@@ -1,6 +1,10 @@
-import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import {Button, Chip} from "@material-ui/core";
+import {Link} from "react-router-dom";
+import {Fragment} from "react";
 import {JavaEndpoint} from "../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
+import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
+import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
 /*
 *
 *
@@ -57,7 +61,7 @@ export const AdminStudentTable = [
             customBodyRender: (value, tableMeta, updateValue) => {
                 // value)
                 return value === undefined ? null :
-                    <Link to='/student/' style={{ textDecoration: 'none' }}>
+                    <Link to='/student/' style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
                             Visit Profile
                         </Button>
@@ -69,8 +73,9 @@ export const AdminStudentTable = [
         }
     },
 ];
+
 export function AdminInsertStudentTable(id, firstName, lastName, email, birthdate, grade, section, adviser, profile) {
-    return { LRN:id, firstName, lastName, email, birthdate, grade, section, adviser, profile }
+    return {LRN: id, firstName, lastName, email, birthdate, grade, section, adviser, profile}
 }
 
 
@@ -115,7 +120,7 @@ export const AdminTeacherTable = [
             sort: false,
             customBodyRender: (value, tableMeta, updateValue) => {
                 return value === undefined ? null :
-                    <Link to="/admin/dashboard" style={{ textDecoration: 'none' }}>
+                    <Link to="/admin/dashboard" style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
                             Visit Profile
                         </Button>
@@ -129,7 +134,7 @@ export const AdminTeacherTable = [
 ]
 
 export function AdminInsertTeacherTable(id, firstName, lastName, email, birthdate, profile) {
-    return { id, firstName, lastName, email, birthdate, profile }
+    return {id, firstName, lastName, email, birthdate, profile}
 }
 
 
@@ -167,7 +172,7 @@ export const AdminRoomTable = [
             sort: false,
             customBodyRender: (value, tableMeta, updateValue) => {
                 return value === undefined ? null :
-                    <Link to="/admin/dashboard" style={{ textDecoration: 'none' }}>
+                    <Link to="/admin/dashboard" style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
                             Visit Profile
                         </Button>
@@ -180,8 +185,8 @@ export const AdminRoomTable = [
     },
 ]
 
-export function AdminInsertRoom(roomName,timeStart, timeEnd, profile) {
-    return { roomName, timeStart, timeEnd, profile }
+export function AdminInsertRoom(roomName, timeStart, timeEnd, profile) {
+    return {roomName, timeStart, timeEnd, profile}
 }
 
 /*
@@ -222,7 +227,7 @@ export const AdminSubjectTable = [
             sort: false,
             customBodyRender: (value, tableMeta, updateValue) => {
                 return value === undefined ? null :
-                    <Link to="/admin/dashboard" style={{ textDecoration: 'none' }}>
+                    <Link to="/admin/dashboard" style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
                             View Subject
                         </Button>
@@ -235,8 +240,9 @@ export const AdminSubjectTable = [
     },
 
 ]
+
 export function AdminInsertSubject(subjectCode, subjectName, major, active, profile) {
-    return {subjectCode, subjectName, major, active, profile }
+    return {subjectCode, subjectName, major, active, profile}
 }
 
 /*
@@ -249,7 +255,6 @@ export function AdminInsertSubject(subjectCode, subjectName, major, active, prof
 *
 *
 */
-
 
 
 export const AdminActivityTable = [
@@ -277,20 +282,27 @@ export const AdminActivityTable = [
     },
     {
         name: 'link',
-        label: 'Activity Link',
+        label: 'Activity File',
         options: {
             filter: false,
             sort: false,
+            width: 100,
             customBodyRender: (value, tableMeta, updateValue) => {
                 return value === undefined ? null :
-                    <a href={JavaEndpoint+'/admin/activity/download?activity-id='+value} target="_blank" style={{ textDecoration: 'none' }}>
-                        <Button variant="outlined" color="primary">
-                            Download
-                        </Button>
-                    </a>
-            },
-            filterOptions: {
-                fullWidth: false
+                    <Fragment>
+                        <a href={JavaEndpoint + '/admin/activity/download?activity-id=' + value} target="_blank"
+                           style={{textDecoration: 'none', marginRight: '10px'}}>
+                            <Button variant="outlined" color="primary">
+                                Download
+                            </Button>
+                        </a>
+                        <a href={JavaEndpoint + '/admin/activity/view?activity-id=' + value} target="_blank"
+                           style={{textDecoration: 'none'}}>
+                            <Button variant="outlined" color="primary">
+                                View
+                            </Button>
+                        </a>
+                    </Fragment>
             }
         }
     },
@@ -302,26 +314,50 @@ export const AdminActivityTable = [
             sort: false,
             customBodyRender: (value, tableMeta, updateValue) => {
                 return value === undefined ? null :
-                    <a href={value} target="_blank" style={{ textDecoration: 'none' }}>
+                    <a href={JavaEndpoint + '/admin/activity/download?activity-id=' + value} target="_blank"
+                       style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
-                            View
+                            Visit Activity
                         </Button>
                     </a>
-                    // <Link to="/admin/dashboard" style={{ textDecoration: 'none' }}>
-                    //     <Button variant="outlined" color="primary">
-                    //         Approve
-                    //     </Button>
-                    // </Link>
             },
-            filterOptions: {
-                fullWidth: false
-            }
+
         }
     },
+    {
+        name: 'status',
+        label: "Status",
+        options: {
+            filter: false,
+            sort: true,
+            customBodyRender: (value, tableMeta, updateValue) => {
+                return value === 'Approved' ?
+                    <Chip
+
+                        style={{fontWeight: 'bold',color: 'white', backgroundColor: '#28a745', width: '100%'}}
+                        label={value}
+                        icon={<CheckIcon style={{color: 'white', fontWeight: 'bold'}}/>}/>
+                    :
+                    value === 'Declined' ?
+                        <Chip
+
+                            style={{fontWeight: 'bold',backgroundColor: '#dc3545',color: 'white',
+                            borderColor: '#dc3545', width: '100%'}}
+                            label={value}
+                            icon={<CloseIcon style={{color: 'white', fontWeight: 'bold'}}/>}/> :
+                        <Chip
+
+                            style={{fontWeight: 'bold',color: 'white', backgroundColor: '#007bff',  width: '100%'}}
+                            label={value}
+                            icon={<PriorityHighIcon style={{color: 'white', fontWeight: 'bold'}}/>}/>
+            },
+
+        }
+    }
 ]
 
-export function AdminInsertActivity(activityTitle, subjectName, grade, section,date,link, action) {
-    return {  activityTitle, subjectName, grade, section,date, link, action }
+export function AdminInsertActivity(activityTitle, subjectName, grade, section, date, link, action, status) {
+    return {activityTitle, subjectName, grade, section, date, link, action, status}
 }
 
 
@@ -378,7 +414,7 @@ export const AdminRoomClassTable = [
             sort: false,
             customBodyRender: (value, tableMeta, updateValue) => {
                 return value === undefined ? null :
-                    <Link to={"/classroom/"+value} style={{ textDecoration: 'none' }}>
+                    <Link to={"/classroom/" + value} style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
                             Visit Class
                         </Button>
@@ -391,8 +427,8 @@ export const AdminRoomClassTable = [
     },
 ]
 
-export function AdminInsertRoomClass(roomName, grade, section, subject,assignedTeacher, day, timeStart, timeEnd, profile) {
-    return { roomName, grade, section,subject,assignedTeacher,day, timeStart, timeEnd, profile }
+export function AdminInsertRoomClass(roomName, grade, section, subject, assignedTeacher, day, timeStart, timeEnd, profile) {
+    return {roomName, grade, section, subject, assignedTeacher, day, timeStart, timeEnd, profile}
 }
 
 /*
@@ -440,7 +476,7 @@ export const AdminRoomShiftTable = [
             sort: false,
             customBodyRender: (value, tableMeta, updateValue) => {
                 return value === undefined ? null :
-                    <Link to="/admin/dashboard" style={{ textDecoration: 'none' }}>
+                    <Link to="/admin/dashboard" style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
                             Visit Profile
                         </Button>
@@ -453,6 +489,6 @@ export const AdminRoomShiftTable = [
     },
 ]
 
-export function AdminInsertRoomShift(roomName,roomShiftName, grade, section  ,timeStart, timeEnd, profile,id) {
-    return { roomName, roomShiftName, grade, section ,timeStart, timeEnd, profile,id}
+export function AdminInsertRoomShift(roomName, roomShiftName, grade, section, timeStart, timeEnd, profile, id) {
+    return {roomName, roomShiftName, grade, section, timeStart, timeEnd, profile, id}
 }

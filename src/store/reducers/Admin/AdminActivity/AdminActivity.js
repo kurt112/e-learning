@@ -6,9 +6,9 @@ import {Activity} from "../../../utils/Specify";
 const newState = new state()
 
 const transforms = (items) => items.map((item) =>
-    insert(item.activity.activityTitle,item.classes.subject.subjectName,item.classes.roomShift.grade, item.classes.roomShift.section,item.activity.date_end,item.activity.id, item.activity.link)) //item.activity.status
+    insert(item.activity.activityTitle,item.classes.subject.subjectName,item.classes.roomShift.grade, item.classes.roomShift.section,item.activity.date_end,item.activity.id, item.activity.link, item.activity.status)) //item.activity.status
 
-const response = (item) => insert(item.activity.activityTitle,item.classes.subject.subjectName,item.classes.roomShift.grade, item.classes.roomShift.section,item.activity.date_end,item.activity.id, item.activity.link) //item.activity.status
+const response = (item) => insert(item.activity.activityTitle,item.classes.subject.subjectName,item.classes.roomShift.grade, item.classes.roomShift.section,item.activity.date_end,item.activity.id, item.activity.link, item.activity.status) //item.activity.status
 
 const reducer = (state = newState.init_state, action) =>{
     switch(action.type){
