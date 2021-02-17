@@ -6,7 +6,7 @@ import * as actions from "../../action/admin/__ActionGlobal/AdminActionDialog";
 export function* UploadFile(data, URL, to) {
 
     try {
-        baseUrl({
+      const response =  yield baseUrl({
             method: 'post',
             url: URL,
             headers: {
@@ -14,15 +14,13 @@ export function* UploadFile(data, URL, to) {
             },
             data
 
-        }).then(function (response) {
-
-            console.log(response);
-        }).catch(function (response) {
-            //handle error
-            console.log(response);
-        });
+        })
+        console.log("wewe")
+        console.log(response)
+        yield  put(tableActions.addItemTable(response.data.item, to))
+        yield  put(actions.registerDialogSuccess(to))
     } catch (error) {
-        console.log(error)
+        yield put(actions.registerDialogFail(error, to))
     }
 }
 

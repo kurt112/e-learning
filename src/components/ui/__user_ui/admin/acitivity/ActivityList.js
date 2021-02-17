@@ -21,7 +21,7 @@ const ActivityList = ({
     const classes = style()
 
     useEffect(() => {
-        // if(activity.data.length ===0) initData()
+        if(activity.data.length ===0) initData()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -47,24 +47,24 @@ const ActivityList = ({
                 </Grid>
 
                 <Grid item md={12} component={Paper} className={classes.tableContainerWrapper}>
-                    {/*<MUIDataTable*/}
-                    {/*    title={*/}
-                    {/*        <Typography variant="h6">*/}
-                    {/*            Activity List*/}
-                    {/*            {activity.loading && <CircularProgress size={24} style={{ marginLeft: 15, position: 'relative', top: 4 }} />}*/}
-                    {/*        </Typography>*/}
-                    {/*    }*/}
-                    {/*    data={activity.data}*/}
-                    {/*    columns={columns}*/}
-                    {/*    options={options(*/}
-                    {/*        pageChange,*/}
-                    {/*        searchChange,*/}
-                    {/*        activity.search,*/}
-                    {/*        activity.totalPages,*/}
-                    {/*        activity.totalItems,*/}
-                    {/*        activity.page,*/}
-                    {/*        activity.loading)}*/}
-                    {/*/>*/}
+                    <MUIDataTable
+                        title={
+                            <Typography variant="h6">
+                                Activity List
+                                {activity.loading && <CircularProgress size={24} style={{ marginLeft: 15, position: 'relative', top: 4 }} />}
+                            </Typography>
+                        }
+                        data={activity.data}
+                        columns={columns}
+                        options={options(
+                            pageChange,
+                            searchChange,
+                            activity.search,
+                            activity.totalPages,
+                            activity.totalItems,
+                            activity.page,
+                            activity.loading)}
+                    />
                 </Grid>
             </Grid>
         </Fragment>

@@ -1,6 +1,6 @@
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-
+import {JavaEndpoint} from "../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 /*
 *
 *
@@ -276,8 +276,23 @@ export const AdminActivityTable = [
         label: 'Date'
     },
     {
-        name: 'Activity Link',
-        label: 'Activity Link'
+        name: 'link',
+        label: 'Activity Link',
+        options: {
+            filter: false,
+            sort: false,
+            customBodyRender: (value, tableMeta, updateValue) => {
+                return value === undefined ? null :
+                    <a href={JavaEndpoint+'/admin/activity/download?activity-id='+value} target="_blank" style={{ textDecoration: 'none' }}>
+                        <Button variant="outlined" color="primary">
+                            Download
+                        </Button>
+                    </a>
+            },
+            filterOptions: {
+                fullWidth: false
+            }
+        }
     },
     {
         name: 'action',
@@ -287,11 +302,16 @@ export const AdminActivityTable = [
             sort: false,
             customBodyRender: (value, tableMeta, updateValue) => {
                 return value === undefined ? null :
-                    <Link to="/admin/dashboard" style={{ textDecoration: 'none' }}>
+                    <a href={value} target="_blank" style={{ textDecoration: 'none' }}>
                         <Button variant="outlined" color="primary">
-                            Approve
+                            View
                         </Button>
-                    </Link>
+                    </a>
+                    // <Link to="/admin/dashboard" style={{ textDecoration: 'none' }}>
+                    //     <Button variant="outlined" color="primary">
+                    //         Approve
+                    //     </Button>
+                    // </Link>
             },
             filterOptions: {
                 fullWidth: false
@@ -300,8 +320,8 @@ export const AdminActivityTable = [
     },
 ]
 
-export function AdminInsertActivity(activityTitle, subjectName, grade, section, link, action) {
-    return {  activityTitle, subjectName, grade, section, link, action }
+export function AdminInsertActivity(activityTitle, subjectName, grade, section,date,link, action) {
+    return {  activityTitle, subjectName, grade, section,date, link, action }
 }
 
 

@@ -27,6 +27,7 @@ import {
     changeText
 } from '../../../utils/autoComplete/autoCompleteAction'
 import {subjectBasedOnRoomShift} from "../../../utils/autoComplete/SubjectBasedOnRoomShift";
+import Response from "../../../utils/Response";
 
 
 const formStyle = makeStyles(() => ({
@@ -57,7 +58,8 @@ const ActivityDialogRegister = ({
                                     changeActivityType,
                                     changeDeadlineTime,
                                     changeDeadlineDate,
-                                    changeActivityDescription
+                                    changeActivityDescription,
+                                    registerDialogMessageClose
 
                                 }) => {
     const form = formStyle()
@@ -113,9 +115,9 @@ const ActivityDialogRegister = ({
                     remaining essentially unchanged. It was popularised in the 1960s with the release of L
                 </DialogContentText>
 
-                {/*<Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}*/}
-                {/*          messageFail="Room Register Not Successful"*/}
-                {/*          messageSuccess="Register Room Success"/>*/}
+                <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
+                          messageFail="Activity Register Not Successful"
+                          messageSuccess="Activity Register Success"/>
 
                 <Grid container spacing={1}>
                     <Grid item md={12} xs={12}>

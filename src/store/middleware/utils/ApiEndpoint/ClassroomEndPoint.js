@@ -1,7 +1,7 @@
 export const
-    Endpoint = 'http://localhost:8080',
+    JavaEndpoint = 'http://localhost:8080',
     ExpressEndPoint ='http://localhost:5000',
-    GraphQlEndpoint = Endpoint+'/Elearning',
+    GraphQlEndpoint = JavaEndpoint+'/Elearning',
 
     /**
      *
@@ -36,7 +36,7 @@ export const
     AdminRoomShiftRegister = "admin/register-roomShift",
     AdminRoomShift = "admin/roomShift",
 
-    // RoomClass Admin Endpoint
+    // RoomClass Admin JavaEndpoint
     AdminRoomClassRegister = "admin/classes/register",
     AdminRoomClass = "admin/classes/roomClass",
 

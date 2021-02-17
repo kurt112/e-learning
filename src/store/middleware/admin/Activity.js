@@ -3,6 +3,12 @@ import * as Selector from '../selector'
 import {AdminActivityUpload, AdminActivityList} from '../utils/ApiEndpoint/ClassroomEndPoint'
 import {TableDataInit, TableNextData, UploadFile} from './__MiddleWareGlobal'
 import {Activity, Room} from "../../utils/Specify";
+import {AdminRoomBodyDataQuery, AdminRoomBodyDataSettingsQuery} from "../utils/GraphQlQuery/AdminQuery/AdminRoomQuery";
+import {
+    AdminActivityBodyDataQuery,
+    AdminActivityBodyDataSettingsQuery
+} from "../utils/GraphQlQuery/AdminQuery/AdminActivityQuery";
+import {act} from "@testing-library/react";
 
 export function* ActivityUpload() {
 
@@ -28,13 +34,12 @@ export function* ActivityUpload() {
     }
 }
 export function* ActivityTableNext(action) {
-    const roomTable = yield select(Selector.AdminRoom)
-    yield TableNextData(action,roomTable,AdminActivityList, Activity)
+    const activity = yield select(Selector.AdminActivity)
+    yield TableNextData(action, activity, AdminActivityBodyDataQuery, AdminActivityBodyDataSettingsQuery,Activity)
 }
 
 export function* ActivityDataInit() {
-    alert("wew")
-    const roomTable = yield select(Selector.AdminRoom)
-    yield TableDataInit(roomTable, AdminActivityList, Room)
+    const activity = yield select(Selector.AdminActivity)
+    yield TableDataInit(AdminActivityBodyDataQuery(activity.search,activity.page),AdminActivityBodyDataSettingsQuery(),Activity)
 }
 

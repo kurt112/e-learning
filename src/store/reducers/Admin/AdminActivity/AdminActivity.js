@@ -6,13 +6,13 @@ import {Activity} from "../../../utils/Specify";
 const newState = new state()
 
 const transforms = (items) => items.map((item) =>
-    insert(item.roomShift.room.roomName, item.roomShift.grade, item.roomShift.section, item.subject.subjectName,
-        item.teacher.user.lastName + ' ' + item.teacher.user.firstName, item.day, item.startTime, item.endTime, item.roomShift.room.id+item.id+item.subject.subjectCode))
-// {  activityTitle, subjectName, grade, section, link, action }
-const response = (item) => insert(item.activityTitle)//item.,item.,item.,item.link,item.)}
+    insert(item.activity.activityTitle,item.classes.subject.subjectName,item.classes.roomShift.grade, item.classes.roomShift.section,item.activity.date_end,item.activity.id, item.activity.link)) //item.activity.status
+
+const response = (item) => insert(item.activity.activityTitle,item.classes.subject.subjectName,item.classes.roomShift.grade, item.classes.roomShift.section,item.activity.date_end,item.activity.id, item.activity.link) //item.activity.status
 
 const reducer = (state = newState.init_state, action) =>{
     switch(action.type){
+        case actions.ADMIN_TABLE_SETTINGS_INIT(Activity): return newState.apiSettingsInit(state,action)
         case actions.ADMIN_TABLE_INIT(Activity): return newState.initData(state)
         case actions.ADMIN_TABLE_SUCCESS(Activity): return newState.successData(state, action,transforms)
         case actions.ADMIN_TABLE_FAIL(Activity): return newState.failData(state)

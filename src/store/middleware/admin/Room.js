@@ -21,5 +21,4 @@ export function* RoomTableDataNext(action) {
 export function* RoomTableDataInit() {
     const roomTable = yield select(Selector.AdminRoom)
     yield TableDataInit(AdminRoomBodyDataQuery(roomTable.search,roomTable.page),AdminRoomBodyDataSettingsQuery(),Room)
-
 }

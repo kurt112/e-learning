@@ -1,4 +1,4 @@
-import {LinearProgress, Snackbar} from "@material-ui/core";
+import {DialogContent, LinearProgress, Snackbar} from "@material-ui/core";
 import {Alert, AlertTitle} from "@material-ui/lab";
 import {Fragment} from "react";
 const Response = ({dialogState,registerDialogMessageClose, messageSuccess, messageFail}) => {
@@ -27,6 +27,7 @@ const Response = ({dialogState,registerDialogMessageClose, messageSuccess, messa
                         </Alert>
                     </Snackbar> : null
             }
+            <br/>
         </Fragment>
     )
 }
