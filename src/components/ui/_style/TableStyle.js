@@ -3,7 +3,8 @@ import { makeStyles } from "@material-ui/styles"
 const style = makeStyles(() => ({
     root: {
         width: '100%',
-        overflowY: 'auto'
+        overflowY: 'auto',
+        height: '100%'
     },
     tableContainer: {
         maxHeight: 520
