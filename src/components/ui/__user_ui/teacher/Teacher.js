@@ -1,6 +1,3 @@
-export {
-    default as TeacherRoom
-} from './teacher-room/TeacherRoom'
 
 export {
     default as TeacherProfile

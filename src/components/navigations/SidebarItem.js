@@ -20,11 +20,11 @@ export function TeacherItems({ style }) {
                 </ListItemIcon>
                 <ListItemText primary="Profile" />
             </ListItem>
-            <ListItem component={NavLink} to="/teacher/rooms" button>
+            <ListItem component={NavLink} to="/teacher/classes" button>
                 <ListItemIcon>
                     <PeopleIcon />
                 </ListItemIcon>
-                <ListItemText primary="RoomClass" />
+                <ListItemText primary="Classes" />
             </ListItem>
             <ListItem component={NavLink} to="/teacher/subjects" button>
                 <ListItemIcon>
@@ -59,11 +59,11 @@ export function StudentItems({ style }) {
                 </ListItemIcon>
                 <ListItemText primary="Profile" />
             </ListItem>
-            <ListItem component={NavLink} to="/student/rooms" button>
+            <ListItem component={NavLink} to="/student/classes" button>
                 <ListItemIcon>
                     <AssignmentIcon />
                 </ListItemIcon>
-                <ListItemText primary="Room" />
+                <ListItemText primary="Classes" />
             </ListItem>
             <ListItem component={NavLink} to="/student/subjects" button>
                 <ListItemIcon>

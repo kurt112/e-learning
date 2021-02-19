@@ -1,6 +1,4 @@
-export {
-    default as StudentRoom
-} from './student-room/StudentRoom'
+
 export {
     default as StudentProfile
 } from './student-profile/StudentProfile'
