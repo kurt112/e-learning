@@ -42,8 +42,9 @@ const RoomProfile = lazy(() => import('../ui/__user_ui/profiles/Profile').then(m
 const ClassProfile = lazy(() => import('../ui/__user_ui/profiles/Profile').then(module => ({default: module.ClassesProfile})))
 const SubjectProfile = lazy(() => import('../ui/__user_ui/profiles/Profile').then(module => ({default: module.SubjectProfile})))
 
-export default function MainUi() {
+export default function MainUi(props) {
     const classes = style();
+
 
     const [open, setOpen] = useState(false);
 
@@ -81,21 +82,21 @@ export default function MainUi() {
                                 <Route path='/admin/room-shift' exact render={() =><RoomShift/>}/>
 
 
-                                <Route path='/teacher/profile' exact render={() => <TeacherProfile/>}/>
-                                <Route path='/teacher/classes' exact render={() => <Classes/>}/>
+                                 <Route path='/teacher/classes' exact render={() => <Classes/>}/>
                                 <Route path='/teacher/subjects' exact render={() => <TeacherSubjects/>}/>
                                 <Route path='/teacher/students' exact render={() => <TeacherStudent/>}/>
                                 <Route path='/teacher/activities' exact render={() => <TeacherActivity/>}/>
 
-                                <Route path='/student/profile' exact render={() => <StudentProfile/>}/>
                                 <Route path='/student/subjects' exact render={() => <StudentSubject/>}/>
                                 <Route path='/student/teachers' exact render={() => <StudentTeacher/>}/>
                                 <Route path='/student/activities' exact render={() => <StudentActivity/>}/>
                                 <Route path='/student/classes' exact render={() => <Classes/>}/>
 
-                                <Route path='/classes/profile' exact render={() => <ClassProfile/>}/>
-                                <Route path='/room/profile'exact render={() => <RoomProfile/>}/>
-                                <Route path='/subject/profile' exact render={() => <SubjectProfile/>}/>
+                                <Route path='/classes/profile/:id' exact render={() => <ClassProfile {...props} />}/>
+                                <Route path='/room/profile/:id' exact render={() => <RoomProfile />}/>
+                                <Route path='/subject/profile/:id' exact render={() => <SubjectProfile />}/>
+                                <Route path='/teacher/profile/:id' exact render={() => <TeacherProfile/>}/>
+                                <Route path='/student/profile/:id' exact render={() => <StudentProfile/>}/>
 
 
                             </Switch>

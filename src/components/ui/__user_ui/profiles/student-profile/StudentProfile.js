@@ -2,8 +2,8 @@ import { Avatar, Button,  Container, Divider, Grid, Hidden, Paper, Typography } 
 import ProfileStyle from '../ProfileStyle'
 import Picture from '../../../../../assets/asd.jpg'
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
-import { lazy, useState } from "react";
-
+import { useState } from "react";
+import { withRouter } from 'react-router-dom';
 import Logs from './logs/Logs'
 import Attendance from './attendance/Attendance'
 import Data from './data/Data'
@@ -61,4 +61,4 @@ const StudentProfile = () => {
     )
 }
 
-export default StudentProfile
+export default withRouter(StudentProfile)

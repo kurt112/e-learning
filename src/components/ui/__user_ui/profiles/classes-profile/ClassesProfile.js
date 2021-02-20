@@ -5,9 +5,13 @@ import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
 import { useState } from "react";
 // import Logs from './logs/Logs'
 // import Attendance from './attendace/Attendance'
+import { withRouter } from 'react-router-dom';
 import Data from './data/Data'
-const  ClassesProfile= ()=>{
+const  ClassesProfile= (props)=>{
 
+    const id = props.match.params.id
+
+    console.log(id)
     const style = ProfileStyle()
     const [component, setComponent] = useState(<Data />)
 
@@ -62,4 +66,4 @@ const  ClassesProfile= ()=>{
     )
 }
 
-export default ClassesProfile
+export default withRouter(ClassesProfile)

@@ -4,8 +4,7 @@ import Picture from '../../../../../assets/asd.jpg'
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
 import { lazy, useState } from "react";
 
-// import Logs from './logs/Logs'
-// import Attendance from './attendance/Attendance'
+import { withRouter } from 'react-router-dom';
 import Data from './data/Data'
 
 const RoomProfile = () => {
@@ -61,4 +60,4 @@ const RoomProfile = () => {
     )
 }
 
-export default RoomProfile
+export default withRouter(RoomProfile)

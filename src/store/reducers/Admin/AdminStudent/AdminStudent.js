@@ -4,10 +4,10 @@ import {Student} from "../../../utils/Specify";
 import {AdminInsertStudentTable as insert} from "../../../../components/ui/utils/tableColumn";
 
 const transforms = (items) => items.map((item) =>
-    insert(item.student_id, item.user.firstName,item.user.lastName,item.user.email,item.user.birthdate,"to be insert", "to be insert", "tobe insert","to be insert"))
+    insert(item.student_id, item.user.firstName,item.user.lastName,item.user.email,item.user.birthdate,"to be insert", "to be insert", "to be insert",item.student_id))
 
 const response = (item) =>
-    insert(item.student_id, item.user.firstName,item.user.lastName,item.user.email,item.user.birthdate,"to be insert", "to be insert", "tobe insert","to be insert")
+    insert(item.student_id, item.user.firstName,item.user.lastName,item.user.email,item.user.birthdate,"to be insert", "to be insert", "to be insert",item.student_id)
 
 
 

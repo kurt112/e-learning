@@ -59,11 +59,10 @@ export const AdminStudentTable = [
             filter: false,
             sort: false,
             customBodyRender: (value, tableMeta, updateValue) => {
-                // value)
                 return value === undefined ? null :
-                    <Link to='/student/' style={{textDecoration: 'none'}}>
+                    <Link to={`/student/profile/`+value} style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
-                            Visit Profile
+                           Visit Profile
                         </Button>
                     </Link>
             },
@@ -92,10 +91,7 @@ export function AdminInsertStudentTable(id, firstName, lastName, email, birthdat
 
 
 export const AdminTeacherTable = [
-    {
-        name: 'id',
-        label: "Id",
-    },
+
     {
         name: "firstName",
         label: "First Name",
@@ -118,9 +114,9 @@ export const AdminTeacherTable = [
         options: {
             filter: false,
             sort: false,
-            customBodyRender: (value, tableMeta, updateValue) => {
+            customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to="/admin/dashboard" style={{textDecoration: 'none'}}>
+                    <Link to={`/teacher/profile/`+value} style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
                             Visit Profile
                         </Button>
@@ -133,8 +129,8 @@ export const AdminTeacherTable = [
     },
 ]
 
-export function AdminInsertTeacherTable(id, firstName, lastName, email, birthdate, profile) {
-    return {id, firstName, lastName, email, birthdate, profile}
+export function AdminInsertTeacherTable(firstName, lastName, email, birthdate, profile) {
+    return {firstName, lastName, email, birthdate, profile}
 }
 
 
@@ -170,9 +166,9 @@ export const AdminRoomTable = [
         options: {
             filter: false,
             sort: false,
-            customBodyRender: (value, tableMeta, updateValue) => {
+            customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to="/admin/dashboard" style={{textDecoration: 'none'}}>
+                    <Link to={`/room/profile/`+value} style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
                             Visit Profile
                         </Button>

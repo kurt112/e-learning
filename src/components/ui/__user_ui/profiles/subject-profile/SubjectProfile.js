@@ -1,11 +1,10 @@
-import { Avatar, Button, Container, Divider, Grid, Hidden, Paper, Typography } from "@material-ui/core";
+import { Avatar, Button, Container, Divider, Grid, Hidden, Paper, Typography } from "@material-ui/core"
 import ProfileStyle from '../ProfileStyle'
 import Picture from '../../../../../assets/asd.jpg'
-import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
-import { useState } from "react";
-// import Logs from './logs/Logs'
-// import Attendance from './attendace/Attendance'
+import CreateRoundedIcon from '@material-ui/icons/CreateRounded'
+import { useState } from "react"
 import Data from './data/Data'
+import { withRouter } from 'react-router-dom'
 const  SubjectProfile= ()=>{
     const style = ProfileStyle()
     const [component, setComponent] = useState(<Data />)
@@ -60,4 +59,4 @@ const  SubjectProfile= ()=>{
     )
 }
 
-export default SubjectProfile
+export default withRouter(SubjectProfile)

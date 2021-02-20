@@ -5,8 +5,8 @@ import state from '../__StateGlobal/AdminTable'
 
 const newState = new state()
 
-const transforms = (items) => items.map((item) => insert(item.id, item.user.firstName, item.user.lastName, item.user.email, item.user.birthdate, "To be insert"))
-const response = (item) => insert(item.id, item.user.firstName, item.user.lastName, item.user.email, item.user.birthdate, "To be insert")
+const transforms = (items) => items.map((item) => insert(item.user.firstName, item.user.lastName, item.user.email, item.user.birthdate, item.id))
+const response = (item) => insert(item.user.firstName, item.user.lastName, item.user.email, item.user.birthdate, item.id)
 
 const reducer = (state=newState.init_state, action)=>{
     switch(action.type){
