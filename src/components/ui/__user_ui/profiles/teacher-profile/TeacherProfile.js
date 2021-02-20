@@ -1,12 +1,16 @@
-import { Avatar, Box, Button, ButtonGroup, Container, Divider, Grid, Hidden, Paper, Typography } from "@material-ui/core";
-import ProfileStyle from '../../../_style/ProfileStyle'
+import { Avatar, Button, Container, Divider, Grid, Hidden, Paper, Typography } from "@material-ui/core";
+import ProfileStyle from '../ProfileStyle'
 import Picture from '../../../../../assets/asd.jpg'
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
-import { lazy, useState } from "react";
-const Logs = lazy(() => import('./logs/Logs'))
-const Attendance = lazy(() => import('./attendace/Attendance'))
-const Data = lazy(() => import('./data/Data'))
-export default function TeacherProfile() {
+import { useState } from "react";
+// const Logs = lazy(() => import('./logs/Logs'))
+// const Attendance = lazy(() => import('./attendace/Attendance'))
+// const Data = lazy(() => import('./data/Data'))
+
+import Logs from './logs/Logs'
+import Attendance from './attendace/Attendance'
+import Data from './data/Data'
+const  TeacherProfile= ()=>{
     const style = ProfileStyle()
     const [component, setComponent] = useState(<Data />)
 
@@ -60,3 +64,5 @@ export default function TeacherProfile() {
         </Grid >
     )
 }
+
+export default TeacherProfile

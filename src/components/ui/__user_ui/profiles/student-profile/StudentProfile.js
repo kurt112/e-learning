@@ -1,12 +1,14 @@
-import { Avatar, Box, Button, ButtonGroup, Container, Divider, Grid, Hidden, Paper, Typography } from "@material-ui/core";
-import ProfileStyle from '../../../_style/ProfileStyle'
+import { Avatar, Button,  Container, Divider, Grid, Hidden, Paper, Typography } from "@material-ui/core";
+import ProfileStyle from '../ProfileStyle'
 import Picture from '../../../../../assets/asd.jpg'
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
 import { lazy, useState } from "react";
-const Logs = lazy(() => import('./logs/Logs'))
-const Attendance = lazy(() => import('./attendance/Attendance'))
-const Data = lazy(() => import('./data/Data'))
-export default function StudentProfile() {
+
+import Logs from './logs/Logs'
+import Attendance from './attendance/Attendance'
+import Data from './data/Data'
+
+const StudentProfile = () => {
     const style = ProfileStyle()
     const [component, setComponent] = useState(<Data />)
 
@@ -22,10 +24,8 @@ export default function StudentProfile() {
         setComponent(<Logs />)
     }
 
-
     return (
         <Grid container className={style.container}>
-
             <Grid container className={style.profileHeader} component={Paper} >
                 <Grid className={style.avatarContainer} item md={12} sm={12} xs={12} lg={12}>
                     <Avatar className={style.avatar} alt="Remy Sharp" src={Picture} />
@@ -60,3 +60,5 @@ export default function StudentProfile() {
         </Grid >
     )
 }
+
+export default StudentProfile

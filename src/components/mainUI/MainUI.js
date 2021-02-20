@@ -21,14 +21,14 @@ const RoomShift = lazy(() => import('../ui/__user_ui/admin/Admin').then(module =
 
 
 // // components for teacher UI
-// const TeacherProfile = lazy(() => import('../ui/__user_ui/teacher/Teacher').then(module => ({ default: module.TeacherProfile })))
+const TeacherProfile = lazy(() => import('../ui/__user_ui/profiles/Profile').then(module => ({ default: module.TeacherProfile })))
 const TeacherSubjects = lazy(() => import('../ui/__user_ui/teacher/Teacher').then(module => ({ default: module.TeacherSubject })))
 const TeacherStudent = lazy(() => import('../ui/__user_ui/teacher/Teacher').then(module => ({ default: module.TeacherStudents })))
 const TeacherActivity = lazy(() => import('../ui/__user_ui/teacher/Teacher').then(module => ({ default: module.TeacherActivity })))
 
 
 // // components for student UI
-// const StudentProfile = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({ default: module.StudentProfile })))
+const StudentProfile = lazy(() => import('../ui/__user_ui/profiles/Profile').then(module => ({default: module.StudentProfile})))
 const StudentSubject = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({ default: module.StudentSubjects })))
 const StudentTeacher = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({ default: module.StudentTeachers })))
 const StudentActivity = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({ default: module.StudentActivity })))
@@ -77,13 +77,13 @@ export default function MainUi() {
                                 <Route path='/admin/room-shift' exact render={() =><RoomShift/>}/>
 
 
-                                {/*<Route path='/teacher/profile' exact render={() => <TeacherProfile/>}/>*/}
+                                <Route path='/teacher/profile' exact render={() => <TeacherProfile/>}/>
                                 <Route path='/teacher/classes' exact render={() => <Classes/>}/>
                                 <Route path='/teacher/subjects' exact render={() => <TeacherSubjects/>}/>
                                 <Route path='/teacher/students' exact render={() => <TeacherStudent/>}/>
                                 <Route path='/teacher/activities' exact render={() => <TeacherActivity/>}/>
 
-                                {/*<Route path='/student/profile' exact render={() => <StudentProfile/>}/>*/}
+                                <Route path='/student/profile' exact render={() => <StudentProfile/>}/>
                                 <Route path='/student/subjects' exact render={() => <StudentSubject/>}/>
                                 <Route path='/student/teachers' exact render={() => <StudentTeacher/>}/>
                                 <Route path='/student/activities' exact render={() => <StudentActivity/>}/>

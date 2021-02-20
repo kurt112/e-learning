@@ -1,6 +1,6 @@
 import { Box, Container, Typography } from "@material-ui/core";
 import { Fragment } from "react";
-import ProfileStyle from '../../../../_style/ProfileStyle'
+import ProfileStyle from '../../ProfileStyle'
 export default function Data() {
     const style = ProfileStyle()
     return (
