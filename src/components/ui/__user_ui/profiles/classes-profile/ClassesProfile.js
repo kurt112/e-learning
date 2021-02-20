@@ -3,15 +3,16 @@ import ProfileStyle from '../ProfileStyle'
 import Picture from '../../../../../assets/asd.jpg'
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
 import { useState } from "react";
-import Logs from './logs/Logs'
-import Attendance from './attendace/Attendance'
+// import Logs from './logs/Logs'
+// import Attendance from './attendace/Attendance'
 import Data from './data/Data'
-const  TeacherProfile= ()=>{
+const  ClassesProfile= ()=>{
+
     const style = ProfileStyle()
     const [component, setComponent] = useState(<Data />)
 
     const attendance = () => {
-        setComponent(<Attendance />)
+        // setComponent(<Attendance />)
     }
 
     const data = () => {
@@ -19,7 +20,7 @@ const  TeacherProfile= ()=>{
     }
 
     const logs = () => {
-        setComponent(<Logs />)
+        // setComponent(<Logs />)
     }
 
 
@@ -61,4 +62,4 @@ const  TeacherProfile= ()=>{
     )
 }
 
-export default TeacherProfile
+export default ClassesProfile

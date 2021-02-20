@@ -37,6 +37,10 @@ const StudentActivity = lazy(() => import('../ui/__user_ui/student/Student').the
 // universal Component
 const Classes = lazy(() => import('../ui/__user_ui/roomClasses/ClassList/ClassesList') )
 
+// profile Component
+const RoomProfile = lazy(() => import('../ui/__user_ui/profiles/Profile').then(module => ({default: module.RoomProfile})))
+const ClassProfile = lazy(() => import('../ui/__user_ui/profiles/Profile').then(module => ({default: module.ClassesProfile})))
+const SubjectProfile = lazy(() => import('../ui/__user_ui/profiles/Profile').then(module => ({default: module.SubjectProfile})))
 
 export default function MainUi() {
     const classes = style();
@@ -88,6 +92,12 @@ export default function MainUi() {
                                 <Route path='/student/teachers' exact render={() => <StudentTeacher/>}/>
                                 <Route path='/student/activities' exact render={() => <StudentActivity/>}/>
                                 <Route path='/student/classes' exact render={() => <Classes/>}/>
+
+                                <Route path='/classes/profile' exact render={() => <ClassProfile/>}/>
+                                <Route path='/room/profile'exact render={() => <RoomProfile/>}/>
+                                <Route path='/subject/profile' exact render={() => <SubjectProfile/>}/>
+
+
                             </Switch>
                         </Suspense>
                     }
