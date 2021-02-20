@@ -28,7 +28,6 @@ const StyledDrawer = withStyles({
 })(Drawer);
 
 const Classroom = (props) => {
-
     const classes = style();
 
 

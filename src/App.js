@@ -13,7 +13,7 @@ const App = () => {
           <BrowserRouter>
               <Suspense>
                   <Switch>
-                      {/*<Route path='/classroom/:path' exact  render={(props) =>  <Classroom {...props}/>}/>*/}
+                      <Route path='/classroom/:path' exact  render={(props) =>  <Classroom {...props}/>}/>
                       <DashBoard />
                       {/*<Classroom/>*/}
                       <Login/>

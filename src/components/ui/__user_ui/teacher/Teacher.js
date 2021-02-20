@@ -1,9 +1,5 @@
 
 export {
-    default as TeacherProfile
-} from './teacher-profile/TeacherProfile'
-
-export {
     default as TeacherStudents
 } from './teacher-students/TeacherStudents'
 

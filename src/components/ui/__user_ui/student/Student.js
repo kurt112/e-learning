@@ -1,9 +1,5 @@
 
 export {
-    default as StudentProfile
-} from './student-profile/StudentProfile'
-
-export {
     default as StudentSubjects
 } from './student-subjects/StudentSubjects'
 

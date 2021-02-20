@@ -226,7 +226,7 @@ export function TeacherInsertActivity(id, activityTitle, subjectName, grade,sect
 /**
 *
 *
-*  This table is for the profile table in Teacher area for Attendance
+*  This table is for the profiles table in Teacher area for Attendance
 *
 *
 **/
@@ -261,7 +261,7 @@ export function TeacherInsertAttendace(month, day, year ,time){
 /**
 *
 *
-*  This table is for the profile table in Teacher area for Logs
+*  This table is for the profiles table in Teacher area for Logs
 *
 *
 **/
