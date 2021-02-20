@@ -9,11 +9,13 @@ export const
                               grade,
                               section
                               room{
-                                roomName
+                                roomName,
+                                id
                               }
                            },
                            subject{
-                              subjectName
+                              subjectName,
+                              subjectCode
                            },
                            day,
                            startTime,
