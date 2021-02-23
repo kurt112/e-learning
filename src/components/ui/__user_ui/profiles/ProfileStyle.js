@@ -63,7 +63,7 @@ const style = makeStyles((theme) => ({
             fontSize: 20
         }
     },
-    profileDataContainertitle: {
+    profileDataContainerTitle: {
         flex: 1,
         '& p': {
             fontWeight: 'bold',

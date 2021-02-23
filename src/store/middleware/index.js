@@ -6,7 +6,9 @@ import * as profile from '../ActionType/__ActionTypeGlobal/ProfileActionType'
 
 
 import {
-    studentData
+    studentData,
+    teacherData,
+    roomData
 } from './profile'
 
 import {
@@ -227,5 +229,12 @@ export function * watchStudentGetProfile(){
     yield takeLeading(profile.INIT_DATA(Student),studentData)
 }
 
+export function * watchTeacherGetProfile() {
+    yield takeLeading(profile.INIT_DATA(Teacher), teacherData)
+}
+
+export function * watchRoomGetProfile() {
+    yield takeLeading(profile.INIT_DATA(Room), roomData)
+}
 
 

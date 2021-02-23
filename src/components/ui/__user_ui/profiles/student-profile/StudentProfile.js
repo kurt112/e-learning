@@ -42,12 +42,10 @@ const StudentProfile = ({studentState, match, initData}) => {
         setComponent(<Logs student={studentState.profile.student}/>)
     }
 
-    console.log("asdf")
-    console.log(studentState.profile)
 
     return (
         <Grid container className={style.container}>
-            {studentState.loading === true ? <CircularProgress style={{margin: 'auto'}} disableShrink/> :
+            {studentState.loading === true && studentState.error === null? <CircularProgress style={{margin: 'auto'}} disableShrink/> :
                 <Fragment>
                     <Grid container className={style.profileHeader} component={Paper}>
                         <Grid className={style.avatarContainer} item md={12} sm={12} xs={12} lg={12}>

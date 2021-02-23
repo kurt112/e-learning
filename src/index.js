@@ -8,7 +8,7 @@ import {Provider} from 'react-redux';
 import createSagaMiddleware from 'redux-saga'
 
 // Teacher
-import {TeacherStudent, TeacherProfile, TeacherRoom, TeacherSubject, TeacherActivity} from './store/reducers/Teacher'
+import {TeacherStudent, TeacherRoom, TeacherSubject, TeacherActivity} from './store/reducers/Teacher'
 
 //Student
 import {StudentActivity, StudentSubject, StudentRoom, StudentTeacher} from './store/reducers/Student'
@@ -36,7 +36,7 @@ import Classroom from "./store/reducers/ClassroomState";
 
 
 // profile
-import {StudentProfile} from './store/reducers/Profile'
+import {StudentProfile, TeacherProfile,RoomProfile} from './store/reducers/Profile'
 
 // sagas
 import {
@@ -65,13 +65,14 @@ import {
     watchAdminRoomClassTableInit,
     watchAdminRoomClassTableNext,
     watchStudentGetProfile,
+    watchTeacherGetProfile,
+    watchRoomGetProfile,
     watchAdminActivityUpload, watchAdminActivitySearchChange, watchAdminActivityTableInit, watchAdminActivityTableNext
 } from './store/middleware/'
 
 
 const reducers = combineReducers({
     TeacherStudent,
-    TeacherProfile,
     TeacherRoom,
     TeacherSubject,
     TeacherActivity,
@@ -102,15 +103,11 @@ const reducers = combineReducers({
 
 
     // Profile of Entity
-    StudentProfile
+    StudentProfile,
+    TeacherProfile,
+    RoomProfile
 })
 
-// var old = alert;
-//
-// alert = function() {
-//     console.log(new Error().stack);
-//     old.apply(window, arguments);
-// };
 
 const composeEnhancers =
     process.env.NODE_ENV === "development"
@@ -163,6 +160,8 @@ sagaMiddleware.run(watchAdminActivityTableNext)
 
 // profile
 sagaMiddleware.run(watchStudentGetProfile)
+sagaMiddleware.run(watchTeacherGetProfile)
+sagaMiddleware.run(watchRoomGetProfile)
 
 ReactDOM.render(
     <React.StrictMode>

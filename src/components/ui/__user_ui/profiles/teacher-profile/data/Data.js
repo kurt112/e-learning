@@ -1,51 +1,49 @@
 import { Box, Container, Typography } from "@material-ui/core";
 import { Fragment } from "react";
 import ProfileStyle from '../../ProfileStyle'
-export default function Data() {
+export default function Data({teacher}) {
     const style = ProfileStyle()
     return (
-
         <Fragment>
             <Typography className={style.profileName} variant="h4" component="h2">Personal Information</Typography>
             <Container>
                 <Box className={style.profileDataContainer}>
-                    <Box className={style.profileDataContainertitle}>
+                    <Box className={style.profileDataContainerTitle}>
                         <p>First Name: </p>
                     </Box>
-                    <p>Kurt Lupin</p>
+                    <p>{teacher.user.firstName}</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
-                    <Box className={style.profileDataContainertitle}>
+                    <Box className={style.profileDataContainerTitle}>
                         <p>Last Name: </p>
                     </Box>
-                    <p>Orioque</p>
+                    <p>{teacher.user.lastName}</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
-                    <Box className={style.profileDataContainertitle}>
+                    <Box className={style.profileDataContainerTitle}>
                         <p>Birthdate </p>
                     </Box>
-                    <p>December 20, 1999</p>
+                    <p>{teacher.user.birthdate}</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
-                    <Box className={style.profileDataContainertitle}>
+                    <Box className={style.profileDataContainerTitle}>
                         <p>Account Registered </p>
                     </Box>
-                    <p>May 2, 2020</p>
+                    <p>{teacher.user.registerDate}</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
-                    <Box className={style.profileDataContainertitle}>
+                    <Box className={style.profileDataContainerTitle}>
                         <p>Email </p>
                     </Box>
-                    <p>kurt112@gmai.com</p>
+                    <p>{teacher.user.email}</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
-                    <Box className={style.profileDataContainertitle}>
+                    <Box className={style.profileDataContainerTitle}>
                         <p>Birthdate </p>
                     </Box>
-                    <p>December 20, 1999</p>
+                    <p>{teacher.user.birthdate}</p>
                 </Box>
             </Container>
-
         </Fragment>
     )
 }
