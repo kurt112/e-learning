@@ -1,19 +1,19 @@
 export {
     default as TeacherActivity
-} from './TeacherActivity'
+} from './TeacherActivityState'
 
 export {
     default as TeacherProfile
-} from './TeacherProfile'
+} from './TeacherProfileState'
 
 export {
     default as TeacherRoom
-} from './TeacherRoom'
+} from './TeacherRoomState'
 
 export {
     default as TeacherSubject
-} from './TeacherSubject'
+} from './TeacherSubjectState'
 
 export {
     default as TeacherStudent
-} from './TeacherStudent'
+} from './TeacherStudentState'

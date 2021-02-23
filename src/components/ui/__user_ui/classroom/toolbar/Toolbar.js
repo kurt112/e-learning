@@ -9,7 +9,7 @@ import PresentToAllIcon from '@material-ui/icons/PresentToAll';
 import {Box, Hidden} from "@material-ui/core"
 import { useState } from 'react'
 import ParticiPantDialog from "../Dialog/ParticiPantDialog";
-import * as actions from "../../../../../store/action/Classroom";
+import * as actions from "../../../../../store/action/ClassroomAction";
 import {connect} from 'react-redux'
 const Toolbar = ({ClassroomState, setMic,setVideo, setDrawer}) =>{
     const classes = style()

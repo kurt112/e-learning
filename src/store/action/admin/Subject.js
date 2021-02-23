@@ -1,4 +1,4 @@
-import * as actions from '../../ActionType/Admin/SubjectDialog'
+import * as actions from '../../ActionType/Admin/SubjectDialogActionType'
 
 
 export const changeSubjectCode =(value) => {

@@ -11,8 +11,8 @@ import {
 } from "@material-ui/core"
 
 import {connect} from 'react-redux'
-import * as action from '../../../../../store/action/admin/__ActionGlobal/AdminActionDialog'
-import * as dialogAction from '../../../../../store/action/admin/Room/RoomDialog'
+import * as action from '../../../../../store/action/__ActionGlobal/AdminDialogAction'
+import * as dialogAction from '../../../../../store/action/admin/Room/RoomDialogAction'
 import {Room} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
 

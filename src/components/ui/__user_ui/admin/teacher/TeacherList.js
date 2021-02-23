@@ -5,7 +5,7 @@ import {AdminTeacherTable as columns } from '../../../utils/tableColumn'
 import style, { TableOptions as options } from '../../../_style/TableStyle'
 import TeacherDialogRegister from './TeacherDialogRegister'
 import {connect} from "react-redux";
-import * as actions from '../../../../../store/action/admin/__ActionGlobal/AdminAction'
+import * as actions from '../../../../../store/action/__ActionGlobal/AdminAction'
 import Typography from "@material-ui/core/Typography";
 import {Teacher} from '../../../../../store/utils/Specify'
  const TeacherList = ({teacher,pageChange,searchChange, openDialog, closeDialog,initData}) =>{

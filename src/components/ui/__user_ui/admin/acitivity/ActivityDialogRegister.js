@@ -11,8 +11,8 @@ import {
 } from "@material-ui/core"
 
 import {connect} from 'react-redux'
-import * as action from '../../../../../store/action/admin/__ActionGlobal/AdminActionDialog'
-import * as activityAction from '../../../../../store/action/admin/Activity/ActivityDialog'
+import * as action from '../../../../../store/action/__ActionGlobal/AdminDialogAction'
+import * as activityAction from '../../../../../store/action/admin/Activity/ActivityDialogAction'
 import {Activity} from "../../../../../store/utils/Specify";
 import {useEffect,  useState} from "react";
 import AutoComplete from "../../../utils/autoComplete/AutoComplete";

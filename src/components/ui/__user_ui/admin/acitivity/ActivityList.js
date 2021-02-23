@@ -5,7 +5,7 @@ import style, {TableOptions as options} from '../../../_style/TableStyle'
 import {useEffect} from "react"
 import {Fragment} from 'react'
 import ActivityDialogRegister from "./ActivityDialogRegister";
-import * as actions from "../../../../../store/action/admin/__ActionGlobal/AdminAction";
+import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
 import {Activity} from "../../../../../store/utils/Specify";
 import {connect} from 'react-redux'
 import Typography from "@material-ui/core/Typography";

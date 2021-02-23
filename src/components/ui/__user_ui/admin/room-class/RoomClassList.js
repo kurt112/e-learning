@@ -5,7 +5,7 @@ import { AdminRoomClassTable as columns } from '../../../utils/tableColumn'
 import style, { TableOptions as options } from '../../../_style/TableStyle'
 
 import {connect} from 'react-redux'
-import * as actions from "../../../../../store/action/admin/__ActionGlobal/AdminAction";
+import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
 import {Class} from "../../../../../store/utils/Specify";
 import Typography from "@material-ui/core/Typography";
 

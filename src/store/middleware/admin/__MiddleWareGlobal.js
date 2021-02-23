@@ -1,8 +1,8 @@
 import {put} from "redux-saga/effects";
-import * as tableActions from "../../action/admin/__ActionGlobal/AdminAction";
-import {baseUrl, graphQl} from "../axios";
-import * as actions from "../../action/admin/__ActionGlobal/AdminActionDialog";
-
+import * as tableActions from "../../action/__ActionGlobal/AdminAction";
+import {baseUrl} from "../axios";
+import * as actions from "../../action/__ActionGlobal/AdminDialogAction";
+import {graphQLRequest} from '../utils/HttpRequest'
 export function* UploadFile(data, URL, to) {
 
     try {
@@ -52,8 +52,8 @@ export function* TableNextData(action,state,bodyDataQuery, bodySettingsQuery,to)
 
     try {
         if (action.page > state.highPage) {
-            const bodyDataResponse = yield Data(bodyDataQuery(state.search, action.page))
-            const bodyDataSettingsResponse= yield Data(bodySettingsQuery())
+            const bodyDataResponse = yield graphQLRequest(bodyDataQuery(state.search, action.page))
+            const bodyDataSettingsResponse= yield graphQLRequest(bodySettingsQuery())
 
             const bodyObject = bodyDataResponse.data.data
             const bodyObjectKey = Object.keys(bodyObject)
@@ -74,8 +74,8 @@ export function* TableNextData(action,state,bodyDataQuery, bodySettingsQuery,to)
 
 export function* TableDataInit(bodyDataQuery, bodySettingsQuery,to, ) {
     try {
-        const bodyDataResponse = yield Data(bodyDataQuery)
-        const bodySettingsResponse = yield Data(bodySettingsQuery)
+        const bodyDataResponse = yield graphQLRequest(bodyDataQuery)
+        const bodySettingsResponse = yield graphQLRequest(bodySettingsQuery)
 
         const object = bodyDataResponse.data.data
         const key = Object.keys(object)
@@ -88,8 +88,3 @@ export function* TableDataInit(bodyDataQuery, bodySettingsQuery,to, ) {
     }
 }
 
-function* Data(body) {
-
-
-    return yield graphQl.post("",body)
-}

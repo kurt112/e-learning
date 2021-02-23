@@ -5,7 +5,7 @@ import { AdminRoomShiftTable as columns } from '../../../utils/tableColumn'
 import style, { TableOptions as options } from '../../../_style/TableStyle'
 import RegisterRoom from './RoomShiftDialog'
 import {connect} from 'react-redux'
-import * as actions from "../../../../../store/action/admin/__ActionGlobal/AdminAction";
+import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
 import { RoomShift} from "../../../../../store/utils/Specify";
 import Typography from "@material-ui/core/Typography";
 

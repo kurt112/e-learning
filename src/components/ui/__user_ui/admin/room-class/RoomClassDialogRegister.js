@@ -11,8 +11,8 @@ import {
 } from "@material-ui/core"
 import {useEffect, useState} from "react";
 import {connect} from 'react-redux'
-import * as action from '../../../../../store/action/admin/__ActionGlobal/AdminActionDialog'
-import * as roomClassDialogAction from '../../../../../store/action/admin/RoomClass/RoomClassDialog'
+import * as action from '../../../../../store/action/__ActionGlobal/AdminDialogAction'
+import * as roomClassDialogAction from '../../../../../store/action/admin/RoomClass/RoomClassDialogAction'
 import {Class} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
 import {

@@ -1,57 +1,57 @@
 export {
     default as AdminSubjectDialog
-} from './AdminSubject/AdminSubjectDialog'
+} from './AdminSubject/AdminSubjectDialogState'
 export {
     default as AdminStudentDialog
-} from './AdminStudent/AdminStudentDialog'
+} from './AdminStudent/AdminStudentDialogState'
 export {
     default as AdminSubject
-} from './AdminSubject/AdminSubject'
+} from './AdminSubject/AdminSubjectState'
 
 export{
     default as AdminRoom   
-} from './AdminRoom/AdminRoom'
+} from './AdminRoom/AdminRoomState'
 
 export {
     default as AdminRoomDialog
-}from './AdminRoom/AdminRoomDialog'
+}from './AdminRoom/AdminRoomDialogState'
 
 export {
     default as AdminStudent
-} from './AdminStudent/AdminStudent'
+} from './AdminStudent/AdminStudentState'
 
 export {
     default as AdminTeacher
-} from './AdminTeacher/AdminTeacher'
+} from './AdminTeacher/AdminTeacherState'
 
 export {
     default as AdminDialogTeacher
-} from './AdminTeacher/AdminTeacherDialog'
+} from './AdminTeacher/AdminTeacherDialogState'
 
 export {
     default as AdminActivity
-} from './AdminActivity/AdminActivity'
+} from './AdminActivity/AdminActivityState'
 
 export {
     default as AdminDashBoard
-} from './AdminDashboard'
+} from './AdminDashboardState'
 
 export {
     default as AdminClassDialog
-} from './AdminClass/AdminClassDialog'
+} from './AdminClass/AdminClassDialogState'
 
 export{
     default as AdminClass
-} from './AdminClass/AdminClass'
+} from './AdminClass/AdminClassState'
 
 export {
     default as AdminRoomShiftDialog
-}from './AdminRoomShift/AdminRoomShiftDialog'
+}from './AdminRoomShift/AdminRoomShiftDialogState'
 
 export {
     default as AdminRoomShift
-} from './AdminRoomShift/AdminRoomShift'
+} from './AdminRoomShift/AdminRoomShiftState'
 
 export {
     default as AdminActivityDialog
-} from './AdminActivity/AdminActivityDialog'
+} from './AdminActivity/AdminActivityDialogState'

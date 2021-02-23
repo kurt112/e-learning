@@ -15,7 +15,7 @@ import {
 import {connect} from "react-redux";
 import * as actions from '../../../../../store/action/admin/Subject'
 import {Subject} from "../../../../../store/utils/Specify";
-import * as action from "../../../../../store/action/admin/__ActionGlobal/AdminActionDialog";
+import * as action from "../../../../../store/action/__ActionGlobal/AdminDialogAction";
 import Response from "../../../utils/Response";
 
 

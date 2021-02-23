@@ -21,14 +21,14 @@ const style = makeStyles((theme) => ({
         flexDirection: 'column'
     },
     profileData: {
-        marginTop: 20
+        marginTop: 20,
+
     },
     profileName: {
         margin: 'auto',
         marginTop: 10,
         minWidth: 100,
-
-        // marginLeft: 10,
+        fontFamily: 'Segoe UI Semibold'
     },
     profileButton: {
         paddingLeft: 20,

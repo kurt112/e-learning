@@ -6,7 +6,7 @@ import style, {TableOptions as options} from '../../../_style/TableStyle'
 import StudentRegisterDialog from './StudentRegisterDialog'
 import {connect} from 'react-redux'
 import {Student} from '../../../../../store/utils/Specify'
-import * as actions from "../../../../../store/action/admin/__ActionGlobal/AdminAction";
+import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
 import Typography from "@material-ui/core/Typography";
 import axios from "../../../../../store/middleware/axios";
 import {stringify} from "query-string";

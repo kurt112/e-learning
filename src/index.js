@@ -6,8 +6,13 @@ import reportWebVitals from './reportWebVitals';
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import {Provider} from 'react-redux';
 import createSagaMiddleware from 'redux-saga'
+
+// Teacher
 import {TeacherStudent, TeacherProfile, TeacherRoom, TeacherSubject, TeacherActivity} from './store/reducers/Teacher'
-import {StudentActivity, StudentProfile, StudentSubject, StudentRoom, StudentTeacher} from './store/reducers/Student'
+
+//Student
+import {StudentActivity, StudentSubject, StudentRoom, StudentTeacher} from './store/reducers/Student'
+
 
 import {
     AdminActivity,
@@ -27,7 +32,11 @@ import {
     AdminActivityDialog
 } from './store/reducers/Admin'
 
-import Classroom from "./store/reducers/Classroom";
+import Classroom from "./store/reducers/ClassroomState";
+
+
+// profile
+import {StudentProfile} from './store/reducers/Profile'
 
 // sagas
 import {
@@ -55,6 +64,7 @@ import {
     watchAdminRoomClassSearchChange,
     watchAdminRoomClassTableInit,
     watchAdminRoomClassTableNext,
+    watchStudentGetProfile,
     watchAdminActivityUpload, watchAdminActivitySearchChange, watchAdminActivityTableInit, watchAdminActivityTableNext
 } from './store/middleware/'
 
@@ -67,7 +77,6 @@ const reducers = combineReducers({
     TeacherActivity,
 
     StudentActivity,
-    StudentProfile,
     StudentSubject,
     StudentRoom,
     StudentTeacher,
@@ -89,7 +98,11 @@ const reducers = combineReducers({
     AdminActivityDialog,
 
 
-    Classroom
+    Classroom,
+
+
+    // Profile of Entity
+    StudentProfile
 })
 
 // var old = alert;
@@ -147,6 +160,9 @@ sagaMiddleware.run(watchAdminActivityUpload)
 sagaMiddleware.run(watchAdminActivitySearchChange)
 sagaMiddleware.run(watchAdminActivityTableInit)
 sagaMiddleware.run(watchAdminActivityTableNext)
+
+// profile
+sagaMiddleware.run(watchStudentGetProfile)
 
 ReactDOM.render(
     <React.StrictMode>

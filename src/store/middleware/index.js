@@ -1,40 +1,47 @@
 import {takeLeading} from "redux-saga/effects";
-import * as adminTable from '../ActionType/Admin/__ActionTypeGlobal/AdminTable'
-import * as adminDialog from '../ActionType/Admin/__ActionTypeGlobal/AdminDialog'
+import * as adminTable from '../ActionType/__ActionTypeGlobal/AdminTableActionType'
+import * as adminDialog from '../ActionType/__ActionTypeGlobal/AdminDialogActionType'
 import {Teacher, Student, Room, Subject, RoomShift, Class, Activity} from '../utils/Specify'
+import * as profile from '../ActionType/__ActionTypeGlobal/ProfileActionType'
+
+
+import {
+    studentData
+} from './profile'
+
 import {
     RegisterSubject,
     SubjectTableDataInit,
     SubjectTableDataNext
 
-} from './admin/Subject'
+} from './admin/SubjectMiddleWare'
 
 import {
     watchTeacherRegister,
     TeacherTableDataNext,
     TeacherTableDataInit
-} from './admin/Teacher'
+} from './admin/TeacherMiddleWare'
 
 import {
     StudentRegister,
     StudentTableDataInit,
     StudentTableDataNext
-} from "./admin/Student";
+} from "./admin/StudentMiddleWare";
 
 import {
     ActivityDataInit,
     ActivityTableNext,
     ActivityUpload
-} from './admin/Activity'
+} from './admin/ActivityMiddleWare'
 
 import  {
     RoomRegister,
     RoomTableDataInit,
     RoomTableDataNext
-} from "./admin/Room"
+} from "./admin/RoomMiddleWare"
 
-import {RoomShiftRegister, RoomShiftTableDataInit, RoomShiftTableDataNext} from "./admin/RoomShift";
-import {RoomClassRegister, RoomClassTableDataInit, RoomClassTableDataNext} from "./admin/RoomClass";
+import {RoomShiftRegister, RoomShiftTableDataInit, RoomShiftTableDataNext} from "./admin/RoomShiftMiddleWare";
+import {RoomClassRegister, RoomClassTableDataInit, RoomClassTableDataNext} from "./admin/RoomClassMiddleWare";
 
 /**
  *
@@ -189,6 +196,7 @@ export function* watchAdminRoomClassSearchChange() {
 *
 *
 **/
+
 export function * watchAdminActivityUpload() {
 
     yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Activity), ActivityUpload)
@@ -206,7 +214,18 @@ export function* watchAdminActivityTableNext(){
     yield takeLeading(adminTable.ADMIN_TABLE_NEXT_PAGE(Activity), ActivityTableNext)
 }
 
+/**
+ *
+ *
+ *          This middleware is for Getting Profile of entity
+ *
+ *
+ *
+ **/
 
+export function * watchStudentGetProfile(){
+    yield takeLeading(profile.INIT_DATA(Student),studentData)
+}
 
 
 

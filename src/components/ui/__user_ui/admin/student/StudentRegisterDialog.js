@@ -8,7 +8,7 @@ import {
     TextField
 } from "@material-ui/core"
 import {connect} from 'react-redux'
-import * as actions from '../../../../../store/action/admin/__ActionGlobal/AdminActionDialog'
+import * as actions from '../../../../../store/action/__ActionGlobal/AdminDialogAction'
 import {Student} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
 
