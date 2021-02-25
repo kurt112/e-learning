@@ -5,5 +5,5 @@ export const
     Room = "ROOM",
     RoomShift = 'ROOMSHIFT',
     Subject = "SUBJECT",
-    Class = "CLASS",
+    RoomShiftClass = "ROOMSHIFT_CLASS",
     Activity = "Activity"

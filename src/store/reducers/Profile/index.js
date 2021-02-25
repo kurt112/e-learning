@@ -9,3 +9,11 @@ export {
 export {
     default as RoomProfile
 } from './RoomProfileState'
+
+export {
+    default as RoomShiftProfile
+} from './RoomShiftProfileState'
+
+export {
+    default as RoomShiftClassProfile
+} from './RoomClassProfileState'

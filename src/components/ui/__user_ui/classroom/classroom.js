@@ -60,7 +60,7 @@ const Classroom = (props) => {
             setMessages(messages)
         })
 
-        socket.current.emit('sendMessage', name + ' Has Joined The Class ', m.format('h:mm a'), true, () => setMessage(''))
+        socket.current.emit('sendMessage', name + ' Has Joined The RoomShiftClass ', m.format('h:mm a'), true, () => setMessage(''))
 
 
         return () => {

@@ -9,3 +9,11 @@ export{
 export {
     roomData
 } from './RoomProfileMiddleWare'
+
+export {
+    roomShift
+}from './RoomShiftProfileMiddleWare'
+
+export {
+    roomShiftClass
+} from './RoomShiftClassProfileMiddleWare'

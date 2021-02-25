@@ -8,6 +8,7 @@ import * as actions from '../../ActionType/__ActionTypeGlobal/AdminTableActionTy
 
 
 export const InitDataTable = (to) => {
+
     return {
         type: actions.ADMIN_TABLE_INIT(to)
     }

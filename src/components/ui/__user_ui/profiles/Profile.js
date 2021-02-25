@@ -11,9 +11,13 @@ export {
 }from './subject-profile/SubjectProfile'
 
 export {
-    default as ClassesProfile
-} from './classes-profile/ClassesProfile'
+    default as RoomShiftClassProfile
+} from './classes-profile/RoomShiftClassProfile'
 
 export {
     default as RoomProfile
 } from './room-profile/RoomProfile'
+
+export {
+    default as RoomShiftProfile
+} from './roomShift-profile/roomShiftProfile'

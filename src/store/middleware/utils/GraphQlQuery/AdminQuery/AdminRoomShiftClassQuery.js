@@ -2,7 +2,7 @@ export const
     AdminRoomClassBodyDataQuery = (search, page) => {
         return {
             query: `
-                    query{roomClasses(search:"${search}", page:${page}){
+                    query{roomShiftClasses(search:"${search}", page:${page}){
                            id,
                            roomShift{
                               roomShiftName,

@@ -7,10 +7,10 @@ const PORT = process.env.PORT || 8081
 const Server = http.createServer(app)
 
 
-app.use(express.static(path.join(__dirname, '../build')));
+app.use('/static',express.static(path.join(__dirname, '../build/static')));
 
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.get('*', function (req, res) {
+    res.sendFile('index.html',{root: path.join(__dirname, '../build')});
 });
 
 Server.listen(PORT, () => console.log("I am running"));
@@ -97,7 +97,7 @@ Server.listen(PORT, () => console.log("I am running"));
 //             console.log(getUserInClass(people.path).length)
 //
 //
-//             const message = people.name + ' Left The Class'
+//             const message = people.name + ' Left The RoomShiftClass'
 //             const time =  moment().format('h:mm a')
 //
 //             io.to(people.path).emit('message', {

@@ -1,7 +1,7 @@
 import state from '../../__StateGlobal/AdminTableDialogState'
 import * as actionClass from '../../../ActionType/Admin/RoomClassDialogActionType'
 import * as globalActionDialog from '../../../ActionType/__ActionTypeGlobal/AdminDialogActionType'
-import {Class} from '../../../utils/Specify'
+import {RoomShiftClass} from '../../../utils/Specify'
 import {updateObject} from "../../../utils/UpdateObject";
 
 const newState = new state();
@@ -20,10 +20,10 @@ const init_state = {
 const reducer = (state=init_state, action) => {
 
     switch (action.type){
-        case globalActionDialog.ADMIN_DIALOG_REGISTER(Class): return newState.initRegister(state)
-        case globalActionDialog.ADMIN_DIALOG_REGISTER_FAIL(Class): return newState.failRegister(state, action)
-        case globalActionDialog.ADMIN_DIALOG_REGISTER_SUCCESS(Class): return newState.successRegister(state)
-        case globalActionDialog.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(Class): return newState.handleClose(state,action)
+        case globalActionDialog.ADMIN_DIALOG_REGISTER(RoomShiftClass): return newState.initRegister(state)
+        case globalActionDialog.ADMIN_DIALOG_REGISTER_FAIL(RoomShiftClass): return newState.failRegister(state, action)
+        case globalActionDialog.ADMIN_DIALOG_REGISTER_SUCCESS(RoomShiftClass): return newState.successRegister(state)
+        case globalActionDialog.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(RoomShiftClass): return newState.handleClose(state,action)
 
         case actionClass.CHANGE_ROOMCLASS_DAY: return updateObject(state, {day: action.data})
         case actionClass.CHANGE_ROOMCLASS_ROOMSHIFT_ID: return updateObject(state, {shiftID: action.data})

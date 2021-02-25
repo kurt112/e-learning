@@ -1,14 +1,16 @@
 import {takeLeading} from "redux-saga/effects";
 import * as adminTable from '../ActionType/__ActionTypeGlobal/AdminTableActionType'
 import * as adminDialog from '../ActionType/__ActionTypeGlobal/AdminDialogActionType'
-import {Teacher, Student, Room, Subject, RoomShift, Class, Activity} from '../utils/Specify'
+import {Teacher, Student, Room, Subject, RoomShift, RoomShiftClass, Activity} from '../utils/Specify'
 import * as profile from '../ActionType/__ActionTypeGlobal/ProfileActionType'
 
 
 import {
     studentData,
     teacherData,
-    roomData
+    roomData,
+    roomShift,
+    roomShiftClass
 } from './profile'
 
 import {
@@ -168,26 +170,26 @@ export function* watchAdminRoomShiftSearchChange() {
 /**
  *
  *
- *          This middleware is for admin Room Class
+ *          This middleware is for admin Room RoomShiftClass
  *
  *
  **/
 
 export function* watchAdminRegisterRoomClass() {
-    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Class), RoomClassRegister)
+    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(RoomShiftClass), RoomClassRegister)
 }
 
 
 export function* watchAdminRoomClassTableInit(){
-    yield takeLeading(adminTable.ADMIN_TABLE_INIT(Class), RoomClassTableDataInit)
+    yield takeLeading(adminTable.ADMIN_TABLE_INIT(RoomShiftClass), RoomClassTableDataInit)
 }
 
 export function* watchAdminRoomClassTableNext(){
-    yield takeLeading(adminTable.ADMIN_TABLE_NEXT_PAGE(Class), RoomClassTableDataNext)
+    yield takeLeading(adminTable.ADMIN_TABLE_NEXT_PAGE(RoomShiftClass), RoomClassTableDataNext)
 }
 
 export function* watchAdminRoomClassSearchChange() {
-    yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Class), RoomClassTableDataInit)
+    yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(RoomShiftClass), RoomClassTableDataInit)
 }
 
 /**
@@ -237,4 +239,10 @@ export function * watchRoomGetProfile() {
     yield takeLeading(profile.INIT_DATA(Room), roomData)
 }
 
+export function * watchRoomShiftGetProfile(){
+    yield takeLeading(profile.INIT_DATA(RoomShift), roomShift)
+}
 
+export function * watchRoomShiftClassGetProfile() {
+    yield takeLeading(profile.INIT_DATA(RoomShiftClass), roomShiftClass)
+}

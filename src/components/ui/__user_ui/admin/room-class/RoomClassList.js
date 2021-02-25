@@ -6,7 +6,7 @@ import style, { TableOptions as options } from '../../../_style/TableStyle'
 
 import {connect} from 'react-redux'
 import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
-import {Class} from "../../../../../store/utils/Specify";
+import {RoomShiftClass} from "../../../../../store/utils/Specify";
 import Typography from "@material-ui/core/Typography";
 
 
@@ -72,11 +72,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps =(dispatch) => {
     return {
-        initData: () => dispatch(actions.InitDataTable(Class)),
-        searchChange: (data) => dispatch(actions.SearchChange(data,Class)),
-        pageChange: (page) => dispatch(actions.DataNextPage(page,Class)),
-        openDialog: () => dispatch(actions.openDialog(Class)),
-        closeDialog: ()=> dispatch(actions.closeDialog(Class)),
+        initData: () => dispatch(actions.InitDataTable(RoomShiftClass)),
+        searchChange: (data) => dispatch(actions.SearchChange(data,RoomShiftClass)),
+        pageChange: (page) => dispatch(actions.DataNextPage(page,RoomShiftClass)),
+        openDialog: () => dispatch(actions.openDialog(RoomShiftClass)),
+        closeDialog: ()=> dispatch(actions.closeDialog(RoomShiftClass)),
     }
 }
 

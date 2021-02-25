@@ -13,7 +13,7 @@ import {useEffect, useState} from "react";
 import {connect} from 'react-redux'
 import * as action from '../../../../../store/action/__ActionGlobal/AdminDialogAction'
 import * as roomClassDialogAction from '../../../../../store/action/admin/RoomClass/RoomClassDialogAction'
-import {Class} from "../../../../../store/utils/Specify";
+import {RoomShiftClass} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
 import {
     autoCompleteTeacher,
@@ -234,8 +234,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         // Global Dialog Action
-        registerDialogMessageClose: (event) => dispatch(action.registerDialogMessageClose(event, Class)),
-        registerDialog: () => dispatch(action.dialogRegister(Class)),
+        registerDialogMessageClose: (event) => dispatch(action.registerDialogMessageClose(event, RoomShiftClass)),
+        registerDialog: () => dispatch(action.dialogRegister(RoomShiftClass)),
 
         // Current Dialog Action
         changeTeacherId: (data) => dispatch(roomClassDialogAction.changeTeacherId(data)),

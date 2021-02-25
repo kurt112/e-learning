@@ -47,7 +47,7 @@ const DoneClasses = ({style}) => <Fragment>
             </div>
 
             <div className={style.iconsFooter}>
-                <Tooltip title="Start Class" aria-label="add">
+                <Tooltip title="Start RoomShiftClass" aria-label="add">
                     <VideoCallIcon fontSize={'large'}/>
 
                 </Tooltip>
@@ -95,7 +95,7 @@ const DoneClasses = ({style}) => <Fragment>
             </div>
 
             <div className={style.iconsFooter}>
-                <Tooltip title="Start Class" aria-label="add">
+                <Tooltip title="Start RoomShiftClass" aria-label="add">
                     <VideoCallIcon fontSize={'large'}/>
 
                 </Tooltip>

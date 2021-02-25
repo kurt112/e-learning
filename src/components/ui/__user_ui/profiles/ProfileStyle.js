@@ -28,7 +28,7 @@ const style = makeStyles((theme) => ({
         margin: 'auto',
         marginTop: 10,
         minWidth: 100,
-        fontFamily: 'Segoe UI Semibold'
+        fontFamily: 'Segoe UI Semibold',
     },
     profileButton: {
         paddingLeft: 20,

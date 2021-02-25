@@ -308,7 +308,7 @@ export const AdminActivityTable = [
         options: {
             filter: false,
             sort: false,
-            customBodyRender: (value, tableMeta, updateValue) => {
+            customBodyRender: (value) => {
                 return value === undefined ? null :
                     <a href={JavaEndpoint + '/admin/activity/download?activity-id=' + value} target="_blank"
                        style={{textDecoration: 'none'}}>
@@ -326,7 +326,7 @@ export const AdminActivityTable = [
         options: {
             filter: false,
             sort: true,
-            customBodyRender: (value, tableMeta, updateValue) => {
+            customBodyRender: (value) => {
                 return value === 'Approved' ?
                     <Chip
 
@@ -361,7 +361,7 @@ export function AdminInsertActivity(activityTitle, subjectName, grade, section, 
 *
 *
 *
-*                             This table is for the Class List table in admin area
+*                             This table is for the RoomShiftClass List table in admin area
 *
 *
 *
@@ -403,16 +403,36 @@ export const AdminRoomClassTable = [
         label: 'Time End'
     },
     {
+        name: "classroom",
+        label: "Class Room",
+        options: {
+            filter: false,
+            sort: false,
+            customBodyRender: (value) => {
+                return value === undefined ? null :
+                    <Link to={"/classroom/" + value} style={{textDecoration: 'none'}}>
+                        <Button variant="outlined" color="primary">
+                            Join Class
+                        </Button>
+                    </Link>
+            },
+            filterOptions: {
+                fullWidth: false
+            }
+        }
+    },
+
+    {
         name: "profile",
         label: "Profile",
         options: {
             filter: false,
             sort: false,
-            customBodyRender: (value, tableMeta, updateValue) => {
+            customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to={"/classroom/" + value} style={{textDecoration: 'none'}}>
+                    <Link to={"/roomShiftClass/profile/" + value} style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
-                            Visit Class
+                            Visit Profile
                         </Button>
                     </Link>
             },
@@ -423,8 +443,8 @@ export const AdminRoomClassTable = [
     },
 ]
 
-export function AdminInsertRoomClass(roomName, grade, section, subject, assignedTeacher, day, timeStart, timeEnd, profile) {
-    return {roomName, grade, section, subject, assignedTeacher, day, timeStart, timeEnd, profile}
+export function AdminInsertRoomClass(roomName, grade, section, subject, assignedTeacher, day, timeStart, timeEnd, classroom, profile) {
+    return {roomName, grade, section, subject, assignedTeacher, day, timeStart, timeEnd, classroom, profile}
 }
 
 /*
@@ -470,9 +490,9 @@ export const AdminRoomShiftTable = [
         options: {
             filter: false,
             sort: false,
-            customBodyRender: (value, tableMeta, updateValue) => {
+            customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to="/admin/dashboard" style={{textDecoration: 'none'}}>
+                    <Link to={`/roomshift/profile/`+value} style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
                             Visit Profile
                         </Button>
