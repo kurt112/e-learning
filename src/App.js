@@ -7,21 +7,21 @@ import {Route, Switch} from "react-router";
 import Login from './components/ui/login/Login'
 const App = () => {
   return (
-      // <Login/>
-    <Fragment>
-
-          <BrowserRouter>
-              <Suspense>
-                  <Switch>
-                      <Route path='/classroom/:path' exact  render={(props) =>  <Classroom {...props}/>}/>
-                      <DashBoard />
-                      {/*<Classroom/>*/}
-                      <Login/>
-                  </Switch>
-              </Suspense>
-
-          </BrowserRouter>
-    </Fragment>
+      <Login/>
+    // <Fragment>
+    //
+    //       <BrowserRouter>
+    //           <Suspense>
+    //               <Switch>
+    //               {/*    /!*<Route path='/classroom/:path' exact  render={(props) =>  <Classroom {...props}/>}/>*!/*/}
+    //               {/*    /!*<DashBoard />*!/*/}
+    //               {/*    /!*<Classroom/>*!/*/}
+    //               {/*    /!*<Login/>*!/*/}
+    //               {/*</Switch>*/}
+    //           </Suspense>
+    //
+    //       </BrowserRouter>
+    // </Fragment>
   )
 }
 

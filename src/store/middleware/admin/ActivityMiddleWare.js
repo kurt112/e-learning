@@ -1,15 +1,12 @@
 import {select} from 'redux-saga/effects'
 import * as Selector from '../selector'
-import {AdminActivityUpload, AdminActivityList} from '../utils/ApiEndpoint/ClassroomEndPoint'
+import {AdminActivityUpload} from '../utils/ApiEndpoint/ClassroomEndPoint'
 import {TableDataInit, TableNextData, UploadFile} from './__MiddleWareGlobal'
-import {Activity, Room} from "../../utils/Specify";
-import {AdminRoomBodyDataQuery, AdminRoomBodyDataSettingsQuery} from "../utils/GraphQlQuery/AdminQuery/AdminRoomQuery";
+import {Activity} from "../../utils/Specify";
 import {
     AdminActivityBodyDataQuery,
     AdminActivityBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/AdminQuery/AdminActivityQuery";
-import {act} from "@testing-library/react";
-
 export function* ActivityUpload() {
 
     const activity = yield select(Selector.AdminActivityDialog)
@@ -17,7 +14,6 @@ export function* ActivityUpload() {
     let i =0;
 
 
-    console.log(activity.file[i])
     while (activity.file[i] !== undefined){
         const data = new FormData();
         data.append("activity-name", activity.activityName)

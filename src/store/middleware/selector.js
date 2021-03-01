@@ -12,4 +12,5 @@ export const
     AdminRoomClassDialog = (state) =>state.AdminClassDialog,
     AdminClass = (state) => state.AdminClass,
     AdminActivity = (state) => state.AdminActivity,
-    AdminActivityDialog = (state) => state.AdminActivityDialog
+    AdminActivityDialog = (state) => state.AdminActivityDialog,
+    Login = (state) => state.Login

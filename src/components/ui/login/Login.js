@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Hidden } from '@material-ui/core';
 import Copyright from '../copyright/Copyright';
+import {connect} from 'react-redux'
+import * as action from '../../../store/action/login/LoginAction'
 const useStyles = makeStyles((theme) => ({
     root: {
         height: '100vh',
@@ -45,29 +47,28 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function Login() {
+const Login = ({loginState, changeEmail, changePassword, login}) => {
+
     const classes = useStyles();
 
     return (
         <Grid container component="main" component={Paper} className={classes.root}>
             <CssBaseline />
-            <Grid item xs={false} sm={4} md={7} className={classes.image}>
-                {/*<Hidden xsDown>*/}
-                    {/*<div>*/}
-                    {/*    <h1>E-LEARNING<br/> ENVIROMENT <br/>FOR<br/></h1>*/}
-                    {/*</div>*/}
-                {/*</Hidden>*/}
+            <Grid item xs={false} sm={false} md={8} className={classes.image}>
+
             </Grid>
-            <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+            <Grid item xs={12} sm={12} md={4} component={Paper} elevation={6} square>
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
                         <LockOutlinedIcon />
                     </Avatar>
+                    <p>No Account Found</p>
                     <Typography component="h1" variant="h5">
                         Sign in
           </Typography>
                     <form className={classes.form} noValidate>
                         <TextField
+                            value={loginState.username}
                             variant="outlined"
                             margin="normal"
                             required
@@ -76,6 +77,7 @@ export default function Login() {
                             label="Email Address"
                             name="email"
                             autoComplete="email"
+                            onChange={(event) => changeEmail(event.target.value)}
                             autoFocus
                         />
                         <TextField
@@ -83,10 +85,12 @@ export default function Login() {
                             margin="normal"
                             required
                             fullWidth
+                            value={loginState.password}
                             name="password"
                             label="Password"
                             type="password"
                             id="password"
+                            onChange={(event) => changePassword(event.target.value)}
                             autoComplete="current-password"
                         />
                         <FormControlLabel
@@ -94,11 +98,11 @@ export default function Login() {
                             label="Remember me"
                         />
                         <Button
-                            type="submit"
                             fullWidth
                             variant="contained"
                             color="primary"
                             className={classes.submit}
+                            onClick={login}
                         >
                             Sign In
             </Button>
@@ -123,3 +127,19 @@ export default function Login() {
         </Grid>
     );
 }
+
+const mapStateToProps = (state) => {
+    return {
+        loginState: state.Login
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changeEmail: (data) => dispatch(action.changeEmail(data)),
+        changePassword: (data) => dispatch(action.changePassword(data)),
+        login:() => dispatch(action.Login())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

@@ -1,9 +1,13 @@
 import {takeLeading} from "redux-saga/effects";
 import * as adminTable from '../ActionType/__ActionTypeGlobal/AdminTableActionType'
 import * as adminDialog from '../ActionType/__ActionTypeGlobal/AdminDialogActionType'
+import * as loginAction from '../ActionType/Login/LoginActionType'
 import {Teacher, Student, Room, Subject, RoomShift, RoomShiftClass, Activity} from '../utils/Specify'
 import * as profile from '../ActionType/__ActionTypeGlobal/ProfileActionType'
 
+import {
+    Login
+} from "./login/LoginMiddleware";
 
 import {
     studentData,
@@ -245,4 +249,16 @@ export function * watchRoomShiftGetProfile(){
 
 export function * watchRoomShiftClassGetProfile() {
     yield takeLeading(profile.INIT_DATA(RoomShiftClass), roomShiftClass)
+}
+
+/**
+ *
+ *
+ *          This middleware is for Login
+ *
+ *
+ *
+ **/
+export function * watchLogin() {
+    yield takeLeading(loginAction.Login, Login)
 }

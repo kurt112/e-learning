@@ -38,6 +38,11 @@ import Classroom from "./store/reducers/ClassroomState";
 // profile
 import {StudentProfile, TeacherProfile,RoomProfile, RoomShiftProfile, RoomShiftClassProfile} from './store/reducers/Profile'
 
+
+// Login
+import Login from './store/reducers/Login/LoginState'
+
+
 // sagas
 import {
     watchAdminRegisterTeacher,
@@ -69,6 +74,7 @@ import {
     watchRoomGetProfile,
     watchRoomShiftGetProfile,
     watchRoomShiftClassGetProfile,
+    watchLogin,
     watchAdminActivityUpload, watchAdminActivitySearchChange, watchAdminActivityTableInit, watchAdminActivityTableNext
 } from './store/middleware/'
 
@@ -109,7 +115,10 @@ const reducers = combineReducers({
     TeacherProfile,
     RoomProfile,
     RoomShiftProfile,
-    RoomShiftClassProfile
+    RoomShiftClassProfile,
+
+    // Login
+    Login
 })
 
 
@@ -169,6 +178,9 @@ sagaMiddleware.run(watchRoomGetProfile)
 sagaMiddleware.run(watchRoomShiftGetProfile)
 sagaMiddleware.run(watchRoomShiftClassGetProfile)
 
+
+// Login
+sagaMiddleware.run(watchLogin)
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
