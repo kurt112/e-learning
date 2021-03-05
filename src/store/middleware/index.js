@@ -6,7 +6,8 @@ import {Teacher, Student, Room, Subject, RoomShift, RoomShiftClass, Activity} fr
 import * as profile from '../ActionType/__ActionTypeGlobal/ProfileActionType'
 
 import {
-    Login
+    Login,
+    PreRegister
 } from "./login/LoginMiddleware";
 
 import {
@@ -254,11 +255,15 @@ export function * watchRoomShiftClassGetProfile() {
 /**
  *
  *
- *          This middleware is for Login
+ *          This middleware is for LOGIN
  *
  *
  *
  **/
 export function * watchLogin() {
-    yield takeLeading(loginAction.Login, Login)
+    yield takeLeading(loginAction.LOGIN, Login)
+}
+
+export function * watchPreRegister(){
+    yield takeLeading(loginAction.REGISTER_INIT, PreRegister)
 }

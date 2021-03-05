@@ -14,6 +14,7 @@ const reducer = (state=newState.init_state, action)=>{
         case actions.ADMIN_TABLE_INIT(Teacher): return newState.initData(state)
         case actions.ADMIN_TABLE_SUCCESS(Teacher): return newState.successData(state, action,transforms)
         case actions.ADMIN_TABLE_FAIL(Teacher): return newState.failData(state)
+
         case actions.ADMIN_TABLE_DIALOG_OPEN(Teacher): return newState.openDialog(state)
         case actions.ADMIN_TABLE_DIALOG_CLOSE(Teacher): return newState.closeDialog(state)
         case actions.ADMIN_TABLE_NEXT_PAGE(Teacher): return newState.nextData(state,action)

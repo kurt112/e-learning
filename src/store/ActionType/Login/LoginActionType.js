@@ -1,6 +1,14 @@
 export const
     CHANGE_EMAIL = 'CHANGE_EMAIL',
     CHANGE_PASSWORD = 'CHANGE_PASSWORD',
-    Login = 'Login',
-    SuccessLogin = 'SuccessLogin',
-    FailLogin = 'FailLogin'
+    LOGIN = 'LOGIN',
+    SUCCESS_LOGIN = 'SUCCESS_LOGIN',
+    FAIL_LOGIN = 'FAIL_LOGIN',
+
+
+    // for sign up action in login
+    CHANGE_ID = 'CHANGE_ID',
+    CHANGE_FORM = 'CHANGE_FORM',
+    REGISTER_OPEN = 'REGISTER_OPEN',
+    REGISTER_CLOSE = 'REGISTER_CLOSE',
+    REGISTER_INIT = 'REGISTER_INIT'

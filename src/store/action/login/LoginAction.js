@@ -17,20 +17,53 @@ export const
 
     Login = () => {
         return {
-            type: action.Login
+            type: action.LOGIN
         }
     },
 
     successLogin = (data) => {
         return {
-            type: action.SuccessLogin,
+            type: action.SUCCESS_LOGIN,
             data
         }
     },
 
     failLogin = (data) => {
         return {
-            type: action.FailLogin,
+            type: action.FAIL_LOGIN,
             data
+        }
+    },
+
+    // Registration in Login from actions
+    changeId = (data) => {
+        return {
+            type: action.CHANGE_ID,
+            data
+        }
+    },
+    changeForm = (data) => {
+        return {
+            type: action.CHANGE_FORM,
+            data
+        }
+    },
+
+    registerClose = () => {
+        return {
+            type: action.REGISTER_CLOSE
+        }
+    },
+
+    registerOpen = () => {
+        return {
+            type: action.REGISTER_OPEN
+        }
+    },
+
+    registerInit = () => {
+
+        return {
+            type: action.REGISTER_INIT
         }
     }

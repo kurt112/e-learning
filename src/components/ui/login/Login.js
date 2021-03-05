@@ -1,71 +1,62 @@
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import { Hidden } from '@material-ui/core';
+import {LinearProgress} from '@material-ui/core';
 import Copyright from '../copyright/Copyright';
 import {connect} from 'react-redux'
 import * as action from '../../../store/action/login/LoginAction'
-const useStyles = makeStyles((theme) => ({
-    root: {
-        height: '100vh',
-    },
-    image: {
-        backgroundImage: 'url(https://source.unsplash.com/random)',
-        backgroundRepeat: 'no-repeat',
-        backgroundColor:
-            theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-    },
-    paper: {
-        margin: theme.spacing(8, 4),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
+import {StudentRegisterForm, TeacherRegisterForm,UserIDForm} from "../registerForm";
+import style from './LoginStyle'
+import {useState} from "react";
 
-}));
+const Login = ({loginState, changeEmail, changePassword, login, changeId,
+                   registerInit, registerOpen,registerClose}) => {
 
-const Login = ({loginState, changeEmail, changePassword, login}) => {
+    const classes = style();
 
-    const classes = useStyles();
+    // set the state to 1 if u want to ouput Student Register form
+    // set the state to 2 if u want to output Teacher Register form
+
+
 
     return (
-        <Grid container component="main" component={Paper} className={classes.root}>
-            <CssBaseline />
+        <Grid container component="main"  className={classes.root}>
+
+
+            {loginState.form === ''? <UserIDForm  submit={registerInit} changeId={changeId} dialog={loginState.dialog} registerClose={registerClose}/>:null}
+            {loginState.form === 'Student'? <StudentRegisterForm/>: null}
+            {loginState.form === 'Teacher'? <TeacherRegisterForm/>: null}
+
+
+            <CssBaseline/>
+
             <Grid item xs={false} sm={false} md={8} className={classes.image}>
 
             </Grid>
             <Grid item xs={12} sm={12} md={4} component={Paper} elevation={6} square>
+
+
                 <div className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <p>No Account Found</p>
+                    <AccountCircleIcon style={{fontSize: 70}}/>
                     <Typography component="h1" variant="h5">
                         Sign in
-          </Typography>
+                    </Typography>
+
+                    {
+                        loginState.loading === true ?
+                            <Box className={classes.progress}>
+                                <LinearProgress color="secondary"/>
+                            </Box> :
+                            null
+                    }
+
                     <form className={classes.form} noValidate>
                         <TextField
                             value={loginState.username}
@@ -93,10 +84,13 @@ const Login = ({loginState, changeEmail, changePassword, login}) => {
                             onChange={(event) => changePassword(event.target.value)}
                             autoComplete="current-password"
                         />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
-                        />
+                        <Box className={classes.util}>
+                            <FormControlLabel
+                                control={<Checkbox value="remember" color="primary"/>}
+                                label="Remember me"
+                            />
+                            <p>No Account Found</p>
+                        </Box>
                         <Button
                             fullWidth
                             variant="contained"
@@ -105,17 +99,15 @@ const Login = ({loginState, changeEmail, changePassword, login}) => {
                             onClick={login}
                         >
                             Sign In
-            </Button>
+                        </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2">
-                                    Forgot password?
-                </Link>
+                                <Grid item>
+                                    <Button color="primary">Forgot Password</Button>
+                                </Grid>
                             </Grid>
                             <Grid item>
-                                <Link href="#" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link>
+                                <Button color="primary" onClick={registerOpen}>Sign Up</Button>
                             </Grid>
                         </Grid>
                         <Box mt={5}>
@@ -138,7 +130,14 @@ const mapDispatchToProps = (dispatch) => {
     return {
         changeEmail: (data) => dispatch(action.changeEmail(data)),
         changePassword: (data) => dispatch(action.changePassword(data)),
-        login:() => dispatch(action.Login())
+        login: () => dispatch(action.Login()),
+
+        //  Register action
+        registerOpen: () => dispatch(action.registerOpen()),
+        registerInit: () => dispatch(action.registerInit()),
+        registerClose: () => dispatch(action.registerClose()),
+        changeId: (data) => dispatch(action.changeId(data))
+
     }
 }
 
