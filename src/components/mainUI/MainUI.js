@@ -6,9 +6,9 @@ import Navbar from '../navbar/Navbar';
 import {Switch} from 'react-router';
 import Skeleton from '../ui/utils/skeleton/TableUISkeleton'
 import Route from '../Route'
-import {Student} from "../../store/utils/Specify";
 
-export default function MainUi({props}) {
+export default function MainUi({user}) {
+
     const classes = style();
 
 
@@ -33,7 +33,7 @@ export default function MainUi({props}) {
             <Sidebar
                 open={open}
                 handleDrawerClose={handleDrawerClose}
-                handleDrawerOpen={handleDrawerOpen} role={Student}/>
+                handleDrawerOpen={handleDrawerOpen} role={user.userRole}/>
 
 
             <main className={classes.content}>
@@ -41,7 +41,7 @@ export default function MainUi({props}) {
                 {
                     <Suspense fallback={<Skeleton/>}>
                         <Switch>
-                            <Route role={Student}/>
+                            <Route role={user.userRole}/>
                         </Switch>
                     </Suspense>
                 }

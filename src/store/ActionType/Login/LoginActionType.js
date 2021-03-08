@@ -4,7 +4,8 @@ export const
     LOGIN = 'LOGIN',
     SUCCESS_LOGIN = 'SUCCESS_LOGIN',
     FAIL_LOGIN = 'FAIL_LOGIN',
-
+    RE_LOGIN = 'RE_LOGIN',
+    RESET_LOGIN_PAGE = 'RESET_LOGIN_PAGE',
 
     // for sign up action in login
     CHANGE_ID = 'CHANGE_ID',

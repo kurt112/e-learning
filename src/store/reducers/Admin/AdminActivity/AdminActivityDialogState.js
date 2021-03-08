@@ -1,7 +1,7 @@
 import state from '../../__StateGlobal/AdminTableDialogState'
 import * as globalActionDialog from '../../../ActionType/__ActionTypeGlobal/AdminDialogActionType'
 import {Activity} from '../../../utils/Specify'
-import * as actions from '../../../ActionType/Admin/ActivityDialogActionType'
+import * as actions from '../../../ActionType/Admin/Activity/ActivityDialogActionType'
 import {updateObject} from "../../../utils/UpdateObject";
 const newState = new state();
 
@@ -19,7 +19,7 @@ const init_state = {
     ...newState.init_state
 }
 const reducer = (state=init_state, action) => {
-    console.log(action.type)
+
     switch (action.type){
         case actions.CHANGE_FILE:return updateObject(state, {file:action.file})
         case actions.CHANGE_CLASS_ROOMSHIFT: return updateObject(state, {roomShiftId: action.data})

@@ -8,7 +8,6 @@ import {Teacher, Student,Admin} from "../../store/utils/Specify";
 
 
 const Route = ({role}) => {
-
     return (
         <Fragment>
             {

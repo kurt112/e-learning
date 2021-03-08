@@ -62,7 +62,7 @@ const RoomShiftProfile = ({roomShift, match, initData}) => {
                                 <Grid className={style.buttonGroup} item md={12} sm={12} xs={12} lg={12} >
                                     <Button color="primary" onClick={data}>RoomShift Info</Button>
                                     <Button color="primary" onClick={roomShift}>Room Class</Button>
-                                    <Button color="primary" onClick={roomClasses}>Room Classes</Button>
+                                    <Button color="primary" onClick={roomClasses}>Students</Button>
                                 </Grid>
                                 <Button
                                     color="primary"

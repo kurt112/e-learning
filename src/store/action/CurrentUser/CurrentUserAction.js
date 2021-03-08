@@ -12,4 +12,11 @@ export const
             type: action.CHANGE_USER,
             data
         }
+    },
+
+    logout = () => {
+
+        return{
+            type: action.LOGOUT
+        }
     }

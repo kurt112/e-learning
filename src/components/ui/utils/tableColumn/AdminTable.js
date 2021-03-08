@@ -58,7 +58,7 @@ export const AdminStudentTable = [
         options: {
             filter: false,
             sort: false,
-            customBodyRender: (value, tableMeta, updateValue) => {
+            customBodyRender: (value) => {
                 return value === undefined ? null :
                     <Link to={`/student/profile/`+value} style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
@@ -221,7 +221,7 @@ export const AdminSubjectTable = [
         options: {
             filter: false,
             sort: false,
-            customBodyRender: (value, tableMeta, updateValue) => {
+            customBodyRender: (value) => {
                 return value === undefined ? null :
                     <Link to="/admin/dashboard" style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
@@ -283,7 +283,7 @@ export const AdminActivityTable = [
             filter: false,
             sort: false,
             width: 100,
-            customBodyRender: (value, tableMeta, updateValue) => {
+            customBodyRender: (value) => {
                 return value === undefined ? null :
                     <Fragment>
                         <a href={JavaEndpoint + '/admin/activity/download?activity-id=' + value} target="_blank"

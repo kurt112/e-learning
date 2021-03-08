@@ -1,4 +1,4 @@
-import * as actions from '../../../ActionType/Admin/RoomDialogActionType'
+import * as actions from '../../../ActionType/Admin/Room/RoomDialogActionType'
 
 export const roomNameChange = (data) => {
     return{

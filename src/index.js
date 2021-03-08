@@ -40,7 +40,7 @@ import {StudentProfile, TeacherProfile,RoomProfile, RoomShiftProfile, RoomShiftC
 
 
 // LOGIN
-import Login from './store/reducers/Login/LoginState'
+import Login from './store/reducers/LoginLogout/LoginLogoutState'
 
 // Current User
 import CurrentUser from "./store/reducers/CurrentUser/CurrentUser";
@@ -79,6 +79,7 @@ import {
     watchRoomShiftClassGetProfile,
     watchLogin,
     watchPreRegister,
+    watchReLogin,
     watchAdminActivityUpload, watchAdminActivitySearchChange, watchAdminActivityTableInit, watchAdminActivityTableNext
 } from './store/middleware/'
 
@@ -188,7 +189,7 @@ sagaMiddleware.run(watchRoomShiftClassGetProfile)
 // LOGIN
 sagaMiddleware.run(watchLogin)
 sagaMiddleware.run(watchPreRegister)
-
+sagaMiddleware.run(watchReLogin)
 
 ReactDOM.render(
     <React.StrictMode>

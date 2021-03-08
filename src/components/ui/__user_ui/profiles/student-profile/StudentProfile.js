@@ -20,7 +20,7 @@ const StudentProfile = ({studentState, match, initData}) => {
     useEffect(() => {
         let id;
         id = match.params.id;
-
+        
         initData(id)
 
 

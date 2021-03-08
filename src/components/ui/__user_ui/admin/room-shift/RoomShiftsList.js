@@ -29,6 +29,9 @@ const  RoomShiftList = ({roomShift, initData,searchChange,pageChange,openDialog,
                             <Button variant="outlined" color="primary" onClick={openDialog}>
                                 Add Room Shift
                             </Button>
+                            <Button variant="outlined" color="primary" onClick={openDialog}>
+                                Add Students
+                            </Button>
                         </Box>
                         <Button variant="outlined" color="primary">
                             Quit

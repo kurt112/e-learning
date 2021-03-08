@@ -17,6 +17,7 @@ const  TeacherProfile= ({teacherState,initData, match})=>{
 
     useEffect(() => {
         const id = match.params.id;
+
         initData(id)
     }, [initData, match.params.id])
 

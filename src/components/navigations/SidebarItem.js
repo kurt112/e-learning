@@ -14,12 +14,6 @@ export function TeacherItems({ style }) {
     return (
         <div>
             <ListSubheader className={style} inset>TEACHER</ListSubheader>
-            <ListItem component={Link} to="/teacher/profile" button>
-                <ListItemIcon>
-                    <ShoppingCartIcon />
-                </ListItemIcon>
-                <ListItemText primary="Profile" />
-            </ListItem>
             <ListItem component={NavLink} to="/teacher/classes" button>
                 <ListItemIcon>
                     <PeopleIcon />
@@ -53,12 +47,6 @@ export function StudentItems({ style }) {
     return (
         <div>
             <ListSubheader className={style} inset>STUDENT</ListSubheader>
-            <ListItem component={NavLink} to="/student/profile" button>
-                <ListItemIcon>
-                    <AssignmentIcon />
-                </ListItemIcon>
-                <ListItemText primary="Profile" />
-            </ListItem>
             <ListItem component={NavLink} to="/student/classes" button>
                 <ListItemIcon>
                     <AssignmentIcon />

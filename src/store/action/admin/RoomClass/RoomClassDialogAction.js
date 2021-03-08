@@ -1,4 +1,4 @@
-import * as roomClassAction from '../../../ActionType/Admin/RoomClassDialogActionType'
+import * as roomClassAction from '../../../ActionType/Admin/RoomShiftClass/RoomShiftClassDialogActionType'
 
 export const changeRoomShiftId = (data) => {
     return {

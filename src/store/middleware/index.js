@@ -7,7 +7,8 @@ import * as profile from '../ActionType/__ActionTypeGlobal/ProfileActionType'
 
 import {
     Login,
-    PreRegister
+    PreRegister,
+    ReLogin
 } from "./login/LoginMiddleware";
 
 import {
@@ -266,4 +267,8 @@ export function * watchLogin() {
 
 export function * watchPreRegister(){
     yield takeLeading(loginAction.REGISTER_INIT, PreRegister)
+}
+
+export  function * watchReLogin () {
+    yield takeLeading(loginAction.RE_LOGIN, ReLogin)
 }

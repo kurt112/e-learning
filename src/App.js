@@ -1,21 +1,36 @@
-import {Fragment, Suspense} from 'react'
+import {Fragment, Suspense, useEffect} from 'react'
 import DashBoard from './components/mainUI/MainUI'
 import {BrowserRouter} from 'react-router-dom'
 import Classroom from './components/ui/__user_ui/classroom/classroom'
 import {Redirect, Route, Switch} from "react-router";
 import Login from './components/ui/login/Login'
+import {connect} from 'react-redux'
+import * as action from './store/action/login/LoginAction'
+const App = ({currentUser,reLogin}) => {
 
-const App = ({user}) => {
+
+    const token = localStorage.getItem('token')
+
+
+
+    useEffect(() => {
+        if(token !== null && currentUser.user === null){
+            reLogin(localStorage.getItem('token'))
+        }
+    }, [])
+
     return (
         <Fragment>
             <BrowserRouter>
                 <Suspense fallback={'Loading'}>
                     <Switch>
                         {
-                            user === undefined ?
-                                <Route path={'/'} exact render={() => <Login/>}/> :
+                            currentUser.user === null ?
+
+                                token !== null? null:  <Route path={'/'} exact render={() => <Login/>}/> :
+
                                 <Fragment>
-                                    <DashBoard/>
+                                    <DashBoard user={currentUser.user}/>
                                     <Route path='/classroom/:path' exact render={(props) => <Classroom {...props}/>}/>
                                 </Fragment>
                         }
@@ -28,4 +43,16 @@ const App = ({user}) => {
     )
 }
 
-export default App
+const mapStateToProps = (state) => {
+    return {
+        currentUser: state.CurrentUser
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        reLogin: (data) => dispatch(action.reLogin(data))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

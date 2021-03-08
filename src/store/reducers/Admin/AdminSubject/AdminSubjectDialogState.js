@@ -1,4 +1,4 @@
-import * as dialogActions from '../../../ActionType/Admin/SubjectDialogActionType'
+import * as dialogActions from '../../../ActionType/Admin/Subject/SubjectDialogActionType'
 import * as actions from '../../../ActionType/__ActionTypeGlobal/AdminDialogActionType'
 import {updateObject} from '../../../utils/UpdateObject'
 import state from '../../__StateGlobal/AdminTableDialogState'

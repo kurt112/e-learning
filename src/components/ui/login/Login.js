@@ -14,16 +14,16 @@ import {connect} from 'react-redux'
 import * as action from '../../../store/action/login/LoginAction'
 import {StudentRegisterForm, TeacherRegisterForm,UserIDForm} from "../registerForm";
 import style from './LoginStyle'
-import {useState} from "react";
+import {useEffect} from "react";
 
 const Login = ({loginState, changeEmail, changePassword, login, changeId,
                    registerInit, registerOpen,registerClose}) => {
 
     const classes = style();
 
-    // set the state to 1 if u want to ouput Student Register form
-    // set the state to 2 if u want to output Teacher Register form
-
+    useEffect(() => {
+        login()
+    }, [])
 
 
     return (

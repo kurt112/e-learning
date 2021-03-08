@@ -35,7 +35,7 @@ export const
         }
     },
 
-    // Registration in Login from actions
+    // Registration in LoginLogout from actions
     changeId = (data) => {
         return {
             type: action.CHANGE_ID,
@@ -65,5 +65,18 @@ export const
 
         return {
             type: action.REGISTER_INIT
+        }
+    },
+
+    reLogin = (data) => {
+        return {
+            type: action.RE_LOGIN,
+            data
+        }
+    },
+
+    resetLoginPage = () => {
+        return {
+            type: action.RESET_LOGIN_PAGE
         }
     }

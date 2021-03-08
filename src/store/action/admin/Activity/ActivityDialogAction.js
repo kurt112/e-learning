@@ -1,4 +1,4 @@
-import * as actions from "../../../ActionType/Admin/ActivityDialogActionType";
+import * as actions from "../../../ActionType/Admin/Activity/ActivityDialogActionType";
 
 
 export const changeFile = (file) =>{

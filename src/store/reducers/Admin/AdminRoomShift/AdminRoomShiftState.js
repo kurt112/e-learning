@@ -12,7 +12,13 @@ const response = (item) => {
     return  insert(item.room.roomName, item.roomShiftName, item.grade, item.section, item.timeStart,item.timeEnd,item.id)
 }
 
-const reducer = (state = newState.init_state, action) =>{
+const initState = {
+    ...newState.init_state,
+    dialog: false,
+
+}
+
+const reducer = (state = initState, action) =>{
     switch(action.type){
         case actions.ADMIN_TABLE_SETTINGS_INIT(RoomShift): return newState.apiSettingsInit(state, action)
         case actions.ADMIN_TABLE_INIT(RoomShift): return newState.initData(state)

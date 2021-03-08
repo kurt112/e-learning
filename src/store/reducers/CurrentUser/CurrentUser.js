@@ -3,18 +3,32 @@ import {updateObject} from "../../utils/UpdateObject";
 
 
 const initState = {
-    user: '',
+    user: null,
     token: '',
 }
 
+const logout = (state) => {
+    localStorage.clear()
 
-const reducer = (state= initState, action) =>{
+    return updateObject(state, {
+        user: null,
+        token: '',
+    })
+}
 
-    switch (action.type){
-        case actions.CHANGE_USER: return updateObject(state, {user: action.data})
-        case actions.CHANGE_TOKEN: return updateObject(state, {token: action.data})
+const reducer = (state = initState, action) => {
 
-        default: return state;
+    switch (action.type) {
+        case actions.CHANGE_USER:
+            return updateObject(state, {user: action.data})
+        case actions.CHANGE_TOKEN:
+            return updateObject(state, {token: action.data})
+
+        case actions.LOGOUT:
+            return logout(state)
+
+        default:
+            return state;
     }
 
 }

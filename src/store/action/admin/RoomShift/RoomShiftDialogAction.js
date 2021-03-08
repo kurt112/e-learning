@@ -1,4 +1,4 @@
-import * as actions from '../../../ActionType/Admin/RoomShiftDialogActionType'
+import * as actions from '../../../ActionType/Admin/RoomShift/RoomShiftDialogActionType'
 export const roomShiftSectionChange = (data) => {
     return {
         type: actions.ROOMSHIFT_DIALOG_ROOMSECTION_CHANGE,

@@ -1,12 +1,11 @@
-import clsx from 'clsx';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
-import {Badge, CssBaseline, FormControlLabel, Switch, withStyles} from '@material-ui/core';
-import { mode } from '../ui/utils/darkMode/DarkMode'
-import { useEffect, useState } from 'react';
+import {Badge, FormControlLabel, Switch, withStyles} from '@material-ui/core';
+import {mode} from '../ui/utils/darkMode/DarkMode'
+import {useEffect, useState} from 'react';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -17,6 +16,10 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import style from '../mainUI/MainUiStyle'
+import {connect} from "react-redux";
+import * as action from '../../store/action/CurrentUser/CurrentUserAction'
+import {Link} from "react-router-dom";
+import {Student, Teacher} from "../../store/utils/Specify";
 
 const StyledMenu = withStyles({
     paper: {
@@ -47,13 +50,13 @@ const StyledMenuItem = withStyles((theme) => ({
                 color: theme.palette.common.black,
             },
         },
-        '& .MuiListItemIcon-root, & .MuiListItemText-primary':{
+        '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
             color: theme.palette.common.black
         }
     },
 }))(MenuItem);
 
-export default function Navbar({  handleDrawerOpen }) {
+const Navbar = ({handleDrawerOpen, currentUser, logout}) => {
     const [enable, setEnable] = useState(false)
     const classes = style()
 
@@ -64,6 +67,8 @@ export default function Navbar({  handleDrawerOpen }) {
         mode(enable)
 
     }
+
+
     useEffect(() => {
         // mode(false)
     }, [])
@@ -91,21 +96,28 @@ export default function Navbar({  handleDrawerOpen }) {
                     onClick={handleDrawerOpen}
                     edge="start"
                 >
-                    <MenuIcon />
+                    <MenuIcon/>
                 </IconButton>
                 <Typography variant="h6" noWrap className={classes.title}>
                     Gardner College
                 </Typography>
 
-
-                <Typography variant="h6" noWrap style={{marginRight: '10px'}}>
-                    Kurt Lupin Orioque
-                </Typography>
-                <Badge color="secondary" badgeContent={1} className={classes.badge} >
-                    <NotificationsIcon style={{fontSize:25}}  color="primary"  variant="contained" />
+                <Link  style={{textDecoration: 'none', color: 'white'}} to={'/'
+                +(currentUser.user.userRole === Student? 'student': 'teacher') +
+                '/profile/'+currentUser.user.email}>
+                    <Typography variant="h6" noWrap style={{marginRight: '10px'}}>
+                        {
+                            currentUser.user.firstName
+                            + ' ' +
+                            currentUser.user.lastName
+                        }
+                    </Typography>
+                </Link>
+                <Badge color="secondary" badgeContent={1} className={classes.badge}>
+                    <NotificationsIcon style={{fontSize: 25}} color="primary" variant="contained"/>
                 </Badge>
 
-                <div >
+                <div>
                     <ArrowDropDownIcon
                         className={classes.dropDownLight}
                         color={'primary'}
@@ -126,15 +138,15 @@ export default function Navbar({  handleDrawerOpen }) {
 
                         <StyledMenuItem>
                             <ListItemIcon>
-                                <DraftsIcon   fontSize="small" />
+                                <DraftsIcon fontSize="small"/>
                             </ListItemIcon>
-                            <ListItemText  primary="Drafts" />
+                            <ListItemText primary="Drafts"/>
                         </StyledMenuItem>
                         <StyledMenuItem>
                             <ListItemIcon>
-                                <InboxIcon   fontSize="small" />
+                                <InboxIcon fontSize="small"/>
                             </ListItemIcon>
-                            <ListItemText primary="Your Profile" />
+                            <ListItemText primary="Your Profile"/>
                         </StyledMenuItem>
 
                         <StyledMenuItem>
@@ -154,11 +166,11 @@ export default function Navbar({  handleDrawerOpen }) {
 
                         </StyledMenuItem>
 
-                        <StyledMenuItem >
+                        <StyledMenuItem onClick={logout}>
                             <ListItemIcon>
-                                <ExitToAppIcon  fontSize="small" />
+                                <ExitToAppIcon fontSize="small"/>
                             </ListItemIcon>
-                            <ListItemText  primary="Logout" />
+                            <ListItemText primary="Logout"/>
                         </StyledMenuItem>
 
                     </StyledMenu>
@@ -167,3 +179,17 @@ export default function Navbar({  handleDrawerOpen }) {
         </AppBar>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        currentUser: state.CurrentUser
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logout: () => dispatch(action.logout())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

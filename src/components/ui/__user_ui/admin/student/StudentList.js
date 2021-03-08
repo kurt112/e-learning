@@ -53,6 +53,9 @@ const StudentList = ({student, pageChange, searchChange, openDialog, closeDialog
                             <Button variant="outlined" color="primary" onClick={openDialog}>
                                 Add Student
                             </Button>
+                            <Button variant="outlined" color="primary" onClick={openDialog}>
+                                Add Student Class
+                            </Button>
                         </Box>
                         <Button variant="outlined" color="primary">
                             Quit

@@ -1,6 +1,6 @@
 import * as actions from "../../../ActionType/__ActionTypeGlobal/AdminDialogActionType";
 import {RoomShift} from "../../../utils/Specify";
-import * as roomShiftAction from "../../../ActionType/Admin/RoomShiftDialogActionType";
+import * as roomShiftAction from "../../../ActionType/Admin/RoomShift/RoomShiftDialogActionType";
 import {updateObject} from "../../../utils/UpdateObject";
 import State from "../../__StateGlobal/AdminTableDialogState"
 
