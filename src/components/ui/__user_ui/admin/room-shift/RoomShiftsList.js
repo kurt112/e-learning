@@ -3,13 +3,18 @@ import MUIDataTable from 'mui-datatables'
 import {Fragment, useEffect} from "react"
 import { AdminRoomShiftTable as columns } from '../../../utils/tableColumn'
 import style, { TableOptions as options } from '../../../_style/TableStyle'
-import RegisterRoom from './RoomShiftDialog'
+import RegisterRoomShift from './RoomShiftDialogRegister'
+import AddStudent from './RoomShiftDialogAddStudent'
 import {connect} from 'react-redux'
-import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
 import { RoomShift} from "../../../../../store/utils/Specify";
 import Typography from "@material-ui/core/Typography";
 
-const  RoomShiftList = ({roomShift, initData,searchChange,pageChange,openDialog,closeDialog})=> {
+
+// actions
+import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
+import * as roomShiftListAction from "../../../../../store/action/admin/RoomShift/RoomShiftListAction"
+
+const  RoomShiftList = ({roomShift, initData,searchChange,pageChange,openDialog,closeDialog,openAddStudent, closeAddStudent})=> {
 
     const classes = style()
     useEffect(() => {
@@ -20,7 +25,8 @@ const  RoomShiftList = ({roomShift, initData,searchChange,pageChange,openDialog,
     return (
         <Fragment>
 
-            <RegisterRoom dialog={roomShift.dialog} closeDialog={closeDialog}/>
+            <RegisterRoomShift dialog={roomShift.dialog} closeDialog={closeDialog}/>
+            <AddStudent  dialog={roomShift.addStudentDialog} closeDialog={closeAddStudent}/>
 
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
@@ -29,7 +35,7 @@ const  RoomShiftList = ({roomShift, initData,searchChange,pageChange,openDialog,
                             <Button variant="outlined" color="primary" onClick={openDialog}>
                                 Add Room Shift
                             </Button>
-                            <Button variant="outlined" color="primary" onClick={openDialog}>
+                            <Button variant="outlined" color="primary" onClick={openAddStudent}>
                                 Add Students
                             </Button>
                         </Box>
@@ -77,6 +83,8 @@ const mapDispatchToProps =(dispatch) => {
         pageChange: (page) => dispatch(actions.DataNextPage(page,RoomShift)),
         openDialog: () => dispatch(actions.openDialog(RoomShift)),
         closeDialog: ()=> dispatch(actions.closeDialog(RoomShift)),
+        openAddStudent: () => dispatch(roomShiftListAction.openAddStudent()),
+        closeAddStudent: () => dispatch(roomShiftListAction.closeAddStudent())
     }
 }
 

@@ -2,7 +2,9 @@
 import {AdminInsertRoomShift as insert} from "../../../../components/ui/utils/tableColumn";
 import state from "../../__StateGlobal/AdminTableState";
 import * as actions from "../../../ActionType/__ActionTypeGlobal/AdminTableActionType";
+import * as roomShiftListAction from "../../../ActionType/Admin/RoomShift/RoomShiftListActionType"
 import {RoomShift} from "../../../utils/Specify";
+import {updateObject} from "../../../utils/UpdateObject";
 
 const newState = new state()
 const transforms = (items) => items.map((item) =>
@@ -14,7 +16,7 @@ const response = (item) => {
 
 const initState = {
     ...newState.init_state,
-    dialog: false,
+    addStudentDialog: false,
 
 }
 
@@ -29,6 +31,10 @@ const reducer = (state = initState, action) =>{
         case actions.ADMIN_TABLE_NEXT_PAGE(RoomShift): return newState.nextData(state,action)
         case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(RoomShift): return newState.searchChange(state,action)
         case actions.ADMIN_DIALOG_TABLE_REGISTER(RoomShift): return newState.AddTable(state, response(action.item))
+
+        // Adding Student in Room Shift List
+        case roomShiftListAction.ADD_STUDENT_DIALOG_CLOSE: return updateObject(state, {addStudentDialog:false})
+        case roomShiftListAction.ADD_STUDENT_DIALOG_OPEN: return updateObject(state, {addStudentDialog: true})
         default: return state;
     }
 }

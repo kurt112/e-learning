@@ -29,4 +29,58 @@ export const
         }
         `
         }
+    },
+
+    getRoomShift = (shiftID) => {
+        return {
+            query: `
+                    query{roomShift(id:"${shiftID}"){
+                        id,
+                        grade,
+                        section,
+                        students{
+                            student_id,
+                            user{
+                              firstName,
+                              lastName
+                            }
+                        }
+            }
+        }
+        `
+        }
+    },
+    getStudentsForRoomShift = (search) => {
+        return {
+            query: `
+                    query{getStudentsForRoomShift(search:"${search}"){                      
+                            student_id,
+                            user{
+                              firstName,
+                              lastName
+                            }
+            }
+        }
+        `
+        }
+    },
+    uploadStudentInRoomShift = (id,list) => {
+
+        return {
+            query: `.
+                    query{uploadStudentsInRoomShift(roomShiftID:"${id}", students:"${list}"){
+                        id,
+                        grade,
+                        section,
+                        students{
+                            student_id,
+                            user{
+                              firstName,
+                              lastName
+                            }
+                        }
+            }
+        }
+        `
+        }
     }
