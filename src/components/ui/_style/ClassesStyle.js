@@ -77,7 +77,8 @@ const classesStyle = makeStyles(() => ({
         flexDirection: 'column',
         marginLeft: 20,
         marginBottom: 20,
-        borderRadius: '5%'
+        borderRadius: '5%',
+        cursor: 'pointer'
     },
 
     classesTop: {
@@ -86,16 +87,12 @@ const classesStyle = makeStyles(() => ({
         paddingRight:10,
         color:'white',
         borderRadius: '5%'
-        // borderBottomLeftRadius: '20%',
-        // borderTopRightRadius: '40%',
-
     },
 
     classFooter: {
         paddingLeft: 10,
         paddingRight: 10,
         display: 'flex',
-        justifyContent: 'flex-end',
 
     },
 
@@ -119,11 +116,19 @@ const classesStyle = makeStyles(() => ({
         color: '#5F6368',
         textAlign: "center",
         cursor: 'pointer',
-
         '&:hover': {
             backgroundColor: '#F9F9F9',
         }
     },
+    schedule:{
+        flex: 1,
+        fontWeight: 'bold',
+        margin: "auto",
+        '& p': {
+            color: '#5F6368',
+            margin: 0,
+        }
+    }
 
 
 }))

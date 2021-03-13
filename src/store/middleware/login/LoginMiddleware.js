@@ -1,6 +1,6 @@
 import {put, select} from "redux-saga/effects";
 import * as Selector from "../selector";
-import {baseUrl,baseUrlNoAuth} from "../axios";
+import {baseUrlNoAuth} from "../axios";
 import * as action from '../../action/login/LoginAction'
 import * as currentUserAction from '../../action/CurrentUser/CurrentUserAction'
 

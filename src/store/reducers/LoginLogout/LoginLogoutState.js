@@ -42,8 +42,8 @@ const logout = (state) => {
 
 
     return updateObject(state, {
-        username: '12312',
-        password: '?',
+        username: '',
+        password: '',
         message: '',
         loading: false,
         dialog: false,

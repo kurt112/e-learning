@@ -40,7 +40,7 @@ const Classroom = (props) => {
     const [people, setPeople] = useState([])
     const [messages, setMessages] = useState([])
 
-    const [name] = useState(makeid(5))
+    const [name] = useState(`${props.user.firstName} ${props.user.lastName}`)
     const socket = useRef()
     const [chatDrawer, setDrawer] = useState(false)
 
@@ -60,7 +60,7 @@ const Classroom = (props) => {
             setMessages(messages)
         })
 
-        socket.current.emit('sendMessage', name + ' Has Joined The RoomShiftClass ', m.format('h:mm a'), true, () => setMessage(''))
+        socket.current.emit('sendMessage', name + ' Has Joined The Class ', m.format('h:mm a'), true, () => setMessage(''))
 
 
         return () => {

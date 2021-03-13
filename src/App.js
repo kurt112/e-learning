@@ -8,10 +8,7 @@ import {connect} from 'react-redux'
 import * as action from './store/action/login/LoginAction'
 const App = ({currentUser,reLogin}) => {
 
-
     const token = localStorage.getItem('token')
-
-
 
     useEffect(() => {
         if(token !== null && currentUser.user === null){
@@ -24,6 +21,7 @@ const App = ({currentUser,reLogin}) => {
             <BrowserRouter>
                 <Suspense fallback={'Loading'}>
                     <Switch>
+                        {currentUser.user === null? null: <Route path='/classroom/:path' exact render={(props) => <Classroom user={currentUser.user} {...props}/>}/>}
                         {
                             currentUser.user === null ?
 
@@ -31,9 +29,10 @@ const App = ({currentUser,reLogin}) => {
 
                                 <Fragment>
                                     <DashBoard user={currentUser.user}/>
-                                    <Route path='/classroom/:path' exact render={(props) => <Classroom {...props}/>}/>
                                 </Fragment>
                         }
+
+
                         <Redirect to={'/'}/>
                     </Switch>
                 </Suspense>

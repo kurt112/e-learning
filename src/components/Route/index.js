@@ -7,13 +7,13 @@ import {Redirect} from "react-router";
 import {Teacher, Student,Admin} from "../../store/utils/Specify";
 
 
-const Route = ({role}) => {
+const Route = ({role,email}) => {
     return (
         <Fragment>
             {
-                role === Teacher ? <TeacherRoute/> :
-                    role === Student ? <StudentRoute/> :
-                        role === Admin ? <AdminRoute/> :
+                role === Teacher ? <TeacherRoute email={email}/> :
+                    role === Student ? <StudentRoute email={email}/> :
+                        role === Admin ? <AdminRoute email={email}/> :
                             <Redirect to={'/'}/>
             }
             <ProfileRoute/>

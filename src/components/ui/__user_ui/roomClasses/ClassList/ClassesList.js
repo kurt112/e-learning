@@ -6,14 +6,12 @@ import CurrentClasses from "./CurrentClasses";
 import DoneClasses from "./DoneClasses";
 import ClassesStyle from "../../../_style/ClassesStyle";
 
-const ClassesList= () => {
+const ClassesList= ({classes}) => {
 
     const currentStyle = ClassesStyle()
     const [currentClassActive, setCurrentClassActive] = useState(true)
 
-
-
-    const [Classes, setClasses] = useState(<CurrentClasses style={currentStyle}/>)
+    const [Classes, setClasses] = useState(<CurrentClasses classes={classes} style={currentStyle}/>)
 
     const currentClassClick = () => {
         setCurrentClassActive(true)

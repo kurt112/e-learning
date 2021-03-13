@@ -21,7 +21,6 @@ export default function MainUi({user}) {
 
     const handleDrawerClose = () => {
         setOpen(false);
-
     };
 
     return (
@@ -41,7 +40,7 @@ export default function MainUi({user}) {
                 {
                     <Suspense fallback={<Skeleton/>}>
                         <Switch>
-                            <Route role={user.userRole}/>
+                            <Route role={user.userRole} email={user.email}/>
                         </Switch>
                     </Suspense>
                 }
