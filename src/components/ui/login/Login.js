@@ -25,6 +25,9 @@ const Login = ({loginState, changeEmail, changePassword, login, changeId,
         login()
     }, [])
 
+    const ClickEnter = (event) =>{
+        if(event  === "Enter") login()
+    }
 
     return (
         <Grid container component="main"  className={classes.root}>
@@ -70,6 +73,7 @@ const Login = ({loginState, changeEmail, changePassword, login, changeId,
                             autoComplete="email"
                             onChange={(event) => changeEmail(event.target.value)}
                             autoFocus
+                            onKeyPress={(event) => ClickEnter(event.key)}
                         />
                         <TextField
                             variant="outlined"
@@ -83,6 +87,7 @@ const Login = ({loginState, changeEmail, changePassword, login, changeId,
                             id="password"
                             onChange={(event) => changePassword(event.target.value)}
                             autoComplete="current-password"
+                            onKeyPress={(event) => ClickEnter(event.key)}
                         />
                         <Box className={classes.util}>
                             <FormControlLabel

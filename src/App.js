@@ -7,7 +7,6 @@ import Login from './components/ui/login/Login'
 import {connect} from 'react-redux'
 import * as action from './store/action/login/LoginAction'
 const App = ({currentUser,reLogin}) => {
-
     const token = localStorage.getItem('token')
 
     useEffect(() => {

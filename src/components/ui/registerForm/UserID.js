@@ -12,16 +12,18 @@ const UserId = ({submit,id, changeId,dialog, registerClose}) => {
         open={dialog}
         onClose={registerClose}
         aria-labelledby="add-teacher"
+        fullWidth={true}
     >
         <DialogTitle id="add-teacher"><strong>Enter Your Id</strong>
 
         </DialogTitle>
         <DialogContent>
-            <DialogContentText style={{color: 'black'}}>
-                only five centuries, but also the leap into electronic typesetting, remaining essentially
-                unchanged. It
-                was popularised in the 1960s with the release of L
-            </DialogContentText>
+
+
+            {/*<DialogContentText style={{color: 'black'}}>*/}
+
+
+            {/*</DialogContentText>*/}
 
 
             <TextField
