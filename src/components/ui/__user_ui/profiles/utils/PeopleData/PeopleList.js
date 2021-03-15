@@ -3,9 +3,9 @@ import {Container} from "@material-ui/core";
 
 import ProfileStyle from '../../ProfileStyle'
 import Box from "@material-ui/core/Box";
-import ClassPeopleData from "./ClassPeopleData";
+import PeopleData from "./PeopleData";
 
-const ClassPeople = ({students, teacher}) => {
+const PeopleList = ({students, teacher}) => {
     const style = ProfileStyle()
     return (
         <Fragment>
@@ -13,8 +13,8 @@ const ClassPeople = ({students, teacher}) => {
                 <h1>Teachers</h1>
                 <hr className={style.classPeopleDivider}/>
                 <Box className={style.peopleListContainer}>
-                    <ClassPeopleData border={{border: 'none', marginTop: 0}}
-                                     name={`${teacher.user.firstName}  ${teacher.user.lastName}`}/>
+                    <PeopleData border={{border: 'none', marginTop: 0}}
+                                name={`${teacher.user.firstName}  ${teacher.user.lastName}`}/>
 
 
                 </Box>
@@ -24,7 +24,7 @@ const ClassPeople = ({students, teacher}) => {
                     students.map((student, index) => {
                         let border ={border: 'none', marginTop: 0}
                         if(index !== 0) border = null
-                        return <ClassPeopleData key={student.student_id} name={`${student.user.firstName} ${student.user.lastName}`} border={border}/>
+                        return <PeopleData key={student.student_id} name={`${student.user.firstName} ${student.user.lastName}`} border={border}/>
                     })
                 }
                 <br/>
@@ -33,4 +33,4 @@ const ClassPeople = ({students, teacher}) => {
     )
 }
 
-export default ClassPeople;
+export default PeopleList;

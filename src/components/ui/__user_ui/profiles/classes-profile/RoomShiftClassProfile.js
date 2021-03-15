@@ -11,7 +11,7 @@ import * as action from "../../../../../store/action/__ActionGlobal/ProfileActio
 
 // component
 import Data from './data/Data'
-import ClassPeople from "./classes-people/ClassPeople";
+import PeopleList from "../utils/PeopleData/PeopleList";
 import ClassWork from "./classes-work/ClassWork";
 
 const  RoomShiftClassProfile= ({roomShiftClass, match, initData})=>{
@@ -41,7 +41,7 @@ const  RoomShiftClassProfile= ({roomShiftClass, match, initData})=>{
     }
 
     const RoomClassPeople = () => {
-        setComponent(<ClassPeople teacher={profile.teacher} students={profile.students}/>)
+        setComponent(<PeopleList teacher={profile.teacher} students={profile.students}/>)
     }
 
     return (

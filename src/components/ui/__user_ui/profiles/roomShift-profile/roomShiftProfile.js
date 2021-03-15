@@ -9,11 +9,13 @@ import Data from './data/Data'
 import * as action from "../../../../../store/action/__ActionGlobal/ProfileAction";
 import {RoomShift} from "../../../../../store/utils/Specify";
 import {Fragment} from "react";
-
+import PeopleList from "../utils/PeopleData/PeopleList";
+import RoomShiftClasses from "./roomShift-Classes/RoomShiftClasses";
 const RoomShiftProfile = ({roomShift, match, initData}) => {
     const style = ProfileStyle()
     const [component, setComponent] = useState(null)
-
+    const profile = roomShift.profile !== null? roomShift.profile.roomShift: null
+    console.log(profile)
     useEffect(() => {
         const id = match.params.id;
 
@@ -22,20 +24,20 @@ const RoomShiftProfile = ({roomShift, match, initData}) => {
 
     useEffect(() => {
 
-        if (roomShift.profile !== null) setComponent(<Data roomShift={roomShift.profile.roomShift}/>)
+        if (roomShift.profile !== null) setComponent(<Data roomShift={profile}/>)
     }, [roomShift.profile])
 
 
     const data = () => {
-        setComponent(<Data roomShift={roomShift.profile.roomShift}/>)
+        setComponent(<Data roomShift={profile}/>)
     }
 
-    const roomInfo = () => {
-        setComponent(<Data />)
+    const people = () => {
+        setComponent(<PeopleList teacher={profile.teacher} students={profile.students} />)
     }
 
     const roomClasses = () => {
-        // setComponent(<Logs />)
+        setComponent(<RoomShiftClasses classes={profile.roomShiftClasses}/>)
     }
 
     console.log("The room ")
@@ -61,8 +63,8 @@ const RoomShiftProfile = ({roomShift, match, initData}) => {
                             <Grid className={style.profileButton} container >
                                 <Grid className={style.buttonGroup} item md={12} sm={12} xs={12} lg={12} >
                                     <Button color="primary" onClick={data}>RoomShift Info</Button>
-                                    <Button color="primary" onClick={roomShift}>Room Class</Button>
-                                    <Button color="primary" onClick={roomClasses}>Students</Button>
+                                    <Button color="primary" onClick={roomClasses}>Room Class</Button>
+                                    <Button color="primary" onClick={people}>People</Button>
                                 </Grid>
                                 <Button
                                     color="primary"

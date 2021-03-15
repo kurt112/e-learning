@@ -3,24 +3,23 @@ import {Container} from "@material-ui/core";
 
 import ProfileStyle from '../../ProfileStyle'
 import Box from "@material-ui/core/Box";
-import ClassWorkData from "./ClassWorkData";
-import PeopleData from "../../utils/PeopleData/PeopleData";
-import {act} from "@testing-library/react";
+import ClassesData from "./ClassesData";
 
-const ClassWork = ({activities}) => {
+const RoomShiftClasses = ({classes}) => {
     const style = ProfileStyle()
-    console.log(activities)
+    console.log("im an")
+    console.log(classes)
     return (
         <Fragment>
             <Container>
-                <h1>ClassWork</h1>
+                <h1>Classes Schedule</h1>
                 <hr className={style.classPeopleDivider}/>
                 <Box className={style.peopleListContainer}>
                     {
-                        activities.map((activity, index) => {
+                        classes.map((lecture, index) => {
                             let border ={border: 'none', marginTop: 0}
                             if(index !== 0) border = null
-                            return <ClassWorkData key={activity.id} activity={activity} border={border}/>
+                            return <ClassesData key={lecture.id} classes={lecture} border={border}/>
                         })
                     }
                 </Box>
@@ -29,4 +28,4 @@ const ClassWork = ({activities}) => {
     )
 }
 
-export default ClassWork;
+export default RoomShiftClasses;

@@ -2,7 +2,6 @@ import {Avatar} from "@material-ui/core";
 import ProfileStyle from '../../ProfileStyle'
 
 const ClassWorkData = ({border, activity}) =>{
-    console.log(activity.date_end.length)
     const style = ProfileStyle()
     return (
         <div style={border} className={style.classDataContainer}>

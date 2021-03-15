@@ -1,7 +1,7 @@
 import {Avatar} from "@material-ui/core";
 import ProfileStyle from '../../ProfileStyle'
 
-const ClassPeopleData = ({border, name}) => {
+const PeopleData = ({border, name}) => {
     // console.log(border)
     const style = ProfileStyle()
     return (
@@ -14,4 +14,4 @@ const ClassPeopleData = ({border, name}) => {
     )
 }
 
-export default ClassPeopleData
+export default PeopleData
