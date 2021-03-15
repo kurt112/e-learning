@@ -13,7 +13,6 @@ class State {
 
         this.successData =(state, action) => {
 
-            console.log(action.data)
             state = updateObject(state, {loading: false})
 
             return updateObject(state,{profile: action.data})

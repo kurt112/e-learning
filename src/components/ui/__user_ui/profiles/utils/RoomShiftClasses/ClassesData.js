@@ -3,7 +3,7 @@ import ProfileStyle from '../../ProfileStyle'
 
 const ClassesData = ({border, classes}) => {
     const style = ProfileStyle()
-    console.log(classes)
+
     return (
         <div style={border} className={style.classDataContainer}>
             <div className={style.classDataContainerLeft}>

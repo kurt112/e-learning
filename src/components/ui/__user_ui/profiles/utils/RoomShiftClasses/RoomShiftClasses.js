@@ -7,8 +7,6 @@ import ClassesData from "./ClassesData";
 
 const RoomShiftClasses = ({classes}) => {
     const style = ProfileStyle()
-    console.log("im an")
-    console.log(classes)
     return (
         <Fragment>
             <Container>

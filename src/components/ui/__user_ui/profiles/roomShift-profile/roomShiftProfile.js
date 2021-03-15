@@ -10,7 +10,7 @@ import * as action from "../../../../../store/action/__ActionGlobal/ProfileActio
 import {RoomShift} from "../../../../../store/utils/Specify";
 import {Fragment} from "react";
 import PeopleList from "../utils/PeopleData/PeopleList";
-import RoomShiftClasses from "./roomShift-Classes/RoomShiftClasses";
+import RoomShiftClasses from "../utils/RoomShiftClasses/RoomShiftClasses";
 const RoomShiftProfile = ({roomShift, match, initData}) => {
     const style = ProfileStyle()
     const [component, setComponent] = useState(null)

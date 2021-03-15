@@ -34,7 +34,7 @@ export const
                            subject{
                                 subjectName
                                 },
-                           day
+                           day,
                            startTime,
                            endTime    
                     }
