@@ -70,7 +70,39 @@ const style = makeStyles((theme) => ({
             fontSize: 20
         },
        
-    }
+    },
+    peopleListContainer:{
+        marginTop: 10
+    },
+    classDataContainer: {
+        display: 'flex',
+
+        paddingLeft: 10,
+        borderTop:'1px solid #E0E0E0',
+        '& p': {
+            marginLeft: 10,
+            fontSize: 18,
+        }
+    },
+    classDataContainerLeft:{
+        display: 'flex',
+        alignItems:"center",
+        flex: 1,
+    },
+    classDataContainerRight: {
+        color: 'gray'
+    },
+    classPeopleDivider: {
+        backgroundColor:'blue',
+        height: '1px',
+        border:'0px'
+    },
+    dividerNormal:{
+        backgroundColor: 'grey',
+        border: '0px',
+        height: '1px'
+    },
+
 }))
 
 

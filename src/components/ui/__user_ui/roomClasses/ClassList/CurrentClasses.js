@@ -1,5 +1,5 @@
 import {Fragment} from "react";
-import {Box, Divider, Paper, Tooltip} from "@material-ui/core";
+import {Avatar, Box, Divider, Paper, Tooltip} from "@material-ui/core";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import VideoCallIcon from '@material-ui/icons/VideoCall';
 import {Link} from "react-router-dom";
@@ -31,9 +31,8 @@ const CurrentClasses = ({style, classes}) => {
                         </div>
                     </div>
 
-                    <img className={style.image}
-                         src="https://scontent.fmnl17-1.fna.fbcdn.net/v/t1.0-9/56702378_2655041071233365_7647132881902370816_o.jpg?_nc_cat=100&ccb=3&_nc_sid=09cbfe&_nc_eui2=AeGItDxV3T4oe7J0G3Gfa5nrGwkl7KZk1xMbCSXspmTXE99H00QSzkLF2NBIA860lVasMjmcmjOtyN-7jyaErtut&_nc_ohc=XM3EyyZVxaAAX8bfeW6&_nc_ht=scontent.fmnl17-1.fna&oh=2c4c7c3cb26de44e4a33ebd4eaa006bb&oe=6055DF8D"
-                    />
+                    <Avatar className={style.image}>{e.subject.subjectName.substring(0,1).toUpperCase()}</Avatar>
+
 
                     <div className={style.classDescription}>
                         <p>orem Ipsum is sunchanged. It was asdas popularised inasdfasdfasdf the 1960s with the release

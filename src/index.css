@@ -19,7 +19,7 @@ background-color: #F5F5F5;
 
 *::-webkit-scrollbar
 {
-width: 0px;
+width: 10px;
 background-color: red !important;
 }
 

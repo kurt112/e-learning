@@ -15,6 +15,7 @@ const TeacherRoute = () => {
             <Route path='/teacher/activities' exact render={() => <TeacherActivity/>}/>
             <Route path='/teacher/classes' exact render={() => <Classes/>}/>
             <Redirect to={'teacher/classes'}/>
+
         </Fragment>
     )
 }

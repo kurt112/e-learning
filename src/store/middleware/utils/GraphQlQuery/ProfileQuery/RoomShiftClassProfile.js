@@ -11,9 +11,29 @@ export const
                                      roomName,
                                     }
                            },
+                           activities{
+                                id,
+                                date_created,
+                                date_end,
+                                activityTitle
+                           },
+                           teacher{
+                                id
+                                user{
+                                    firstName,
+                                    lastName
+                                }
+                           },
+                           students{
+                                student_id,
+                                user{
+                                    firstName,
+                                    lastName
+                                }
+                           },
                            subject{
                                 subjectName
-                                   },
+                                },
                            day
                            startTime,
                            endTime    

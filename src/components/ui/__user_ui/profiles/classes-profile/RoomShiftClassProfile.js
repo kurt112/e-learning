@@ -4,16 +4,21 @@ import Picture from '../../../../../assets/asd.jpg'
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
 import {Fragment, useEffect, useState} from "react";
 import {connect} from 'react-redux'
-// import Logs from './logs/Logs'
-// import Attendance from './attendace/Attendance'
+
 import { withRouter } from 'react-router-dom';
-import Data from './data/Data'
 import {RoomShiftClass} from "../../../../../store/utils/Specify";
 import * as action from "../../../../../store/action/__ActionGlobal/ProfileAction";
+
+// component
+import Data from './data/Data'
+import ClassPeople from "./classes-people/ClassPeople";
+import ClassWork from "./classes-work/ClassWork";
+
 const  RoomShiftClassProfile= ({roomShiftClass, match, initData})=>{
 
     const style = ProfileStyle()
     const [component, setComponent] = useState(null)
+    const profile = roomShiftClass.profile !== null? roomShiftClass.profile.roomShiftClass: null
 
     useEffect(() => {
         const id = match.params.id;
@@ -23,24 +28,21 @@ const  RoomShiftClassProfile= ({roomShiftClass, match, initData})=>{
 
     useEffect(() => {
 
-        if (roomShiftClass.profile !== null) setComponent(<Data roomShiftClass={roomShiftClass.profile.roomShiftClass}/>)
+        if (roomShiftClass.profile !== null) setComponent(<Data roomShiftClass={profile}/>)
     }, [roomShiftClass.profile])
 
 
     const data = () => {
-        setComponent(<Data roomShift={roomShiftClass.profile.roomShiftClass}/>)
+        setComponent(<Data roomShiftClass={profile}/>)
     }
 
-    const roomInfo = () => {
-        setComponent(<Data />)
+    const classWork = () => {
+        setComponent(<ClassWork activities={profile.activities}/>)
     }
 
-    const roomClasses = () => {
-        // setComponent(<Logs />)
+    const RoomClassPeople = () => {
+        setComponent(<ClassPeople teacher={profile.teacher} students={profile.students}/>)
     }
-
-    console.log("The room roomShiftClass")
-    console.log(roomShiftClass.profile)
 
     return (
         <Grid container className={style.container}>
@@ -67,8 +69,8 @@ const  RoomShiftClassProfile= ({roomShiftClass, match, initData})=>{
                             <Grid className={style.profileButton} container >
                                 <Grid className={style.buttonGroup} item md={12} sm={12} xs={12} lg={12} >
                                     <Button color="primary" onClick={data}>Class Info</Button>
-                                    <Button color="primary" onClick={roomShiftClass}>Class Work</Button>
-                                    <Button color="primary" onClick={roomClasses}>People</Button>
+                                    <Button color="primary" onClick={classWork}>Class Work</Button>
+                                    <Button color="primary" onClick={RoomClassPeople}>People</Button>
                                 </Grid>
                                 <Button
                                     color="primary"

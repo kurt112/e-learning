@@ -1,6 +1,7 @@
 import {makeStyles} from "@material-ui/styles";
+import { deepPurple } from '@material-ui/core/colors';
 
-const classesStyle = makeStyles(() => ({
+const classesStyle = makeStyles((theme) => ({
     boxNavButtonContainer: {
         marginLeft: 10,
         display: 'flex',
@@ -103,7 +104,8 @@ const classesStyle = makeStyles(() => ({
         width: 80,
         right: 10,
         top: 50,
-        border: '3px solid white'
+        border: '3px solid white',
+        backgroundColor: "#c0392b"
         // right: 0,
     },
     iconsFooter:{
