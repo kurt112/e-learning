@@ -45,6 +45,9 @@ import Login from './store/reducers/LoginLogout/LoginLogoutState'
 // Current User
 import CurrentUser from "./store/reducers/CurrentUser/CurrentUser";
 
+// Form Register
+import {StudentRegisterForm,TeacherRegisterForm} from './store/reducers/RegisterForm'
+
 
 // sagas
 import {
@@ -80,6 +83,8 @@ import {
     watchLogin,
     watchPreRegister,
     watchReLogin,
+    watchStudentRegister,
+    watchTeacherRegister,
     watchAdminActivityUpload, watchAdminActivitySearchChange, watchAdminActivityTableInit, watchAdminActivityTableNext
 } from './store/middleware/'
 
@@ -126,7 +131,11 @@ const reducers = combineReducers({
     Login,
 
     // Current User
-    CurrentUser
+    CurrentUser,
+
+    // Register From
+    StudentRegisterForm,
+    TeacherRegisterForm
 })
 
 
@@ -190,6 +199,11 @@ sagaMiddleware.run(watchRoomShiftClassGetProfile)
 sagaMiddleware.run(watchLogin)
 sagaMiddleware.run(watchPreRegister)
 sagaMiddleware.run(watchReLogin)
+
+// REGISTER STUDENT TEACHER
+
+sagaMiddleware.run(watchStudentRegister)
+sagaMiddleware.run(watchTeacherRegister)
 
 ReactDOM.render(
     <React.StrictMode>

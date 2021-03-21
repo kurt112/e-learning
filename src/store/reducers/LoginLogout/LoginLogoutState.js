@@ -2,8 +2,8 @@ import * as actions from '../../ActionType/Login/LoginActionType'
 import {updateObject} from "../../utils/UpdateObject";
 
 const initState = {
-    username: '12312',
-    password: '?',
+    username: '',
+    password: '',
     message: '',
     loading: false,
     dialog: false,
@@ -39,7 +39,6 @@ const registerClose = (state, action) => {
 }
 
 const logout = (state) => {
-
 
     return updateObject(state, {
         username: '',

@@ -16,12 +16,11 @@ export const
 
 //Teacher Admin endpoint
 
-    AdminTeachers = 'admin/teachers',
-    AdminTeacherRegister = 'admin/teacherID-register',
+    AdminTeacherRegister = 'teacherID-register',
 
 //Student Admin endpoint
     AdminStudents = "admin/students",
-    AdminStudentRegister = "admin/student-register",
+    AdminStudentRegister = "/student-register",
 
 // Room Admin endpoint
     AdminRooms = "admin/rooms",

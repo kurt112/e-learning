@@ -13,4 +13,6 @@ export const
     AdminClass = (state) => state.AdminClass,
     AdminActivity = (state) => state.AdminActivity,
     AdminActivityDialog = (state) => state.AdminActivityDialog,
-    Login = (state) => state.Login
+    Login = (state) => state.Login,
+    StudentRegister = (state) => state.StudentRegisterForm,
+    TeacherRegister = (state) => state.TeacherRegisterForm

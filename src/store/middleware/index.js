@@ -1,6 +1,7 @@
 import {takeLeading} from "redux-saga/effects";
 import * as adminTable from '../ActionType/__ActionTypeGlobal/AdminTableActionType'
 import * as adminDialog from '../ActionType/__ActionTypeGlobal/AdminDialogActionType'
+import * as userRegister from '../ActionType/__ActionTypeGlobal/UserRegisterActionType'
 import * as loginAction from '../ActionType/Login/LoginActionType'
 import {Teacher, Student, Room, Subject, RoomShift, RoomShiftClass, Activity} from '../utils/Specify'
 import * as profile from '../ActionType/__ActionTypeGlobal/ProfileActionType'
@@ -10,6 +11,11 @@ import {
     PreRegister,
     ReLogin
 } from "./login/LoginMiddleware";
+
+import {
+    StudentRegisterData,
+    TeacherRegisterData
+}from './register'
 
 import {
     studentData,
@@ -27,7 +33,7 @@ import {
 } from './admin/SubjectMiddleWare'
 
 import {
-    watchTeacherRegister,
+    TeacherRegister,
     TeacherTableDataNext,
     TeacherTableDataInit
 } from './admin/TeacherMiddleWare'
@@ -63,7 +69,7 @@ import {RoomClassRegister, RoomClassTableDataInit, RoomClassTableDataNext} from 
 
 
 export function* watchAdminRegisterTeacher() {
-    yield  takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher), watchTeacherRegister)
+    yield  takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher), TeacherRegister)
 }
 
 export function* watchAdminTeacherInitTableData() {
@@ -271,4 +277,20 @@ export function * watchPreRegister(){
 
 export  function * watchReLogin () {
     yield takeLeading(loginAction.RE_LOGIN, ReLogin)
+}
+
+/**
+ *
+ *
+ *          This middleware is for Studnet Teacher Register
+ *
+ *
+ *
+ **/
+export function * watchStudentRegister () {
+    yield takeLeading(userRegister.INIT_REGISTER(Student), StudentRegisterData)
+}
+
+export function * watchTeacherRegister() {
+    yield takeLeading(userRegister.INIT_REGISTER(Teacher), TeacherRegisterData)
 }

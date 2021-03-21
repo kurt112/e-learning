@@ -7,7 +7,8 @@ import {
     DialogTitle,
     TextField
 } from "@material-ui/core";
-const UserId = ({submit,id, changeId,dialog, registerClose}) => {
+const UserId = ({submit,id, changeId,dialog, registerClose,openStudent}) => {
+
     return <Dialog
         open={dialog}
         onClose={registerClose}

@@ -8,7 +8,7 @@ import {
     AdminTeacherBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/AdminQuery/AdminTeacherQuery";
 
-export function* watchTeacherRegister() {
+export function* TeacherRegister() {
     const teacher = yield select(Selector.AdminTeacherDialog)
     const params = new URLSearchParams();
     params.append('id', teacher.id)

@@ -15,7 +15,7 @@ const ClassesList= ({classes}) => {
 
     const currentClassClick = () => {
         setCurrentClassActive(true)
-        setClasses(<CurrentClasses style={currentStyle}/>)
+        setClasses(<CurrentClasses classes={classes} style={currentStyle}/>)
     }
 
     const doneClassesClick = () => {

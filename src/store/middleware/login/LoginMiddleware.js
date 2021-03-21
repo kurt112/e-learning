@@ -3,18 +3,28 @@ import * as Selector from "../selector";
 import {baseUrlNoAuth} from "../axios";
 import * as action from '../../action/login/LoginAction'
 import * as currentUserAction from '../../action/CurrentUser/CurrentUserAction'
+import {PasswordEncrypt} from "../utils/EncryptPassword";
 
 export function* Login() {
     const login = yield select(Selector.Login)
+    // console.log(login)
+    const userData = yield {
+        username:login.username,
+        password: yield login.password //PasswordEncrypt(login.password)
+    }
+
+    console.log(userData)
     try {
 
-        const response = yield baseUrlNoAuth.post('/login', login)
+        const response = yield baseUrlNoAuth.post('/login', userData)
+        console.log(response)
         const  data = response.data
         yield put(action.successLogin(data))
         yield put(currentUserAction.changeToken(data.token))
         yield put(currentUserAction.changeUser(data.user))
         yield put(action.resetLoginPage())
     } catch (error) {
+        console.log(error)
         yield put(action.failLogin(error))
     }
 }
@@ -45,6 +55,7 @@ export function* PreRegister() {
     params.append('id', login.id)
     try {
         const response = yield baseUrlNoAuth.post('/pre-register',params )
+
         yield put(action.changeForm(response.data))
     }catch (error){
 

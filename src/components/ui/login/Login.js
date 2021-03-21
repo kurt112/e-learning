@@ -14,28 +14,56 @@ import {connect} from 'react-redux'
 import * as action from '../../../store/action/login/LoginAction'
 import {StudentRegisterForm, TeacherRegisterForm,UserIDForm} from "../registerForm";
 import style from './LoginStyle'
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import {Student, Teacher} from "../../../store/utils/Specify";
 
 const Login = ({loginState, changeEmail, changePassword, login, changeId,
                    registerInit, registerOpen,registerClose}) => {
 
     const classes = style();
 
+    const [studentForm, setStudentForm] = useState(false)
+    const [teacherForm, setTeacherForm] = useState(false)
+
     useEffect(() => {
-        login()
+        // login()
     }, [])
+
+    useEffect(() => {
+
+
+        if(loginState.form === Student) {
+            setStudentForm(true)
+            setTeacherForm(false)
+        }else if(loginState.form === Teacher){
+            setStudentForm(false)
+            setTeacherForm(true)
+        }else {
+            setTeacherForm(false)
+            setStudentForm(false)
+        }
+
+
+    }, [loginState.form])
 
     const ClickEnter = (event) =>{
         if(event  === "Enter") login()
     }
 
+
+
     return (
         <Grid container component="main"  className={classes.root}>
 
 
-            {loginState.form === ''? <UserIDForm  submit={registerInit} changeId={changeId} dialog={loginState.dialog} registerClose={registerClose}/>:null}
-            {loginState.form === 'Student'? <StudentRegisterForm/>: null}
-            {loginState.form === 'Teacher'? <TeacherRegisterForm/>: null}
+            {studentForm === false && teacherForm === false?
+                <UserIDForm openStudent={setStudentForm}
+                            submit={registerInit}
+                            changeId={changeId}
+                            dialog={loginState.dialog}
+                            registerClose={registerClose}/>:null}
+            {studentForm === true? <StudentRegisterForm setStudent={setStudentForm} open={studentForm}/>: null}
+            {teacherForm === true? <TeacherRegisterForm setTeacher={setTeacherForm} open={teacherForm}/>: null}
 
 
             <CssBaseline/>

@@ -62,7 +62,6 @@ export const
     },
 
     registerInit = () => {
-
         return {
             type: action.REGISTER_INIT
         }
