@@ -13,10 +13,11 @@ const PeopleList = ({students, teacher}) => {
                 <h1>Teachers</h1>
                 <hr className={style.classPeopleDivider}/>
                 <Box className={style.peopleListContainer}>
-                    <PeopleData border={{border: 'none', marginTop: 0}}
-                                name={`${teacher.user.firstName}  ${teacher.user.lastName}`}/>
-
-
+                    {
+                        teacher === null?  <h3>TBA</h3>:
+                            <PeopleData border={{border: 'none', marginTop: 0}}
+                                        name={`${teacher.user.firstName}  ${teacher.user.lastName}`}/>
+                    }
                 </Box>
                 <h1>Students</h1>
                 <hr className={style.classPeopleDivider}/>

@@ -15,7 +15,7 @@ import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction
 import * as roomShiftListAction from "../../../../../store/action/admin/RoomShift/RoomShiftListAction"
 
 const  RoomShiftList = ({roomShift, initData,searchChange,pageChange,openDialog,closeDialog,openAddStudent, closeAddStudent})=> {
-
+    console.log(roomShift.data)
     const classes = style()
     useEffect(() => {
         if(roomShift.data.length ===0) initData()

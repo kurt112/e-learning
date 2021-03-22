@@ -7,12 +7,16 @@ import {RoomShift} from "../../../utils/Specify";
 import {updateObject} from "../../../utils/UpdateObject";
 
 const newState = new state()
-const transforms = (items) => items.map((item) =>
-    insert(item.room.roomName, item.roomShiftName, item.grade, item.section, item.timeStart,item.timeEnd,item.id))
+const transforms = (items) => {
+    console.log("DId i asdd")
+    console.log(items)
+    return items.map((item) =>
+        insert(item.room.roomName, item.roomShiftName, item.grade, item.section, item.timeStart,item.timeEnd,item.id))
 
-const response = (item) => {
-    return  insert(item.room.roomName, item.roomShiftName, item.grade, item.section, item.timeStart,item.timeEnd,item.id)
 }
+const response = (item) => insert(item.roomName, item.shiftName, item.grade, item.section, item.timeStart,item.timeEnd,item.id)
+
+
 
 const initState = {
     ...newState.init_state,

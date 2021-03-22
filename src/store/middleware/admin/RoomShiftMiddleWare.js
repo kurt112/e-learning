@@ -3,7 +3,6 @@ import * as Selector from "../selector";
 import {Register, TableDataInit, TableNextData} from "./__MiddleWareGlobal";
 import {AdminRoomShiftRegister} from "../utils/ApiEndpoint/ClassroomEndPoint";
 import {RoomShift} from "../../utils/Specify";
-import {AdminRoomBodyDataSettingsQuery} from "../utils/GraphQlQuery/AdminQuery/AdminRoomQuery";
 import {
     AdminRoomShiftBodyDataQuery,
     AdminRoomShiftBodyDataSettingsQuery
@@ -30,5 +29,5 @@ export function* RoomShiftTableDataNext(action) {
 
 export function* RoomShiftTableDataInit() {
     const roomShift = yield select(Selector.AdminRoomShift)
-    yield TableDataInit(AdminRoomShiftBodyDataQuery(roomShift.search,roomShift.page),AdminRoomBodyDataSettingsQuery(), RoomShift)
+    yield TableDataInit(AdminRoomShiftBodyDataQuery(roomShift.search,roomShift.page),AdminRoomShiftBodyDataSettingsQuery(), RoomShift)
 }

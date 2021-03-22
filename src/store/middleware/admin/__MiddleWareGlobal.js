@@ -4,7 +4,8 @@ import {baseUrl} from "../axios";
 import * as actions from "../../action/__ActionGlobal/AdminDialogAction";
 import {graphQLRequest} from '../utils/HttpRequest'
 export function* UploadFile(data, URL, to) {
-
+    console.log('The ')
+    console.log(URL)
     try {
       const response =  yield baseUrl({
             method: 'post',
@@ -15,23 +16,22 @@ export function* UploadFile(data, URL, to) {
             data
 
         })
-        console.log("wewe")
-        console.log(response)
         yield  put(tableActions.addItemTable(response.data.item, to))
         yield  put(actions.registerDialogSuccess(to))
     } catch (error) {
+        console.log(error)
         yield put(actions.registerDialogFail(error, to))
     }
 }
 
 export function* Register(params, URL, to) {
     try {
-        console.log(params)
+
         const response = yield baseUrl.post(URL, params)
-        console.log(response)
         yield  put(tableActions.addItemTable(response.data.item, to))
         yield  put(actions.registerDialogSuccess(to))
     } catch (error) {
+
         yield put(actions.registerDialogFail(error, to))
     }
 }
@@ -79,7 +79,8 @@ export function* TableDataInit(bodyDataQuery, bodySettingsQuery,to, ) {
 
         const object = bodyDataResponse.data.data
         const key = Object.keys(object)
-
+        console.log("the settings")
+        console.log(bodySettingsResponse)
         yield put(tableActions.SettingInitDataTable(bodySettingsResponse.data.data,to))
         yield put(tableActions.SuccessDataTable(object[key], true, to))
     } catch (error) {

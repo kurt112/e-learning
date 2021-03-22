@@ -10,8 +10,10 @@ const transforms = (items) => items.map((item) =>
         "To be insert", item.day, item.startTime, item.endTime, item.roomShift.room.id+item.id+item.subject.subjectCode,item.id))
 
 const response = (item) => {
-    return insert(item.roomShift.room.roomName, item.roomShift.grade, item.roomShift.section, item.subject.subjectName,
-        "To be insert", item.day, item.startTime, item.endTime, item.roomShift.room.id+item.id+item.subject.subjectCode, item.id)}
+
+    return insert(item.roomName, item.grade, item.section, item.subjectName,
+        item.teacherName, item.day, item.startTime, item.endTime, item.roomId+item.classId+item.subjectId, item.classId)
+}
 
 const reducer = (state = newState.init_state, action) =>{
     switch(action.type){

@@ -34,6 +34,7 @@ class State {
             state = updateObject(state, {loading: false})
             state = updateObject(state, {data: unique})
 
+            console.log(state)
 
             return state
         }
@@ -72,10 +73,13 @@ class State {
             return updateObject(state, {search: action.text === null? '': action.text})
         }
         this.AddTable = (state, responseData) => {
-            console.log(responseData)
+
             const newStudent = [responseData, ...state.data]
+            console.log("The state")
+            console.log(state)
             const newPage = state.totalItems + 1;
             state = updateObject(state, {totalItems: newPage})
+
             return updateObject(state, {data: newStudent})
         }
 
