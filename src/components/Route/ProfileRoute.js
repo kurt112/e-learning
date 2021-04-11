@@ -1,13 +1,15 @@
 import {lazy, Fragment} from "react";
 import {Route} from "react-router";
 
-const RoomProfile = lazy(() => import('../ui/__user_ui/profiles/Profile').then(module => ({default: module.RoomProfile})))
-const RoomShiftClassProfile = lazy(() => import('../ui/__user_ui/profiles/Profile').then(module => ({default: module.RoomShiftClassProfile})))
-const SubjectProfile = lazy(() => import('../ui/__user_ui/profiles/Profile').then(module => ({default: module.SubjectProfile})))
-const RoomShiftProfile = lazy(() => import('../ui/__user_ui/profiles/Profile').then(module => ({default: module.RoomShiftProfile})))
-const TeacherProfile = lazy(() => import('../ui/__user_ui/profiles/Profile').then(module => ({ default: module.TeacherProfile })))
-const StudentProfile = lazy(() => import('../ui/__user_ui/profiles/Profile').then(module => ({default: module.StudentProfile})))
-const Classes = lazy(() => import('../ui/__user_ui/roomClasses/ClassList/ClassesList') )
+const RoomProfile = lazy(() => import(`../ui/__user_ui/profiles/Profile`).then(module => ({default: module.RoomProfile})))
+const RoomShiftClassProfile = lazy(() => import(`../ui/__user_ui/profiles/Profile`).then(module => ({default: module.RoomShiftClassProfile})))
+const SubjectProfile = lazy(() => import(`../ui/__user_ui/profiles/Profile`).then(module => ({default: module.SubjectProfile})))
+const RoomShiftProfile = lazy(() => import(`../ui/__user_ui/profiles/Profile`).then(module => ({default: module.RoomShiftProfile})))
+const TeacherProfile = lazy(() => import(`../ui/__user_ui/profiles/Profile`).then(module => ({ default: module.TeacherProfile })))
+const StudentProfile = lazy(() => import(`../ui/__user_ui/profiles/Profile`).then(module => ({default: module.StudentProfile})))
+const ActivityProfile = lazy(() => import(`../ui/__user_ui/profiles/Profile`).then(module => ({default: module.ActivityProfile})))
+
+// const Classes = lazy(() => import('../ui/__user_ui/roomClasses/ClassList/ClassesList') )
 
 const ProfileRoute = () => {
     return (
@@ -18,6 +20,7 @@ const ProfileRoute = () => {
             <Route path='/student/profile/:id' exact render={() => <StudentProfile/>}/>
             <Route path='/roomshift/profile/:id' exact render ={() => <RoomShiftProfile/>}/>
             <Route path='/roomShiftClass/profile/:id' exact render={() => <RoomShiftClassProfile/>}/>
+            <Route path='/activity/profile/:id' exact render={() => <ActivityProfile/>}/>
             {/*<Route path='/classes/profile/:id' exact render={() => <Classes {...props} />}/>*/}
         </Fragment>
     )

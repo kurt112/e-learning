@@ -4,6 +4,35 @@ export const
             query: `
                     query{
                        getStudentByUserID(userID:"${email}") {
+                            studentActivities{
+                            id,
+                            status,
+                            grade,
+                            roomShiftClass{
+                              roomShift{
+                                grade,
+                                section
+                              },
+                              subject{
+                                subjectName
+                              },
+                              teacher{
+                                id,
+                                user{
+                                  firstName,
+                                  lastName
+                                },        
+                              },
+                            },
+                            activity{
+                              activityTitle,
+                              description,
+                              date_end,
+                              date_created,
+                              type,
+                              
+                            }
+                          },
                             roomShiftClasses{
                                 id,
                                 day,
@@ -11,7 +40,8 @@ export const
                                 endTime,
                                   subject{
                                     subjectName,
-                                    subjectCode
+                                    subjectCode,
+                                    subjectMajor
                                   }
                                 roomShift{
                                     id,
@@ -22,6 +52,7 @@ export const
                                     }
                                 },
                                 teacher{
+                                  id,
                                   user{
                                     firstName,
                                     lastName

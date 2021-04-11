@@ -7,6 +7,7 @@ const classesStyle = makeStyles((theme) => ({
         display: 'flex',
         marginTop: 10,
         marginBottom: 10,
+
     },
     boxNavButton: {
         cursor: 'pointer',

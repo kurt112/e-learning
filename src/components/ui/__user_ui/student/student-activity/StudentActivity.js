@@ -1,55 +1,58 @@
-import { Box, Button, Grid, Paper, Toolbar } from "@material-ui/core"
-import { StudentActivityTable as columns, StudentInsertActivity as insert } from '../../../utils/tableColumn'
-import MUIDataTable from 'mui-datatables'
-import style, { TableOptions as options } from '../../../_style/TableStyle'
-
-const rowClicked = (id) => {
-}
-
-
-
-const data = [
-    insert(0, 'kurt', 'orioque', 19, 'December 20, 2000'),
-    insert(1, 'Ellysa', 'Jarilla', 19, 'December 21, 2000'),
-    insert(2, 'Eve', 'Maturan', 30, 'December 22, 2000'),
-    insert(3, 'kurt', 'orioque', 19, 'December 20, 2000'),
-    insert(4, 'Ellysa', 'Jarilla', 19, 'December 21, 2000'),
-    insert(5, 'Eve', 'Maturan', 30, 'December 22, 2000'),
-    insert(6, 'kurt', 'orioque', 19, 'December 20, 2000'),
-    insert(7, 'Ellysa', 'Jarilla', 19, 'December 21, 2000'),
-    insert(8, 'Eve', 'Maturan', 30, 'December 22, 2000'),
-    insert(9, 'Eve', 'Maturan', 30, 'December 22, 2000'),
-    insert(10, 'Eve', 'Maturan', 30, 'December 22, 2000'),
-    insert(11, 'Eve', 'Maturan', 30, 'December 22, 2000')
-]
+import {
+    Box,
+    Grid,
+} from "@material-ui/core"
+import clsx from "clsx";
+import AccessTimeIcon from "@material-ui/icons/AccessTime";
+import ClassesStyle from "../../../_style/ClassesStyle";
+import {useState} from "react";
+import ActivityStyle from './ActivityStyle'
+import CurrentActivity from "./CurrentActivity";
+import DoneActivity from "./DoneActivity";
 
 
-export default function StudentActivity() {
+export default function StudentActivity({student}) {
+    const currentStyle = ClassesStyle()
+    const activityStyle = ActivityStyle()
+    const [currentActivity, setCurrentActivity] = useState(true)
+    const [currentActivities] = useState(student.studentActivities.filter(e=>e.status === "Pending"));
+    const [doneActivities] = useState(student.studentActivities.filter(e => e.status !== "Pending"))
+    const currentClassClick = () => {
+        setCurrentActivity(true)
 
-    const classes = style()
+    }
 
+    const doneClassesClick = () => {
+        setCurrentActivity(false)
+    }
     return (
-        <Grid component="main" className={classes.root}>
-            <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
-                <Toolbar>
-                    <Box className={classes.tableNavbarBox}>
-                        <Button variant="outlined" color="primary">
-                            Add Teacher
-                    </Button>
-                    </Box>
-                    <Button variant="outlined" color="primary">
-                        Quit
-                </Button>
-                </Toolbar>
-            </Grid>
-            <Grid item md={12} component={Paper} className={classes.tableContainerWrapper}>
-                <MUIDataTable
-                    title={"Activity List"}
-                    data={data}
-                    columns={columns}
-                    options={options(rowClicked)}
-                />
-            </Grid>
+        <Grid component="main">
+
+            <Box className={currentStyle.boxNavButtonContainer}>
+                <Box onClick={currentClassClick}
+                     className={clsx(currentStyle.boxNavButton, currentActivity === true ? currentStyle.active : null)}>
+                    <span>Current Activity</span>
+                    <br/>
+                    <AccessTimeIcon/>
+
+                </Box>
+
+                <Box onClick={doneClassesClick}
+                     className={clsx(currentStyle.boxNavButton, currentActivity !== true ? currentStyle.active : null)}>
+                    <span>Done Activity</span>
+                    <br/>
+                    <AccessTimeIcon/>
+                </Box>
+
+            </Box>
+
+            {
+                currentActivity  === true? <CurrentActivity activities={currentActivities} activityStyle={activityStyle}/>:
+                    <DoneActivity CurrentActivity activities={doneActivities} activityStyle={activityStyle}/>
+            }
+
+
+
 
         </Grid>
 

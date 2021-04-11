@@ -27,14 +27,11 @@ export default function MainUi({user}) {
         <div className={classes.root}>
             <CssBaseline/>
 
-
             <Navbar open={open} handleDrawerOpen={handleDrawerOpen}/>
             <Sidebar
                 open={open}
                 handleDrawerClose={handleDrawerClose}
                 handleDrawerOpen={handleDrawerOpen} role={user.userRole}/>
-
-
             <main className={classes.content}>
                 <div className={classes.toolbar}/>
                 {

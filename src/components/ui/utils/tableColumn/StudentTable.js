@@ -1,6 +1,5 @@
-
-import { Button } from "@material-ui/core"
-import { Link } from "react-router-dom"
+import {Button} from "@material-ui/core"
+import {Link} from "react-router-dom"
 
 /*
 *
@@ -44,9 +43,9 @@ export const StudentRoomTable = [
         options: {
             filter: false,
             sort: false,
-            customBodyRender: (value, tableMeta, updateValue) => {
+            customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to="/admin/dashboard" style={{ textDecoration: 'none' }}>
+                    <Link to="/admin/dashboard" style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
                             Join Room
                         </Button>
@@ -60,24 +59,20 @@ export const StudentRoomTable = [
 ]
 
 export function StudentInsertRoom(id, roomName, roomSubject, students, timeStart, timeEnd, visit) {
-    return { id, roomName, roomSubject, students, timeStart, timeEnd, visit }
+    return {id, roomName, roomSubject, students, timeStart, timeEnd, visit}
 }
 
 
 /**
-*
-*
-*  This table is for the Subject table in Student area
-*
-*
-**/
+ *
+ *
+ *  This table is for the Subject table in Student area
+ *
+ *
+ **/
 
 
 export const StudentSubjectTable = [
-    {
-        name: 'id',
-        label: 'id',
-    },
     {
         name: 'subjectName',
         label: 'Subject Name'
@@ -87,37 +82,53 @@ export const StudentSubjectTable = [
         label: 'Subject Code'
     },
     {
-        name: 'subjectHour',
-        label: 'Subject Hour',
+        name: 'startTime',
+        label: 'Start Time',
     },
     {
-        name: 'subjectMinute',
-        label: 'Subject Minute'
+        name: 'endTime',
+        label: 'End Time'
     },
     {
         name: 'major',
-        label: 'Major'
+        label: 'Status'
+    },
+    {
+        name: "profile",
+        label: "Profile",
+        options: {
+            filter: false,
+            sort: false,
+            customBodyRender: (value) => {
+                return value === undefined ? null :
+                    <Link to={`/subject/profile/${value}`} style={{textDecoration: 'none'}}>
+                        <Button variant="outlined" color="primary">
+                            Visit Profile
+                        </Button>
+                    </Link>
+            },
+            filterOptions: {
+                fullWidth: false
+            }
+        }
     },
 ]
 
-export function StudentInsertSubject(id, subjectName, subjectCode, SubjectHour, subjectMinute, major) {
-    return { id, subjectName, subjectCode, SubjectHour, subjectMinute, major }
+export function StudentInsertSubject(subjectName, subjectCode, startTime, endTime, major) {
+
+    return {  subjectName, subjectCode, startTime, endTime, major,profile: subjectCode}
 }
 
 
 /**
-*
-*
-*  This table is for the Teacher table in Student area
-*
-*
-**/
+ *
+ *
+ *  This table is for the Teacher table in Student area
+ *
+ *
+ **/
 
 export const StudentTeacherTable = [
-    {
-        name: "id",
-        label: "Id",
-    },
     {
         name: "firstName",
         label: "First Name",
@@ -131,17 +142,17 @@ export const StudentTeacherTable = [
         name: "subject",
         label: "Subject"
     },
-   
+
     {
         name: "profile",
         label: "Profile",
         options: {
             filter: false,
             sort: false,
-            customBodyRender: (value, tableMeta, updateValue) => {
+            customBodyRender: (value) => {
                 // value)
                 return value === undefined ? null :
-                    <Link to='/student/' style={{ textDecoration: 'none' }}>
+                    <Link to={`/teacher/profile/${value}`} style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
                             Visit Profile
                         </Button>
@@ -153,18 +164,19 @@ export const StudentTeacherTable = [
         }
     },
 ];
-export function StudentInsertTeacher(id, firstName, lastName,subject,profile) {
 
-    return {id, firstName, lastName,subject,profile}
+export function StudentInsertTeacher(firstName, lastName, subject, profile) {
+
+    return {firstName, lastName, subject, profile}
 }
 
 /**
-*
-*
-*  This table is for the Activies table in Student area
-*
-*
-**/
+ *
+ *
+ *  This table is for the Activies table in Student area
+ *
+ *
+ **/
 
 
 export const StudentActivityTable = [
@@ -194,9 +206,9 @@ export const StudentActivityTable = [
         options: {
             filter: false,
             sort: false,
-            customBodyRender: (value, tableMeta, updateValue) => {
+            customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to="/admin/dashboard" style={{ textDecoration: 'none' }}>
+                    <Link to="/admin/dashboard" style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
                             Approve
                         </Button>
@@ -209,6 +221,6 @@ export const StudentActivityTable = [
     },
 ]
 
-export function StudentInsertActivity(id, activityTitle, subjectName, date, status,link) {
-    return { id, activityTitle, subjectName, date, status,link }
+export function StudentInsertActivity(id, activityTitle, subjectName, date, status, link) {
+    return {id, activityTitle, subjectName, date, status, link}
 } 

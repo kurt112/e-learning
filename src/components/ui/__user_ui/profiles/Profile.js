@@ -21,3 +21,8 @@ export {
 export {
     default as RoomShiftProfile
 } from './roomShift-profile/roomShiftProfile'
+
+export {
+    default as ActivityProfile
+} from './activity-profile/ActivityProfile'
+

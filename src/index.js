@@ -36,7 +36,7 @@ import Classroom from "./store/reducers/ClassroomState";
 
 
 // profile
-import {StudentProfile, TeacherProfile,RoomProfile, RoomShiftProfile, RoomShiftClassProfile} from './store/reducers/Profile'
+import {StudentProfile, TeacherProfile,RoomProfile, RoomShiftProfile, RoomShiftClassProfile, ActivityProfile} from './store/reducers/Profile'
 
 
 // LOGIN
@@ -126,6 +126,7 @@ const reducers = combineReducers({
     RoomProfile,
     RoomShiftProfile,
     RoomShiftClassProfile,
+    ActivityProfile,
 
     // LOGIN
     Login,

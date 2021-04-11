@@ -17,3 +17,7 @@ export {
 export {
     default as RoomShiftClassProfile
 } from './RoomClassProfileState'
+
+export {
+    default as ActivityProfile
+} from './ActivityProfileState'
