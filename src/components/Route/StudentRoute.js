@@ -34,16 +34,16 @@ const StudentRoute = ({email}) => {
         if(student !== null){
             const tempTeacher = []
             const tempSubject = []
+            console.log(student)
             student.roomShiftClasses.map(e => {
-                console.log(e)
+
                 tempTeacher.push(insertTeacher(e.teacher.user.firstName, e.teacher.user.lastName, e.subject.subjectName, e.teacher.id))
                 tempSubject.push(insertSubject(e.subject.subjectName,e.subject.subjectCode,e.startTime,e.endTime,e.subject.subjectMajor))
             })
 
-            console.log(tempSubject)
-
             setTeacher(tempTeacher)
             setSubjects(tempSubject)
+            console.log(subjects)
         }
     },[student])
 
