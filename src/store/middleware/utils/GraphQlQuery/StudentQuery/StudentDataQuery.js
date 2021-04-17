@@ -3,7 +3,7 @@ export const
         return {
             query: `
                     query{
-                       getStudentByUserID(userID:"${email}") {
+                       getStudentByUserEmail(userID:"${email}") {
                             studentActivities{
                             id,
                             status,
