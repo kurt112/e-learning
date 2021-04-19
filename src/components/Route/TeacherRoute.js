@@ -33,7 +33,7 @@ const TeacherRoute = ({email}) => {
 
     }, [])
 
-    useEffect( async () => {
+    useEffect(  () => {
 
         if (teacher) {
             const tempStudent = []
