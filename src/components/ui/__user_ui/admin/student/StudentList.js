@@ -8,35 +8,14 @@ import {connect} from 'react-redux'
 import {Student} from '../../../../../store/utils/Specify'
 import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
 import Typography from "@material-ui/core/Typography";
-import axios from "../../../../../store/middleware/axios";
-import {stringify} from "query-string";
 
 
 const StudentList = ({student, pageChange, searchChange, openDialog, closeDialog, initData}) => {
     const classes = style()
 
     useEffect(() => {
-        // axios.post('/Elearning',{
-        //     query: `
-        //             query{
-        //                 students(search:"",page: 1){
-        //                     student_id,
-        //
-        //                     }
-        //                  }
-        //
-        //         `
-        // }).then(respone => {
-        //     console.log(respone)
-        // }).catch(error => {
-        //     console.log(error)
-        // })
-
-
-
 
         if(student.data.length ===0) initData()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 

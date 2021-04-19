@@ -16,6 +16,7 @@ const StudentProfile = ({studentState, match, initData}) => {
 
     const style = ProfileStyle()
     const [component, setComponent] = useState(null)
+    const [name,setName] = useState('')
 
     useEffect(() => {
         let id;
@@ -23,19 +24,25 @@ const StudentProfile = ({studentState, match, initData}) => {
         
         initData(id)
 
+        console.log(studentState)
 
     }, [initData, match.params.id])
 
     useEffect(() => {
-        if (studentState.profile !== null) setComponent(<Data student={studentState.profile.student}/>)
-    }, [studentState.profile])
+        if (studentState.profile !== null) {
+            setComponent(<Data student={studentState.profile}/>)
+
+            setName(`${studentState.profile.user.firstName} ${studentState.profile.user.lastName}`)
+        }
+
+    }, [studentState])
 
     const attendance = () => {
-        setComponent(<Attendance student={studentState.profile.student}/>)
+        setComponent(<Attendance student={studentState.profile}/>)
     }
 
     const data = () => {
-        setComponent(<Data student={studentState.profile.student}/>)
+        setComponent(<Data student={studentState.profile}/>)
     }
 
     const logs = () => {
@@ -54,8 +61,7 @@ const StudentProfile = ({studentState, match, initData}) => {
                         <Typography className={style.profileName} variant="h3" component="h2">
 
                             {
-                                studentState.profile.student.user.firstName + ' ' +
-                                studentState.profile.student.user.lastName
+                               name
                             }
 
                         </Typography>

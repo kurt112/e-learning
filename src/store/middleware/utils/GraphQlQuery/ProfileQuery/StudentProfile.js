@@ -1,8 +1,8 @@
 export const
-    getStudent = (id) => {
+    getStudent = (email) => {
         return {
             query: `
-                    query{student(id:"${id}"){
+                    query{getStudentByUserEmail(email:"${email}"){
                          user{
                                 firstName,
                                 lastName,

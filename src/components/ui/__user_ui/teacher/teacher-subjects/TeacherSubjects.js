@@ -1,28 +1,10 @@
 import { Box, Button, Grid, Paper, Toolbar } from "@material-ui/core"
-import { TeacherSubjectTable as columns, TeacherInsertSubject as insert } from '../../../utils/tableColumn'
+import { TeacherSubjectTable as columns} from '../../../utils/tableColumn'
 import MUIDataTable from 'mui-datatables'
-import style, { TableOptions as options } from '../../../_style/TableStyle'
-
-const rowClicked = (id) => {
-}
-
-const data = [
-    insert(0, 'kurt', 'orioque', 19, 'December 20, 2000'),
-    insert(1, 'Ellysa', 'Jarilla', 19, 'December 21, 2000'),
-    insert(2, 'Eve', 'Maturan', 30, 'December 22, 2000'),
-    insert(3, 'kurt', 'orioque', 19, 'December 20, 2000'),
-    insert(4, 'Ellysa', 'Jarilla', 19, 'December 21, 2000'),
-    insert(5, 'Eve', 'Maturan', 30, 'December 22, 2000'),
-    insert(6, 'kurt', 'orioque', 19, 'December 20, 2000'),
-    insert(7, 'Ellysa', 'Jarilla', 19, 'December 21, 2000'),
-    insert(8, 'Eve', 'Maturan', 30, 'December 22, 2000'),
-    insert(9, 'Eve', 'Maturan', 30, 'December 22, 2000'),
-    insert(10, 'Eve', 'Maturan', 30, 'December 22, 2000'),
-    insert(11, 'Eve', 'Maturan', 30, 'December 22, 2000')
-]
+import style from '../../../_style/TableStyle'
 
 
-export default function TeacherSubject() {
+export default function TeacherSubject({subjects}) {
 
     const classes = style()
 
@@ -43,9 +25,8 @@ export default function TeacherSubject() {
             <Grid item md={12} component={Paper} className={classes.tableContainerWrapper}>
                 <MUIDataTable
                     title={"Subject List"}
-                    data={data}
+                    data={subjects}
                     columns={columns}
-                    options={options(rowClicked)}
                 />
             </Grid>
         </Grid>

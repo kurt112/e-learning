@@ -24,8 +24,10 @@ const StudentRoute = ({email}) => {
         }
 
         fetchData().then(r => {
-            setStudent(r.data.data.getStudentByUserID)
+            setStudent(r.data.data.getStudentByUserEmail)
         })
+
+
 
 
     }, [email])
@@ -34,7 +36,6 @@ const StudentRoute = ({email}) => {
         if(student !== null){
             const tempTeacher = []
             const tempSubject = []
-            console.log(student)
             student.roomShiftClasses.map(e => {
 
                 tempTeacher.push(insertTeacher(e.teacher.user.firstName, e.teacher.user.lastName, e.subject.subjectName, e.teacher.id))
@@ -43,7 +44,6 @@ const StudentRoute = ({email}) => {
 
             setTeacher(tempTeacher)
             setSubjects(tempSubject)
-            console.log(subjects)
         }
     },[student])
 

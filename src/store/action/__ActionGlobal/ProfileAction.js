@@ -8,7 +8,6 @@ export const initData = (data,to) => {
 }
 
 export const successData = (data,to) => {
-
     return {
         type: actions.SUCCESS_DATA(to),
         data

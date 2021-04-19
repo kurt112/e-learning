@@ -15,7 +15,8 @@ const reducer = (state=init_state, action) => {
     switch (action.type){
 
         case profileAction.INIT_DATA(Teacher): return TeacherState.initData(state)
-        case profileAction.SUCCESS_DATA(Teacher): return TeacherState.successData(state, action) //updateObject(state, {student: action.data, loading: false})
+        case profileAction.SUCCESS_DATA(Teacher): return TeacherState.successData(state, action)
+
         case profileAction.FAIL_DATA(Teacher): return TeacherState.failData(state,action)
 
 

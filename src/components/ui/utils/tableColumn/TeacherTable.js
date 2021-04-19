@@ -50,7 +50,7 @@ export const TeacherRoomTable = [
         options: {
             filter: false,
             sort: false,
-            customBodyRender: (value, tableMeta, updateValue) => {
+            customBodyRender: (value) => {
                 return value === undefined ? null :
                     <Link to="/admin/dashboard" style={{ textDecoration: 'none' }}>
                         <Button variant="outlined" color="primary">
@@ -81,10 +81,6 @@ export function TeacherInsertRoom(id, roomName, roomSubject, students, timeStart
 
 export const TeacherSubjectTable = [
     {
-        name: 'id',
-        label: 'id',
-    },
-    {
         name: 'subjectName',
         label: 'Subject Name'
     },
@@ -93,21 +89,13 @@ export const TeacherSubjectTable = [
         label: 'Subject Code'
     },
     {
-        name: 'subjectHour',
-        label: 'Subject Hour',
-    },
-    {
-        name: 'subjectMinute',
-        label: 'Subject Minute'
-    },
-    {
         name: 'major',
         label: 'Major'
     },
 ]
 
-export function TeacherInsertSubject(id, subjectName, subjectCode, SubjectHour, subjectMinute, major) {
-    return { id, subjectName, subjectCode, SubjectHour, subjectMinute, major }
+export function TeacherInsertSubject(subjectName, subjectCode,  major) {
+    return { subjectName, subjectCode,  major }
 } 
 
 
@@ -120,10 +108,7 @@ export function TeacherInsertSubject(id, subjectName, subjectCode, SubjectHour, 
 **/
 
 export const TeacherStudentTable = [
-    {
-        name: "id",
-        label: "LRN",
-    },
+
     {
         name: "firstName",
         label: "First Name",
@@ -155,10 +140,9 @@ export const TeacherStudentTable = [
         options: {
             filter: false,
             sort: false,
-            customBodyRender: (value, tableMeta, updateValue) => {
-                // value)
+            customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to='/student/' style={{ textDecoration: 'none' }}>
+                    <Link to={'/student/profile/'+value} style={{ textDecoration: 'none' }}>
                         <Button variant="outlined" color="primary">
                             Visit Profile
                         </Button>
@@ -170,9 +154,9 @@ export const TeacherStudentTable = [
         }
     },
 ];
-export function TeacherInsertStudent(id, firstName, lastName,   grade, section,subject, adviser, profile) {
+export function TeacherInsertStudent(firstName, lastName,   grade, section,subject, adviser, profile) {
 
-    return { id, firstName, lastName, grade, section,subject, adviser, profile }
+    return {firstName, lastName, grade, section,subject, adviser, profile }
 }
 
 /**

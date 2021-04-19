@@ -12,7 +12,6 @@ class State {
         }
 
         this.successData =(state, action) => {
-
             state = updateObject(state, {loading: false})
 
             return updateObject(state,{profile: action.data})

@@ -2,37 +2,69 @@
 import {lazy, Fragment, useState, useEffect} from "react";
 import {Redirect, Route} from "react-router";
 import {graphQlRequestAsync} from "../../store/middleware/utils/HttpRequest";
+import {getTeacherDataByEmail} from "../../store/middleware/utils/GraphQlQuery/TeacherQuery/TeacherDataQuery";
+import {TeacherInsertStudent as insertStudent } from '../ui/utils/tableColumn'
+import { TeacherInsertSubject as insertSubject } from '../ui/utils/tableColumn'
 // import {get} from "../../store/middleware/utils/GraphQlQuery/TeacherQuery";
-
-const TeacherSubjects = lazy(() => import('../ui/__user_ui/teacher/Teacher').then(module => ({ default: module.TeacherSubject })))
-const TeacherStudent = lazy(() => import('../ui/__user_ui/teacher/Teacher').then(module => ({ default: module.TeacherStudents })))
-const TeacherActivity = lazy(() => import('../ui/__user_ui/teacher/Teacher').then(module => ({ default: module.TeacherActivity })))
-const Classes = lazy(() => import('../ui/__user_ui/roomClasses/ClassList/ClassesList') )
+const TeacherSubjects = lazy(() => import('../ui/__user_ui/teacher/Teacher').then(module => ({default: module.TeacherSubject})))
+const TeacherStudent = lazy(() => import('../ui/__user_ui/teacher/Teacher').then(module => ({default: module.TeacherStudents})))
+const TeacherActivity = lazy(() => import('../ui/__user_ui/teacher/Teacher').then(module => ({default: module.TeacherActivity})))
+const Classes = lazy(() => import('../ui/__user_ui/roomClasses/ClassList/ClassesList'))
 
 const TeacherRoute = ({email}) => {
-    const [student, setStudent] = useState(null);
-    const [teachers,setTeacher] = useState([])
+
+    const [teacher, setTeacher] = useState(null)
+    const [students, setStudents] = useState([])
     const [subjects, setSubjects] = useState([])
+    const [classes, setClasses] = useState()
+
+    useEffect(() => {
+
+        async function fetchData() {
+            return await graphQlRequestAsync(getTeacherDataByEmail(email))
+        }
+
+        fetchData().then(r =>{
+            setTeacher(r.data.data.getTeacherByUserEmail)
+        })
+
+
+        console.log(teacher)
+
+    }, [])
+
+    useEffect( async () => {
+
+        if (teacher) {
+            const tempStudent = []
+            const tempSubject = []
+            setClasses(teacher.roomShiftClasses)
+            teacher.roomShiftClasses.map(e => {
+                const roomShift = e.roomShift
+                const students = e.students
+                const subject = e.subject
+                students.map(student => {
+                    const user = student.user
+                    tempStudent.push(insertStudent(user.firstName, user.lastName,roomShift.grade,roomShift.section,e.subject.subjectName,`${roomShift.teacher.user.firstName} ${roomShift.teacher.user.lastName}`,user.email))
+                })
+                console.log(subject)
+                tempSubject.push(insertSubject(subject.subjectName, subject.subjectCode,subject.subjectMajor))
+            })
 
 
 
-    // useEffect(() => {
-    //
-    //     async function fetchData() {
-    //         return await graphQlRequestAsync(getTeac(email))
-    //     }
-    //
-    //     fetchData().then(r => {
-    //         setStudent(r.data.data.getStudentByUserID)
-    //     })
-    //
-    //
-    // }, [email])
+            setStudents(tempStudent)
+            setSubjects(tempSubject)
+
+
+        }
+    }, [teacher])
+
 
     return (
         <Fragment>
-            <Route path='/teacher/subjects' exact render={() => <TeacherSubjects/>}/>
-            <Route path='/teacher/students' exact render={() => <TeacherStudent/>}/>
+            <Route path='/teacher/subjects' exact render={() => <TeacherSubjects subjects={subjects}/>}/>
+            <Route path='/teacher/students' exact render={() => <TeacherStudent students={students}/>}/>
             <Route path='/teacher/activities' exact render={() => <TeacherActivity/>}/>
             <Route path='/teacher/classes' exact render={() => <Classes/>}/>
             <Redirect to={'teacher/classes'}/>

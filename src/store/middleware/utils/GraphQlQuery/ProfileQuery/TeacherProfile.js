@@ -2,7 +2,7 @@ export const
     getTeacher = (id) => {
         return {
             query: `
-                    query{teacher(id:"${id}"){
+                    query{getTeacherByUserEmail(email:"${id}"){
                          user{
                                 firstName,
                                 lastName,

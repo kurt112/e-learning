@@ -10,8 +10,9 @@ export  function * teacherData(action) {
     try {
         const response = yield profileData(body)
 
-        yield put(profileAction.successData(response.data.data, Teacher))
+        yield put(profileAction.successData(response.data.data.getTeacherByUserEmail, Teacher))
     }catch (error){
+        console.log(error)
     }
 
 }

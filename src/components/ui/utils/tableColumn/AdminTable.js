@@ -73,8 +73,8 @@ export const AdminStudentTable = [
     },
 ];
 
-export function AdminInsertStudentTable(id, firstName, lastName, email, birthdate, grade, section, adviser, profile) {
-    return {LRN: id, firstName, lastName, email, birthdate, grade, section, adviser, profile}
+export function AdminInsertStudentTable(id, firstName, lastName, email, birthdate, grade, section, adviser) {
+    return {LRN: id, firstName, lastName, email, birthdate, grade, section, adviser, profile:email}
 }
 
 
@@ -129,8 +129,8 @@ export const AdminTeacherTable = [
     },
 ]
 
-export function AdminInsertTeacherTable(firstName, lastName, email, birthdate, profile) {
-    return {firstName, lastName, email, birthdate, profile}
+export function AdminInsertTeacherTable(firstName, lastName, email, birthdate) {
+    return {firstName, lastName, email, birthdate, profile:email}
 }
 
 

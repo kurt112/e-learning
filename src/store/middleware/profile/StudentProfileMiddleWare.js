@@ -10,10 +10,7 @@ export  function * studentData(action) {
     try {
         const response = yield profileData(body)
 
-        console.log("The response")
-        console.log(body)
-
-        yield put(profileAction.successData(response.data.data, Student))
+        yield put(profileAction.successData(response.data.data.getStudentByUserEmail, Student))
     }catch (error){
     }
 

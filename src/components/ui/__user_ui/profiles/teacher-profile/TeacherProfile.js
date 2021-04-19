@@ -14,6 +14,7 @@ import {Fragment} from "react";
 
 const  TeacherProfile= ({teacherState,initData, match})=>{
     const style = ProfileStyle()
+    const [name, setName] = useState('')
 
     useEffect(() => {
         const id = match.params.id;
@@ -23,8 +24,13 @@ const  TeacherProfile= ({teacherState,initData, match})=>{
 
     useEffect(() => {
 
-        if (teacherState.profile !== null) setComponent(<Data teacher={teacherState.profile.teacher}/>)
-    }, [teacherState.profile])
+        if (teacherState.profile !== null) {
+
+            setName(`${teacherState.profile.user.firstName} ${teacherState.profile.user.lastName}`)
+            setComponent(<Data teacher={teacherState.profile}/>)
+        }
+
+    }, [teacherState])
 
     const [component, setComponent] = useState(null)
 
@@ -33,19 +39,17 @@ const  TeacherProfile= ({teacherState,initData, match})=>{
     }
 
     const data = () => {
-        setComponent(<Data teacher={teacherState.profile.teacher}/>)
+        setComponent(<Data teacher={teacherState.profile}/>)
     }
 
     const logs = () => {
         setComponent(<Logs teacher={teacherState.profile.teacher}/>)
     }
 
-
-
     return (
         <Grid container className={style.container}>
             {
-                teacherState.loading === true && teacherState.error === null ? <CircularProgress style={{margin: 'auto'}} disableShrink/> :
+                teacherState.loading === true && teacherState.error === null && teacherState.profile ===null ? <CircularProgress style={{margin: 'auto'}} disableShrink/> :
                     <Fragment>
                         <Grid container className={style.profileHeader} component={Paper} >
                             <Grid className={style.avatarContainer} item md={12} sm={12} xs={12} lg={12}>
@@ -53,8 +57,7 @@ const  TeacherProfile= ({teacherState,initData, match})=>{
                             </Grid>
                             <Typography className={style.profileName} variant="h3" component="h2">
                                 {
-                                    teacherState.profile.teacher.user.firstName + ' ' +
-                                    teacherState.profile.teacher.user.lastName
+                                    name
                                 }
                             </Typography>
                             <br />
