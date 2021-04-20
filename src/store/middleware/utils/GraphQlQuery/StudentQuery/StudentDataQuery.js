@@ -38,6 +38,7 @@ export const
                                 day,
                                 startTime,
                                 endTime,
+                                status,
                                   subject{
                                     subjectName,
                                     subjectCode,
@@ -55,7 +56,8 @@ export const
                                   id,
                                   user{
                                     firstName,
-                                    lastName
+                                    lastName,
+                                    email,
                                   }
                                 }
                             }          

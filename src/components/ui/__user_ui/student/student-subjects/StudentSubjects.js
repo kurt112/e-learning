@@ -1,7 +1,7 @@
 import { Grid, Paper } from "@material-ui/core"
 import { StudentSubjectTable as columns} from '../../../utils/tableColumn'
 import MUIDataTable from 'mui-datatables'
-import style from '../../../_style/TableStyle'
+import style, {TableOptions} from '../../../_style/TableStyle'
 
 
 
@@ -16,9 +16,7 @@ export default function StudentSubjects({subjects}) {
                     title={"Activity List"}
                     data={subjects}
                     columns={columns}
-                    options={{
-                        selectableRows: false
-                    }}
+                    options={TableOptions()}
                 />
             </Grid>
         </Grid>

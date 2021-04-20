@@ -1,50 +1,74 @@
 import {Box, Divider, Grid} from "@material-ui/core"
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import clsx from "clsx";
-import CurrentClasses from "./CurrentClasses";
-import DoneClasses from "./DoneClasses";
+import ClassesCard from "./ClassesCard";
 import ClassesStyle from "../../../_style/ClassesStyle";
 
-const ClassesList= ({classes}) => {
+const ClassesList = ({classes}) => {
+
+    console.log(classes)
 
     const currentStyle = ClassesStyle()
     const [currentClassActive, setCurrentClassActive] = useState(true)
 
-    const [Classes, setClasses] = useState(<CurrentClasses classes={classes} style={currentStyle}/>)
+    // classes data
+    const [currentClass, setCurrentClass] = useState()
+    const [archiveClass, setArchiveClass] = useState()
+
+    useEffect(() => {
+        const tempCurrentClass = []
+        const tempArchiveClass = []
+
+        if (classes !== undefined) {
+
+            classes.map(e => {
+                if (e.status === 1) tempCurrentClass.push(e)
+                else tempArchiveClass.push(e)
+            })
+
+            setCurrentClass(tempCurrentClass)
+            setArchiveClass(tempArchiveClass)
+        }
+    }, [classes])
+
 
     const currentClassClick = () => {
         setCurrentClassActive(true)
-        setClasses(<CurrentClasses classes={classes} style={currentStyle}/>)
     }
 
-    const doneClassesClick = () => {
+    const archiveClassClick = () => {
         setCurrentClassActive(false)
-         setClasses(<DoneClasses style={currentStyle}/>)
     }
 
     return (
-        <Grid component="main" >
-            <Box  className={currentStyle.boxNavButtonContainer}>
-                <Box  onClick={currentClassClick} className={clsx(currentStyle.boxNavButton, currentClassActive === true? currentStyle.active: null)}>
+        <Grid component="main">
+            <Box className={currentStyle.boxNavButtonContainer}>
+                <Box onClick={currentClassClick}
+                     className={clsx(currentStyle.boxNavButton, currentClassActive === true ? currentStyle.active : null)}>
                     <span>Current Class</span>
                     <br/>
                     <AccessTimeIcon/>
 
                 </Box>
 
-                <Box onClick={doneClassesClick}  className={clsx(currentStyle.boxNavButton, currentClassActive !== true? currentStyle.active: null)}>
-                    <span>Done Classes</span>
+                <Box onClick={archiveClassClick}
+                     className={clsx(currentStyle.boxNavButton, currentClassActive !== true ? currentStyle.active : null)}>
+                    <span>Archive Classes</span>
                     <br/>
                     <AccessTimeIcon/>
                 </Box>
             </Box>
-            <Divider />
+            <Divider/>
 
             <div className={currentStyle.classesContainer}>
-                {Classes}
+                {
+                    currentClassActive ?
+                        <ClassesCard style={currentStyle} classes={currentClass}/>
+                        :
+                        <ClassesCard style={currentStyle} classes={archiveClass}/>
+                }
             </div>
-
         </Grid>
 
     )

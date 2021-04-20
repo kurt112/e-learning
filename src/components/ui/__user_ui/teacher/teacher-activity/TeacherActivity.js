@@ -1,28 +1,10 @@
-import { Box, Button, Grid, Paper, Toolbar } from "@material-ui/core"
-import { TeacherActivityTable as columns, TeacherInsertActivity as insert } from '../../../utils/tableColumn'
+import {Box, Button, Grid, Paper, Toolbar} from "@material-ui/core"
+import {TeacherActivityTable as columns, TeacherInsertActivity as insert} from '../../../utils/tableColumn'
 import MUIDataTable from 'mui-datatables'
-import style, { TableOptions as options } from '../../../_style/TableStyle'
-
-const rowClicked = (id) => {
-}
-
-const data = [
-    insert(0, 'kurt', 'orioque', 19, 'December 20, 2000'),
-    insert(1, 'Ellysa', 'Jarilla', 19, 'December 21, 2000'),
-    insert(2, 'Eve', 'Maturan', 30, 'December 22, 2000'),
-    insert(3, 'kurt', 'orioque', 19, 'December 20, 2000'),
-    insert(4, 'Ellysa', 'Jarilla', 19, 'December 21, 2000'),
-    insert(5, 'Eve', 'Maturan', 30, 'December 22, 2000'),
-    insert(6, 'kurt', 'orioque', 19, 'December 20, 2000'),
-    insert(7, 'Ellysa', 'Jarilla', 19, 'December 21, 2000'),
-    insert(8, 'Eve', 'Maturan', 30, 'December 22, 2000'),
-    insert(9, 'Eve', 'Maturan', 30, 'December 22, 2000'),
-    insert(10, 'Eve', 'Maturan', 30, 'December 22, 2000'),
-    insert(11, 'Eve', 'Maturan', 30, 'December 22, 2000')
-]
+import style, {TableOptions, TableOptions as options} from '../../../_style/TableStyle'
 
 
-export default function TeacherActivity() {
+export default function TeacherActivity({activity}) {
 
     const classes = style()
 
@@ -31,22 +13,24 @@ export default function TeacherActivity() {
             <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                 <Toolbar>
                     <Box className={classes.tableNavbarBox}>
-                        <Button variant="outlined" color="primary">
+                        <Button variant="outlined" style={{marginRight: 20}} color="primary">
                             Add Activity
-                    </Button>
+                        </Button>
+
+                        <Button variant="outlined" color="primary">
+                            Add Resources
+                        </Button>
                     </Box>
-                    <Button variant="outlined" color="primary">
-                        Quit
-                </Button>
+
                 </Toolbar>
             </Grid>
 
             <Grid item md={12} component={Paper} className={classes.tableContainerWrapper}>
                 <MUIDataTable
                     title={"Activity List"}
-                    data={data}
+                    data={activity}
                     columns={columns}
-                    options={options(rowClicked)}
+                    options={TableOptions()}
                 />
             </Grid>
         </Grid>

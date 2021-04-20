@@ -25,7 +25,6 @@ const  TeacherProfile= ({teacherState,initData, match})=>{
     useEffect(() => {
 
         if (teacherState.profile !== null) {
-
             setName(`${teacherState.profile.user.firstName} ${teacherState.profile.user.lastName}`)
             setComponent(<Data teacher={teacherState.profile}/>)
         }
@@ -45,6 +44,9 @@ const  TeacherProfile= ({teacherState,initData, match})=>{
     const logs = () => {
         setComponent(<Logs teacher={teacherState.profile.teacher}/>)
     }
+
+    console.log("i am in profile")
+    console.log(teacherState)
 
     return (
         <Grid container className={style.container}>

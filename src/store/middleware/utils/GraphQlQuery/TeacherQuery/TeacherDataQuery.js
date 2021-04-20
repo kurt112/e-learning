@@ -9,6 +9,7 @@ export const
                                 day,
                                 startTime,
                                 endTime,
+                                status,
                                 subject{
                                     subjectName,
                                     subjectCode,

@@ -4,9 +4,10 @@ import MenuBookIcon from "@material-ui/icons/MenuBook";
 import VideoCallIcon from '@material-ui/icons/VideoCall';
 import {Link} from "react-router-dom";
 
-const CurrentClasses = ({style, classes}) => {
+const ClassesCard = ({style, classes}) => {
 
-    return classes === undefined ? <h3>Class is Empty</h3> :
+    console.log(classes)
+    return classes === undefined || classes.length === 0 ? <h3>Class is Empty</h3> :
         classes.map((e) => {
             return (
                 <Fragment key={e.id}>
@@ -25,8 +26,9 @@ const CurrentClasses = ({style, classes}) => {
                             <div className={style.classTeacher}>
                                 <p>
                                     {
-                                        `${e.teacher.user.firstName} 
-                                    ${e.teacher.user.lastName}`
+                                        e.teacher === undefined ? 'You' :
+                                            `${e.teacher.user.firstName} 
+                                             ${e.teacher.user.lastName}`
                                     }
                                 </p>
                             </div>
@@ -78,4 +80,4 @@ const CurrentClasses = ({style, classes}) => {
         })
 }
 
-export default CurrentClasses
+export default ClassesCard

@@ -1,7 +1,7 @@
 import {Grid, Paper} from "@material-ui/core"
 import {StudentTeacherTable as columns} from '../../../utils/tableColumn'
 import MUIDataTable from 'mui-datatables'
-import style from '../../../_style/TableStyle'
+import style, {TableOptions} from '../../../_style/TableStyle'
 
 
 export default function StudentTeachers({teachers}) {
@@ -16,9 +16,7 @@ export default function StudentTeachers({teachers}) {
                     title={"Teacher List"}
                     data={teachers}
                     columns={columns}
-                    options={{
-                        selectableRows: false
-                    }}
+                    options={TableOptions()}
                 />
             </Grid>
         </Grid>

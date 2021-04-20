@@ -6,7 +6,7 @@ const CurrentActivity = ({activities, activityStyle}) => {
     return (
         <List>
             {
-                activities.map((e) => <ActivityCard activityStyle={activityStyle}
+                activities.map((e, index) => <ActivityCard key={index} activityStyle={activityStyle}
                                                     activityName={e.activity.activityTitle}
                                                     deadLine={e.activity.date_end}
                                                     teacherName={`${e.roomShiftClass.teacher.user.firstName} ${e.roomShiftClass.teacher.user.lastName}`}

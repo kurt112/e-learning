@@ -43,6 +43,12 @@ export function TeacherItems({ style }) {
                 </ListItemIcon>
                 <ListItemText primary="Activities" />
             </ListItem>
+            <ListItem component={NavLink} to="/teacher/resources" button>
+                <ListItemIcon>
+                    <PeopleIcon />
+                </ListItemIcon>
+                <ListItemText primary="Resources" />
+            </ListItem>
         </div>
     )
 }

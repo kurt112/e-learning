@@ -1,7 +1,7 @@
 import { Box, Button, Grid, Paper, Toolbar } from "@material-ui/core"
 import { TeacherStudentTable as columns} from '../../../utils/tableColumn'
 import MUIDataTable from 'mui-datatables'
-import style from '../../../_style/TableStyle'
+import style, {TableOptions} from '../../../_style/TableStyle'
 
 
 
@@ -30,6 +30,7 @@ export default function TeacherStudents({students}) {
                     title={"Student List"}
                     data={students}
                     columns={columns}
+                    options={TableOptions()}
                 />
             </Grid>
         </Grid>
