@@ -281,3 +281,45 @@ export const TeacherLogs = [
 export function TeacherInsertLogs(date, subjectName, grade, section, timeStart, timeEnd){
     return {date, subjectName, grade, section, timeStart, timeEnd}
 }
+
+
+
+/**
+ *
+ *
+ *  This table is for the profiles table in Teacher area for Resources
+ *
+ *
+ **/
+
+export const TeacherResources = [
+    {
+        name: 'documentCode',
+        label: 'Document Code'
+    },
+    {
+        name: 'documentName',
+        label: 'Document Name',
+    },
+    {
+        name: 'dateUploaded',
+        label: 'Uploaded On'
+    },
+    {
+        name: 'type',
+        label: 'Type'
+    },
+    {
+        name: 'download',
+        label: 'DownLoad'
+    },
+    {
+        name: 'timeEnd',
+        label: 'Time End'
+    },
+
+]
+
+export function TeacherInsertResources(date, subjectName, grade, section, timeStart, timeEnd){
+    return {date, subjectName, grade, section, timeStart, timeEnd}
+}

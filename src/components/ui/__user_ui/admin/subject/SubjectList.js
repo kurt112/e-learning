@@ -1,15 +1,14 @@
 import {Box, Button, CircularProgress, Grid, Paper, Toolbar} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
-import {Fragment, useEffect} from "react"
+import {Fragment, lazy, useEffect} from "react"
 import {AdminSubjectTable as columns } from '../../../utils/tableColumn'
 
 import style, { TableOptions as options } from '../../../_style/TableStyle'
-import RegisterSubject from './SubjectDialogRegister'
-import {connect} from "react-redux";
-import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
-import { Subject} from "../../../../../store/utils/Specify";
-import Typography from "@material-ui/core/Typography";
-
+import {connect} from "react-redux"
+import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction"
+import { Subject} from "../../../../../store/utils/Specify"
+import Typography from "@material-ui/core/Typography"
+const RegisterSubject = lazy(() => import(`./SubjectDialogRegister`))
 
 const SubjectList = ({subject,  pageChange,searchChange, openDialog, closeDialog,initData}) => {
 

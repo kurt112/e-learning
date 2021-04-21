@@ -1,14 +1,14 @@
 import {Box, Button, CircularProgress, Grid, Paper, Toolbar} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
-import {Fragment, useEffect} from "react"
+import {Fragment, lazy, useEffect} from "react"
 import {AdminStudentTable as columns} from '../../../utils/tableColumn'
 import style, {TableOptions as options} from '../../../_style/TableStyle'
-import StudentRegisterDialog from './StudentRegisterDialog'
 import {connect} from 'react-redux'
 import {Student} from '../../../../../store/utils/Specify'
 import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
 import Typography from "@material-ui/core/Typography";
 
+const StudentRegisterDialog = lazy(() => import(`./StudentRegisterDialog`));
 
 const StudentList = ({student, pageChange, searchChange, openDialog, closeDialog, initData}) => {
     const classes = style()

@@ -2,13 +2,14 @@ import {Box, Button, CircularProgress, Grid, Paper, Toolbar} from "@material-ui/
 import {AdminActivityTable as columns} from '../../../utils/tableColumn'
 import MUIDataTable from 'mui-datatables'
 import style, {TableOptions as options} from '../../../_style/TableStyle'
-import {useEffect} from "react"
+import {lazy, useEffect} from "react"
 import {Fragment} from 'react'
-import ActivityDialogRegister from "./ActivityDialogRegister";
 import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
 import {Activity} from "../../../../../store/utils/Specify";
 import {connect} from 'react-redux'
 import Typography from "@material-ui/core/Typography";
+
+const ActivityDialogRegister = lazy(() => import(`./ActivityDialogRegister`));
 
 const ActivityList = ({
                           openDialog,

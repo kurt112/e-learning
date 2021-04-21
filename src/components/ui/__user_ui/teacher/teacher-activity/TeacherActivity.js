@@ -1,7 +1,7 @@
 import {Box, Button, Grid, Paper, Toolbar} from "@material-ui/core"
-import {TeacherActivityTable as columns, TeacherInsertActivity as insert} from '../../../utils/tableColumn'
+import {TeacherActivityTable as columns} from '../../../utils/tableColumn'
 import MUIDataTable from 'mui-datatables'
-import style, {TableOptions, TableOptions as options} from '../../../_style/TableStyle'
+import style, {TableOptions} from '../../../_style/TableStyle'
 
 
 export default function TeacherActivity({activity}) {
@@ -16,12 +16,7 @@ export default function TeacherActivity({activity}) {
                         <Button variant="outlined" style={{marginRight: 20}} color="primary">
                             Add Activity
                         </Button>
-
-                        <Button variant="outlined" color="primary">
-                            Add Resources
-                        </Button>
                     </Box>
-
                 </Toolbar>
             </Grid>
 
@@ -34,6 +29,5 @@ export default function TeacherActivity({activity}) {
                 />
             </Grid>
         </Grid>
-
     )
 }

@@ -10,3 +10,7 @@ export {
 export {
     default as TeacherActivity
 } from './teacher-activity/TeacherActivity'
+
+export {
+    default as TeacherResources
+} from './teacher-resources/TeacherResources'

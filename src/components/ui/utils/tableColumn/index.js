@@ -49,11 +49,13 @@ export {
     TeacherActivityTable,
     TeacherAttendace,
     TeacherLogs,
+    TeacherResources,
 
+    TeacherInsertResources,
     TeacherInsertAttendace,
     TeacherInsertLogs,
     TeacherInsertActivity,
     TeacherInsertStudent,
     TeacherInsertSubject,
-    TeacherInsertRoom
+    TeacherInsertRoom,
 } from './TeacherTable'

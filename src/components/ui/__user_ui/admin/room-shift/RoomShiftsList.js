@@ -1,18 +1,19 @@
 import {Box, Button, CircularProgress, Grid, Paper, Toolbar} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
-import {Fragment, useEffect} from "react"
+import {Fragment, lazy, useEffect} from "react"
 import { AdminRoomShiftTable as columns } from '../../../utils/tableColumn'
 import style, { TableOptions as options } from '../../../_style/TableStyle'
-import RegisterRoomShift from './RoomShiftDialogRegister'
-import AddStudent from './RoomShiftDialogAddStudent'
+
 import {connect} from 'react-redux'
 import { RoomShift} from "../../../../../store/utils/Specify";
 import Typography from "@material-ui/core/Typography";
 
-
 // actions
 import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
 import * as roomShiftListAction from "../../../../../store/action/admin/RoomShift/RoomShiftListAction"
+
+const AddStudentDialog = lazy(() => import(`./RoomShiftDialogAddStudent`));
+const RegisterRoomShiftDialog = lazy(() => import(`./RoomShiftDialogRegister`));
 
 const  RoomShiftList = ({roomShift, initData,searchChange,pageChange,openDialog,closeDialog,openAddStudent, closeAddStudent})=> {
     console.log(roomShift.data)
@@ -25,8 +26,8 @@ const  RoomShiftList = ({roomShift, initData,searchChange,pageChange,openDialog,
     return (
         <Fragment>
 
-            <RegisterRoomShift dialog={roomShift.dialog} closeDialog={closeDialog}/>
-            <AddStudent  dialog={roomShift.addStudentDialog} closeDialog={closeAddStudent}/>
+            <RegisterRoomShiftDialog dialog={roomShift.dialog} closeDialog={closeDialog}/>
+            <AddStudentDialog dialog={roomShift.addStudentDialog} closeDialog={closeAddStudent}/>
 
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>

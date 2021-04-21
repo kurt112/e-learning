@@ -10,7 +10,7 @@ import {RoomShiftClass} from "../../../../../store/utils/Specify";
 import Typography from "@material-ui/core/Typography";
 
 
-const RegisterRoom = lazy(() => import('./RoomClassDialogRegister'));
+const RegisterRoom = lazy(() => import(`./RoomClassDialogRegister`));
 
  const  RoomClassList = ({room, initData,searchChange,pageChange,openDialog,closeDialog})=> {
 

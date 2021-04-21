@@ -10,6 +10,7 @@ import { TeacherInsertSubject as insertSubject } from '../ui/utils/tableColumn'
 const TeacherSubjects = lazy(() => import('../ui/__user_ui/teacher/Teacher').then(module => ({default: module.TeacherSubject})))
 const TeacherStudent = lazy(() => import('../ui/__user_ui/teacher/Teacher').then(module => ({default: module.TeacherStudents})))
 const TeacherActivity = lazy(() => import('../ui/__user_ui/teacher/Teacher').then(module => ({default: module.TeacherActivity})))
+const TeacherResources = lazy(() => import('../ui/__user_ui/teacher/Teacher').then(module => ({default: module.TeacherResources})))
 const Classes = lazy(() => import('../ui/__user_ui/roomClasses/ClassList/ClassesList'))
 
 const TeacherRoute = ({email}) => {
@@ -68,6 +69,7 @@ const TeacherRoute = ({email}) => {
             <Route path='/teacher/students' exact render={() => <TeacherStudent students={students}/>}/>
             <Route path='/teacher/activities' exact render={() => <TeacherActivity/>}/>
             <Route path='/teacher/classes' exact render={() => <Classes classes={classes}/>}/>
+            <Route path='/teacher/resources' exact render={() => <TeacherResources/>}/>
             <Redirect to={'teacher/classes'}/>
         </Fragment>
     )
