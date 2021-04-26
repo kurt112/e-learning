@@ -6,4 +6,8 @@ export const
     RoomShift = 'ROOMSHIFT',
     Subject = "SUBJECT",
     RoomShiftClass = "ROOMSHIFT_CLASS",
-    Activity = "Activity"
+    Activity = "Activity",
+
+
+    // Teacher User
+    Teacher_Resource = 'TEACHER_RESOURCE'

@@ -10,7 +10,6 @@ export const dialogId = (value, to) => {
 }
 
 export const dialogRegister = (to) => {
-    console.log("wew")
     return {
         type: actions.ADMIN_DIALOG_REGISTER(to)
     }

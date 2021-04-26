@@ -3,7 +3,7 @@ export {
 } from './TeacherActivityState'
 
 export {
-    default as TeacherProfile
+    default as TeacherProfileState
 } from './TeacherProfileState'
 
 export {
@@ -17,3 +17,21 @@ export {
 export {
     default as TeacherStudent
 } from './TeacherStudentState'
+
+
+// for teacher resource
+export {
+    default as TeacherResource
+} from './Resources/TeacherResourceState'
+
+export {
+    default as UploadResource
+}from './Resources/Dialog/UploadResource'
+
+export {
+    default as DeleteResource
+} from './Resources/Dialog/DeleteResource'
+
+export {
+    default as UpdateResource
+}from './Resources/Dialog/UpdateResource'

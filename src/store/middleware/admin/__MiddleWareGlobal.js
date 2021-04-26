@@ -4,8 +4,7 @@ import {baseUrl} from "../axios";
 import * as actions from "../../action/__ActionGlobal/AdminDialogAction";
 import {graphQLRequest} from '../utils/HttpRequest'
 export function* UploadFile(data, URL, to) {
-    console.log('The ')
-    console.log(URL)
+
     try {
       const response =  yield baseUrl({
             method: 'post',
@@ -14,7 +13,6 @@ export function* UploadFile(data, URL, to) {
                 'Content-Type': 'multipart/form-data'
             },
             data
-
         })
         yield  put(tableActions.addItemTable(response.data.item, to))
         yield  put(actions.registerDialogSuccess(to))

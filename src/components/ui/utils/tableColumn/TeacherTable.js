@@ -310,16 +310,31 @@ export const TeacherResources = [
         label: 'Type'
     },
     {
-        name: 'download',
-        label: 'DownLoad'
+        name: 'status',
+        label: 'Status'
     },
     {
-        name: 'timeEnd',
-        label: 'Time End'
+        name: "download",
+        label: "Download",
+        options: {
+            filter: false,
+            sort: false,
+            customBodyRender: (value) => {
+                return value === undefined ? null :
+                    <Link to={'/student/profile/'+value} style={{ textDecoration: 'none' }}>
+                        <Button variant="outlined" color="primary">
+                            Visit Profile
+                        </Button>
+                    </Link>
+            },
+            filterOptions: {
+                fullWidth: false
+            }
+        }
     },
 
 ]
 
-export function TeacherInsertResources(date, subjectName, grade, section, timeStart, timeEnd){
-    return {date, subjectName, grade, section, timeStart, timeEnd}
+export function TeacherInsertResources(documentCode, documentName, dateUploaded, type, status, download){
+    return {documentCode, documentName, dateUploaded, type, status, download}
 }

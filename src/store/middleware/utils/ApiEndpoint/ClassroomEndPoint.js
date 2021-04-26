@@ -1,14 +1,7 @@
 export const
     JavaEndpoint = 'http://localhost:8080',
-    ExpressEndPoint ='http://localhost:5000',
-    GraphQlEndpoint = JavaEndpoint+'/Elearning',
-
-    /**
-     *
-     *     GraphQL ENDPOINT
-     *
-     */
-
+    ExpressEndPoint = 'http://localhost:5000',
+    GraphQlEndpoint = JavaEndpoint + '/Elearning',
 
     /**
      * for Admin end point
@@ -53,6 +46,7 @@ export const
     /**
      * for Teacher End Point
      */
+    TeacherResourceUpload = 'teacher/upload/resource',
 
 
     /**
@@ -63,7 +57,7 @@ export const
     autoCompleteTeacher = autoComplete + 'teacher',
     autoCompleteRoom = autoComplete + 'room',
     autoCompleteSubject = autoComplete + 'subject',
-    autoCompleteRoomShift = autoComplete+'roomShift',
-    autoCompleteRoomClass = autoComplete+'classes',
-    autoCompleteSubjectBasedOnRoomShift = autoComplete+'subjectBaseOnRoomShift'
+    autoCompleteRoomShift = autoComplete + 'roomShift',
+    autoCompleteRoomClass = autoComplete + 'classes',
+    autoCompleteSubjectBasedOnRoomShift = autoComplete + 'subjectBaseOnRoomShift'
 

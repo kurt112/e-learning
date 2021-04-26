@@ -8,7 +8,8 @@ import {Provider} from 'react-redux';
 import createSagaMiddleware from 'redux-saga'
 
 // Teacher
-import {TeacherStudent, TeacherRoom, TeacherSubject, TeacherActivity} from './store/reducers/Teacher'
+import {TeacherStudent, TeacherRoom, TeacherSubject, TeacherActivity,DeleteResource,
+TeacherResource,UpdateResource,UploadResource,TeacherProfileState} from './store/reducers/Teacher'
 
 //Student
 import {StudentActivity, StudentSubject, StudentRoom, StudentTeacher} from './store/reducers/Student'
@@ -85,21 +86,33 @@ import {
     watchReLogin,
     watchStudentRegister,
     watchTeacherRegister,
-    watchAdminActivityUpload, watchAdminActivitySearchChange, watchAdminActivityTableInit, watchAdminActivityTableNext
+    watchAdminActivityUpload,
+    watchAdminActivitySearchChange,
+    watchAdminActivityTableInit,
+    watchAdminActivityTableNext,
+    watchTeacherUploadResource
 } from './store/middleware/'
 
 
 const reducers = combineReducers({
-    TeacherStudent,
-    TeacherRoom,
-    TeacherSubject,
-    TeacherActivity,
+    // Teacher State
+    // TeacherStudent,
+    // TeacherRoom,
+    // TeacherSubject,
+    // TeacherActivity,
+    // DeleteResource,
+    TeacherResource,
+    UploadResource,
+    // TeacherProfileState,
 
+    // Student State
     StudentActivity,
     StudentSubject,
     StudentRoom,
     StudentTeacher,
 
+
+    // Admin State
     AdminActivity,
     AdminDashBoard,
     AdminRoom,
@@ -202,9 +215,11 @@ sagaMiddleware.run(watchPreRegister)
 sagaMiddleware.run(watchReLogin)
 
 // REGISTER STUDENT TEACHER
-
 sagaMiddleware.run(watchStudentRegister)
 sagaMiddleware.run(watchTeacherRegister)
+
+// TEACHER ROLE
+sagaMiddleware.run(watchTeacherUploadResource)
 
 ReactDOM.render(
     <React.StrictMode>

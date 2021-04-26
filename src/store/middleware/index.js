@@ -3,7 +3,7 @@ import * as adminTable from '../ActionType/__ActionTypeGlobal/AdminTableActionTy
 import * as adminDialog from '../ActionType/__ActionTypeGlobal/AdminDialogActionType'
 import * as userRegister from '../ActionType/__ActionTypeGlobal/UserRegisterActionType'
 import * as loginAction from '../ActionType/Login/LoginActionType'
-import {Teacher, Student, Room, Subject, RoomShift, RoomShiftClass, Activity} from '../utils/Specify'
+import {Teacher, Student, Room, Subject, RoomShift, RoomShiftClass, Activity, Teacher_Resource} from '../utils/Specify'
 import * as profile from '../ActionType/__ActionTypeGlobal/ProfileActionType'
 
 import {
@@ -58,6 +58,7 @@ import  {
 
 import {RoomShiftRegister, RoomShiftTableDataInit, RoomShiftTableDataNext} from "./admin/RoomShiftMiddleWare";
 import {RoomClassRegister, RoomClassTableDataInit, RoomClassTableDataNext} from "./admin/RoomClassMiddleWare";
+import {TeacherResourceUpload} from "./teacher/TeacherResource";
 
 /**
  *
@@ -282,15 +283,29 @@ export  function * watchReLogin () {
 /**
  *
  *
- *          This middleware is for Studnet Teacher Register
+ *          This middleware is for Student, Teacher Register
  *
  *
  *
  **/
+
 export function * watchStudentRegister () {
     yield takeLeading(userRegister.INIT_REGISTER(Student), StudentRegisterData)
 }
 
 export function * watchTeacherRegister() {
     yield takeLeading(userRegister.INIT_REGISTER(Teacher), TeacherRegisterData)
+}
+
+/**
+ *
+ *
+ *          This middleware is for Teacher
+ *
+ *
+ *
+ **/
+
+export function * watchTeacherUploadResource() {
+    yield takeLeading('TEACHER_RESOURCE_ADMIN_DIALOG_REGISTER', TeacherResourceUpload)
 }

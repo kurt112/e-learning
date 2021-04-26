@@ -279,6 +279,7 @@ const mapDispatchToProps = (dispatch) => {
         changeDeadlineTime: (data) => dispatch(activityAction.changeDeadlineTime(data)),
         changeDeadlineDate: (data) => dispatch(activityAction.changeDeadlineDate(data)),
         changeActivityDescription: (data) => dispatch(activityAction.changeActivityDescription(data)),
+
         registerDialogMessageClose: (event) => dispatch(action.registerDialogMessageClose(event, Activity)),
         registerDialog: () => dispatch(action.dialogRegister(Activity))
     }

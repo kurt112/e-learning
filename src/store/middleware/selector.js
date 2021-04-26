@@ -1,4 +1,8 @@
+import {UploadResource} from "../reducers/Teacher";
+
 export const
+
+    // Admin State
     AdminSubject = (state) => state.AdminSubject,
     AdminSubjectDialog = (state) => state.AdminSubjectDialog,
     AdminTeacher = (state) => state.AdminTeacher,
@@ -13,6 +17,16 @@ export const
     AdminClass = (state) => state.AdminClass,
     AdminActivity = (state) => state.AdminActivity,
     AdminActivityDialog = (state) => state.AdminActivityDialog,
+
+    // Teacher User
+    TeacherResource = (state) => state.TeacherResource,
+    TeacherResourceUploadDialog = (state) => state.UploadResource,
+
+    // Login, Register State
     Login = (state) => state.Login,
     StudentRegister = (state) => state.StudentRegisterForm,
-    TeacherRegister = (state) => state.TeacherRegisterForm
+    TeacherRegister = (state) => state.TeacherRegisterForm,
+
+    // Current User State
+    CurrentUser = (state) => state.CurrentUser
+
