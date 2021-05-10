@@ -36,6 +36,8 @@ const StudentRoute = ({email}) => {
         if(student !== null){
             const tempTeacher = []
             const tempSubject = []
+
+            // eslint-disable-next-line array-callback-return
             student.roomShiftClasses.map(e => {
                 tempTeacher.push(insertTeacher(e.teacher.user.firstName, e.teacher.user.lastName, e.subject.subjectName, e.teacher.user.email))
                 tempSubject.push(insertSubject(e.subject.subjectName,e.subject.subjectCode,e.startTime,e.endTime,e.subject.subjectMajor))

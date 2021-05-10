@@ -1,16 +1,14 @@
-import {select} from "redux-saga/effects";
+import {put, select} from "redux-saga/effects";
 import * as Selector from "../selector";
-import {UploadFile} from "../admin/__MiddleWareGlobal";
 import {TeacherResourceUpload as destination} from "../utils/ApiEndpoint/ClassroomEndPoint";
-import {Teacher_Resource} from "../../utils/Specify";
-import {uniqueNamesGenerator, adjectives, colors, animals} from 'unique-names-generator';
-
+import {uniqueNamesGenerator, adjectives, colors, animals} from 'unique-names-generator'
+import {baseUrl} from "../axios"
+import {success_uploadDialog} from '../../action/teacher/TeacherResource/TeacherResource'
+import {TeacherInsertResources as insert} from "../../../components/ui/utils/tableColumn";
 export function* TeacherResourceUpload() {
     const teacherResource = yield select(Selector.TeacherResourceUploadDialog)
     const currentUser = yield select(Selector.CurrentUser)
     const email = currentUser.user.email
-    console.log(teacherResource)
-
     const code = uniqueNamesGenerator({
             dictionaries: [adjectives, colors, animals],
             separator: '-',
@@ -29,7 +27,19 @@ export function* TeacherResourceUpload() {
         data.append("description", teacherResource.description)
         data.append("code", code)
         data.append("email", email)
-        yield UploadFile(data, destination, Teacher_Resource)
+        const response =  yield baseUrl({
+            method: 'post',
+            url: destination,
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            data
+        }).catch(e=> {
+            console.log(e)
+        })
         i++;
+
+        yield put(success_uploadDialog(response.data.item))
     }
+
 }

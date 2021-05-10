@@ -24,13 +24,12 @@ const StudentProfile = ({studentState, match, initData}) => {
         
         initData(id)
 
-        console.log(studentState)
 
     }, [initData, match.params.id])
 
     useEffect(() => {
         if (studentState.profile !== null) {
-            setComponent(<Data student={studentState.profile}/>)
+            setComponent(<Data student={studentState.profile} assignedRoom={studentState.profile.roomShifts[0]}/>)
 
             setName(`${studentState.profile.user.firstName} ${studentState.profile.user.lastName}`)
         }
@@ -42,7 +41,7 @@ const StudentProfile = ({studentState, match, initData}) => {
     }
 
     const data = () => {
-        setComponent(<Data student={studentState.profile}/>)
+        setComponent(<Data student={studentState.profile} assignedRoom={studentState.profile.roomShifts[0]}/>)
     }
 
     const logs = () => {

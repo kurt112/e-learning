@@ -1,8 +1,12 @@
 import { Box, Container, Typography } from "@material-ui/core";
 import { Fragment } from "react";
 import ProfileStyle from '../../ProfileStyle'
-export default function Data({student}) {
+import {convertDateTime} from "../../../../utils/dateFormat/DateTimeFormatToDateWord";
+export default function Data({student,assignedRoom}) {
     const style = ProfileStyle()
+    console.log(assignedRoom)
+    console.log(student)
+
     return (
         <Fragment>
             <Typography className={style.profileName} variant="h4" component="h2">Personal Information</Typography>
@@ -23,13 +27,13 @@ export default function Data({student}) {
                     <Box className={style.profileDataContainerTitle}>
                         <p>Grade And Section </p>
                     </Box>
-                    <p>{student.user.birthdate}</p>
+                    <p>{`${assignedRoom.grade} - ${assignedRoom.section}`}</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainerTitle}>
                         <p>Account Registered </p>
                     </Box>
-                    <p>{student.user.registerDate}</p>
+                    <p>{convertDateTime(student.user.createdAt)}</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainerTitle}>

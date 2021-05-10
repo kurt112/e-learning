@@ -1,6 +1,7 @@
 import { Box, Container, Typography } from "@material-ui/core";
 import { Fragment } from "react";
 import ProfileStyle from '../../ProfileStyle'
+import {convertDateTime} from "../../../../utils/dateFormat/DateTimeFormatToDateWord";
 export default function Data({teacher}) {
     const style = ProfileStyle()
     return (
@@ -29,7 +30,7 @@ export default function Data({teacher}) {
                     <Box className={style.profileDataContainerTitle}>
                         <p>Account Registered </p>
                     </Box>
-                    <p>{teacher.user.registerDate}</p>
+                    <p>{convertDateTime(teacher.user.createdAt)}</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainerTitle}>

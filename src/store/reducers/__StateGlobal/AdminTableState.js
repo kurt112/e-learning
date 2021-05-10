@@ -23,6 +23,7 @@ class State {
         }
 
         this.successData = (state, action, transform) => {
+            console.log(action.data)
             const fetchData = transform(action.data)
 
             let new_Data;

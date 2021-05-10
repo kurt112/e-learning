@@ -4,6 +4,15 @@ export const
             query: `
                     query{
                        getTeacherByUserEmail(email:"${email}") {
+                             resources{
+                                code,
+                                description,
+                                createdAt,
+                                location,
+                                status,
+                                type,
+                                name
+                            },
                             roomShiftClasses{
                                 id,
                                 day,
@@ -14,7 +23,7 @@ export const
                                     subjectName,
                                     subjectCode,
                                     subjectMajor
-                            },
+                                },
                             roomShift{
                                 id,
                                 grade,

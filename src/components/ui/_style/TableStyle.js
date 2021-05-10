@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles"
 const style = makeStyles(() => ({
     root: {
         width: '100%',
-        overflowY: 'auto',
+        // overflowY: 'auto',
         height: '100%'
     },
     tableContainer: {
@@ -56,4 +56,20 @@ export function TableOptions(pageChange,searchChange,searchText, pageNumber,tota
 
 
     };
-} 
+}
+
+export function TableOptionsNoPaging() {
+
+    return {
+        filter: true,
+        filterType: "dropdown",
+        tableBodyMaxHeight: '490px',
+        selectableRowsHeader: true,
+        rowsPerPageOptions:[],
+        rowsPerPage:10,
+        pagination: true,
+        searchPlaceholder: 'Search Anything',
+        selectableRowsHideCheckboxes: false,
+        selectableRows: 'none',
+    };
+}

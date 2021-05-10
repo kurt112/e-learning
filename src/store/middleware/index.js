@@ -3,9 +3,9 @@ import * as adminTable from '../ActionType/__ActionTypeGlobal/AdminTableActionTy
 import * as adminDialog from '../ActionType/__ActionTypeGlobal/AdminDialogActionType'
 import * as userRegister from '../ActionType/__ActionTypeGlobal/UserRegisterActionType'
 import * as loginAction from '../ActionType/Login/LoginActionType'
-import {Teacher, Student, Room, Subject, RoomShift, RoomShiftClass, Activity, Teacher_Resource} from '../utils/Specify'
+import {Teacher, Student, Room, Subject, RoomShift, RoomShiftClass, Activity} from '../utils/Specify'
 import * as profile from '../ActionType/__ActionTypeGlobal/ProfileActionType'
-
+import * as teacherResource from '../ActionType/Teacher/TeacherResource/TeacherResource'
 import {
     Login,
     PreRegister,
@@ -307,5 +307,5 @@ export function * watchTeacherRegister() {
  **/
 
 export function * watchTeacherUploadResource() {
-    yield takeLeading('TEACHER_RESOURCE_ADMIN_DIALOG_REGISTER', TeacherResourceUpload)
+    yield takeLeading(teacherResource.Upload_Dialog_SUBMIT, TeacherResourceUpload)
 }

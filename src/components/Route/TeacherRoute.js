@@ -57,11 +57,8 @@ const TeacherRoute = ({email}) => {
 
             setStudents(tempStudent)
             setSubjects(tempSubject)
-
-
         }
     }, [teacher])
-
 
     return (
         <Fragment>
@@ -69,7 +66,7 @@ const TeacherRoute = ({email}) => {
             <Route path='/teacher/students' exact render={() => <TeacherStudent students={students}/>}/>
             <Route path='/teacher/activities' exact render={() => <TeacherActivity/>}/>
             <Route path='/teacher/classes' exact render={() => <Classes classes={classes}/>}/>
-            <Route path='/teacher/resources' exact render={() => <TeacherResources/>}/>
+            <Route path='/teacher/resources' exact render={() => <TeacherResources resources={teacher.resources}/>}/>
             <Redirect to={'teacher/classes'}/>
         </Fragment>
     )

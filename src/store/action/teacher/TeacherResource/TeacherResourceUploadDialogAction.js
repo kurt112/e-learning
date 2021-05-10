@@ -1,4 +1,4 @@
-import * as actions from '../../../ActionType/Teacher/TeacherResource/TeacherResourceUploadActionType'
+import * as actions from '../../../ActionType/Teacher/TeacherResource/TeacherResource'
 
 export const
     changeFile = (data) => {

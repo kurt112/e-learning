@@ -7,10 +7,15 @@ export const
                                 firstName,
                                 lastName,
                                 email,
-                                registerDate,
+                                createdAt,
                                 birthdate,
+                         },
+                         roomShifts{
+                                grade,
+                                section
                          }                         
                     }
             }
-        `}
+        `
+        }
     }

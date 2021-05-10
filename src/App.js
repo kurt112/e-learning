@@ -9,6 +9,7 @@ import * as action from './store/action/login/LoginAction'
 const App = ({currentUser,reLogin}) => {
 
     const token = localStorage.getItem('token')
+
     useEffect(() => {
         if(token !== null && currentUser.user === null){
             reLogin(localStorage.getItem('token'))

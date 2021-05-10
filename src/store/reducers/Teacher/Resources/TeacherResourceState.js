@@ -1,29 +1,45 @@
+import * as actions from "../../../ActionType/Teacher/TeacherResource/TeacherResource";
+import {TeacherInsertResources as insert} from '../../../../components/ui/utils/tableColumn/TeacherTable'
+import {updateObject} from "../../../utils/UpdateObject";
+import {convertDateTime} from "../../../../components/ui/utils/dateFormat/DateTimeFormatToDateWord";
 
-import {TeacherInsertResources as insert} from "../../../../components/ui/utils/tableColumn";
-import state from "../../__StateGlobal/AdminTableState";
-import * as actions from "../../../ActionType/__ActionTypeGlobal/AdminTableActionType";
-import {Teacher_Resource} from "../../../utils/Specify";
-const newState = new state()
+const initState = {
 
-const transforms = (items) => items.map((item) =>
-    insert(item.activity.activityTitle,item.classes.subject.subjectName,item.classes.roomShift.grade, item.classes.roomShift.section,item.activity.date_end,item.activity.id, item.activity.link, item.activity.status)) //item.activity.status
+    data: [],
 
-const response = (item) =>{
-
-    return insert(item.title,item.subjectName,item.grade, item.section,item.date_end,item.id, item.link, item.status) //item.activity.status
+    // Upload Dialog Resource
+    uploadResourceDialog: false,
+    uploadResourceDialogError: '',
 }
-const reducer = (state = newState.init_state, action) =>{
-    switch(action.type){
-        case actions.ADMIN_TABLE_SETTINGS_INIT(Teacher_Resource): return newState.apiSettingsInit(state,action)
-        case actions.ADMIN_TABLE_INIT(Teacher_Resource): return newState.initData(state)
-        case actions.ADMIN_TABLE_SUCCESS(Teacher_Resource): return newState.successData(state, action,transforms)
-        case actions.ADMIN_TABLE_FAIL(Teacher_Resource): return newState.failData(state)
-        case actions.ADMIN_TABLE_DIALOG_OPEN(Teacher_Resource): return newState.openDialog(state)
 
-        case actions.ADMIN_TABLE_DIALOG_CLOSE(Teacher_Resource): return newState.closeDialog(state)
-        case actions.ADMIN_TABLE_NEXT_PAGE(Teacher_Resource): return newState.nextData(state,action)
-        case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(Teacher_Resource): return newState.searchChange(state,action)
-        case actions.ADMIN_DIALOG_TABLE_REGISTER(Teacher_Resource): return newState.AddTable(state, response(action.item))
+const initData = (state,action) => {
+    const tempData = []
+
+    action.data.map(resource => tempData.push(insert(resource.code,resource.name,convertDateTime(resource.createdAt),resource.type,resource.status,resource.location)))
+
+    return updateObject(state, {data: tempData})
+}
+
+const successData = (state,action) => {
+    const newData = action.data
+    const tempData = [...state.data]
+
+    tempData.unshift(insert(newData.code,newData.name,newData.date,newData.type,newData.status,newData.location))
+
+    console.log(tempData)
+    return updateObject(state, {data: tempData})
+}
+
+const reducer = (state = initState, action) =>{
+    switch(action.type){
+        case actions.Init_Resources: return initData(state,action)
+
+        // upload dialog
+        case actions.Upload_Dialog_CLOSE: return updateObject(state, {uploadResourceDialog:false})
+        case actions.Upload_Dialog_OPEN: return updateObject(state, {uploadResourceDialog: true})
+        case actions.Upload_Dialog_ERROR: return updateObject(state, {uploadResourceDialogError: 'error'})
+        case actions.Upload_Dialog_Success:return successData(state,action)
+        case actions.Upload_Dialog_SUBMIT: return state
         default: return state;
     }
 }

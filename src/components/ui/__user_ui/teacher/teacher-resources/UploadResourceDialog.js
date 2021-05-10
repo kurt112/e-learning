@@ -6,19 +6,19 @@ import {
     DialogContentText,
     DialogTitle, FormControl,
     Grid, InputLabel,
-     Select, TextareaAutosize,
+    Select, TextareaAutosize,
     TextField
 } from "@material-ui/core"
 
 import {connect} from 'react-redux'
-import * as UploadResourceAction from '../../../../../store/action/teacher/TeacherResource/TeacherResourceUploadDialogAction'
+import * as UploadResourceAction
+    from '../../../../../store/action/teacher/TeacherResource/TeacherResourceUploadDialogAction'
 import * as action from '../../../../../store/action/__ActionGlobal/AdminDialogAction'
 import {useEffect, useState} from "react";
-import Response from "../../../utils/Response";
 import {Teacher_Resource} from "../../../../../store/utils/Specify";
 
 const UploadResourceDialog = ({
-                                  registerDialog,
+
                                   dialog,
                                   closeDialog,
                                   changeFile,
@@ -26,6 +26,7 @@ const UploadResourceDialog = ({
                                   changeDescription,
                                   changeType,
                                   dialogState,
+                                  Upload
                               }) => {
 
     const [file, setFile] = useState(0)
@@ -34,16 +35,13 @@ const UploadResourceDialog = ({
         setFile(event.target.files.length)
         changeFile(event.target.files)
     }
-    useEffect(() => {
 
-        registerDialog()
-    }, [])
     return <Dialog
         open={dialog}
         onClose={closeDialog}
         aria-labelledby="add-student"
     >
-        <form noValidate >
+        <form noValidate>
             <DialogTitle id="add-student">Create Resources</DialogTitle>
             <DialogContent>
                 <DialogContentText>
@@ -120,7 +118,7 @@ const UploadResourceDialog = ({
             </DialogContent>
 
             <DialogActions>
-                <Button onClick={registerDialog} color='primary'>
+                <Button onClick={Upload} color='primary'>
                     Register
                 </Button>
                 <Button onClick={closeDialog} color='secondary'>
@@ -143,9 +141,6 @@ const mapDispatchToProps = (dispatch) => {
         changeName: (data) => dispatch(UploadResourceAction.changeName(data)),
         changeDescription: (data) => dispatch(UploadResourceAction.changeDescription(data)),
         changeType: (data) => dispatch(UploadResourceAction.changeType(data)),
-
-        registerDialogMessageClose: (event) => dispatch(action.registerDialogMessageClose(event, Teacher_Resource)),
-        registerDialog: () => dispatch(action.dialogRegister(Teacher_Resource))
     }
 }
 
