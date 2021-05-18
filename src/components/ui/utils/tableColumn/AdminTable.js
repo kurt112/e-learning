@@ -310,7 +310,9 @@ export const AdminActivityTable = [
             sort: false,
             customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <a href={JavaEndpoint + '/admin/activity/download?activity-id=' + value} target="_blank"
+                    <a href={JavaEndpoint + '/admin/activity/download?activity-id=' + value}
+                       target="_blank"
+                       rel="noopener noreferrer"
                        style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
                             Visit Activity

@@ -30,12 +30,10 @@ const TeacherResources = ({
                               UploadOpenDialog,
                               UploadCloseDialog,
                               InitResources,
-                              UploadResource
                           }) => {
 
     const classes = style()
 
-    console.log(resources)
 
     useEffect(() => {
         InitResources(resources)
@@ -44,7 +42,7 @@ const TeacherResources = ({
 
     return (
         <Fragment>
-            <UploadResources Upload={UploadResource} dialog={state.uploadResourceDialog} closeDialog={UploadCloseDialog}/>
+            <UploadResources dialog={state.uploadResourceDialog} closeDialog={UploadCloseDialog}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
@@ -107,7 +105,6 @@ const mapDispatchToProps = (dispatch) => {
         UploadOpenDialog: () => dispatch(actions.open_uploadDialog()),
         UploadCloseDialog: () => dispatch(actions.close_uploadDialog()),
         InitResources: (data) => dispatch(actions.initData(data)),
-        UploadResource: () => dispatch(actions.submit_uploadDialog())
     }
 }
 

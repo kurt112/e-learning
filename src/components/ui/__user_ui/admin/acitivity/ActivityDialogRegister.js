@@ -47,6 +47,7 @@ const formStyle = makeStyles(() => ({
 
 
 const ActivityDialogRegister = ({
+                                    registerDialogMessageClose,
                                     registerDialog,
                                     changeRoomShiftID,
                                     dialog,
@@ -58,8 +59,8 @@ const ActivityDialogRegister = ({
                                     changeActivityType,
                                     changeDeadlineTime,
                                     changeDeadlineDate,
-                                    changeActivityDescription,
-                                    registerDialogMessageClose
+                                    changeActivityDescription
+
 
                                 }) => {
     const form = formStyle()
@@ -280,7 +281,7 @@ const mapDispatchToProps = (dispatch) => {
         changeDeadlineDate: (data) => dispatch(activityAction.changeDeadlineDate(data)),
         changeActivityDescription: (data) => dispatch(activityAction.changeActivityDescription(data)),
 
-        registerDialogMessageClose: (event) => dispatch(action.registerDialogMessageClose(event, Activity)),
+        registerDialogMessageClose: () => dispatch(action.registerDialogMessageClose(Activity)),
         registerDialog: () => dispatch(action.dialogRegister(Activity))
     }
 }

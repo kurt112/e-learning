@@ -17,6 +17,7 @@ export const dialogRegister = (to) => {
 
 
 export const registerDialogSuccess = (to) => {
+    alert("i am here")
     return {
         type: actions.ADMIN_DIALOG_REGISTER_SUCCESS(to)
     }
@@ -30,7 +31,7 @@ export const registerDialogFail = (message, to) => {
     }
 }
 
-export const registerDialogMessageClose = (event, to) => {
+export const registerDialogMessageClose = (to) => {
     return {
         type: actions.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(to)
     }

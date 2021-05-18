@@ -1,13 +1,14 @@
-import { Button } from "@material-ui/core"
-import { Link } from "react-router-dom"
+import {Button} from "@material-ui/core"
+import {Link} from "react-router-dom"
 import {convertDateTime} from "../dateFormat/DateTimeFormatToDateWord";
+import {JavaEndpoint} from "../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 
 export const TeacherProfileColumn = [
-    { id: 'id', label: 'id', minWidth: 50 },
-    { id: 'firstName', label: 'FirstName', minWidth: 170 },
-    { id: 'lastName', label: 'LastName', minWidth: 170 },
-    { id: 'age', label: 'Age', minWidth: 50 },
-    { id: 'birthday', label: 'Birthday', minWidth: 170 },
+    {id: 'id', label: 'id', minWidth: 50},
+    {id: 'firstName', label: 'FirstName', minWidth: 170},
+    {id: 'lastName', label: 'LastName', minWidth: 170},
+    {id: 'age', label: 'Age', minWidth: 50},
+    {id: 'birthday', label: 'Birthday', minWidth: 170},
 ]
 /*
 *
@@ -53,7 +54,7 @@ export const TeacherRoomTable = [
             sort: false,
             customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to="/admin/dashboard" style={{ textDecoration: 'none' }}>
+                    <Link to="/admin/dashboard" style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
                             Join Room
                         </Button>
@@ -67,17 +68,17 @@ export const TeacherRoomTable = [
 ]
 
 export function TeacherInsertRoom(id, roomName, roomSubject, students, timeStart, timeEnd, visit) {
-    return { id, roomName, roomSubject, students, timeStart, timeEnd, visit }
+    return {id, roomName, roomSubject, students, timeStart, timeEnd, visit}
 }
 
 
 /**
-*
-*
-*  This table is for the Subject table in Teacher area
-*
-*
-**/
+ *
+ *
+ *  This table is for the Subject table in Teacher area
+ *
+ *
+ **/
 
 
 export const TeacherSubjectTable = [
@@ -95,18 +96,18 @@ export const TeacherSubjectTable = [
     },
 ]
 
-export function TeacherInsertSubject(subjectName, subjectCode,  major) {
-    return { subjectName, subjectCode,  major }
-} 
+export function TeacherInsertSubject(subjectName, subjectCode, major) {
+    return {subjectName, subjectCode, major}
+}
 
 
 /**
-*
-*
-*  This table is for the Student table in Teacher area
-*
-*
-**/
+ *
+ *
+ *  This table is for the Student table in Teacher area
+ *
+ *
+ **/
 
 export const TeacherStudentTable = [
 
@@ -143,7 +144,7 @@ export const TeacherStudentTable = [
             sort: false,
             customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to={'/student/profile/'+value} style={{ textDecoration: 'none' }}>
+                    <Link to={'/student/profile/' + value} style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
                             Visit Profile
                         </Button>
@@ -155,18 +156,19 @@ export const TeacherStudentTable = [
         }
     },
 ];
-export function TeacherInsertStudent(firstName, lastName,   grade, section,subject, adviser, profile) {
 
-    return {firstName, lastName, grade, section,subject, adviser, profile }
+export function TeacherInsertStudent(firstName, lastName, grade, section, subject, adviser, profile) {
+
+    return {firstName, lastName, grade, section, subject, adviser, profile}
 }
 
 /**
-*
-*
-*  This table is for the Activies table in Teacher area
-*
-*
-**/
+ *
+ *
+ *  This table is for the Activies table in Teacher area
+ *
+ *
+ **/
 
 
 export const TeacherActivityTable = [
@@ -204,21 +206,21 @@ export const TeacherActivityTable = [
     },
 ]
 
-export function TeacherInsertActivity(id, activityTitle, subjectName, grade,section, link,date, status){
-    return {id, activityTitle, subjectName, grade,section, link,date, status}
-} 
+export function TeacherInsertActivity(id, activityTitle, subjectName, grade, section, link, date, status) {
+    return {id, activityTitle, subjectName, grade, section, link, date, status}
+}
 
 /**
-*
-*
-*  This table is for the profiles table in Teacher area for Attendance
-*
-*
-**/
+ *
+ *
+ *  This table is for the profiles table in Teacher area for Attendance
+ *
+ *
+ **/
 
 
 export const TeacherAttendace = [
-  
+
     {
         name: 'month',
         label: 'Month',
@@ -235,21 +237,21 @@ export const TeacherAttendace = [
         name: 'time',
         label: 'Time'
     },
- 
+
 ]
 
-export function TeacherInsertAttendace(month, day, year ,time){
-    return {month, day, year ,time}
-} 
+export function TeacherInsertAttendace(month, day, year, time) {
+    return {month, day, year, time}
+}
 
 
 /**
-*
-*
-*  This table is for the profiles table in Teacher area for Logs
-*
-*
-**/
+ *
+ *
+ *  This table is for the profiles table in Teacher area for Logs
+ *
+ *
+ **/
 
 export const TeacherLogs = [
     {
@@ -276,13 +278,12 @@ export const TeacherLogs = [
         name: 'timeEnd',
         label: 'Time End'
     },
-   
+
 ]
 
-export function TeacherInsertLogs(date, subjectName, grade, section, timeStart, timeEnd){
+export function TeacherInsertLogs(date, subjectName, grade, section, timeStart, timeEnd) {
     return {date, subjectName, grade, section, timeStart, timeEnd}
 }
-
 
 
 /**
@@ -321,12 +322,12 @@ export const TeacherResources = [
             filter: false,
             sort: false,
             customBodyRender: (value) => {
-                return value === undefined ? null :
-                    <Link to={'/student/profile/'+value} style={{ textDecoration: 'none' }}>
-                        <Button variant="outlined" color="primary">
-                            Visit Profile
-                        </Button>
-                    </Link>
+                return <a href={JavaEndpoint + '/teacher/resource/download?code='+value} target="_blank"
+                              style={{textDecoration: 'none', marginRight: '10px'}}>
+                    <Button variant="outlined" color="primary">
+                        Download
+                    </Button>
+                </a>
             },
             filterOptions: {
                 fullWidth: false
@@ -334,8 +335,9 @@ export const TeacherResources = [
         }
     },
 
+
 ]
 
-export function TeacherInsertResources(documentCode, documentName, dateUploaded, type, status, download){
-    return {documentCode, documentName, dateUploaded, type, status, download}
+export function TeacherInsertResources(documentCode, documentName, dateUploaded, type, status) {
+    return {documentCode, documentName, dateUploaded, type, status, download:documentCode}
 }

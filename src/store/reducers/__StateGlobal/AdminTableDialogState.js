@@ -11,10 +11,14 @@ class state{
         }
 
         this.successRegister = (state) => {
+            alert("dont")
             state = updateObject(state, {error: false})
             state = updateObject(state, {showMessage: true})
             if(state.id !== undefined) state = updateObject(state, {id: ''})
-            return updateObject(state, {loading: false})
+            alert("i am here baga")
+            state = updateObject(state, {loading: false})
+            alert("doneasdf")
+            return state
         }
         this.initRegister = (state) => {
 

@@ -128,7 +128,7 @@ const mapDispatchToProps = (dispatch) => {
         changeTimeStart: (event) => dispatch(dialogAction.roomTimeStartChange(event)),
         changeTimeEnd: (event) => dispatch(dialogAction.roomTimeEndChange(event)),
 
-        registerDialogMessageClose: (event) => dispatch(action.registerDialogMessageClose(event, Room)),
+        registerDialogMessageClose: () => dispatch(action.registerDialogMessageClose(Room)),
         registerDialog: () => dispatch(action.dialogRegister(Room))
     }
 }

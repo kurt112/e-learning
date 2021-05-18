@@ -13,9 +13,10 @@ import {
 import {connect} from 'react-redux'
 import * as UploadResourceAction
     from '../../../../../store/action/teacher/TeacherResource/TeacherResourceUploadDialogAction'
-import * as action from '../../../../../store/action/__ActionGlobal/AdminDialogAction'
-import {useEffect, useState} from "react";
-import {Teacher_Resource} from "../../../../../store/utils/Specify";
+import * as dialogAction from '../../../../../store/action/__ActionGlobal/AdminDialogAction'
+import {useState} from "react";
+import Response from "../../../utils/Response";
+import {Teacher_Resource_Upload} from "../../../../../store/utils/Specify";
 
 const UploadResourceDialog = ({
 
@@ -26,7 +27,8 @@ const UploadResourceDialog = ({
                                   changeDescription,
                                   changeType,
                                   dialogState,
-                                  Upload
+                                  upload,
+                                  registerDialogMessageClose
                               }) => {
 
     const [file, setFile] = useState(0)
@@ -39,19 +41,18 @@ const UploadResourceDialog = ({
     return <Dialog
         open={dialog}
         onClose={closeDialog}
-        aria-labelledby="add-student"
+        aria-labelledby="create-resource"
+        fullWidth
+        maxWidth={"lg"}
     >
         <form noValidate>
-            <DialogTitle id="add-student">Create Resources</DialogTitle>
+            <DialogTitle id="create-resource"
+            >Create Resources</DialogTitle>
             <DialogContent>
-                <DialogContentText>
-                    only five centuries, but also the leap into electronic typesetting,
-                    remaining essentially unchanged. It was popularised in the 1960s with the release of L
-                </DialogContentText>
 
-                {/*<Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}*/}
-                {/*          messageFail="Activity Register Not Successful"*/}
-                {/*          messageSuccess="Activity Register Success"/>*/}
+                <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
+                          messageFail="Resource Upload Not Success"
+                          messageSuccess="Resource Upload Success"/>
 
                 <Grid container spacing={1}>
                     <Grid item md={12} xs={12}>
@@ -68,7 +69,7 @@ const UploadResourceDialog = ({
                                 hidden
                             />
                         </Button>
-                        <span>{file + ' File Selected'} </span>
+                        <span>{' ' + file + ' File Selected'} </span>
                     </Grid>
 
 
@@ -89,7 +90,7 @@ const UploadResourceDialog = ({
                             <Select
                                 value={dialogState.type}
                                 native
-                                label="type"
+                                label="ResourceType"
                                 inputProps={{
                                     name: 'type',
                                     id: 'type',
@@ -118,7 +119,7 @@ const UploadResourceDialog = ({
             </DialogContent>
 
             <DialogActions>
-                <Button onClick={Upload} color='primary'>
+                <Button onClick={upload} color='primary'>
                     Register
                 </Button>
                 <Button onClick={closeDialog} color='secondary'>
@@ -141,6 +142,9 @@ const mapDispatchToProps = (dispatch) => {
         changeName: (data) => dispatch(UploadResourceAction.changeName(data)),
         changeDescription: (data) => dispatch(UploadResourceAction.changeDescription(data)),
         changeType: (data) => dispatch(UploadResourceAction.changeType(data)),
+
+        registerDialogMessageClose: () => dispatch(dialogAction.registerDialogMessageClose(Teacher_Resource_Upload)),
+        upload: () => dispatch(dialogAction.dialogRegister(Teacher_Resource_Upload))
     }
 }
 

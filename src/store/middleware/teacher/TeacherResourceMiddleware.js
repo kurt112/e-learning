@@ -4,7 +4,10 @@ import {TeacherResourceUpload as destination} from "../utils/ApiEndpoint/Classro
 import {uniqueNamesGenerator, adjectives, colors, animals} from 'unique-names-generator'
 import {baseUrl} from "../axios"
 import {success_uploadDialog} from '../../action/teacher/TeacherResource/TeacherResource'
-import {TeacherInsertResources as insert} from "../../../components/ui/utils/tableColumn";
+
+import * as dialogAction from '../../action/__ActionGlobal/AdminDialogAction'
+import {Teacher_Resource_Upload} from "../../utils/Specify";
+
 export function* TeacherResourceUpload() {
     const teacherResource = yield select(Selector.TeacherResourceUploadDialog)
     const currentUser = yield select(Selector.CurrentUser)
@@ -40,6 +43,8 @@ export function* TeacherResourceUpload() {
         i++;
 
         yield put(success_uploadDialog(response.data.item))
+        yield put(dialogAction.registerDialogSuccess(Teacher_Resource_Upload))
+
     }
 
 }

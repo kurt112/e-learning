@@ -1,6 +1,8 @@
 import state from '../../../__StateGlobal/AdminTableDialogState'
-import * as actions from '../../../../ActionType/Teacher/TeacherResource/TeacherResource'
+import * as uploadResource from '../../../../ActionType/Teacher/TeacherResource/TeacherResourceActionType'
 import {updateObject} from "../../../../utils/UpdateObject";
+import * as dialogAction from '../../../../ActionType/__ActionTypeGlobal/AdminDialogActionType'
+import {Teacher_Resource_Upload} from "../../../../utils/Specify";
 
 const newState = new state();
 
@@ -11,22 +13,30 @@ const init_state = {
     type: 'Lecture',
     description: '',
     file: '',
+    ...newState.init_state
 }
 const reducer = (state = init_state, action) => {
 
     switch (action.type) {
 
-        // data in dilaog1
-        case actions.CHANGE_NAME:
+        // data in dialog
+        case uploadResource.CHANGE_NAME:
             return updateObject(state, {name: action.data})
-        case actions.CHANGE_TYPE:
+        case uploadResource.CHANGE_TYPE:
             return updateObject(state, {type: action.data})
-        case actions.CHANGE_FILE:
+        case uploadResource.CHANGE_FILE:
             return updateObject(state, {file: action.data})
-        case actions.CHANGE_DESCRIPTION:
+        case uploadResource.CHANGE_DESCRIPTION:
             return updateObject(state, {description: action.data})
-        default:
-            return state;
+
+        // action for dialog
+
+        case dialogAction.ADMIN_DIALOG_REGISTER(Teacher_Resource_Upload): return newState.initRegister(state)
+        case dialogAction.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(Teacher_Resource_Upload): return newState.handleClose(state)
+        case dialogAction.ADMIN_DIALOG_REGISTER_FAIL(Teacher_Resource_Upload): return newState.failRegister(state,action)
+        case dialogAction.ADMIN_DIALOG_REGISTER_SUCCESS(Teacher_Resource_Upload): return newState.successRegister(state)
+
+        default: return state;
     }
 
 }

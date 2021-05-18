@@ -123,7 +123,7 @@ const mapDispatchToProps = (dispatch) => {
         changeSubjectCode: (event) => dispatch(actions.changeSubjectCode(event.target.value)),
         changeSubjectMajor: (event) => dispatch(actions.changeSubjectMajor(event.target.value)),
 
-        registerDialogMessageClose: (event) => dispatch(action.registerDialogMessageClose(event, Subject)),
+        registerDialogMessageClose: () => dispatch(action.registerDialogMessageClose(Subject)),
         registerDialog: () => dispatch(action.dialogRegister(Subject))
     }
 }

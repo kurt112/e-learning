@@ -10,4 +10,7 @@ export const
 
 
     // Teacher User
-    Teacher_Resource = 'TEACHER_RESOURCE'
+    Teacher_Resource = 'TEACHER_RESOURCE',
+
+    // Teacher User Resource Upload Dialog,
+    Teacher_Resource_Upload = 'TEACHER_RESOURCE'

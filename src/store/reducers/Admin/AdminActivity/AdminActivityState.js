@@ -1,4 +1,3 @@
-
 import {AdminInsertActivity as insert} from "../../../../components/ui/utils/tableColumn";
 import state from "../../__StateGlobal/AdminTableState";
 import * as actions from "../../../ActionType/__ActionTypeGlobal/AdminTableActionType";

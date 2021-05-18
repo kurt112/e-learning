@@ -3,15 +3,14 @@ import {lazy, Fragment, useState, useEffect} from "react";
 import {Redirect, Route} from "react-router";
 import {graphQlRequestAsync} from "../../store/middleware/utils/HttpRequest";
 import {getTeacherDataByEmail} from "../../store/middleware/utils/GraphQlQuery/TeacherQuery/TeacherDataQuery";
-import {TeacherInsertStudent as insertStudent } from '../ui/utils/tableColumn'
-import { TeacherInsertSubject as insertSubject } from '../ui/utils/tableColumn'
+import {TeacherInsertStudent as insertStudent,TeacherInsertSubject as insertSubject } from '../ui/utils/tableColumn'
 
 // import {get} from "../../store/middleware/utils/GraphQlQuery/TeacherQuery";
-const TeacherSubjects = lazy(() => import('../ui/__user_ui/teacher/Teacher').then(module => ({default: module.TeacherSubject})))
-const TeacherStudent = lazy(() => import('../ui/__user_ui/teacher/Teacher').then(module => ({default: module.TeacherStudents})))
-const TeacherActivity = lazy(() => import('../ui/__user_ui/teacher/Teacher').then(module => ({default: module.TeacherActivity})))
-const TeacherResources = lazy(() => import('../ui/__user_ui/teacher/Teacher').then(module => ({default: module.TeacherResources})))
-const Classes = lazy(() => import('../ui/__user_ui/roomClasses/ClassList/ClassesList'))
+const TeacherSubjects = lazy(() => import(`../ui/__user_ui/teacher/Teacher`).then(module => ({default: module.TeacherSubject})))
+const TeacherStudent = lazy(() => import(`../ui/__user_ui/teacher/Teacher`).then(module => ({default: module.TeacherStudents})))
+const TeacherActivity = lazy(() => import(`../ui/__user_ui/teacher/Teacher`).then(module => ({default: module.TeacherActivity})))
+const TeacherResources = lazy(() => import(`../ui/__user_ui/teacher/Teacher`).then(module => ({default: module.TeacherResources})))
+const Classes = lazy(() => import(`../ui/__user_ui/roomClasses/ClassList/ClassesList`))
 
 const TeacherRoute = ({email}) => {
 
@@ -21,16 +20,14 @@ const TeacherRoute = ({email}) => {
     const [classes, setClasses] = useState()
 
     useEffect(() => {
-
-        async function fetchData() {
-            return await graphQlRequestAsync(getTeacherDataByEmail(email))
-        }
-
         fetchData().then(r =>{
             setTeacher(r.data.data.getTeacherByUserEmail)
         })
-
     }, [])
+
+    async function fetchData() {
+        return await graphQlRequestAsync(getTeacherDataByEmail(email))
+    }
 
     useEffect(  () => {
 

@@ -234,7 +234,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         // Global Dialog Action
-        registerDialogMessageClose: (event) => dispatch(action.registerDialogMessageClose(event, RoomShiftClass)),
+        registerDialogMessageClose: () => dispatch(action.registerDialogMessageClose(RoomShiftClass)),
         registerDialog: () => dispatch(action.dialogRegister(RoomShiftClass)),
 
         // Current Dialog Action

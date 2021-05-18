@@ -1,4 +1,4 @@
-import * as actions from '../../../ActionType/Teacher/TeacherResource/TeacherResource'
+import * as actions from '../../../ActionType/Teacher/TeacherResource/TeacherResourceActionType'
 
 export const
     open_uploadDialog = () => {
@@ -20,11 +20,6 @@ export const
         return {
             type: actions.Upload_Dialog_Success,
             data
-        }
-    },
-    error_uploadDialog = () => {
-        return {
-            type: actions.Upload_Dialog_ERROR
         }
     },
 

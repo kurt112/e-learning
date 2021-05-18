@@ -220,7 +220,7 @@ const mapDispatchToProps = (dispatch) => {
         changeTimeEnd: (value) => dispatch(roomShiftAction.roomShiftTimeEndChange(value)),
         changeRoomShift: (value) => dispatch(roomShiftAction.roomShiftChange(value)),
 
-        registerDialogMessageClose: (event) => dispatch(action.registerDialogMessageClose(event, RoomShift)),
+        registerDialogMessageClose: () => dispatch(action.registerDialogMessageClose(RoomShift)),
         registerDialog: () => dispatch(action.dialogRegister(RoomShift))
     }
 }
