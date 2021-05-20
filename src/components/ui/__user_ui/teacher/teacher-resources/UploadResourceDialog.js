@@ -3,7 +3,6 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText,
     DialogTitle, FormControl,
     Grid, InputLabel,
     Select, TextareaAutosize,
@@ -17,7 +16,7 @@ import * as dialogAction from '../../../../../store/action/__ActionGlobal/AdminD
 import {useState} from "react";
 import Response from "../../../utils/Response";
 import {Teacher_Resource_Upload} from "../../../../../store/utils/Specify";
-
+import {AddedResourceFail, AddedResourceSuccess} from "../../../../../__Messages/TeacherResourceMessage";
 const UploadResourceDialog = ({
 
                                   dialog,
@@ -38,6 +37,11 @@ const UploadResourceDialog = ({
         changeFile(event.target.files)
     }
 
+    const clickUpload = () => {
+        upload()
+        setFile(0)
+    }
+
     return <Dialog
         open={dialog}
         onClose={closeDialog}
@@ -51,8 +55,8 @@ const UploadResourceDialog = ({
             <DialogContent>
 
                 <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
-                          messageFail="Resource Upload Not Success"
-                          messageSuccess="Resource Upload Success"/>
+                          messageFail={AddedResourceFail}
+                          messageSuccess={AddedResourceSuccess}/>
 
                 <Grid container spacing={1}>
                     <Grid item md={12} xs={12}>
@@ -119,8 +123,8 @@ const UploadResourceDialog = ({
             </DialogContent>
 
             <DialogActions>
-                <Button onClick={upload} color='primary'>
-                    Register
+                <Button onClick={clickUpload} color='primary'>
+                    Upload
                 </Button>
                 <Button onClick={closeDialog} color='secondary'>
                     Cancel

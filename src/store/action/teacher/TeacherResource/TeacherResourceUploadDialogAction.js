@@ -25,18 +25,8 @@ export const
             data
         }
     },
-    registerDialogMessageClose = () => {
-        return {
-            type: actions.Upload_Dialog_Message_Close
-        }
-    },
     successRegister = () => {
         return {
             type: actions.Upload_Dialog_Success
-        }
-    },
-    failRegister = () => {
-        return {
-            type: actions.Upload_Dialog_ERROR
         }
     }

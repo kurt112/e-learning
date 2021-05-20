@@ -13,7 +13,7 @@ export const
                                 type,
                                 name
                             },
-                            roomShiftClasses{
+                            roomShiftClasses{ 
                                 id,
                                 day,
                                 startTime,

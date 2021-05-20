@@ -1,7 +1,5 @@
 import * as actions from '../../ActionType/__ActionTypeGlobal/AdminDialogActionType'
 
-
-
 export const dialogId = (value, to) => {
     return {
         type: actions.ADMIN_DIALOG_ID_CHANGE(to),
@@ -17,14 +15,12 @@ export const dialogRegister = (to) => {
 
 
 export const registerDialogSuccess = (to) => {
-    alert("i am here")
     return {
         type: actions.ADMIN_DIALOG_REGISTER_SUCCESS(to)
     }
 }
 
 export const registerDialogFail = (message, to) => {
-    alert(to)
     return {
         type: actions.ADMIN_DIALOG_REGISTER_FAIL(to),
         message

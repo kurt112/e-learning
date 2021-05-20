@@ -90,7 +90,8 @@ import {
     watchAdminActivitySearchChange,
     watchAdminActivityTableInit,
     watchAdminActivityTableNext,
-    watchTeacherUploadResource
+    watchTeacherUploadResource,
+    watchDeleteResource
 } from './store/middleware/'
 
 
@@ -100,7 +101,7 @@ const reducers = combineReducers({
     // TeacherRoom,
     // TeacherSubject,
     // TeacherActivity,
-    // DeleteResource,
+    DeleteResource,
     TeacherResource,
     UploadResource,
     // TeacherProfileState,
@@ -220,6 +221,7 @@ sagaMiddleware.run(watchTeacherRegister)
 
 // TEACHER ROLE
 sagaMiddleware.run(watchTeacherUploadResource)
+sagaMiddleware.run(watchDeleteResource)
 
 ReactDOM.render(
     <React.StrictMode>

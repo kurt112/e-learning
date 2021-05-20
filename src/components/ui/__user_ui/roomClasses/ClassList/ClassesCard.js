@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 
 const ClassesCard = ({style, classes}) => {
 
-    console.log(classes)
+
     return classes === undefined || classes.length === 0 ? <h3>Class is Empty</h3> :
         classes.map((e) => {
             return (
@@ -57,7 +57,7 @@ const ClassesCard = ({style, classes}) => {
                             <Link to={`/roomShiftClass/profile/${e.id}`}>
                                 <div className={style.iconsFooter}>
 
-                                    <Tooltip title="View Activity" aria-label="add">
+                                    <Tooltip title="View Class" aria-label="add">
 
                                         <MenuBookIcon style={{fontSize: 30}}/>
 
@@ -66,7 +66,7 @@ const ClassesCard = ({style, classes}) => {
                             </Link>
                             <Link to={`/classroom/${e.roomShift.room.id}${e.id}${e.subject.subjectCode}`}>
                                 <div className={style.iconsFooter}>
-                                    <Tooltip title="Join Class" aria-label="add">
+                                    <Tooltip title={e.teacher === undefined?'Start Class':'Join Class'} aria-label="add">
                                         <VideoCallIcon fontSize={'large'}/>
 
                                     </Tooltip>

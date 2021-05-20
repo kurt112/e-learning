@@ -1,28 +1,45 @@
 import * as actions from '../../../ActionType/Teacher/TeacherResource/TeacherResourceActionType'
 
 export const
-    open_uploadDialog = () => {
+
+    // for upload dialogs
+    open_UploadDialog = () => {
         return {
             type: actions.Upload_Dialog_OPEN
         }
     },
-    close_uploadDialog = () => {
+    close_UploadDialog = () => {
         return {
             type: actions.Upload_Dialog_CLOSE
         }
     },
-    submit_uploadDialog = () => {
-        return {
-            type: actions.Upload_Dialog_SUBMIT
-        }
-    },
-    success_uploadDialog = (data) => {
+    success_UploadDialog = (data) => {
         return {
             type: actions.Upload_Dialog_Success,
             data
         }
     },
 
+    // for delete dialog
+    open_DeleteDialog = () => {
+        return {
+            type: actions.Delete_Dialog_OPEN
+        }
+    },
+    close_DeleteDialog = () => {
+        return {
+            type: actions.Delete_Dialog_CLOSE
+        }
+    },
+    success_DeleteDialog = (data) => {
+        return {
+            type: actions.Delete_Dialog_Success,
+            data
+        }
+    },
+
+
+    // for getting data
     initData = (data) => {
         return {
             data,

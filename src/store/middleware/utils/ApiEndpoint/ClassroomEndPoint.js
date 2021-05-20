@@ -47,6 +47,7 @@ export const
      * for Teacher End Point
      */
     TeacherResourceUpload = 'teacher/upload/resource',
+    TeacherResourceDelete = 'teacher/delete/resource',
 
 
     /**

@@ -1,7 +1,7 @@
 import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
 import MUIDataTable from "mui-datatables"
 import {TeacherResources as columns} from "../../../utils/tableColumn"
-import style, {TableOptions as options, TableOptionsNoPaging} from "../../../_style/TableStyle"
+import style, {TableOptionsNoPaging} from "../../../_style/TableStyle"
 import {Fragment, lazy, useEffect} from "react";
 
 // icons
@@ -11,10 +11,8 @@ import FolderSharedIcon from '@material-ui/icons/FolderShared'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import * as actions from "../../../../../store/action/teacher/TeacherResource/TeacherResource";
-import {Activity, Teacher_Resource} from "../../../../../store/utils/Specify";
 import {connect} from "react-redux";
 import Typography from "@material-ui/core/Typography";
-
 
 // dialogs
 
@@ -30,6 +28,8 @@ const TeacherResources = ({
                               UploadOpenDialog,
                               UploadCloseDialog,
                               InitResources,
+                              DeleteOpenDialog,
+                              DeleteCloseDialog
                           }) => {
 
     const classes = style()
@@ -42,6 +42,7 @@ const TeacherResources = ({
 
     return (
         <Fragment>
+            <DeleteResourceDialog dialog={state.deleteResourceDialog} closeDialog={DeleteCloseDialog}/>
             <UploadResources dialog={state.uploadResourceDialog} closeDialog={UploadCloseDialog}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
@@ -67,7 +68,7 @@ const TeacherResources = ({
                             </Tooltip>
 
                             <Tooltip title="Delete Resources">
-                                <IconButton aria-label="update">
+                                <IconButton aria-label="delete" onClick={DeleteOpenDialog}>
                                     <DeleteForeverIcon color='secondary' fontSize={"large"}/>
                                 </IconButton>
                             </Tooltip>
@@ -82,7 +83,7 @@ const TeacherResources = ({
                         title={
                             <Typography variant="h6">
                                 Resource List
-                                {/*{resourceTableState.loading && <CircularProgress size={24} style={{ marginLeft: 15, position: 'relative', top: 4 }} />}*/}
+                                {state.loading && <CircularProgress size={24} style={{ marginLeft: 15, position: 'relative', top: 4 }} />}
                             </Typography>
                         }
                         data={state.data}
@@ -102,8 +103,15 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        UploadOpenDialog: () => dispatch(actions.open_uploadDialog()),
-        UploadCloseDialog: () => dispatch(actions.close_uploadDialog()),
+        // // for opening and closing delete dialog
+        DeleteOpenDialog: ()=> dispatch(actions.open_DeleteDialog()),
+        DeleteCloseDialog: () => dispatch(actions.close_DeleteDialog()),
+        // for opening and closing upload dialog
+        UploadOpenDialog: () => dispatch(actions.open_UploadDialog()),
+        UploadCloseDialog: () => dispatch(actions.close_UploadDialog()),
+
+
+
         InitResources: (data) => dispatch(actions.initData(data)),
     }
 }

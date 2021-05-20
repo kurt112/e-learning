@@ -68,9 +68,11 @@ const  RoomShiftClassProfile= ({roomShiftClass, match, initData})=>{
                             </Hidden>
                             <Grid className={style.profileButton} container >
                                 <Grid className={style.buttonGroup} item md={12} sm={12} xs={12} lg={12} >
-                                    <Button color="primary" onClick={data}>Class Info</Button>
-                                    <Button color="primary" onClick={classWork}>Class Work</Button>
+                                    <Button color="primary" onClick={data}>Info</Button>
+                                    <Button color="primary" onClick={classWork}>Work</Button>
                                     <Button color="primary" onClick={RoomClassPeople}>People</Button>
+                                    <Button color="primary" onClick={RoomClassPeople}>Join</Button>
+                                    <Button color="primary" onClick={RoomClassPeople}>Resources</Button>
                                 </Grid>
                                 <Button
                                     color="primary"

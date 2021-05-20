@@ -3,9 +3,9 @@ export const
     Student = "STUDENT",
     Admin = "ADMIN",
     Room = "ROOM",
-    RoomShift = 'ROOMSHIFT',
+    RoomShift = 'ROOM_SHIFT',
     Subject = "SUBJECT",
-    RoomShiftClass = "ROOMSHIFT_CLASS",
+    RoomShiftClass = "ROOM_SHIFT_CLASS",
     Activity = "Activity",
 
 
@@ -13,4 +13,5 @@ export const
     Teacher_Resource = 'TEACHER_RESOURCE',
 
     // Teacher User Resource Upload Dialog,
-    Teacher_Resource_Upload = 'TEACHER_RESOURCE'
+    Teacher_Resource_Upload = 'TEACHER_RESOURCE_UPLOAD',
+    Teacher_Resource_Delete = 'TEACHER_RESOURCE_DELETE'

@@ -15,6 +15,24 @@ const init_state = {
     file: '',
     ...newState.init_state
 }
+
+const success = (state) => {
+    state = updateObject(state, reset(state))
+    return newState.successRegister(state)
+}
+
+const closing = (state) => {
+    state = updateObject(state, reset(state))
+    return newState.handleClose(state)
+}
+
+const reset = (state) =>{
+    state = updateObject(state,{name: ''})
+    state = updateObject(state, {description: ''})
+    state = updateObject(state, {file: ''})
+    return state
+}
+
 const reducer = (state = init_state, action) => {
 
     switch (action.type) {
@@ -32,9 +50,9 @@ const reducer = (state = init_state, action) => {
         // action for dialog
 
         case dialogAction.ADMIN_DIALOG_REGISTER(Teacher_Resource_Upload): return newState.initRegister(state)
-        case dialogAction.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(Teacher_Resource_Upload): return newState.handleClose(state)
+        case dialogAction.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(Teacher_Resource_Upload):  return closing(state)
         case dialogAction.ADMIN_DIALOG_REGISTER_FAIL(Teacher_Resource_Upload): return newState.failRegister(state,action)
-        case dialogAction.ADMIN_DIALOG_REGISTER_SUCCESS(Teacher_Resource_Upload): return newState.successRegister(state)
+        case dialogAction.ADMIN_DIALOG_REGISTER_SUCCESS(Teacher_Resource_Upload): return success(state)
 
         default: return state;
     }

@@ -56,6 +56,7 @@ const style = makeStyles((theme) => ({
         [theme.breakpoints.down('sm')]: {
             width: '100%'
         },
+        cursor:'pointer'
     },
     profileDataContainer: {
         display: 'flex',

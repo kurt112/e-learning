@@ -11,7 +11,7 @@ import {
     RoomShift,
     RoomShiftClass,
     Activity,
-    Teacher_Resource_Upload
+    Teacher_Resource_Upload, Teacher_Resource_Delete
 } from '../utils/Specify'
 import * as profile from '../ActionType/__ActionTypeGlobal/ProfileActionType'
 import {
@@ -66,7 +66,7 @@ import  {
 
 import {RoomShiftRegister, RoomShiftTableDataInit, RoomShiftTableDataNext} from "./admin/RoomShiftMiddleWare";
 import {RoomClassRegister, RoomClassTableDataInit, RoomClassTableDataNext} from "./admin/RoomClassMiddleWare";
-import {TeacherResourceUpload} from "./teacher/TeacherResourceMiddleware";
+import {TeacherResourceUpload,TeacherResourceDelete} from "./teacher/TeacherResourceMiddleware";
 
 /**
  *
@@ -316,4 +316,8 @@ export function * watchTeacherRegister() {
 
 export function * watchTeacherUploadResource() {
     yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Resource_Upload), TeacherResourceUpload)
+}
+
+export function * watchDeleteResource() {
+    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Resource_Delete),TeacherResourceDelete)
 }

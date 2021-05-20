@@ -304,6 +304,10 @@ export const TeacherResources = [
         label: 'Document Name',
     },
     {
+        name:'description',
+        label: 'Description'
+    },
+    {
         name: 'dateUploaded',
         label: 'Uploaded On'
     },
@@ -338,6 +342,6 @@ export const TeacherResources = [
 
 ]
 
-export function TeacherInsertResources(documentCode, documentName, dateUploaded, type, status) {
-    return {documentCode, documentName, dateUploaded, type, status, download:documentCode}
+export function TeacherInsertResources(documentCode, documentName,description, dateUploaded, type, status) {
+    return {documentCode, documentName,description, dateUploaded, type, status, download:documentCode}
 }

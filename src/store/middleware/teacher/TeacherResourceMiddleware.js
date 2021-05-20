@@ -1,12 +1,12 @@
 import {put, select} from "redux-saga/effects";
 import * as Selector from "../selector";
-import {TeacherResourceUpload as destination} from "../utils/ApiEndpoint/ClassroomEndPoint";
+import {TeacherResourceUpload as destination, TeacherResourceDelete as deleteResource} from "../utils/ApiEndpoint/ClassroomEndPoint";
 import {uniqueNamesGenerator, adjectives, colors, animals} from 'unique-names-generator'
 import {baseUrl} from "../axios"
-import {success_uploadDialog} from '../../action/teacher/TeacherResource/TeacherResource'
+import {success_DeleteDialog, success_UploadDialog} from '../../action/teacher/TeacherResource/TeacherResource'
 
 import * as dialogAction from '../../action/__ActionGlobal/AdminDialogAction'
-import {Teacher_Resource_Upload} from "../../utils/Specify";
+import {Teacher_Resource_Delete, Teacher_Resource_Upload} from "../../utils/Specify";
 
 export function* TeacherResourceUpload() {
     const teacherResource = yield select(Selector.TeacherResourceUploadDialog)
@@ -42,9 +42,25 @@ export function* TeacherResourceUpload() {
         })
         i++;
 
-        yield put(success_uploadDialog(response.data.item))
+        yield put(success_UploadDialog(response.data.item))
         yield put(dialogAction.registerDialogSuccess(Teacher_Resource_Upload))
 
+    }
+
+}
+
+export function *TeacherResourceDelete(){
+
+    const teacherResource = yield select(Selector.TeacherResourceDeleteDialog)
+    const params = new URLSearchParams();
+    params.append('code', teacherResource.id)
+    try {
+        const response =  yield baseUrl.delete(deleteResource, {params})
+        yield put(success_DeleteDialog(response.data.item))
+        yield put(dialogAction.registerDialogSuccess(Teacher_Resource_Delete))
+    }catch (error) {
+        yield put(dialogAction.registerDialogFail(error,Teacher_Resource_Delete))
+        // console.log(error)
     }
 
 }

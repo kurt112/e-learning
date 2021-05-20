@@ -11,13 +11,10 @@ class state{
         }
 
         this.successRegister = (state) => {
-            alert("dont")
             state = updateObject(state, {error: false})
             state = updateObject(state, {showMessage: true})
             if(state.id !== undefined) state = updateObject(state, {id: ''})
-            alert("i am here baga")
             state = updateObject(state, {loading: false})
-            alert("doneasdf")
             return state
         }
         this.initRegister = (state) => {
@@ -30,7 +27,7 @@ class state{
         }
 
         this.failRegister = (state, action) => {
-
+            console.log(action)
             if(action.message.response === undefined) state = updateObject(state, {message: "Check your internet Connection"})
             else state = updateObject(state, {message: action.message.response.data.message})
             state = updateObject(state, {error: true})

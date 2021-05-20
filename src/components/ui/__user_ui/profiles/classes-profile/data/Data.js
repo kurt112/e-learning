@@ -10,7 +10,7 @@ export default function Data({roomShiftClass}) {
     return (
 
         <Fragment>
-            <Typography className={style.profileName} variant="h4" component="h2">Personal Information</Typography>
+            <Typography className={style.profileName} variant="h4" component="h2">Class Information</Typography>
             <Container>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainerTitle}>

@@ -36,12 +36,14 @@ const TeacherRoute = ({email}) => {
             setClasses(teacher.roomShiftClasses)
             const tempStudent = []
             const tempSubject = []
+            // eslint-disable-next-line array-callback-return
             teacher.roomShiftClasses.map(e => {
 
                 const roomShift = e.roomShift
                 const students = e.students
                 const subject = e.subject
 
+                // eslint-disable-next-line array-callback-return
                 students.map(student => {
                     const user = student.user
                     tempStudent.push(insertStudent(user.firstName, user.lastName,roomShift.grade,roomShift.section,e.subject.subjectName,`${roomShift.teacher.user.firstName} ${roomShift.teacher.user.lastName}`,user.email))
