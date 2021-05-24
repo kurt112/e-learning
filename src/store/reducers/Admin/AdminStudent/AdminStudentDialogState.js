@@ -1,6 +1,6 @@
 import state from '../../__StateGlobal/AdminTableDialogState'
 import {updateObject} from '../../../utils/UpdateObject'
-import * as actions from '../../../ActionType/__ActionTypeGlobal/AdminDialogActionType'
+import * as actions from '../../../ActionType/__ActionTypeGlobal/DialogActionType'
 import {Student} from '../../../utils/Specify'
 const newState = new state()
 

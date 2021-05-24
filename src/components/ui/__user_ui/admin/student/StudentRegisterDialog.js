@@ -29,6 +29,8 @@ const StudentRegisterDialog = ({
         open={dialog}
         onClose={closeDialog}
         aria-labelledby="add-student"
+        maxWidth="md"
+        fullWidth
     >
         <DialogTitle id="add-student">Register Student</DialogTitle>
         <DialogContent>
@@ -50,6 +52,7 @@ const StudentRegisterDialog = ({
                 onKeyDown={event => {
                     RegisterEnter(event)
                 }}
+                variant={"outlined"}
             />
         </DialogContent>
         <DialogActions>

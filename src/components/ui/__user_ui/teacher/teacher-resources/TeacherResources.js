@@ -3,20 +3,19 @@ import MUIDataTable from "mui-datatables"
 import {TeacherResources as columns} from "../../../utils/tableColumn"
 import style, {TableOptionsNoPaging} from "../../../_style/TableStyle"
 import {Fragment, lazy, useEffect} from "react";
-
+import * as dialogAction from "../../../../../store/action/__ActionGlobal/AdminAction"
+import * as actions from "../../../../../store/action/teacher/TeacherResource/TeacherResource";
 // icons
 import IconButton from "@material-ui/core/IconButton"
 import UpdateIcon from '@material-ui/icons/Update'
 import FolderSharedIcon from '@material-ui/icons/FolderShared'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
-import * as actions from "../../../../../store/action/teacher/TeacherResource/TeacherResource";
 import {connect} from "react-redux";
 import Typography from "@material-ui/core/Typography";
+import {Teacher_Resource_Delete, Teacher_Resource_Upload} from "../../../../../store/utils/Specify";
 
 // dialogs
-
-
 const DeleteResourceDialog = lazy(() => import(`./DeleteResourceDialog`))
 const ShareDialog = lazy(() => import(`./ShareResources`))
 const UpdateResourceDialog = lazy(() => import(`./UpdateResourceDialog`))
@@ -38,7 +37,6 @@ const TeacherResources = ({
     useEffect(() => {
         InitResources(resources)
     },[])
-
 
     return (
         <Fragment>
@@ -95,6 +93,7 @@ const TeacherResources = ({
         </Fragment>
     )
 }
+
 const mapStateToProps = (state) => {
     return {
         state: state.TeacherResource
@@ -104,11 +103,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         // // for opening and closing delete dialog
-        DeleteOpenDialog: ()=> dispatch(actions.open_DeleteDialog()),
-        DeleteCloseDialog: () => dispatch(actions.close_DeleteDialog()),
+        DeleteOpenDialog: ()=> dispatch(dialogAction.openDialog(Teacher_Resource_Delete)),
+        DeleteCloseDialog: () => dispatch(dialogAction.closeDialog(Teacher_Resource_Delete)),
         // for opening and closing upload dialog
-        UploadOpenDialog: () => dispatch(actions.open_UploadDialog()),
-        UploadCloseDialog: () => dispatch(actions.close_UploadDialog()),
+        UploadOpenDialog: () => dispatch(dialogAction.openDialog(Teacher_Resource_Upload)),
+        UploadCloseDialog: () => dispatch(dialogAction.closeDialog(Teacher_Resource_Upload)),
 
 
 

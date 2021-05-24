@@ -102,7 +102,10 @@ const UploadResourceDialog = ({
                                 onChange={(event => changeType(event.target.value))}
                             >
                                 <option value='Lecture'>Lecture</option>
-                                <option value='Activity'>Activity</option>
+                                <option value='Quiz'>Quiz</option>
+                                <option value='Exam'>Exam</option>
+                                <option value='Assignment'>Assignment</option>
+
                             </Select>
                         </FormControl>
 

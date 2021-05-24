@@ -1,4 +1,4 @@
-import * as actions from '../../../ActionType/__ActionTypeGlobal/AdminDialogActionType'
+import * as actions from '../../../ActionType/__ActionTypeGlobal/DialogActionType'
 import {updateObject} from '../../../utils/UpdateObject'
 import state from '../../__StateGlobal/AdminTableDialogState'
 import {Teacher} from '../../../utils/Specify'

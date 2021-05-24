@@ -1,4 +1,4 @@
-import * as actions from '../../ActionType/__ActionTypeGlobal/AdminTableActionType'
+import * as actions from '../../ActionType/__ActionTypeGlobal/TableActionType'
 
 
 /**
@@ -60,13 +60,13 @@ export const SearchChange = (text, to) => {
 
 export const closeDialog = (to) => {
     return {
-        type: actions.ADMIN_TABLE_DIALOG_CLOSE(to)
+        type: actions.DIALOG_CLOSE(to)
     }
 }
 
 export const openDialog = (to) => {
     return {
-        type: actions.ADMIN_TABLE_DIALOG_OPEN(to)
+        type: actions.DIALOG_OPEN(to)
     }
 }
 

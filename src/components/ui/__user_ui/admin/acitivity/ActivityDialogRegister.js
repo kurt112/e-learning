@@ -106,10 +106,12 @@ const ActivityDialogRegister = ({
     return <Dialog
         open={dialog}
         onClose={closeDialog}
-        aria-labelledby="add-student"
+        aria-labelledby="add-activity"
+        maxWidth="lg"
+        fullWidth
     >
         <form noValidate className={form.root}>
-            <DialogTitle id="add-student">Register Activity</DialogTitle>
+            <DialogTitle id="add-activity">Register Activity</DialogTitle>
             <DialogContent>
                 <DialogContentText>
                     only five centuries, but also the leap into electronic typesetting,

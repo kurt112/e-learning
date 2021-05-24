@@ -1,4 +1,4 @@
-import * as actions from '../../../ActionType/__ActionTypeGlobal/AdminTableActionType'
+import * as actions from '../../../ActionType/__ActionTypeGlobal/TableActionType'
 import {AdminInsertTeacherTable as insert} from "../../../../components/ui/utils/tableColumn";
 import {Teacher} from '../../../utils/Specify'
 import state from '../../__StateGlobal/AdminTableState'
@@ -15,8 +15,8 @@ const reducer = (state=newState.init_state, action)=>{
         case actions.ADMIN_TABLE_SUCCESS(Teacher): return newState.successData(state, action,transforms)
         case actions.ADMIN_TABLE_FAIL(Teacher): return newState.failData(state)
 
-        case actions.ADMIN_TABLE_DIALOG_OPEN(Teacher): return newState.openDialog(state)
-        case actions.ADMIN_TABLE_DIALOG_CLOSE(Teacher): return newState.closeDialog(state)
+        case actions.DIALOG_OPEN(Teacher): return newState.openDialog(state)
+        case actions.DIALOG_CLOSE(Teacher): return newState.closeDialog(state)
         case actions.ADMIN_TABLE_NEXT_PAGE(Teacher): return newState.nextData(state,action)
         case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(Teacher): return newState.searchChange(state,action)
         case actions.ADMIN_DIALOG_TABLE_REGISTER(Teacher): return newState.AddTable(state, response(action.item))

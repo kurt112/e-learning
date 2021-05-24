@@ -17,6 +17,9 @@ const StudentRoute = ({email}) => {
     const [teachers,setTeacher] = useState([])
     const [subjects, setSubjects] = useState([])
 
+    const [currentClass, setCurrentClass] = useState()
+    const [doneClass, setDoneClass] = useState()
+
     useEffect(() => {
 
         async function fetchData() {
@@ -37,8 +40,14 @@ const StudentRoute = ({email}) => {
             const tempTeacher = []
             const tempSubject = []
 
+            const tempDoneClass = student.roomShiftClasses.filter(e => e.status ===0)
+            const tempCurrentClass = student.roomShiftClasses.filter(e => e.status === 1)
+
+            setCurrentClass(tempCurrentClass)
+            setDoneClass(tempDoneClass)
+
             // eslint-disable-next-line array-callback-return
-            student.roomShiftClasses.map(e => {
+            tempCurrentClass.map(e => {
                 tempTeacher.push(insertTeacher(e.teacher.user.firstName, e.teacher.user.lastName, e.subject.subjectName, e.teacher.user.email))
                 tempSubject.push(insertSubject(e.subject.subjectName,e.subject.subjectCode,e.startTime,e.endTime,e.subject.subjectMajor))
             })
@@ -53,7 +62,7 @@ const StudentRoute = ({email}) => {
             <Route path='/student/subjects' exact render={() => <StudentSubject subjects={subjects}/>}/>
             <Route path='/student/teachers' exact render={() => <StudentTeacher teachers={teachers}/>}/>
             <Route path='/student/activities' exact render={() => <StudentActivity student={student}/>}/>
-            <Route path='/student/classes' exact render={() => <Classes classes={student.roomShiftClasses}/>}/>
+            <Route path='/student/classes' exact render={() => <Classes currentClass={currentClass} archiveClass={doneClass}/>}/>
             <Redirect to='/student/classes'/>
         </Fragment>
 }

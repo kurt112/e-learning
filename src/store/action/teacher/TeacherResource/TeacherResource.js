@@ -2,17 +2,6 @@ import * as actions from '../../../ActionType/Teacher/TeacherResource/TeacherRes
 
 export const
 
-    // for upload dialogs
-    open_UploadDialog = () => {
-        return {
-            type: actions.Upload_Dialog_OPEN
-        }
-    },
-    close_UploadDialog = () => {
-        return {
-            type: actions.Upload_Dialog_CLOSE
-        }
-    },
     success_UploadDialog = (data) => {
         return {
             type: actions.Upload_Dialog_Success,
@@ -21,16 +10,7 @@ export const
     },
 
     // for delete dialog
-    open_DeleteDialog = () => {
-        return {
-            type: actions.Delete_Dialog_OPEN
-        }
-    },
-    close_DeleteDialog = () => {
-        return {
-            type: actions.Delete_Dialog_CLOSE
-        }
-    },
+
     success_DeleteDialog = (data) => {
         return {
             type: actions.Delete_Dialog_Success,

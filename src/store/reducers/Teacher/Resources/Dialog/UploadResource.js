@@ -1,7 +1,7 @@
 import state from '../../../__StateGlobal/AdminTableDialogState'
 import * as uploadResource from '../../../../ActionType/Teacher/TeacherResource/TeacherResourceActionType'
 import {updateObject} from "../../../../utils/UpdateObject";
-import * as dialogAction from '../../../../ActionType/__ActionTypeGlobal/AdminDialogActionType'
+import * as dialogAction from '../../../../ActionType/__ActionTypeGlobal/DialogActionType'
 import {Teacher_Resource_Upload} from "../../../../utils/Specify";
 
 const newState = new state();

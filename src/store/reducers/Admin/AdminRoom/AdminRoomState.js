@@ -1,5 +1,5 @@
 import state from "../../__StateGlobal/AdminTableState";
-import * as actions from "../../../ActionType/__ActionTypeGlobal/AdminTableActionType";
+import * as actions from "../../../ActionType/__ActionTypeGlobal/TableActionType";
 import {Room} from "../../../utils/Specify";
 import {AdminInsertRoom as insert} from "../../../../components/ui/utils/tableColumn";
 
@@ -18,8 +18,8 @@ const reducer = (state = newState.init_state, action)=>{
         case actions.ADMIN_TABLE_INIT(Room): return newState.initData(state)
         case actions.ADMIN_TABLE_SUCCESS(Room): return newState.successData(state, action,transforms)
         case actions.ADMIN_TABLE_FAIL(Room): return newState.failData(state)
-        case actions.ADMIN_TABLE_DIALOG_OPEN(Room): return newState.openDialog(state)
-        case actions.ADMIN_TABLE_DIALOG_CLOSE(Room): return newState.closeDialog(state)
+        case actions.DIALOG_OPEN(Room): return newState.openDialog(state)
+        case actions.DIALOG_CLOSE(Room): return newState.closeDialog(state)
         case actions.ADMIN_TABLE_NEXT_PAGE(Room): return newState.nextData(state,action)
         case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(Room): return newState.searchChange(state,action)
         case actions.ADMIN_DIALOG_TABLE_REGISTER(Room):return newState.AddTable(state, responseData(action.item))

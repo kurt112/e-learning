@@ -73,6 +73,7 @@ export function* TableNextData(action,state,bodyDataQuery, bodySettingsQuery,to)
 export function* TableDataInit(bodyDataQuery, bodySettingsQuery,to, ) {
     try {
         const bodyDataResponse = yield graphQLRequest(bodyDataQuery)
+        console.log(bodyDataResponse)
         const bodySettingsResponse = yield graphQLRequest(bodySettingsQuery)
 
         const object = bodyDataResponse.data.data

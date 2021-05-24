@@ -3,49 +3,72 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import { NavLink} from 'react-router-dom'
 
-
+import FindInPageIcon from '@material-ui/icons/FindInPage';
 //icons
 import ClassIcon from '@material-ui/icons/Class';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import PeopleIcon from '@material-ui/icons/People';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-export function TeacherItems({ style }) {
+import CreateIcon from '@material-ui/icons/Create';
 
+// icons admin
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
+import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
+import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import AcUnitIcon from '@material-ui/icons/AcUnit';
+export function TeacherItems({ style }) {
     return (
         <div>
             <ListSubheader className={style} inset>TEACHER</ListSubheader>
             <ListItem component={NavLink} to="/teacher/classes" button>
                 <ListItemIcon>
-                    <PeopleIcon />
+                    <ClassIcon />
                 </ListItemIcon>
                 <ListItemText primary="Classes" />
             </ListItem>
             <ListItem component={NavLink} to="/teacher/subjects" button>
                 <ListItemIcon>
-                    <BarChartIcon />
+                    <MenuBookIcon />
                 </ListItemIcon>
                 <ListItemText primary="Subjects" />
             </ListItem>
             <ListItem component={NavLink} to="/teacher/students" button>
                 <ListItemIcon>
-                    <LayersIcon />
+                    <PeopleIcon />
                 </ListItemIcon>
                 <ListItemText primary="Students" />
             </ListItem>
-            <ListItem component={NavLink} to="/teacher/activities" button>
+            <ListItem component={NavLink} to="/teacher/task" button>
                 <ListItemIcon>
-                    <PeopleIcon />
+                    <AssignmentIcon />
                 </ListItemIcon>
-                <ListItemText primary="Activities" />
+                <ListItemText primary="Task List" />
+            </ListItem>
+            <ListItem component={NavLink} to="/teacher/assignments" button>
+                <ListItemIcon>
+                    <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Assignments" />
+            </ListItem>
+            <ListItem component={NavLink} to="/teacher/quizzes" button>
+                <ListItemIcon>
+                    <CreateIcon />
+                </ListItemIcon>
+                <ListItemText primary="Quizzes" />
+            </ListItem>
+            <ListItem component={NavLink} to="/teacher/exams" button>
+                <ListItemIcon>
+                    <FindInPageIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Exams"/>
             </ListItem>
             <ListItem component={NavLink} to="/teacher/resources" button>
                 <ListItemIcon>
-                    <PeopleIcon />
+                    <CloudUploadIcon />
                 </ListItemIcon>
                 <ListItemText primary="Resources" />
             </ListItem>
@@ -105,19 +128,19 @@ export function AdminItems({ style }) {
             </ListItem>
             <ListItem component={NavLink} to="/admin/room-list" button>
                 <ListItemIcon>
-                    <PeopleIcon />
+                    <MeetingRoomIcon />
                 </ListItemIcon>
                 <ListItemText primary="Rooms" />
             </ListItem>
             <ListItem component={NavLink} to="/admin/room-shift" button>
                 <ListItemIcon>
-                    <PeopleIcon />
+                    <SwapHorizIcon />
                 </ListItemIcon>
                 <ListItemText primary="Room Shifts" />
             </ListItem>
             <ListItem component={NavLink} to="/admin/classes-list" button>
                 <ListItemIcon>
-                    <PeopleIcon />
+                    <ClassIcon />
                 </ListItemIcon>
                 <ListItemText primary="Classes" />
             </ListItem>
@@ -136,19 +159,19 @@ export function AdminItems({ style }) {
 
             <ListItem component={NavLink} to="/admin/subject-list" button>
                 <ListItemIcon>
-                    <PeopleIcon />
+                    <ImportContactsIcon />
                 </ListItemIcon>
                 <ListItemText primary="Subjects" />
             </ListItem>
             <ListItem component={NavLink} to="/admin/activity-list" button>
                 <ListItemIcon>
-                    <PeopleIcon />
+                    <FormatListBulletedIcon />
                 </ListItemIcon>
                 <ListItemText primary="Activities" />
             </ListItem>
             <ListItem component={NavLink} to="/admin/strand-courses" button>
                 <ListItemIcon>
-                    <PeopleIcon />
+                    <AcUnitIcon />
                 </ListItemIcon>
                 <ListItemText primary="Strand/Courses" />
             </ListItem>

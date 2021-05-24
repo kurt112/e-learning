@@ -22,6 +22,7 @@ export const
     TeacherResource = (state) => state.TeacherResource,
     TeacherResourceUploadDialog = (state) => state.UploadResource,
     TeacherResourceDeleteDialog = (state) => state.DeleteResource,
+    TeacherAssignment = (state) => state.TeacherAssignment,
 
     // Login, Register State
     Login = (state) => state.Login,

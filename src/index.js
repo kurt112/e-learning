@@ -9,7 +9,7 @@ import createSagaMiddleware from 'redux-saga'
 
 // Teacher
 import {TeacherStudent, TeacherRoom, TeacherSubject, TeacherActivity,DeleteResource,
-TeacherResource,UpdateResource,UploadResource,TeacherProfileState} from './store/reducers/Teacher'
+TeacherResource,UpdateResource,UploadResource,TeacherAssignment} from './store/reducers/Teacher'
 
 //Student
 import {StudentActivity, StudentSubject, StudentRoom, StudentTeacher} from './store/reducers/Student'
@@ -91,7 +91,8 @@ import {
     watchAdminActivityTableInit,
     watchAdminActivityTableNext,
     watchTeacherUploadResource,
-    watchDeleteResource
+    watchDeleteResource,
+    watchTeacherAssignmentInit
 } from './store/middleware/'
 
 
@@ -100,7 +101,8 @@ const reducers = combineReducers({
     // TeacherStudent,
     // TeacherRoom,
     // TeacherSubject,
-    // TeacherActivity,
+    // TeacherTask,
+    TeacherAssignment,
     DeleteResource,
     TeacherResource,
     UploadResource,
@@ -222,6 +224,7 @@ sagaMiddleware.run(watchTeacherRegister)
 // TEACHER ROLE
 sagaMiddleware.run(watchTeacherUploadResource)
 sagaMiddleware.run(watchDeleteResource)
+sagaMiddleware.run(watchTeacherAssignmentInit)
 
 ReactDOM.render(
     <React.StrictMode>

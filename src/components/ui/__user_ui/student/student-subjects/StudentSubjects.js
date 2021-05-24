@@ -13,7 +13,7 @@ export default function StudentSubjects({subjects}) {
         <Grid component="main" className={classes.root}>
             <Grid item md={12} component={Paper} className={classes.tableContainerWrapper}>
                 <MUIDataTable
-                    title={"Activity List"}
+                    title={"Subject List"}
                     data={subjects}
                     columns={columns}
                     options={TableOptions()}

@@ -35,3 +35,9 @@ export {
 export {
     default as UpdateResource
 }from './Resources/Dialog/UpdateResource'
+
+
+// for teacher assignment
+export {
+    default as TeacherAssignment
+} from './Assignment/TeacherAssignmentState'

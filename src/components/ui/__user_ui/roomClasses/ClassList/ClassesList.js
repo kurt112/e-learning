@@ -1,36 +1,15 @@
 import {Box, Divider, Grid} from "@material-ui/core"
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import clsx from "clsx";
 import ClassesCard from "./ClassesCard";
 import ClassesStyle from "../../../_style/ClassesStyle";
 
-const ClassesList = ({classes}) => {
+const ClassesList = ({currentClass,archiveClass}) => {
 
-    console.log(classes)
 
     const currentStyle = ClassesStyle()
     const [currentClassActive, setCurrentClassActive] = useState(true)
-
-    // classes data
-    const [currentClass, setCurrentClass] = useState()
-    const [archiveClass, setArchiveClass] = useState()
-
-    useEffect(() => {
-        const tempCurrentClass = []
-        const tempArchiveClass = []
-
-        if (classes !== undefined) {
-
-            classes.map(e => {
-                if (e.status === 1) tempCurrentClass.push(e)
-                else tempArchiveClass.push(e)
-            })
-
-            setCurrentClass(tempCurrentClass)
-            setArchiveClass(tempArchiveClass)
-        }
-    }, [classes])
 
 
     const currentClassClick = () => {

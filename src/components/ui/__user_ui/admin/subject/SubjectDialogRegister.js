@@ -34,12 +34,14 @@ const RegisterSubject = (
     return <Dialog
         open={dialog}
         onClose={closeDialog}
-        aria-labelledby="add-student"
+        aria-labelledby="add-subject"
+        maxWidth="md"
+        fullWidth
     >
         <form noValidate>
 
 
-            <DialogTitle id="add-student">Register Subject</DialogTitle>
+            <DialogTitle id="add-subject">Register Subject</DialogTitle>
             <DialogContent>
                 <DialogContentText>
                     only five centuries, but also the leap into electronic typesetting,

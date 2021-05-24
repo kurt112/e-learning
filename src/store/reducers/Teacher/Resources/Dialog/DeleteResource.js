@@ -1,5 +1,5 @@
 import state from '../../../__StateGlobal/AdminTableDialogState'
-import * as globalActionDialog from '../../../../ActionType/__ActionTypeGlobal/AdminDialogActionType'
+import * as globalActionDialog from '../../../../ActionType/__ActionTypeGlobal/DialogActionType'
 import {Teacher_Resource_Delete} from '../../../../utils/Specify'
 import {updateObject} from "../../../../utils/UpdateObject";
 

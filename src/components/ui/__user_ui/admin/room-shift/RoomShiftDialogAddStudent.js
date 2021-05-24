@@ -50,8 +50,8 @@ const RoomShiftDialogAddStudent = ({closeDialog, dialog}) => {
             open={dialog}
             onClose={closeDialog}
             aria-labelledby="add-student"
-            maxWidth={"sm"}
-            fullWidth={true}
+            maxWidth="lg"
+            fullWidth
         >
             <form noValidate>
                 <DialogTitle id="add-student">Enter Grade Section</DialogTitle>

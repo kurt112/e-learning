@@ -345,3 +345,82 @@ export const TeacherResources = [
 export function TeacherInsertResources(documentCode, documentName,description, dateUploaded, type, status) {
     return {documentCode, documentName,description, dateUploaded, type, status, download:documentCode}
 }
+
+/**
+ *
+ *
+ *  This table is for the profiles table in Teacher area for Assignments
+ *
+ *
+ **/
+
+export const TeacherAssignments = [
+    {
+        name: 'code',
+        label: 'Assignment Code'
+    },
+    {
+        name: 'documentName',
+        label: 'Document Name',
+    },
+    {
+        name:'description',
+        label: 'Description'
+    },
+    {
+        name: 'lowGrade',
+        label: 'Low Grade'
+    },
+    {
+        name: 'highGrade',
+        label: 'High Grade'
+    },
+    {
+        name: 'semester',
+        label: 'Semester'
+    },
+    {
+        name: 'quarter',
+        label: 'Quarter'
+    },
+    {
+        name: 'classes',
+        label: 'Class'
+    },
+    {
+        name: 'dateUploaded',
+        label: 'Uploaded On'
+    },
+
+    {
+        name: 'deadline',
+        label: 'Deadline'
+    },
+
+    {
+        name: "download",
+        label: "Download",
+        options: {
+            filter: false,
+            sort: false,
+            customBodyRender: (value) => {
+                return <a href={JavaEndpoint + '/teacher/resource/download?code='+value} target="_blank"
+                          style={{textDecoration: 'none', marginRight: '10px'}}>
+                    <Button variant="outlined" color="primary">
+                        Download
+                    </Button>
+                </a>
+            },
+            filterOptions: {
+                fullWidth: false
+            }
+        }
+    },
+
+
+]
+
+export function TeacherInsertAssignment(code, documentName,description, lowGrade, highGrade, semester,quarter,classes,dateUploaded,deadline,documentCode) {
+
+    return {code, documentName,description, lowGrade, highGrade, semester,quarter,classes,dateUploaded:convertDateTime(dateUploaded),deadline: convertDateTime(deadline),download:documentCode}
+}

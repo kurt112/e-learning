@@ -1,6 +1,6 @@
 import {takeLeading} from "redux-saga/effects";
-import * as adminTable from '../ActionType/__ActionTypeGlobal/AdminTableActionType'
-import * as adminDialog from '../ActionType/__ActionTypeGlobal/AdminDialogActionType'
+import * as adminTable from '../ActionType/__ActionTypeGlobal/TableActionType'
+import * as adminDialog from '../ActionType/__ActionTypeGlobal/DialogActionType'
 import * as userRegister from '../ActionType/__ActionTypeGlobal/UserRegisterActionType'
 import * as loginAction from '../ActionType/Login/LoginActionType'
 import {
@@ -11,7 +11,7 @@ import {
     RoomShift,
     RoomShiftClass,
     Activity,
-    Teacher_Resource_Upload, Teacher_Resource_Delete
+    Teacher_Resource_Upload, Teacher_Resource_Delete, Teacher_Assignment
 } from '../utils/Specify'
 import * as profile from '../ActionType/__ActionTypeGlobal/ProfileActionType'
 import {
@@ -67,6 +67,7 @@ import  {
 import {RoomShiftRegister, RoomShiftTableDataInit, RoomShiftTableDataNext} from "./admin/RoomShiftMiddleWare";
 import {RoomClassRegister, RoomClassTableDataInit, RoomClassTableDataNext} from "./admin/RoomClassMiddleWare";
 import {TeacherResourceUpload,TeacherResourceDelete} from "./teacher/TeacherResourceMiddleware";
+import {TeacherAssignmentTableDataInit} from "./teacher/TeacherAssignmentMiddleware";
 
 /**
  *
@@ -321,3 +322,8 @@ export function * watchTeacherUploadResource() {
 export function * watchDeleteResource() {
     yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Resource_Delete),TeacherResourceDelete)
 }
+
+export function* watchTeacherAssignmentInit(){
+    yield takeLeading(adminTable.ADMIN_TABLE_INIT(Teacher_Assignment), TeacherAssignmentTableDataInit)
+}
+

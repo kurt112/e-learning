@@ -1,5 +1,5 @@
 import state from '../../__StateGlobal/AdminTableDialogState'
-import * as actions from '../../../ActionType/__ActionTypeGlobal/AdminDialogActionType'
+import * as actions from '../../../ActionType/__ActionTypeGlobal/DialogActionType'
 import * as roomAction from '../../../ActionType/Admin/Room/RoomDialogActionType'
 import {Room} from '../../../utils/Specify'
 import {updateObject} from "../../../utils/UpdateObject";

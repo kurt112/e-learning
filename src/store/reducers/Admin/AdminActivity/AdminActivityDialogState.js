@@ -1,5 +1,5 @@
 import state from '../../__StateGlobal/AdminTableDialogState'
-import * as globalActionDialog from '../../../ActionType/__ActionTypeGlobal/AdminDialogActionType'
+import * as globalActionDialog from '../../../ActionType/__ActionTypeGlobal/DialogActionType'
 import {Activity} from '../../../utils/Specify'
 import * as actions from '../../../ActionType/Admin/Activity/ActivityDialogActionType'
 import {updateObject} from "../../../utils/UpdateObject";

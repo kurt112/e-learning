@@ -9,9 +9,12 @@ export const
     Activity = "Activity",
 
 
-    // Teacher User
+    // Teacher User Resource
     Teacher_Resource = 'TEACHER_RESOURCE',
+    Teacher_Resource_Upload = Teacher_Resource+'_UPLOAD',
+    Teacher_Resource_Delete = Teacher_Resource+'_DELETE',
 
     // Teacher User Resource Upload Dialog,
-    Teacher_Resource_Upload = 'TEACHER_RESOURCE_UPLOAD',
-    Teacher_Resource_Delete = 'TEACHER_RESOURCE_DELETE'
+    Teacher_Assignment = 'TEACHER_ASSIGNMENT',
+    Teacher_Assignment_Create = Teacher_Assignment+'_CREATE',
+    Teacher_Assignment_Delete = Teacher_Assignment+'_DELETE'

@@ -1,6 +1,6 @@
 import state from '../../__StateGlobal/AdminTableDialogState'
 import * as actionClass from '../../../ActionType/Admin/RoomShiftClass/RoomShiftClassDialogActionType'
-import * as globalActionDialog from '../../../ActionType/__ActionTypeGlobal/AdminDialogActionType'
+import * as globalActionDialog from '../../../ActionType/__ActionTypeGlobal/DialogActionType'
 import {RoomShiftClass} from '../../../utils/Specify'
 import {updateObject} from "../../../utils/UpdateObject";
 

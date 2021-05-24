@@ -96,10 +96,12 @@ const RoomClassDialog = ({
     return <Dialog
         open={dialog}
         onClose={closeDialog}
-        aria-labelledby="add-student"
+        aria-labelledby="add-class"
+        maxWidth="lg"
+        fullWidth
     >
         <form noValidate className={form.root}>
-            <DialogTitle id="add-student">Register Class</DialogTitle>
+            <DialogTitle id="add-class">Register Class</DialogTitle>
 
             <DialogContent>
                 <DialogContentText>

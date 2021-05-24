@@ -4,6 +4,7 @@ export const
             query: `
                     query{
                        getTeacherByUserEmail(email:"${email}") {
+                             id,
                              resources{
                                 code,
                                 description,
@@ -13,7 +14,36 @@ export const
                                 type,
                                 name
                             },
-                            roomShiftClasses{ 
+                            activities{
+                                roomShiftClass{
+                                    id,
+                                    day,
+                                    startTime,
+                                    endTime,
+                                    subject{
+                                    subjectName,
+                                    subjectCode,
+                                    subjectMajor
+                                }
+                            },
+                            activity{
+                                    activityTitle,
+                                    description,
+                                    date_end,
+                                    date_created,
+                                    type
+                            }
+                       }
+                    }
+            }
+        `
+        }
+    },
+    getTeacherClasses = (id,status) => {
+        return {
+            query: `
+                    query{
+                       getTeacherClasses(teacherId:"${id}",status:${status}) {
                                 id,
                                 day,
                                 startTime,
@@ -38,7 +68,7 @@ export const
                                     id,
                                     roomName
                                 }
-                            },
+                            }
                             students{
                             student_id,
                                 user{
@@ -48,28 +78,7 @@ export const
                                     suffix
                                 }
                             }
-                       },
-                            activities{
-                                roomShiftClass{
-                                    id,
-                                    day,
-                                    startTime,
-                                    endTime,
-                                    subject{
-                                    subjectName,
-                                    subjectCode,
-                                    subjectMajor
-                                }
-                            },
-                            activity{
-                                    activityTitle,
-                                    description,
-                                    date_end,
-                                    date_created,
-                                    type
-                            }
                        }
-                    }
             }
         `
         }

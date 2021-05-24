@@ -50,7 +50,9 @@ export {
     TeacherAttendace,
     TeacherLogs,
     TeacherResources,
+    TeacherAssignments,
 
+    TeacherInsertAssignment,
     TeacherInsertResources,
     TeacherInsertAttendace,
     TeacherInsertLogs,

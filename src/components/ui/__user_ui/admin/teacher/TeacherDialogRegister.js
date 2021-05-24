@@ -30,6 +30,8 @@ const TeacherRegister = ({
         open={dialog}
         onClose={closeDialog}
         aria-labelledby="add-teacher"
+        maxWidth="md"
+        fullWidth
     >
         <DialogTitle id="add-teacher"><strong>Register Teacher</strong>
 
@@ -47,6 +49,7 @@ const TeacherRegister = ({
 
             <TextField
                 autoFocus
+                variant={'outlined'}
                 margin="dense"
                 id="teacher-id"
                 label="Enter Teacher Id"
