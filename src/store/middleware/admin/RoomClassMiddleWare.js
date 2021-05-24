@@ -23,7 +23,7 @@ export function* RoomClassRegister() {
 
 export function* RoomClassTableDataNext(action) {
     const classState = yield select(Selector.AdminClass)
-    yield TableNextData(action, classState, AdminRoomClassBodyDataQuery, AdminRoomClassBodyDataSettingsQuery,RoomShiftClass)
+    yield TableNextData(action, classState, AdminRoomClassBodyDataQuery(classState.search,classState.page),AdminRoomClassBodyDataSettingsQuery(),RoomShiftClass)
 }
 
 export function* RoomClassTableDataInit() {

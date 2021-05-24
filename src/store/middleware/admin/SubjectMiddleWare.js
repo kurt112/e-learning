@@ -15,7 +15,7 @@ export function* RegisterSubject() {
 
 export function* SubjectTableDataNext(action) {
     const subjectState = yield  select(Selector.AdminSubject)
-    yield TableNextData(action, subjectState, AdminSubjectBodyDataQuery, AdminSubjectBodyDataSettingsQuery,Subject)
+    yield TableNextData(action, subjectState, AdminSubjectBodyDataQuery(subjectState.search,subjectState.page),AdminSubjectBodyDataSettingsQuery(),Subject)
 
 }
 

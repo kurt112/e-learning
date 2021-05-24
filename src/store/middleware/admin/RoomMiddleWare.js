@@ -15,7 +15,7 @@ export function* RoomRegister() {
 
 export function* RoomTableDataNext(action) {
     const roomTable = yield select(Selector.AdminRoom)
-    yield TableNextData(action, roomTable, AdminRoomBodyDataQuery, AdminRoomBodyDataSettingsQuery,Room)
+    yield TableNextData(action, roomTable, AdminRoomBodyDataQuery(roomTable.search,roomTable.page),AdminRoomBodyDataSettingsQuery(),Room)
 }
 
 export function* RoomTableDataInit() {

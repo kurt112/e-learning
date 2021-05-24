@@ -363,10 +363,7 @@ export const TeacherAssignments = [
         name: 'documentName',
         label: 'Document Name',
     },
-    {
-        name:'description',
-        label: 'Description'
-    },
+
     {
         name: 'lowGrade',
         label: 'Low Grade'
@@ -396,7 +393,10 @@ export const TeacherAssignments = [
         name: 'deadline',
         label: 'Deadline'
     },
-
+    {
+        name:'description',
+        label: 'Description'
+    },
     {
         name: "download",
         label: "Download",
@@ -420,7 +420,7 @@ export const TeacherAssignments = [
 
 ]
 
-export function TeacherInsertAssignment(code, documentName,description, lowGrade, highGrade, semester,quarter,classes,dateUploaded,deadline,documentCode) {
+export function TeacherInsertAssignment(code, documentName, lowGrade, highGrade, semester,quarter,classes,dateUploaded,deadline,description,documentCode) {
 
-    return {code, documentName,description, lowGrade, highGrade, semester,quarter,classes,dateUploaded:convertDateTime(dateUploaded),deadline: convertDateTime(deadline),download:documentCode}
+    return {code, documentName, lowGrade, highGrade, semester,quarter,classes,dateUploaded:convertDateTime(dateUploaded),deadline: convertDateTime(deadline),description,download:documentCode}
 }

@@ -50,8 +50,8 @@ export function* TableNextData(action,state,bodyDataQuery, bodySettingsQuery,to)
 
     try {
         if (action.page > state.highPage) {
-            const bodyDataResponse = yield graphQLRequest(bodyDataQuery(state.search, action.page))
-            const bodyDataSettingsResponse= yield graphQLRequest(bodySettingsQuery())
+            const bodyDataResponse = yield graphQLRequest(bodyDataQuery)
+            const bodyDataSettingsResponse= yield graphQLRequest(bodySettingsQuery)
 
             const bodyObject = bodyDataResponse.data.data
             const bodyObjectKey = Object.keys(bodyObject)
@@ -73,13 +73,10 @@ export function* TableNextData(action,state,bodyDataQuery, bodySettingsQuery,to)
 export function* TableDataInit(bodyDataQuery, bodySettingsQuery,to, ) {
     try {
         const bodyDataResponse = yield graphQLRequest(bodyDataQuery)
-        console.log(bodyDataResponse)
         const bodySettingsResponse = yield graphQLRequest(bodySettingsQuery)
-
+        console.log(bodyDataResponse)
         const object = bodyDataResponse.data.data
         const key = Object.keys(object)
-        console.log("the settings")
-        console.log(bodySettingsResponse)
         yield put(tableActions.SettingInitDataTable(bodySettingsResponse.data.data,to))
         yield put(tableActions.SuccessDataTable(object[key], true, to))
     } catch (error) {

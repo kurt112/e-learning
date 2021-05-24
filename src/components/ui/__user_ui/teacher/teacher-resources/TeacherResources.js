@@ -1,10 +1,9 @@
 import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
 import MUIDataTable from "mui-datatables"
 import {TeacherResources as columns} from "../../../utils/tableColumn"
-import style, {TableOptionsNoPaging} from "../../../_style/TableStyle"
+import style, {TableOptions as options, TableOptionsNoPaging} from "../../../_style/TableStyle"
 import {Fragment, lazy, useEffect} from "react";
 import * as dialogAction from "../../../../../store/action/__ActionGlobal/AdminAction"
-import * as actions from "../../../../../store/action/teacher/TeacherResource/TeacherResource";
 // icons
 import IconButton from "@material-ui/core/IconButton"
 import UpdateIcon from '@material-ui/icons/Update'
@@ -13,7 +12,13 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import {connect} from "react-redux";
 import Typography from "@material-ui/core/Typography";
-import {Teacher_Resource_Delete, Teacher_Resource_Upload} from "../../../../../store/utils/Specify";
+import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
+import {
+
+    Teacher_Resource,
+    Teacher_Resource_Delete,
+    Teacher_Resource_Upload
+} from "../../../../../store/utils/Specify";
 
 // dialogs
 const DeleteResourceDialog = lazy(() => import(`./DeleteResourceDialog`))
@@ -22,21 +27,24 @@ const UpdateResourceDialog = lazy(() => import(`./UpdateResourceDialog`))
 const UploadResources = lazy(() => import(`./UploadResourceDialog`))
 
 const TeacherResources = ({
-                              resources,
                               state,
                               UploadOpenDialog,
                               UploadCloseDialog,
-                              InitResources,
+                              initData,
+                              searchChange,
+                              pageChange,
                               DeleteOpenDialog,
                               DeleteCloseDialog
                           }) => {
 
     const classes = style()
-
+    console.log(state)
 
     useEffect(() => {
-        InitResources(resources)
-    },[])
+        if (state.data.length === 0) initData()
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <Fragment>
@@ -86,7 +94,14 @@ const TeacherResources = ({
                         }
                         data={state.data}
                         columns={columns}
-                        options={TableOptionsNoPaging()}
+                        options={options(
+                            pageChange,
+                            searchChange,
+                            state.search,
+                            state.totalPages,
+                            state.totalItems,
+                            state.page,
+                            state.loading)}
                     />
                 </Grid>
             </Grid>
@@ -111,7 +126,9 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-        InitResources: (data) => dispatch(actions.initData(data)),
+        initData: () => dispatch(actions.InitDataTable(Teacher_Resource)),
+        searchChange: (data) => dispatch(actions.SearchChange(data, Teacher_Resource)),
+        pageChange: (page) => dispatch(actions.DataNextPage(page, Teacher_Resource)),
     }
 }
 

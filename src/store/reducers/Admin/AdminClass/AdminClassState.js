@@ -21,11 +21,12 @@ const reducer = (state = newState.init_state, action) =>{
         case actions.ADMIN_TABLE_INIT(RoomShiftClass): return newState.initData(state)
         case actions.ADMIN_TABLE_SUCCESS(RoomShiftClass): return newState.successData(state, action,transforms)
         case actions.ADMIN_TABLE_FAIL(RoomShiftClass): return newState.failData(state)
-        case actions.DIALOG_OPEN(RoomShiftClass): return newState.openDialog(state)
-        case actions.DIALOG_CLOSE(RoomShiftClass): return newState.closeDialog(state)
         case actions.ADMIN_TABLE_NEXT_PAGE(RoomShiftClass): return newState.nextData(state,action)
         case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(RoomShiftClass): return newState.searchChange(state,action)
+
         case actions.ADMIN_DIALOG_TABLE_REGISTER(RoomShiftClass): return newState.AddTable(state, response(action.item))
+        case actions.DIALOG_OPEN(RoomShiftClass): return newState.openDialog(state)
+        case actions.DIALOG_CLOSE(RoomShiftClass): return newState.closeDialog(state)
         default: return state;
     }
 }

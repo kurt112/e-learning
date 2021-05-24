@@ -18,7 +18,7 @@ export function* TeacherRegister() {
 
 export function* TeacherTableDataNext(action) {
     const teacherTable = yield select(Selector.AdminTeacher)
-    yield TableNextData(action, teacherTable, AdminTeacherBodyDataQuery, AdminTeacherBodyDataSettingsQuery,Teacher)
+    yield TableNextData(action, teacherTable, AdminTeacherBodyDataQuery(teacherTable.search,teacherTable.page),AdminTeacherBodyDataSettingsQuery(),Teacher)
 }
 
 export function* TeacherTableDataInit() {

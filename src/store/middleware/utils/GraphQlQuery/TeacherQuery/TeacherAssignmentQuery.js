@@ -23,10 +23,10 @@ export const
                             quarter,
                             createdAt,
                             deadline,
+                            description,
                             resource{
                                 code,
-                                name,
-                                description
+                                name
                             },
                             roomShiftClass{
                                 roomShift{

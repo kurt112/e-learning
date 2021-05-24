@@ -92,7 +92,12 @@ import {
     watchAdminActivityTableNext,
     watchTeacherUploadResource,
     watchDeleteResource,
-    watchTeacherAssignmentInit
+    watchTeacherAssignmentInit,
+    watchTeacherResourcesInit,
+    watchTeacherResourcesSearchChange,
+    watchTeacherResourcesTableNext,
+    watchTeacherAssignmentSearchChange,
+    watchTeacherAssignmentTableNext
 } from './store/middleware/'
 
 
@@ -225,6 +230,11 @@ sagaMiddleware.run(watchTeacherRegister)
 sagaMiddleware.run(watchTeacherUploadResource)
 sagaMiddleware.run(watchDeleteResource)
 sagaMiddleware.run(watchTeacherAssignmentInit)
+sagaMiddleware.run(watchTeacherResourcesInit)
+sagaMiddleware.run(watchTeacherResourcesSearchChange)
+sagaMiddleware.run(watchTeacherResourcesTableNext)
+sagaMiddleware.run(watchTeacherAssignmentTableNext)
+sagaMiddleware.run(watchTeacherAssignmentSearchChange)
 
 ReactDOM.render(
     <React.StrictMode>

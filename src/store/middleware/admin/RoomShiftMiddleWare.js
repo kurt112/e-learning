@@ -24,7 +24,7 @@ export function* RoomShiftRegister() {
 
 export function* RoomShiftTableDataNext(action) {
     const roomShift = yield select(Selector.AdminRoomShift)
-    yield TableNextData(action, roomShift, AdminRoomShiftBodyDataQuery, AdminRoomShiftBodyDataSettingsQuery,RoomShift)
+    yield TableNextData(action, roomShift, AdminRoomShiftBodyDataQuery(roomShift.search,roomShift.page),AdminRoomShiftBodyDataSettingsQuery(),RoomShift)
 }
 
 export function* RoomShiftTableDataInit() {

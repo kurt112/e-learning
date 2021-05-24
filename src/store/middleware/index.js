@@ -11,7 +11,10 @@ import {
     RoomShift,
     RoomShiftClass,
     Activity,
-    Teacher_Resource_Upload, Teacher_Resource_Delete, Teacher_Assignment
+    Teacher_Resource_Upload,
+    Teacher_Resource_Delete,
+    Teacher_Assignment,
+    Teacher_Resource
 } from '../utils/Specify'
 import * as profile from '../ActionType/__ActionTypeGlobal/ProfileActionType'
 import {
@@ -66,8 +69,12 @@ import  {
 
 import {RoomShiftRegister, RoomShiftTableDataInit, RoomShiftTableDataNext} from "./admin/RoomShiftMiddleWare";
 import {RoomClassRegister, RoomClassTableDataInit, RoomClassTableDataNext} from "./admin/RoomClassMiddleWare";
-import {TeacherResourceUpload,TeacherResourceDelete} from "./teacher/TeacherResourceMiddleware";
-import {TeacherAssignmentTableDataInit} from "./teacher/TeacherAssignmentMiddleware";
+import {
+    TeacherResourceUpload,
+    TeacherResourceDelete,
+    TeacherResourceTableDataInit, TeacherResourceDataNext
+} from "./teacher/TeacherResourceMiddleware";
+import {TeacherAssignmentTableDataInit, TeacherAssignmentTableNext} from "./teacher/TeacherAssignmentMiddleware";
 
 /**
  *
@@ -323,7 +330,30 @@ export function * watchDeleteResource() {
     yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Resource_Delete),TeacherResourceDelete)
 }
 
+// for teacher assignment
 export function* watchTeacherAssignmentInit(){
     yield takeLeading(adminTable.ADMIN_TABLE_INIT(Teacher_Assignment), TeacherAssignmentTableDataInit)
+}
+
+export function* watchTeacherAssignmentSearchChange() {
+    yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Teacher_Assignment), TeacherAssignmentTableDataInit)
+}
+
+export function* watchTeacherAssignmentTableNext(){
+    yield takeLeading(adminTable.ADMIN_TABLE_NEXT_PAGE(Teacher_Assignment), TeacherAssignmentTableNext)
+}
+
+
+// for resource teacher
+export function* watchTeacherResourcesInit(){
+    yield takeLeading(adminTable.ADMIN_TABLE_INIT(Teacher_Resource), TeacherResourceTableDataInit)
+}
+
+export function* watchTeacherResourcesSearchChange() {
+    yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Teacher_Resource), TeacherResourceTableDataInit)
+}
+
+export function* watchTeacherResourcesTableNext(){
+    yield takeLeading(adminTable.ADMIN_TABLE_NEXT_PAGE(Teacher_Resource), TeacherResourceDataNext)
 }
 

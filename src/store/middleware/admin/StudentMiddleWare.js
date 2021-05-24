@@ -15,7 +15,7 @@ export function* StudentRegister() {
 
 export function* StudentTableDataNext(action) {
     const student = yield select(Selector.AdminStudent)
-    yield TableNextData(action, student, AdminStudentBodyDataQuery,AdminStudentBodyDataSettingsQuery, Student)
+    yield TableNextData(action, student, AdminStudentBodyDataQuery(student.search,student.page),AdminStudentBodyDataSettingsQuery(), Student)
 
 }
 

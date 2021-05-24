@@ -6,7 +6,11 @@ import {baseUrl} from "../axios"
 import {success_DeleteDialog, success_UploadDialog} from '../../action/teacher/TeacherResource/TeacherResource'
 
 import * as dialogAction from '../../action/__ActionGlobal/AdminDialogAction'
-import {Teacher_Resource_Delete, Teacher_Resource_Upload} from "../../utils/Specify";
+import {Teacher_Resource, Teacher_Resource_Delete, Teacher_Resource_Upload} from "../../utils/Specify";
+import {TableDataInit, TableNextData} from "../admin/__MiddleWareGlobal";
+
+import {AdminTeacherBodyDataSettingsQuery} from "../utils/GraphQlQuery/AdminQuery/AdminTeacherQuery";
+import {getTeacherResource} from "../utils/GraphQlQuery/TeacherQuery/TeacherResourceQuery";
 
 export function* TeacherResourceUpload() {
     const teacherResource = yield select(Selector.TeacherResourceUploadDialog)
@@ -63,4 +67,18 @@ export function *TeacherResourceDelete(){
         // console.log(error)
     }
 
+}
+
+
+export function* TeacherResourceDataNext(action) {
+    const teacherResource = yield select(Selector.TeacherResource)
+    const user = yield  select(Selector.CurrentUser)
+    yield TableNextData(action, teacherResource, getTeacherResource(teacherResource.search,user.user.email,teacherResource.page), AdminTeacherBodyDataSettingsQuery(),Teacher_Resource)
+}
+
+export function* TeacherResourceTableDataInit() {
+
+    const teacherResource = yield select(Selector.TeacherResource)
+    const user = yield  select(Selector.CurrentUser)
+    yield TableDataInit(getTeacherResource(teacherResource.search,user.user.email,teacherResource.page),AdminTeacherBodyDataSettingsQuery(),Teacher_Resource)
 }

@@ -15,7 +15,7 @@ const newSate = {
 
 }
 
-const transforms = (items) => items.map((item) => insert(item.code, item.resource.name, item.resource.description, item.lowGrade, item.highGrade, item.sem, item.quarter, `${item.roomShiftClass.roomShift.grade} - ${item.roomShiftClass.roomShift.section}`, item.createdAt,item.deadline, item.resource.code))
+const transforms = (items) => items.map((item) => insert(item.code, item.resource.name, item.lowGrade, item.highGrade, item.sem, item.quarter, `${item.roomShiftClass.roomShift.grade} - ${item.roomShiftClass.roomShift.section}`, item.createdAt,item.deadline,item.description, item.resource.code))
 
 const reducer = (state = newSate, action) => {
     switch (action.type) {

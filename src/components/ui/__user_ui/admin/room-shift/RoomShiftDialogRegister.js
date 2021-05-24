@@ -91,10 +91,12 @@ const RoomShiftDialogRegister = ({
     return <Dialog
         open={dialog}
         onClose={closeDialog}
-        aria-labelledby="add-student"
+        aria-labelledby="add-roomShift"
+        maxWidth="lg"
+        fullWidth
     >
         <form noValidate className={form.root}>
-            <DialogTitle id="add-student">Register Room Shift</DialogTitle>
+            <DialogTitle id="add-roomShift">Register Room Shift</DialogTitle>
             <DialogContent>
                 <DialogContentText>
                     only five centuries, but also the leap into electronic typesetting,

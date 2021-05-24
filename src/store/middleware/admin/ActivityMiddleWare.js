@@ -31,7 +31,7 @@ export function* ActivityUpload() {
 }
 export function* ActivityTableNext(action) {
     const activity = yield select(Selector.AdminActivity)
-    yield TableNextData(action, activity, AdminActivityBodyDataQuery, AdminActivityBodyDataSettingsQuery,Activity)
+    yield TableNextData(action, activity, AdminActivityBodyDataQuery(activity.search,activity.page),AdminActivityBodyDataSettingsQuery(),Activity)
 }
 
 export function* ActivityDataInit() {

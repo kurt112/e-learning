@@ -84,7 +84,7 @@ const TeacherRoute = ({email}) => {
             <Route path='/teacher/students' exact render={() => <TeacherStudent students={students}/>}/>
             <Route path='/teacher/task' exact render={() => <TeacherActivity/>}/>
             <Route path='/teacher/classes' exact render={() => <Classes currentClass={currentClass} archiveClass={doneClass}/>}/>
-            <Route path='/teacher/resources' exact render={() => <TeacherResources resources={teacher.resources}/>}/>
+            <Route path='/teacher/resources' exact render={() => <TeacherResources/>}/>
             <Route path='/teacher/assignments' exact render={() => <TeacherAssignments/>}/>
             <Route path='/teacher/exams' exact render={() => <TeacherExams/>}/>
             <Route path='/teacher/quizzes' exact render={() => <TeacherQuizzes/>}/>
