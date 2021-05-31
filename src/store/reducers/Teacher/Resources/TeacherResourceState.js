@@ -1,10 +1,9 @@
-import * as actions from "../../../ActionType/Teacher/TeacherResource/TeacherResourceActionType";
 import {TeacherInsertResources as insert} from '../../../../components/ui/utils/tableColumn/TeacherTable'
 import {updateObject} from "../../../utils/UpdateObject";
 import {convertDateTime} from "../../../../components/ui/utils/dateFormat/DateTimeFormatToDateWord";
 import * as dialogAction from '../../../ActionType/__ActionTypeGlobal/TableActionType'
+import * as teacherDialog from '../../../ActionType/Teacher/GlobalActiontype'
 import {
-    RoomShiftClass,
     Teacher_Resource,
     Teacher_Resource_Delete,
     Teacher_Resource_Upload
@@ -57,7 +56,7 @@ const reducer = (state = initState, action) => {
             return updateObject(state, {uploadResourceDialog: true})
         case dialogAction.DIALOG_CLOSE(Teacher_Resource_Upload):
             return updateObject(state, {uploadResourceDialog: false})
-        case actions.Upload_Dialog_Success:
+        case teacherDialog.Dialog_Success(Teacher_Resource_Upload):
             return successData(state, action)
 
 
@@ -66,7 +65,7 @@ const reducer = (state = initState, action) => {
             return updateObject(state, {deleteResourceDialog: true})
         case dialogAction.DIALOG_CLOSE(Teacher_Resource_Delete):
             return updateObject(state, {deleteResourceDialog: false})
-        case actions.Delete_Dialog_Success:
+        case teacherDialog.Dialog_Success(Teacher_Resource_Delete):
             return successDelete(state, action)
 
 

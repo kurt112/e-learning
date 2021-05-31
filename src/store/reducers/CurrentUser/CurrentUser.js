@@ -9,7 +9,7 @@ const initState = {
 
 const logout = (state) => {
     localStorage.clear()
-
+    window.location.reload()
     return updateObject(state, {
         user: null,
         token: '',

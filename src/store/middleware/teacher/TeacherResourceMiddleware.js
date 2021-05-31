@@ -3,7 +3,7 @@ import * as Selector from "../selector";
 import {TeacherResourceUpload as destination, TeacherResourceDelete as deleteResource} from "../utils/ApiEndpoint/ClassroomEndPoint";
 import {uniqueNamesGenerator, adjectives, colors, animals} from 'unique-names-generator'
 import {baseUrl} from "../axios"
-import {success_DeleteDialog, success_UploadDialog} from '../../action/teacher/TeacherResource/TeacherResource'
+import {DialogSuccess} from '../../action/teacher/GlobalAction'
 
 import * as dialogAction from '../../action/__ActionGlobal/AdminDialogAction'
 import {Teacher_Resource, Teacher_Resource_Delete, Teacher_Resource_Upload} from "../../utils/Specify";
@@ -46,7 +46,7 @@ export function* TeacherResourceUpload() {
         })
         i++;
 
-        yield put(success_UploadDialog(response.data.item))
+        yield put(DialogSuccess(response.data.item,Teacher_Resource_Upload))
         yield put(dialogAction.registerDialogSuccess(Teacher_Resource_Upload))
 
     }
@@ -56,11 +56,14 @@ export function* TeacherResourceUpload() {
 export function *TeacherResourceDelete(){
 
     const teacherResource = yield select(Selector.TeacherResourceDeleteDialog)
+    const currentUser = yield select(Selector.CurrentUser)
+    const email = currentUser.user.email
     const params = new URLSearchParams();
     params.append('code', teacherResource.id)
+    params.append('email', email)
     try {
         const response =  yield baseUrl.delete(deleteResource, {params})
-        yield put(success_DeleteDialog(response.data.item))
+        yield put(DialogSuccess(response.data.item, Teacher_Resource_Delete))
         yield put(dialogAction.registerDialogSuccess(Teacher_Resource_Delete))
     }catch (error) {
         yield put(dialogAction.registerDialogFail(error,Teacher_Resource_Delete))

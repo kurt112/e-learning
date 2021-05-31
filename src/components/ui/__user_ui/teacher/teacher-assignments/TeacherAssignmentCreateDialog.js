@@ -8,35 +8,63 @@ import {
     Select, TextareaAutosize,
     TextField
 } from "@material-ui/core"
-
 import {connect} from 'react-redux'
-import * as UploadResourceAction
-    from '../../../../../store/action/teacher/TeacherResource/TeacherResourceUploadDialogAction'
 import * as dialogAction from '../../../../../store/action/__ActionGlobal/AdminDialogAction'
-import {useState} from "react";
-import Response from "../../../utils/Response";
-import {Teacher_Resource_Upload} from "../../../../../store/utils/Specify";
-import {AddedResourceFail, AddedResourceSuccess} from "../../../../../__Messages/TeacherResourceMessage";
-import AutoComplete from "../../../utils/autoComplete/AutoComplete";
+import * as actions from '../../../../../store/action/teacher/TeacherAssignment/TeacherAssignmentCreateDialogAction'
+import {useState} from "react"
+import Response from "../../../utils/Response"
+import {Teacher_Assignment_Create} from "../../../../../store/utils/Specify"
+import AutoComplete from "../../../utils/autoComplete/AutoComplete"
+import {
+    autoCompleteGetTeacherResources,
+    autoCompleteGetTeacherClass
+} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint"
+import {
+    TwoFilterOption,
+    twoOptionLabel,
+    twoOptionSelected,
+    changeTextWithRole
+} from '../../../utils/autoComplete/autoCompleteAction'
+import {AddedAssignmentFail, AddedAssignmentSuccess} from "../../../../../__Messages/TeacherAssignmentMessage"
+
 const TeacherAssignmentCreateDialog = ({
 
-                                  dialog,
-                                  closeDialog,
-                                  upload,
-                                  registerDialogMessageClose
-                              }) => {
+                                           dialog,
+                                           closeDialog,
+                                           create,
+                                           registerDialogMessageClose,
+                                           email,
+                                           state,
+                                           changeResourceCode,
+                                           changeClassCode,
+                                           changeDeadLine,
+                                           changeSem,
+                                           changeQuarter,
+                                           changeLowGrade,
+                                           changeHighGrade,
+                                           changeDescription
+                                       }) => {
 
-    const [file, setFile] = useState(0)
 
-    const FileChange = (event) => {
-        setFile(event.target.files.length)
-        // changeFile(event.target.files)
+    // for assignment resource autoComplete
+    const [resourceOpen, setResourceOpen] = useState(false);
+    const [resourceOptions, setResourceOptions] = useState([])
+    const [resourceLoading, setResourceLoading] = useState(false)
+    const [resourceText, setResourceText] = useState('')
+    const OutputResources = (event, value) => {
+        changeResourceCode(value  === null? '': value[1].toString())
     }
 
-    const clickUpload = () => {
-        upload()
-        setFile(0)
+
+    // for teacher class autoComplete
+    const [classOpen, setClassOpen] = useState(false);
+    const [classOptions, setClassOptions] = useState([])
+    const [classLoading, setClassLoading] = useState(false)
+    const [classText, setClassText] = useState('')
+    const OutputClass = (event, value) => {
+        changeClassCode(value  === null? '': value[2].toString())
     }
+
 
     return <Dialog
         open={dialog}
@@ -50,42 +78,42 @@ const TeacherAssignmentCreateDialog = ({
             >Create Assignment</DialogTitle>
             <DialogContent>
 
-                {/*<Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}*/}
-                {/*          messageFail={AddedResourceFail}*/}
-                {/*          messageSuccess={AddedResourceSuccess}/>*/}
+                <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
+                          messageFail={AddedAssignmentFail}
+                          messageSuccess={AddedAssignmentSuccess}/>
 
                 <Grid container spacing={1}>
                     <Grid item md={4} xs={12}>
                         <AutoComplete
-                            // open={openRoomName}
-                            // setOpen={setOpenRoomName}
-                            // filterOptions={filterOptionsTeacher}
-                            // options={roomOptions}
-                            // loading={loading}
-                            // InputText={roomText}
-                            // changeAutoComplete={OutputRoom}
-                            // changeText={changeRoom}
-                            noOptionText={"Search by Room Name"}
+                            open={resourceOpen}
+                            setOpen={setResourceOpen}
+                            filterOptions={TwoFilterOption}
+                            options={resourceOptions}
+                            loading={resourceLoading}
+                            InputText={resourceText}
+                            changeAutoComplete={OutputResources}
+                            changeText={(value) => changeTextWithRole(value, setResourceText, setResourceLoading, setResourceOptions, autoCompleteGetTeacherResources, email)}
+                            noOptionText={"Search By Class"}
                             label={"Assignment Resource"}
-                            // optionLabel={optionLabel}
-                            // optionSelected={optionSelected}
+                            optionLabel={twoOptionLabel}
+                            optionSelected={twoOptionSelected}
                         />
                     </Grid>
 
                     <Grid item md={4} xs={12}>
                         <AutoComplete
-                            // open={openRoomName}
-                            // setOpen={setOpenRoomName}
-                            // filterOptions={filterOptionsTeacher}
-                            // options={roomOptions}
-                            // loading={loading}
-                            // InputText={roomText}
-                            // changeAutoComplete={OutputRoom}
-                            // changeText={changeRoom}
+                            open={classOpen}
+                            setOpen={setClassOpen}
+                            filterOptions={TwoFilterOption}
+                            options={classOptions}
+                            loading={classLoading}
+                            InputText={classText}
+                            changeAutoComplete={OutputClass}
+                            changeText={(value) => changeTextWithRole(value, setClassText, setClassLoading, setClassOptions, autoCompleteGetTeacherClass, email)}
                             noOptionText={"No Class Found"}
                             label={"Your Class"}
-                            // optionLabel={optionLabel}
-                            // optionSelected={optionSelected}
+                            optionLabel={twoOptionLabel}
+                            optionSelected={twoOptionSelected}
                         />
                     </Grid>
 
@@ -96,6 +124,8 @@ const TeacherAssignmentCreateDialog = ({
                             type="datetime-local"
                             fullWidth
                             variant="outlined"
+                            value={state.deadLine}
+                            onChange={(e) => changeDeadLine(e.target.value)}
                         />
                     </Grid>
 
@@ -104,14 +134,14 @@ const TeacherAssignmentCreateDialog = ({
                         <FormControl variant="outlined" margin='dense' fullWidth>
                             <InputLabel htmlFor="Semester">Semester</InputLabel>
                             <Select
-                                // value={dialogState.type}
                                 native
                                 label="Semester"
                                 inputProps={{
                                     name: 'type',
                                     id: 'type',
                                 }}
-                                // onChange={(event => changeType(event.target.value))}
+                                value={state.sem}
+                                onChange={(e) => changeSem(e.target.value)}
                             >
                                 <option value='1'>1</option>
                                 <option value='2'>2</option>
@@ -125,14 +155,14 @@ const TeacherAssignmentCreateDialog = ({
                         <FormControl variant="outlined" margin='dense' fullWidth>
                             <InputLabel htmlFor="Quarter">Quarter</InputLabel>
                             <Select
-                                // value={dialogState.type}
                                 native
                                 label="Quarter"
                                 inputProps={{
                                     name: 'type',
                                     id: 'type',
                                 }}
-                                // onChange={(event => changeType(event.target.value))}
+                                value={state.quarter}
+                                onChange={(e) => changeQuarter(e.target.value)}
                             >
                                 <option value='1'>1</option>
                                 <option value='2'>2</option>
@@ -144,14 +174,15 @@ const TeacherAssignmentCreateDialog = ({
                     </Grid>
 
 
-
                     <Grid item md={3} xs={4}>
                         <TextField
                             margin="dense"
                             label="Low Grade"
-                             type="text"
+                            type="number"
                             fullWidth
                             variant="outlined"
+                            value={state.lowGrade}
+                            onChange={(e) => changeLowGrade(e.target.value)}
                         />
                     </Grid>
 
@@ -159,29 +190,32 @@ const TeacherAssignmentCreateDialog = ({
                         <TextField
                             margin="dense"
                             label="High Grade"
-                            type="text"
+                            type="number"
                             fullWidth
                             variant="outlined"
+                            value={state.highGrade}
+                            onChange={(e) => changeHighGrade(e.target.value)}
                         />
                     </Grid>
 
                     <Grid item md={12} xs={12}>
                         <InputLabel htmlFor="ActivityDescription">Assignment Description(Optional)</InputLabel>
                         <TextareaAutosize
-                            // value={dialogState.description}
+
                             label="Description"
                             rowsMin={10}
                             aria-label="maximum height"
                             style={{width: '100%', marginBottom: '10px', marginTop: '10px'}}
-                            // onChange={(event) => changeDescription(event.target.value)}
+                            value={state.description}
+                            onChange={(e) => changeDescription(e.target.value)}
                         />
                     </Grid>
                 </Grid>
             </DialogContent>
 
             <DialogActions>
-                <Button onClick={clickUpload} color='primary'>
-                    Upload
+                <Button onClick={create} color='primary'>
+                    Create
                 </Button>
                 <Button onClick={closeDialog} color='secondary'>
                     Cancel
@@ -193,19 +227,24 @@ const TeacherAssignmentCreateDialog = ({
 
 const mapStateToProps = (state) => {
     return {
-        // dialogState: state.UploadResource
+        state: state.TeacherAssignmentCreateDialog,
+        email: state.CurrentUser.user.email
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        /*changeFile: (file) => dispatch(UploadResourceAction.changeFile(file)),
-        changeName: (data) => dispatch(UploadResourceAction.changeName(data)),
-        changeDescription: (data) => dispatch(UploadResourceAction.changeDescription(data)),
-        changeType: (data) => dispatch(UploadResourceAction.changeType(data)),
+        changeResourceCode: (data) => dispatch(actions.changeResourceCode(data)),
+        changeClassCode: (data) => dispatch(actions.changeClassCode(data)),
+        changeDeadLine: (data) => dispatch(actions.changeDeadLine(data)),
+        changeSem: (data) => dispatch(actions.changeSemester(data)),
+        changeQuarter: (data) => dispatch(actions.changeQuarter(data)),
+        changeLowGrade: (data) => dispatch(actions.changeLowGrade(data)),
+        changeHighGrade: (data) => dispatch(actions.changeHighGrade(data)),
+        changeDescription: (data) => dispatch(actions.changeAssignmentDescription(data)),
 
-        registerDialogMessageClose: () => dispatch(dialogAction.registerDialogMessageClose(Teacher_Resource_Upload)),
-        upload: () => dispatch(dialogAction.dialogRegister(Teacher_Resource_Upload))*/
+        registerDialogMessageClose: () => dispatch(dialogAction.registerDialogMessageClose(Teacher_Assignment_Create)),
+        create: () => dispatch(dialogAction.dialogRegister(Teacher_Assignment_Create))
     }
 }
 

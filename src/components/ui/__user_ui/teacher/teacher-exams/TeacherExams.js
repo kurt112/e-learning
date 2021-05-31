@@ -9,7 +9,6 @@ import MUIDataTable from "mui-datatables";
 import Typography from "@material-ui/core/Typography";
 import {TeacherResources as columns} from "../../../utils/tableColumn";
 import style, {TableOptionsNoPaging} from "../../../_style/TableStyle";
-import * as actions from "../../../../../store/action/teacher/TeacherResource/TeacherResource";
 import {connect} from "react-redux";
 
 const TeacherExams = () => {

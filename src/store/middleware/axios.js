@@ -3,9 +3,6 @@ import {JavaEndpoint,GraphQlEndpoint} from "./utils/ApiEndpoint/ClassroomEndPoin
 
 
 export const graphQl = axios.create({
-    headers: {
-        Authorization: "Bearer " + localStorage.getItem('token')
-    },
     baseURL: GraphQlEndpoint
 })
 

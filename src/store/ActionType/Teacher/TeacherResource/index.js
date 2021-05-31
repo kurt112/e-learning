@@ -1,0 +1,12 @@
+export const
+
+    // for Create Resource
+    CHANGE_FILE = 'CHANGE_FILE',
+    CHANGE_TYPE = 'CHANGE_TYPE',
+    CHANGE_DESCRIPTION = 'CHANGE_DESCRIPTION',
+    CHANGE_NAME = 'CHANGE_NAME'
+
+
+
+
+

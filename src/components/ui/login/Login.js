@@ -8,7 +8,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Typography from '@material-ui/core/Typography';
-import {LinearProgress} from '@material-ui/core';
+import {Divider, Hidden, LinearProgress} from '@material-ui/core';
 import Copyright from '../copyright/Copyright';
 import {connect} from 'react-redux'
 import * as action from '../../../store/action/login/LoginAction'
@@ -68,9 +68,13 @@ const Login = ({loginState, changeEmail, changePassword, login, changeId,
 
             <CssBaseline/>
 
-            <Grid item xs={false} sm={false} md={8} className={classes.image}>
-
-            </Grid>
+           <Hidden mdDown>
+               <Grid item xs={false} sm={false} md={8} className={classes.image}>
+                   <p className={classes.textSide}><em><b>Virtual  School</b></em></p>
+                   <Divider style={{marginRight: 260, marginLeft: 260, backgroundColor: '#333'}}/>
+                   <p style={{cursor: 'default'}}>2020</p>
+               </Grid>
+           </Hidden>
             <Grid item xs={12} sm={12} md={4} component={Paper} elevation={6} square>
 
 

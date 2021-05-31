@@ -14,7 +14,7 @@ import {
     Teacher_Resource_Upload,
     Teacher_Resource_Delete,
     Teacher_Assignment,
-    Teacher_Resource
+    Teacher_Resource, Teacher_Assignment_Delete, Teacher_Assignment_Create
 } from '../utils/Specify'
 import * as profile from '../ActionType/__ActionTypeGlobal/ProfileActionType'
 import {
@@ -74,7 +74,12 @@ import {
     TeacherResourceDelete,
     TeacherResourceTableDataInit, TeacherResourceDataNext
 } from "./teacher/TeacherResourceMiddleware";
-import {TeacherAssignmentTableDataInit, TeacherAssignmentTableNext} from "./teacher/TeacherAssignmentMiddleware";
+import {
+    TeacherAssignmentCreate,
+    TeacherAssignmentDelete,
+    TeacherAssignmentTableDataInit,
+    TeacherAssignmentTableNext
+} from "./teacher/TeacherAssignmentMiddleware";
 
 /**
  *
@@ -322,13 +327,7 @@ export function * watchTeacherRegister() {
  *
  **/
 
-export function * watchTeacherUploadResource() {
-    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Resource_Upload), TeacherResourceUpload)
-}
 
-export function * watchDeleteResource() {
-    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Resource_Delete),TeacherResourceDelete)
-}
 
 // for teacher assignment
 export function* watchTeacherAssignmentInit(){
@@ -341,6 +340,14 @@ export function* watchTeacherAssignmentSearchChange() {
 
 export function* watchTeacherAssignmentTableNext(){
     yield takeLeading(adminTable.ADMIN_TABLE_NEXT_PAGE(Teacher_Assignment), TeacherAssignmentTableNext)
+}
+
+export function * watchTeacherAssignmentDelete() {
+    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Assignment_Delete), TeacherAssignmentDelete)
+}
+
+export function * watchTeacherAssignmentCreate() {
+    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Assignment_Create),TeacherAssignmentCreate)
 }
 
 
@@ -357,3 +364,10 @@ export function* watchTeacherResourcesTableNext(){
     yield takeLeading(adminTable.ADMIN_TABLE_NEXT_PAGE(Teacher_Resource), TeacherResourceDataNext)
 }
 
+export function * watchTeacherUploadResource() {
+    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Resource_Upload), TeacherResourceUpload)
+}
+
+export function * watchDeleteResource() {
+    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Resource_Delete),TeacherResourceDelete)
+}

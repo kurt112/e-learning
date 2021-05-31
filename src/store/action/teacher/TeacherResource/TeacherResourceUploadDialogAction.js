@@ -1,4 +1,4 @@
-import * as actions from '../../../ActionType/Teacher/TeacherResource/TeacherResourceActionType'
+import * as actions from '../../../ActionType/Teacher/TeacherResource'
 
 export const
     changeFile = (data) => {
@@ -23,10 +23,5 @@ export const
         return {
             type: actions.CHANGE_TYPE,
             data
-        }
-    },
-    successRegister = () => {
-        return {
-            type: actions.Upload_Dialog_Success
         }
     }

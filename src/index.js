@@ -8,8 +8,11 @@ import {Provider} from 'react-redux';
 import createSagaMiddleware from 'redux-saga'
 
 // Teacher
-import {TeacherStudent, TeacherRoom, TeacherSubject, TeacherActivity,DeleteResource,
-TeacherResource,UpdateResource,UploadResource,TeacherAssignment} from './store/reducers/Teacher'
+import {
+    DeleteAssignmentDialog, DeleteResource,
+    TeacherResource, UploadResource, TeacherAssignment,
+    TeacherAssignmentCreateDialog
+} from './store/reducers/Teacher'
 
 //Student
 import {StudentActivity, StudentSubject, StudentRoom, StudentTeacher} from './store/reducers/Student'
@@ -37,7 +40,14 @@ import Classroom from "./store/reducers/ClassroomState";
 
 
 // profile
-import {StudentProfile, TeacherProfile,RoomProfile, RoomShiftProfile, RoomShiftClassProfile, ActivityProfile} from './store/reducers/Profile'
+import {
+    StudentProfile,
+    TeacherProfile,
+    RoomProfile,
+    RoomShiftProfile,
+    RoomShiftClassProfile,
+    ActivityProfile
+} from './store/reducers/Profile'
 
 
 // LOGIN
@@ -47,7 +57,7 @@ import Login from './store/reducers/LoginLogout/LoginLogoutState'
 import CurrentUser from "./store/reducers/CurrentUser/CurrentUser";
 
 // Form Register
-import {StudentRegisterForm,TeacherRegisterForm} from './store/reducers/RegisterForm'
+import {StudentRegisterForm, TeacherRegisterForm} from './store/reducers/RegisterForm'
 
 
 // sagas
@@ -97,7 +107,9 @@ import {
     watchTeacherResourcesSearchChange,
     watchTeacherResourcesTableNext,
     watchTeacherAssignmentSearchChange,
-    watchTeacherAssignmentTableNext
+    watchTeacherAssignmentTableNext,
+    watchTeacherAssignmentDelete,
+    watchTeacherAssignmentCreate
 } from './store/middleware/'
 
 
@@ -110,7 +122,9 @@ const reducers = combineReducers({
     TeacherAssignment,
     DeleteResource,
     TeacherResource,
+    TeacherAssignmentCreateDialog,
     UploadResource,
+    DeleteAssignmentDialog,
     // TeacherProfileState,
 
     // Student State
@@ -164,7 +178,7 @@ const reducers = combineReducers({
 const composeEnhancers =
     process.env.NODE_ENV === "development"
         ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-        : null || compose;
+        : compose;
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -235,7 +249,8 @@ sagaMiddleware.run(watchTeacherResourcesSearchChange)
 sagaMiddleware.run(watchTeacherResourcesTableNext)
 sagaMiddleware.run(watchTeacherAssignmentTableNext)
 sagaMiddleware.run(watchTeacherAssignmentSearchChange)
-
+sagaMiddleware.run(watchTeacherAssignmentDelete)
+sagaMiddleware.run(watchTeacherAssignmentCreate)
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>

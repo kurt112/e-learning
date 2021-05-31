@@ -26,7 +26,7 @@ export {
 
 export {
     default as UploadResource
-}from './Resources/Dialog/UploadResource'
+} from './Resources/Dialog/UploadResource'
 
 export {
     default as DeleteResource
@@ -34,10 +34,18 @@ export {
 
 export {
     default as UpdateResource
-}from './Resources/Dialog/UpdateResource'
+} from './Resources/Dialog/UpdateResource'
 
 
 // for teacher assignment
 export {
     default as TeacherAssignment
 } from './Assignment/TeacherAssignmentState'
+
+export {
+    default as DeleteAssignmentDialog
+} from './Assignment/Dialog/DeleteAssignmentDialogState'
+
+export {
+    default as TeacherAssignmentCreateDialog
+} from './Assignment/Dialog/CreateAssignmentDialogState'

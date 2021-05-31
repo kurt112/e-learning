@@ -3,8 +3,6 @@ import * as Selector from "../selector";
 import {baseUrlNoAuth} from "../axios";
 import * as action from '../../action/login/LoginAction'
 import * as currentUserAction from '../../action/CurrentUser/CurrentUserAction'
-import {PasswordEncrypt} from "../utils/EncryptPassword";
-
 export function* Login() {
     const login = yield select(Selector.Login)
     // console.log(login)

@@ -1,9 +1,7 @@
 import {Fragment, lazy, useEffect} from "react";
-import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core";
+import {Box,  Grid, Paper, Toolbar, Tooltip} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import UpdateIcon from "@material-ui/icons/Update";
-import FolderSharedIcon from "@material-ui/icons/FolderShared";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import MUIDataTable from "mui-datatables";
 import Typography from "@material-ui/core/Typography";
@@ -11,9 +9,14 @@ import {TeacherAssignments as columns} from "../../../utils/tableColumn";
 import style, {TableOptions as options} from "../../../_style/TableStyle";
 import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
 import {connect} from "react-redux";
-import {Teacher_Assignment, Teacher_Assignment_Create} from "../../../../../store/utils/Specify";
+import {
+    Teacher_Assignment,
+    Teacher_Assignment_Create,
+    Teacher_Assignment_Delete
+} from "../../../../../store/utils/Specify";
 
 const TeacherAssignmentCreateDialog = lazy(() => import(`./TeacherAssignmentCreateDialog`))
+const TeacherAssignmentDeleteDialog = lazy(() => import(`./TeacherAssignmentDeleteDialog`))
 
 const TeacherAssignments = ({
                                 state,
@@ -21,7 +24,9 @@ const TeacherAssignments = ({
                                 searchChange,
                                 pageChange,
                                 createAssignmentDialogOpen,
-                                createAssignmentDialogClose
+                                createAssignmentDialogClose,
+                                deleteAssignmentDialogOpen,
+                                deleteAssignmentDialogClose
                             }) => {
     useEffect(() => {
         if (state.data.length === 0) initData()
@@ -32,6 +37,7 @@ const TeacherAssignments = ({
     return (
         <Fragment>
             <TeacherAssignmentCreateDialog dialog={state.createDialog} closeDialog={createAssignmentDialogClose}/>
+            <TeacherAssignmentDeleteDialog dialog={state.deleteDialog} closeDialog={deleteAssignmentDialogClose}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
@@ -44,7 +50,7 @@ const TeacherAssignments = ({
                             </Tooltip>
 
                             <Tooltip title="Delete Assignment">
-                                <IconButton aria-label="update">
+                                <IconButton aria-label="delete" onClick={deleteAssignmentDialogOpen} >
                                     <DeleteForeverIcon color='secondary' fontSize={"large"}/>
                                 </IconButton>
                             </Tooltip>
@@ -95,6 +101,9 @@ const mapDispatchToProps = (dispatch) => {
 
         createAssignmentDialogOpen: () => dispatch(actions.openDialog(Teacher_Assignment_Create)),
         createAssignmentDialogClose: () => dispatch(actions.closeDialog(Teacher_Assignment_Create)),
+
+        deleteAssignmentDialogOpen: () => dispatch(actions.openDialog(Teacher_Assignment_Delete)),
+        deleteAssignmentDialogClose: () => dispatch(actions.closeDialog(Teacher_Assignment_Delete))
     }
 }
 

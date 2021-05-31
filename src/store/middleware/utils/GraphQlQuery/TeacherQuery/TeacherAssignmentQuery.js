@@ -22,7 +22,7 @@ export const
                             sem,
                             quarter,
                             createdAt,
-                            deadline,
+                            deadLine,
                             description,
                             resource{
                                 code,

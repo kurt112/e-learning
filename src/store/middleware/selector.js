@@ -1,4 +1,4 @@
-import {UploadResource} from "../reducers/Teacher";
+import {DeleteAssignmentDialog, UploadResource} from "../reducers/Teacher";
 
 export const
 
@@ -23,6 +23,8 @@ export const
     TeacherResourceUploadDialog = (state) => state.UploadResource,
     TeacherResourceDeleteDialog = (state) => state.DeleteResource,
     TeacherAssignment = (state) => state.TeacherAssignment,
+    TeacherAssignmentDeleteDialog = (state) => state.DeleteAssignmentDialog,
+    TeacherAssignmentCreateDialog = (state) => state.TeacherAssignmentCreateDialog,
 
     // Login, Register State
     Login = (state) => state.Login,

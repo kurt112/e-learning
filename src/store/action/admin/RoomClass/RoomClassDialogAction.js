@@ -36,7 +36,7 @@ export const changeTimeEnd = (data) => {
 }
 
 export const changeDay = (data) => {
-    alert(data)
+
     return {
         type: roomClassAction.CHANGE_ROOMCLASS_DAY,
         data
