@@ -16,21 +16,18 @@ const newSate = {
 
 }
 
-const transforms = (items) => items.map((item) => insert(item.code, item.resource.name, item.lowGrade, item.highGrade, item.sem, item.quarter, `${item.roomShiftClass.roomShift.grade} - ${item.roomShiftClass.roomShift.section}`, item.createdAt,item.deadLine,item.description, item.resource.code))
+const transforms = (items) => items.map((item) => insert(item.code, item.lowGrade, item.highGrade, item.sem, item.quarter, `${item.roomShiftClass.roomShift.grade} - ${item.roomShiftClass.roomShift.section}`, item.createdAt,item.deadLine,item.description, item.resource.code))
 
 const successData = (state, action) => {
     const newData = action.data
     const tempData = [...state.data]
-
     tempData.unshift(insert(newData.code, newData.name, newData.description, newData.date, newData.type, newData.status, newData.location))
-
     return updateObject(state, {data: tempData})
 }
 
 const successDelete = (state, action) => {
     const assignmentCode = action.data
     const tempData = state.data.filter(resource => resource.code !== assignmentCode)
-
     return updateObject(state, {data: tempData})
 }
 

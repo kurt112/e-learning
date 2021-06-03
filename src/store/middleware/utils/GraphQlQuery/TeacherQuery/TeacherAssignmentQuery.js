@@ -2,7 +2,7 @@ export const
     TeacherAssignmentBodyDataSettingsQuery = () => {
         return {
             query: `
-                     query{roomShiftClassAssignmentSettings{
+                     query{teacherAssignmentSettings{
                             totalPages,
                             totalElements,
                             currentPage
@@ -15,7 +15,7 @@ export const
     getTeacherAssignments = (search, email, page) => {
         return {
             query: `
-                    query{getRoomShiftClassAssignmentByTeacher(search:"${search}",email:"${email}", page:${page}){
+                    query{getTeacherAssignment(search:"${search}",email:"${email}", page:${page}){
                             code,
                             lowGrade,
                             highGrade,

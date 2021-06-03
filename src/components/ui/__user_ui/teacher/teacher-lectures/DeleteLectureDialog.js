@@ -8,18 +8,19 @@ import {
 } from "@material-ui/core"
 import {connect} from 'react-redux'
 import * as actions from '../../../../../store/action/__ActionGlobal/AdminDialogAction'
-import {Teacher_Assignment_Delete} from "../../../../../store/utils/Specify";
-import Response from "../../../utils/Response";
-import {DeleteAssignmentFail, DeleteAssignmentSuccess} from "../../../../../__Messages/teacher/TeacherAssignmentMessage";
+import {Teacher_Lecture_Delete} from "../../../../../store/utils/Specify"
+import Response from "../../../utils/Response"
+import {DeleteLectureFail, DeleteLectureSuccess} from "../../../../../__Messages/teacher/TeacherLectureMessages";
 
-const TeacherAssignmentDeleteDialog = ({
-                                           dialog,
-                                           state,
-                                           closeDialog,
-                                           dialogId,
-                                           registerDialogMessageClose,
-                                           dialogRegister
-                                       }) => {
+const DeleteLectureDialog = ({
+                                 state,
+                                 closeDialog,
+                                 dialog,
+                                 dialogId,
+                                 registerDialogMessageClose,
+                                 dialogRegister
+                             }) => {
+
 
     const RegisterEnter = (event) => {
         if (event.key === "Enter" && state.id.length > 0) dialogRegister()
@@ -28,22 +29,22 @@ const TeacherAssignmentDeleteDialog = ({
     return <Dialog
         open={dialog}
         onClose={closeDialog}
-        aria-labelledby="delete-resource"
+        aria-labelledby="delete-lecture"
         fullWidth
         maxWidth={"md"}
     >
-        <DialogTitle id="delete-resource">Delete Assignment</DialogTitle>
+        <DialogTitle id="delete-lecture">Delete Lecture</DialogTitle>
         <DialogContent>
 
             <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
-                      messageFail={DeleteAssignmentFail}
-                      messageSuccess={DeleteAssignmentSuccess}/>
+                      messageFail={DeleteLectureFail}
+                      messageSuccess={DeleteLectureSuccess}/>
             <TextField
                 autoFocus
                 value={state.id}
                 margin="dense"
                 variant={'outlined'}
-                label="Enter Assignment Code"
+                label="Enter Lecture Code"
                 type="text"
                 fullWidth
                 onChange={(event) => dialogId(event.target.value)}
@@ -65,17 +66,17 @@ const TeacherAssignmentDeleteDialog = ({
 
 const mapToState = (state) => {
     return {
-        state: state.DeleteAssignmentDialog
+        state: state.TeacherLectureDeleteDialog
     }
 }
 
 const mapDispatchToState = (dispatch) => {
     return {
-        dialogRegister: () => dispatch(actions.dialogRegister(Teacher_Assignment_Delete)),
-        dialogId: (data) => dispatch(actions.dialogId(data, Teacher_Assignment_Delete)),
-        registerDialogMessageClose: () => dispatch(actions.registerDialogMessageClose(Teacher_Assignment_Delete))
+        dialogRegister: () => dispatch(actions.dialogRegister(Teacher_Lecture_Delete)),
+        dialogId: (data) => dispatch(actions.dialogId(data, Teacher_Lecture_Delete)),
+        registerDialogMessageClose: () => dispatch(actions.registerDialogMessageClose(Teacher_Lecture_Delete))
     }
 }
 
 
-export default connect(mapToState, mapDispatchToState)(TeacherAssignmentDeleteDialog)
+export default connect(mapToState, mapDispatchToState)(DeleteLectureDialog)

@@ -8,8 +8,8 @@ export {
 } from './teacher-subjects/TeacherSubjects'
 
 export {
-    default as TeacherActivity
-} from './teacher-task/TeacherTask'
+    default as TeacherLecture
+} from './teacher-lectures/TeacherLecture'
 
 export {
     default as TeacherResources

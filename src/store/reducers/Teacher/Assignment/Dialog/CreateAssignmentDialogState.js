@@ -1,6 +1,6 @@
 import state from '../../../__StateGlobal/AdminTableDialogState'
 import * as globalActionDialog from '../../../../ActionType/__ActionTypeGlobal/DialogActionType'
-import * as teacherAssignmentCreateDialogAction from '../../../../ActionType/Teacher/TeacherAssignment'
+import * as dialogAction from '../../../../ActionType/Teacher/GlobalActiontype'
 import {Teacher_Assignment_Create} from '../../../../utils/Specify'
 import {updateObject} from "../../../../utils/UpdateObject"
 
@@ -23,22 +23,23 @@ const init_state = {
 const reducer = (state = init_state, action) => {
 
     switch (action.type) {
+
         // for changing data
-        case teacherAssignmentCreateDialogAction.CHANGE_HIGH_GRADE:
+        case dialogAction.CHANGE_HIGH_GRADE(Teacher_Assignment_Create):
             return updateObject(state, {highGrade: action.data})
-        case teacherAssignmentCreateDialogAction.CHANGE_RESOURCE_CODE:
+        case dialogAction.CHANGE_RESOURCE_CODE(Teacher_Assignment_Create):
             return updateObject(state, {resourceCode: action.data})
-        case teacherAssignmentCreateDialogAction.CHANGE_CLASS_CODE:
+        case dialogAction.CHANGE_CLASS_CODE(Teacher_Assignment_Create):
             return updateObject(state, {classCode: action.data})
-        case teacherAssignmentCreateDialogAction.CHANGE_DEADLINE:
+        case dialogAction.CHANGE_DEADLINE(Teacher_Assignment_Create):
             return updateObject(state, {deadLine: action.data})
-        case teacherAssignmentCreateDialogAction.CHANGE_SEMESTER:
+        case dialogAction.CHANGE_SEMESTER(Teacher_Assignment_Create):
             return updateObject(state, {sem: action.data})
-        case teacherAssignmentCreateDialogAction.CHANGE_QUARTER:
+        case dialogAction.CHANGE_QUARTER(Teacher_Assignment_Create):
             return updateObject(state, {quarter: action.data})
-        case teacherAssignmentCreateDialogAction.CHANGE_LOW_GRADE:
+        case dialogAction.CHANGE_LOW_GRADE(Teacher_Assignment_Create):
             return updateObject(state, {lowGrade: action.data})
-        case teacherAssignmentCreateDialogAction.CHANGE_DESCRIPTION:
+        case dialogAction.CHANGE_DESCRIPTION(Teacher_Assignment_Create):
             return updateObject(state, {description: action.data})
 
         // for the state of dialog
@@ -62,8 +63,6 @@ const reducer = (state = init_state, action) => {
         }
         case globalActionDialog.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(Teacher_Assignment_Create):
             return newState.handleClose(state, action)
-        case globalActionDialog.ADMIN_DIALOG_ID_CHANGE(Teacher_Assignment_Create):
-            return updateObject(state, {id: action.value})
 
         default:
             return state;

@@ -3,13 +3,7 @@ import {Link} from "react-router-dom"
 import {convertDateTime} from "../dateFormat/DateTimeFormatToDateWord";
 import {JavaEndpoint} from "../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 
-export const TeacherProfileColumn = [
-    {id: 'id', label: 'id', minWidth: 50},
-    {id: 'firstName', label: 'FirstName', minWidth: 170},
-    {id: 'lastName', label: 'LastName', minWidth: 170},
-    {id: 'age', label: 'Age', minWidth: 50},
-    {id: 'birthday', label: 'Birthday', minWidth: 170},
-]
+
 /*
 *
 *
@@ -171,43 +165,55 @@ export function TeacherInsertStudent(firstName, lastName, grade, section, subjec
  **/
 
 
-export const TeacherActivityTable = [
+export const TeacherLectureTable = [
     {
-        name: 'id',
-        label: 'id'
+        name: 'code',
+        label: 'Code'
     },
     {
-        name: 'activityTitle',
-        label: 'Activity Title'
+        name: 'gradeSection',
+        label: 'Grade Section',
     },
     {
-        name: 'subjectName',
-        label: 'Subject Name',
+        name: 'sem',
+        label: 'Semester'
     },
     {
-        name: 'grade',
-        label: 'Grade'
+        name: 'quarter',
+        label:'Quarter'
     },
     {
-        name: 'section',
-        label: 'Section'
+        name: 'uploadedOn',
+        label: 'UploadedOn'
     },
     {
-        name: 'Activity Link',
-        label: 'Activity Link'
+        name: 'description',
+        label: 'Description'
     },
     {
-        name: 'date',
-        label: 'Date'
-    },
-    {
-        name: 'status',
-        label: "Status",
-    },
+        name: 'download',
+        label: 'Download',
+        options: {
+            filter: false,
+            sort: false,
+            customBodyRender: (value) => {
+                return <a href={JavaEndpoint + `/teacher/resource/download?code=`+value} target="_blank"
+                          style={{textDecoration: 'none', marginRight: '10px'}}>
+                    <Button variant="outlined" color="primary">
+                        Download
+                    </Button>
+                </a>
+            },
+            filterOptions: {
+                fullWidth: false
+            }
+        }
+    }
+
 ]
 
-export function TeacherInsertActivity(id, activityTitle, subjectName, grade, section, link, date, status) {
-    return {id, activityTitle, subjectName, grade, section, link, date, status}
+export function TeacherInsertLecture(code, documentName, gradeSection,sem,quarter, uploadedOn, description, download) {
+    return {code, documentName, gradeSection,sem,quarter, uploadedOn, description, download}
 }
 
 /**
@@ -360,11 +366,6 @@ export const TeacherAssignments = [
         label: 'Assignment Code'
     },
     {
-        name: 'documentName',
-        label: 'Document Name',
-    },
-
-    {
         name: 'lowGrade',
         label: 'Low Grade'
     },
@@ -420,7 +421,7 @@ export const TeacherAssignments = [
 
 ]
 
-export function TeacherInsertAssignment(code, documentName, lowGrade, highGrade, semester,quarter,classes,dateUploaded,deadline,description,documentCode) {
+export function TeacherInsertAssignment(code, lowGrade, highGrade, semester,quarter,classes,dateUploaded,deadline,description,documentCode) {
 
-    return {code, documentName, lowGrade, highGrade, semester,quarter,classes,dateUploaded:convertDateTime(dateUploaded),deadline: convertDateTime(deadline),description,download:documentCode}
+    return {code, lowGrade, highGrade, semester,quarter,classes,dateUploaded:convertDateTime(dateUploaded),deadline: convertDateTime(deadline),description,download:documentCode}
 }

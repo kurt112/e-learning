@@ -14,6 +14,7 @@ import {getTeacherResource} from "../utils/GraphQlQuery/TeacherQuery/TeacherReso
 
 export function* TeacherResourceUpload() {
     const teacherResource = yield select(Selector.TeacherResourceUploadDialog)
+    const teacher = yield select(Selector.TeacherResource)
     const currentUser = yield select(Selector.CurrentUser)
     const email = currentUser.user.email
     const code = uniqueNamesGenerator({
@@ -46,9 +47,9 @@ export function* TeacherResourceUpload() {
         })
         i++;
 
-        yield put(DialogSuccess(response.data.item,Teacher_Resource_Upload))
+        // yield put(DialogSuccess(response.data.item,Teacher_Resource_Upload))
+        yield TableDataInit(getTeacherResource(teacher.search,email,teacher.page),AdminTeacherBodyDataSettingsQuery(),Teacher_Resource)
         yield put(dialogAction.registerDialogSuccess(Teacher_Resource_Upload))
-
     }
 
 }

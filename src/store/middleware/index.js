@@ -14,7 +14,7 @@ import {
     Teacher_Resource_Upload,
     Teacher_Resource_Delete,
     Teacher_Assignment,
-    Teacher_Resource, Teacher_Assignment_Delete, Teacher_Assignment_Create
+    Teacher_Resource, Teacher_Assignment_Delete, Teacher_Assignment_Create, Teacher_Lecture, Teacher_Lecture_Delete
 } from '../utils/Specify'
 import * as profile from '../ActionType/__ActionTypeGlobal/ProfileActionType'
 import {
@@ -80,6 +80,13 @@ import {
     TeacherAssignmentTableDataInit,
     TeacherAssignmentTableNext
 } from "./teacher/TeacherAssignmentMiddleware";
+
+import {
+    DeleteLecture,
+    TeacherLectureCreate,
+    TeacherLectureDataNext,
+    TeacherLectureTableDataInit
+} from "./teacher/TeacherLectureMIddleWare"
 
 /**
  *
@@ -370,4 +377,26 @@ export function * watchTeacherUploadResource() {
 
 export function * watchDeleteResource() {
     yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Resource_Delete),TeacherResourceDelete)
+}
+
+// for lecture teacher
+
+export function* watchTeacherLectureInit(){
+    yield takeLeading(adminTable.ADMIN_TABLE_INIT(Teacher_Lecture), TeacherLectureTableDataInit)
+}
+
+export function* watchTeacherLectureSearchChange(){
+    yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Teacher_Lecture), TeacherLectureTableDataInit)
+}
+
+export function* watchTeacherLectureTableNext(){
+    yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Teacher_Lecture), TeacherLectureDataNext)
+}
+
+export function * watchTeacherCreateLecture() {
+    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Lecture), TeacherLectureCreate)
+}
+
+export function * watchDeleteLecture() {
+    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Lecture_Delete),DeleteLecture)
 }

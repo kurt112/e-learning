@@ -3,7 +3,6 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText,
     DialogTitle,
     TextField
 } from "@material-ui/core"
@@ -11,7 +10,7 @@ import {connect} from 'react-redux'
 import * as actions from '../../../../../store/action/__ActionGlobal/AdminDialogAction'
 import {Teacher_Resource_Delete} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
-import {DeleteResourceFail, DeleteResourceSuccess} from "../../../../../__Messages/TeacherResourceMessage";
+import {DeleteResourceFail, DeleteResourceSuccess} from "../../../../../__Messages/teacher/TeacherResourceMessage";
 const DeleteResource = ({
                             dialog,
                             resource,
@@ -46,7 +45,7 @@ const DeleteResource = ({
                 label="Enter Document Code"
                 type="text"
                 fullWidth
-                onChange={(event) => dialogId(event)}
+                onChange={(event) => dialogId(event.target.value)}
                 onKeyDown={event => {
                     RegisterEnter(event)
                 }}

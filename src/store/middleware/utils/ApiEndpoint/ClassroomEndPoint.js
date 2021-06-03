@@ -50,6 +50,8 @@ export const
     TeacherResourceDelete = 'teacher/delete/resource',
     TeacherAssignmentDelete = 'teacher/assignment/delete',
     TeacherAssignmentCreate = 'teacher/assignment/create',
+    TeacherLectureCreate = 'teacher/lecture/create',
+    TeacherLectureDelete = 'teacher/lecture/delete',
 
     /**
      * for Auto Complete API
@@ -62,6 +64,6 @@ export const
     autoCompleteRoomShift = autoComplete + 'roomShift',
     autoCompleteRoomClass = autoComplete + 'classes',
     autoCompleteSubjectBasedOnRoomShift = autoComplete + 'subjectBaseOnRoomShift',
-    autoCompleteGetTeacherResources = autoComplete + 'getTeacherResources',
-    autoCompleteGetTeacherClass = autoComplete + 'getTeacherClass'
-
+    autoCompleteGetTeacherAssignment = autoComplete + 'getTeacherAssignment',
+    autoCompleteGetTeacherClass = autoComplete + 'getTeacherClass',
+    autoCompleteGetTeacherLecture = autoComplete + 'getTeacherLectures'

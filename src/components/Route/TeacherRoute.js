@@ -12,7 +12,7 @@ import {TeacherInsertStudent as insertStudent, TeacherInsertSubject as insertSub
 // import {get} from "../../store/middleware/utils/GraphQlQuery/TeacherQuery";
 const TeacherSubjects = lazy(() => import(`../ui/__user_ui/teacher`).then(module => ({default: module.TeacherSubject})))
 const TeacherStudent = lazy(() => import(`../ui/__user_ui/teacher`).then(module => ({default: module.TeacherStudents})))
-const TeacherActivity = lazy(() => import(`../ui/__user_ui/teacher`).then(module => ({default: module.TeacherActivity})))
+const TeacherLectures = lazy(() => import(`../ui/__user_ui/teacher`).then(module => ({default: module.TeacherLecture})))
 const TeacherResources = lazy(() => import(`../ui/__user_ui/teacher`).then(module => ({default: module.TeacherResources})))
 const TeacherAssignments = lazy(() => import(`../ui/__user_ui/teacher`).then(module => ({default: module.TeacherAssignments})))
 const TeacherExams = lazy(() => import(`../ui/__user_ui/teacher`).then(module => ({default: module.TeacherExams})))
@@ -82,7 +82,7 @@ const TeacherRoute = ({email}) => {
         <Fragment>
             <Route path='/teacher/subjects' exact render={() => <TeacherSubjects subjects={subjects}/>}/>
             <Route path='/teacher/students' exact render={() => <TeacherStudent students={students}/>}/>
-            <Route path='/teacher/task' exact render={() => <TeacherActivity/>}/>
+            <Route path='/teacher/lectures' exact render={() => <TeacherLectures/>}/>
             <Route path='/teacher/classes' exact render={() => <Classes currentClass={currentClass} archiveClass={doneClass}/>}/>
             <Route path='/teacher/resources' exact render={() => <TeacherResources/>}/>
             <Route path='/teacher/assignments' exact render={() => <TeacherAssignments/>}/>

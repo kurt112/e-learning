@@ -16,7 +16,7 @@ import * as dialogAction from '../../../../../store/action/__ActionGlobal/AdminD
 import {useState} from "react";
 import Response from "../../../utils/Response";
 import {Teacher_Resource_Upload} from "../../../../../store/utils/Specify";
-import {AddedResourceFail, AddedResourceSuccess} from "../../../../../__Messages/TeacherResourceMessage";
+import {AddedResourceFail, AddedResourceSuccess} from "../../../../../__Messages/teacher/TeacherResourceMessage";
 const UploadResourceDialog = ({
 
                                   dialog,

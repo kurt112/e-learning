@@ -25,6 +25,9 @@ export const
     TeacherAssignment = (state) => state.TeacherAssignment,
     TeacherAssignmentDeleteDialog = (state) => state.DeleteAssignmentDialog,
     TeacherAssignmentCreateDialog = (state) => state.TeacherAssignmentCreateDialog,
+    TeacherLecture = (state) => state.TeacherLectures,
+    TeacherLectureCreate = (state) => state.TeacherLectureCreateDialog,
+    TeacherLectureDelete = (state) => state.TeacherLectureDeleteDialog,
 
     // Login, Register State
     Login = (state) => state.Login,

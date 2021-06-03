@@ -49,3 +49,17 @@ export {
 export {
     default as TeacherAssignmentCreateDialog
 } from './Assignment/Dialog/CreateAssignmentDialogState'
+
+// for teacher lecture
+
+export {
+    default as TeacherLectures
+} from './Lecture/TeacherLectureState'
+
+export {
+    default as TeacherLectureCreateDialog
+} from './Lecture/Dialog/CreateLectureDialogState'
+
+export {
+    default as TeacherLectureDeleteDialog
+} from './Lecture/Dialog/DeleteLectureDialogState'

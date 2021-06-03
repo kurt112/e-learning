@@ -5,19 +5,17 @@ import {
     DialogContent,
     DialogTitle, FormControl,
     Grid, InputLabel,
-    Select, TextareaAutosize,
-    TextField
+    Select, TextareaAutosize
 } from "@material-ui/core"
 import {connect} from 'react-redux'
 import * as dialogAction from '../../../../../store/action/__ActionGlobal/AdminDialogAction'
 import * as actions from '../../../../../store/action/teacher/GlobalAction'
 import {useState} from "react"
 import Response from "../../../utils/Response"
-import {Teacher_Assignment_Create} from "../../../../../store/utils/Specify"
+import {Teacher_Lecture_Create} from "../../../../../store/utils/Specify"
 import AutoComplete from "../../../utils/autoComplete/AutoComplete"
 import {
-    autoCompleteGetTeacherAssignment,
-    autoCompleteGetTeacherClass
+    autoCompleteGetTeacherClass, autoCompleteGetTeacherLecture
 } from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint"
 import {
     TwoFilterOption,
@@ -25,9 +23,9 @@ import {
     twoOptionSelected,
     changeTextWithRole
 } from '../../../utils/autoComplete/autoCompleteAction'
-import {AddedAssignmentFail, AddedAssignmentSuccess} from "../../../../../__Messages/teacher/TeacherAssignmentMessage"
+import {AddedLectureFail, AddedLectureSuccess} from "../../../../../__Messages/teacher/TeacherLectureMessages";
 
-const TeacherAssignmentCreateDialog = ({
+const CreateLectureDialog = ({
 
                                            dialog,
                                            closeDialog,
@@ -37,14 +35,10 @@ const TeacherAssignmentCreateDialog = ({
                                            state,
                                            changeResourceCode,
                                            changeClassCode,
-                                           changeDeadLine,
                                            changeSem,
                                            changeQuarter,
-                                           changeLowGrade,
-                                           changeHighGrade,
                                            changeDescription
                                        }) => {
-
 
     // for assignment resource autoComplete
     const [resourceOpen, setResourceOpen] = useState(false);
@@ -69,21 +63,21 @@ const TeacherAssignmentCreateDialog = ({
     return <Dialog
         open={dialog}
         onClose={closeDialog}
-        aria-labelledby="create-resource"
+        aria-labelledby="create-lecture"
         fullWidth
         maxWidth={"lg"}
     >
         <form noValidate>
-            <DialogTitle id="create-resource"
-            >Create Assignment</DialogTitle>
+            <DialogTitle id="create-lecture"
+            >Create Lecture</DialogTitle>
             <DialogContent>
 
                 <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
-                          messageFail={AddedAssignmentFail}
-                          messageSuccess={AddedAssignmentSuccess}/>
+                          messageFail={AddedLectureFail}
+                          messageSuccess={AddedLectureSuccess}/>
 
                 <Grid container spacing={1}>
-                    <Grid item md={4} xs={12}>
+                    <Grid item md={3} xs={12}>
                         <AutoComplete
                             open={resourceOpen}
                             setOpen={setResourceOpen}
@@ -92,15 +86,15 @@ const TeacherAssignmentCreateDialog = ({
                             loading={resourceLoading}
                             InputText={resourceText}
                             changeAutoComplete={OutputResources}
-                            changeText={(value) => changeTextWithRole(value, setResourceText, setResourceLoading, setResourceOptions, autoCompleteGetTeacherAssignment, email)}
-                            noOptionText={"Search By Class"}
-                            label={"Assignment Resource"}
+                            changeText={(value) => changeTextWithRole(value, setResourceText, setResourceLoading, setResourceOptions, autoCompleteGetTeacherLecture, email)}
+                            noOptionText={"Search By Resource Name"}
+                            label={"Lecture Resource"}
                             optionLabel={twoOptionLabel}
                             optionSelected={twoOptionSelected}
                         />
                     </Grid>
 
-                    <Grid item md={4} xs={12}>
+                    <Grid item md={3} xs={12}>
                         <AutoComplete
                             open={classOpen}
                             setOpen={setClassOpen}
@@ -114,18 +108,6 @@ const TeacherAssignmentCreateDialog = ({
                             label={"Your Class"}
                             optionLabel={twoOptionLabel}
                             optionSelected={twoOptionSelected}
-                        />
-                    </Grid>
-
-                    <Grid item md={4} xs={6}>
-                        <TextField
-                            margin="dense"
-                            label="Deadline"
-                            type="datetime-local"
-                            fullWidth
-                            variant="outlined"
-                            value={state.deadLine}
-                            onChange={(e) => changeDeadLine(e.target.value)}
                         />
                     </Grid>
 
@@ -172,36 +154,9 @@ const TeacherAssignmentCreateDialog = ({
                             </Select>
                         </FormControl>
                     </Grid>
-
-
-                    <Grid item md={3} xs={4}>
-                        <TextField
-                            margin="dense"
-                            label="Low Grade"
-                            type="number"
-                            fullWidth
-                            variant="outlined"
-                            value={state.lowGrade}
-                            onChange={(e) => changeLowGrade(e.target.value)}
-                        />
-                    </Grid>
-
-                    <Grid item md={3} xs={4}>
-                        <TextField
-                            margin="dense"
-                            label="High Grade"
-                            type="number"
-                            fullWidth
-                            variant="outlined"
-                            value={state.highGrade}
-                            onChange={(e) => changeHighGrade(e.target.value)}
-                        />
-                    </Grid>
-
                     <Grid item md={12} xs={12}>
-                        <InputLabel htmlFor="ActivityDescription">Assignment Description(Optional)</InputLabel>
+                        <InputLabel htmlFor="ActivityDescription">Lecture Description(Optional)</InputLabel>
                         <TextareaAutosize
-
                             label="Description"
                             rowsMin={10}
                             aria-label="maximum height"
@@ -227,25 +182,22 @@ const TeacherAssignmentCreateDialog = ({
 
 const mapStateToProps = (state) => {
     return {
-        state: state.TeacherAssignmentCreateDialog,
+        state: state.TeacherLectureCreateDialog,
         email: state.CurrentUser.user.email
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changeResourceCode: (data) => dispatch(actions.changeResourceCode(data,Teacher_Assignment_Create)),
-        changeClassCode: (data) => dispatch(actions.changeClassCode(data,Teacher_Assignment_Create)),
-        changeDeadLine: (data) => dispatch(actions.changeDeadLine(data,Teacher_Assignment_Create)),
-        changeSem: (data) => dispatch(actions.changeSemester(data,Teacher_Assignment_Create)),
-        changeQuarter: (data) => dispatch(actions.changeQuarter(data,Teacher_Assignment_Create)),
-        changeLowGrade: (data) => dispatch(actions.changeLowGrade(data,Teacher_Assignment_Create)),
-        changeHighGrade: (data) => dispatch(actions.changeHighGrade(data,Teacher_Assignment_Create)),
-        changeDescription: (data) => dispatch(actions.changeDescription(data,Teacher_Assignment_Create)),
+        changeResourceCode: (data) => dispatch(actions.changeResourceCode(data,Teacher_Lecture_Create)),
+        changeClassCode: (data) => dispatch(actions.changeClassCode(data,Teacher_Lecture_Create)),
+        changeSem: (data) => dispatch(actions.changeSemester(data,Teacher_Lecture_Create)),
+        changeQuarter: (data) => dispatch(actions.changeQuarter(data,Teacher_Lecture_Create)),
+        changeDescription: (data) => dispatch(actions.changeDescription(data,Teacher_Lecture_Create)),
 
-        registerDialogMessageClose: () => dispatch(dialogAction.registerDialogMessageClose(Teacher_Assignment_Create)),
-        create: () => dispatch(dialogAction.dialogRegister(Teacher_Assignment_Create))
+        registerDialogMessageClose: () => dispatch(dialogAction.registerDialogMessageClose(Teacher_Lecture_Create)),
+        create: () => dispatch(dialogAction.dialogRegister(Teacher_Lecture_Create))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TeacherAssignmentCreateDialog)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateLectureDialog)

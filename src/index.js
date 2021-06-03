@@ -11,7 +11,8 @@ import createSagaMiddleware from 'redux-saga'
 import {
     DeleteAssignmentDialog, DeleteResource,
     TeacherResource, UploadResource, TeacherAssignment,
-    TeacherAssignmentCreateDialog
+    TeacherAssignmentCreateDialog,TeacherLectureCreateDialog,
+    TeacherLectures,TeacherLectureDeleteDialog
 } from './store/reducers/Teacher'
 
 //Student
@@ -109,22 +110,26 @@ import {
     watchTeacherAssignmentSearchChange,
     watchTeacherAssignmentTableNext,
     watchTeacherAssignmentDelete,
-    watchTeacherAssignmentCreate
+    watchTeacherAssignmentCreate,
+    watchTeacherLectureInit,
+    watchTeacherLectureSearchChange,
+    watchTeacherLectureTableNext,
+    watchTeacherCreateLecture,
+    watchDeleteLecture
 } from './store/middleware/'
 
 
 const reducers = combineReducers({
     // Teacher State
-    // TeacherStudent,
-    // TeacherRoom,
-    // TeacherSubject,
-    // TeacherTask,
     TeacherAssignment,
     DeleteResource,
     TeacherResource,
     TeacherAssignmentCreateDialog,
     UploadResource,
     DeleteAssignmentDialog,
+    TeacherLectureCreateDialog,
+    TeacherLectures,
+    TeacherLectureDeleteDialog,
     // TeacherProfileState,
 
     // Student State
@@ -251,6 +256,12 @@ sagaMiddleware.run(watchTeacherAssignmentTableNext)
 sagaMiddleware.run(watchTeacherAssignmentSearchChange)
 sagaMiddleware.run(watchTeacherAssignmentDelete)
 sagaMiddleware.run(watchTeacherAssignmentCreate)
+sagaMiddleware.run(watchTeacherLectureInit)
+sagaMiddleware.run(watchTeacherLectureSearchChange)
+sagaMiddleware.run(watchTeacherLectureTableNext)
+sagaMiddleware.run(watchTeacherCreateLecture)
+sagaMiddleware.run(watchDeleteLecture)
+
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
