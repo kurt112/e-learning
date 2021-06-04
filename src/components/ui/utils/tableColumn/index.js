@@ -6,7 +6,7 @@
 *   for the column
 *
 *
-*   The lower part of the oject if
+*   The lower part of the object
 *   for the insertion of data in table
 *
 *
@@ -51,7 +51,11 @@ export {
     TeacherLogs,
     TeacherResources,
     TeacherAssignments,
+    TeacherExams,
+    TeacherQuiz,
 
+    TeacherInsertQuiz,
+    TeacherInsertExam,
     TeacherInsertAssignment,
     TeacherInsertResources,
     TeacherInsertAttendace,

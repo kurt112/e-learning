@@ -1,8 +1,8 @@
 export const
-    TeacherAssignmentBodyDataSettingsQuery = () => {
+    TeacherExamsBodyDataSettingsQuery = () => {
         return {
             query: `
-                     query{teacherAssignmentSettings{
+                     query{getTeacherExamsSettings{
                             totalPages,
                             totalElements,
                             currentPage
@@ -12,10 +12,10 @@ export const
         }
     },
 
-    getTeacherAssignments = (search, email, page) => {
+    getTeacherExams = (search, email, page) => {
         return {
             query: `
-                    query{getTeacherAssignment(search:"${search}",email:"${email}", page:${page}){
+                    query{getTeacherExams(search:"${search}",email:"${email}", page:${page}){
                             code,
                             lowGrade,
                             highGrade,

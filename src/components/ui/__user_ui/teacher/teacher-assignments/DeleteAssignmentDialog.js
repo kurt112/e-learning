@@ -12,7 +12,7 @@ import {Teacher_Assignment_Delete} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
 import {DeleteAssignmentFail, DeleteAssignmentSuccess} from "../../../../../__Messages/teacher/TeacherAssignmentMessage";
 
-const TeacherAssignmentDeleteDialog = ({
+const DeleteAssignmentDialog = ({
                                            dialog,
                                            state,
                                            closeDialog,
@@ -78,4 +78,4 @@ const mapDispatchToState = (dispatch) => {
 }
 
 
-export default connect(mapToState, mapDispatchToState)(TeacherAssignmentDeleteDialog)
+export default connect(mapToState, mapDispatchToState)(DeleteAssignmentDialog)

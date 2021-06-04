@@ -14,7 +14,12 @@ import {
     Teacher_Resource_Upload,
     Teacher_Resource_Delete,
     Teacher_Assignment,
-    Teacher_Resource, Teacher_Assignment_Delete, Teacher_Assignment_Create, Teacher_Lecture, Teacher_Lecture_Delete
+    Teacher_Resource,
+    Teacher_Assignment_Delete,
+    Teacher_Assignment_Create,
+    Teacher_Lecture,
+    Teacher_Lecture_Delete,
+    Teacher_Exams_Create, Teacher_Exams, Teacher_Exams_Delete, Teacher_Quiz_Create, Teacher_Quiz_Delete, Teacher_Quiz
 } from '../utils/Specify'
 import * as profile from '../ActionType/__ActionTypeGlobal/ProfileActionType'
 import {
@@ -87,6 +92,18 @@ import {
     TeacherLectureDataNext,
     TeacherLectureTableDataInit
 } from "./teacher/TeacherLectureMIddleWare"
+import {
+    TeacherExamsCreate,
+    TeacherExamsDelete,
+    TeacherExamsTableDataInit,
+    TeacherExamsTableNext
+} from "./teacher/TeacherExamsMiddleware";
+import {
+    TeacherQuizzesCreate,
+    TeacherQuizzesDelete,
+    TeacherQuizzesTableDataInit,
+    TeacherQuizzesTableNext
+} from "./teacher/TeacherQuizMIddleware";
 
 /**
  *
@@ -399,4 +416,48 @@ export function * watchTeacherCreateLecture() {
 
 export function * watchDeleteLecture() {
     yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Lecture_Delete),DeleteLecture)
+}
+
+// for exams teacher
+
+export function* watchTeacherExamsInit(){
+    yield takeLeading(adminTable.ADMIN_TABLE_INIT(Teacher_Exams), TeacherExamsTableDataInit)
+}
+
+export function* watchTeacherExamsSearchChange(){
+    yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Teacher_Exams), TeacherExamsTableDataInit)
+}
+
+export function* watchTeacherExamsTableNext(){
+    yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Teacher_Exams), TeacherExamsTableNext)
+}
+
+export function * watchTeacherCreateExams() {
+    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Exams_Create), TeacherExamsCreate)
+}
+
+export function * watchDeleteExams() {
+    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Exams_Delete),TeacherExamsDelete)
+}
+
+// for quiz teacher
+
+export function* watchTeacherQuizInit(){
+    yield takeLeading(adminTable.ADMIN_TABLE_INIT(Teacher_Quiz), TeacherQuizzesTableDataInit)
+}
+
+export function* watchTeacherQuizSearchChange(){
+    yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Teacher_Quiz), TeacherQuizzesTableDataInit)
+}
+
+export function* watchTeacherQuizTableNext(){
+    yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Teacher_Quiz), TeacherQuizzesTableNext)
+}
+
+export function * watchTeacherQuizExams() {
+    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Quiz_Create), TeacherQuizzesCreate)
+}
+
+export function * watchDeleteQuiz() {
+    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Quiz_Delete),TeacherQuizzesDelete)
 }

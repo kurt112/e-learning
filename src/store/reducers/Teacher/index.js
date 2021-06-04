@@ -63,3 +63,31 @@ export {
 export {
     default as TeacherLectureDeleteDialog
 } from './Lecture/Dialog/DeleteLectureDialogState'
+
+// for teacher exams
+
+export {
+    default as TeacherExams
+} from './Exams/TeacherExamsState'
+
+export {
+    default as TeacherExamsCreateDialog
+} from './Exams/Dialog/CreateExamsDialogState'
+
+export {
+    default as TeacherExamsDeleteDialog
+} from './Exams/Dialog/CreateExamsDialogState'
+
+// for teacher quizzes
+
+export {
+    default as TeacherQuizzes
+} from './Quizzes/TeacherQuizzesState'
+
+export {
+    default as TeacherQuizCreateDialog
+} from './Quizzes/Dialog/CreateQuizDialogState'
+
+export {
+    default as TeacherQuizDeleteDialog
+} from './Quizzes/Dialog/DeleteQuizDialogState'

@@ -13,7 +13,7 @@ import * as dialogAction from '../../../../../store/action/__ActionGlobal/AdminD
 import * as actions from '../../../../../store/action/teacher/GlobalAction'
 import {useState} from "react"
 import Response from "../../../utils/Response"
-import {Teacher_Assignment_Create} from "../../../../../store/utils/Specify"
+import {Teacher_Quiz_Create} from "../../../../../store/utils/Specify"
 import AutoComplete from "../../../utils/autoComplete/AutoComplete"
 import {
     autoCompleteGetTeacherAssignment,
@@ -27,23 +27,22 @@ import {
 } from '../../../utils/autoComplete/autoCompleteAction'
 import {AddedAssignmentFail, AddedAssignmentSuccess} from "../../../../../__Messages/teacher/TeacherAssignmentMessage"
 
-const TeacherAssignmentCreateDialog = ({
-
-                                           dialog,
-                                           closeDialog,
-                                           create,
-                                           registerDialogMessageClose,
-                                           email,
-                                           state,
-                                           changeResourceCode,
-                                           changeClassCode,
-                                           changeDeadLine,
-                                           changeSem,
-                                           changeQuarter,
-                                           changeLowGrade,
-                                           changeHighGrade,
-                                           changeDescription
-                                       }) => {
+const CreateQuizDialog = ({
+                              dialog,
+                              closeDialog,
+                              create,
+                              registerDialogMessageClose,
+                              email,
+                              state,
+                              changeResourceCode,
+                              changeClassCode,
+                              changeDeadLine,
+                              changeSem,
+                              changeQuarter,
+                              changeLowGrade,
+                              changeHighGrade,
+                              changeDescription
+                          }) => {
 
 
     // for assignment resource autoComplete
@@ -52,7 +51,7 @@ const TeacherAssignmentCreateDialog = ({
     const [resourceLoading, setResourceLoading] = useState(false)
     const [resourceText, setResourceText] = useState('')
     const OutputResources = (event, value) => {
-        changeResourceCode(value  === null? '': value[1].toString())
+        changeResourceCode(value === null ? '' : value[1].toString())
     }
 
 
@@ -62,20 +61,20 @@ const TeacherAssignmentCreateDialog = ({
     const [classLoading, setClassLoading] = useState(false)
     const [classText, setClassText] = useState('')
     const OutputClass = (event, value) => {
-        changeClassCode(value  === null? '': value[2].toString())
+        changeClassCode(value === null ? '' : value[2].toString())
     }
 
 
     return <Dialog
         open={dialog}
         onClose={closeDialog}
-        aria-labelledby="create-resource"
+        aria-labelledby="create-quiz"
         fullWidth
         maxWidth={"lg"}
     >
         <form noValidate>
-            <DialogTitle id="create-resource"
-            >Create Assignment</DialogTitle>
+            <DialogTitle id="create-quiz"
+            >Create Quiz</DialogTitle>
             <DialogContent>
 
                 <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
@@ -94,7 +93,7 @@ const TeacherAssignmentCreateDialog = ({
                             changeAutoComplete={OutputResources}
                             changeText={(value) => changeTextWithRole(value, setResourceText, setResourceLoading, setResourceOptions, autoCompleteGetTeacherAssignment, email)}
                             noOptionText={"Search By Class"}
-                            label={"Assignment Resource"}
+                            label={"Quiz Resource"}
                             optionLabel={twoOptionLabel}
                             optionSelected={twoOptionSelected}
                         />
@@ -234,18 +233,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changeResourceCode: (data) => dispatch(actions.changeResourceCode(data,Teacher_Assignment_Create)),
-        changeClassCode: (data) => dispatch(actions.changeClassCode(data,Teacher_Assignment_Create)),
-        changeDeadLine: (data) => dispatch(actions.changeDeadLine(data,Teacher_Assignment_Create)),
-        changeSem: (data) => dispatch(actions.changeSemester(data,Teacher_Assignment_Create)),
-        changeQuarter: (data) => dispatch(actions.changeQuarter(data,Teacher_Assignment_Create)),
-        changeLowGrade: (data) => dispatch(actions.changeLowGrade(data,Teacher_Assignment_Create)),
-        changeHighGrade: (data) => dispatch(actions.changeHighGrade(data,Teacher_Assignment_Create)),
-        changeDescription: (data) => dispatch(actions.changeDescription(data,Teacher_Assignment_Create)),
+        changeResourceCode: (data) => dispatch(actions.changeResourceCode(data, Teacher_Quiz_Create)),
+        changeClassCode: (data) => dispatch(actions.changeClassCode(data, Teacher_Quiz_Create)),
+        changeDeadLine: (data) => dispatch(actions.changeDeadLine(data, Teacher_Quiz_Create)),
+        changeSem: (data) => dispatch(actions.changeSemester(data, Teacher_Quiz_Create)),
+        changeQuarter: (data) => dispatch(actions.changeQuarter(data, Teacher_Quiz_Create)),
+        changeLowGrade: (data) => dispatch(actions.changeLowGrade(data, Teacher_Quiz_Create)),
+        changeHighGrade: (data) => dispatch(actions.changeHighGrade(data, Teacher_Quiz_Create)),
+        changeDescription: (data) => dispatch(actions.changeDescription(data, Teacher_Quiz_Create)),
 
-        registerDialogMessageClose: () => dispatch(dialogAction.registerDialogMessageClose(Teacher_Assignment_Create)),
-        create: () => dispatch(dialogAction.dialogRegister(Teacher_Assignment_Create))
+        registerDialogMessageClose: () => dispatch(dialogAction.registerDialogMessageClose(Teacher_Quiz_Create)),
+        create: () => dispatch(dialogAction.dialogRegister(Teacher_Quiz_Create))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TeacherAssignmentCreateDialog)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateQuizDialog)

@@ -18,7 +18,7 @@ import {JavaEndpoint} from "../../../../store/middleware/utils/ApiEndpoint/Class
 export const TeacherRoomTable = [
     {
         name: 'id',
-        lable: 'Id',
+        label: 'Id',
     },
     {
         name: 'roomName',
@@ -180,7 +180,7 @@ export const TeacherLectureTable = [
     },
     {
         name: 'quarter',
-        label:'Quarter'
+        label: 'Quarter'
     },
     {
         name: 'uploadedOn',
@@ -197,8 +197,8 @@ export const TeacherLectureTable = [
             filter: false,
             sort: false,
             customBodyRender: (value) => {
-                return <a href={JavaEndpoint + `/teacher/resource/download?code=`+value} target="_blank"
-                          style={{textDecoration: 'none', marginRight: '10px'}}>
+                return <a href={JavaEndpoint + `/teacher/resource/download?code=` + value} target="_blank"
+                          style={{textDecoration: 'none', marginRight: '10px'}} rel="noopener noreferrer">
                     <Button variant="outlined" color="primary">
                         Download
                     </Button>
@@ -212,8 +212,8 @@ export const TeacherLectureTable = [
 
 ]
 
-export function TeacherInsertLecture(code, documentName, gradeSection,sem,quarter, uploadedOn, description, download) {
-    return {code, documentName, gradeSection,sem,quarter, uploadedOn, description, download}
+export function TeacherInsertLecture(code, documentName, gradeSection, sem, quarter, uploadedOn, description, download) {
+    return {code, documentName, gradeSection, sem, quarter, uploadedOn, description, download}
 }
 
 /**
@@ -310,7 +310,7 @@ export const TeacherResources = [
         label: 'Document Name',
     },
     {
-        name:'description',
+        name: 'description',
         label: 'Description'
     },
     {
@@ -332,8 +332,9 @@ export const TeacherResources = [
             filter: false,
             sort: false,
             customBodyRender: (value) => {
-                return <a href={JavaEndpoint + '/teacher/resource/download?code='+value} target="_blank"
-                              style={{textDecoration: 'none', marginRight: '10px'}}>
+                return <a href={JavaEndpoint + '/teacher/resource/download?code=' + value} target="_blank"
+                          style={{textDecoration: 'none', marginRight: '10px'}}
+                          rel="noopener noreferrer">
                     <Button variant="outlined" color="primary">
                         Download
                     </Button>
@@ -348,8 +349,8 @@ export const TeacherResources = [
 
 ]
 
-export function TeacherInsertResources(documentCode, documentName,description, dateUploaded, type, status) {
-    return {documentCode, documentName,description, dateUploaded, type, status, download:documentCode}
+export function TeacherInsertResources(documentCode, documentName, description, dateUploaded, type, status) {
+    return {documentCode, documentName, description, dateUploaded, type, status, download: documentCode}
 }
 
 /**
@@ -395,7 +396,7 @@ export const TeacherAssignments = [
         label: 'Deadline'
     },
     {
-        name:'description',
+        name: 'description',
         label: 'Description'
     },
     {
@@ -405,8 +406,9 @@ export const TeacherAssignments = [
             filter: false,
             sort: false,
             customBodyRender: (value) => {
-                return <a href={JavaEndpoint + '/teacher/resource/download?code='+value} target="_blank"
-                          style={{textDecoration: 'none', marginRight: '10px'}}>
+                return <a href={JavaEndpoint + '/teacher/resource/download?code=' + value} target="_blank"
+                          style={{textDecoration: 'none', marginRight: '10px'}}
+                          rel="noopener noreferrer">
                     <Button variant="outlined" color="primary">
                         Download
                     </Button>
@@ -421,7 +423,172 @@ export const TeacherAssignments = [
 
 ]
 
-export function TeacherInsertAssignment(code, lowGrade, highGrade, semester,quarter,classes,dateUploaded,deadline,description,documentCode) {
+export function TeacherInsertAssignment(code, lowGrade, highGrade, semester, quarter, classes, dateUploaded, deadline, description, documentCode) {
 
-    return {code, lowGrade, highGrade, semester,quarter,classes,dateUploaded:convertDateTime(dateUploaded),deadline: convertDateTime(deadline),description,download:documentCode}
+    return {
+        code,
+        lowGrade,
+        highGrade,
+        semester,
+        quarter,
+        classes,
+        dateUploaded: convertDateTime(dateUploaded),
+        deadline: convertDateTime(deadline),
+        description,
+        download: documentCode
+    }
+}
+
+export const TeacherExams = [
+    {
+        name: 'code',
+        label: 'Exam Code'
+    },
+    {
+        name: 'lowGrade',
+        label: 'Low Grade'
+    },
+    {
+        name: 'highGrade',
+        label: 'High Grade'
+    },
+    {
+        name: 'semester',
+        label: 'Semester'
+    },
+    {
+        name: 'quarter',
+        label: 'Quarter'
+    },
+    {
+        name: 'classes',
+        label: 'Class'
+    },
+    {
+        name: 'dateUploaded',
+        label: 'Uploaded On'
+    },
+
+    {
+        name: 'deadline',
+        label: 'Deadline'
+    },
+    {
+        name: 'description',
+        label: 'Description'
+    },
+    {
+        name: "download",
+        label: "Download",
+        options: {
+            filter: false,
+            sort: false,
+            customBodyRender: (value) => {
+                return <a href={JavaEndpoint + '/teacher/resource/download?code=' + value} target="_blank"
+                          style={{textDecoration: 'none', marginRight: '10px'}}
+                          rel="noopener noreferrer">
+                    <Button variant="outlined" color="primary">
+                        Download
+                    </Button>
+                </a>
+            },
+            filterOptions: {
+                fullWidth: false
+            }
+        }
+    }
+]
+
+
+export function TeacherInsertExam(code, lowGrade, highGrade, semester, quarter, classes, dateUploaded, deadline, description, documentCode) {
+
+    return {
+        code,
+        lowGrade,
+        highGrade,
+        semester,
+        quarter,
+        classes,
+        dateUploaded: convertDateTime(dateUploaded),
+        deadline: convertDateTime(deadline),
+        description,
+        download: documentCode
+    }
+}
+
+export const TeacherQuiz = [
+    {
+        name: 'code',
+        label: 'Quiz Code'
+    },
+    {
+        name: 'lowGrade',
+        label: 'Low Grade'
+    },
+    {
+        name: 'highGrade',
+        label: 'High Grade'
+    },
+    {
+        name: 'semester',
+        label: 'Semester'
+    },
+    {
+        name: 'quarter',
+        label: 'Quarter'
+    },
+    {
+        name: 'classes',
+        label: 'Class'
+    },
+    {
+        name: 'dateUploaded',
+        label: 'Uploaded On'
+    },
+
+    {
+        name: 'deadline',
+        label: 'Deadline'
+    },
+    {
+        name: 'description',
+        label: 'Description'
+    },
+    {
+        name: "download",
+        label: "Download",
+        options: {
+            filter: false,
+            sort: false,
+            customBodyRender: (value) => {
+                return <a href={JavaEndpoint + '/teacher/resource/download?code=' + value} target="_blank"
+                          style={{textDecoration: 'none', marginRight: '10px'}}
+                          rel="noopener noreferrer">
+                    <Button variant="outlined" color="primary">
+                        Download
+                    </Button>
+                </a>
+            },
+            filterOptions: {
+                fullWidth: false
+            }
+        }
+    }
+]
+
+
+export function TeacherInsertQuiz(code, lowGrade, highGrade, semester, quarter, classes, dateUploaded, deadline, description, documentCode) {
+
+    return {
+        code,
+        lowGrade,
+        highGrade,
+        semester,
+        quarter,
+        classes,
+        dateUploaded: convertDateTime(dateUploaded),
+        deadline: convertDateTime(deadline),
+        description,
+        download: documentCode
+    }
 }

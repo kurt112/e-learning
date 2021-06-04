@@ -1,5 +1,3 @@
-import {DeleteAssignmentDialog, UploadResource} from "../reducers/Teacher";
-
 export const
 
     // Admin State
@@ -28,6 +26,12 @@ export const
     TeacherLecture = (state) => state.TeacherLectures,
     TeacherLectureCreate = (state) => state.TeacherLectureCreateDialog,
     TeacherLectureDelete = (state) => state.TeacherLectureDeleteDialog,
+    TeacherExamsCreateDialog = (state) => state.TeacherExamsCreateDialog,
+    TeacherExamsDeleteDialog = (state) => state.TeacherExamsDeleteDialog,
+    TeacherExams = (state) => state.TeacherExams,
+    TeacherQuizzes = (state) => state.TeacherQuizzes,
+    TeacherQuizCreateDialog = (state) => state.TeacherQuizCreateDialog,
+    TeacherQuizDeleteDialog = (state) => state.TeacherQuizDeleteDialog,
 
     // Login, Register State
     Login = (state) => state.Login,

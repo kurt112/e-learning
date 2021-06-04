@@ -1,5 +1,5 @@
 import {Fragment, lazy, useEffect} from "react";
-import {Box,  Grid, Paper, Toolbar, Tooltip} from "@material-ui/core";
+import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
@@ -15,8 +15,8 @@ import {
     Teacher_Assignment_Delete
 } from "../../../../../store/utils/Specify";
 
-const TeacherAssignmentCreateDialog = lazy(() => import(`./TeacherAssignmentCreateDialog`))
-const TeacherAssignmentDeleteDialog = lazy(() => import(`./TeacherAssignmentDeleteDialog`))
+const TeacherAssignmentCreateDialog = lazy(() => import(`./CreateAssignmentDialog`))
+const TeacherAssignmentDeleteDialog = lazy(() => import(`./DeleteAssignmentDialog`))
 
 const TeacherAssignments = ({
                                 state,
@@ -66,7 +66,7 @@ const TeacherAssignments = ({
                         title={
                             <Typography variant="h6">
                                 Assignment List
-                                {/*{state.loading && <CircularProgress size={24} style={{ marginLeft: 15, position: 'relative', top: 4 }} />}*/}
+                                {state.loading && <CircularProgress size={24} style={{ marginLeft: 15, position: 'relative', top: 4 }} />}
                             </Typography>
                         }
                         columns={columns}

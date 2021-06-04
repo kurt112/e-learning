@@ -1,31 +1,53 @@
-import {Fragment} from "react";
+import {Fragment, lazy, useEffect} from "react";
 import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import MUIDataTable from "mui-datatables";
 import Typography from "@material-ui/core/Typography";
-import {TeacherResources as columns} from "../../../utils/tableColumn";
-import style, {TableOptionsNoPaging} from "../../../_style/TableStyle";
+import {TeacherQuiz as columns} from "../../../utils/tableColumn";
+import style, {TableOptions as options} from "../../../_style/TableStyle";
+import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
 import {connect} from "react-redux";
+import {
+ Teacher_Quiz, Teacher_Quiz_Create, Teacher_Quiz_Delete
+} from "../../../../../store/utils/Specify";
 
-const TeacherQuizzes = () => {
+const CreateQuizDialog = lazy(() => import(`./CreateQuizDialog`))
+const DeleteQuizDialog = lazy(() => import(`./DeleteQuizDialog`))
+
+const TeacherQuizzes = ({
+                          state,
+                          initData,
+                          searchChange,
+                          pageChange,
+                          createExamDialogOpen,
+                          createExamDialogClose,
+                          deleteExamDialogOpen,
+                          deleteExamDialogClose
+                      }) => {
+    useEffect(() => {
+        if (state.data.length === 0) initData()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     const classes = style()
     return (
         <Fragment>
+            <CreateQuizDialog dialog={state.createDialog} closeDialog={createExamDialogClose}/>
+            <DeleteQuizDialog dialog={state.deleteDialog} closeDialog={deleteExamDialogClose}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
                         <Box className={classes.tableNavbarBox}>
 
-                            <Tooltip title="Create Assignment">
-                                <IconButton aria-label="Add">
+                            <Tooltip title="Create Quiz">
+                                <IconButton aria-label="Add" onClick={createExamDialogOpen}>
                                     <CloudUploadIcon color='primary' fontSize={"large"}/>
                                 </IconButton>
                             </Tooltip>
 
                             <Tooltip title="Delete Quiz">
-                                <IconButton aria-label="delete">
+                                <IconButton aria-label="delete" onClick={deleteExamDialogOpen}>
                                     <DeleteForeverIcon color='secondary' fontSize={"large"}/>
                                 </IconButton>
                             </Tooltip>
@@ -40,13 +62,20 @@ const TeacherQuizzes = () => {
                     <MUIDataTable
                         title={
                             <Typography variant="h6">
-                                Teacher Quiz List
-                                {/*{state.loading && <CircularProgress size={24} style={{ marginLeft: 15, position: 'relative', top: 4 }} />}*/}
+                                Quiz List
+                                {state.loading && <CircularProgress size={24} style={{ marginLeft: 15, position: 'relative', top: 4 }} />}
                             </Typography>
                         }
-                        // data={state.data}
                         columns={columns}
-                        options={TableOptionsNoPaging()}
+                        data={state.data}
+                        options={options(
+                            pageChange,
+                            searchChange,
+                            state.search,
+                            state.totalPages,
+                            state.totalItems,
+                            state.page,
+                            state.loading)}
                     />
                 </Grid>
             </Grid>
@@ -56,13 +85,22 @@ const TeacherQuizzes = () => {
 
 const mapStateToProps = (state) => {
     return {
-
+        state: state.TeacherQuizzes
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        initData: () => dispatch(actions.InitDataTable(Teacher_Quiz)),
+        searchChange: (data) => dispatch(actions.SearchChange(data, Teacher_Quiz)),
+        pageChange: (page) => dispatch(actions.DataNextPage(page, Teacher_Quiz)),
 
+
+        createExamDialogOpen: () => dispatch(actions.openDialog(Teacher_Quiz_Create)),
+        createExamDialogClose: () => dispatch(actions.closeDialog(Teacher_Quiz_Create)),
+
+        deleteExamDialogOpen: () => dispatch(actions.openDialog(Teacher_Quiz_Delete)),
+        deleteExamDialogClose: () => dispatch(actions.closeDialog(Teacher_Quiz_Delete))
     }
 }
 

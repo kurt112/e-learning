@@ -12,7 +12,13 @@ import {
     DeleteAssignmentDialog, DeleteResource,
     TeacherResource, UploadResource, TeacherAssignment,
     TeacherAssignmentCreateDialog,TeacherLectureCreateDialog,
-    TeacherLectures,TeacherLectureDeleteDialog
+    TeacherLectures,TeacherLectureDeleteDialog,
+    TeacherExamsCreateDialog,
+    TeacherExamsDeleteDialog,
+    TeacherExams,
+    TeacherQuizzes,
+    TeacherQuizCreateDialog,
+    TeacherQuizDeleteDialog
 } from './store/reducers/Teacher'
 
 //Student
@@ -115,11 +121,22 @@ import {
     watchTeacherLectureSearchChange,
     watchTeacherLectureTableNext,
     watchTeacherCreateLecture,
-    watchDeleteLecture
+    watchDeleteLecture,
+    watchDeleteExams,
+    watchTeacherCreateExams,
+    watchTeacherExamsInit,
+    watchTeacherExamsSearchChange,
+    watchTeacherExamsTableNext,
+    watchDeleteQuiz,
+    watchTeacherQuizExams,
+    watchTeacherQuizInit,
+    watchTeacherQuizSearchChange,
+    watchTeacherQuizTableNext
 } from './store/middleware/'
 
 
 const reducers = combineReducers({
+
     // Teacher State
     TeacherAssignment,
     DeleteResource,
@@ -130,7 +147,12 @@ const reducers = combineReducers({
     TeacherLectureCreateDialog,
     TeacherLectures,
     TeacherLectureDeleteDialog,
-    // TeacherProfileState,
+    TeacherExamsCreateDialog,
+    TeacherExamsDeleteDialog,
+    TeacherExams,
+    TeacherQuizzes,
+    TeacherQuizCreateDialog,
+    TeacherQuizDeleteDialog,
 
     // Student State
     StudentActivity,
@@ -261,6 +283,17 @@ sagaMiddleware.run(watchTeacherLectureSearchChange)
 sagaMiddleware.run(watchTeacherLectureTableNext)
 sagaMiddleware.run(watchTeacherCreateLecture)
 sagaMiddleware.run(watchDeleteLecture)
+sagaMiddleware.run(watchDeleteExams)
+sagaMiddleware.run(watchTeacherCreateExams)
+sagaMiddleware.run(watchTeacherExamsInit)
+sagaMiddleware.run(watchTeacherExamsSearchChange)
+sagaMiddleware.run(watchTeacherExamsTableNext)
+sagaMiddleware.run(watchDeleteQuiz)
+sagaMiddleware.run(watchTeacherQuizExams)
+sagaMiddleware.run(watchTeacherQuizInit)
+sagaMiddleware.run(watchTeacherQuizSearchChange)
+sagaMiddleware.run(watchTeacherQuizTableNext)
+
 
 ReactDOM.render(
     <React.StrictMode>

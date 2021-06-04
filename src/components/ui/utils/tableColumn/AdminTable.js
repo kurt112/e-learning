@@ -287,12 +287,14 @@ export const AdminActivityTable = [
                 return value === undefined ? null :
                     <Fragment>
                         <a href={JavaEndpoint + '/admin/activity/download?activity-id=' + value} target="_blank"
+                           rel="noopener noreferrer"
                            style={{textDecoration: 'none', marginRight: '10px'}}>
                             <Button variant="outlined" color="primary">
                                 Download
                             </Button>
                         </a>
                         <a href={JavaEndpoint + '/admin/activity/view?activity-id=' + value} target="_blank"
+                           rel="noopener noreferrer"
                            style={{textDecoration: 'none'}}>
                             <Button variant="outlined" color="primary">
                                 View
