@@ -76,7 +76,7 @@ export {
 
 export {
     default as TeacherExamsDeleteDialog
-} from './Exams/Dialog/CreateExamsDialogState'
+} from './Exams/Dialog/DeleteExamsDialogState'
 
 // for teacher quizzes
 

@@ -8,9 +8,9 @@ import {
 } from "@material-ui/core"
 import {connect} from 'react-redux'
 import * as actions from '../../../../../store/action/__ActionGlobal/AdminDialogAction'
-import {Teacher_Assignment_Delete} from "../../../../../store/utils/Specify";
+import {Teacher_Exams_Delete} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
-import {DeleteAssignmentFail, DeleteAssignmentSuccess} from "../../../../../__Messages/teacher/TeacherAssignmentMessage";
+// import {DeleteAssignmentFail, DeleteAssignmentSuccess} from "../../../../../__Messages/teacher/TeacherAssignmentMessage";
 
 const DeleteExamsDialog = ({
                                            dialog,
@@ -36,8 +36,8 @@ const DeleteExamsDialog = ({
         <DialogContent>
 
             <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
-                      messageFail={DeleteAssignmentFail}
-                      messageSuccess={DeleteAssignmentSuccess}/>
+                      messageFail={'Exam Delete Not Success'}
+                      messageSuccess={'Exam Delete Success'}/>
             <TextField
                 autoFocus
                 value={state.id}
@@ -65,15 +65,15 @@ const DeleteExamsDialog = ({
 
 const mapToState = (state) => {
     return {
-        state: state.DeleteAssignmentDialog
+        state: state.TeacherExamsDeleteDialog
     }
 }
 
 const mapDispatchToState = (dispatch) => {
     return {
-        dialogRegister: () => dispatch(actions.dialogRegister(Teacher_Assignment_Delete)),
-        dialogId: (data) => dispatch(actions.dialogId(data, Teacher_Assignment_Delete)),
-        registerDialogMessageClose: () => dispatch(actions.registerDialogMessageClose(Teacher_Assignment_Delete))
+        dialogRegister: () => dispatch(actions.dialogRegister(Teacher_Exams_Delete)),
+        dialogId: (data) => dispatch(actions.dialogId(data, Teacher_Exams_Delete)),
+        registerDialogMessageClose: () => dispatch(actions.registerDialogMessageClose(Teacher_Exams_Delete))
     }
 }
 

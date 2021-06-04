@@ -14,8 +14,6 @@ const newState = {
 }
 const transforms = (items) => items.map((item) => insert(item.code, item.lowGrade, item.highGrade, item.sem, item.quarter, `${item.roomShiftClass.roomShift.grade} - ${item.roomShiftClass.roomShift.section}`, item.createdAt,item.deadLine,item.description, item.resource.code))
 
-
-
 const reducer = (state = newState, action) => {
     switch (action.type) {
 
@@ -41,8 +39,6 @@ const reducer = (state = newState, action) => {
             return updateObject(state, {createDialog: true})
         case dialogAction.DIALOG_CLOSE(Teacher_Quiz_Create):
             return updateObject(state, {createDialog: false})
-        // case teacherDialog.Dialog_Success(Teacher_Resource_Upload):
-        // return successData(state, action)
 
 
         // for opening and closing of delete dialog
@@ -50,8 +46,7 @@ const reducer = (state = newState, action) => {
             return updateObject(state, {deleteDialog: true})
         case dialogAction.DIALOG_CLOSE(Teacher_Quiz_Delete):
             return updateObject(state, {deleteDialog: false})
-        // case teacherDialog.Dialog_Success(Teacher_Resource_Delete):
-        //     return successDelete(state, action)
+
         default:
             return state
     }

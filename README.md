@@ -49,3 +49,4 @@ This section is the author of the project
 
 [Ellysa Kaye Jarilla](https://www.facebook.com/silly.elly2121/)
 
+[![DeepScan grade](https://deepscan.io/api/teams/13640/projects/16651/branches/361269/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=13640&pid=16651&bid=361269)

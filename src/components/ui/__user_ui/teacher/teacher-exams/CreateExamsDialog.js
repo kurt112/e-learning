@@ -16,8 +16,7 @@ import Response from "../../../utils/Response"
 import {Teacher_Exams_Create} from "../../../../../store/utils/Specify"
 import AutoComplete from "../../../utils/autoComplete/AutoComplete"
 import {
-    autoCompleteGetTeacherAssignment,
-    autoCompleteGetTeacherClass
+    autoCompleteGetTeacherClass, autoCompleteGetTeacherExams
 } from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint"
 import {
     TwoFilterOption,
@@ -92,7 +91,7 @@ const CreateExamsDialog = ({
                             loading={resourceLoading}
                             InputText={resourceText}
                             changeAutoComplete={OutputResources}
-                            changeText={(value) => changeTextWithRole(value, setResourceText, setResourceLoading, setResourceOptions, autoCompleteGetTeacherAssignment, email)}
+                            changeText={(value) => changeTextWithRole(value, setResourceText, setResourceLoading, setResourceOptions, autoCompleteGetTeacherExams, email)}
                             noOptionText={"Search By Class"}
                             label={"Exams Resource"}
                             optionLabel={twoOptionLabel}
@@ -199,7 +198,7 @@ const CreateExamsDialog = ({
                     </Grid>
 
                     <Grid item md={12} xs={12}>
-                        <InputLabel htmlFor="ActivityDescription">Assignment Description(Optional)</InputLabel>
+                        <InputLabel htmlFor="ActivityDescription">Exam Description(Optional)</InputLabel>
                         <TextareaAutosize
 
                             label="Description"
@@ -227,7 +226,7 @@ const CreateExamsDialog = ({
 
 const mapStateToProps = (state) => {
     return {
-        state: state.TeacherAssignmentCreateDialog,
+        state: state.TeacherExamsCreateDialog,
         email: state.CurrentUser.user.email
     }
 }

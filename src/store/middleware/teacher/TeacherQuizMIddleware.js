@@ -6,30 +6,29 @@ import {
 } from "../../utils/Specify";
 
 import {
-    TeacherAssignmentDelete as deleteAssignment,
-    TeacherAssignmentCreate as createAssignment
+    TeacherQuizDelete ,
+    TeacherQuizCreate
 } from "../utils/ApiEndpoint/ClassroomEndPoint";
 import {baseUrl} from "../axios";
-import {DialogSuccess} from "../../action/teacher/GlobalAction";
 import * as dialogAction from "../../action/__ActionGlobal/AdminDialogAction";
 import {adjectives, animals, colors, uniqueNamesGenerator} from "unique-names-generator";
 import {getTeacherQuiz,TeacherQuizBodyDataSettingsQuery} from "../utils/GraphQlQuery/TeacherQuery/TeacherQuizQuery";
 
 export function* TeacherQuizzesTableNext(action) {
-    const classState = yield select(Selector.TeacherExams)
+    const classState = yield select(Selector.TeacherQuizzes)
     const user = yield  select(Selector.CurrentUser)
     yield TableNextData(action, classState, getTeacherQuiz(classState.search, user.user.email, classState.page), TeacherQuizBodyDataSettingsQuery(), Teacher_Quiz)
 }
 
 export function* TeacherQuizzesTableDataInit() {
 
-    const classState = yield select(Selector.TeacherExams)
+    const classState = yield select(Selector.TeacherQuizzes)
     const user = yield  select(Selector.CurrentUser)
     yield TableDataInit(getTeacherQuiz(classState.search, user.user.email, classState.page), TeacherQuizBodyDataSettingsQuery(), Teacher_Quiz)
 }
 
 export function* TeacherQuizzesDelete() {
-    const classState = yield select(Selector.TeacherExamsDeleteDialog)
+    const classState = yield select(Selector.TeacherQuizDeleteDialog)
     const currentUser = yield select(Selector.CurrentUser)
     const email = currentUser.user.email
     const params = new URLSearchParams();
@@ -37,8 +36,8 @@ export function* TeacherQuizzesDelete() {
     params.append('code', classState.id)
     params.append('email', email)
     try {
-        const response = yield baseUrl.delete(deleteAssignment, {params})
-        yield put(DialogSuccess(response.data.item, Teacher_Quiz_Delete))
+        yield baseUrl.delete(TeacherQuizDelete, {params})
+        yield TeacherQuizzesTableDataInit()
         yield put(dialogAction.registerDialogSuccess(Teacher_Quiz_Delete))
     } catch (error) {
         yield put(dialogAction.registerDialogFail(error, Teacher_Quiz_Delete))
@@ -46,7 +45,7 @@ export function* TeacherQuizzesDelete() {
 }
 
 export function* TeacherQuizzesCreate() {
-    const classState = yield select(Selector.TeacherExamsCreateDialog)
+    const classState = yield select(Selector.TeacherQuizCreateDialog)
 
     const code = yield uniqueNamesGenerator({
             dictionaries: [adjectives, colors, animals],
@@ -62,11 +61,9 @@ export function* TeacherQuizzesCreate() {
     }
 
     try {
-        yield baseUrl.post(createAssignment, data)
-        const classState = yield select(Selector.TeacherExams)
-        const user = yield  select(Selector.CurrentUser)
+        yield baseUrl.post(TeacherQuizCreate, data)
+        yield TeacherQuizzesTableDataInit()
         yield put(dialogAction.registerDialogSuccess(Teacher_Quiz_Create))
-        yield TableDataInit(getTeacherQuiz(classState.search, user.user.email, classState.page), TeacherQuizBodyDataSettingsQuery(), Teacher_Quiz)
     } catch (error) {
         console.log(error)
     }

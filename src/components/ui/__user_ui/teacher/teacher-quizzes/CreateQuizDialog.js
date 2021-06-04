@@ -16,8 +16,7 @@ import Response from "../../../utils/Response"
 import {Teacher_Quiz_Create} from "../../../../../store/utils/Specify"
 import AutoComplete from "../../../utils/autoComplete/AutoComplete"
 import {
-    autoCompleteGetTeacherAssignment,
-    autoCompleteGetTeacherClass
+    autoCompleteGetTeacherClass, autoCompleteGetTeacherQuiz
 } from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint"
 import {
     TwoFilterOption,
@@ -91,7 +90,7 @@ const CreateQuizDialog = ({
                             loading={resourceLoading}
                             InputText={resourceText}
                             changeAutoComplete={OutputResources}
-                            changeText={(value) => changeTextWithRole(value, setResourceText, setResourceLoading, setResourceOptions, autoCompleteGetTeacherAssignment, email)}
+                            changeText={(value) => changeTextWithRole(value, setResourceText, setResourceLoading, setResourceOptions, autoCompleteGetTeacherQuiz, email)}
                             noOptionText={"Search By Class"}
                             label={"Quiz Resource"}
                             optionLabel={twoOptionLabel}
@@ -226,7 +225,7 @@ const CreateQuizDialog = ({
 
 const mapStateToProps = (state) => {
     return {
-        state: state.TeacherAssignmentCreateDialog,
+        state: state.TeacherQuizCreateDialog,
         email: state.CurrentUser.user.email
     }
 }

@@ -32,7 +32,6 @@ export function* TeacherLectureTableDataInit() {
 export function* DeleteLecture() {
     const deleteLecture = yield select(Selector.TeacherLectureDelete)
     const currentUser = yield select(Selector.CurrentUser)
-    const state = yield select(Selector.TeacherLecture)
     const email = currentUser.user.email
 
     const params = new URLSearchParams();
@@ -40,7 +39,7 @@ export function* DeleteLecture() {
     params.append('email', email)
     try {
         yield baseUrl.delete(TeacherLectureDelete, {params})
-        yield TableDataInit(getTeacherLectureByEmail(state.search, email, state.page), TeacherLectureBodyDataSettingsQuery(), Teacher_Lecture)
+        yield TeacherLectureTableDataInit()
         yield put(dialogAction.registerDialogSuccess(Teacher_Lecture_Delete))
     } catch (error) {
         yield put(dialogAction.registerDialogFail(error, Teacher_Resource_Delete))
@@ -65,10 +64,8 @@ export function* TeacherLectureCreate() {
 
     try {
         yield baseUrl.post(createLecture, data)
-        const state = yield select(Selector.TeacherLecture)
-        const user = yield  select(Selector.CurrentUser)
         yield put(dialogAction.registerDialogSuccess(Teacher_Lecture_Create))
-        yield TableDataInit(getTeacherLectureByEmail(state.search, user.user.email, state.page), TeacherLectureBodyDataSettingsQuery(), Teacher_Lecture)
+        yield TeacherLectureTableDataInit()
     } catch (error) {
         console.log(error)
     }

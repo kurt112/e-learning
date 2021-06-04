@@ -11,6 +11,7 @@ import * as actions from '../../../../../store/action/__ActionGlobal/AdminDialog
 import {Teacher_Quiz_Delete} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
 import {DeleteAssignmentFail, DeleteAssignmentSuccess} from "../../../../../__Messages/teacher/TeacherAssignmentMessage";
+import {TeacherQuizDeleteDialog} from "../../../../../store/reducers/Teacher";
 
 const DeleteQuizDialog = ({
                                dialog,
@@ -65,7 +66,7 @@ const DeleteQuizDialog = ({
 
 const mapToState = (state) => {
     return {
-        state: state.DeleteAssignmentDialog
+        state: state.TeacherQuizDeleteDialog
     }
 }
 

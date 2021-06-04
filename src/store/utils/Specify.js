@@ -30,6 +30,6 @@ export const
     Teacher_Exams_Delete = Teacher_Exams+'_DELETE',
 
     // Teacher User Quizzes,
-    Teacher_Quiz = Teacher+'_Quizzes',
-    Teacher_Quiz_Create = Teacher_Exams+'_CREATE',
-    Teacher_Quiz_Delete = Teacher_Exams+'_DELETE'
+    Teacher_Quiz = Teacher+'_QUIZZES',
+    Teacher_Quiz_Create = Teacher_Quiz+'_CREATE',
+    Teacher_Quiz_Delete = Teacher_Quiz+'_DELETE'

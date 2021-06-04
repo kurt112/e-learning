@@ -6,17 +6,14 @@ import {
     TeacherExamsBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/TeacherQuery/TeacherExamsQuery";
 import {
-    Teacher_Assignment_Create,
-    Teacher_Assignment_Delete,
-    Teacher_Exams
+    Teacher_Exams, Teacher_Exams_Create, Teacher_Exams_Delete
 } from "../../utils/Specify";
 
 import {
-    TeacherAssignmentDelete as deleteAssignment,
-    TeacherAssignmentCreate as createAssignment
+    TeacherExamCreate,
+    TeacherExamDelete
 } from "../utils/ApiEndpoint/ClassroomEndPoint";
 import {baseUrl} from "../axios";
-import {DialogSuccess} from "../../action/teacher/GlobalAction";
 import * as dialogAction from "../../action/__ActionGlobal/AdminDialogAction";
 import {adjectives, animals, colors, uniqueNamesGenerator} from "unique-names-generator";
 
@@ -42,11 +39,11 @@ export function* TeacherExamsDelete() {
     params.append('code', classState.id)
     params.append('email', email)
     try {
-        const response = yield baseUrl.delete(deleteAssignment, {params})
-        yield put(DialogSuccess(response.data.item, Teacher_Assignment_Delete))
-        yield put(dialogAction.registerDialogSuccess(Teacher_Assignment_Delete))
+        yield baseUrl.delete(TeacherExamDelete, {params})
+        yield TeacherExamsTableDataInit()
+        yield put(dialogAction.registerDialogSuccess(Teacher_Exams_Delete))
     } catch (error) {
-        yield put(dialogAction.registerDialogFail(error, Teacher_Assignment_Delete))
+        yield put(dialogAction.registerDialogFail(error, Teacher_Exams_Delete))
     }
 }
 
@@ -67,11 +64,9 @@ export function* TeacherExamsCreate() {
     }
 
     try {
-        yield baseUrl.post(createAssignment, data)
-        const classState = yield select(Selector.TeacherExams)
-        const user = yield  select(Selector.CurrentUser)
-        yield put(dialogAction.registerDialogSuccess(Teacher_Assignment_Create))
-        yield TableDataInit(getTeacherExams(classState.search, user.user.email, classState.page), TeacherExamsBodyDataSettingsQuery(), Teacher_Exams)
+        yield baseUrl.post(TeacherExamCreate, data)
+        yield put(dialogAction.registerDialogSuccess(Teacher_Exams_Create))
+        yield TeacherExamsTableDataInit()
     } catch (error) {
         console.log(error)
     }

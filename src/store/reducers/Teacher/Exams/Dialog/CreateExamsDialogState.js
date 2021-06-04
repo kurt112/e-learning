@@ -9,8 +9,11 @@ const newState = new state()
 const init_state = {
     resourceCode: '',
     classCode: '',
+    deadLine: '',
     sem: 1,
     quarter: 1,
+    lowGrade: 0,
+    highGrade: 100,
     description: '',
     ...newState.init_state
 }
@@ -18,14 +21,20 @@ const init_state = {
 const reducer = (state = init_state, action) => {
     switch (action.type) {
         // for changing data
+        case dialogAction.CHANGE_HIGH_GRADE(Teacher_Exams_Create):
+            return updateObject(state, {highGrade: action.data})
         case dialogAction.CHANGE_RESOURCE_CODE(Teacher_Exams_Create):
             return updateObject(state, {resourceCode: action.data})
         case dialogAction.CHANGE_CLASS_CODE(Teacher_Exams_Create):
             return updateObject(state, {classCode: action.data})
+        case dialogAction.CHANGE_DEADLINE(Teacher_Exams_Create):
+            return updateObject(state, {deadLine: action.data})
         case dialogAction.CHANGE_SEMESTER(Teacher_Exams_Create):
             return updateObject(state, {sem: action.data})
         case dialogAction.CHANGE_QUARTER(Teacher_Exams_Create):
             return updateObject(state, {quarter: action.data})
+        case dialogAction.CHANGE_LOW_GRADE(Teacher_Exams_Create):
+            return updateObject(state, {lowGrade: action.data})
         case dialogAction.CHANGE_DESCRIPTION(Teacher_Exams_Create):
             return updateObject(state, {description: action.data})
 
@@ -38,9 +47,13 @@ const reducer = (state = init_state, action) => {
             state = updateObject(state, {
                 resourceCode: '',
                 classCode: '',
+                deadLine: '',
                 sem: 1,
                 quarter: 1,
-                description: ''
+                lowGrade: 0,
+                highGrade: 100,
+                description: '',
+                ...newState.init_state
             })
 
             return newState.successRegister(state)
@@ -50,7 +63,6 @@ const reducer = (state = init_state, action) => {
 
         default:
             return state;
-
     }
 
 }
