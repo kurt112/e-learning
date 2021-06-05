@@ -104,6 +104,10 @@ const style = makeStyles((theme) => ({
         height: '1px'
     },
 
+    marginZero: {
+        margin: 0
+    }
+
 }))
 
 

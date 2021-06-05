@@ -36,7 +36,7 @@ const  ActivityProfile= ({roomShiftClass, match, initData})=>{
     }
 
     const classWork = () => {
-        // setComponent(<ClassWork activities={profile.activities}/>)
+        // setComponent(<ClassAssignment activities={profile.activities}/>)
     }
 
     const RoomClassPeople = () => {

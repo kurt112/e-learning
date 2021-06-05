@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@material-ui/core";
+import {Box, Container, Grid, Paper, Typography} from "@material-ui/core";
 import { Fragment } from "react";
 import ProfileStyle from '../../ProfileStyle'
 export default function Data({roomShiftClass}) {
@@ -8,62 +8,63 @@ export default function Data({roomShiftClass}) {
 
     const style = ProfileStyle()
     return (
+        <Grid container component={Container} className={style.profileData}  >
+            <Grid className={style.profileInfo} component={Paper} container >
+                <Typography className={style.profileName} variant="h4" component="h2">Class Information</Typography>
+                <Container>
+                    <Box className={style.profileDataContainer}>
+                        <Box className={style.profileDataContainerTitle}>
+                            <p>Room Name: </p>
+                        </Box>
+                        <p>{roomShift.room.roomName}</p>
+                    </Box>
+                    <Box className={style.profileDataContainer}>
+                        <Box className={style.profileDataContainerTitle}>
+                            <p>Room Shift Name: </p>
+                        </Box>
+                        <p>{roomShift.roomShiftName}</p>
+                    </Box>
+                    <Box className={style.profileDataContainer}>
+                        <Box className={style.profileDataContainerTitle}>
+                            <p>Grade </p>
+                        </Box>
+                        <p>{roomShift.grade}</p>
+                    </Box>
+                    <Box className={style.profileDataContainer}>
+                        <Box className={style.profileDataContainerTitle}>
+                            <p>Section </p>
+                        </Box>
+                        <p>{roomShift.section}</p>
+                    </Box>
+                    <Box className={style.profileDataContainer}>
+                        <Box className={style.profileDataContainerTitle}>
+                            <p>Subject Name </p>
+                        </Box>
+                        <p>{subject.subjectName}</p>
+                    </Box>
+                    <Box className={style.profileDataContainer}>
+                        <Box className={style.profileDataContainerTitle}>
+                            <p>Day </p>
+                        </Box>
+                        <p>{roomShiftClass.day}</p>
+                    </Box>
 
-        <Fragment>
-            <Typography className={style.profileName} variant="h4" component="h2">Class Information</Typography>
-            <Container>
-                <Box className={style.profileDataContainer}>
-                    <Box className={style.profileDataContainerTitle}>
-                        <p>Room Name: </p>
+                    <Box className={style.profileDataContainer}>
+                        <Box className={style.profileDataContainerTitle}>
+                            <p>Time Start </p>
+                        </Box>
+                        <p>{roomShiftClass.startTime}</p>
                     </Box>
-                    <p>{roomShift.room.roomName}</p>
-                </Box>
-                <Box className={style.profileDataContainer}>
-                    <Box className={style.profileDataContainerTitle}>
-                        <p>Room Shift Name: </p>
-                    </Box>
-                    <p>{roomShift.roomShiftName}</p>
-                </Box>
-                <Box className={style.profileDataContainer}>
-                    <Box className={style.profileDataContainerTitle}>
-                        <p>Grade </p>
-                    </Box>
-                    <p>{roomShift.grade}</p>
-                </Box>
-                <Box className={style.profileDataContainer}>
-                    <Box className={style.profileDataContainerTitle}>
-                        <p>Section </p>
-                    </Box>
-                    <p>{roomShift.section}</p>
-                </Box>
-                <Box className={style.profileDataContainer}>
-                    <Box className={style.profileDataContainerTitle}>
-                        <p>Subject Name </p>
-                    </Box>
-                    <p>{subject.subjectName}</p>
-                </Box>
-                <Box className={style.profileDataContainer}>
-                    <Box className={style.profileDataContainerTitle}>
-                        <p>Day </p>
-                    </Box>
-                    <p>{roomShiftClass.day}</p>
-                </Box>
 
-                <Box className={style.profileDataContainer}>
-                    <Box className={style.profileDataContainerTitle}>
-                        <p>Time Start </p>
+                    <Box className={style.profileDataContainer}>
+                        <Box className={style.profileDataContainerTitle}>
+                            <p>Time End </p>
+                        </Box>
+                        <p>{roomShiftClass.endTime}</p>
                     </Box>
-                    <p>{roomShiftClass.startTime}</p>
-                </Box>
+                </Container>
+            </Grid>
 
-                <Box className={style.profileDataContainer}>
-                    <Box className={style.profileDataContainerTitle}>
-                        <p>Time End </p>
-                    </Box>
-                    <p>{roomShiftClass.endTime}</p>
-                </Box>
-            </Container>
-
-        </Fragment>
+        </Grid>
     )
 }

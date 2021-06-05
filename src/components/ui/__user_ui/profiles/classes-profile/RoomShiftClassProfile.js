@@ -1,8 +1,8 @@
-import {Avatar, Button, CircularProgress, Container, Divider, Grid, Hidden, Paper, Typography} from "@material-ui/core";
+import {Avatar, Button, CircularProgress, Divider, Grid, Hidden, Paper, Typography} from "@material-ui/core";
 import ProfileStyle from '../ProfileStyle'
 import Picture from '../../../../../assets/asd.jpg'
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
-import {Fragment, useEffect, useState} from "react";
+import {Fragment, lazy, useEffect, useState} from "react";
 import {connect} from 'react-redux'
 
 import { withRouter } from 'react-router-dom';
@@ -12,7 +12,12 @@ import * as action from "../../../../../store/action/__ActionGlobal/ProfileActio
 // component
 import Data from './data/Data'
 import PeopleList from "../utils/PeopleData/PeopleList";
-import ClassWork from "./classes-work/ClassWork";
+
+const ClassAssignment = lazy(() => import(`./classes-assignments/ClassAssignment`))
+const ClassQuizzes = lazy(() => import(`./classes-quizzes/ClassQuizzes`))
+const ClassExams = lazy(() => import(`./classes-exams/ClassExams`))
+const ClassLectures = lazy(() => import(`./classes-lecture/ClassLectures`))
+
 
 const  RoomShiftClassProfile= ({roomShiftClass, match, initData})=>{
 
@@ -36,8 +41,20 @@ const  RoomShiftClassProfile= ({roomShiftClass, match, initData})=>{
         setComponent(<Data roomShiftClass={profile}/>)
     }
 
-    const classWork = () => {
-        setComponent(<ClassWork activities={profile.activities}/>)
+    const classAssignment = () => {
+        setComponent(<ClassAssignment activities={profile.activities}/>)
+    }
+
+    const classQuizzes = () => {
+        setComponent(<ClassQuizzes/>)
+    }
+
+    const classExams = () => {
+        setComponent(<ClassExams/>)
+    }
+
+    const classLectures = () => {
+        setComponent(<ClassLectures/>)
     }
 
     const RoomClassPeople = () => {
@@ -69,10 +86,12 @@ const  RoomShiftClassProfile= ({roomShiftClass, match, initData})=>{
                             <Grid className={style.profileButton} container >
                                 <Grid className={style.buttonGroup} item md={12} sm={12} xs={12} lg={12} >
                                     <Button color="primary" onClick={data}>Info</Button>
-                                    <Button color="primary" onClick={classWork}>Work</Button>
+                                    <Button color="primary" onClick={classAssignment}>Assignment</Button>
+                                    <Button color="primary" onClick={classLectures}>Lectures</Button>
+                                    <Button color="primary" onClick={classExams}>Exams</Button>
+                                    <Button color="primary" onClick={classQuizzes}>Quiz</Button>
                                     <Button color="primary" onClick={RoomClassPeople}>People</Button>
                                     <Button color="primary" onClick={RoomClassPeople}>Join</Button>
-                                    <Button color="primary" onClick={RoomClassPeople}>Resources</Button>
                                 </Grid>
                                 <Button
                                     color="primary"
@@ -84,8 +103,8 @@ const  RoomShiftClassProfile= ({roomShiftClass, match, initData})=>{
                         </Grid>
 
 
-                        <Grid container component={Container} className={style.profileData}  >
-                            <Grid className={style.profileInfo} container component={Paper} >
+                        <Grid container className={style.profileData}  >
+                            <Grid className={style.profileInfo} container  >
                                 {component}
                             </Grid>
 
