@@ -126,7 +126,7 @@ const Login = ({loginState, changeEmail, changePassword, login, changeId,
                                 control={<Checkbox value="remember" color="primary"/>}
                                 label="Remember me"
                             />
-                            <p>No Account Found</p>
+                            {/*<p>No Account Found</p>*/}
                         </Box>
                         <Button
                             fullWidth
