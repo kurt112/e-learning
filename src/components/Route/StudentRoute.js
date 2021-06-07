@@ -8,7 +8,6 @@ import {
 } from "../ui/utils/tableColumn";
 const StudentSubject = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({default: module.StudentSubjects})))
 const StudentTeacher = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({default: module.StudentTeachers})))
-const StudentActivity = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({default: module.StudentActivity})))
 const Classes = lazy(() => import('../ui/__user_ui/roomClasses/ClassList/ClassesList'))
 
 const StudentRoute = ({email}) => {
@@ -61,7 +60,6 @@ const StudentRoute = ({email}) => {
         <Fragment>
             <Route path='/student/subjects' exact render={() => <StudentSubject subjects={subjects}/>}/>
             <Route path='/student/teachers' exact render={() => <StudentTeacher teachers={teachers}/>}/>
-            <Route path='/student/activities' exact render={() => <StudentActivity student={student}/>}/>
             <Route path='/student/classes' exact render={() => <Classes currentClass={currentClass} archiveClass={doneClass}/>}/>
             <Redirect to='/student/classes'/>
         </Fragment>

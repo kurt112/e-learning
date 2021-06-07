@@ -4,30 +4,10 @@ export const
             query: `
                     query{
                        getTeacherByUserEmail(email:"${email}") {
-                             id,
-                            activities{
-                                roomShiftClass{
-                                    id,
-                                    day,
-                                    startTime,
-                                    endTime,
-                                    subject{
-                                    subjectName,
-                                    subjectCode,
-                                    subjectMajor
-                                }
-                            },
-                            activity{
-                                    activityTitle,
-                                    description,
-                                    date_end,
-                                    date_created,
-                                    type
-                            }
-                       }
-                    }
-            }
-        `
+                             id
+                      }
+                   }
+            `
         }
     },
     getTeacherClasses = (id,status) => {

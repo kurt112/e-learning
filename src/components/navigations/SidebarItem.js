@@ -99,12 +99,6 @@ export function StudentItems({ style }) {
                 </ListItemIcon>
                 <ListItemText primary="Teachers" />
             </ListItem>
-            <ListItem component={NavLink} to="/student/activities" button>
-                <ListItemIcon>
-                    <AssignmentIcon />
-                </ListItemIcon>
-                <ListItemText primary="Activities" />
-            </ListItem>
             <ListItem component={NavLink} to="/student/resources" button>
                 <ListItemIcon>
                     <CloudUploadIcon />
@@ -162,12 +156,6 @@ export function AdminItems({ style }) {
                     <ImportContactsIcon />
                 </ListItemIcon>
                 <ListItemText primary="Subjects" />
-            </ListItem>
-            <ListItem component={NavLink} to="/admin/activity-list" button>
-                <ListItemIcon>
-                    <FormatListBulletedIcon />
-                </ListItemIcon>
-                <ListItemText primary="Activities" />
             </ListItem>
             <ListItem component={NavLink} to="/admin/strand-courses" button>
                 <ListItemIcon>

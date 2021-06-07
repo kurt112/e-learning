@@ -2,7 +2,7 @@ import {Avatar, Button, CircularProgress, Divider, Grid, Hidden, Paper, Typograp
 import ProfileStyle from '../ProfileStyle'
 import Picture from '../../../../../assets/asd.jpg'
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
-import {Fragment, lazy, useEffect, useState} from "react";
+    import {Fragment, useEffect, useState} from "react";
 import {connect} from 'react-redux'
 
 import { withRouter } from 'react-router-dom';
@@ -12,17 +12,19 @@ import * as action from "../../../../../store/action/__ActionGlobal/ProfileActio
 // component
 import Data from './data/Data'
 import PeopleList from "../utils/PeopleData/PeopleList";
-
-const ClassAssignment = lazy(() => import(`./classes-assignments/ClassAssignment`))
-const ClassQuizzes = lazy(() => import(`./classes-quizzes/ClassQuizzes`))
-const ClassExams = lazy(() => import(`./classes-exams/ClassExams`))
-const ClassLectures = lazy(() => import(`./classes-lecture/ClassLectures`))
-
+import ClassAssignment from './classes-assignments/ClassAssignment'
+import ClassQuizzes from './classes-quizzes/ClassQuizzes'
+import ClassExams from './classes-exams/ClassExams'
+import ClassLectures from "./classes-lecture/ClassLectures";
 
 const  RoomShiftClassProfile= ({roomShiftClass, match, initData})=>{
 
     const style = ProfileStyle()
     const [component, setComponent] = useState(null)
+    const [assignments, setAssignments] = useState([])
+    const [exams, setExams] = useState([])
+    const [lectures, setLectures] = useState([])
+    const [quizzes, setQuizzes] = useState([])
     const profile = roomShiftClass.profile !== null? roomShiftClass.profile.roomShiftClass: null
 
     useEffect(() => {
@@ -32,8 +34,20 @@ const  RoomShiftClassProfile= ({roomShiftClass, match, initData})=>{
     }, [initData, match.params.id])
 
     useEffect(() => {
+        if(profile !== null){
+            setAssignments(profile.teacherAssignments)
+            setQuizzes(profile.teacherQuizzes)
+            setLectures(profile.teacherLectures)
+            setExams(profile.teacherExams)
+        }
 
-        if (roomShiftClass.profile !== null) setComponent(<Data roomShiftClass={profile}/>)
+    }, [profile])
+
+    useEffect(() => {
+
+        if (roomShiftClass.profile !== null) {
+            setComponent(<Data roomShiftClass={profile}/>)
+        }
     }, [roomShiftClass.profile])
 
 
@@ -42,24 +56,25 @@ const  RoomShiftClassProfile= ({roomShiftClass, match, initData})=>{
     }
 
     const classAssignment = () => {
-        setComponent(<ClassAssignment activities={profile.activities}/>)
+        setComponent(<ClassAssignment assignments={assignments}/>)
     }
 
     const classQuizzes = () => {
-        setComponent(<ClassQuizzes/>)
+        setComponent(<ClassQuizzes quizzes={quizzes}/>)
     }
 
     const classExams = () => {
-        setComponent(<ClassExams/>)
+        setComponent(<ClassExams exams={exams}/>)
     }
 
     const classLectures = () => {
-        setComponent(<ClassLectures/>)
+        setComponent(<ClassLectures lectures={lectures}/>)
     }
 
     const RoomClassPeople = () => {
         setComponent(<PeopleList teacher={profile.teacher} students={profile.students}/>)
     }
+    console.log(roomShiftClass.profile)
 
     return (
         <Grid container className={style.container}>

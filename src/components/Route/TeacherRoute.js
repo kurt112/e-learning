@@ -29,7 +29,7 @@ const TeacherRoute = ({email}) => {
 
     useEffect(() => {
         fetchData().then(r => {
-            console.log(r.data.data.getTeacherByUserEmail.id)
+            console.log(r)
             setTeacher(r.data.data.getTeacherByUserEmail)
         })
     }, [])

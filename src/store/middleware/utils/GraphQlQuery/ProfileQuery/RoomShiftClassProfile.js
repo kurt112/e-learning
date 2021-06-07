@@ -3,6 +3,9 @@ export const
         return {
             query: `
                     query{roomShiftClass(id:"${id}"){
+                           day,
+                           startTime,
+                           endTime,  
                            roomShift{
                                 grade,
                                 section,
@@ -10,12 +13,6 @@ export const
                                 room{
                                      roomName,
                                     }
-                           },
-                           activities{
-                                id,
-                                date_created,
-                                date_end,
-                                activityTitle
                            },
                            teacher{
                                 id
@@ -33,10 +30,77 @@ export const
                            },
                            subject{
                                 subjectName
-                                },
-                           day,
-                           startTime,
-                           endTime    
+                           },
+                           teacherAssignments{
+                                code,
+                                highGrade,
+                                lowGrade,
+                                deadLine,
+                                createdAt
+                                resource{
+                                    code,
+                                    name,
+                                    description,
+                                    teacher{
+                                        user{
+                                            firstName,
+                                            lastName
+                                        }
+                                    }
+                                }
+                           },
+                            teacherExams{ 
+                                code,
+                                highGrade,
+                                lowGrade,
+                                deadLine,
+                                createdAt
+                                resource{
+                                    code,
+                                    name,
+                                    description,
+                                    teacher{
+                                        user{
+                                            firstName,
+                                            lastName
+                                        }
+                                    }
+                                }
+                            },
+                            teacherQuizzes{
+                                code,
+                                highGrade,
+                                lowGrade,
+                                deadLine,
+                                createdAt
+                                resource{
+                                   code,
+                                   name,
+                                   description,
+                                   teacher{
+                                        user{
+                                          firstName,
+                                          lastName
+                                        }
+                                   }
+                                }
+                            },
+                            teacherLectures{
+                                code,
+                                createdAt,
+                                resource{
+                                    code,
+                                    name,
+                                    description,
+                                    teacher{
+                                        user{
+                                            firstName,
+                                            lastName
+                                        }
+                                    }
+                                }
+                            }
+                           
                     }
             }
         `}

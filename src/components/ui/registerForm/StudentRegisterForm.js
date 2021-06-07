@@ -47,8 +47,7 @@ const StudentRegisterForm = ({
                 <Grid container spacing={1}>
                     <Grid item md={4} xs={12}>
                         <TextField
-                            error
-                            helperText='Wwe'
+                            // helperText='Wwe'
                             margin="dense"
                             id="firstName"
                             label="First Name"
@@ -147,8 +146,7 @@ const StudentRegisterForm = ({
 
                     <Grid item md={4} xs={12}>
                         <TextField
-                            error
-                            helperText={'asdf'}
+                            // helperText={'asdf'}
                             margin="dense"
                             id="password"
                             label="Password"
@@ -162,8 +160,7 @@ const StudentRegisterForm = ({
 
                     <Grid item md={4} xs={12}>
                         <TextField
-                            error
-                            helperText={'asdf'}
+                            // helperText={'asdf'}
                             margin="dense"
                             id="ReTypePassword"
                             label="Re type Password"

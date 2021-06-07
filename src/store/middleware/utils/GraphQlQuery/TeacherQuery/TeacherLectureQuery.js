@@ -8,7 +8,7 @@ export const
                              createdAt,
                              quarter,
                              sem,
-                             resources{
+                             resource{
                                 code,
                             },
                             class_{

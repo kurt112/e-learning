@@ -32,7 +32,7 @@ const UserId = ({submit,id, changeId,dialog, registerClose,openStudent}) => {
                 margin="dense"
                 id="user-id"
                 label="Enter User ID"
-                type="number"
+                type="text"
                 value={id}
                 fullWidth
                 onChange={(event) => changeId(event.target.value)}
