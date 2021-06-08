@@ -1,4 +1,4 @@
-import {Box, Button, CircularProgress, Grid, Paper, Toolbar} from "@material-ui/core"
+import {Box, Button, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
 import {Fragment, lazy, useEffect} from "react"
 import {AdminStudentTable as columns} from '../../../utils/tableColumn'
@@ -7,10 +7,13 @@ import {connect} from 'react-redux'
 import {Student} from '../../../../../store/utils/Specify'
 import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
 import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const StudentRegisterDialog = lazy(() => import(`./StudentRegisterDialog`));
 
-const StudentList = ({student, pageChange, searchChange, openDialog, closeDialog, initData}) => {
+const Index = ({student, pageChange, searchChange, openDialog, closeDialog, initData}) => {
     const classes = style()
 
     useEffect(() => {
@@ -29,12 +32,17 @@ const StudentList = ({student, pageChange, searchChange, openDialog, closeDialog
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
                         <Box className={classes.tableNavbarBox}>
-                            <Button variant="outlined" color="primary" onClick={openDialog}>
-                                Add Student
-                            </Button>
-                            <Button variant="outlined" color="primary" onClick={openDialog}>
-                                Add Student Class
-                            </Button>
+                            <Tooltip title='Add student'>
+                                <IconButton aria-label="add-student" onClick={openDialog}>
+                                    <LibraryAddIcon fontSize={'large'} color={'primary'}/>
+                                </IconButton>
+                            </Tooltip>
+                            <Tooltip title='Delete Student'>
+                                <IconButton aria-label="delete-student" onClick={() => alert('gagawin mo pa to')}>
+                                    <DeleteIcon fontSize={'large'} color={'secondary'}/>
+                                </IconButton>
+                            </Tooltip>
+
                         </Box>
                         <Button variant="outlined" color="primary">
                             Quit
@@ -86,4 +94,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentList)
+export default connect(mapStateToProps, mapDispatchToProps)(Index)

@@ -28,9 +28,6 @@ export {
     default as AdminDialogTeacher
 } from './AdminTeacher/AdminTeacherDialogState'
 
-export {
-    default as AdminActivity
-} from './AdminActivity/AdminActivityState'
 
 export {
     default as AdminDashBoard
@@ -52,6 +49,3 @@ export {
     default as AdminRoomShift
 } from './AdminRoomShift/AdminRoomShiftState'
 
-export {
-    default as AdminActivityDialog
-} from './AdminActivity/AdminActivityDialogState'

@@ -3,7 +3,6 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText,
     DialogTitle,
     TextField
 } from "@material-ui/core"
@@ -34,10 +33,6 @@ const StudentRegisterDialog = ({
     >
         <DialogTitle id="add-student">Register Student</DialogTitle>
         <DialogContent>
-            <DialogContentText>
-                only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It
-                was popularised in the 1960s with the release of L
-            </DialogContentText>
            <Response dialogState={student} registerDialogMessageClose={registerDialogMessageClose}
                      messageFail="Student Register Not Successful"
                      messageSuccess="Student Register Success"/>

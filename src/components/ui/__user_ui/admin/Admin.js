@@ -1,30 +1,26 @@
 export {
     default as DashBoard
-} from './dashboard/DashBoard'
+} from './dashboard'
 
 export {
     default as StudentList
-} from './student/StudentList'
+} from './student'
 
 export {
     default as SubjectList
-} from './subject/SubjectList'
+} from './subject'
 
 export {
     default as TeacherList
-} from './teacher/TeacherList'
-
-export {
-    default as ActivityList
-} from './acitivity/ActivityList'
+} from './teacher'
 
 export {
     default as RoomList
-} from './room/RoomList'
+} from './room'
 
 export {
     default as RoomClassList
-} from './room-class/RoomClassList'
+} from './room-class'
 
 export {
     default as RoomShift

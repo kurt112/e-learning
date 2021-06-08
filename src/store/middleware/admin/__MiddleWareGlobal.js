@@ -3,24 +3,6 @@ import * as tableActions from "../../action/__ActionGlobal/AdminAction";
 import {baseUrl} from "../axios";
 import * as actions from "../../action/__ActionGlobal/AdminDialogAction";
 import {graphQLRequest} from '../utils/HttpRequest'
-export function* UploadFile(data, URL, to) {
-
-    try {
-      const response =  yield baseUrl({
-            method: 'post',
-            url: URL,
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-            data
-        })
-        yield  put(tableActions.addItemTable(response.data.item, to))
-        yield  put(actions.registerDialogSuccess(to))
-    } catch (error) {
-        console.log(error)
-        yield put(actions.registerDialogFail(error, to))
-    }
-}
 
 export function* Register(params, URL, to) {
     try {

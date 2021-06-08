@@ -59,13 +59,6 @@ import {
     StudentTableDataInit,
     StudentTableDataNext
 } from "./admin/StudentMiddleWare";
-
-import {
-    ActivityDataInit,
-    ActivityTableNext,
-    ActivityUpload
-} from './admin/ActivityMiddleWare'
-
 import  {
     RoomRegister,
     RoomTableDataInit,
@@ -250,31 +243,6 @@ export function* watchAdminRoomClassSearchChange() {
     yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(RoomShiftClass), RoomClassTableDataInit)
 }
 
-/**
- *
- *
- *          This middleware is for admin activity
- *
-*
-*
-**/
-
-export function * watchAdminActivityUpload() {
-
-    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Activity), ActivityUpload)
-}
-
-export function* watchAdminActivityTableInit(){
-    yield takeLeading(adminTable.ADMIN_TABLE_INIT(Activity), ActivityDataInit)
-}
-
-export function* watchAdminActivitySearchChange() {
-    yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Activity), ActivityDataInit)
-}
-
-export function* watchAdminActivityTableNext(){
-    yield takeLeading(adminTable.ADMIN_TABLE_NEXT_PAGE(Activity), ActivityTableNext)
-}
 
 /**
  *

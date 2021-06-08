@@ -1,7 +1,7 @@
  import {Route} from "react-router";
 import {Fragment, lazy} from "react";
 
-const DashBoard = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({ default: module.DashBoard })))
+const DashBoard = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({ default: module.Index })))
 const TeacherList = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({ default: module.TeacherList })))
 const StudentList = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({ default: module.StudentList })))
 const RoomList = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({ default: module.RoomList })))

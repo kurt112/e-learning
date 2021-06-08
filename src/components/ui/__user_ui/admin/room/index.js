@@ -1,4 +1,4 @@
-import {Box, Button, CircularProgress, Grid, Paper, Toolbar} from "@material-ui/core"
+import {Box, Button, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
 import {Fragment, lazy, useEffect} from "react"
 import {AdminRoomTable as columns} from '../../../utils/tableColumn'
@@ -7,10 +7,13 @@ import {connect} from 'react-redux'
 import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
 import {Room} from "../../../../../store/utils/Specify";
 import Typography from "@material-ui/core/Typography";
-
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from '@material-ui/icons/Delete';
+import UpdateIcon from '@material-ui/icons/Update';
 const RegisterRoom = lazy(() => import(`./RoomDialogRegister`));
 
-const RoomList = ({room, initData, searchChange, pageChange, openDialog, closeDialog}) => {
+const Index = ({room, initData, searchChange, pageChange, openDialog, closeDialog}) => {
 
     const classes = style()
     useEffect(() => {
@@ -27,13 +30,25 @@ const RoomList = ({room, initData, searchChange, pageChange, openDialog, closeDi
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
                         <Box className={classes.tableNavbarBox}>
-                            <Button variant="outlined" color="primary" onClick={openDialog}>
-                                Add Room
-                            </Button>
+                            <Tooltip title='Add Room'>
+                                <IconButton aria-label="add-room" onClick={openDialog} color="primary">
+                                    <AddCircleOutlineIcon fontSize={'large'} color={'primary'}/>
+                                </IconButton>
+                            </Tooltip>
+
+                           <Tooltip title='Delete Room'>
+                               <IconButton aria-label="delete-room" onClick={() => alert('gagawin mo pa to')}>
+                                   <DeleteIcon fontSize={'large'} color={'secondary'}/>
+                               </IconButton>
+                           </Tooltip>
+
+                            <Tooltip title='Update Room'>
+                                <IconButton aria-label="update-room" onClick={() => alert('gagawin mo pa to')}>
+                                    <UpdateIcon fontSize={'large'} color={'primary'}/>
+                                </IconButton>
+                            </Tooltip>
+
                         </Box>
-                        <Button variant="outlined" color="primary">
-                            Quit
-                        </Button>
                     </Toolbar>
                 </Grid>
 
@@ -79,4 +94,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RoomList)
+export default connect(mapStateToProps, mapDispatchToProps)(Index)

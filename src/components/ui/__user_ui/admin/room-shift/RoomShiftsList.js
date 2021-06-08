@@ -1,16 +1,21 @@
-import {Box, Button, CircularProgress, Grid, Paper, Toolbar} from "@material-ui/core"
+import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
 import {Fragment, lazy, useEffect} from "react"
 import { AdminRoomShiftTable as columns } from '../../../utils/tableColumn'
 import style, { TableOptions as options } from '../../../_style/TableStyle'
-
 import {connect} from 'react-redux'
 import { RoomShift} from "../../../../../store/utils/Specify";
 import Typography from "@material-ui/core/Typography";
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
+
+import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 
 // actions
 import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
 import * as roomShiftListAction from "../../../../../store/action/admin/RoomShift/RoomShiftListAction"
+import IconButton from "@material-ui/core/IconButton";
+import UpdateIcon from "@material-ui/icons/Update";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const AddStudentDialog = lazy(() => import(`./RoomShiftDialogAddStudent`));
 const RegisterRoomShiftDialog = lazy(() => import(`./RoomShiftDialogRegister`));
@@ -33,16 +38,31 @@ const  RoomShiftList = ({roomShift, initData,searchChange,pageChange,openDialog,
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
                         <Box className={classes.tableNavbarBox}>
-                            <Button variant="outlined" color="primary" onClick={openDialog}>
-                                Add Room Shift
-                            </Button>
-                            <Button variant="outlined" color="primary" onClick={openAddStudent}>
-                                Add Students
-                            </Button>
+
+                            <Tooltip title='Add Room Shift'>
+                                <IconButton aria-label="add-room-shift" onClick={openDialog}>
+                                    <LibraryAddIcon fontSize={'large'} color={'primary'}/>
+                                </IconButton>
+                            </Tooltip>
+
+                            <Tooltip title='Delete Room Shift'>
+                                <IconButton aria-label="delete-room" onClick={() => alert('gagawin mo pa to')}>
+                                    <DeleteIcon fontSize={'large'} color={'secondary'}/>
+                                </IconButton>
+                            </Tooltip>
+
+                            <Tooltip title='Update Room Shift'>
+                                <IconButton aria-label="update-room" onClick={() => alert('gagawin mo pa to')}>
+                                    <UpdateIcon fontSize={'large'} color={'primary'}/>
+                                </IconButton>
+                            </Tooltip>
+                            <Tooltip title='Add Students'>
+                                <IconButton aria-label="update-room" onClick={openAddStudent}>
+                                    <GroupAddIcon fontSize={'large'} color={'primary'}/>
+                                </IconButton>
+                            </Tooltip>
+
                         </Box>
-                        <Button variant="outlined" color="primary">
-                            Quit
-                        </Button>
                     </Toolbar>
                 </Grid>
 

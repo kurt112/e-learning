@@ -26,7 +26,6 @@ import {StudentActivity, StudentSubject, StudentRoom, StudentTeacher} from './st
 
 
 import {
-    AdminActivity,
     AdminDashBoard,
     AdminRoom,
     AdminRoomDialog,
@@ -39,8 +38,7 @@ import {
     AdminClassDialog,
     AdminRoomShiftDialog,
     AdminRoomShift,
-    AdminClass,
-    AdminActivityDialog
+    AdminClass
 } from './store/reducers/Admin'
 
 import Classroom from "./store/reducers/ClassroomState";
@@ -103,10 +101,6 @@ import {
     watchReLogin,
     watchStudentRegister,
     watchTeacherRegister,
-    watchAdminActivityUpload,
-    watchAdminActivitySearchChange,
-    watchAdminActivityTableInit,
-    watchAdminActivityTableNext,
     watchTeacherUploadResource,
     watchDeleteResource,
     watchTeacherAssignmentInit,
@@ -162,7 +156,6 @@ const reducers = combineReducers({
 
 
     // Admin State
-    AdminActivity,
     AdminDashBoard,
     AdminRoom,
     AdminRoomDialog,
@@ -176,9 +169,6 @@ const reducers = combineReducers({
     AdminClassDialog,
     AdminRoomShiftDialog,
     AdminRoomShift,
-    AdminActivityDialog,
-
-
     Classroom,
 
 
@@ -246,10 +236,6 @@ sagaMiddleware.run(watchAdminRoomClassTableNext)
 sagaMiddleware.run(watchAdminRoomClassTableInit)
 sagaMiddleware.run(watchAdminRoomClassSearchChange)
 
-sagaMiddleware.run(watchAdminActivityUpload)
-sagaMiddleware.run(watchAdminActivitySearchChange)
-sagaMiddleware.run(watchAdminActivityTableInit)
-sagaMiddleware.run(watchAdminActivityTableNext)
 
 // profile
 sagaMiddleware.run(watchStudentGetProfile)
