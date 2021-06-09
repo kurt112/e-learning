@@ -7,7 +7,7 @@ import MUIDataTable from "mui-datatables";
 import Typography from "@material-ui/core/Typography";
 import {TeacherExams as columns} from "../../../utils/tableColumn";
 import style, {TableOptions as options} from "../../../_style/TableStyle";
-import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
+import * as actions from "../../../../../store/action/__ActionGlobal/TableAction";
 import {connect} from "react-redux";
 import {
     Teacher_Exams, Teacher_Exams_Create, Teacher_Exams_Delete

@@ -7,11 +7,10 @@ export function* Login() {
     const login = yield select(Selector.Login)
     // console.log(login)
     const userData = yield {
-        username:login.username,
-        password: yield login.password //PasswordEncrypt(login.password)
+        username: login.username,
+        password: login.password //PasswordEncrypt(login.password)
     }
 
-    console.log(userData)
     try {
 
         const response = yield baseUrlNoAuth.post('/login', userData)

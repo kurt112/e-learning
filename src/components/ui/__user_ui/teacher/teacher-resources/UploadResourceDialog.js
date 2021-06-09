@@ -12,7 +12,7 @@ import {
 import {connect} from 'react-redux'
 import * as UploadResourceAction
     from '../../../../../store/action/teacher/TeacherResource/TeacherResourceUploadDialogAction'
-import * as dialogAction from '../../../../../store/action/__ActionGlobal/AdminDialogAction'
+import * as dialogAction from '../../../../../store/action/__ActionGlobal/DialogAction'
 import {useState} from "react";
 import Response from "../../../utils/Response";
 import {Teacher_Resource_Upload} from "../../../../../store/utils/Specify";

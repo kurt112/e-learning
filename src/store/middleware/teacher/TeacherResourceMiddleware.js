@@ -4,7 +4,7 @@ import {TeacherResourceUpload as destination, TeacherResourceDelete as deleteRes
 import {uniqueNamesGenerator, adjectives, colors, animals} from 'unique-names-generator'
 import {baseUrl} from "../axios"
 
-import * as dialogAction from '../../action/__ActionGlobal/AdminDialogAction'
+import * as dialogAction from '../../action/__ActionGlobal/DialogAction'
 import {Teacher_Resource, Teacher_Resource_Delete, Teacher_Resource_Upload} from "../../utils/Specify";
 import {TableDataInit, TableNextData} from "../admin/__MiddleWareGlobal";
 

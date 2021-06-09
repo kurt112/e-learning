@@ -1,7 +1,7 @@
-import {Box, Button, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
+import {Box,  CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
 import {Fragment, lazy, useEffect} from "react"
-import {AdminSubjectTable as columns} from '../../../utils/tableColumn'
+import {AdminCurriculumTable as columns} from '../../../utils/tableColumn'
 
 import style, {TableOptions as options} from '../../../_style/TableStyle'
 import {connect} from "react-redux"
@@ -12,9 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
-
-const RegisterSubject = lazy(() => import(`./SubjectDialogRegister`))
-
+import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 const Index = ({subject, pageChange, searchChange, openDialog, closeDialog, initData}) => {
 
     const classes = style()
@@ -28,26 +26,32 @@ const Index = ({subject, pageChange, searchChange, openDialog, closeDialog, init
 
     return (
         <Fragment>
-            <RegisterSubject dialog={subject.dialog} closeDialog={closeDialog}/>
+            {/*<RegisterSubject dialog={subject.dialog} closeDialog={closeDialog}/>*/}
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
                         <Box className={classes.tableNavbarBox}>
-                            <Tooltip title='Add Subject'>
-                                <IconButton aria-label="add-subject" onClick={openDialog}>
+                            <Tooltip title='Add Curriculum'>
+                                <IconButton aria-label="add-curriculum" onClick={openDialog}>
                                     <LibraryAddIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
                             </Tooltip>
 
-                            <Tooltip title='Delete Subject'>
-                                <IconButton aria-label="delete-subject" onClick={() => alert('gagawin mo pa to')}>
+                            <Tooltip title='Delete Curriculum'>
+                                <IconButton aria-label="delete-curriculum" onClick={() => alert('gagawin mo pa to')}>
                                     <DeleteIcon fontSize={'large'} color={'secondary'}/>
                                 </IconButton>
                             </Tooltip>
 
-                            <Tooltip title='Update Subject'>
-                                <IconButton aria-label="update-room" onClick={() => alert('gagawin mo pa to')}>
+                            <Tooltip title='Update Curriculum'>
+                                <IconButton aria-label="update-curriculum" onClick={() => alert('gagawin mo pa to')}>
                                     <UpdateIcon fontSize={'large'} color={'primary'}/>
+                                </IconButton>
+                            </Tooltip>
+
+                            <Tooltip title='Add Curriculum Subject'>
+                                <IconButton aria-label="update-curriculum" onClick={() => alert('gagawin mo pa to')}>
+                                    <ImportContactsIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
                             </Tooltip>
                         </Box>
@@ -58,7 +62,7 @@ const Index = ({subject, pageChange, searchChange, openDialog, closeDialog, init
                         <MUIDataTable
                             title={
                                 <Typography variant="h6">
-                                    Subject List
+                                    Curriculum List
                                     {subject.loading && <CircularProgress size={24} style={{
                                         marginLeft: 15,
                                         position: 'relative',

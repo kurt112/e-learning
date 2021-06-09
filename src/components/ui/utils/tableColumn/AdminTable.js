@@ -512,3 +512,53 @@ export const AdminRoomShiftTable = [
 export function AdminInsertRoomShift(roomName, roomShiftName, grade, section, timeStart, timeEnd, profile, id) {
     return {roomName, roomShiftName, grade, section, timeStart, timeEnd, profile, id}
 }
+
+/*
+*
+*
+*
+*                             This table is for the Admin Curriculum List table in admin area
+*
+*
+*
+*
+*/
+
+export const AdminCurriculumTable = [
+
+    {
+        name: 'code',
+        label: 'Code',
+    },
+    {
+        name: 'name',
+        label: 'Name'
+    },
+    {
+        name: 'description',
+        label: 'Description'
+    },
+    {
+        name: "profile",
+        label: "Profile",
+        options: {
+            filter: false,
+            sort: false,
+            customBodyRender: (value) => {
+                return value === undefined ? null :
+                    <Link to={`/room/profile/`+value} style={{textDecoration: 'none'}}>
+                        <Button variant="outlined" color="primary">
+                            Visit Profile
+                        </Button>
+                    </Link>
+            },
+            filterOptions: {
+                fullWidth: false
+            }
+        }
+    },
+]
+
+export function AdminInsertCurriculum(roomName, timeStart, timeEnd, profile) {
+    return {roomName, timeStart, timeEnd, profile}
+}

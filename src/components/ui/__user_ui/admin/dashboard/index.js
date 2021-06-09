@@ -1,7 +1,9 @@
-export default function Index() {
+const  Index = () => {
     return (
         <h1>
             im in dashboard
         </h1>
     )
 }
+
+export default  Index

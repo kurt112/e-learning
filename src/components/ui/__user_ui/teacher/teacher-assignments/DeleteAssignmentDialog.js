@@ -7,7 +7,7 @@ import {
     TextField
 } from "@material-ui/core"
 import {connect} from 'react-redux'
-import * as actions from '../../../../../store/action/__ActionGlobal/AdminDialogAction'
+import * as actions from '../../../../../store/action/__ActionGlobal/DialogAction'
 import {Teacher_Assignment_Delete} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
 import {DeleteAssignmentFail, DeleteAssignmentSuccess} from "../../../../../__Messages/teacher/TeacherAssignmentMessage";

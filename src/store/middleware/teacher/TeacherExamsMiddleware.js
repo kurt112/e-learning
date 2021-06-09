@@ -14,7 +14,7 @@ import {
     TeacherExamDelete
 } from "../utils/ApiEndpoint/ClassroomEndPoint";
 import {baseUrl} from "../axios";
-import * as dialogAction from "../../action/__ActionGlobal/AdminDialogAction";
+import * as dialogAction from "../../action/__ActionGlobal/DialogAction";
 import {adjectives, animals, colors, uniqueNamesGenerator} from "unique-names-generator";
 
 export function* TeacherExamsTableNext(action) {

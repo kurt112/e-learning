@@ -1,7 +1,7 @@
 import {put} from "redux-saga/effects";
-import * as tableActions from "../../action/__ActionGlobal/AdminAction";
+import * as tableActions from "../../action/__ActionGlobal/TableAction";
 import {baseUrl} from "../axios";
-import * as actions from "../../action/__ActionGlobal/AdminDialogAction";
+import * as actions from "../../action/__ActionGlobal/DialogAction";
 import {graphQLRequest} from '../utils/HttpRequest'
 
 export function* Register(params, URL, to) {

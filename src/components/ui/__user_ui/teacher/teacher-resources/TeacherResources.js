@@ -3,7 +3,7 @@ import MUIDataTable from "mui-datatables"
 import {TeacherResources as columns} from "../../../utils/tableColumn"
 import style, {TableOptions as options, TableOptionsNoPaging} from "../../../_style/TableStyle"
 import {Fragment, lazy, useEffect} from "react";
-import * as dialogAction from "../../../../../store/action/__ActionGlobal/AdminAction"
+import * as dialogAction from "../../../../../store/action/__ActionGlobal/TableAction"
 // icons
 import IconButton from "@material-ui/core/IconButton"
 import UpdateIcon from '@material-ui/icons/Update'
@@ -12,7 +12,7 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import {connect} from "react-redux";
 import Typography from "@material-ui/core/Typography";
-import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
+import * as actions from "../../../../../store/action/__ActionGlobal/TableAction";
 import {
 
     Teacher_Resource,

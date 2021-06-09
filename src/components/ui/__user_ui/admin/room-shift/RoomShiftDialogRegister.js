@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core"
 
 import {connect} from 'react-redux'
-import * as action from '../../../../../store/action/__ActionGlobal/AdminDialogAction'
+import * as action from '../../../../../store/action/__ActionGlobal/DialogAction'
 import * as roomShiftAction from '../../../../../store/action/admin/RoomShift/RoomShiftDialogAction'
 import {RoomShift} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";

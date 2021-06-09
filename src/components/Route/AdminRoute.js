@@ -1,7 +1,7 @@
  import {Route} from "react-router";
 import {Fragment, lazy} from "react";
 
-const DashBoard = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({ default: module.Index })))
+const DashBoard = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({ default: module.DashBoard })))
 const TeacherList = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({ default: module.TeacherList })))
 const StudentList = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({ default: module.StudentList })))
 const RoomList = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({ default: module.RoomList })))
@@ -9,6 +9,7 @@ const SubjectList = lazy(() => import('../ui/__user_ui/admin/Admin').then(module
 const ActivityList = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({ default: module.ActivityList })))
 const RoomClass = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({default: module.RoomClassList})))
 const RoomShift = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({default: module.RoomShift})))
+const StrandAndCourse = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({default: module.StrandAndCourse})))
 
  const AdminRoute = () => {
     return (
@@ -21,7 +22,7 @@ const RoomShift = lazy(() => import('../ui/__user_ui/admin/Admin').then(module =
             <Route path='/admin/activity-list' exact render={() => <ActivityList/>}/>
             <Route path='/admin/classes-list' exact render={() => <RoomClass/>}/>
             <Route path='/admin/room-shift' exact render={() =><RoomShift/>}/>
-            <Route path={'/admin/dashboard'}/>
+            <Route path='/admin/strand-course' exactr render={() => <StrandAndCourse/>}/>
         </Fragment>
     )
 }

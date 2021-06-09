@@ -11,7 +11,7 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 
 // actions
-import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
+import * as actions from "../../../../../store/action/__ActionGlobal/TableAction";
 import * as roomShiftListAction from "../../../../../store/action/admin/RoomShift/RoomShiftListAction"
 import IconButton from "@material-ui/core/IconButton";
 import UpdateIcon from "@material-ui/icons/Update";

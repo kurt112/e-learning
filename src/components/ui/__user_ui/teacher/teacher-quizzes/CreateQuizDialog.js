@@ -9,7 +9,7 @@ import {
     TextField
 } from "@material-ui/core"
 import {connect} from 'react-redux'
-import * as dialogAction from '../../../../../store/action/__ActionGlobal/AdminDialogAction'
+import * as dialogAction from '../../../../../store/action/__ActionGlobal/DialogAction'
 import * as actions from '../../../../../store/action/teacher/GlobalAction'
 import {useState} from "react"
 import Response from "../../../utils/Response"

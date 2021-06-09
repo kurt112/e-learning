@@ -7,14 +7,13 @@ import Login from './components/ui/login/Login'
 import {connect} from 'react-redux'
 import * as action from './store/action/login/LoginAction'
 
-const App = ({currentUser,reLogin}) => {
+const App = ({currentUser, reLogin}) => {
 
     const token = localStorage.getItem('token')
 
     useEffect(() => {
-        if(token !== null && currentUser.user === null){
-            reLogin(localStorage.getItem('token'))
-        }
+        if (token !== null && currentUser.user === null) reLogin(localStorage.getItem('token'))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -22,11 +21,14 @@ const App = ({currentUser,reLogin}) => {
             <BrowserRouter>
                 <Suspense fallback={'Loading'}>
                     <Switch>
-                        {currentUser.user === null? null: <Route path='/classroom/:path' exact render={(props) => <Classroom user={currentUser.user} {...props}/>}/>}
+                        {currentUser.user === null ? null : <Route path='/classroom/:path' exact
+                                                                   render={(props) =>
+                                                                       <Classroom
+                                                                           user={currentUser.user} {...props}/>}/>}
                         {
                             currentUser.user === null ?
 
-                                token !== null? null:  <Route path={'/'} exact render={() => <Login/>}/> :
+                                token !== null ? null : <Route path={'/'} exact render={() => <Login/>}/> :
 
                                 <Fragment>
                                     <DashBoard user={currentUser.user}/>

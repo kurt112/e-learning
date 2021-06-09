@@ -4,7 +4,7 @@ import {Fragment, lazy, useEffect} from "react"
 import {AdminRoomTable as columns} from '../../../utils/tableColumn'
 import style, {TableOptions as options} from '../../../_style/TableStyle'
 import {connect} from 'react-redux'
-import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
+import * as actions from "../../../../../store/action/__ActionGlobal/TableAction";
 import {Room} from "../../../../../store/utils/Specify";
 import Typography from "@material-ui/core/Typography";
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';

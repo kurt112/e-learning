@@ -4,7 +4,7 @@ import {Fragment, lazy, useEffect} from "react"
 import {AdminTeacherTable as columns} from '../../../utils/tableColumn'
 import style, {TableOptions as options} from '../../../_style/TableStyle'
 import {connect} from "react-redux";
-import * as actions from '../../../../../store/action/__ActionGlobal/AdminAction'
+import * as actions from '../../../../../store/action/__ActionGlobal/TableAction'
 import Typography from "@material-ui/core/Typography";
 import {Teacher} from '../../../../../store/utils/Specify'
 import IconButton from "@material-ui/core/IconButton";

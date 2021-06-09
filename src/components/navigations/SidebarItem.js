@@ -18,7 +18,6 @@ import CreateIcon from '@material-ui/icons/Create';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
-import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 export function TeacherItems({ style }) {
     return (
@@ -157,11 +156,11 @@ export function AdminItems({ style }) {
                 </ListItemIcon>
                 <ListItemText primary="Subjects" />
             </ListItem>
-            <ListItem component={NavLink} to="/admin/strand-courses" button>
+            <ListItem component={NavLink} to="/admin/strand-course" button>
                 <ListItemIcon>
                     <AcUnitIcon />
                 </ListItemIcon>
-                <ListItemText primary="Strand/Courses" />
+                <ListItemText primary="Curriculum" />
             </ListItem>
         </div>
     )

@@ -1,5 +1,5 @@
 export const
-    JavaEndpoint = 'http://localhost:8080',
+    JavaEndpoint = 'https://eellearning.herokuapp.com',
     ExpressEndPoint = 'http://localhost:5000',
     GraphQlEndpoint = JavaEndpoint + '/Elearning',
 

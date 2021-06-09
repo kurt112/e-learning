@@ -6,7 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import UpdateIcon from "@material-ui/icons/Update";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import * as actions from "../../../../../store/action/__ActionGlobal/AdminAction";
+import * as actions from "../../../../../store/action/__ActionGlobal/TableAction";
 import {
     Teacher_Lecture,
     Teacher_Lecture_Create, Teacher_Lecture_Delete

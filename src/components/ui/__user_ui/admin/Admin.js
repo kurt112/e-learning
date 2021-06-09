@@ -25,3 +25,7 @@ export {
 export {
     default as RoomShift
 } from './room-shift/RoomShiftsList'
+
+export {
+    default as StrandAndCourse
+}from './curriculum'

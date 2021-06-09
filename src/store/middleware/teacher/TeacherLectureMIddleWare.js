@@ -15,7 +15,7 @@ import {
     TeacherLectureCreate as createLecture,
     TeacherLectureDelete,
 } from "../utils/ApiEndpoint/ClassroomEndPoint";
-import * as dialogAction from "../../action/__ActionGlobal/AdminDialogAction";
+import * as dialogAction from "../../action/__ActionGlobal/DialogAction";
 
 export function* TeacherLectureDataNext(action) {
     const state = yield select(Selector.TeacherLecture)
