@@ -5,17 +5,26 @@ import {AdminRoomTable as columns} from '../../../utils/tableColumn'
 import style, {TableOptions as options} from '../../../_style/TableStyle'
 import {connect} from 'react-redux'
 import * as actions from "../../../../../store/action/__ActionGlobal/TableAction";
-import {Room} from "../../../../../store/utils/Specify";
+import {Room, Room_Delete} from "../../../../../store/utils/Specify";
 import Typography from "@material-ui/core/Typography";
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
 import UpdateIcon from '@material-ui/icons/Update';
-import DeleteRoomDialog from "./DeleteRoomDialog";
-const RegisterRoom = lazy(() => import(`./RegisterRoomDialog`));
-const DeleteRoom = lazy(() => import(`./DeleteRoomDialog`))
 
-const Index = ({room, initData, searchChange, pageChange, openDialog, closeDialog}) => {
+const RegisterRoom = lazy(() => import(`./RegisterRoomDialog`));
+const DeleteRoomDialog = lazy(() => import(`./DeleteRoomDialog`))
+
+const Index = ({
+                   room,
+                   initData,
+                   searchChange,
+                   pageChange,
+                   openDialog,
+                   closeDialog,
+                   openDeleteDialog,
+                   closeDeleteDialog
+               }) => {
 
     const classes = style()
     useEffect(() => {
@@ -27,7 +36,7 @@ const Index = ({room, initData, searchChange, pageChange, openDialog, closeDialo
         <Fragment>
 
             <RegisterRoom dialog={room.dialog} closeDialog={closeDialog}/>
-            <DeleteRoomDialog/>
+            <DeleteRoomDialog dialog={room.deleteDialog} closeDialog={closeDeleteDialog}/>
 
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
@@ -39,11 +48,11 @@ const Index = ({room, initData, searchChange, pageChange, openDialog, closeDialo
                                 </IconButton>
                             </Tooltip>
 
-                           <Tooltip title='Delete Room'>
-                               <IconButton aria-label="delete-room" onClick={() => alert('gagawin mo pa to')}>
-                                   <DeleteIcon fontSize={'large'} color={'secondary'}/>
-                               </IconButton>
-                           </Tooltip>
+                            <Tooltip title='Delete Room'>
+                                <IconButton aria-label="delete-room" onClick={openDeleteDialog}>
+                                    <DeleteIcon fontSize={'large'} color={'secondary'}/>
+                                </IconButton>
+                            </Tooltip>
 
                             <Tooltip title='Update Room'>
                                 <IconButton aria-label="update-room" onClick={() => alert('gagawin mo pa to')}>
@@ -89,11 +98,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        // action for tables
         initData: () => dispatch(actions.InitDataTable(Room)),
         searchChange: (data) => dispatch(actions.SearchChange(data, Room)),
         pageChange: (page) => dispatch(actions.DataNextPage(page, Room)),
+
+        // action for opening and closing dialogs
         openDialog: () => dispatch(actions.openDialog(Room)),
         closeDialog: () => dispatch(actions.closeDialog(Room)),
+
+        openDeleteDialog: () => dispatch(actions.openDialog(Room_Delete)),
+        closeDeleteDialog: () => dispatch(actions.closeDialog(Room_Delete))
+
     }
 }
 

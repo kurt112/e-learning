@@ -8,6 +8,10 @@ import {
     AdminRoomBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/AdminQuery/AdminRoomQuery";
 
+export function * DeleteRoom(){
+    alert("yow")
+}
+
 export function* RoomRegister() {
     const room = yield select(Selector.AdminRoomDialog)
     yield RegisterBody(room,AdminRoomRegister,Room, RoomTableDataInit)

@@ -17,10 +17,10 @@ import {
     twoOptionLabel,
     twoOptionSelected
 } from "../../../utils/autoComplete/autoCompleteAction";
-import {useEffect, Fragment, useState} from "react";
-import RoomShiftAddStudentTransfer from "./RoomShiftDialogAddStudentTransfer";
+import {Fragment, useState} from "react";
+import RoomShiftAddStudentTransfer from "./RoomShiftAddStudentTransferDialog";
 
-const RoomShiftDialogAddStudent = ({closeDialog, dialog}) => {
+const RoomShiftAddStudentDialog = ({closeDialog, dialog}) => {
 
     const [openRoomShift, setOpenRoomShift] = useState(false)
     const [roomShiftOptions, setRoomShiftOptions] = useState([])
@@ -93,4 +93,4 @@ const RoomShiftDialogAddStudent = ({closeDialog, dialog}) => {
     </Fragment>
 }
 
-export default RoomShiftDialogAddStudent
+export default RoomShiftAddStudentDialog

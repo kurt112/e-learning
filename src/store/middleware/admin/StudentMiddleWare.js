@@ -5,6 +5,10 @@ import {AdminStudentRegister} from "../utils/ApiEndpoint/ClassroomEndPoint";
 import {TableNextData, TableDataInit, Register} from './__MiddleWareGlobal'
 import {AdminStudentBodyDataSettingsQuery,AdminStudentBodyDataQuery} from "../utils/GraphQlQuery/AdminQuery/AdminStudentQuery";
 
+export function * DeleteStudent(){
+    alert("student delete")
+}
+
 export function* StudentRegister() {
     const student = yield select(Selector.AdminStudentDialog)
     const params = new URLSearchParams();

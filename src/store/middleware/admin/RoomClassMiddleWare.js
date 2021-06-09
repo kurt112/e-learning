@@ -20,6 +20,10 @@ export function* RoomClassRegister() {
     yield Register(params, AdminRoomClassRegister, RoomShiftClass,RoomClassTableDataInit)
 }
 
+export function * DeleteRoomClass(){
+    alert("i am clicked")
+}
+
 
 export function* RoomClassTableDataNext(action) {
     const classState = yield select(Selector.AdminClass)

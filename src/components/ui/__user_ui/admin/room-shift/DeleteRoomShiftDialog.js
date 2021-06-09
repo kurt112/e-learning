@@ -8,14 +8,14 @@ import {
 } from "@material-ui/core"
 import {connect} from 'react-redux'
 import * as actions from '../../../../../store/action/__ActionGlobal/DialogAction'
-import {Room_Delete} from "../../../../../store/utils/Specify";
+import {RoomShift_Delete} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
 import {
     DeleteAssignmentFail,
     DeleteAssignmentSuccess
 } from "../../../../../__Messages/teacher/TeacherAssignmentMessage";
 
-const DeleteRoomDialog = ({
+const DeleteRoomShiftDialog = ({
                               dialog,
                               state,
                               closeDialog,
@@ -31,11 +31,11 @@ const DeleteRoomDialog = ({
     return <Dialog
         open={dialog}
         onClose={closeDialog}
-        aria-labelledby="delete-room"
+        aria-labelledby="delete-room-shift"
         fullWidth
         maxWidth={"md"}
     >
-        <DialogTitle id="delete-room">Delete Room</DialogTitle>
+        <DialogTitle id="delete-room-shift">Delete Room Shift</DialogTitle>
         <DialogContent>
 
             <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
@@ -68,17 +68,17 @@ const DeleteRoomDialog = ({
 
 const mapToState = (state) => {
     return {
-        state: state.DeleteDialogRoom
+        state: state.DeleteAssignmentDialog
     }
 }
 
 const mapDispatchToState = (dispatch) => {
     return {
-        dialogRegister: () => dispatch(actions.dialogRegister(Room_Delete)),
-        dialogId: (data) => dispatch(actions.dialogId(data, Room_Delete)),
-        registerDialogMessageClose: () => dispatch(actions.registerDialogMessageClose(Room_Delete))
+        dialogRegister: () => dispatch(actions.dialogRegister(RoomShift_Delete)),
+        dialogId: (data) => dispatch(actions.dialogId(data, RoomShift_Delete)),
+        registerDialogMessageClose: () => dispatch(actions.registerDialogMessageClose(RoomShift_Delete))
     }
 }
 
 
-export default connect(mapToState, mapDispatchToState)(DeleteRoomDialog)
+export default connect(mapToState, mapDispatchToState)(DeleteRoomShiftDialog)

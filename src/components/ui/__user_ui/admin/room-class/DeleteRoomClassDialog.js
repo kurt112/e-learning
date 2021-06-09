@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core"
 import {connect} from 'react-redux'
 import * as actions from '../../../../../store/action/__ActionGlobal/DialogAction'
-import {Room_Delete} from "../../../../../store/utils/Specify";
+import {RoomShiftClass_Delete} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
 import {
     DeleteAssignmentFail,
@@ -31,11 +31,11 @@ const DeleteRoomDialog = ({
     return <Dialog
         open={dialog}
         onClose={closeDialog}
-        aria-labelledby="delete-room"
+        aria-labelledby="delete-room-class"
         fullWidth
         maxWidth={"md"}
     >
-        <DialogTitle id="delete-room">Delete Room</DialogTitle>
+        <DialogTitle id="delete-room-class">Delete Room Class</DialogTitle>
         <DialogContent>
 
             <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
@@ -46,7 +46,7 @@ const DeleteRoomDialog = ({
                 value={state.id}
                 margin="dense"
                 variant={'outlined'}
-                label="Enter Assignment Code"
+                label="Enter Room Class Id"
                 type="text"
                 fullWidth
                 onChange={(event) => dialogId(event.target.value)}
@@ -68,15 +68,15 @@ const DeleteRoomDialog = ({
 
 const mapToState = (state) => {
     return {
-        state: state.DeleteDialogRoom
+        state: state.DeleteAssignmentDialog
     }
 }
 
 const mapDispatchToState = (dispatch) => {
     return {
-        dialogRegister: () => dispatch(actions.dialogRegister(Room_Delete)),
-        dialogId: (data) => dispatch(actions.dialogId(data, Room_Delete)),
-        registerDialogMessageClose: () => dispatch(actions.registerDialogMessageClose(Room_Delete))
+        dialogRegister: () => dispatch(actions.dialogRegister(RoomShiftClass_Delete)),
+        dialogId: (data) => dispatch(actions.dialogId(data, RoomShiftClass_Delete)),
+        registerDialogMessageClose: () => dispatch(actions.registerDialogMessageClose(RoomShiftClass_Delete))
     }
 }
 

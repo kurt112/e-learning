@@ -38,7 +38,14 @@ import {
     AdminClassDialog,
     AdminRoomShiftDialog,
     AdminRoomShift,
-    AdminClass
+    AdminClass,
+    DeleteDialogSubject,
+    DeleteDialogRoom,
+    DeleteDialogClass,
+    DeleteDialogRoomShift,
+    DeleteDialogStudent,
+    DeleteDialogTeacher,
+    AdminCurriculum
 } from './store/reducers/Admin'
 
 import Classroom from "./store/reducers/ClassroomState";
@@ -65,42 +72,7 @@ import CurrentUser from "./store/reducers/CurrentUser/CurrentUser";
 import {StudentRegisterForm, TeacherRegisterForm} from './store/reducers/RegisterForm'
 
 
-// sagas
 import {
-    watchAdminRegisterTeacher,
-    watchTeacherTableNextData,
-    watchAdminTeacherInitTableData,
-    watchTeacherSearchChange,
-    watchStudentInitTableData,
-    watchStudentRegisterStudent,
-    watchStudentSearchChange,
-    watchStudentTableNextData,
-    watchAdminRegisterRoom,
-    watchAdminRoomTableInit,
-    watchAdminRoomTableNext,
-    watchAdminRoomSearchChange,
-    watchAdminSubjectRegister,
-    watchAdminSubjectSearchChange,
-    watchAdminSubjectTableInit,
-    watchAdminSubjectTableNext,
-    watchAdminRegisterRoomShift,
-    watchAdminRoomShiftSearchChange,
-    watchAdminRoomShiftTableInit,
-    watchAdminRoomShiftTableNext,
-    watchAdminRegisterRoomClass,
-    watchAdminRoomClassSearchChange,
-    watchAdminRoomClassTableInit,
-    watchAdminRoomClassTableNext,
-    watchStudentGetProfile,
-    watchTeacherGetProfile,
-    watchRoomGetProfile,
-    watchRoomShiftGetProfile,
-    watchRoomShiftClassGetProfile,
-    watchLogin,
-    watchPreRegister,
-    watchReLogin,
-    watchStudentRegister,
-    watchTeacherRegister,
     watchTeacherUploadResource,
     watchDeleteResource,
     watchTeacherAssignmentInit,
@@ -126,8 +98,63 @@ import {
     watchTeacherQuizInit,
     watchTeacherQuizSearchChange,
     watchTeacherQuizTableNext
-} from './store/middleware/'
+} from './store/middleware/teacher'
 
+import {
+    watchAdminRegisterRoom,
+    watchAdminRoomTableInit,
+    watchAdminRoomTableNext,
+    watchAdminRoomSearchChange,
+    watchAdminSubjectRegister,
+    watchAdminSubjectSearchChange,
+    watchAdminSubjectTableInit,
+    watchAdminSubjectTableNext,
+    watchAdminRegisterRoomShift,
+    watchAdminRoomShiftSearchChange,
+    watchAdminRoomShiftTableInit,
+    watchAdminRoomShiftTableNext,
+    watchAdminRegisterRoomClass,
+    watchAdminRoomClassSearchChange,
+    watchAdminRoomClassTableInit,
+    watchAdminRoomClassTableNext,
+    watchStudentInitTableData,
+    watchStudentRegisterStudent,
+    watchStudentSearchChange,
+    watchStudentTableNextData,
+    watchAdminRegisterTeacher,
+    watchAdminTeacherInitTableData,
+    watchTeacherSearchChange,
+    watchTeacherTableNextData,
+    watchAdminDeleteRoom,
+    watchAdminDeleteRoomClass,
+    watchAdminTeacherDelete,
+    watchDeleteRoomShift,
+    watchDeleteStudent,
+    watchSubjectDelete
+} from './store/middleware/admin'
+
+import {
+    watchStudentGetProfile,
+    watchTeacherGetProfile,
+    watchRoomGetProfile,
+    watchRoomShiftGetProfile,
+    watchRoomShiftClassGetProfile
+} from './store/middleware/profile'
+
+// import {
+//
+// } from './store/middleware/student'
+
+import {
+    watchLogin,
+    watchPreRegister,
+    watchReLogin
+} from './store/middleware/login'
+
+import {
+    watchTeacherRegister,
+    watchStudentRegister
+} from './store/middleware/register'
 
 const reducers = combineReducers({
 
@@ -170,6 +197,13 @@ const reducers = combineReducers({
     AdminRoomShiftDialog,
     AdminRoomShift,
     Classroom,
+    DeleteDialogSubject,
+    DeleteDialogRoom,
+    DeleteDialogClass,
+    DeleteDialogRoomShift,
+    DeleteDialogStudent,
+    DeleteDialogTeacher,
+    AdminCurriculum,
 
 
     // Profile of Entity
@@ -235,6 +269,13 @@ sagaMiddleware.run(watchAdminRegisterRoomClass)
 sagaMiddleware.run(watchAdminRoomClassTableNext)
 sagaMiddleware.run(watchAdminRoomClassTableInit)
 sagaMiddleware.run(watchAdminRoomClassSearchChange)
+
+sagaMiddleware.run(watchAdminDeleteRoom)
+sagaMiddleware.run(watchAdminTeacherDelete)
+sagaMiddleware.run(watchAdminDeleteRoomClass)
+sagaMiddleware.run(watchDeleteRoomShift)
+sagaMiddleware.run(watchDeleteStudent)
+sagaMiddleware.run(watchSubjectDelete)
 
 
 // profile

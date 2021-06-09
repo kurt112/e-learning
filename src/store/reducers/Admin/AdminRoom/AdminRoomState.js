@@ -2,6 +2,7 @@ import state from "../../__StateGlobal/AdminTableState";
 import * as actions from "../../../ActionType/__ActionTypeGlobal/TableActionType";
 import {Room, Room_Delete} from "../../../utils/Specify";
 import {AdminInsertRoom as insert} from "../../../../components/ui/utils/tableColumn";
+import {updateObject} from "../../../utils/UpdateObject";
 
 const newState = new state()
 
@@ -9,8 +10,6 @@ const currentState = {
     ...newState.init_state,
     deleteDialog: false
 }
-
-
 
 const transforms = (items) => items.map((item) =>
     insert(item.roomName, item.timeStart, item.timeEnd, item.id))
@@ -31,12 +30,10 @@ const reducer = (state = currentState, action)=>{
         // for room create dialog actions
         case actions.DIALOG_OPEN(Room): return newState.openDialog(state)
         case actions.DIALOG_CLOSE(Room): return newState.closeDialog(state)
-        // case actions.ADMIN_DIALOG_TABLE_REGISTER(Room):return newState.AddTable(state, responseData(action.item))
 
-        // from room delete dialog actinos
-        case actions.DIALOG_OPEN(Room_Delete): return newState.openDialog(state)
-        case actions.DIALOG_CLOSE(Room_Delete): return newState.closeDialog(state)
-        // case actions.ADMIN_DIALOG_TABLE_REGISTER(Room_Delete):return newState.AddTable(state, responseData(action.item))
+        // from room delete dialog actions
+        case actions.DIALOG_OPEN(Room_Delete): return updateObject(state, {deleteDialog: true})
+        case actions.DIALOG_CLOSE(Room_Delete): return updateObject(state, {deleteDialog: false})
         default: return state;
     }
 }

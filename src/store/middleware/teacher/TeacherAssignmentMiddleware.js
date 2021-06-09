@@ -30,21 +30,20 @@ export function* TeacherAssignmentTableDataInit() {
 }
 
 export function* TeacherAssignmentDelete() {
-    alert("i am called")
-    // const classState = yield select(Selector.TeacherAssignmentDeleteDialog)
-    // const currentUser = yield select(Selector.CurrentUser)
-    // const email = currentUser.user.email
-    // const params = new URLSearchParams();
-    //
-    // params.append('code', classState.id)
-    // params.append('email', email)
-    // try {
-    //     const response = yield baseUrl.delete(deleteAssignment, {params})
-    //     yield put(DialogSuccess(response.data.item, Teacher_Assignment_Delete))
-    //     yield put(dialogAction.registerDialogSuccess(Teacher_Assignment_Delete))
-    // } catch (error) {
-    //     yield put(dialogAction.registerDialogFail(error, Teacher_Assignment_Delete))
-    // }
+    const classState = yield select(Selector.TeacherAssignmentDeleteDialog)
+    const currentUser = yield select(Selector.CurrentUser)
+    const email = currentUser.user.email
+    const params = new URLSearchParams();
+
+    params.append('code', classState.id)
+    params.append('email', email)
+    try {
+        const response = yield baseUrl.delete(deleteAssignment, {params})
+        yield put(DialogSuccess(response.data.item, Teacher_Assignment_Delete))
+        yield put(dialogAction.registerDialogSuccess(Teacher_Assignment_Delete))
+    } catch (error) {
+        yield put(dialogAction.registerDialogFail(error, Teacher_Assignment_Delete))
+    }
 }
 
 export function* TeacherAssignmentCreate() {

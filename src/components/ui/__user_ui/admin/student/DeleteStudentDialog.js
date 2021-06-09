@@ -8,21 +8,21 @@ import {
 } from "@material-ui/core"
 import {connect} from 'react-redux'
 import * as actions from '../../../../../store/action/__ActionGlobal/DialogAction'
-import {Room_Delete} from "../../../../../store/utils/Specify";
+import {Student_Delete} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
 import {
     DeleteAssignmentFail,
     DeleteAssignmentSuccess
 } from "../../../../../__Messages/teacher/TeacherAssignmentMessage";
 
-const DeleteRoomDialog = ({
-                              dialog,
-                              state,
-                              closeDialog,
-                              dialogId,
-                              registerDialogMessageClose,
-                              dialogRegister
-                          }) => {
+const DeleteRoomShiftDialog = ({
+                                   dialog,
+                                   state,
+                                   closeDialog,
+                                   dialogId,
+                                   registerDialogMessageClose,
+                                   dialogRegister
+                               }) => {
 
     const RegisterEnter = (event) => {
         if (event.key === "Enter" && state.id.length > 0) dialogRegister()
@@ -31,11 +31,11 @@ const DeleteRoomDialog = ({
     return <Dialog
         open={dialog}
         onClose={closeDialog}
-        aria-labelledby="delete-room"
+        aria-labelledby="delete-student"
         fullWidth
         maxWidth={"md"}
     >
-        <DialogTitle id="delete-room">Delete Room</DialogTitle>
+        <DialogTitle id="delete-student">Delete Student</DialogTitle>
         <DialogContent>
 
             <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
@@ -46,7 +46,7 @@ const DeleteRoomDialog = ({
                 value={state.id}
                 margin="dense"
                 variant={'outlined'}
-                label="Enter Assignment Code"
+                label="Enter Student LRN"
                 type="text"
                 fullWidth
                 onChange={(event) => dialogId(event.target.value)}
@@ -68,17 +68,17 @@ const DeleteRoomDialog = ({
 
 const mapToState = (state) => {
     return {
-        state: state.DeleteDialogRoom
+        state: state.DeleteAssignmentDialog
     }
 }
 
 const mapDispatchToState = (dispatch) => {
     return {
-        dialogRegister: () => dispatch(actions.dialogRegister(Room_Delete)),
-        dialogId: (data) => dispatch(actions.dialogId(data, Room_Delete)),
-        registerDialogMessageClose: () => dispatch(actions.registerDialogMessageClose(Room_Delete))
+        dialogRegister: () => dispatch(actions.dialogRegister(Student_Delete)),
+        dialogId: (data) => dispatch(actions.dialogId(data, Student_Delete)),
+        registerDialogMessageClose: () => dispatch(actions.registerDialogMessageClose(Student_Delete))
     }
 }
 
 
-export default connect(mapToState, mapDispatchToState)(DeleteRoomDialog)
+export default connect(mapToState, mapDispatchToState)(DeleteRoomShiftDialog)

@@ -6,7 +6,7 @@ import style, {TableOptions as options} from '../../../_style/TableStyle'
 
 import {connect} from 'react-redux'
 import * as actions from "../../../../../store/action/__ActionGlobal/TableAction";
-import {RoomShiftClass} from "../../../../../store/utils/Specify";
+import {RoomShiftClass, RoomShiftClass_Delete} from "../../../../../store/utils/Specify";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
@@ -14,9 +14,19 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
 
 
-const RegisterRoom = lazy(() => import(`./RoomClassDialogRegister`));
+const RegisterRoom = lazy(() => import(`./RegisterRoomClassDialog`));
+const DeleteRoomClass = lazy(() => import(`./DeleteRoomClassDialog`))
 
-const Index = ({room, initData, searchChange, pageChange, openDialog, closeDialog}) => {
+const Index = ({
+                   room,
+                   initData,
+                   searchChange,
+                   pageChange,
+                   openDialog,
+                   closeDialog,
+                   openDeleteDialog,
+                   closeDeleteDialog
+               }) => {
 
     const classes = style()
     useEffect(() => {
@@ -28,7 +38,7 @@ const Index = ({room, initData, searchChange, pageChange, openDialog, closeDialo
         <Fragment>
 
             <RegisterRoom dialog={room.dialog} closeDialog={closeDialog}/>
-
+            <DeleteRoomClass dialog={room.deleteDialog} closeDialog={closeDeleteDialog}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
@@ -38,7 +48,7 @@ const Index = ({room, initData, searchChange, pageChange, openDialog, closeDialo
                             </IconButton>
                         </Tooltip>
                         <Tooltip title='Delete Class'>
-                            <IconButton aria-label="delete-room" onClick={() => alert('gagawin mo pa to')}>
+                            <IconButton aria-label="delete-room" onClick={openDeleteDialog}>
                                 <DeleteIcon fontSize={'large'} color={'secondary'}/>
                             </IconButton>
                         </Tooltip>
@@ -87,8 +97,13 @@ const mapDispatchToProps = (dispatch) => {
         initData: () => dispatch(actions.InitDataTable(RoomShiftClass)),
         searchChange: (data) => dispatch(actions.SearchChange(data, RoomShiftClass)),
         pageChange: (page) => dispatch(actions.DataNextPage(page, RoomShiftClass)),
+
+        // for opening and closing dialog
         openDialog: () => dispatch(actions.openDialog(RoomShiftClass)),
         closeDialog: () => dispatch(actions.closeDialog(RoomShiftClass)),
+
+        openDeleteDialog: () => dispatch(actions.openDialog(RoomShiftClass_Delete)),
+        closeDeleteDialog: () => dispatch(actions.closeDialog(RoomShiftClass_Delete))
     }
 }
 

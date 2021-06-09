@@ -6,14 +6,16 @@ import style, {TableOptions as options} from '../../../_style/TableStyle'
 import {connect} from "react-redux";
 import * as actions from '../../../../../store/action/__ActionGlobal/TableAction'
 import Typography from "@material-ui/core/Typography";
-import {Teacher} from '../../../../../store/utils/Specify'
+import {Teacher, Teacher_Delete} from '../../../../../store/utils/Specify'
 import IconButton from "@material-ui/core/IconButton";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
 
-const TeacherDialogRegister = lazy(() => import(`./TeacherDialogRegister`))
-const Index = ({teacher, pageChange, searchChange, openDialog, closeDialog, initData}) => {
+const TeacherDialogRegister = lazy(() => import(`./RegisterTeacherDialog`))
+const TeacherDeleteDialog = lazy(() => import(`./DeleteDialogTeacher`))
+const Index = ({teacher, pageChange, searchChange, openDialog, closeDialog, initData,  openDeleteDialog,
+                   closeDeleteDialog}) => {
     const classes = style()
 
     useEffect(() => {
@@ -25,7 +27,7 @@ const Index = ({teacher, pageChange, searchChange, openDialog, closeDialog, init
     return (
         <Fragment>
             <TeacherDialogRegister dialog={teacher.dialog} closeDialog={closeDialog}/>
-
+            <TeacherDeleteDialog dialog={teacher.deleteDialog} closeDialog={closeDeleteDialog}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
@@ -36,7 +38,7 @@ const Index = ({teacher, pageChange, searchChange, openDialog, closeDialog, init
                                 </IconButton>
                             </Tooltip>
                             <Tooltip title='Delete Teacher'>
-                                <IconButton aria-label="delete-teacher" onClick={() => alert('gagawin mo pa to')}>
+                                <IconButton aria-label="delete-teacher" onClick={openDeleteDialog}>
                                     <DeleteIcon fontSize={'large'} color={'secondary'}/>
                                 </IconButton>
                             </Tooltip>
@@ -90,8 +92,12 @@ const mapDispatchToProps = (dispatch) => {
         initData: () => dispatch(actions.InitDataTable(Teacher)),
         searchChange: (data) => dispatch(actions.SearchChange(data, Teacher)),
         pageChange: (page) => dispatch(actions.DataNextPage(page, Teacher)),
+
+        // for opening and closing dialog
         openDialog: () => dispatch(actions.openDialog(Teacher)),
         closeDialog: () => dispatch(actions.closeDialog(Teacher)),
+        openDeleteDialog: () => dispatch(actions.openDialog(Teacher_Delete)),
+        closeDeleteDialog: () => dispatch(actions.closeDialog(Teacher_Delete))
     }
 }
 

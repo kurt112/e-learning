@@ -24,7 +24,7 @@ export {
 
 export {
     default as RoomShift
-} from './room-shift/RoomShiftsList'
+} from './room-shift'
 
 export {
     default as StrandAndCourse

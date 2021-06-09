@@ -11,7 +11,7 @@ import * as actions from '../../../../../store/action/__ActionGlobal/DialogActio
 import {Student} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
 
-const StudentRegisterDialog = ({
+const RegisterStudentDialog = ({
                                    dialog,
                                    student,
                                    closeDialog,
@@ -76,4 +76,4 @@ const mapDispatchToState = (dispatch) => {
 }
 
 
-export default connect(mapToState, mapDispatchToState)(StudentRegisterDialog)
+export default connect(mapToState, mapDispatchToState)(RegisterStudentDialog)

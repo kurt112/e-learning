@@ -34,7 +34,7 @@ const formStyle = makeStyles(() => ({
 }))
 
 
-const RoomShiftDialogRegister = ({
+const RoomShiftRegisterDialog = ({
                              closeDialog,
                              dialog,
                                 dialogState,
@@ -227,4 +227,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RoomShiftDialogRegister)
+export default connect(mapStateToProps, mapDispatchToProps)(RoomShiftRegisterDialog)

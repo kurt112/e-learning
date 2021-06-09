@@ -8,6 +8,10 @@ import {
     AdminTeacherBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/AdminQuery/AdminTeacherQuery";
 
+export function * DeleteTeacher (){
+    alert("techer")
+}
+
 export function* TeacherRegister() {
     const teacher = yield select(Selector.AdminTeacherDialog)
     const params = new URLSearchParams();

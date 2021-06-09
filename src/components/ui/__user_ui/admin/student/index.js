@@ -4,21 +4,25 @@ import {Fragment, lazy, useEffect} from "react"
 import {AdminStudentTable as columns} from '../../../utils/tableColumn'
 import style, {TableOptions as options} from '../../../_style/TableStyle'
 import {connect} from 'react-redux'
-import {Student} from '../../../../../store/utils/Specify'
+import {Student, Student_Delete} from '../../../../../store/utils/Specify'
 import * as actions from "../../../../../store/action/__ActionGlobal/TableAction";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-const StudentRegisterDialog = lazy(() => import(`./StudentRegisterDialog`));
+const StudentRegisterDialog = lazy(() => import(`./RegisterStudentDialog`));
+const StudentDeleteDialog = lazy(() => import(`./DeleteStudentDialog`))
 
-const Index = ({student, pageChange, searchChange, openDialog, closeDialog, initData}) => {
+const Index = ({
+                   student, pageChange, searchChange, openDialog, closeDialog, initData, openDeleteDialog,
+                   closeDeleteDialog
+               }) => {
     const classes = style()
 
     useEffect(() => {
-
-        if(student.data.length ===0) initData()
+        if (student.data.length === 0) initData()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
@@ -26,6 +30,7 @@ const Index = ({student, pageChange, searchChange, openDialog, closeDialog, init
         <Fragment>
 
             <StudentRegisterDialog dialog={student.dialog} closeDialog={closeDialog}/>
+            <StudentDeleteDialog dialog={student.deleteDialog} closeDialog={closeDeleteDialog} />
 
             <Grid component="main" className={classes.root}>
 
@@ -38,7 +43,7 @@ const Index = ({student, pageChange, searchChange, openDialog, closeDialog, init
                                 </IconButton>
                             </Tooltip>
                             <Tooltip title='Delete Student'>
-                                <IconButton aria-label="delete-student" onClick={() => alert('gagawin mo pa to')}>
+                                <IconButton aria-label="delete-student" onClick={openDeleteDialog}>
                                     <DeleteIcon fontSize={'large'} color={'secondary'}/>
                                 </IconButton>
                             </Tooltip>
@@ -88,8 +93,12 @@ const mapDispatchToProps = (dispatch) => {
         initData: () => dispatch(actions.InitDataTable(Student)),
         searchChange: (data) => dispatch(actions.SearchChange(data, Student)),
         pageChange: (page) => dispatch(actions.DataNextPage(page, Student)),
+
+        // for opening and closing dialog
         openDialog: () => dispatch(actions.openDialog(Student)),
         closeDialog: () => dispatch(actions.closeDialog(Student)),
+        openDeleteDialog: () => dispatch(actions.openDialog(Student_Delete)),
+        closeDeleteDialog: () => dispatch(actions.closeDialog(Student_Delete))
     }
 }
 

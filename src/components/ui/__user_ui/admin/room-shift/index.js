@@ -4,7 +4,7 @@ import {Fragment, lazy, useEffect} from "react"
 import { AdminRoomShiftTable as columns } from '../../../utils/tableColumn'
 import style, { TableOptions as options } from '../../../_style/TableStyle'
 import {connect} from 'react-redux'
-import { RoomShift} from "../../../../../store/utils/Specify";
+import {RoomShift, RoomShift_Delete} from "../../../../../store/utils/Specify";
 import Typography from "@material-ui/core/Typography";
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 
@@ -17,10 +17,19 @@ import IconButton from "@material-ui/core/IconButton";
 import UpdateIcon from "@material-ui/icons/Update";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-const AddStudentDialog = lazy(() => import(`./RoomShiftDialogAddStudent`));
-const RegisterRoomShiftDialog = lazy(() => import(`./RoomShiftDialogRegister`));
-
-const  RoomShiftList = ({roomShift, initData,searchChange,pageChange,openDialog,closeDialog,openAddStudent, closeAddStudent})=> {
+const AddStudentDialog = lazy(() => import(`./RoomShiftAddStudentDialog`));
+const RegisterRoomShiftDialog = lazy(() => import(`./RoomShiftRegisterDialog`));
+const DeleteRooShiftDialog = lazy(() => import(`./DeleteRoomShiftDialog`))
+const  RoomShiftList = ({roomShift,
+                            initData,
+                            searchChange,
+                            pageChange,
+                            openDialog,
+                            closeDialog,
+                            openAddStudent,
+                            closeAddStudent,
+                            openDeleteDialog,
+                            closeDeleteDialog})=> {
     console.log(roomShift.data)
     const classes = style()
     useEffect(() => {
@@ -33,7 +42,7 @@ const  RoomShiftList = ({roomShift, initData,searchChange,pageChange,openDialog,
 
             <RegisterRoomShiftDialog dialog={roomShift.dialog} closeDialog={closeDialog}/>
             <AddStudentDialog dialog={roomShift.addStudentDialog} closeDialog={closeAddStudent}/>
-
+            <DeleteRooShiftDialog dialog={roomShift.deleteDialog} closeDialog={closeDeleteDialog}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
@@ -46,7 +55,7 @@ const  RoomShiftList = ({roomShift, initData,searchChange,pageChange,openDialog,
                             </Tooltip>
 
                             <Tooltip title='Delete Room Shift'>
-                                <IconButton aria-label="delete-room" onClick={() => alert('gagawin mo pa to')}>
+                                <IconButton aria-label="delete-room" onClick={openDeleteDialog}>
                                     <DeleteIcon fontSize={'large'} color={'secondary'}/>
                                 </IconButton>
                             </Tooltip>
@@ -102,10 +111,14 @@ const mapDispatchToProps =(dispatch) => {
         initData: () => dispatch(actions.InitDataTable(RoomShift)),
         searchChange: (data) => dispatch(actions.SearchChange(data,RoomShift)),
         pageChange: (page) => dispatch(actions.DataNextPage(page,RoomShift)),
+        openAddStudent: () => dispatch(roomShiftListAction.openAddStudent()),
+        closeAddStudent: () => dispatch(roomShiftListAction.closeAddStudent()),
+
+        // for opening dialog
         openDialog: () => dispatch(actions.openDialog(RoomShift)),
         closeDialog: ()=> dispatch(actions.closeDialog(RoomShift)),
-        openAddStudent: () => dispatch(roomShiftListAction.openAddStudent()),
-        closeAddStudent: () => dispatch(roomShiftListAction.closeAddStudent())
+        openDeleteDialog: () => dispatch(actions.openDialog(RoomShift_Delete)),
+        closeDeleteDialog: () => dispatch(actions.closeDialog(RoomShift_Delete))
     }
 }
 

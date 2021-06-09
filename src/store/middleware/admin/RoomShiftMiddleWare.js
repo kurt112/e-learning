@@ -8,6 +8,10 @@ import {
     AdminRoomShiftBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/AdminQuery/AdminRoomShiftQuery";
 
+export function * DeleteRoomShift(){
+    alert("room shift")
+}
+
 export function* RoomShiftRegister() {
 
     const roomShift = yield select(Selector.AdminRoomShiftDialog)

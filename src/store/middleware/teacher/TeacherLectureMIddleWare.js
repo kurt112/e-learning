@@ -43,7 +43,6 @@ export function* DeleteLecture() {
         yield put(dialogAction.registerDialogSuccess(Teacher_Lecture_Delete))
     } catch (error) {
         yield put(dialogAction.registerDialogFail(error, Teacher_Resource_Delete))
-        // console.log(error)
     }
 }
 

@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core"
 import {connect} from 'react-redux'
 import * as actions from '../../../../../store/action/__ActionGlobal/DialogAction'
-import {Room_Delete} from "../../../../../store/utils/Specify";
+import {Curriculum_Delete} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
 import {
     DeleteAssignmentFail,
@@ -68,15 +68,15 @@ const DeleteRoomDialog = ({
 
 const mapToState = (state) => {
     return {
-        state: state.DeleteDialogRoom
+        state: state.DeleteAssignmentDialog
     }
 }
 
 const mapDispatchToState = (dispatch) => {
     return {
-        dialogRegister: () => dispatch(actions.dialogRegister(Room_Delete)),
-        dialogId: (data) => dispatch(actions.dialogId(data, Room_Delete)),
-        registerDialogMessageClose: () => dispatch(actions.registerDialogMessageClose(Room_Delete))
+        dialogRegister: () => dispatch(actions.dialogRegister(Curriculum_Delete)),
+        dialogId: (data) => dispatch(actions.dialogId(data, Curriculum_Delete)),
+        registerDialogMessageClose: () => dispatch(actions.registerDialogMessageClose(Curriculum_Delete))
     }
 }
 

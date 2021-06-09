@@ -8,6 +8,10 @@ import {
     AdminSubjectBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/AdminQuery/AdminSubjectQuery";
 
+export function* DeleteSubject() {
+    alert("subject")
+}
+
 export function* RegisterSubject() {
     const subjectState =  yield select(Selector.AdminSubjectDialog)
     yield RegisterBody(subjectState, AdminSubjectRegister,Subject,SubjectTableDataInit)
