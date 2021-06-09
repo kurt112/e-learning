@@ -2,11 +2,15 @@ export const
     Teacher = "TEACHER",
     Student = "STUDENT",
     Admin = "ADMIN",
-    Room = "ROOM",
     RoomShift = 'ROOM_SHIFT',
     Subject = "SUBJECT",
     RoomShiftClass = "ROOM_SHIFT_CLASS",
     Activity = "Activity",
+
+    // For Room
+    Room = "ROOM",
+    Room_Create = Room+'_CREATE',
+    Room_Delete = Room+'_DELETE',
 
 
     // Teacher User Resource

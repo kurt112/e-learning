@@ -4,23 +4,23 @@ import {baseUrl} from "../axios";
 import * as actions from "../../action/__ActionGlobal/DialogAction";
 import {graphQLRequest} from '../utils/HttpRequest'
 
-export function* Register(params, URL, to) {
+export function* Register(params, URL, to, reload) {
     try {
 
-        const response = yield baseUrl.post(URL, params)
-        yield  put(tableActions.addItemTable(response.data.item, to))
+        yield baseUrl.post(URL, params)
         yield  put(actions.registerDialogSuccess(to))
+        yield reload()
     } catch (error) {
 
         yield put(actions.registerDialogFail(error, to))
     }
 }
 
-export function* RegisterBody(state, URL, to) {
+export function* RegisterBody(state, URL, to, reload) {
 
     try {
-        const response = yield baseUrl.post(URL, state)
-        yield  put(tableActions.addItemTable(response.data.item, to))
+        yield baseUrl.post(URL, state)
+        yield reload()
         yield  put(actions.registerDialogSuccess(to))
     } catch (error) {
         yield put(actions.registerDialogFail(error, to))

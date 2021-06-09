@@ -14,8 +14,6 @@ const transforms = (items) => {
         insert(item.room.roomName, item.roomShiftName, item.grade, item.section, item.timeStart,item.timeEnd,item.id))
 
 }
-const response = (item) => insert(item.roomName, item.shiftName, item.grade, item.section, item.timeStart,item.timeEnd,item.id)
-
 
 
 const initState = {
@@ -34,7 +32,6 @@ const reducer = (state = initState, action) =>{
         case actions.DIALOG_CLOSE(RoomShift): return newState.closeDialog(state)
         case actions.ADMIN_TABLE_NEXT_PAGE(RoomShift): return newState.nextData(state,action)
         case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(RoomShift): return newState.searchChange(state,action)
-        case actions.ADMIN_DIALOG_TABLE_REGISTER(RoomShift): return newState.AddTable(state, response(action.item))
 
         // Adding Student in Room Shift List
         case roomShiftListAction.ADD_STUDENT_DIALOG_CLOSE: return updateObject(state, {addStudentDialog:false})

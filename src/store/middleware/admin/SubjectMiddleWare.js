@@ -10,7 +10,7 @@ import {
 
 export function* RegisterSubject() {
     const subjectState =  yield select(Selector.AdminSubjectDialog)
-    yield RegisterBody(subjectState, AdminSubjectRegister,Subject  )
+    yield RegisterBody(subjectState, AdminSubjectRegister,Subject,SubjectTableDataInit)
 }
 
 export function* SubjectTableDataNext(action) {

@@ -6,11 +6,6 @@ import {AdminInsertStudentTable as insert} from "../../../../components/ui/utils
 const transforms = (items) => items.map((item) =>
     insert(item.student_id, item.user.firstName,item.user.lastName,item.user.email,item.user.birthdate,"to be insert", "to be insert", "to be insert",item.student_id))
 
-const response = (item) =>
-    insert(item.id, item.user.firstName,item.user.lastName,item.user.email,item.user.birthdate,"to be insert", "to be insert", "to be insert",item.student_id)
-
-
-
 const newState = new state()
 
 const reducer = (state = newState.init_state, action)=>{
@@ -24,7 +19,6 @@ const reducer = (state = newState.init_state, action)=>{
         case actions.DIALOG_CLOSE(Student): return newState.closeDialog(state)
         case actions.ADMIN_TABLE_NEXT_PAGE(Student): return newState.nextData(state,action)
         case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(Student): return newState.searchChange(state,action)
-        case actions.ADMIN_DIALOG_TABLE_REGISTER(Student): return newState.AddTable(state, response(action.item))
         default: return state;
     }
 }

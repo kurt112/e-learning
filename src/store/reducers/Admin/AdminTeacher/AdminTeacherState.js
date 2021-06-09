@@ -6,7 +6,6 @@ import state from '../../__StateGlobal/AdminTableState'
 const newState = new state()
 
 const transforms = (items) => items.map((item) => insert(item.user.firstName, item.user.lastName, item.user.email, item.user.birthdate))
-const response = (item) => insert(item.user.firstName, item.user.lastName, item.user.email, item.user.birthdate)
 
 const reducer = (state=newState.init_state, action)=>{
     switch(action.type){
@@ -19,7 +18,6 @@ const reducer = (state=newState.init_state, action)=>{
         case actions.DIALOG_CLOSE(Teacher): return newState.closeDialog(state)
         case actions.ADMIN_TABLE_NEXT_PAGE(Teacher): return newState.nextData(state,action)
         case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(Teacher): return newState.searchChange(state,action)
-        case actions.ADMIN_DIALOG_TABLE_REGISTER(Teacher): return newState.AddTable(state, response(action.item))
         default: return state;
     }
 

@@ -29,7 +29,7 @@ const formStyle = makeStyles(() => ({
 }))
 
 
-const RoomDialogRegister = ({
+const RegisterRoomDialog = ({
                                 closeDialog,
                                 dialog,
                                 dialogState,
@@ -126,13 +126,13 @@ const mapDispatchToProps = (dispatch) => {
     return {
 
 
-        changeRoomName: (event) => dispatch(dialogAction.roomNameChange(event)),
-        changeTimeStart: (event) => dispatch(dialogAction.roomTimeStartChange(event)),
-        changeTimeEnd: (event) => dispatch(dialogAction.roomTimeEndChange(event)),
+        changeRoomName: (data) => dispatch(dialogAction.roomNameChange(data)),
+        changeTimeStart: (data) => dispatch(dialogAction.roomTimeStartChange(data)),
+        changeTimeEnd: (data) => dispatch(dialogAction.roomTimeEndChange(data)),
 
         registerDialogMessageClose: () => dispatch(action.registerDialogMessageClose(Room)),
         registerDialog: () => dispatch(action.dialogRegister(Room))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RoomDialogRegister)
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterRoomDialog)

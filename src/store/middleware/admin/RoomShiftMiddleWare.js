@@ -18,7 +18,7 @@ export function* RoomShiftRegister() {
     params.append('shiftID-section',roomShift.section)
     params.append('shiftID-timeStart',roomShift.timeStart)
     params.append('shiftID-timeEnd',roomShift.timeEnd)
-    yield Register(params, AdminRoomShiftRegister, RoomShift)
+    yield Register(params, AdminRoomShiftRegister, RoomShift,RoomShiftTableDataInit)
 }
 
 

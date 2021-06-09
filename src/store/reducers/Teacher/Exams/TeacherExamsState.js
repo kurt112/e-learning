@@ -43,8 +43,7 @@ const reducer = (state = newState, action) => {
             return updateObject(state, {createDialog: true})
         case dialogAction.DIALOG_CLOSE(Teacher_Exams_Create):
             return updateObject(state, {createDialog: false})
-        // case teacherDialog.Dialog_Success(Teacher_Resource_Upload):
-        // return successData(state, action)
+
 
 
         // for opening and closing of delete dialog
@@ -52,8 +51,6 @@ const reducer = (state = newState, action) => {
             return updateObject(state, {deleteDialog: true})
         case dialogAction.DIALOG_CLOSE(Teacher_Exams_Delete):
             return updateObject(state, {deleteDialog: false})
-        // case teacherDialog.Dialog_Success(Teacher_Resource_Delete):
-        //     return successDelete(state, action)
         default:
             return state
     }

@@ -13,7 +13,7 @@ export function* TeacherRegister() {
     const params = new URLSearchParams();
     params.append('id', teacher.id)
 
-    yield Register(params, AdminTeacherRegister, Teacher)
+    yield Register(params, AdminTeacherRegister, Teacher,TeacherTableDataInit)
 }
 
 export function* TeacherTableDataNext(action) {

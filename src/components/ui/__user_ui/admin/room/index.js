@@ -1,4 +1,4 @@
-import {Box, Button, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
+import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
 import {Fragment, lazy, useEffect} from "react"
 import {AdminRoomTable as columns} from '../../../utils/tableColumn'
@@ -11,7 +11,9 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
 import UpdateIcon from '@material-ui/icons/Update';
-const RegisterRoom = lazy(() => import(`./RoomDialogRegister`));
+import DeleteRoomDialog from "./DeleteRoomDialog";
+const RegisterRoom = lazy(() => import(`./RegisterRoomDialog`));
+const DeleteRoom = lazy(() => import(`./DeleteRoomDialog`))
 
 const Index = ({room, initData, searchChange, pageChange, openDialog, closeDialog}) => {
 
@@ -25,6 +27,7 @@ const Index = ({room, initData, searchChange, pageChange, openDialog, closeDialo
         <Fragment>
 
             <RegisterRoom dialog={room.dialog} closeDialog={closeDialog}/>
+            <DeleteRoomDialog/>
 
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>

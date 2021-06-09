@@ -9,7 +9,7 @@ export function* StudentRegister() {
     const student = yield select(Selector.AdminStudentDialog)
     const params = new URLSearchParams();
     params.append('id', student.id)
-    yield Register(params, AdminStudentRegister, Student)
+    yield Register(params, AdminStudentRegister, Student, StudentTableDataInit)
 }
 
 

@@ -69,10 +69,3 @@ export const openDialog = (to) => {
         type: actions.DIALOG_OPEN(to)
     }
 }
-
-export const addItemTable = (item, to) => {
-    return {
-        type: actions.ADMIN_DIALOG_TABLE_REGISTER(to),
-        item,
-    }
-}

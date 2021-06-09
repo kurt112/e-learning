@@ -10,7 +10,7 @@ import {
 
 export function* RoomRegister() {
     const room = yield select(Selector.AdminRoomDialog)
-    yield RegisterBody(room,AdminRoomRegister,Room)
+    yield RegisterBody(room,AdminRoomRegister,Room, RoomTableDataInit)
 }
 
 export function* RoomTableDataNext(action) {

@@ -5,12 +5,9 @@ import * as actions from "../../../ActionType/__ActionTypeGlobal/TableActionType
 import {Subject} from "../../../utils/Specify";
 
 const newState = new state()
+
 const transforms = (items) => items.map((item) =>
     insert(item.subjectCode, item.subjectName, item.subjectMajor, item.status, item.subjectCode))
-
-const response = (item) => {
-    return  insert(item.subjectCode, item.subjectName, item.subjectMajor, item.status, item.subjectCode)
-}
 
 const reducer = (state = newState.init_state, action) =>{
     switch(action.type){
@@ -22,7 +19,6 @@ const reducer = (state = newState.init_state, action) =>{
         case actions.DIALOG_CLOSE(Subject): return newState.closeDialog(state)
         case actions.ADMIN_TABLE_NEXT_PAGE(Subject): return newState.nextData(state,action)
         case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(Subject): return newState.searchChange(state,action)
-        case actions.ADMIN_DIALOG_TABLE_REGISTER(Subject): return newState.AddTable(state, response(action.item))
         default: return state;
     }
 }

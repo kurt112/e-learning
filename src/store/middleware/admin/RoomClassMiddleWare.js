@@ -17,7 +17,7 @@ export function* RoomClassRegister() {
     params.append('time-end',roomClass.timeEnd)
     params.append('day',roomClass.day)
     params.append('teacher-id',roomClass.teacherID)
-    yield Register(params, AdminRoomClassRegister, RoomShiftClass)
+    yield Register(params, AdminRoomClassRegister, RoomShiftClass,RoomClassTableDataInit)
 }
 
 

@@ -9,11 +9,6 @@ const transforms = (items) => items.map((item) =>
     insert(item.roomShift.room.roomName, item.roomShift.grade, item.roomShift.section, item.subject.subjectName,
         "To be insert", item.day, item.startTime, item.endTime, item.roomShift.room.id+item.id+item.subject.subjectCode,item.id))
 
-const response = (item) => {
-
-    return insert(item.roomName, item.grade, item.section, item.subjectName,
-        item.teacherName, item.day, item.startTime, item.endTime, item.roomId+item.classId+item.subjectId, item.classId)
-}
 
 const reducer = (state = newState.init_state, action) =>{
     switch(action.type){
@@ -24,7 +19,6 @@ const reducer = (state = newState.init_state, action) =>{
         case actions.ADMIN_TABLE_NEXT_PAGE(RoomShiftClass): return newState.nextData(state,action)
         case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(RoomShiftClass): return newState.searchChange(state,action)
 
-        case actions.ADMIN_DIALOG_TABLE_REGISTER(RoomShiftClass): return newState.AddTable(state, response(action.item))
         case actions.DIALOG_OPEN(RoomShiftClass): return newState.openDialog(state)
         case actions.DIALOG_CLOSE(RoomShiftClass): return newState.closeDialog(state)
         default: return state;
