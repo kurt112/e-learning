@@ -1,16 +1,17 @@
 import {select} from "redux-saga/effects";
 import * as Selector from "../selector";
-import {Register, TableDataInit, TableNextData} from "./__MiddleWareGlobal";
-import {AdminRoomClassRegister} from "../utils/ApiEndpoint/ClassroomEndPoint";
-import {RoomShiftClass} from "../../utils/Specify";
+import {Delete, Register, TableDataInit, TableNextData} from "./__MiddleWareGlobal";
+import {AdminRoomClassRegister, DeleteRoomClass as deleteRoomClass} from "../utils/ApiEndpoint/ClassroomEndPoint";
+import {RoomShiftClass, RoomShiftClass_Delete} from "../../utils/Specify";
 import {
     AdminRoomClassBodyDataQuery,
     AdminRoomClassBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/AdminQuery/AdminRoomShiftClassQuery";
-
+import uuid from 'short-uuid'
 export function* RoomClassRegister() {
     const roomClass = yield select(Selector.AdminRoomClassDialog)
     const params = new URLSearchParams();
+    params.append('id',yield uuid.generate())
     params.append('roomShift-id', roomClass.shiftID)
     params.append('subject-id',roomClass.subjectID)
     params.append('time-start',roomClass.timeStart)
@@ -21,7 +22,10 @@ export function* RoomClassRegister() {
 }
 
 export function * DeleteRoomClass(){
-    alert("i am clicked")
+    const classState = yield select(Selector.DeleteClassDialog)
+    const params = new URLSearchParams();
+    params.append('id', classState.id)
+    yield Delete(params,deleteRoomClass,RoomShiftClass_Delete,RoomClassTableDataInit)
 }
 
 

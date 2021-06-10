@@ -1,15 +1,19 @@
 import {select} from 'redux-saga/effects'
 import * as Selector from '../selector'
-import {Teacher} from '../../utils/Specify'
-import {AdminTeacherRegister} from '../utils/ApiEndpoint/ClassroomEndPoint'
-import {TableNextData, TableDataInit, Register} from './__MiddleWareGlobal'
+import {Teacher, Teacher_Delete} from '../../utils/Specify'
+import {AdminTeacherRegister, DeleteTeacher as deleteTeacher} from '../utils/ApiEndpoint/ClassroomEndPoint'
+import {TableNextData, TableDataInit, Register, Delete} from './__MiddleWareGlobal'
 import {
     AdminTeacherBodyDataQuery,
     AdminTeacherBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/AdminQuery/AdminTeacherQuery";
 
 export function * DeleteTeacher (){
-    alert("techer")
+    const classState = yield select(Selector.DeleteTeacherDialog)
+    const params = new URLSearchParams();
+    params.append('id', classState.id)
+
+    yield Delete(params,deleteTeacher,Teacher_Delete,TeacherTableDataInit)
 }
 
 export function* TeacherRegister() {

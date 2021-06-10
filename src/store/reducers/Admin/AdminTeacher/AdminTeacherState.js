@@ -6,7 +6,7 @@ import {updateObject} from "../../../utils/UpdateObject";
 
 const newState = new state()
 
-const transforms = (items) => items.map((item) => insert(item.user.firstName, item.user.lastName, item.user.email, item.user.birthdate))
+const transforms = (items) => items.map((item) => insert(item.id,item.user.firstName, item.user.lastName, item.user.email, item.user.birthdate))
 const currentState = {
     ...newState.init_state,
     deleteDialog: false

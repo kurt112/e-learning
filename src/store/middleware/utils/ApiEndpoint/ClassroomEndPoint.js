@@ -9,35 +9,32 @@ export const
      * for Admin end point
      * */
 
-//Teacher Admin endpoint
-
+    //Teacher Admin endpoint
     AdminTeacherRegister = 'teacherID-register',
+    DeleteTeacher = 'delete/teacher',
 
-//Student Admin endpoint
-    AdminStudents = "admin/students",
-    AdminStudentRegister = "/student-register",
+    //Student Admin endpoint
+    AdminStudentRegister = "student-register",
+    DeleteStudent = 'delete/student',
 
-// Room Admin endpoint
-    AdminRooms = "admin/rooms",
+    // Room Admin endpoint
     AdminRoomRegister = "admin/room-register",
+    DeleteRoom = 'admin/delete/room',
 
-// Subject Admin endpoint
-    AdminSubjects = "admin/subjects",
+    // Subject Admin endpoint
     AdminSubjectRegister = "admin/subjectID-register",
+    DeleteSubject = 'admin/delete/subject',
 
 
     // Room Shift Admin endpoint
     AdminRoomShiftRegister = "admin/register-roomShift",
     AdminRoomShift = "admin/roomShift",
+    DeleteRoomShift = 'admin/delete/roomShift',
 
     // RoomClass Admin JavaEndpoint
     AdminRoomClassRegister = "admin/classes/register",
     AdminRoomClass = "admin/classes/roomClass",
-
-    // Activity Admin Enpoint
-    AdminActivityUpload = "admin/activity/upload",
-    AdminActivityDownload = "admin/activity/download",
-    AdminActivityList = "admin/activity/list",
+    DeleteRoomClass = 'admin/classes/delete/class',
 
 
     /**
@@ -55,7 +52,7 @@ export const
     TeacherLectureCreate = 'teacher/lecture/create',
     TeacherLectureDelete = 'teacher/lecture/delete',
     TeacherExamCreate = 'teacher/exam/create',
-    TeacherExamDelete ='teacher/exam/delete',
+    TeacherExamDelete = 'teacher/exam/delete',
     TeacherQuizCreate = 'teacher/quiz/create',
     TeacherQuizDelete = 'teacher/quiz/delete',
 

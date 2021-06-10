@@ -53,7 +53,7 @@ const TeacherRegister = ({
                 margin="dense"
                 id="teacher-id"
                 label="Enter Teacher Id"
-                type="number"
+                type="text"
                 value={dialogState.id}
                 fullWidth
                 onChange={(event) => dialogId(event)}

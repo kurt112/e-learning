@@ -1,12 +1,16 @@
-import {Student} from '../../utils/Specify'
+import {Student, Student_Delete} from '../../utils/Specify'
 import {select} from "redux-saga/effects";
 import * as Selector from "../selector";
-import {AdminStudentRegister} from "../utils/ApiEndpoint/ClassroomEndPoint";
-import {TableNextData, TableDataInit, Register} from './__MiddleWareGlobal'
+import {AdminStudentRegister, DeleteStudent as deleteStudent} from "../utils/ApiEndpoint/ClassroomEndPoint";
+import {TableNextData, TableDataInit, Register, Delete} from './__MiddleWareGlobal'
 import {AdminStudentBodyDataSettingsQuery,AdminStudentBodyDataQuery} from "../utils/GraphQlQuery/AdminQuery/AdminStudentQuery";
 
 export function * DeleteStudent(){
-    alert("student delete")
+    const classState = yield select(Selector.DeleteStudentDialog)
+    const params = new URLSearchParams();
+    params.append('id', classState.id)
+
+    yield Delete(params,deleteStudent,Student_Delete,StudentTableDataInit)
 }
 
 export function* StudentRegister() {

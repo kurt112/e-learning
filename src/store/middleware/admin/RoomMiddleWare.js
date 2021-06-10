@@ -1,19 +1,25 @@
 import {select} from 'redux-saga/effects'
 import * as Selector from '../selector'
-import {Room} from '../../utils/Specify'
-import {AdminRoomRegister} from '../utils/ApiEndpoint/ClassroomEndPoint'
-import {TableNextData, TableDataInit, RegisterBody} from './__MiddleWareGlobal'
+import {Room, Room_Delete} from '../../utils/Specify'
+import {AdminRoomRegister, DeleteRoom as deleteRoom} from '../utils/ApiEndpoint/ClassroomEndPoint'
+import {TableNextData, TableDataInit, RegisterBody, Delete} from './__MiddleWareGlobal'
 import {
     AdminRoomBodyDataQuery,
     AdminRoomBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/AdminQuery/AdminRoomQuery";
+import uuid from "short-uuid";
 
 export function * DeleteRoom(){
-    alert("yow")
+    const classState = yield select(Selector.DeleteRoomDialog)
+    const params = new URLSearchParams();
+    params.append('id', classState.id)
+    yield Delete(params,deleteRoom,Room_Delete,RoomTableDataInit)
 }
 
 export function* RoomRegister() {
     const room = yield select(Selector.AdminRoomDialog)
+    room.id = yield uuid.generate()
+
     yield RegisterBody(room,AdminRoomRegister,Room, RoomTableDataInit)
 }
 

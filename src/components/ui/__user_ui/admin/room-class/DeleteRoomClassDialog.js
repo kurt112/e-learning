@@ -68,7 +68,7 @@ const DeleteRoomDialog = ({
 
 const mapToState = (state) => {
     return {
-        state: state.DeleteAssignmentDialog
+        state: state.DeleteDialogClass
     }
 }
 

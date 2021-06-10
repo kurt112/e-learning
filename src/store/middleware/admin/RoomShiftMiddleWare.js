@@ -1,21 +1,27 @@
 import {select} from "redux-saga/effects";
 import * as Selector from "../selector";
-import {Register, TableDataInit, TableNextData} from "./__MiddleWareGlobal";
-import {AdminRoomShiftRegister} from "../utils/ApiEndpoint/ClassroomEndPoint";
-import {RoomShift} from "../../utils/Specify";
+import {Delete, Register, TableDataInit, TableNextData} from "./__MiddleWareGlobal";
+import {AdminRoomShiftRegister, DeleteRoomShift as deleteRoomShift} from "../utils/ApiEndpoint/ClassroomEndPoint";
+import {    RoomShift, RoomShift_Delete} from "../../utils/Specify";
 import {
     AdminRoomShiftBodyDataQuery,
     AdminRoomShiftBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/AdminQuery/AdminRoomShiftQuery";
+import uuid from "short-uuid";
 
 export function * DeleteRoomShift(){
-    alert("room shift")
+    const classState = yield select(Selector.DeleteRoomShiftDialog)
+    const params = new URLSearchParams();
+    params.append('id', classState.id)
+
+    yield Delete(params,deleteRoomShift,RoomShift_Delete,RoomShiftTableDataInit)
 }
 
 export function* RoomShiftRegister() {
 
     const roomShift = yield select(Selector.AdminRoomShiftDialog)
     const params = new URLSearchParams();
+    params.append('id',yield uuid.generate())
     params.append('room-id', roomShift.room)
     params.append('room-shiftID',roomShift.roomShift)
     params.append('shiftID-grade',roomShift.grade)

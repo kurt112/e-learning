@@ -5,14 +5,13 @@ import {
     getTeacherAssignments,
     TeacherAssignmentBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/TeacherQuery/TeacherAssignmentQuery";
-import { Teacher_Assignment, Teacher_Assignment_Create, Teacher_Assignment_Delete} from "../../utils/Specify";
+import {Teacher_Assignment, Teacher_Assignment_Create, Teacher_Assignment_Delete} from "../../utils/Specify";
 
 import {
     TeacherAssignmentDelete as deleteAssignment,
     TeacherAssignmentCreate as createAssignment
 } from "../utils/ApiEndpoint/ClassroomEndPoint";
 import {baseUrl} from "../axios";
-import {DialogSuccess} from "../../action/teacher/GlobalAction";
 import * as dialogAction from "../../action/__ActionGlobal/DialogAction";
 import {adjectives, animals, colors, uniqueNamesGenerator} from "unique-names-generator";
 
@@ -38,8 +37,8 @@ export function* TeacherAssignmentDelete() {
     params.append('code', classState.id)
     params.append('email', email)
     try {
-        const response = yield baseUrl.delete(deleteAssignment, {params})
-        yield put(DialogSuccess(response.data.item, Teacher_Assignment_Delete))
+        yield baseUrl.delete(deleteAssignment, {params})
+        yield TeacherAssignmentTableDataInit()
         yield put(dialogAction.registerDialogSuccess(Teacher_Assignment_Delete))
     } catch (error) {
         yield put(dialogAction.registerDialogFail(error, Teacher_Assignment_Delete))

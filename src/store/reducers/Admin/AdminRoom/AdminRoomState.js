@@ -12,29 +12,40 @@ const currentState = {
 }
 
 const transforms = (items) => items.map((item) =>
-    insert(item.roomName, item.timeStart, item.timeEnd, item.id))
+    insert(item.id, item.roomName, item.timeStart, item.timeEnd, item.id))
 
-const reducer = (state = currentState, action)=>{
+const reducer = (state = currentState, action) => {
 
-    switch(action.type){
+    switch (action.type) {
 
         // for room table
-        case actions.ADMIN_TABLE_SETTINGS_INIT(Room): return newState.apiSettingsInit(state,action)
-        case actions.ADMIN_TABLE_INIT(Room): return newState.initData(state)
-        case actions.ADMIN_TABLE_SUCCESS(Room): return newState.successData(state, action,transforms)
-        case actions.ADMIN_TABLE_FAIL(Room): return newState.failData(state)
-        case actions.ADMIN_TABLE_NEXT_PAGE(Room): return newState.nextData(state,action)
-        case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(Room): return newState.searchChange(state,action)
+        case actions.ADMIN_TABLE_SETTINGS_INIT(Room):
+            return newState.apiSettingsInit(state, action)
+        case actions.ADMIN_TABLE_INIT(Room):
+            return newState.initData(state)
+        case actions.ADMIN_TABLE_SUCCESS(Room):
+            return newState.successData(state, action, transforms)
+        case actions.ADMIN_TABLE_FAIL(Room):
+            return newState.failData(state)
+        case actions.ADMIN_TABLE_NEXT_PAGE(Room):
+            return newState.nextData(state, action)
+        case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(Room):
+            return newState.searchChange(state, action)
 
 
         // for room create dialog actions
-        case actions.DIALOG_OPEN(Room): return newState.openDialog(state)
-        case actions.DIALOG_CLOSE(Room): return newState.closeDialog(state)
+        case actions.DIALOG_OPEN(Room):
+            return newState.openDialog(state)
+        case actions.DIALOG_CLOSE(Room):
+            return newState.closeDialog(state)
 
         // from room delete dialog actions
-        case actions.DIALOG_OPEN(Room_Delete): return updateObject(state, {deleteDialog: true})
-        case actions.DIALOG_CLOSE(Room_Delete): return updateObject(state, {deleteDialog: false})
-        default: return state;
+        case actions.DIALOG_OPEN(Room_Delete):
+            return updateObject(state, {deleteDialog: true})
+        case actions.DIALOG_CLOSE(Room_Delete):
+            return updateObject(state, {deleteDialog: false})
+        default:
+            return state;
     }
 }
 

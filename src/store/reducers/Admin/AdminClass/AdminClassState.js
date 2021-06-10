@@ -2,12 +2,12 @@
 import {AdminInsertRoomClass as insert} from "../../../../components/ui/utils/tableColumn";
 import state from "../../__StateGlobal/AdminTableState";
 import * as actions from "../../../ActionType/__ActionTypeGlobal/TableActionType";
-import {Room_Delete, RoomShiftClass, RoomShiftClass_Delete} from "../../../utils/Specify";
+import {RoomShiftClass, RoomShiftClass_Delete} from "../../../utils/Specify";
 import {updateObject} from "../../../utils/UpdateObject";
 const newState = new state()
 
 const transforms = (items) => items.map((item) =>
-    insert(item.roomShift.room.roomName, item.roomShift.grade, item.roomShift.section, item.subject.subjectName,
+    insert(item.id,item.roomShift.room.roomName, item.roomShift.grade, item.roomShift.section, item.subject.subjectName,
         "To be insert", item.day, item.startTime, item.endTime, item.roomShift.room.id+item.id+item.subject.subjectCode,item.id))
 
 const currentState = {

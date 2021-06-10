@@ -10,7 +10,7 @@ const newState = new state()
 
 
 const transforms = (items) => items.map((item) =>
-        insert(item.room.roomName, item.roomShiftName, item.grade, item.section, item.timeStart,item.timeEnd,item.id))
+        insert(item.id,item.room.roomName, item.roomShiftName, item.grade, item.section, item.timeStart,item.timeEnd,item.id))
 
 const initState = {
     ...newState.init_state,

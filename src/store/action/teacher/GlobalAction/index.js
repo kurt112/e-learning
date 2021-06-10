@@ -1,11 +1,6 @@
 import * as actions from "../../../ActionType/Teacher/GlobalActiontype";
 
-export const DialogSuccess = (data, to) => {
-        return {
-            type: actions.Dialog_Success(to),
-            data
-        }
-    },
+export const
     changeResourceCode = (data,to) => {
         return {
             type: actions.CHANGE_RESOURCE_CODE(to),

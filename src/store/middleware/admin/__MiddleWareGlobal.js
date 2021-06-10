@@ -3,6 +3,18 @@ import * as tableActions from "../../action/__ActionGlobal/TableAction";
 import {baseUrl} from "../axios";
 import * as actions from "../../action/__ActionGlobal/DialogAction";
 import {graphQLRequest} from '../utils/HttpRequest'
+import * as dialogAction from "../../action/__ActionGlobal/DialogAction";
+
+
+export function * Delete(params,URL,to, reload){
+    try {
+        yield baseUrl.delete(URL, {params})
+        yield reload()
+        yield put(dialogAction.registerDialogSuccess(to))
+    } catch (error) {
+        yield put(dialogAction.registerDialogFail(error, to))
+    }
+}
 
 export function* Register(params, URL, to, reload) {
     try {

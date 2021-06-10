@@ -13,8 +13,14 @@ export const
     AdminRoomShiftDialog = (state) => state.AdminRoomShiftDialog,
     AdminRoomClassDialog = (state) =>state.AdminClassDialog,
     AdminClass = (state) => state.AdminClass,
-    AdminActivity = (state) => state.AdminActivity,
-    AdminActivityDialog = (state) => state.AdminActivityDialog,
+
+    // admin dialogs
+    DeleteSubjectDialog = (state) => state.DeleteDialogSubject,
+    DeleteTeacherDialog = (state) => state.DeleteDialogTeacher,
+    DeleteStudentDialog = (state) => state.DeleteDialogStudent,
+    DeleteRoomShiftDialog = (state) => state.DeleteDialogRoomShift,
+    DeleteClassDialog =  (state) => state.DeleteDialogClass,
+    DeleteRoomDialog = (state) => state.DeleteDialogRoom,
 
     // Teacher User
     TeacherResource = (state) => state.TeacherResource,

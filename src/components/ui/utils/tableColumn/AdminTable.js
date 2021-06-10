@@ -1,10 +1,5 @@
-import {Button, Chip} from "@material-ui/core";
+import {Button} from "@material-ui/core";
 import {Link} from "react-router-dom";
-import {Fragment} from "react";
-import {JavaEndpoint} from "../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
-import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
-import CheckIcon from '@material-ui/icons/Check';
-import CloseIcon from '@material-ui/icons/Close';
 /*
 *
 *
@@ -91,7 +86,10 @@ export function AdminInsertStudentTable(id, firstName, lastName, email, birthdat
 
 
 export const AdminTeacherTable = [
-
+    {
+      name: 'id',
+      label: 'Id'
+    },
     {
         name: "firstName",
         label: "First Name",
@@ -129,8 +127,8 @@ export const AdminTeacherTable = [
     },
 ]
 
-export function AdminInsertTeacherTable(firstName, lastName, email, birthdate) {
-    return {firstName, lastName, email, birthdate, profile:email}
+export function AdminInsertTeacherTable(id,firstName, lastName, email, birthdate) {
+    return {id,firstName, lastName, email, birthdate, profile:email}
 }
 
 
@@ -147,7 +145,10 @@ export function AdminInsertTeacherTable(firstName, lastName, email, birthdate) {
 
 
 export const AdminRoomTable = [
-
+    {
+        name: 'id',
+        label: 'Id'
+    },
     {
         name: 'roomName',
         label: 'RoomName',
@@ -181,15 +182,15 @@ export const AdminRoomTable = [
     },
 ]
 
-export function AdminInsertRoom(roomName, timeStart, timeEnd, profile) {
-    return {roomName, timeStart, timeEnd, profile}
+export function AdminInsertRoom(id,roomName, timeStart, timeEnd, profile) {
+    return {id,roomName, timeStart, timeEnd, profile}
 }
 
 /*
 *
 *
 *
-*                             This table is for the Subject table in admin area
+*          This table is for the Subject table in admin area
 *
 *
 *
@@ -241,124 +242,8 @@ export function AdminInsertSubject(subjectCode, subjectName, major, active, prof
     return {subjectCode, subjectName, major, active, profile}
 }
 
-/*
-*
-*
-*
-*                             This table is for the Activity table in admin area
-*
-*
-*
-*
-*/
 
 
-export const AdminActivityTable = [
-
-    {
-        name: 'activityTitle',
-        label: 'Activity Title'
-    },
-    {
-        name: 'subjectName',
-        label: 'Subject Name',
-    },
-    {
-        name: 'grade',
-        label: 'Grade'
-    },
-    {
-        name: 'section',
-        label: 'Section'
-    },
-
-    {
-        name: 'date',
-        label: 'Date'
-    },
-    {
-        name: 'link',
-        label: 'Activity File',
-        options: {
-            filter: false,
-            sort: false,
-            width: 100,
-            customBodyRender: (value) => {
-                return value === undefined ? null :
-                    <Fragment>
-                        <a href={JavaEndpoint + '/admin/activity/download?activity-id=' + value} target="_blank"
-                           rel="noopener noreferrer"
-                           style={{textDecoration: 'none', marginRight: '10px'}}>
-                            <Button variant="outlined" color="primary">
-                                Download
-                            </Button>
-                        </a>
-                        <a href={JavaEndpoint + '/admin/activity/view?activity-id=' + value} target="_blank"
-                           rel="noopener noreferrer"
-                           style={{textDecoration: 'none'}}>
-                            <Button variant="outlined" color="primary">
-                                View
-                            </Button>
-                        </a>
-                    </Fragment>
-            }
-        }
-    },
-    {
-        name: 'action',
-        label: "Action",
-        options: {
-            filter: false,
-            sort: false,
-            customBodyRender: (value) => {
-                return value === undefined ? null :
-                    <a href={JavaEndpoint + '/admin/activity/download?activity-id=' + value}
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       style={{textDecoration: 'none'}}>
-                        <Button variant="outlined" color="primary">
-                            Visit Activity
-                        </Button>
-                    </a>
-            },
-
-        }
-    },
-    {
-        name: 'status',
-        label: "Status",
-        options: {
-            filter: false,
-            sort: true,
-            customBodyRender: (value) => {
-                return value === 'Approved' ?
-                    <Chip
-
-                        style={{fontWeight: 'bold',color: 'white', backgroundColor: '#28a745', width: '100%'}}
-                        label={value}
-                        icon={<CheckIcon style={{color: 'white', fontWeight: 'bold'}}/>}/>
-                    :
-                    value === 'Declined' ?
-                        <Chip
-
-                            style={{fontWeight: 'bold',backgroundColor: '#dc3545',color: 'white',
-                            borderColor: '#dc3545', width: '100%'}}
-                            label={value}
-                            icon={<CloseIcon style={{color: 'white', fontWeight: 'bold'}}/>}/> :
-                        <Chip
-
-                            style={{fontWeight: 'bold',color: 'white', backgroundColor: '#007bff',  width: '100%'}}
-                            label={value}
-                            icon={<PriorityHighIcon style={{color: 'white', fontWeight: 'bold'}}/>}/>
-            },
-
-        }
-    }
-]
-
-export function AdminInsertActivity(activityTitle, subjectName, grade, section, date, link, action, status) {
-    return {activityTitle, subjectName, grade, section, date, link, action, status}
-}
 
 
 /*
@@ -373,10 +258,13 @@ export function AdminInsertActivity(activityTitle, subjectName, grade, section, 
 */
 
 export const AdminRoomClassTable = [
-
+    {
+        name: 'id',
+        label: 'Id'
+    },
     {
         name: 'roomName',
-        label: 'RoomName',
+        label: 'RoomName'
     },
     {
         name: 'grade',
@@ -447,8 +335,8 @@ export const AdminRoomClassTable = [
     },
 ]
 
-export function AdminInsertRoomClass(roomName, grade, section, subject, assignedTeacher, day, timeStart, timeEnd, classroom, profile) {
-    return {roomName, grade, section, subject, assignedTeacher, day, timeStart, timeEnd, classroom, profile}
+export function AdminInsertRoomClass(id,roomName, grade, section, subject, assignedTeacher, day, timeStart, timeEnd, classroom, profile) {
+    return {id,roomName, grade, section, subject, assignedTeacher, day, timeStart, timeEnd, classroom, profile}
 }
 
 /*
@@ -462,10 +350,13 @@ export function AdminInsertRoomClass(roomName, grade, section, subject, assigned
 *
 */
 export const AdminRoomShiftTable = [
-
+    {
+        name: 'id',
+        label: 'Id'
+    },
     {
         name: 'roomName',
-        label: 'RoomName',
+        label: 'RoomName'
     },
     {
         name: 'roomShiftName',
@@ -509,8 +400,8 @@ export const AdminRoomShiftTable = [
     },
 ]
 
-export function AdminInsertRoomShift(roomName, roomShiftName, grade, section, timeStart, timeEnd, profile, id) {
-    return {roomName, roomShiftName, grade, section, timeStart, timeEnd, profile, id}
+export function AdminInsertRoomShift(id,roomName, roomShiftName, grade, section, timeStart, timeEnd, profile) {
+    return {id,roomName, roomShiftName, grade, section, timeStart, timeEnd, profile}
 }
 
 /*

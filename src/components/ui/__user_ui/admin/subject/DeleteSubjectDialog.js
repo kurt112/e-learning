@@ -46,7 +46,7 @@ const DeleteRoomShiftDialog = ({
                 value={state.id}
                 margin="dense"
                 variant={'outlined'}
-                label="Enter Assignment Code"
+                label="Enter Subject Code"
                 type="text"
                 fullWidth
                 onChange={(event) => dialogId(event.target.value)}
@@ -68,7 +68,7 @@ const DeleteRoomShiftDialog = ({
 
 const mapToState = (state) => {
     return {
-        state: state.DeleteAssignmentDialog
+        state: state.DeleteDialogSubject
     }
 }
 

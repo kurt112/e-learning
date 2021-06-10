@@ -175,6 +175,7 @@ export function* watchAdminRoomShiftSearchChange() {
  *
  **/
 
+
 export function * watchAdminDeleteRoomClass() {
     yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(RoomShiftClass_Delete), DeleteRoomClass)
 }

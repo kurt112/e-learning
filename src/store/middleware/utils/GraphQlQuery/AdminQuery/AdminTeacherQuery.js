@@ -4,16 +4,14 @@ export const
             query: `
                     query{teachers(search:"${search}", page:${page}){
                         id,
-                            user{
-                                   lastName,
-                                   email,
-                                   firstName,
-                                   birthdate,
-                }
-            }
-        }
-        `
-        }
+                        user{
+                               lastName,
+                               email,
+                               firstName,
+                               birthdate,
+                        }
+                    }
+       }`  }
     },
 
     AdminTeacherBodyDataSettingsQuery = () => {
@@ -23,8 +21,7 @@ export const
                             totalPages,
                             totalElements,
                             currentPage
-            }
-        }
-        `
+                    }
+            }`
         }
     }

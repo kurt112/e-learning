@@ -144,7 +144,7 @@ const Video =  ({video,mic,socket}) =>{
                 return null;
             }
             return (
-                <p>ahksjd</p>
+                <p key={key}>ahksjd</p>
                 // <button key={key} onClick={() => callPeer(key)}>Call {key}</button>
             );
         }

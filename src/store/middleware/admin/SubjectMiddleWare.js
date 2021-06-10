@@ -1,15 +1,19 @@
 import {select} from 'redux-saga/effects'
 import * as Selector from '../selector'
-import {RegisterBody, TableDataInit, TableNextData} from "./__MiddleWareGlobal";
-import {AdminSubjectRegister} from "../utils/ApiEndpoint/ClassroomEndPoint";
-import {Subject} from "../../utils/Specify";
+import {Delete, RegisterBody, TableDataInit, TableNextData} from "./__MiddleWareGlobal"
+import {AdminSubjectRegister, DeleteSubject as deleteSubject} from "../utils/ApiEndpoint/ClassroomEndPoint"
+import {Subject, Subject_Delete} from "../../utils/Specify"
 import {
     AdminSubjectBodyDataQuery,
     AdminSubjectBodyDataSettingsQuery
-} from "../utils/GraphQlQuery/AdminQuery/AdminSubjectQuery";
+} from "../utils/GraphQlQuery/AdminQuery/AdminSubjectQuery"
 
 export function* DeleteSubject() {
-    alert("subject")
+    const classState = yield select(Selector.DeleteSubjectDialog)
+    const params = new URLSearchParams();
+    params.append('id', classState.id)
+
+    yield Delete(params,deleteSubject,Subject_Delete,SubjectTableDataInit)
 }
 
 export function* RegisterSubject() {
