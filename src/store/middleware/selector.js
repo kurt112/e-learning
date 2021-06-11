@@ -13,6 +13,7 @@ export const
     AdminRoomShiftDialog = (state) => state.AdminRoomShiftDialog,
     AdminRoomClassDialog = (state) =>state.AdminClassDialog,
     AdminClass = (state) => state.AdminClass,
+    AdminCurriculum = (state) => state.AdminCurriculum,
 
     // admin dialogs
     DeleteSubjectDialog = (state) => state.DeleteDialogSubject,

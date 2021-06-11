@@ -130,7 +130,10 @@ import {
     watchAdminTeacherDelete,
     watchDeleteRoomShift,
     watchDeleteStudent,
-    watchSubjectDelete
+    watchSubjectDelete,
+    watchAdminCurriculumInitTableData,
+    watchCurriculumSearchChange,
+    watchCurriculumTableNextData
 } from './store/middleware/admin'
 
 import {
@@ -243,39 +246,42 @@ sagaMiddleware.run(watchAdminTeacherInitTableData)
 sagaMiddleware.run(watchAdminRegisterTeacher)
 sagaMiddleware.run(watchTeacherSearchChange)
 sagaMiddleware.run(watchTeacherTableNextData)
+sagaMiddleware.run(watchAdminTeacherDelete)
 
 sagaMiddleware.run(watchAdminRegisterRoom)
 sagaMiddleware.run(watchAdminRoomTableNext)
 sagaMiddleware.run(watchAdminRoomTableInit)
 sagaMiddleware.run(watchAdminRoomSearchChange)
+sagaMiddleware.run(watchAdminDeleteRoom)
 
 sagaMiddleware.run(watchAdminRegisterRoomShift)
 sagaMiddleware.run(watchAdminRoomShiftTableNext)
 sagaMiddleware.run(watchAdminRoomShiftTableInit)
 sagaMiddleware.run(watchAdminRoomShiftSearchChange)
+sagaMiddleware.run(watchDeleteRoomShift)
 
 sagaMiddleware.run(watchAdminSubjectRegister)
 sagaMiddleware.run(watchAdminSubjectSearchChange)
 sagaMiddleware.run(watchAdminSubjectTableInit)
 sagaMiddleware.run(watchAdminSubjectTableNext)
-
+sagaMiddleware.run(watchSubjectDelete)
 
 sagaMiddleware.run(watchStudentInitTableData)
 sagaMiddleware.run(watchStudentRegisterStudent)
 sagaMiddleware.run(watchStudentSearchChange)
 sagaMiddleware.run(watchStudentTableNextData)
+sagaMiddleware.run(watchDeleteStudent)
 
 sagaMiddleware.run(watchAdminRegisterRoomClass)
 sagaMiddleware.run(watchAdminRoomClassTableNext)
 sagaMiddleware.run(watchAdminRoomClassTableInit)
 sagaMiddleware.run(watchAdminRoomClassSearchChange)
-
-sagaMiddleware.run(watchAdminDeleteRoom)
-sagaMiddleware.run(watchAdminTeacherDelete)
 sagaMiddleware.run(watchAdminDeleteRoomClass)
-sagaMiddleware.run(watchDeleteRoomShift)
-sagaMiddleware.run(watchDeleteStudent)
-sagaMiddleware.run(watchSubjectDelete)
+
+sagaMiddleware.run(watchAdminCurriculumInitTableData)
+sagaMiddleware.run(watchCurriculumSearchChange)
+sagaMiddleware.run(watchCurriculumTableNextData)
+
 
 
 // profile

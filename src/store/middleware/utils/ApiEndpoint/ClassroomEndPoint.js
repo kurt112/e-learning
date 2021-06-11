@@ -30,8 +30,9 @@ export const
     AdminRoomShiftRegister = "admin/register-roomShift",
     AdminRoomShift = "admin/roomShift",
     DeleteRoomShift = 'admin/delete/roomShift',
+    
 
-    // RoomClass Admin JavaEndpoint
+    // RoomClass Admin Endpoint
     AdminRoomClassRegister = "admin/classes/register",
     AdminRoomClass = "admin/classes/roomClass",
     DeleteRoomClass = 'admin/classes/delete/class',

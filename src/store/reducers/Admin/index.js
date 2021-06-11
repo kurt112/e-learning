@@ -89,4 +89,4 @@ export {
 
 export {
     default as AdminCurriculum
-} from './AdminCurriculum/AdminCurriculumDeleteDialogState'
+} from './AdminCurriculum/AdminCurriculumState'

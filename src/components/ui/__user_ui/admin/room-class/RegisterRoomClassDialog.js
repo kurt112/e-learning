@@ -3,10 +3,9 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText,
-    DialogTitle, FormControl,
+    DialogTitle, Divider, FormControl,
     Grid, InputLabel,
-    makeStyles, Select,
+    Select,
     TextField
 } from "@material-ui/core"
 import {useEffect, useState} from "react";
@@ -23,19 +22,6 @@ import {
 import AutoComplete from "../../../utils/autoComplete/AutoComplete";
 import {TwoFilterOption,twoOptionLabel,twoOptionSelected,changeText} from '../../../utils/autoComplete/autoCompleteAction'
 
-const formStyle = makeStyles(() => ({
-    root: {
-        "& select": {
-            paddingTop: 10,
-        }
-    },
-    control: {
-        marginTop: 100,
-
-    }
-}))
-
-
 const RoomClassDialog = ({
                              closeDialog,
                              dialog,
@@ -49,8 +35,6 @@ const RoomClassDialog = ({
                              changeTimeEnd,
                              changeDay
                          }) => {
-
-    const form = formStyle()
 
     const [openTeacher, setOpenTeacher] = useState(false)
     const [openSubject, setOpenSubject] = useState(false)
@@ -100,14 +84,10 @@ const RoomClassDialog = ({
         maxWidth="lg"
         fullWidth
     >
-        <form noValidate className={form.root}>
+        <form noValidate >
             <DialogTitle id="add-class">Register Class</DialogTitle>
-
+            <Divider/>
             <DialogContent>
-                <DialogContentText>
-                    only five centuries, but also the leap into electronic typesetting,
-                    remaining essentially unchanged. It was popularised in the 1960s with the release of L
-                </DialogContentText>
 
                 <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
                           messageFail="Room Register Not Successful"
@@ -116,6 +96,7 @@ const RoomClassDialog = ({
                 <Grid container spacing={1}>
                     <Grid item md={6} xs={12}>
                         <AutoComplete
+                            autoFocus={true}
                             open={openRoomShift}
                             setOpen={setOpenRoomShift}
                             filterOptions={TwoFilterOption}

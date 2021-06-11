@@ -7,7 +7,7 @@ import {
     Button,
     Dialog, DialogActions,
     DialogContent,
-    DialogTitle,
+    DialogTitle, Divider,
     Grid,
 } from "@material-ui/core";
 import AutoComplete from "../../../utils/autoComplete/AutoComplete";
@@ -55,11 +55,14 @@ const RoomShiftAddStudentDialog = ({closeDialog, dialog}) => {
         >
             <form noValidate>
                 <DialogTitle id="add-student">Enter Grade Section</DialogTitle>
+                <Divider/>
+                <br/>
                 <DialogContent>
 
                     <Grid container spacing={1}>
                         <Grid item md={12} xs={12}>
                             <AutoComplete
+                                autoFocus={true }
                                 open={openRoomShift}
                                 setOpen={setOpenRoomShift}
                                 filterOptions={TwoFilterOption}
@@ -81,10 +84,10 @@ const RoomShiftAddStudentDialog = ({closeDialog, dialog}) => {
                 </DialogContent>
 
                 <DialogActions>
-                    <Button onClick={id.length === 0 ?null: openTransfer} color='primary'>
+                    <Button variant={'contained'} disableElevation onClick={id.length === 0 ?null: openTransfer} color='primary'>
                         Continue
                     </Button>
-                    <Button onClick={closeDialog} color='secondary'>
+                    <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
                         Cancel
                     </Button>
                 </DialogActions>

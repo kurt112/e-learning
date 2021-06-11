@@ -56,10 +56,10 @@ const DeleteRoomDialog = ({
             />
         </DialogContent>
         <DialogActions>
-            <Button onClick={dialogRegister} color='secondary'>
+            <Button variant={'contained'} disableElevation onClick={dialogRegister} color='secondary'>
                 Delete
             </Button>
-            <Button onClick={closeDialog} color='primary'>
+            <Button variant={'contained'} disableElevation onClick={closeDialog} color='primary'>
                 Cancel
             </Button>
         </DialogActions>

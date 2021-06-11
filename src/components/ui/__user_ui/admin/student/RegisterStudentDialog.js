@@ -3,7 +3,7 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle,
+    DialogTitle, Divider,
     TextField
 } from "@material-ui/core"
 import {connect} from 'react-redux'
@@ -32,6 +32,7 @@ const RegisterStudentDialog = ({
         fullWidth
     >
         <DialogTitle id="add-student">Register Student</DialogTitle>
+        <Divider/>
         <DialogContent>
            <Response dialogState={student} registerDialogMessageClose={registerDialogMessageClose}
                      messageFail="Student Register Not Successful"
@@ -51,10 +52,10 @@ const RegisterStudentDialog = ({
             />
         </DialogContent>
         <DialogActions>
-            <Button onClick={dialogRegister} color='primary'>
+            <Button variant={'contained'} disableElevation onClick={dialogRegister} color='primary'>
                 Register
             </Button>
-            <Button onClick={closeDialog} color='secondary'>
+            <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
                 Cancel
             </Button>
         </DialogActions>

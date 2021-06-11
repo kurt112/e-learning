@@ -4,9 +4,8 @@ import {
     DialogActions,
     DialogContent,
     DialogContentText,
-    DialogTitle,
+    DialogTitle, Divider,
     Grid,
-    makeStyles,
     TextField
 } from "@material-ui/core"
 
@@ -15,19 +14,6 @@ import * as action from '../../../../../store/action/__ActionGlobal/DialogAction
 import * as dialogAction from '../../../../../store/action/admin/Room/RoomDialogAction'
 import {Room} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
-
-const formStyle = makeStyles(() => ({
-    root: {
-        "& select": {
-            paddingTop: 10,
-        }
-    },
-    control: {
-        marginTop: 8,
-
-    }
-}))
-
 
 const RegisterRoomDialog = ({
                                 closeDialog,
@@ -40,9 +26,6 @@ const RegisterRoomDialog = ({
                                 registerDialog
                             }) => {
 
-    const form = formStyle()
-
-
     return <Dialog
         open={dialog}
         onClose={closeDialog}
@@ -50,13 +33,10 @@ const RegisterRoomDialog = ({
         maxWidth="md"
         fullWidth
     >
-        <form noValidate className={form.root}>
-            <DialogTitle id="add-room">Register Room Shift</DialogTitle>
+        <form noValidate >
+            <DialogTitle id="add-room">Register Room </DialogTitle>
+            <Divider/>
             <DialogContent>
-                <DialogContentText>
-                    only five centuries, but also the leap into electronic typesetting,
-                    remaining essentially unchanged. It was popularised in the 1960s with the release of L
-                </DialogContentText>
 
                 <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
                           messageFail="Room Register Not Successful"
@@ -105,10 +85,10 @@ const RegisterRoomDialog = ({
             </DialogContent>
 
             <DialogActions>
-                <Button onClick={registerDialog} color='primary'>
+                <Button variant={'contained'} disableElevation onClick={registerDialog} color='primary'>
                     Register
                 </Button>
-                <Button onClick={closeDialog} color='secondary'>
+                <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
                     Cancel
                 </Button>
             </DialogActions>

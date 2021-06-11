@@ -16,6 +16,7 @@ export default function AutoComplete({
                                          label,
                                          optionLabel,
                                          optionSelected,
+    autoFocus
                                      }) {
 
     return <FormControl variant="outlined" margin='dense' fullWidth>
@@ -38,6 +39,7 @@ export default function AutoComplete({
             loading={loading}
             renderInput={(params) => (
                 <TextField
+                    autoFocus={autoFocus !== undefined}
                     value={InputText}
                     onChange={(event) => changeText(event.target.value)}
                     {...params}

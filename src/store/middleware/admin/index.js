@@ -1,6 +1,7 @@
 import {takeLeading} from "redux-saga/effects";
 import * as adminDialog from "../../ActionType/__ActionTypeGlobal/DialogActionType";
 import {
+    Curriculum,
     Room, Room_Delete,
     RoomShift, RoomShift_Delete,
     RoomShiftClass, RoomShiftClass_Delete,
@@ -27,6 +28,7 @@ import {
     RoomClassTableDataInit,
     RoomClassTableDataNext
 } from "./RoomClassMiddleWare";
+import {CurriculumTableDataInit, CurriculumTableDataNext} from "./CurriculumMIddleware";
 
 /**
  *
@@ -195,4 +197,33 @@ export function* watchAdminRoomClassTableNext(){
 
 export function* watchAdminRoomClassSearchChange() {
     yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(RoomShiftClass), RoomClassTableDataInit)
+}
+
+/**
+ *
+ *
+ *          This middleware is for admin Curriculum
+ *
+ *
+ **/
+
+// export function * watchAdminCurriculumDelete(){
+//     yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Delete), DeleteTeacher)
+// }
+//
+// export function* watchAdminRegisterCurriculum() {
+//     yield  takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher), TeacherRegister)
+// }
+
+export function* watchAdminCurriculumInitTableData() {
+    yield takeLeading(adminTable.ADMIN_TABLE_INIT(Curriculum), CurriculumTableDataInit)
+}
+
+
+export function* watchCurriculumTableNextData() {
+    yield takeLeading(adminTable.ADMIN_TABLE_NEXT_PAGE(Curriculum), CurriculumTableDataNext)
+}
+
+export function* watchCurriculumSearchChange() {
+    yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Curriculum), CurriculumTableDataNext)
 }

@@ -4,7 +4,7 @@ import {
     DialogActions,
     DialogContent,
     DialogContentText,
-    DialogTitle,
+    DialogTitle, Divider,
     TextField
 } from "@material-ui/core"
 import {connect} from "react-redux";
@@ -34,15 +34,9 @@ const TeacherRegister = ({
         fullWidth
     >
         <DialogTitle id="add-teacher"><strong>Register Teacher</strong>
-
         </DialogTitle>
+        <Divider/>
         <DialogContent>
-            <DialogContentText style={{color: 'black'}}>
-                    only five centuries, but also the leap into electronic typesetting, remaining essentially
-                    unchanged. It
-                    was popularised in the 1960s with the release of L
-            </DialogContentText>
-
             <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
                       messageFail="Teacher Register Not Successful"
                       messageSuccess="Teacher Register Success"/>
@@ -61,10 +55,10 @@ const TeacherRegister = ({
             />
         </DialogContent>
         <DialogActions>
-            <Button onClick={dialogState.id.length >0?   () => dialogRegister(): null} color='primary'>
+            <Button variant={'contained'} disableElevation onClick={dialogState.id.length >0?   () => dialogRegister(): null} color='primary'>
                 Register
             </Button>
-            <Button onClick={() => closeDialog(Teacher)} color='secondary'>
+            <Button variant={'contained'} disableElevation onClick={() => closeDialog(Teacher)} color='secondary'>
                 Cancel
             </Button>
         </DialogActions>

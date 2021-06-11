@@ -4,9 +4,9 @@ import {
     DialogActions,
     DialogContent,
     DialogContentText,
-    DialogTitle, FormControl,
+    DialogTitle, Divider, FormControl,
     Grid, InputLabel,
-    makeStyles, Select,
+    Select,
     TextField
 } from "@material-ui/core"
 
@@ -20,19 +20,6 @@ import {useEffect, useState} from "react";
 import {createFilterOptions} from "@material-ui/lab";
 import { autoCompleteRoom} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 import {baseUrl} from "../../../../../store/middleware/axios";
-
-const formStyle = makeStyles(() => ({
-    root: {
-        "& select": {
-            paddingTop: 10,
-        }
-    },
-    control: {
-        marginTop: 8,
-
-    }
-}))
-
 
 const RoomShiftRegisterDialog = ({
                              closeDialog,
@@ -48,7 +35,6 @@ const RoomShiftRegisterDialog = ({
                              registerDialog
                          }) => {
 
-    const form = formStyle()
 
     const [openRoomName, setOpenRoomName] = useState(false);
     const [roomOptions, setRoomOptions] = useState([]); // value ng auto complete
@@ -95,13 +81,11 @@ const RoomShiftRegisterDialog = ({
         maxWidth="lg"
         fullWidth
     >
-        <form noValidate className={form.root}>
+        <form noValidate >
             <DialogTitle id="add-roomShift">Register Room Shift</DialogTitle>
+
+            <Divider/>
             <DialogContent>
-                <DialogContentText>
-                    only five centuries, but also the leap into electronic typesetting,
-                    remaining essentially unchanged. It was popularised in the 1960s with the release of L
-                </DialogContentText>
 
                 <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
                           messageFail="Room Shift Register Not Successful"
@@ -110,6 +94,7 @@ const RoomShiftRegisterDialog = ({
                 <Grid container spacing={1}>
                     <Grid item md={6} xs={12}>
                         <AutoComplete
+                            autoFocus={true}
                             open={openRoomName}
                             setOpen={setOpenRoomName}
                             filterOptions={filterOptionsTeacher}
@@ -196,10 +181,10 @@ const RoomShiftRegisterDialog = ({
             </DialogContent>
 
             <DialogActions>
-                <Button onClick={registerDialog} color='primary'>
+                <Button variant={'contained'} disableElevation onClick={registerDialog} color='primary'>
                     Register
                 </Button>
-                <Button onClick={closeDialog} color='secondary'>
+                <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
                     Cancel
                 </Button>
             </DialogActions>

@@ -450,6 +450,6 @@ export const AdminCurriculumTable = [
     },
 ]
 
-export function AdminInsertCurriculum(roomName, timeStart, timeEnd, profile) {
-    return {roomName, timeStart, timeEnd, profile}
+export function AdminInsertCurriculum(code, name, description, profile) {
+    return {code, name, description, profile}
 }

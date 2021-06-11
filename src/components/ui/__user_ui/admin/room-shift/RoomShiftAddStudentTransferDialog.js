@@ -330,11 +330,11 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID}) => {
                 </DialogContent>
 
                 <DialogActions>
-                    <Button variant={"contained"} onClick={() => uploadStudent(shiftID, roomShiftStudents)}
+                    <Button variant={'contained'} disableElevation onClick={() => uploadStudent(shiftID, roomShiftStudents)}
                             color='primary'>
                         Save
                     </Button>
-                    <Button variant={"contained"} onClick={closeDialog} color='Secondary'>
+                    <Button variant={'contained'} disableElevation onClick={closeDialog} color='Secondary'>
                         Back
                     </Button>
                 </DialogActions>

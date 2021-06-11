@@ -1,4 +1,4 @@
-import {Box,  CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
+import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
 import {Fragment, lazy, useEffect} from "react"
 import {AdminCurriculumTable as columns} from '../../../utils/tableColumn'
@@ -6,27 +6,37 @@ import {AdminCurriculumTable as columns} from '../../../utils/tableColumn'
 import style, {TableOptions as options} from '../../../_style/TableStyle'
 import {connect} from "react-redux"
 import * as actions from "../../../../../store/action/__ActionGlobal/TableAction"
-import {Subject} from "../../../../../store/utils/Specify"
+import {Curriculum, Curriculum_Create, Curriculum_Delete} from "../../../../../store/utils/Specify"
 import Typography from "@material-ui/core/Typography"
 import IconButton from "@material-ui/core/IconButton";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
-const Index = ({subject, pageChange, searchChange, openDialog, closeDialog, initData}) => {
+import CreateCurriculumDialog from "./CreateCurriculumDialog";
+const Index = ({
+                   state,
+                   pageChange,
+                   searchChange,
+                   initData,
+                   openDialog,
+                   closeDialog,
+                   openDeleteDialog,
+                   closeDeleteDialog
+               }) => {
 
     const classes = style()
 
     useEffect(() => {
 
-        if (subject.data.length === 0) initData();
+        if (state.data.length === 0) initData();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
         <Fragment>
-            {/*<RegisterSubject dialog={subject.dialog} closeDialog={closeDialog}/>*/}
+            <CreateCurriculumDialog dialog={state.dialog} closeDialog={closeDialog}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
@@ -38,7 +48,7 @@ const Index = ({subject, pageChange, searchChange, openDialog, closeDialog, init
                             </Tooltip>
 
                             <Tooltip title='Delete Curriculum'>
-                                <IconButton aria-label="delete-curriculum" onClick={() => alert('gagawin mo pa to')}>
+                                <IconButton aria-label="delete-curriculum" onClick={openDeleteDialog}>
                                     <DeleteIcon fontSize={'large'} color={'secondary'}/>
                                 </IconButton>
                             </Tooltip>
@@ -63,23 +73,23 @@ const Index = ({subject, pageChange, searchChange, openDialog, closeDialog, init
                             title={
                                 <Typography variant="h6">
                                     Curriculum List
-                                    {subject.loading && <CircularProgress size={24} style={{
+                                    {state.loading && <CircularProgress size={24} style={{
                                         marginLeft: 15,
                                         position: 'relative',
                                         top: 4
                                     }}/>}
                                 </Typography>
                             }
-                            data={subject.data}
+                            data={state.data}
                             columns={columns}
                             options={options(
                                 pageChange,
                                 searchChange,
-                                subject.search,
-                                subject.totalPages,
-                                subject.totalItems,
-                                subject.page,
-                                subject.loading)}
+                                state.search,
+                                state.totalPages,
+                                state.totalItems,
+                                state.page,
+                                state.loading)}
                         />
                     </div>
                 </Grid>
@@ -91,17 +101,23 @@ const Index = ({subject, pageChange, searchChange, openDialog, closeDialog, init
 
 const mapStateToProps = (state) => {
     return {
-        subject: state.AdminSubject
+        state: state.AdminCurriculum
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        initData: () => dispatch(actions.InitDataTable(Subject)),
-        searchChange: (data) => dispatch(actions.SearchChange(data, Subject)),
-        pageChange: (page) => dispatch(actions.DataNextPage(page, Subject)),
-        openDialog: () => dispatch(actions.openDialog(Subject)),
-        closeDialog: () => dispatch(actions.closeDialog(Subject)),
+        // action for tables
+        initData: () => dispatch(actions.InitDataTable(Curriculum)),
+        searchChange: (data) => dispatch(actions.SearchChange(data, Curriculum)),
+        pageChange: (page) => dispatch(actions.DataNextPage(page, Curriculum)),
+
+        // action for opening and closing dialogs
+        openDialog: () => dispatch(actions.openDialog(Curriculum_Create)),
+        closeDialog: () => dispatch(actions.closeDialog(Curriculum_Create)),
+
+        openDeleteDialog: () => dispatch(actions.openDialog(Curriculum_Delete)),
+        closeDeleteDialog: () => dispatch(actions.closeDialog(Curriculum_Delete))
 
     }
 }

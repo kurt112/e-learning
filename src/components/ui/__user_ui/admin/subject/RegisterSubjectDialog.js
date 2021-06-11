@@ -4,7 +4,7 @@ import {
     DialogActions,
     DialogContent,
     DialogContentText,
-    DialogTitle,
+    DialogTitle, Divider,
     FormControl,
     Grid,
     InputLabel,
@@ -39,15 +39,9 @@ const RegisterSubject = (
         fullWidth
     >
         <form noValidate>
-
-
             <DialogTitle id="add-subject">Register Subject</DialogTitle>
+            <Divider/>
             <DialogContent>
-                <DialogContentText>
-                    only five centuries, but also the leap into electronic typesetting,
-                    remaining essentially unchanged. It was popularised in the 1960s with the release of L
-                </DialogContentText>
-
                 <Response dialogState={subject} registerDialogMessageClose={registerDialogMessageClose}
                           messageFail="Subject Register Not Successful"
                           messageSuccess="Subject Register Success"/>
@@ -102,10 +96,10 @@ const RegisterSubject = (
             </DialogContent>
 
             <DialogActions>
-                <Button color='primary' onClick={registerDialog}>
+                <Button variant={'contained'} disableElevation color='primary' onClick={registerDialog}>
                     Register
                 </Button>
-                <Button onClick={closeDialog} color='secondary'>
+                <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
                     Cancel
                 </Button>
             </DialogActions>
