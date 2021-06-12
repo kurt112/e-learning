@@ -3,7 +3,7 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle, FormControl,
+    DialogTitle, Divider, FormControl,
     Grid, InputLabel,
     Select, TextareaAutosize
 } from "@material-ui/core"
@@ -70,6 +70,7 @@ const CreateLectureDialog = ({
         <form noValidate>
             <DialogTitle id="create-lecture"
             >Create Lecture</DialogTitle>
+            <Divider/>
             <DialogContent>
 
                 <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
@@ -79,6 +80,7 @@ const CreateLectureDialog = ({
                 <Grid container spacing={1}>
                     <Grid item md={3} xs={12}>
                         <AutoComplete
+                            autoFocus={true}
                             open={resourceOpen}
                             setOpen={setResourceOpen}
                             filterOptions={TwoFilterOption}
@@ -169,10 +171,10 @@ const CreateLectureDialog = ({
             </DialogContent>
 
             <DialogActions>
-                <Button onClick={create} color='primary'>
+                <Button variant={'contained'} disableElevation onClick={create} color='primary'>
                     Create
                 </Button>
-                <Button onClick={closeDialog} color='secondary'>
+                <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
                     Cancel
                 </Button>
             </DialogActions>

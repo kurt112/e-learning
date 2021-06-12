@@ -3,7 +3,6 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText,
     DialogTitle,
     Grid, TextareaAutosize,
     TextField
@@ -22,7 +21,6 @@ const CreateCurriculumDialog = ({
                                 dialogState,
                                 changeRoomName,
                                 changeTimeStart,
-                                changeTimeEnd,
                                 registerDialogMessageClose,
                                 registerDialog
                             }) => {

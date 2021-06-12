@@ -3,7 +3,7 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle, FormControl,
+    DialogTitle, Divider, FormControl,
     Grid, InputLabel,
     Select, TextareaAutosize,
     TextField
@@ -52,6 +52,7 @@ const UploadResourceDialog = ({
         <form noValidate>
             <DialogTitle id="create-resource"
             >Create Resources</DialogTitle>
+            <Divider/>
             <DialogContent>
 
                 <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
@@ -126,10 +127,10 @@ const UploadResourceDialog = ({
             </DialogContent>
 
             <DialogActions>
-                <Button onClick={clickUpload} color='primary'>
+                <Button variant={'contained'} disableElevation onClick={clickUpload} color='primary'>
                     Upload
                 </Button>
-                <Button onClick={closeDialog} color='secondary'>
+                <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
                     Cancel
                 </Button>
             </DialogActions>

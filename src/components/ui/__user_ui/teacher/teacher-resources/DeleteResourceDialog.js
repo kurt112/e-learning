@@ -3,7 +3,7 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle,
+    DialogTitle, Divider,
     TextField
 } from "@material-ui/core"
 import {connect} from 'react-redux'
@@ -32,6 +32,7 @@ const DeleteResource = ({
         maxWidth={"md"}
     >
         <DialogTitle id="delete-resource">Delete Resource</DialogTitle>
+        <Divider/>
         <DialogContent>
 
             <Response dialogState={resource} registerDialogMessageClose={registerDialogMessageClose}
@@ -52,10 +53,10 @@ const DeleteResource = ({
             />
         </DialogContent>
         <DialogActions>
-            <Button onClick={dialogRegister} color='secondary'>
+            <Button variant={'contained'} disableElevation onClick={dialogRegister} color='secondary'>
                 Delete
             </Button>
-            <Button onClick={closeDialog} color='primary'>
+            <Button variant={'contained'} disableElevation onClick={closeDialog} color='primary'>
                 Cancel
             </Button>
         </DialogActions>

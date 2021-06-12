@@ -3,7 +3,7 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle,
+    DialogTitle, Divider,
     TextField
 } from "@material-ui/core"
 import {connect} from 'react-redux'
@@ -34,6 +34,7 @@ const DeleteLectureDialog = ({
         maxWidth={"md"}
     >
         <DialogTitle id="delete-lecture">Delete Lecture</DialogTitle>
+        <Divider/>
         <DialogContent>
 
             <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
@@ -54,10 +55,10 @@ const DeleteLectureDialog = ({
             />
         </DialogContent>
         <DialogActions>
-            <Button onClick={dialogRegister} color='secondary'>
+            <Button variant={'contained'} disableElevation onClick={dialogRegister} color='secondary'>
                 Delete
             </Button>
-            <Button onClick={closeDialog} color='primary'>
+            <Button variant={'contained'} disableElevation onClick={closeDialog} color='primary'>
                 Cancel
             </Button>
         </DialogActions>

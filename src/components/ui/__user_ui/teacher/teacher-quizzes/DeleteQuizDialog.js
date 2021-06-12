@@ -3,7 +3,7 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle,
+    DialogTitle, Divider,
     TextField
 } from "@material-ui/core"
 import {connect} from 'react-redux'
@@ -11,7 +11,6 @@ import * as actions from '../../../../../store/action/__ActionGlobal/DialogActio
 import {Teacher_Quiz_Delete} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
 import {DeleteAssignmentFail, DeleteAssignmentSuccess} from "../../../../../__Messages/teacher/TeacherAssignmentMessage";
-import {TeacherQuizDeleteDialog} from "../../../../../store/reducers/Teacher";
 
 const DeleteQuizDialog = ({
                                dialog,
@@ -34,8 +33,8 @@ const DeleteQuizDialog = ({
         maxWidth={"md"}
     >
         <DialogTitle id="delete-quiz">Delete Quiz</DialogTitle>
+        <Divider/>
         <DialogContent>
-
             <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
                       messageFail={DeleteAssignmentFail}
                       messageSuccess={DeleteAssignmentSuccess}/>
@@ -54,10 +53,10 @@ const DeleteQuizDialog = ({
             />
         </DialogContent>
         <DialogActions>
-            <Button onClick={dialogRegister} color='secondary'>
+            <Button variant={'contained'} disableElevation onClick={dialogRegister} color='secondary'>
                 Delete
             </Button>
-            <Button onClick={closeDialog} color='primary'>
+            <Button variant={'contained'} disableElevation onClick={closeDialog} color='primary'>
                 Cancel
             </Button>
         </DialogActions>

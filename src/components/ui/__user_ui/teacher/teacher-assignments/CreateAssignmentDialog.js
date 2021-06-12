@@ -3,7 +3,7 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle, FormControl,
+    DialogTitle, Divider, FormControl,
     Grid, InputLabel,
     Select, TextareaAutosize,
     TextField
@@ -76,6 +76,7 @@ const CreateAssignmentDialog = ({
         <form noValidate>
             <DialogTitle id="create-resource"
             >Create Assignment</DialogTitle>
+            <Divider/>
             <DialogContent>
 
                 <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
@@ -214,10 +215,10 @@ const CreateAssignmentDialog = ({
             </DialogContent>
 
             <DialogActions>
-                <Button onClick={create} color='primary'>
+                <Button variant={'contained'} disableElevation onClick={create} color='primary'>
                     Create
                 </Button>
-                <Button onClick={closeDialog} color='secondary'>
+                <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
                     Cancel
                 </Button>
             </DialogActions>

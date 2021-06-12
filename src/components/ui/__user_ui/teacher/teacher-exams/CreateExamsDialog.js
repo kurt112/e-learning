@@ -3,7 +3,7 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle, FormControl,
+    DialogTitle, Divider, FormControl,
     Grid, InputLabel,
     Select, TextareaAutosize,
     TextField
@@ -75,8 +75,8 @@ const CreateExamsDialog = ({
         <form noValidate>
             <DialogTitle id="create-exams"
             >Create Exams</DialogTitle>
+            <Divider/>
             <DialogContent>
-
                 <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
                           messageFail={AddedAssignmentFail}
                           messageSuccess={AddedAssignmentSuccess}/>
@@ -84,6 +84,7 @@ const CreateExamsDialog = ({
                 <Grid container spacing={1}>
                     <Grid item md={4} xs={12}>
                         <AutoComplete
+                            autoFocus={true}
                             open={resourceOpen}
                             setOpen={setResourceOpen}
                             filterOptions={TwoFilterOption}
@@ -213,10 +214,10 @@ const CreateExamsDialog = ({
             </DialogContent>
 
             <DialogActions>
-                <Button onClick={create} color='primary'>
+                <Button variant={'contained'} disableElevation onClick={create} color='primary'>
                     Create
                 </Button>
-                <Button onClick={closeDialog} color='secondary'>
+                <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
                     Cancel
                 </Button>
             </DialogActions>
