@@ -45,7 +45,8 @@ import {
     DeleteDialogRoomShift,
     DeleteDialogStudent,
     DeleteDialogTeacher,
-    AdminCurriculum
+    AdminCurriculum,
+    CreateCurriculum
 } from './store/reducers/Admin'
 
 import Classroom from "./store/reducers/ClassroomState";
@@ -133,7 +134,8 @@ import {
     watchSubjectDelete,
     watchAdminCurriculumInitTableData,
     watchCurriculumSearchChange,
-    watchCurriculumTableNextData
+    watchCurriculumTableNextData,
+    watchAdminRegisterCurriculum
 } from './store/middleware/admin'
 
 import {
@@ -207,7 +209,7 @@ const reducers = combineReducers({
     DeleteDialogStudent,
     DeleteDialogTeacher,
     AdminCurriculum,
-
+    CreateCurriculum,
 
     // Profile of Entity
     StudentProfile,
@@ -281,6 +283,7 @@ sagaMiddleware.run(watchAdminDeleteRoomClass)
 sagaMiddleware.run(watchAdminCurriculumInitTableData)
 sagaMiddleware.run(watchCurriculumSearchChange)
 sagaMiddleware.run(watchCurriculumTableNextData)
+sagaMiddleware.run(watchAdminRegisterCurriculum)
 
 
 

@@ -14,6 +14,7 @@ export const
     AdminRoomClassDialog = (state) =>state.AdminClassDialog,
     AdminClass = (state) => state.AdminClass,
     AdminCurriculum = (state) => state.AdminCurriculum,
+    AdminCreateCurriculum = (state) => state.CreateCurriculum,
 
     // admin dialogs
     DeleteSubjectDialog = (state) => state.DeleteDialogSubject,

@@ -1,23 +1,17 @@
 import {select} from "redux-saga/effects";
 import * as Selector from "../selector";
-import {TableDataInit, TableNextData} from "./__MiddleWareGlobal";
-// import {AdminRoomClassRegister, as deleteRoomClass} from "../utils/ApiEndpoint/ClassroomEndPoint";
-import {Curriculum} from "../../utils/Specify";
+import {RegisterBody, TableDataInit, TableNextData} from "./__MiddleWareGlobal";
+import {CreateCurriculum} from "../utils/ApiEndpoint/ClassroomEndPoint";
+import {Curriculum, Curriculum_Create} from "../../utils/Specify";
 import {
     AdminCurriculumBodyDataQuery,
     AdminCurriculumBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/AdminQuery/AdminCurriculum";
+import uuid from "short-uuid";
 export function* CurriculumRegister() {
-    // const roomClass = yield select(Selector.AdminRoomClassDialog)
-    // const params = new URLSearchParams();
-    // params.append('id',yield uuid.generate())
-    // params.append('roomShift-id', roomClass.shiftID)
-    // params.append('subject-id',roomClass.subjectID)
-    // params.append('time-start',roomClass.timeStart)
-    // params.append('time-end',roomClass.timeEnd)
-    // params.append('day',roomClass.day)
-    // params.append('teacher-id',roomClass.teacherID)
-    // yield Register(params, AdminRoomClassRegister, RoomShiftClass,RoomClassTableDataInit)
+    const data = yield select(Selector.AdminCreateCurriculum)
+    data.code = yield uuid.generate()
+    yield RegisterBody(data, CreateCurriculum, Curriculum_Create,CurriculumTableDataInit)
 }
 
 export function * DeleteCurriculum(){

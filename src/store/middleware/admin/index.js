@@ -1,7 +1,7 @@
 import {takeLeading} from "redux-saga/effects";
 import * as adminDialog from "../../ActionType/__ActionTypeGlobal/DialogActionType";
 import {
-    Curriculum,
+    Curriculum, Curriculum_Create,
     Room, Room_Delete,
     RoomShift, RoomShift_Delete,
     RoomShiftClass, RoomShiftClass_Delete,
@@ -28,7 +28,7 @@ import {
     RoomClassTableDataInit,
     RoomClassTableDataNext
 } from "./RoomClassMiddleWare";
-import {CurriculumTableDataInit, CurriculumTableDataNext} from "./CurriculumMIddleware";
+import {CurriculumRegister, CurriculumTableDataInit, CurriculumTableDataNext} from "./CurriculumMIddleware";
 
 /**
  *
@@ -226,4 +226,8 @@ export function* watchCurriculumTableNextData() {
 
 export function* watchCurriculumSearchChange() {
     yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Curriculum), CurriculumTableDataNext)
+}
+
+export function* watchAdminRegisterCurriculum() {
+    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Curriculum_Create), CurriculumRegister)
 }

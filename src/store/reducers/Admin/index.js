@@ -90,3 +90,7 @@ export {
 export {
     default as AdminCurriculum
 } from './AdminCurriculum/AdminCurriculumState'
+
+export {
+    default as CreateCurriculum
+} from './AdminCurriculum/AdminCurriculumCreateDialogState'

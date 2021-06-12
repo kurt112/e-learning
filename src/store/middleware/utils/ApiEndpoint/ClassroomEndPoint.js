@@ -9,6 +9,9 @@ export const
      * for Admin end point
      * */
 
+    // Curriculum admin endpoint
+    CreateCurriculum = 'admin/curriculum-register',
+
     //Teacher Admin endpoint
     AdminTeacherRegister = 'teacherID-register',
     DeleteTeacher = 'delete/teacher',
@@ -30,7 +33,7 @@ export const
     AdminRoomShiftRegister = "admin/register-roomShift",
     AdminRoomShift = "admin/roomShift",
     DeleteRoomShift = 'admin/delete/roomShift',
-    
+
 
     // RoomClass Admin Endpoint
     AdminRoomClassRegister = "admin/classes/register",

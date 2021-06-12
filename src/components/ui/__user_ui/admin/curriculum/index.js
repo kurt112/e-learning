@@ -13,7 +13,9 @@ import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
-import CreateCurriculumDialog from "./CreateCurriculumDialog";
+
+const CreateCurriculumDialog = lazy(() => import(`./CreateCurriculumDialog`))
+
 const Index = ({
                    state,
                    pageChange,

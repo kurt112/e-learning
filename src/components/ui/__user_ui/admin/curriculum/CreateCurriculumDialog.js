@@ -10,20 +10,20 @@ import {
 
 import {connect} from 'react-redux'
 import * as action from '../../../../../store/action/__ActionGlobal/DialogAction'
-import * as dialogAction from '../../../../../store/action/admin/Room/RoomDialogAction'
-import {Room} from "../../../../../store/utils/Specify";
+import * as dialogAction from '../../../../../store/action/admin/Curriculum/CreateCurriculumDialogAction'
+import {Curriculum_Create} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
 import Divider from "@material-ui/core/Divider";
 
 const CreateCurriculumDialog = ({
-                                closeDialog,
-                                dialog,
-                                dialogState,
-                                changeRoomName,
-                                changeTimeStart,
-                                registerDialogMessageClose,
-                                registerDialog
-                            }) => {
+                                    closeDialog,
+                                    dialog,
+                                    dialogState,
+                                    changeName,
+                                    changeDescription,
+                                    registerDialogMessageClose,
+                                    registerDialog
+                                }) => {
 
     return <Dialog
         open={dialog}
@@ -32,7 +32,7 @@ const CreateCurriculumDialog = ({
         maxWidth="md"
         fullWidth
     >
-        <form noValidate >
+        <form noValidate>
             <DialogTitle id="add-curriculum">Create Curriculum</DialogTitle>
             <Divider/>
             <DialogContent>
@@ -47,8 +47,8 @@ const CreateCurriculumDialog = ({
                             autoFocus
                             margin="dense"
                             label="Curriculum Name"
-                            value={dialogState.roomName}
-                            onChange={(event) => changeRoomName(event.target.value)}
+                            value={dialogState.name}
+                            onChange={(event) => changeName(event.target.value)}
                             type="text"
                             fullWidth
                             variant="outlined"
@@ -60,8 +60,8 @@ const CreateCurriculumDialog = ({
                             rows={12}
                             style={{width: '100%'}}
                             margin="dense"
-                            value={dialogState.timeStart}
-                            onChange={(event) => changeTimeStart(event.target.value)}
+                            value={dialogState.description}
+                            onChange={(event) => changeDescription(event.target.value)}
 
                             variant="outlined"
                         />
@@ -83,7 +83,7 @@ const CreateCurriculumDialog = ({
 
 const mapStateToProps = (state) => {
     return {
-        dialogState: state.AdminRoomDialog
+        dialogState: state.CreateCurriculum
     }
 }
 
@@ -91,12 +91,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
 
 
-        changeRoomName: (data) => dispatch(dialogAction.roomNameChange(data)),
-        changeTimeStart: (data) => dispatch(dialogAction.roomTimeStartChange(data)),
-        changeTimeEnd: (data) => dispatch(dialogAction.roomTimeEndChange(data)),
+        changeName: (data) => dispatch(dialogAction.changeName(data)),
+        changeDescription: (data) => dispatch(dialogAction.changeDescription(data)),
 
-        registerDialogMessageClose: () => dispatch(action.registerDialogMessageClose(Room)),
-        registerDialog: () => dispatch(action.dialogRegister(Room))
+
+        registerDialogMessageClose: () => dispatch(action.registerDialogMessageClose(Curriculum_Create)),
+        registerDialog: () => dispatch(action.dialogRegister(Curriculum_Create))
     }
 }
 
