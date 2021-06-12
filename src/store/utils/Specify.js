@@ -5,6 +5,7 @@ export const
     Curriculum = "CURRICULUM",
     Curriculum_Create = Curriculum+Create,
     Curriculum_Delete = Curriculum+Delete,
+    Curriculum_Insert_Subject = Curriculum+"_INSERT_SUBJECT",
 
     // For Teacher
     Teacher = "TEACHER",

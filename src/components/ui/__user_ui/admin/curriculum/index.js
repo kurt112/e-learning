@@ -6,7 +6,12 @@ import {AdminCurriculumTable as columns} from '../../../utils/tableColumn'
 import style, {TableOptions as options} from '../../../_style/TableStyle'
 import {connect} from "react-redux"
 import * as actions from "../../../../../store/action/__ActionGlobal/TableAction"
-import {Curriculum, Curriculum_Create, Curriculum_Delete} from "../../../../../store/utils/Specify"
+import {
+    Curriculum,
+    Curriculum_Create,
+    Curriculum_Delete,
+    Curriculum_Insert_Subject
+} from "../../../../../store/utils/Specify"
 import Typography from "@material-ui/core/Typography"
 import IconButton from "@material-ui/core/IconButton";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
@@ -15,6 +20,8 @@ import UpdateIcon from "@material-ui/icons/Update";
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 
 const CreateCurriculumDialog = lazy(() => import(`./CreateCurriculumDialog`))
+const DeleteCurriculumDialog = lazy(() => import(`./DeleteCurriculumDialog`))
+const InsertSubjectCurriculumDialog= lazy(() => import(`./InsertSubjectInCurriculum`))
 
 const Index = ({
                    state,
@@ -24,7 +31,9 @@ const Index = ({
                    openDialog,
                    closeDialog,
                    openDeleteDialog,
-                   closeDeleteDialog
+                   closeDeleteDialog,
+                   openInsertSubjectDialog,
+                   closeInsertSubjectDialog
                }) => {
 
     const classes = style()
@@ -39,6 +48,8 @@ const Index = ({
     return (
         <Fragment>
             <CreateCurriculumDialog dialog={state.dialog} closeDialog={closeDialog}/>
+            <DeleteCurriculumDialog dialog={state.deleteDialog} closeDialog={closeDeleteDialog}/>
+            <InsertSubjectCurriculumDialog open={state.insertSubjectDialog} closeDialog={closeInsertSubjectDialog}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
@@ -62,7 +73,7 @@ const Index = ({
                             </Tooltip>
 
                             <Tooltip title='Add Curriculum Subject'>
-                                <IconButton aria-label="update-curriculum" onClick={() => alert('gagawin mo pa to')}>
+                                <IconButton aria-label="update-curriculum" onClick={openInsertSubjectDialog}>
                                     <ImportContactsIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
                             </Tooltip>
@@ -119,8 +130,10 @@ const mapDispatchToProps = (dispatch) => {
         closeDialog: () => dispatch(actions.closeDialog(Curriculum_Create)),
 
         openDeleteDialog: () => dispatch(actions.openDialog(Curriculum_Delete)),
-        closeDeleteDialog: () => dispatch(actions.closeDialog(Curriculum_Delete))
+        closeDeleteDialog: () => dispatch(actions.closeDialog(Curriculum_Delete)),
 
+        openInsertSubjectDialog: () =>dispatch(actions.openDialog(Curriculum_Insert_Subject)),
+        closeInsertSubjectDialog: () =>dispatch(actions.closeDialog(Curriculum_Insert_Subject))
     }
 }
 

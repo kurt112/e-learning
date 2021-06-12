@@ -11,6 +11,7 @@ export const
 
     // Curriculum admin endpoint
     CreateCurriculum = 'admin/curriculum-register',
+    DeleteCurriculum = 'admin/delete/curriculum',
 
     //Teacher Admin endpoint
     AdminTeacherRegister = 'teacherID-register',

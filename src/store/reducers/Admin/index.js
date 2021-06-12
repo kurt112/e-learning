@@ -94,3 +94,11 @@ export {
 export {
     default as CreateCurriculum
 } from './AdminCurriculum/AdminCurriculumCreateDialogState'
+
+export {
+    default as DeleteCurriculum
+} from './AdminCurriculum/AdminCurriculumDeleteDialogState'
+
+export {
+    default as InsertCurriculumSubject
+} from './AdminCurriculum/AdminCurriculumInsertSubjectDialogState'

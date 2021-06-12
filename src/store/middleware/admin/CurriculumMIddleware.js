@@ -1,8 +1,12 @@
 import {select} from "redux-saga/effects";
 import * as Selector from "../selector";
-import {RegisterBody, TableDataInit, TableNextData} from "./__MiddleWareGlobal";
-import {CreateCurriculum} from "../utils/ApiEndpoint/ClassroomEndPoint";
-import {Curriculum, Curriculum_Create} from "../../utils/Specify";
+import {Delete, RegisterBody, TableDataInit, TableNextData} from "./__MiddleWareGlobal";
+import {CreateCurriculum, DeleteCurriculum as deleteCurriculum} from "../utils/ApiEndpoint/ClassroomEndPoint";
+import {
+    Curriculum,
+    Curriculum_Create,
+    Curriculum_Delete
+} from "../../utils/Specify";
 import {
     AdminCurriculumBodyDataQuery,
     AdminCurriculumBodyDataSettingsQuery
@@ -15,10 +19,10 @@ export function* CurriculumRegister() {
 }
 
 export function * DeleteCurriculum(){
-    // const classState = yield select(Selector.DeleteClassDialog)
-    // const params = new URLSearchParams();
-    // params.append('id', classState.id)
-    // yield Delete(params,deleteRoomClass,RoomShiftClass_Delete,CurriculumTableDataInit)
+    const classState = yield select(Selector.AdminDeleteCurriculum)
+    const params = new URLSearchParams();
+    params.append('id', classState.id)
+    yield Delete(params,deleteCurriculum,Curriculum_Delete,CurriculumTableDataInit)
 }
 
 

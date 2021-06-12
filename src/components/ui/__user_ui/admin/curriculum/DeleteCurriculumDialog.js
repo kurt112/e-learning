@@ -14,8 +14,9 @@ import {
     DeleteAssignmentFail,
     DeleteAssignmentSuccess
 } from "../../../../../__Messages/teacher/TeacherAssignmentMessage";
+import Divider from "@material-ui/core/Divider";
 
-const DeleteRoomDialog = ({
+const DeleteCurriculumDialog = ({
                               dialog,
                               state,
                               closeDialog,
@@ -36,6 +37,7 @@ const DeleteRoomDialog = ({
         maxWidth={"md"}
     >
         <DialogTitle id="delete-room">Delete Room</DialogTitle>
+        <Divider/>
         <DialogContent>
 
             <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
@@ -46,7 +48,7 @@ const DeleteRoomDialog = ({
                 value={state.id}
                 margin="dense"
                 variant={'outlined'}
-                label="Enter Assignment Code"
+                label="Enter Curriculum Code"
                 type="text"
                 fullWidth
                 onChange={(event) => dialogId(event.target.value)}
@@ -68,7 +70,7 @@ const DeleteRoomDialog = ({
 
 const mapToState = (state) => {
     return {
-        state: state.DeleteAssignmentDialog
+        state: state.DeleteCurriculum
     }
 }
 
@@ -81,4 +83,4 @@ const mapDispatchToState = (dispatch) => {
 }
 
 
-export default connect(mapToState, mapDispatchToState)(DeleteRoomDialog)
+export default connect(mapToState, mapDispatchToState)(DeleteCurriculumDialog)

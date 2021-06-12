@@ -17,14 +17,12 @@ import CardHeader from '@material-ui/core/CardHeader';
 import ListItem from '@material-ui/core/ListItem';
 import {useEffect, useState} from "react";
 import {
-    getRoomShift,
     getStudentsForRoomShift
 } from "../../../../../store/middleware/utils/GraphQlQuery/AdminQuery/AdminRoomShiftQuery";
 import {graphQlRequestAsync,PostData } from "../../../../../store/middleware/utils/HttpRequest";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        margin: 'auto',
     },
     cardHeader: {
         padding: theme.spacing(1, 2),
@@ -34,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
         height: 500,
         backgroundColor: theme.palette.background.paper,
         overflow: 'auto',
-        textAlign: 'center'
+        textAlign: 'center',
     },
     button: {
         margin: theme.spacing(1, 0),
@@ -57,7 +55,7 @@ function intersection(a, b) {
  * @param {{student_id:string}} id of the student
  *
  */
-const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID}) => {
+const InsertSubjectInCurriculumDialog = ({open, closeDialog}) => {
 
     const classes = useStyles();
     const [checked, setChecked] = useState([])
@@ -185,8 +183,7 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID}) => {
             <TextField
                 size={"small"}
                 style={{marginLeft: 17, width: '90%'}}
-                id="room-grade"
-                label="Student"
+                label="Subject"
                 type="text"
                 value={text}
                 onChange={(event => changeText(event.target.value))}
@@ -232,19 +229,19 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID}) => {
     // If the shift id is change
     useEffect(() => {
 
-        async function fetchData() {
-            return await graphQlRequestAsync(getRoomShift(shiftID))
-        }
+        // async function fetchData() {
+        //     return await graphQlRequestAsync(getRoomShift(shiftID))
+        // }
 
 
-        fetchData().then(r => {
-            const response = r.data.data.roomShift
-            setRoomName(response.grade + ' ' + response.section)
-            setRoomShiftStudents(response.students)
-        })
+        // fetchData().then(r => {
+        //     const response = r.data.data.roomShift
+        //     setRoomName(response.grade + ' ' + response.section)
+        //     setRoomShiftStudents(response.students)
+        // })
 
 
-    }, [shiftID])
+    }, [])
 
 
     // Getting all the students
@@ -279,7 +276,7 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID}) => {
             setChecked(newCheck)
         })
 
-    }, [shiftID, leftText])
+    }, [leftText])
 
     return (
 
@@ -294,11 +291,10 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID}) => {
                 <DialogContent>
 
 
-                    <Grid container spacing={2} justify="center" alignItems="center"
+                    <Grid container spacing={2} justify="space-between" alignItems="center"
                           className={classes.root}>
-                        <Grid md={5}
-                              item sm={12} xs={12} item>{customList('Available Student', availStudent, leftText, setLeftText)}</Grid>
-                        <Grid  md={2} sm={12} xs={12} item>
+                        <Grid md={5} sm={12} xs={12} item>{customList('Available Subject', availStudent, leftText, setLeftText)}</Grid>
+                        <Grid item md={2} sm={12} xs={12}>
                             <Grid container direction="column" alignItems="center">
                                 <Button
                                     variant="outlined"
@@ -325,14 +321,13 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID}) => {
                             </Grid>
                         </Grid>
                         <Grid md={5}
-                              item sm={12} xs={12}
-                            item>{customList(roomName + ' Student', roomShiftStudents, rightText, setRightText)}</Grid>
+                            item sm={12} xs={12}>{customList(roomName + ' Current Subject', roomShiftStudents, rightText, setRightText)}</Grid>
                     </Grid>
 
                 </DialogContent>
 
                 <DialogActions>
-                    <Button variant={'contained'} disableElevation onClick={() => uploadStudent(shiftID, roomShiftStudents)}
+                    <Button variant={'contained'} disableElevation
                             color='primary'>
                         Save
                     </Button>
@@ -345,4 +340,4 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID}) => {
     )
 }
 
-export default RoomShiftAddStudentTransfer
+export default InsertSubjectInCurriculumDialog
