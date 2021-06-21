@@ -18,7 +18,9 @@ import {useEffect, useState} from "react";
 import {Student, Teacher} from "../../../store/utils/Specify";
 
 const Login = ({loginState, changeEmail, changePassword, login, changeId,
-                   registerInit, registerOpen,registerClose}) => {
+                   registerInit, registerOpen,registerClose,translation}) => {
+
+    console.log(translation)
 
     const classes = style();
 
@@ -51,7 +53,6 @@ const Login = ({loginState, changeEmail, changePassword, login, changeId,
     }
 
 
-
     return (
         <Grid container component="main"  className={classes.root}>
 
@@ -70,9 +71,9 @@ const Login = ({loginState, changeEmail, changePassword, login, changeId,
 
            <Hidden mdDown>
                <Grid item xs={false} sm={false} md={8} className={classes.image}>
-                   <p className={classes.textSide}><em><b>Virtual  School</b></em></p>
+                   <p className={classes.textSide}><em><b>{translation.language["label.login.heading.title"]}</b></em></p>
                    <Divider style={{marginRight: 260, marginLeft: 260, backgroundColor: '#333'}}/>
-                   <p style={{cursor: 'default'}}>2020</p>
+                   <p style={{cursor: 'default'}}>  {new Date().getFullYear()}</p>
                </Grid>
            </Hidden>
             <Grid item xs={12} sm={12} md={4} component={Paper} elevation={6} square>
@@ -81,7 +82,7 @@ const Login = ({loginState, changeEmail, changePassword, login, changeId,
                 <div className={classes.paper}>
                     <AccountCircleIcon style={{fontSize: 70}}/>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        {translation.language["label.login.heading.login"]}
                     </Typography>
 
                     {
@@ -97,10 +98,9 @@ const Login = ({loginState, changeEmail, changePassword, login, changeId,
                             value={loginState.username}
                             variant="outlined"
                             margin="normal"
-                            required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label={translation.language["label.login.input.email"]}
                             name="email"
                             autoComplete="email"
                             onChange={(event) => changeEmail(event.target.value)}
@@ -108,15 +108,13 @@ const Login = ({loginState, changeEmail, changePassword, login, changeId,
                             onKeyPress={(event) => ClickEnter(event.key)}
                         />
                         <TextField
+                            fullWidth
                             variant="outlined"
                             margin="normal"
-                            required
-                            fullWidth
                             value={loginState.password}
                             name="password"
-                            label="Password"
+                            label={translation.language["label.login.input.password"]}
                             type="password"
-                            id="password"
                             onChange={(event) => changePassword(event.target.value)}
                             autoComplete="current-password"
                             onKeyPress={(event) => ClickEnter(event.key)}
@@ -124,9 +122,9 @@ const Login = ({loginState, changeEmail, changePassword, login, changeId,
                         <Box className={classes.util}>
                             <FormControlLabel
                                 control={<Checkbox value="remember" color="primary"/>}
-                                label="Remember me"
+                                label={translation.language["label.login.check.remember"]}
                             />
-                            {/*<p>No Account Found</p>*/}
+                            <p>{translation.language["validation.login.error"]}</p>
                         </Box>
                         <Button
                             fullWidth
@@ -135,16 +133,16 @@ const Login = ({loginState, changeEmail, changePassword, login, changeId,
                             className={classes.submit}
                             onClick={login}
                         >
-                            Sign In
+                            {translation.language["label.login.button.login"]}
                         </Button>
                         <Grid container>
                             <Grid item xs>
                                 <Grid item>
-                                    <Button color="primary">Forgot Password</Button>
+                                    <Button color="primary">{translation.language["label.login.button.forgot"]}</Button>
                                 </Grid>
                             </Grid>
                             <Grid item>
-                                <Button color="primary" onClick={registerOpen}>Sign Up</Button>
+                                <Button color="primary" onClick={registerOpen}>{translation.language["label.login.button.sing.up"]}</Button>
                             </Grid>
                         </Grid>
                         <Box mt={5}>
@@ -159,7 +157,8 @@ const Login = ({loginState, changeEmail, changePassword, login, changeId,
 
 const mapStateToProps = (state) => {
     return {
-        loginState: state.Login
+        loginState: state.Login,
+        translation: state.languageReducer,
     }
 }
 

@@ -11,53 +11,54 @@ import {Link} from "react-router-dom";
 *
 */
 
-export const AdminStudentTable = [
+export const AdminStudentTable = (translation) => [
     {
         name: "LRN",
-        label: "LRN",
+        label: translation.language["label.student.table.column.lrn"],
     },
     {
         name: "firstName",
-        label: "First Name",
+        label: translation.language["label.global.first.name"],
 
     },
     {
         name: "lastName",
-        label: "Last Name",
+        label: translation.language["label.global.last.name"],
     },
     {
         name: "grade",
-        label: "Grade",
+        label: translation.language["label.global.grade"],
     },
     {
         name: "section",
-        label: "Section",
+        label: translation.language["label.global.section"],
     },
     {
         name: "email",
-        label: "Email",
+        label: translation.language["label.global.email"],
     },
 
     {
         name: "birthdate",
-        label: "BirthDate",
+        label: translation.language["label.global.birth.date"],
     },
 
     {
         name: "adviser",
-        label: "Adviser"
+        label: translation.language["label.global.adviser"]
     },
     {
         name: "profile",
-        label: "Profile",
+        label: translation.language["label.global.profile"],
         options: {
             filter: false,
             sort: false,
             customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to={`/student/profile/`+value} style={{textDecoration: 'none'}}>
+                    <Link to={`${translation.language["route.profile.student"]}${value}`}
+                          style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
-                           Visit Profile
+                            {translation.language["label.global.visit.profile"]}
                         </Button>
                     </Link>
             },
@@ -69,7 +70,7 @@ export const AdminStudentTable = [
 ];
 
 export function AdminInsertStudentTable(id, firstName, lastName, email, birthdate, grade, section, adviser) {
-    return {LRN: id, firstName, lastName, email, birthdate, grade, section, adviser, profile:email}
+    return {LRN: id, firstName, lastName, email, birthdate, grade, section, adviser, profile: email}
 }
 
 
@@ -85,38 +86,38 @@ export function AdminInsertStudentTable(id, firstName, lastName, email, birthdat
 */
 
 
-export const AdminTeacherTable = [
+export const AdminTeacherTable=(translation) => [
     {
-      name: 'id',
-      label: 'Id'
+        name: 'id',
+        label: translation.language["label.global.id"]
     },
     {
         name: "firstName",
-        label: "First Name",
+        label:translation.language["label.global.first.name"]
     },
     {
         name: 'lastName',
-        label: 'Last Name',
+        label: translation.language["label.global.last.name"]
     },
     {
         name: 'email',
-        label: 'Email',
+        label: translation.language["label.global.email"]
     },
     {
         name: 'birthdate',
-        label: 'BirthDate'
+        label: translation.language["label.global.birth.date"]
     },
     {
         name: "profile",
-        label: "Profile",
+        label: translation.language["label.global.profile"],
         options: {
             filter: false,
             sort: false,
             customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to={`/teacher/profile/`+value} style={{textDecoration: 'none'}}>
+                    <Link to={`${translation.language["route.profile.teacher"]}${value}`}  style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
-                            Visit Profile
+                            {translation.language["label.global.visit.profile"]}
                         </Button>
                     </Link>
             },
@@ -127,8 +128,8 @@ export const AdminTeacherTable = [
     },
 ]
 
-export function AdminInsertTeacherTable(id,firstName, lastName, email, birthdate) {
-    return {id,firstName, lastName, email, birthdate, profile:email}
+export function AdminInsertTeacherTable(id, firstName, lastName, email, birthdate) {
+    return {id, firstName, lastName, email, birthdate, profile: email}
 }
 
 
@@ -144,34 +145,34 @@ export function AdminInsertTeacherTable(id,firstName, lastName, email, birthdate
 */
 
 
-export const AdminRoomTable = [
+export const AdminRoomTable = (translation) => [
     {
         name: 'id',
-        label: 'Id'
+        label: translation.language["label.global.id"]
     },
     {
         name: 'roomName',
-        label: 'RoomName',
+        label: translation.language["label.global.room.name"],
     },
     {
         name: 'timeStart',
-        label: 'Time Start'
+        label: translation.language["label.global.time.start"]
     },
     {
         name: 'timeEnd',
-        label: 'Time End'
+        label: translation.language["label.global.time.end"]
     },
     {
         name: "profile",
-        label: "Profile",
+        label: translation.language["label.global.profile"],
         options: {
             filter: false,
             sort: false,
             customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to={`/room/profile/`+value} style={{textDecoration: 'none'}}>
+                    <Link to={`${translation.language["route.profile.room"]}${value}`} style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
-                            Visit Profile
+                            {translation.language["label.global.visit.profile"]}
                         </Button>
                     </Link>
             },
@@ -182,8 +183,8 @@ export const AdminRoomTable = [
     },
 ]
 
-export function AdminInsertRoom(id,roomName, timeStart, timeEnd, profile) {
-    return {id,roomName, timeStart, timeEnd, profile}
+export function AdminInsertRoom(id, roomName, timeStart, timeEnd, profile) {
+    return {id, roomName, timeStart, timeEnd, profile}
 }
 
 /*
@@ -198,27 +199,27 @@ export function AdminInsertRoom(id,roomName, timeStart, timeEnd, profile) {
 */
 
 
-export const AdminSubjectTable = [
+export const AdminSubjectTable = (translation) => [
     {
         name: 'subjectCode',
-        label: 'Subject Code'
+        label: translation.language["label.global.subject.code"]
     },
     {
         name: 'subjectName',
-        label: 'Subject Name'
+        label: translation.language["label.global.subject.name"]
     },
 
     {
         name: 'major',
-        label: 'Major'
+        label: translation.language["label.global.major"]
     },
     {
         name: 'active',
-        label: 'Active'
+        label: translation.language["label.global.active"]
     },
     {
         name: "profile",
-        label: "Profile",
+        label: translation.language["label.global.profile"],
         options: {
             filter: false,
             sort: false,
@@ -226,7 +227,7 @@ export const AdminSubjectTable = [
                 return value === undefined ? null :
                     <Link to="/admin/dashboard" style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
-                            View Subject
+                            {translation.language["label.global.visit.profile"]}
                         </Button>
                     </Link>
             },
@@ -243,9 +244,6 @@ export function AdminInsertSubject(subjectCode, subjectName, major, active, prof
 }
 
 
-
-
-
 /*
 *
 *
@@ -257,54 +255,54 @@ export function AdminInsertSubject(subjectCode, subjectName, major, active, prof
 *
 */
 
-export const AdminRoomClassTable = [
+export const AdminRoomClassTable = (translation) => [
     {
         name: 'id',
-        label: 'Id'
+        label: translation.language["label.global.id"]
     },
     {
         name: 'roomName',
-        label: 'RoomName'
+        label: translation.language["label.global.room.name"]
     },
     {
         name: 'grade',
-        label: 'Grade'
+        label: translation.language["label.global.grade"]
     },
     {
         name: 'section',
-        label: 'section'
+        label: translation.language["label.global.section"]
     },
     {
         name: 'subject',
-        label: 'Subject'
+        label: translation.language["label.global.subject"]
     },
     {
         name: 'assignedTeacher',
-        label: 'assignedTeacher'
+        label: translation.language["label.global.assign.teacher"]
     },
     {
         name: 'day',
-        label: 'Day'
+        label: translation.language["label.global.day"]
     },
     {
         name: 'timeStart',
-        label: 'Time Start'
+        label: translation.language["label.global.time.start"]
     },
     {
         name: 'timeEnd',
-        label: 'Time End'
+        label: translation.language["label.global.time.end"]
     },
     {
         name: "classroom",
-        label: "Class Room",
+        label: translation.language["label.global.classroom"],
         options: {
             filter: false,
             sort: false,
             customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to={"/classroom/" + value} style={{textDecoration: 'none'}}>
+                    <Link to={`${translation.language["route.classroom"]}${value}`} style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
-                            Join Class
+                            {translation.language["label.global.join.class"]}
                         </Button>
                     </Link>
             },
@@ -316,15 +314,16 @@ export const AdminRoomClassTable = [
 
     {
         name: "profile",
-        label: "Profile",
+        label: translation.language["label.global.profile"],
         options: {
             filter: false,
             sort: false,
             customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to={"/roomShiftClass/profile/" + value} style={{textDecoration: 'none'}}>
+                    <Link to={`${translation.language["route.profile.room.shift.class"]}${value}`}
+                          style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
-                            Visit Profile
+                            {translation.language["label.global.visit.profile"]}
                         </Button>
                     </Link>
             },
@@ -335,8 +334,8 @@ export const AdminRoomClassTable = [
     },
 ]
 
-export function AdminInsertRoomClass(id,roomName, grade, section, subject, assignedTeacher, day, timeStart, timeEnd, classroom, profile) {
-    return {id,roomName, grade, section, subject, assignedTeacher, day, timeStart, timeEnd, classroom, profile}
+export function AdminInsertRoomClass(id, roomName, grade, section, subject, assignedTeacher, day, timeStart, timeEnd, classroom, profile) {
+    return {id, roomName, grade, section, subject, assignedTeacher, day, timeStart, timeEnd, classroom, profile}
 }
 
 /*
@@ -349,47 +348,48 @@ export function AdminInsertRoomClass(id,roomName, grade, section, subject, assig
 *
 *
 */
-export const AdminRoomShiftTable = [
+export const AdminRoomShiftTable = (translation) => [
     {
         name: 'id',
-        label: 'Id'
+        label: translation.language["label.global.id"]
     },
     {
         name: 'roomName',
-        label: 'RoomName'
+        label: translation.language["label.global.room.name"]
     },
     {
         name: 'roomShiftName',
-        label: 'Room Shift Name'
+        label: translation.language["label.room.shift.table.column.shift"]
     },
     {
         name: 'grade',
-        label: 'Grade'
+        label: translation.language["label.global.grade"]
     },
     {
         name: 'section',
-        label: 'section'
+        label: translation.language["label.global.section"]
     },
 
     {
         name: 'timeStart',
-        label: 'Time Start'
+        label: translation.language["label.global.time.start"]
     },
     {
         name: 'timeEnd',
-        label: 'Time End'
+        label: translation.language["label.global.time.end"]
     },
     {
         name: "profile",
-        label: "Profile",
+        label: translation.language["label.global.profile"],
         options: {
             filter: false,
             sort: false,
             customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to={`/roomshift/profile/`+value} style={{textDecoration: 'none'}}>
+                    <Link to={`${translation.language["route.profile.room.shift"]}${value}`}
+                          style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
-                            Visit Profile
+                            {translation.language["label.global.visit.profile"]}
                         </Button>
                     </Link>
             },
@@ -400,8 +400,8 @@ export const AdminRoomShiftTable = [
     },
 ]
 
-export function AdminInsertRoomShift(id,roomName, roomShiftName, grade, section, timeStart, timeEnd, profile) {
-    return {id,roomName, roomShiftName, grade, section, timeStart, timeEnd, profile}
+export function AdminInsertRoomShift(id, roomName, roomShiftName, grade, section, timeStart, timeEnd, profile) {
+    return {id, roomName, roomShiftName, grade, section, timeStart, timeEnd, profile}
 }
 
 /*
@@ -415,31 +415,32 @@ export function AdminInsertRoomShift(id,roomName, roomShiftName, grade, section,
 *
 */
 
-export const AdminCurriculumTable = [
+export const AdminCurriculumTable = (translation) => [
 
     {
         name: 'code',
-        label: 'Code',
+        label: translation.language["label.global.code"],
     },
     {
         name: 'name',
-        label: 'Name'
+        label: translation.language["label.curriculum.table.column.name"],
     },
     {
         name: 'description',
-        label: 'Description'
+        label: translation.language["label.curriculum.table.column.description"],
     },
     {
         name: "profile",
-        label: "Profile",
+        label: translation.language["label.global.profile"],
         options: {
             filter: false,
             sort: false,
             customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to={`/room/profile/`+value} style={{textDecoration: 'none'}}>
+                    <Link to={`${translation.language["route.profile.room"]}:${value}`}
+                          style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
-                            Visit Profile
+                            {translation.language["label.global.visit.profile"]}
                         </Button>
                     </Link>
             },

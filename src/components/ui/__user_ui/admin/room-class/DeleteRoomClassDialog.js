@@ -10,10 +10,6 @@ import {connect} from 'react-redux'
 import * as actions from '../../../../../store/action/__ActionGlobal/DialogAction'
 import {RoomShiftClass_Delete} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
-import {
-    DeleteAssignmentFail,
-    DeleteAssignmentSuccess
-} from "../../../../../__Messages/teacher/TeacherAssignmentMessage";
 
 const DeleteRoomDialog = ({
                               dialog,
@@ -21,7 +17,8 @@ const DeleteRoomDialog = ({
                               closeDialog,
                               dialogId,
                               registerDialogMessageClose,
-                              dialogRegister
+                              dialogRegister,
+    translation
                           }) => {
 
     const RegisterEnter = (event) => {
@@ -35,19 +32,19 @@ const DeleteRoomDialog = ({
         fullWidth
         maxWidth={"md"}
     >
-        <DialogTitle id="delete-room-class">Delete Room Class</DialogTitle>
+        <DialogTitle id="delete-room-class">{translation.language["label.room.class.dialog.delete.title"]}</DialogTitle>
         <Divider/>
         <DialogContent>
 
             <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
-                      messageFail={DeleteAssignmentFail}
-                      messageSuccess={DeleteAssignmentSuccess}/>
+                      messageFail={translation.language["message.room.class.dialog.delete.fail"]}
+                      messageSuccess={translation.language["message.room.class.dialog.delete.success"]}/>
             <TextField
                 autoFocus
                 value={state.id}
                 margin="dense"
                 variant={'outlined'}
-                label="Enter Room Class Id"
+                label={translation.language["label.room.class.dialog.delete.input"]}
                 type="text"
                 fullWidth
                 onChange={(event) => dialogId(event.target.value)}
@@ -58,10 +55,10 @@ const DeleteRoomDialog = ({
         </DialogContent>
         <DialogActions>
             <Button variant={'contained'} disableElevation onClick={dialogRegister} color='secondary'>
-                Delete
+                {translation.language["label.button.delete"]}
             </Button>
             <Button variant={'contained'} disableElevation onClick={closeDialog} color='primary'>
-                Cancel
+                {translation.language["label.button.back"]}
             </Button>
         </DialogActions>
     </Dialog>

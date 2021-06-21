@@ -27,7 +27,8 @@ const RegisterSubject = (
         changeSubjectCode,
         changeSubjectMajor,
         registerDialogMessageClose,
-        registerDialog
+        registerDialog,
+        translation
     }) => {
 
     return <Dialog
@@ -38,19 +39,18 @@ const RegisterSubject = (
         fullWidth
     >
         <form noValidate>
-            <DialogTitle id="add-subject">Register Subject</DialogTitle>
+            <DialogTitle id="add-subject">{translation.language["label.subject.dialog.add.title"]}</DialogTitle>
             <Divider/>
             <DialogContent>
                 <Response dialogState={subject} registerDialogMessageClose={registerDialogMessageClose}
-                          messageFail="Subject Register Not Successful"
-                          messageSuccess="Subject Register Success"/>
+                          messageFail={translation.language["message.subject.dialog.register.fail"]}
+                          messageSuccess={translation.language["message.subject.dialog.register.success"]}/>
 
                 <Grid container spacing={1}>
                     <Grid item md={4} xs={12}>
                         <TextField autoFocus
                                    margin="dense"
-                                   id="subject-name"
-                                   label="Subject Name"
+                                   label={translation.language["label.global.subject.name"]}
                                    type="text"
                                    fullWidth
                                    variant="outlined"
@@ -63,8 +63,7 @@ const RegisterSubject = (
                     <Grid item md={4} xs={12}>
                         <TextField
                             margin="dense"
-                            id="subject-code"
-                            label="Subject Code"
+                            label={translation.language["label.global.subject.code"]}
                             type="text"
                             fullWidth
                             variant="outlined"
@@ -73,21 +72,23 @@ const RegisterSubject = (
                         />
                     </Grid>
                     <Grid item md={4} xs={12}>
-                        <FormControl variant="outlined"  margin='dense' fullWidth>
-                            <InputLabel htmlFor="Major">Major</InputLabel>
+                        <FormControl variant="outlined" margin='dense' fullWidth>
+                            <InputLabel
+                                htmlFor={translation.language["label.global.major"]}>{translation.language["label.global.major"]}</InputLabel>
                             <Select
                                 native
                                 value={subject.subjectMajor}
-                                // onChange={handleChange}
-                                label="Major"
+                                label={translation.language["label.global.major"]}
                                 inputProps={{
-                                    name: 'age',
-                                    id: 'Major',
+                                    name: translation.language["label.global.major"],
+                                    id: translation.language["label.global.major"],
                                 }}
                                 onChange={(event => changeSubjectMajor(event))}
                             >
-                                <option value='Minor'>Minor</option>
-                                <option value='Major'>Major</option>
+                                <option
+                                    value={translation.language["label.global.minor"]}>{translation.language["label.global.minor"]}</option>
+                                <option
+                                    value={translation.language["label.global.major"]}>{translation.language["label.global.major"]}</option>
                             </Select>
                         </FormControl>
                     </Grid>
@@ -96,10 +97,10 @@ const RegisterSubject = (
 
             <DialogActions>
                 <Button variant={'contained'} disableElevation color='primary' onClick={registerDialog}>
-                    Register
+                    {translation.language["label.button.save"]}
                 </Button>
                 <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
-                    Cancel
+                    {translation.language["label.button.back"]}
                 </Button>
             </DialogActions>
         </form>

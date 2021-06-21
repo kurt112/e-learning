@@ -1,4 +1,4 @@
-import {Box, Button, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
+import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
 import {Fragment, lazy, useEffect} from "react"
 import {AdminTeacherTable as columns} from '../../../utils/tableColumn'
@@ -14,8 +14,10 @@ import UpdateIcon from "@material-ui/icons/Update";
 
 const TeacherDialogRegister = lazy(() => import(`./RegisterTeacherDialog`))
 const TeacherDeleteDialog = lazy(() => import(`./DeleteDialogTeacher`))
-const Index = ({teacher, pageChange, searchChange, openDialog, closeDialog, initData,  openDeleteDialog,
-                   closeDeleteDialog}) => {
+const Index = ({
+                   teacher, pageChange, searchChange, openDialog, closeDialog, initData, openDeleteDialog,
+                   closeDeleteDialog, translation
+               }) => {
     const classes = style()
 
     useEffect(() => {
@@ -26,45 +28,42 @@ const Index = ({teacher, pageChange, searchChange, openDialog, closeDialog, init
     }, [])
     return (
         <Fragment>
-            <TeacherDialogRegister dialog={teacher.dialog} closeDialog={closeDialog}/>
-            <TeacherDeleteDialog dialog={teacher.deleteDialog} closeDialog={closeDeleteDialog}/>
+            <TeacherDialogRegister translation={translation} dialog={teacher.dialog} closeDialog={closeDialog}/>
+            <TeacherDeleteDialog translation={translation} dialog={teacher.deleteDialog} closeDialog={closeDeleteDialog}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
                         <Box className={classes.tableNavbarBox}>
-                            <Tooltip title='Add Teacher'>
+                            <Tooltip title={translation.language["tooltip.teacher.add"]}>
                                 <IconButton aria-label="add-teacher" onClick={openDialog}>
                                     <LibraryAddIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
                             </Tooltip>
-                            <Tooltip title='Delete Teacher'>
+                            <Tooltip title={translation.language["tooltip.teacher.delete"]}>
                                 <IconButton aria-label="delete-teacher" onClick={openDeleteDialog}>
                                     <DeleteIcon fontSize={'large'} color={'secondary'}/>
                                 </IconButton>
                             </Tooltip>
 
-                            <Tooltip title='Update Teacher'>
+                            <Tooltip title={translation.language["tooltip.teacher.update"]}>
                                 <IconButton aria-label="update-teacher" onClick={() => alert('gagawin mo pa to')}>
                                     <UpdateIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
                             </Tooltip>
                         </Box>
-                        <Button variant="outlined" color="primary">
-                            Quit
-                        </Button>
                     </Toolbar>
                 </Grid>
                 <Grid item md={12} sm={12} xs={false} component={Paper} className={classes.tableContainerWrapper}>
                     <MUIDataTable
                         title={
                             <Typography variant="h6">
-                                Teacher List
+                                {translation.language["label.teacher.table.title"]}
                                 {teacher.loading &&
                                 <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}}/>}
                             </Typography>
                         }
                         data={teacher.data}
-                        columns={columns}
+                        columns={columns(translation)}
                         options={options(
                             pageChange,
                             searchChange,

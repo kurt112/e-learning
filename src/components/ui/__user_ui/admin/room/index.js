@@ -23,7 +23,8 @@ const Index = ({
                    openDialog,
                    closeDialog,
                    openDeleteDialog,
-                   closeDeleteDialog
+                   closeDeleteDialog,
+                   translation
                }) => {
 
     const classes = style()
@@ -35,26 +36,26 @@ const Index = ({
     return (
         <Fragment>
 
-            <RegisterRoom dialog={room.dialog} closeDialog={closeDialog}/>
-            <DeleteRoomDialog dialog={room.deleteDialog} closeDialog={closeDeleteDialog}/>
+            <RegisterRoom translation={translation} dialog={room.dialog} closeDialog={closeDialog}/>
+            <DeleteRoomDialog translation={translation} dialog={room.deleteDialog} closeDialog={closeDeleteDialog}/>
 
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
                         <Box className={classes.tableNavbarBox}>
-                            <Tooltip title='Add Room'>
+                            <Tooltip title={translation.language["tooltip.room.add"]}>
                                 <IconButton aria-label="add-room" onClick={openDialog} color="primary">
                                     <AddCircleOutlineIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
                             </Tooltip>
 
-                            <Tooltip title='Delete Room'>
+                            <Tooltip title={translation.language["tooltip.room.delete"]}>
                                 <IconButton aria-label="delete-room" onClick={openDeleteDialog}>
                                     <DeleteIcon fontSize={'large'} color={'secondary'}/>
                                 </IconButton>
                             </Tooltip>
 
-                            <Tooltip title='Update Room'>
+                            <Tooltip title={translation.language["tooltip.room.update"]}>
                                 <IconButton aria-label="update-room" onClick={() => alert('gagawin mo pa to')}>
                                     <UpdateIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
@@ -68,13 +69,13 @@ const Index = ({
                     <MUIDataTable
                         title={
                             <Typography variant="h6">
-                                Room List
+                                {translation.language["label.room.table.title"]}
                                 {room.loading &&
                                 <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}}/>}
                             </Typography>
                         }
                         data={room.data}
-                        columns={columns}
+                        columns={columns(translation)}
                         options={options(
                             pageChange,
                             searchChange,

@@ -19,53 +19,53 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
-export function TeacherItems({ style }) {
+export function TeacherItems({ style,translation }) {
     return (
         <div>
             <ListSubheader className={style} inset>TEACHER</ListSubheader>
-            <ListItem component={NavLink} to="/teacher/classes" button>
+            <ListItem component={NavLink} to={translation.language["route.teacher.classes"]} button>
                 <ListItemIcon>
                     <ClassIcon />
                 </ListItemIcon>
                 <ListItemText primary="Classes" />
             </ListItem>
-            <ListItem component={NavLink} to="/teacher/subjects" button>
+            <ListItem component={NavLink} to={translation.language["route.teacher.subjects"]} button>
                 <ListItemIcon>
                     <MenuBookIcon />
                 </ListItemIcon>
                 <ListItemText primary="Subjects" />
             </ListItem>
-            <ListItem component={NavLink} to="/teacher/students" button>
+            <ListItem component={NavLink} to={translation.language["route.teacher.students"]} button>
                 <ListItemIcon>
                     <PeopleIcon />
                 </ListItemIcon>
                 <ListItemText primary="Students" />
             </ListItem>
-            <ListItem component={NavLink} to="/teacher/lectures" button>
+            <ListItem component={NavLink} to={translation.language["route.teacher.lectures"]} button>
                 <ListItemIcon>
                     <AssignmentIcon />
                 </ListItemIcon>
                 <ListItemText primary="Lectures" />
             </ListItem>
-            <ListItem component={NavLink} to="/teacher/assignments" button>
+            <ListItem component={NavLink} to={translation.language["route.teacher.assignments"]} button>
                 <ListItemIcon>
                     <AssignmentIcon />
                 </ListItemIcon>
                 <ListItemText primary="Assignments" />
             </ListItem>
-            <ListItem component={NavLink} to="/teacher/quizzes" button>
+            <ListItem component={NavLink} to={translation.language["route.teacher.quizzes"]} button>
                 <ListItemIcon>
                     <CreateIcon />
                 </ListItemIcon>
                 <ListItemText primary="Quizzes" />
             </ListItem>
-            <ListItem component={NavLink} to="/teacher/exams" button>
+            <ListItem component={NavLink} to={translation.language["route.teacher.exams"]} button>
                 <ListItemIcon>
                     <FindInPageIcon/>
                 </ListItemIcon>
                 <ListItemText primary="Exams"/>
             </ListItem>
-            <ListItem component={NavLink} to="/teacher/resources" button>
+            <ListItem component={NavLink} to={translation.language["route.teacher.resources"]} button>
                 <ListItemIcon>
                     <CloudUploadIcon />
                 </ListItemIcon>
@@ -76,91 +76,91 @@ export function TeacherItems({ style }) {
 }
 
 
-export function StudentItems({ style }) {
+export function StudentItems({ style,translation}) {
     return (
         <div>
             <ListSubheader className={style} inset>STUDENT</ListSubheader>
-            <ListItem component={NavLink} to="/student/classes" button>
+            <ListItem component={NavLink} to={translation.language["route.student.classes"]} button>
                 <ListItemIcon>
                     <ClassIcon />
                 </ListItemIcon>
-                <ListItemText primary="Classes" />
+                <ListItemText primary={translation.language["label.sidebar.admin.classes"]} />
             </ListItem>
-            <ListItem component={NavLink} to="/student/subjects" button>
+            <ListItem component={NavLink} to={translation.language["route.student.subjects"]} button>
                 <ListItemIcon>
                     <MenuBookIcon    />
                 </ListItemIcon>
-                <ListItemText primary="Subjects" />
+                <ListItemText primary={translation.language["label.sidebar.admin.subjects"]} />
             </ListItem>
-            <ListItem component={NavLink} to="/student/teachers" button>
+            <ListItem component={NavLink} to={translation.language["route.student.teachers"]} button>
                 <ListItemIcon>
                     <PeopleIcon />
                 </ListItemIcon>
-                <ListItemText primary="Teachers" />
+                <ListItemText primary={translation.language["label.sidebar.admin.teachers"]} />
             </ListItem>
-            <ListItem component={NavLink} to="/student/resources" button>
+            <ListItem component={NavLink} to={translation.language["route.student.resources"]} button>
                 <ListItemIcon>
                     <CloudUploadIcon />
                 </ListItemIcon>
-                <ListItemText primary="Resources" />
+                <ListItemText primary={translation.language["label.sidebar.admin.resources"]} />
             </ListItem>
         
         </div>
     )
 }
 
-export function AdminItems({ style }) {
+export function AdminItems({ style,translation}) {
     return (
         <div>
             <ListSubheader className={style} inset>ADMIN</ListSubheader>
-            <ListItem component={NavLink} to="/admin/dashboard" button>
+            <ListItem component={NavLink} to={translation.language["route.admin.dashboard"]} button>
                 <ListItemIcon>
                     <DashboardIcon />
                 </ListItemIcon>
-                <ListItemText primary="Dashboard" />
+                <ListItemText primary={translation.language["label.sidebar.admin.dashboard"]} />
             </ListItem>
-            <ListItem component={NavLink} to="/admin/room-list" button>
+            <ListItem component={NavLink} to={translation.language["route.admin.room.list"]} button>
                 <ListItemIcon>
                     <MeetingRoomIcon />
                 </ListItemIcon>
-                <ListItemText primary="Rooms" />
+                <ListItemText primary={translation.language["label.sidebar.admin.rooms"]}/>
             </ListItem>
-            <ListItem component={NavLink} to="/admin/room-shift" button>
+            <ListItem component={NavLink} to={translation.language["route.admin.room.shift"]} button>
                 <ListItemIcon>
                     <SwapHorizIcon />
                 </ListItemIcon>
-                <ListItemText primary="Room Shifts" />
+                <ListItemText primary={translation.language["label.sidebar.admin.room.shifts"]}/>
             </ListItem>
-            <ListItem component={NavLink} to="/admin/classes-list" button>
+            <ListItem component={NavLink} to={translation.language["route.admin.classes.list"]} button>
                 <ListItemIcon>
                     <ClassIcon />
                 </ListItemIcon>
-                <ListItemText primary="Classes" />
+                <ListItemText primary={translation.language["label.sidebar.admin.classes"]}/>
             </ListItem>
-            <ListItem component={NavLink} to="/admin/student-list" button>
+            <ListItem component={NavLink} to={translation.language["route.admin.student.list"]} button>
                 <ListItemIcon>
                     <PeopleIcon />
                 </ListItemIcon>
-                <ListItemText primary="Students" />
+                <ListItemText primary={translation.language["label.sidebar.admin.students"]}/>
             </ListItem>
-            <ListItem component={NavLink} to="/admin/teacher-list" button>
+            <ListItem component={NavLink} to={translation.language["route.admin.teacher.list"]} button>
                 <ListItemIcon>
                     <PeopleIcon />
                 </ListItemIcon>
-                <ListItemText primary="Teachers" />
+                <ListItemText primary={translation.language["label.sidebar.admin.teacher"]}/>
             </ListItem>
 
-            <ListItem component={NavLink} to="/admin/subject-list" button>
+            <ListItem component={NavLink} to={translation.language["route.admin.subject.list"]} button>
                 <ListItemIcon>
                     <ImportContactsIcon />
                 </ListItemIcon>
-                <ListItemText primary="Subjects" />
+                <ListItemText primary={translation.language["label.sidebar.admin.subjects"]} />
             </ListItem>
-            <ListItem component={NavLink} to="/admin/strand-course" button>
+            <ListItem component={NavLink} to={translation.language["route.admin.curriculum"]} button>
                 <ListItemIcon>
                     <AcUnitIcon />
                 </ListItemIcon>
-                <ListItemText primary="Curriculum" />
+                <ListItemText primary={translation.language["label.sidebar.admin.curriculum"]} />
             </ListItem>
         </div>
     )

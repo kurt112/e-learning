@@ -20,7 +20,12 @@ import {
     autoCompleteSubject
 } from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 import AutoComplete from "../../../utils/autoComplete/AutoComplete";
-import {TwoFilterOption,twoOptionLabel,twoOptionSelected,changeText} from '../../../utils/autoComplete/autoCompleteAction'
+import {
+    TwoFilterOption,
+    twoOptionLabel,
+    twoOptionSelected,
+    changeText
+} from '../../../utils/autoComplete/autoCompleteAction'
 
 const RoomClassDialog = ({
                              closeDialog,
@@ -33,7 +38,8 @@ const RoomClassDialog = ({
                              changeRoomShiftId,
                              changeTimeStart,
                              changeTimeEnd,
-                             changeDay
+                             changeDay,
+                             translation
                          }) => {
 
     const [openTeacher, setOpenTeacher] = useState(false)
@@ -64,17 +70,16 @@ const RoomClassDialog = ({
     }, [openTeacher, openSubject, openRoomShift])
 
     const OutputTeacher = (event, value) => {
-        changeTeacherId(value[2] === null? '': value[2])
+        changeTeacherId(value[2] === null ? '' : value[2])
     }
 
     const OutputSubject = (event, value) => {
-        changeSubjectId(value === null? '': value[2])
+        changeSubjectId(value === null ? '' : value[2])
     }
 
     const OutputRoomShift = (event, value) => {
-        changeRoomShiftId(value  === null? '': value[2].toString())
+        changeRoomShiftId(value === null ? '' : value[2].toString())
     }
-
 
 
     return <Dialog
@@ -84,14 +89,14 @@ const RoomClassDialog = ({
         maxWidth="lg"
         fullWidth
     >
-        <form noValidate >
-            <DialogTitle id="add-class">Register Class</DialogTitle>
+        <form noValidate>
+            <DialogTitle id="add-class">{translation.language["label.room.class.dialog.add.title"]}</DialogTitle>
             <Divider/>
             <DialogContent>
 
                 <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
-                          messageFail="Room Register Not Successful"
-                          messageSuccess="Register Room Success"/>
+                          messageFail={translation.language["message.room.class.dialog.add.fail"]}
+                          messageSuccess={translation.language["message.room.class.dialog.add.success"]}/>
 
                 <Grid container spacing={1}>
                     <Grid item md={6} xs={12}>
@@ -105,8 +110,8 @@ const RoomClassDialog = ({
                             InputText={roomShiftText}
                             changeAutoComplete={OutputRoomShift}
                             changeText={(value) => changeText(value, setRoomShiftText, setRoomShiftLoading, setRoomShiftOptions, autoCompleteRoomShift)}
-                            noOptionText={"Search by grade fallowed by section "}
-                            label={"RoomShift"}
+                            noOptionText={translation.language["label.room.class.dialog.add.input.room.shift.search"]}
+                            label={translation.language["label.global.room.shift"]}
                             optionLabel={twoOptionLabel}
                             optionSelected={twoOptionSelected}
 
@@ -122,8 +127,8 @@ const RoomClassDialog = ({
                             InputText={subjectText}
                             changeText={(value) => changeText(value, setSubjectText, setSubjectLoading, setSubjectOptions, autoCompleteSubject)}
                             changeAutoComplete={OutputSubject}
-                            noOptionText={"Search by subjectName name fallowed by Subject Major"}
-                            label={"Subject"}
+                            noOptionText={translation.language["label.room.class.dialog.add.input.subject.search"]}
+                            label={translation.language["label.global.subject"]}
                             optionLabel={twoOptionLabel}
                             optionSelected={twoOptionSelected}
 
@@ -134,8 +139,7 @@ const RoomClassDialog = ({
                     <Grid item md={6} xs={12}>
                         <TextField
                             margin="dense"
-                            id="time-start"
-                            label="Time Start"
+                            label={translation.language["label.global.time.start"]}
                             value={dialogState.timeStart}
                             onChange={(event) => changeTimeStart(event.target.value)}
                             type="time"
@@ -146,8 +150,7 @@ const RoomClassDialog = ({
                     <Grid item md={6} xs={12}>
                         <TextField
                             margin="dense"
-                            id="time-end"
-                            label="Time End"
+                            label={translation.language["label.global.time.end"]}
                             value={dialogState.timeEnd}
                             onChange={(event) => changeTimeEnd(event.target.value)}
                             type="time"
@@ -156,15 +159,16 @@ const RoomClassDialog = ({
                         />
                     </Grid>
                     <Grid item md={6} xs={12}>
-                        <FormControl variant="outlined"  margin='dense' fullWidth>
-                            <InputLabel htmlFor="room-day-shift">Day</InputLabel>
+                        <FormControl variant="outlined" margin='dense' fullWidth>
+                            <InputLabel
+                                htmlFor={translation.language["label.global.day"]}>{translation.language["label.global.day"]}</InputLabel>
                             <Select
                                 native
                                 value={dialogState.day}
-                                label="Day"
+                                label={translation.language["label.global.day"]}
                                 inputProps={{
-                                    name: 'Day',
-                                    id: 'room-day-shift',
+                                    name: translation.language["label.global.day"],
+                                    id: translation.language["label.global.day"],
                                 }}
                                 onChange={(event => changeDay(event.target.value))}
                             >
@@ -186,8 +190,8 @@ const RoomClassDialog = ({
                             InputText={teacherText}
                             changeAutoComplete={OutputTeacher}
                             changeText={(value) => changeText(value, setTeacherText, setTeacherLoading, setTeacherOptions, autoCompleteTeacher)}
-                            noOptionText={"Search by last name fallowed by first Name "}
-                            label={"Teacher"}
+                            noOptionText={translation.language["label.room.class.dialog.add.input.teacher.search"]}
+                            label={translation.language["label.global.teacher"]}
                             optionLabel={twoOptionLabel}
                             optionSelected={twoOptionSelected}
                         />
@@ -197,11 +201,11 @@ const RoomClassDialog = ({
             </DialogContent>
 
             <DialogActions>
-                <Button onClick={registerDialog} color='primary'>
-                    Register
+                <Button disableElevation variant={"contained"} onClick={registerDialog} color='primary'>
+                    {translation.language["label.button.save"]}
                 </Button>
-                <Button onClick={closeDialog} color='secondary'>
-                    Cancel
+                <Button disableElevation variant={"contained"} onClick={closeDialog} color='secondary'>
+                    {translation.language["label.button.back"]}
                 </Button>
             </DialogActions>
         </form>

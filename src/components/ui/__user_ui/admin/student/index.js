@@ -1,4 +1,4 @@
-import {Box, Button, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
+import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
 import {Fragment, lazy, useEffect} from "react"
 import {AdminStudentTable as columns} from '../../../utils/tableColumn'
@@ -15,8 +15,15 @@ const StudentRegisterDialog = lazy(() => import(`./RegisterStudentDialog`));
 const StudentDeleteDialog = lazy(() => import(`./DeleteStudentDialog`))
 
 const Index = ({
-                   student, pageChange, searchChange, openDialog, closeDialog, initData, openDeleteDialog,
-                   closeDeleteDialog
+                   student,
+                   pageChange,
+                   searchChange,
+                   openDialog,
+                   closeDialog,
+                   initData,
+                   openDeleteDialog,
+                   closeDeleteDialog,
+                   translation
                }) => {
     const classes = style()
 
@@ -29,29 +36,25 @@ const Index = ({
     return (
         <Fragment>
 
-            <StudentRegisterDialog dialog={student.dialog} closeDialog={closeDialog}/>
-            <StudentDeleteDialog dialog={student.deleteDialog} closeDialog={closeDeleteDialog} />
+            <StudentRegisterDialog translation={translation} dialog={student.dialog} closeDialog={closeDialog}/>
+            <StudentDeleteDialog translation={translation} dialog={student.deleteDialog} closeDialog={closeDeleteDialog}/>
 
             <Grid component="main" className={classes.root}>
 
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
                         <Box className={classes.tableNavbarBox}>
-                            <Tooltip title='Add student'>
+                            <Tooltip title={translation.language["label.global.student.add"]}>
                                 <IconButton aria-label="add-student" onClick={openDialog}>
                                     <LibraryAddIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
                             </Tooltip>
-                            <Tooltip title='Delete Student'>
+                            <Tooltip title={translation.language["label.global.student.delete"]}>
                                 <IconButton aria-label="delete-student" onClick={openDeleteDialog}>
                                     <DeleteIcon fontSize={'large'} color={'secondary'}/>
                                 </IconButton>
                             </Tooltip>
-
                         </Box>
-                        <Button variant="outlined" color="primary">
-                            Quit
-                        </Button>
                     </Toolbar>
                 </Grid>
 
@@ -59,13 +62,13 @@ const Index = ({
                     <MUIDataTable
                         title={
                             <Typography variant="h6">
-                                Student List
+                                {translation.language["label.global.student.list"]}
                                 {student.loading &&
                                 <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}}/>}
                             </Typography>
                         }
                         data={student.data}
-                        columns={columns}
+                        columns={columns(translation)}
                         options={options(
                             pageChange,
                             searchChange,

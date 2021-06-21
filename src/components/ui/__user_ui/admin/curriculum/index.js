@@ -33,7 +33,8 @@ const Index = ({
                    openDeleteDialog,
                    closeDeleteDialog,
                    openInsertSubjectDialog,
-                   closeInsertSubjectDialog
+                   closeInsertSubjectDialog,
+                   translation
                }) => {
 
     const classes = style()
@@ -47,32 +48,32 @@ const Index = ({
 
     return (
         <Fragment>
-            <CreateCurriculumDialog dialog={state.dialog} closeDialog={closeDialog}/>
-            <DeleteCurriculumDialog dialog={state.deleteDialog} closeDialog={closeDeleteDialog}/>
-            <InsertSubjectCurriculumDialog open={state.insertSubjectDialog} closeDialog={closeInsertSubjectDialog}/>
+            <CreateCurriculumDialog translation={translation} dialog={state.dialog} closeDialog={closeDialog}/>
+            <DeleteCurriculumDialog translation={translation} dialog={state.deleteDialog} closeDialog={closeDeleteDialog}/>
+            <InsertSubjectCurriculumDialog translation={translation} open={state.insertSubjectDialog} closeDialog={closeInsertSubjectDialog}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
                         <Box className={classes.tableNavbarBox}>
-                            <Tooltip title='Add Curriculum'>
+                            <Tooltip title={translation.language["tooltip.curriculum.add"]}>
                                 <IconButton aria-label="add-curriculum" onClick={openDialog}>
                                     <LibraryAddIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
                             </Tooltip>
 
-                            <Tooltip title='Delete Curriculum'>
+                            <Tooltip title={translation.language["tooltip.curriculum.delete"]}>
                                 <IconButton aria-label="delete-curriculum" onClick={openDeleteDialog}>
                                     <DeleteIcon fontSize={'large'} color={'secondary'}/>
                                 </IconButton>
                             </Tooltip>
 
-                            <Tooltip title='Update Curriculum'>
+                            <Tooltip title={translation.language["tooltip.curriculum.update"]}>
                                 <IconButton aria-label="update-curriculum" onClick={() => alert('gagawin mo pa to')}>
                                     <UpdateIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
                             </Tooltip>
 
-                            <Tooltip title='Add Curriculum Subject'>
+                            <Tooltip title={translation.language["tooltip.curriculum.add.subject"]}>
                                 <IconButton aria-label="update-curriculum" onClick={openInsertSubjectDialog}>
                                     <ImportContactsIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
@@ -85,7 +86,7 @@ const Index = ({
                         <MUIDataTable
                             title={
                                 <Typography variant="h6">
-                                    Curriculum List
+                                    {translation.language["label.curriculum.table.title"]}
                                     {state.loading && <CircularProgress size={24} style={{
                                         marginLeft: 15,
                                         position: 'relative',
@@ -94,7 +95,7 @@ const Index = ({
                                 </Typography>
                             }
                             data={state.data}
-                            columns={columns}
+                            columns={columns(translation)}
                             options={options(
                                 pageChange,
                                 searchChange,

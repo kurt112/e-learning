@@ -68,13 +68,11 @@ export function* TableDataInit(bodyDataQuery, bodySettingsQuery,to, ) {
     try {
         const bodyDataResponse = yield graphQLRequest(bodyDataQuery)
         const bodySettingsResponse = yield graphQLRequest(bodySettingsQuery)
-        console.log(bodyDataResponse)
         const object = bodyDataResponse.data.data
         const key = Object.keys(object)
         yield put(tableActions.SettingInitDataTable(bodySettingsResponse.data.data,to))
         yield put(tableActions.SuccessDataTable(object[key], true, to))
     } catch (error) {
-        console.log(error)
         yield put(tableActions.FailDataTable(error, to))
     }
 }

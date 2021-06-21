@@ -20,7 +20,7 @@ import {
     getRoomShift,
     getStudentsForRoomShift
 } from "../../../../../store/middleware/utils/GraphQlQuery/AdminQuery/AdminRoomShiftQuery";
-import {graphQlRequestAsync,PostData } from "../../../../../store/middleware/utils/HttpRequest";
+import {graphQlRequestAsync, PostData} from "../../../../../store/middleware/utils/HttpRequest";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -57,7 +57,7 @@ function intersection(a, b) {
  * @param {{student_id:string}} id of the student
  *
  */
-const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID}) => {
+const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID, translation}) => {
 
     const classes = useStyles();
     const [checked, setChecked] = useState([])
@@ -185,8 +185,7 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID}) => {
             <TextField
                 size={"small"}
                 style={{marginLeft: 17, width: '90%'}}
-                id="room-grade"
-                label="Student"
+                label={translation.language["label.global.student"]}
                 type="text"
                 value={text}
                 onChange={(event => changeText(event.target.value))}
@@ -198,14 +197,13 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID}) => {
 
                     students.length === 0 ?
 
-                        <p> No Student Currently</p> :
+                        <p> {translation.language["label.room.shift.dialog.transfer.student.warning"]}</p> :
 
                         students.filter(student => (
                             student.user.firstName +
                             student.user.lastName +
                             student.student_id).toLowerCase().includes(rightText.toLowerCase().replace(/\s+/g, ''))).map((student) => {
                             const labelId = `transfer-list-all-item-${student.student_id}-label`;
-
                             return (
                                 <ListItem key={student.student_id} role="listitem" button
                                           onClick={handleToggle(student)}>
@@ -290,15 +288,14 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID}) => {
             maxWidth={"xl"}
             fullWidth
         >
-            <form noValidate>
+            <form>
                 <DialogContent>
-
-
                     <Grid container spacing={2} justify="center" alignItems="center"
                           className={classes.root}>
                         <Grid md={5}
-                              item sm={12} xs={12} item>{customList('Available Student', availStudent, leftText, setLeftText)}</Grid>
-                        <Grid  md={2} sm={12} xs={12} item>
+                              item sm={12} xs={12}
+                              item>{customList(translation.language["label.room.shift.dialog.transfer.student.available"], availStudent, leftText, setLeftText)}</Grid>
+                        <Grid md={2} sm={12} xs={12} item>
                             <Grid container direction="column" alignItems="center">
                                 <Button
                                     variant="outlined"
@@ -326,18 +323,19 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID}) => {
                         </Grid>
                         <Grid md={5}
                               item sm={12} xs={12}
-                            item>{customList(roomName + ' Student', roomShiftStudents, rightText, setRightText)}</Grid>
+                              item>{customList(roomName + translation.language['label.global.student'], roomShiftStudents, rightText, setRightText)}</Grid>
                     </Grid>
 
                 </DialogContent>
 
                 <DialogActions>
-                    <Button variant={'contained'} disableElevation onClick={() => uploadStudent(shiftID, roomShiftStudents)}
+                    <Button variant={'contained'} disableElevation
+                            onClick={() => uploadStudent(shiftID, roomShiftStudents)}
                             color='primary'>
-                        Save
+                        {translation.language["label.button.save"]}
                     </Button>
                     <Button variant={'contained'} disableElevation onClick={closeDialog} color='Secondary'>
-                        Back
+                        {translation.language["label.button.back"]}
                     </Button>
                 </DialogActions>
             </form>

@@ -55,7 +55,7 @@ function intersection(a, b) {
  * @param {{student_id:string}} id of the student
  *
  */
-const InsertSubjectInCurriculumDialog = ({open, closeDialog}) => {
+const InsertSubjectInCurriculumDialog = ({open, closeDialog,translation}) => {
 
     const classes = useStyles();
     const [checked, setChecked] = useState([])

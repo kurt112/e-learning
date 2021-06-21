@@ -17,22 +17,23 @@ import Response from "../../../utils/Response";
 import AutoComplete from "../../../utils/autoComplete/AutoComplete";
 import {useEffect, useState} from "react";
 import {createFilterOptions} from "@material-ui/lab";
-import { autoCompleteRoom} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
+import {autoCompleteRoom} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 import {baseUrl} from "../../../../../store/middleware/axios";
 
 const RoomShiftRegisterDialog = ({
-                             closeDialog,
-                             dialog,
-                                dialogState,
-                             changeRoomName,
-                             changeSection,
-                             changeGrade,
-                             changeTimeStart,
-                             changeTimeEnd,
-                             changeRoomShift,
-                             registerDialogMessageClose,
-                             registerDialog
-                         }) => {
+                                     closeDialog,
+                                     dialog,
+                                     dialogState,
+                                     changeRoomName,
+                                     changeSection,
+                                     changeGrade,
+                                     changeTimeStart,
+                                     changeTimeEnd,
+                                     changeRoomShift,
+                                     registerDialogMessageClose,
+                                     registerDialog,
+    translation
+                                 }) => {
 
 
     const [openRoomName, setOpenRoomName] = useState(false);
@@ -61,7 +62,7 @@ const RoomShiftRegisterDialog = ({
     }, [openRoomName])
 
     const OutputRoom = (event, value) => {
-        value = value === null ? '': value[1]
+        value = value === null ? '' : value[1]
         changeRoomName(value)
     }
     const filterOptionsTeacher = createFilterOptions({
@@ -80,15 +81,14 @@ const RoomShiftRegisterDialog = ({
         maxWidth="lg"
         fullWidth
     >
-        <form noValidate >
-            <DialogTitle id="add-roomShift">Register Room Shift</DialogTitle>
+        <form noValidate>
+            <DialogTitle id="add-roomShift">{translation.language["label.room.shift.dialog.create.title"]}</DialogTitle>
 
             <Divider/>
             <DialogContent>
-
                 <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
-                          messageFail="Room Shift Register Not Successful"
-                          messageSuccess="Register Room Success"/>
+                          messageFail={translation.language["message.room.shift.dialog.create.fail"]}
+                          messageSuccess={translation.language["message.room.shift.dialog.create.success"]}/>
 
                 <Grid container spacing={1}>
                     <Grid item md={6} xs={12}>
@@ -102,20 +102,18 @@ const RoomShiftRegisterDialog = ({
                             InputText={roomText}
                             changeAutoComplete={OutputRoom}
                             changeText={changeRoom}
-                            noOptionText={"Search by Room Name"}
-                            label={"Room"}
+                            noOptionText={translation.language["label.room.shift.dialog.create.input.room.name"]}
+                            label={translation.language["label.global.room"]}
                             optionLabel={optionLabel}
                             optionSelected={optionSelected}
                         />
                     </Grid>
                     <Grid item md={6} xs={12}>
                         <FormControl variant="outlined" margin='dense' fullWidth>
-                            <InputLabel htmlFor="RoomShift">RoomShift</InputLabel>
+                            <InputLabel htmlFor={translation.language["label.global.room.shift"]}>{translation.language["label.global.room.shift"]}</InputLabel>
                             <Select
                                 native
-                                // value={subjectID.subjectMajor}
-                                // onChange={handleChange}
-                                label="RoomShift"
+                                label={translation.language["label.global.room.shift"]}
                                 inputProps={{
                                     name: 'age',
                                     id: 'RoomShift',
@@ -131,10 +129,9 @@ const RoomShiftRegisterDialog = ({
                     <Grid item md={6} xs={12}>
                         <TextField
                             margin="dense"
-                            id="room-grade"
                             value={dialogState.grade}
                             onChange={(event) => changeGrade(event.target.value)}
-                            label="Grade"
+                            label={translation.language['label.global.grade']}
                             type="text"
                             fullWidth
                             variant="outlined"
@@ -143,8 +140,7 @@ const RoomShiftRegisterDialog = ({
                     <Grid item md={6} xs={12}>
                         <TextField
                             margin="dense"
-                            id="room-section"
-                            label="Section"
+                            label={translation.language['label.global.section']}
                             value={dialogState.section}
                             onChange={(event) => changeSection(event.target.value)}
                             type="text"
@@ -155,8 +151,7 @@ const RoomShiftRegisterDialog = ({
                     <Grid item md={6} xs={12}>
                         <TextField
                             margin="dense"
-                            id="time-start"
-                            label="Time Start"
+                            label={translation.language['label.global.time.start']}
                             value={dialogState.timeStart}
                             onChange={(event) => changeTimeStart(event.target.value)}
                             type="time"
@@ -167,8 +162,7 @@ const RoomShiftRegisterDialog = ({
                     <Grid item md={6} xs={12}>
                         <TextField
                             margin="dense"
-                            id="time-end"
-                            label="Time End"
+                            label={translation.language['label.global.time.end']}
                             value={dialogState.timeEnd}
                             onChange={(event) => changeTimeEnd(event.target.value)}
                             type="time"
@@ -181,10 +175,10 @@ const RoomShiftRegisterDialog = ({
 
             <DialogActions>
                 <Button variant={'contained'} disableElevation onClick={registerDialog} color='primary'>
-                    Register
+                    {translation.language["label.button.save"]}
                 </Button>
                 <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
-                    Cancel
+                    {translation.language["label.button.back"]}
                 </Button>
             </DialogActions>
         </form>

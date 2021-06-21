@@ -23,20 +23,14 @@ class State {
         }
 
         this.successData = (state, action, transform) => {
-            console.log(action.data)
             const fetchData = transform(action.data)
-
             let new_Data;
             if (action.init === false) new_Data = state.data.concat(fetchData)
             else new_Data = fetchData
-
             const set = new Set(new_Data)
             const unique = [...set]
             state = updateObject(state, {loading: false})
             state = updateObject(state, {data: unique})
-
-            console.log(state)
-
             return state
         }
 

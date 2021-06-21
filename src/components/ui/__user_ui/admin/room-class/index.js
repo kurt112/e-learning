@@ -25,7 +25,8 @@ const Index = ({
                    openDialog,
                    closeDialog,
                    openDeleteDialog,
-                   closeDeleteDialog
+                   closeDeleteDialog,
+                   translation
                }) => {
 
     const classes = style()
@@ -37,22 +38,22 @@ const Index = ({
     return (
         <Fragment>
 
-            <RegisterRoom dialog={room.dialog} closeDialog={closeDialog}/>
-            <DeleteRoomClass dialog={room.deleteDialog} closeDialog={closeDeleteDialog}/>
+            <RegisterRoom translation={translation} dialog={room.dialog} closeDialog={closeDialog}/>
+            <DeleteRoomClass translation={translation} dialog={room.deleteDialog} closeDialog={closeDeleteDialog}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
-                        <Tooltip title='Add Class'>
+                        <Tooltip title={translation.language["tooltip.class.add"]}>
                             <IconButton aria-label="add-room-shift" onClick={openDialog}>
                                 <LibraryAddIcon fontSize={'large'} color={'primary'}/>
                             </IconButton>
                         </Tooltip>
-                        <Tooltip title='Delete Class'>
+                        <Tooltip title={translation.language["tooltip.class.delete"]}>
                             <IconButton aria-label="delete-room" onClick={openDeleteDialog}>
                                 <DeleteIcon fontSize={'large'} color={'secondary'}/>
                             </IconButton>
                         </Tooltip>
-                        <Tooltip title='Update Class'>
+                        <Tooltip title={translation.language["tooltip.class.update"]}>
                             <IconButton aria-label="update-room" onClick={() => alert('gagawin mo pa to')}>
                                 <UpdateIcon fontSize={'large'} color={'primary'}/>
                             </IconButton>
@@ -64,13 +65,13 @@ const Index = ({
                     <MUIDataTable
                         title={
                             <Typography variant="h6">
-                                Class List
+                                {translation.language["label.room.class.table.title"]}
                                 {room.loading &&
                                 <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}}/>}
                             </Typography>
                         }
                         data={room.data}
-                        columns={columns}
+                        columns={columns(translation)}
                         options={options(
                             pageChange,
                             searchChange,

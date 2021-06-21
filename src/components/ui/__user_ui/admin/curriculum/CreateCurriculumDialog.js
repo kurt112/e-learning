@@ -22,7 +22,8 @@ const CreateCurriculumDialog = ({
                                     changeName,
                                     changeDescription,
                                     registerDialogMessageClose,
-                                    registerDialog
+                                    registerDialog,
+                                    translation
                                 }) => {
 
     return <Dialog
@@ -33,20 +34,20 @@ const CreateCurriculumDialog = ({
         fullWidth
     >
         <form noValidate>
-            <DialogTitle id="add-curriculum">Create Curriculum</DialogTitle>
+            <DialogTitle id="add-curriculum">{translation.language["label.curriculum.dialog.create.title"]}</DialogTitle>
             <Divider/>
             <DialogContent>
 
                 <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
-                          messageFail="Room Register Not Successful"
-                          messageSuccess="Register Room Success"/>
+                          messageFail={translation.language["message.curriculum.dialog.create.fail"]}
+                          messageSuccess={translation.language["message.curriculum.dialog.create.success"]}/>
 
                 <Grid container spacing={1}>
                     <Grid item md={12} xs={12}>
                         <TextField
                             autoFocus
                             margin="dense"
-                            label="Curriculum Name"
+                            label={translation.language["label.curriculum.dialog.create.input.name"]}
                             value={dialogState.name}
                             onChange={(event) => changeName(event.target.value)}
                             type="text"
@@ -55,14 +56,13 @@ const CreateCurriculumDialog = ({
                         />
                     </Grid>
                     <Grid item md={12} xs={12}>
-                        <p style={{margin: 0}}>Enter Curriculum Description:</p>
+                        <p style={{margin: 0}}>{translation.language["label.curriculum.dialog.create.input.description"]}</p>
                         <TextareaAutosize
                             rows={12}
                             style={{width: '100%'}}
                             margin="dense"
                             value={dialogState.description}
                             onChange={(event) => changeDescription(event.target.value)}
-
                             variant="outlined"
                         />
                     </Grid>
@@ -71,10 +71,10 @@ const CreateCurriculumDialog = ({
 
             <DialogActions>
                 <Button variant={'contained'} disableElevation onClick={registerDialog} color='primary'>
-                    Register
+                    {translation.language["label.button.save"]}
                 </Button>
                 <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
-                    Cancel
+                    {translation.language["label.button.back"]}
                 </Button>
             </DialogActions>
         </form>

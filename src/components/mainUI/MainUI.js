@@ -6,8 +6,9 @@ import Navbar from '../navbar/Navbar';
 import {Switch} from 'react-router';
 import Skeleton from '../ui/utils/skeleton/TableUISkeleton'
 import Route from '../Route'
+import {connect} from "react-redux";
 
-export default function MainUi({user}) {
+const MainUi = ({user,translation}) => {
 
     const classes = style();
 
@@ -26,18 +27,18 @@ export default function MainUi({user}) {
     return (
         <div className={classes.root}>
             <CssBaseline/>
-
             <Navbar open={open} handleDrawerOpen={handleDrawerOpen}/>
             <Sidebar
+                translation={translation}
                 open={open}
                 handleDrawerClose={handleDrawerClose}
                 handleDrawerOpen={handleDrawerOpen} role={user.userRole}/>
             <main className={classes.content}>
-                <div className={classes.toolbar}/>
+                <div />
                 {
                     <Suspense fallback={<Skeleton/>}>
                         <Switch>
-                            <Route role={user.userRole} email={user.email}/>
+                            <Route translation={translation}  role={user.userRole} email={user.email}/>
                         </Switch>
                     </Suspense>
                 }
@@ -46,3 +47,13 @@ export default function MainUi({user}) {
         </div>
     );
 }
+
+const mapStateToProps = (state) => {
+    return {
+        translation: state.languageReducer,
+    }
+}
+
+
+export default connect(mapStateToProps, null)(MainUi)
+

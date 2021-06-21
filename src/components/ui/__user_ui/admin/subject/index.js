@@ -24,7 +24,8 @@ const Index = ({
                    closeDialog,
                    initData,
                    openDeleteDialog,
-                   closeDeleteDialog
+                   closeDeleteDialog,
+                   translation
                }) => {
 
     const classes = style()
@@ -38,25 +39,25 @@ const Index = ({
 
     return (
         <Fragment>
-            <RegisterSubject dialog={subject.dialog} closeDialog={closeDialog}/>
-            <DeleteSubjectDialog dialog={subject.deleteDialog} closeDialog={closeDeleteDialog}/>
+            <RegisterSubject translation={translation} dialog={subject.dialog} closeDialog={closeDialog}/>
+            <DeleteSubjectDialog translation={translation} dialog={subject.deleteDialog} closeDialog={closeDeleteDialog}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
                         <Box className={classes.tableNavbarBox}>
-                            <Tooltip title='Add Subject'>
+                            <Tooltip title={translation.language["tooltip.subject.add"]}>
                                 <IconButton aria-label="add-subject" onClick={openDialog}>
                                     <LibraryAddIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
                             </Tooltip>
 
-                            <Tooltip title='Delete Subject'>
+                            <Tooltip title={translation.language["tooltip.subject.delete"]}>
                                 <IconButton aria-label="delete-subject" onClick={openDeleteDialog}>
                                     <DeleteIcon fontSize={'large'} color={'secondary'}/>
                                 </IconButton>
                             </Tooltip>
 
-                            <Tooltip title='Update Subject'>
+                            <Tooltip title={translation.language["tooltip.subject.update"]}>
                                 <IconButton aria-label="update-room" onClick={() => alert('gagawin mo pa to')}>
                                     <UpdateIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
@@ -69,7 +70,7 @@ const Index = ({
                         <MUIDataTable
                             title={
                                 <Typography variant="h6">
-                                    Subject List
+                                    {translation.language["label.subject.table.title"]}
                                     {subject.loading && <CircularProgress size={24} style={{
                                         marginLeft: 15,
                                         position: 'relative',
@@ -78,7 +79,7 @@ const Index = ({
                                 </Typography>
                             }
                             data={subject.data}
-                            columns={columns}
+                            columns={columns(translation)}
                             options={options(
                                 pageChange,
                                 searchChange,

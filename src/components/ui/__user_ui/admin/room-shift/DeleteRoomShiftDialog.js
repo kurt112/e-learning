@@ -10,19 +10,16 @@ import {connect} from 'react-redux'
 import * as actions from '../../../../../store/action/__ActionGlobal/DialogAction'
 import {RoomShift_Delete} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
-import {
-    DeleteAssignmentFail,
-    DeleteAssignmentSuccess
-} from "../../../../../__Messages/teacher/TeacherAssignmentMessage";
 
 const DeleteRoomShiftDialog = ({
-                              dialog,
-                              state,
-                              closeDialog,
-                              dialogId,
-                              registerDialogMessageClose,
-                              dialogRegister
-                          }) => {
+                                   dialog,
+                                   state,
+                                   closeDialog,
+                                   dialogId,
+                                   registerDialogMessageClose,
+                                   dialogRegister,
+                                   translation
+                               }) => {
 
     const RegisterEnter = (event) => {
         if (event.key === "Enter" && state.id.length > 0) dialogRegister()
@@ -35,18 +32,18 @@ const DeleteRoomShiftDialog = ({
         fullWidth
         maxWidth={"md"}
     >
-        <DialogTitle id="delete-room-shift">Delete Room Shift</DialogTitle>
+        <DialogTitle id="delete-room-shift">{translation.language['label.room.shift.dialog.delete.title']}</DialogTitle>
         <Divider/>
         <DialogContent>
             <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
-                      messageFail={DeleteAssignmentFail}
-                      messageSuccess={DeleteAssignmentSuccess}/>
+                      messageFail={translation.language['message.room.shift.dialog.delete.fail']}
+                      messageSuccess={translation.language['message.room.shift.dialog.delete.success']}/>
             <TextField
                 autoFocus
                 value={state.id}
                 margin="dense"
                 variant={'outlined'}
-                label="Enter Assignment Code"
+                label={translation.language['label.room.shift.dialog.delete.input']}
                 type="text"
                 fullWidth
                 onChange={(event) => dialogId(event.target.value)}
@@ -57,10 +54,10 @@ const DeleteRoomShiftDialog = ({
         </DialogContent>
         <DialogActions>
             <Button variant={'contained'} disableElevation onClick={dialogRegister} color='secondary'>
-                Delete
+                {translation.language["label.button.delete"]}
             </Button>
             <Button variant={'contained'} disableElevation onClick={closeDialog} color='primary'>
-                Cancel
+                {translation.language["label.button.back"]}
             </Button>
         </DialogActions>
     </Dialog>

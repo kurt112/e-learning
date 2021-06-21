@@ -3,7 +3,6 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText,
     DialogTitle, Divider,
     Grid,
     TextField
@@ -23,7 +22,8 @@ const RegisterRoomDialog = ({
                                 changeTimeStart,
                                 changeTimeEnd,
                                 registerDialogMessageClose,
-                                registerDialog
+                                registerDialog,
+    translation
                             }) => {
 
     return <Dialog
@@ -34,20 +34,19 @@ const RegisterRoomDialog = ({
         fullWidth
     >
         <form noValidate >
-            <DialogTitle id="add-room">Register Room </DialogTitle>
+            <DialogTitle id="add-room">{translation.language["label.room.dialog.add.room.title"]}</DialogTitle>
             <Divider/>
             <DialogContent>
 
                 <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
-                          messageFail="Room Register Not Successful"
-                          messageSuccess="Register Room Success"/>
+                          messageFail={translation.language["message.room.dialog.create.fail"]}
+                          messageSuccess={translation.language["message.room.dialog.create.success"]}/>
 
                 <Grid container spacing={1}>
                     <Grid item md={12} xs={12}>
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="room-name"
                             label="Room Name"
                             value={dialogState.roomName}
                             onChange={(event) => changeRoomName(event.target.value)}
@@ -59,8 +58,7 @@ const RegisterRoomDialog = ({
                     <Grid item md={6} xs={12}>
                         <TextField
                             margin="dense"
-                            id="time-start"
-                            label="Time Start"
+                            label={translation.language["label.global.time.start"]}
                             value={dialogState.timeStart}
                             onChange={(event) => changeTimeStart(event.target.value)}
                             type="time"
@@ -71,8 +69,7 @@ const RegisterRoomDialog = ({
                     <Grid item md={6} xs={12}>
                         <TextField
                             margin="dense"
-                            id="time-end"
-                            label="Time End"
+                            label={translation.language["label.global.time.end"]}
                             value={dialogState.timeEnd}
                             onChange={(event) => changeTimeEnd(event.target.value)}
                             type="time"
@@ -86,10 +83,10 @@ const RegisterRoomDialog = ({
 
             <DialogActions>
                 <Button variant={'contained'} disableElevation onClick={registerDialog} color='primary'>
-                    Register
+                    {translation.language["label.button.save"]}
                 </Button>
                 <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
-                    Cancel
+                    {translation.language["label.button.back"]}
                 </Button>
             </DialogActions>
         </form>

@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function Sidebar({open, handleDrawerClose, handleDrawerOpen, role}) {
+const Sidebar = ({open, handleDrawerClose, handleDrawerOpen, role,translation}) => {
 
     const classes = useStyles();
 
@@ -40,13 +40,15 @@ export default function Sidebar({open, handleDrawerClose, handleDrawerOpen, role
                 <Divider/>
                 <List>
                     {
-                        role === Teacher ? <TeacherItems/> :
-                            role === Student ? <StudentItems/> :
-                                role === Admin ? <AdminItems/> : null
+                        role === Teacher ? <TeacherItems translation={translation}/> :
+                            role === Student ? <StudentItems translation={translation}/> :
+                                role === Admin ? <AdminItems translation={translation}/> : null
                     }
                 </List>
             </div>
         </SwipeableDrawer>
     )
 }
+
+export default Sidebar
 

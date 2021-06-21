@@ -10,16 +10,16 @@ import {TeacherInsertStudent as insertStudent, TeacherInsertSubject as insertSub
 
 
 // import {get} from "../../store/middleware/utils/GraphQlQuery/TeacherQuery";
-const TeacherSubjects = lazy(() => import(`../ui/__user_ui/teacher`).then(module => ({default: module.TeacherSubject})))
-const TeacherStudent = lazy(() => import(`../ui/__user_ui/teacher`).then(module => ({default: module.TeacherStudents})))
-const TeacherLectures = lazy(() => import(`../ui/__user_ui/teacher`).then(module => ({default: module.TeacherLecture})))
-const TeacherResources = lazy(() => import(`../ui/__user_ui/teacher`).then(module => ({default: module.TeacherResources})))
-const TeacherAssignments = lazy(() => import(`../ui/__user_ui/teacher`).then(module => ({default: module.TeacherAssignments})))
-const TeacherExams = lazy(() => import(`../ui/__user_ui/teacher`).then(module => ({default: module.TeacherExams})))
-const TeacherQuizzes = lazy(() => import(`../ui/__user_ui/teacher`).then(module => ({default: module.TeacherQuizzes})))
+const TeacherSubjects = lazy(() => import('../ui/__user_ui/teacher').then(module => ({default: module.TeacherSubject})))
+const TeacherStudent = lazy(() => import('../ui/__user_ui/teacher').then(module => ({default: module.TeacherStudents})))
+const TeacherLectures = lazy(() => import('../ui/__user_ui/teacher').then(module => ({default: module.TeacherLecture})))
+const TeacherResources = lazy(() => import('../ui/__user_ui/teacher').then(module => ({default: module.TeacherResources})))
+const TeacherAssignments = lazy(() => import('../ui/__user_ui/teacher').then(module => ({default: module.TeacherAssignments})))
+const TeacherExams = lazy(() => import('../ui/__user_ui/teacher').then(module => ({default: module.TeacherExams})))
+const TeacherQuizzes = lazy(() => import('../ui/__user_ui/teacher').then(module => ({default: module.TeacherQuizzes})))
 const Classes = lazy(() => import(`../ui/__user_ui/roomClasses/ClassList/ClassesList`))
 
-const TeacherRoute = ({email}) => {
+const TeacherRoute = ({email,translation}) => {
 
     const [teacher, setTeacher] = useState(null)
     const [students, setStudents] = useState([])
@@ -80,14 +80,14 @@ const TeacherRoute = ({email}) => {
 
     return (
         <Fragment>
-            <Route path='/teacher/subjects' exact render={() => <TeacherSubjects subjects={subjects}/>}/>
-            <Route path='/teacher/students' exact render={() => <TeacherStudent students={students}/>}/>
-            <Route path='/teacher/lectures' exact render={() => <TeacherLectures/>}/>
-            <Route path='/teacher/classes' exact render={() => <Classes currentClass={currentClass} archiveClass={doneClass}/>}/>
-            <Route path='/teacher/resources' exact render={() => <TeacherResources/>}/>
-            <Route path='/teacher/assignments' exact render={() => <TeacherAssignments/>}/>
-            <Route path='/teacher/exams' exact render={() => <TeacherExams/>}/>
-            <Route path='/teacher/quizzes' exact render={() => <TeacherQuizzes/>}/>
+            <Route path={translation.language["route.teacher.subjects"]} exact render={() => <TeacherSubjects subjects={subjects}/>}/>
+            <Route path={translation.language["route.teacher.students"]} exact render={() => <TeacherStudent students={students}/>}/>
+            <Route path={translation.language["route.teacher.lectures"]} exact render={() => <TeacherLectures/>}/>
+            <Route path={translation.language["route.teacher.classes"]} exact render={() => <Classes currentClass={currentClass} archiveClass={doneClass}/>}/>
+            <Route path={translation.language["route.teacher.resources"]} exact render={() => <TeacherResources/>}/>
+            <Route path={translation.language["route.teacher.assignments"]} exact render={() => <TeacherAssignments/>}/>
+            <Route path={translation.language["route.teacher.exams"]} exact render={() => <TeacherExams/>}/>
+            <Route path={translation.language["route.teacher.quizzes"]} exact render={() => <TeacherQuizzes/>}/>
 
             <Redirect to={'teacher/classes'}/>
         </Fragment>

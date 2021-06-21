@@ -7,6 +7,8 @@ import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import {Provider} from 'react-redux';
 import createSagaMiddleware from 'redux-saga'
 
+import languageReducer from './store/reducers/__StateGlobal/Language'
+
 // Teacher
 import {
     DeleteAssignmentDialog, DeleteResource,
@@ -165,6 +167,9 @@ import {
 } from './store/middleware/register'
 
 const reducers = combineReducers({
+
+    // config language
+    languageReducer,
 
     // Teacher State
     TeacherAssignment,

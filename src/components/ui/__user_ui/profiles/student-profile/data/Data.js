@@ -25,25 +25,25 @@ export default function Data({student,assignedRoom}) {
                 </Box>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainerTitle}>
-                        <p>Grade And Section </p>
+                        <p>Grade And Section: </p>
                     </Box>
-                    <p>{`${assignedRoom.grade} - ${assignedRoom.section}`}</p>
+                    {/*<p>{`${assignedRoom.grade} - ${assignedRoom.section}`}</p>*/}
                 </Box>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainerTitle}>
-                        <p>Account Registered </p>
+                        <p>Account Registered: </p>
                     </Box>
                     <p>{convertDateTime(student.user.createdAt)}</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainerTitle}>
-                        <p>Email </p>
+                        <p>Email: </p>
                     </Box>
                     <p>{student.user.email}</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainerTitle}>
-                        <p>Birthdate </p>
+                        <p>Birthdate: </p>
                     </Box>
                     <p>{student.user.birthdate}</p>
                 </Box>

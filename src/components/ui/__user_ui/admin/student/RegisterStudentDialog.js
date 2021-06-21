@@ -17,7 +17,8 @@ const RegisterStudentDialog = ({
                                    closeDialog,
                                    dialogId,
                                    registerDialogMessageClose,
-                                   dialogRegister
+                                   dialogRegister,
+                                   translation
                                }) => {
 
     const RegisterEnter = (event) => {
@@ -31,17 +32,16 @@ const RegisterStudentDialog = ({
         maxWidth="md"
         fullWidth
     >
-        <DialogTitle id="add-student">Register Student</DialogTitle>
+        <DialogTitle id="add-student">{translation.language["label.student.dialog.register.title"]}</DialogTitle>
         <Divider/>
         <DialogContent>
-           <Response dialogState={student} registerDialogMessageClose={registerDialogMessageClose}
-                     messageFail="Student Register Not Successful"
-                     messageSuccess="Student Register Success"/>
+            <Response dialogState={student} registerDialogMessageClose={registerDialogMessageClose}
+                      messageFail={translation.language["message.student.dialog.register.fail"]}
+                      messageSuccess={translation.language["message.student.dialog.register.success"]}/>
             <TextField
                 autoFocus
                 margin="dense"
-                id="lrn"
-                label="Enter Lrn"
+                label={translation.language["label.student.dialog.input.lrn"]}
                 type="text"
                 fullWidth
                 onChange={(event) => dialogId(event)}
@@ -53,10 +53,10 @@ const RegisterStudentDialog = ({
         </DialogContent>
         <DialogActions>
             <Button variant={'contained'} disableElevation onClick={dialogRegister} color='primary'>
-                Register
+                {translation.language["label.button.save"]}
             </Button>
             <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
-                Cancel
+                {translation.language["label.button.back"]}
             </Button>
         </DialogActions>
     </Dialog>

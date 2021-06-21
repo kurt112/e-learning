@@ -10,18 +10,14 @@ import {connect} from 'react-redux'
 import * as actions from '../../../../../store/action/__ActionGlobal/DialogAction'
 import {Subject_Delete} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
-import {
-    DeleteAssignmentFail,
-    DeleteAssignmentSuccess
-} from "../../../../../__Messages/teacher/TeacherAssignmentMessage";
-
 const DeleteRoomShiftDialog = ({
                                    dialog,
                                    state,
                                    closeDialog,
                                    dialogId,
                                    registerDialogMessageClose,
-                                   dialogRegister
+                                   dialogRegister,
+                                   translation
                                }) => {
 
     const RegisterEnter = (event) => {
@@ -35,12 +31,12 @@ const DeleteRoomShiftDialog = ({
         fullWidth
         maxWidth={"md"}
     >
-        <DialogTitle id="delete-subject">Delete Subject</DialogTitle>
+        <DialogTitle id="delete-subject">{translation.language["label.subject.dialog.delete.title"]}</DialogTitle>
         <Divider/>
         <DialogContent>
             <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
-                      messageFail={DeleteAssignmentFail}
-                      messageSuccess={DeleteAssignmentSuccess}/>
+                      messageFail={translation.language["message.subject.dialog.delete.fail"]}
+                      messageSuccess={translation.language["message.subject.dialog.delete.success"]}/>
             <TextField
                 autoFocus
                 value={state.id}
@@ -57,10 +53,10 @@ const DeleteRoomShiftDialog = ({
         </DialogContent>
         <DialogActions>
             <Button variant={'contained'} disableElevation onClick={dialogRegister} color='secondary'>
-                Delete
+                {translation.language["label.button.delete"]}
             </Button>
             <Button variant={'contained'} disableElevation onClick={closeDialog} color='primary'>
-                Cancel
+                {translation.language["label.button.back"]}
             </Button>
         </DialogActions>
     </Dialog>

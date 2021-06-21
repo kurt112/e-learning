@@ -20,7 +20,7 @@ import {
 import {Fragment, useState} from "react";
 import RoomShiftAddStudentTransfer from "./RoomShiftAddStudentTransferDialog";
 
-const RoomShiftAddStudentDialog = ({closeDialog, dialog}) => {
+const RoomShiftAddStudentDialog = ({closeDialog, dialog,translation}) => {
 
     const [openRoomShift, setOpenRoomShift] = useState(false)
     const [roomShiftOptions, setRoomShiftOptions] = useState([])
@@ -44,7 +44,7 @@ const RoomShiftAddStudentDialog = ({closeDialog, dialog}) => {
 
     return <Fragment>
         {
-            id.length === 0? null:  <RoomShiftAddStudentTransfer shiftID={id} open={transfer} closeDialog={closeTransfer}/>
+            id.length === 0? null:  <RoomShiftAddStudentTransfer shiftID={id} translation={translation} open={transfer} closeDialog={closeTransfer}/>
         }
         <Dialog
             open={dialog}
@@ -54,7 +54,7 @@ const RoomShiftAddStudentDialog = ({closeDialog, dialog}) => {
             fullWidth
         >
             <form noValidate>
-                <DialogTitle id="add-student">Enter Grade Section</DialogTitle>
+                <DialogTitle id="add-student">{translation.language["label.room.shift.dialog.find.title"]}</DialogTitle>
                 <Divider/>
                 <br/>
                 <DialogContent>
@@ -71,8 +71,8 @@ const RoomShiftAddStudentDialog = ({closeDialog, dialog}) => {
                                 InputText={roomShiftText}
                                 changeAutoComplete={OutputRoomShift}
                                 changeText={(value) => changeText(value, setRoomShiftText, setRoomShiftLoading, setRoomShiftOptions, autoCompleteRoomShift)}
-                                noOptionText={"Search by grade fallowed by section "}
-                                label={"RoomShift"}
+                                noOptionText={translation.language["label.room.shift.dialog.find.input.search"]}
+                                label={translation.language["label.global.room.shift"]}
                                 optionLabel={twoOptionLabel}
                                 optionSelected={twoOptionSelected}
 
@@ -85,10 +85,10 @@ const RoomShiftAddStudentDialog = ({closeDialog, dialog}) => {
 
                 <DialogActions>
                     <Button variant={'contained'} disableElevation onClick={id.length === 0 ?null: openTransfer} color='primary'>
-                        Continue
+                        {translation.language["label.global.find"]}
                     </Button>
                     <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
-                        Cancel
+                        {translation.language["label.button.back"]}
                     </Button>
                 </DialogActions>
             </form>

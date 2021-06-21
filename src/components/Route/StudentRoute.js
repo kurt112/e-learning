@@ -8,9 +8,9 @@ import {
 } from "../ui/utils/tableColumn";
 const StudentSubject = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({default: module.StudentSubjects})))
 const StudentTeacher = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({default: module.StudentTeachers})))
-const Classes = lazy(() => import('../ui/__user_ui/roomClasses/ClassList/ClassesList'))
+const Classes = lazy(() => import(`../ui/__user_ui/roomClasses/ClassList/ClassesList`))
 
-const StudentRoute = ({email}) => {
+const StudentRoute = ({email,translation}) => {
 
     const [student, setStudent] = useState(null);
     const [teachers,setTeacher] = useState([])
@@ -58,10 +58,10 @@ const StudentRoute = ({email}) => {
 
     return student === null ? null :
         <Fragment>
-            <Route path='/student/subjects' exact render={() => <StudentSubject subjects={subjects}/>}/>
-            <Route path='/student/teachers' exact render={() => <StudentTeacher teachers={teachers}/>}/>
-            <Route path='/student/classes' exact render={() => <Classes currentClass={currentClass} archiveClass={doneClass}/>}/>
-            <Redirect to='/student/classes'/>
+            <Route path={translation.language["route.student.subjects"]} exact render={() => <StudentSubject subjects={subjects}/>}/>
+            <Route path={translation.language["route.student.teachers"]} exact render={() => <StudentTeacher teachers={teachers}/>}/>
+            <Route path={translation.language["route.student.classes"]} exact render={() => <Classes currentClass={currentClass} archiveClass={doneClass}/>}/>
+            <Redirect to={translation.language["route.student.classes"]}/>
         </Fragment>
 }
 
