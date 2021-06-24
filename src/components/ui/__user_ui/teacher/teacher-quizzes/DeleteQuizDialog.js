@@ -8,18 +8,18 @@ import {
 } from "@material-ui/core"
 import {connect} from 'react-redux'
 import * as actions from '../../../../../store/action/__ActionGlobal/DialogAction'
-import {Teacher_Quiz_Delete} from "../../../../../store/utils/Specify";
-import Response from "../../../utils/Response";
-import {DeleteAssignmentFail, DeleteAssignmentSuccess} from "../../../../../__Messages/teacher/TeacherAssignmentMessage";
+import {Teacher_Quiz_Delete} from "../../../../../store/utils/Specify"
+import Response from "../../../utils/Response"
 
 const DeleteQuizDialog = ({
-                               dialog,
-                               state,
-                               closeDialog,
-                               dialogId,
-                               registerDialogMessageClose,
-                               dialogRegister
-                           }) => {
+                              dialog,
+                              state,
+                              closeDialog,
+                              dialogId,
+                              registerDialogMessageClose,
+                              dialogRegister,
+                              translation
+                          }) => {
 
     const RegisterEnter = (event) => {
         if (event.key === "Enter" && state.id.length > 0) dialogRegister()
@@ -32,18 +32,18 @@ const DeleteQuizDialog = ({
         fullWidth
         maxWidth={"md"}
     >
-        <DialogTitle id="delete-quiz">Delete Quiz</DialogTitle>
+        <DialogTitle id="delete-quiz">{translation.language["label.teacher.quiz.dialog.input.delete.title"]}</DialogTitle>
         <Divider/>
         <DialogContent>
-            <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
-                      messageFail={DeleteAssignmentFail}
-                      messageSuccess={DeleteAssignmentSuccess}/>
+            <Response dialogState={state} registerDDeleteAssignmentSuccessialogMessageClose={registerDialogMessageClose}
+                      messageFail={translation.language["message.teacher.dialog.quiz.delete.fail"]}
+                      messageSuccess={translation.language["message.teacher.dialog.quiz.delete.success"]}/>
             <TextField
                 autoFocus
                 value={state.id}
                 margin="dense"
                 variant={'outlined'}
-                label="Enter Quiz Code"
+                label={translation.language["label.teacher.quiz.dialog.input"]}
                 type="text"
                 fullWidth
                 onChange={(event) => dialogId(event.target.value)}
@@ -54,10 +54,10 @@ const DeleteQuizDialog = ({
         </DialogContent>
         <DialogActions>
             <Button variant={'contained'} disableElevation onClick={dialogRegister} color='secondary'>
-                Delete
+                {translation.language["label.button.delete"]}
             </Button>
             <Button variant={'contained'} disableElevation onClick={closeDialog} color='primary'>
-                Cancel
+                {translation.language["label.button.back"]}
             </Button>
         </DialogActions>
     </Dialog>

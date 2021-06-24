@@ -1,7 +1,7 @@
 import { Box, Container, Typography } from "@material-ui/core";
 import { Fragment } from "react";
 import ProfileStyle from '../../ProfileStyle'
-export default function Data() {
+export default function Data({translation}) {
     const style = ProfileStyle()
     return (
 
@@ -10,25 +10,25 @@ export default function Data() {
             <Container>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainertitle}>
-                        <p>Subject Code: </p>
+                        <p>{translation.language["label.global.subject.code"]}: </p>
                     </Box>
                     <p>Kurt Lupin</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainertitle}>
-                        <p>Subject Name: </p>
+                        <p>{translation.language["label.global.subject.name"]}: </p>
                     </Box>
                     <p>Orioque</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainertitle}>
-                        <p>Major </p>
+                        <p>{translation.language["label.global.major"]}</p>
                     </Box>
                     <p>December 20, 1999</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainertitle}>
-                        <p>Status </p>
+                        <p>{translation.language["label.global.status"]}</p>
                     </Box>
                     <p>May 2, 2020</p>
                 </Box>

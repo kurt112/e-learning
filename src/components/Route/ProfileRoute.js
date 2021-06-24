@@ -13,12 +13,12 @@ const StudentProfile = lazy(() => import('../ui/__user_ui/profiles/Profile').the
 const ProfileRoute = ({translation}) => {
     return (
         <Fragment>
-            <Route path={`${translation.language["route.profile.room"]}:id`} exact render={() => <RoomProfile />}/>
-            <Route path={`${translation.language["route.profile.subject"]}:id`} exact render={() => <SubjectProfile />}/>
-            <Route path={`${translation.language["route.profile.teacher"]}:id`} exact render={() => <TeacherProfile/>}/>
-            <Route path={`${translation.language["route.profile.student"]}:id`} exact render={() => <StudentProfile/>}/>
-            <Route path={`${translation.language["route.profile.room.shift"]}:id`} exact render ={() => <RoomShiftProfile/>}/>
-            <Route path={`${translation.language["route.profile.room.shift.class"]}:id`} exact render={() => <RoomShiftClassProfile/>}/>
+            <Route path={`${translation.language["route.profile.room"]}:id`} exact render={() => <RoomProfile translation={translation}/>}/>
+            <Route path={`${translation.language["route.profile.subject"]}:id`} exact render={() => <SubjectProfile translation={translation}/>}/>
+            <Route path={`${translation.language["route.profile.teacher"]}:id`} exact render={() => <TeacherProfile translation={translation}/>}/>
+            <Route path={`${translation.language["route.profile.student"]}:id`} exact render={() => <StudentProfile translation={translation}/>}/>
+            <Route path={`${translation.language["route.profile.room.shift"]}:id`} exact render ={() => <RoomShiftProfile translation={translation}/>}/>
+            <Route path={`${translation.language["route.profile.room.shift.class"]}:id`} exact render={() => <RoomShiftClassProfile translation={translation}/>}/>
 
             {/*<Route path='/classes/profile/:id' exact render={() => <Classes {...props} />}/>*/}
         </Fragment>

@@ -24,7 +24,8 @@ const TeacherExams = ({
                           createExamDialogOpen,
                           createExamDialogClose,
                           deleteExamDialogOpen,
-                          deleteExamDialogClose
+                          deleteExamDialogClose,
+                          translation
                       }) => {
     useEffect(() => {
         if (state.data.length === 0) initData()
@@ -34,40 +35,35 @@ const TeacherExams = ({
     const classes = style()
     return (
         <Fragment>
-            <CreateExamsDialog dialog={state.createDialog} closeDialog={createExamDialogClose}/>
-            <DeleteExamsDialog dialog={state.deleteDialog} closeDialog={deleteExamDialogClose}/>
+            <CreateExamsDialog translation={translation} dialog={state.createDialog} closeDialog={createExamDialogClose}/>
+            <DeleteExamsDialog translation={translation} dialog={state.deleteDialog} closeDialog={deleteExamDialogClose}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
                         <Box className={classes.tableNavbarBox}>
-
-                            <Tooltip title="Create Exams">
+                            <Tooltip title={translation.language["tooltip.teacher.exam.create.exam"]}>
                                 <IconButton aria-label="Add" onClick={createExamDialogOpen}>
                                     <CloudUploadIcon color='primary' fontSize={"large"}/>
                                 </IconButton>
                             </Tooltip>
-
-                            <Tooltip title="Delete Exams">
+                            <Tooltip title={translation.language["tooltip.teacher.exam.delete.exam"]}>
                                 <IconButton aria-label="delete" onClick={deleteExamDialogOpen}>
                                     <DeleteForeverIcon color='secondary' fontSize={"large"}/>
                                 </IconButton>
                             </Tooltip>
-
-
                         </Box>
-
                     </Toolbar>
                 </Grid>
-
                 <Grid item md={12} component={Paper} className={classes.tableContainerWrapper}>
                     <MUIDataTable
                         title={
                             <Typography variant="h6">
-                                Exam List
-                                {state.loading && <CircularProgress size={24} style={{ marginLeft: 15, position: 'relative', top: 4 }} />}
+                                {translation.language["label.teacher.exam.table.title"]}
+                                {state.loading &&
+                                <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}}/>}
                             </Typography>
                         }
-                        columns={columns}
+                        columns={columns(translation)}
                         data={state.data}
                         options={options(
                             pageChange,

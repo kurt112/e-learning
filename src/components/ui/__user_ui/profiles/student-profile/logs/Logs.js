@@ -1,20 +1,18 @@
-import { makeStyles } from "@material-ui/core";
 import MUIDataTable from "mui-datatables";
 import { Fragment } from "react";
-import { TeacherInsertLogs as insert, TeacherLogs as columns } from '../../../../utils/tableColumn'
+import {TeacherLogs as columns } from '../../../../utils/tableColumn'
 import style from '../StudentProfileStyle'
 
-export default function Logs() {
+export default function Logs({translation}) {
     const classes = style()
     return (
         <Fragment>
             <MUIDataTable
-                title={"Logs"}
-                // data={data}
+                title={translation.language["label.global.logs"]}
                 options={{
                     selectableRows: false // <===== will turn off checkboxes in rows
                 }}
-                columns={columns}
+                columns={columns(translation)}
                 className={classes.table}
             />
         </Fragment>

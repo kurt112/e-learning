@@ -6,12 +6,12 @@ import Box from "@material-ui/core/Box";
 
 import RoomShiftData from "./RoomShiftData";
 
-const RoomShift = ({roomShifts}) => {
+const RoomShift = ({roomShifts,translation}) => {
     const style = ProfileStyle()
     return (
         <Fragment>
             <Container>
-                <h1>Room Shifts</h1>
+                <h1>{translation.language["label.global.room.shift"]}</h1>
                 <hr className={style.classPeopleDivider}/>
                 <Box className={style.peopleListContainer}>
                     {

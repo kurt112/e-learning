@@ -437,7 +437,7 @@ export const AdminCurriculumTable = (translation) => [
             sort: false,
             customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to={`${translation.language["route.profile.room"]}:${value}`}
+                    <Link to={`${translation.language["route.profile.room"]}${value}`}
                           style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
                             {translation.language["label.global.visit.profile"]}

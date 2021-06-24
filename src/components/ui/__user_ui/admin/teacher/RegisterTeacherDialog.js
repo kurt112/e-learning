@@ -22,7 +22,7 @@ const TeacherRegister = ({
                              translation
                          }) => {
 
-    const RegisterEnter = (event) => {
+    const   RegisterEnter = (event) => {
 
         if (event.key === "Enter" && dialogState.id.length > 0) dialogRegister()
     }

@@ -24,25 +24,25 @@ import {
     twoOptionSelected,
     changeTextWithRole
 } from '../../../utils/autoComplete/autoCompleteAction'
-import {AddedAssignmentFail, AddedAssignmentSuccess} from "../../../../../__Messages/teacher/TeacherAssignmentMessage"
 
 const CreateExamsDialog = ({
 
-                                           dialog,
-                                           closeDialog,
-                                           create,
-                                           registerDialogMessageClose,
-                                           email,
-                                           state,
-                                           changeResourceCode,
-                                           changeClassCode,
-                                           changeDeadLine,
-                                           changeSem,
-                                           changeQuarter,
-                                           changeLowGrade,
-                                           changeHighGrade,
-                                           changeDescription
-                                       }) => {
+                               dialog,
+                               closeDialog,
+                               create,
+                               registerDialogMessageClose,
+                               email,
+                               state,
+                               changeResourceCode,
+                               changeClassCode,
+                               changeDeadLine,
+                               changeSem,
+                               changeQuarter,
+                               changeLowGrade,
+                               changeHighGrade,
+                               changeDescription,
+                               translation
+                           }) => {
 
 
     // for assignment resource autoComplete
@@ -51,7 +51,7 @@ const CreateExamsDialog = ({
     const [resourceLoading, setResourceLoading] = useState(false)
     const [resourceText, setResourceText] = useState('')
     const OutputResources = (event, value) => {
-        changeResourceCode(value  === null? '': value[1].toString())
+        changeResourceCode(value === null ? '' : value[1].toString())
     }
 
 
@@ -61,7 +61,7 @@ const CreateExamsDialog = ({
     const [classLoading, setClassLoading] = useState(false)
     const [classText, setClassText] = useState('')
     const OutputClass = (event, value) => {
-        changeClassCode(value  === null? '': value[2].toString())
+        changeClassCode(value === null ? '' : value[2].toString())
     }
 
 
@@ -74,12 +74,12 @@ const CreateExamsDialog = ({
     >
         <form noValidate>
             <DialogTitle id="create-exams"
-            >Create Exams</DialogTitle>
+            >{translation.language["label.teacher.exam.dialog.create"]}</DialogTitle>
             <Divider/>
             <DialogContent>
                 <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
-                          messageFail={AddedAssignmentFail}
-                          messageSuccess={AddedAssignmentSuccess}/>
+                          messageFail={translation.language["message.teacher.dialog.exam.delete.fail"]}
+                          messageSuccess={translation.language["message.teacher.dialog.exam.create.success"]}/>
 
                 <Grid container spacing={1}>
                     <Grid item md={4} xs={12}>
@@ -93,8 +93,8 @@ const CreateExamsDialog = ({
                             InputText={resourceText}
                             changeAutoComplete={OutputResources}
                             changeText={(value) => changeTextWithRole(value, setResourceText, setResourceLoading, setResourceOptions, autoCompleteGetTeacherExams, email)}
-                            noOptionText={"Search By Class"}
-                            label={"Exams Resource"}
+                            noOptionText={translation.language["label.teacher.exam.dialog.resource.search"]}
+                            label={translation.language["label.teacher.exam.dialog.resource"]}
                             optionLabel={twoOptionLabel}
                             optionSelected={twoOptionSelected}
                         />
@@ -110,8 +110,8 @@ const CreateExamsDialog = ({
                             InputText={classText}
                             changeAutoComplete={OutputClass}
                             changeText={(value) => changeTextWithRole(value, setClassText, setClassLoading, setClassOptions, autoCompleteGetTeacherClass, email)}
-                            noOptionText={"No Class Found"}
-                            label={"Your Class"}
+                            noOptionText={translation.language["label.global.search.class"]}
+                            label={translation.language["label.global.your.class"]}
                             optionLabel={twoOptionLabel}
                             optionSelected={twoOptionSelected}
                         />
@@ -120,7 +120,7 @@ const CreateExamsDialog = ({
                     <Grid item md={4} xs={6}>
                         <TextField
                             margin="dense"
-                            label="Deadline"
+                            label={translation.language["label.global.date.deadline"]}
                             type="datetime-local"
                             fullWidth
                             variant="outlined"
@@ -132,10 +132,10 @@ const CreateExamsDialog = ({
 
                     <Grid item md={3} xs={12}>
                         <FormControl variant="outlined" margin='dense' fullWidth>
-                            <InputLabel htmlFor="Semester">Semester</InputLabel>
+                            <InputLabel htmlFor={translation.language["label.global.semester"]}>{translation.language["label.global.semester"]}</InputLabel>
                             <Select
                                 native
-                                label="Semester"
+                                label={translation.language["label.global.semester"]}
                                 inputProps={{
                                     name: 'type',
                                     id: 'type',
@@ -153,10 +153,10 @@ const CreateExamsDialog = ({
 
                     <Grid item md={3} xs={12}>
                         <FormControl variant="outlined" margin='dense' fullWidth>
-                            <InputLabel htmlFor="Quarter">Quarter</InputLabel>
+                            <InputLabel htmlFor={translation.language["label.global.quarter"]}>{translation.language["label.global.quarter"]}</InputLabel>
                             <Select
                                 native
-                                label="Quarter"
+                                label={translation.language["label.global.quarter"]}
                                 inputProps={{
                                     name: 'type',
                                     id: 'type',
@@ -177,7 +177,7 @@ const CreateExamsDialog = ({
                     <Grid item md={3} xs={4}>
                         <TextField
                             margin="dense"
-                            label="Low Grade"
+                            label={translation.language["label.global.low.grade"]}
                             type="number"
                             fullWidth
                             variant="outlined"
@@ -189,7 +189,7 @@ const CreateExamsDialog = ({
                     <Grid item md={3} xs={4}>
                         <TextField
                             margin="dense"
-                            label="High Grade"
+                            label={translation.language["label.global.high.grade"]}
                             type="number"
                             fullWidth
                             variant="outlined"
@@ -202,7 +202,7 @@ const CreateExamsDialog = ({
                         <InputLabel htmlFor="ActivityDescription">Exam Description(Optional)</InputLabel>
                         <TextareaAutosize
 
-                            label="Description"
+                            label={translation.language["label.global.description"]}
                             rowsMin={10}
                             aria-label="maximum height"
                             style={{width: '100%', marginBottom: '10px', marginTop: '10px'}}
@@ -234,14 +234,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changeResourceCode: (data) => dispatch(actions.changeResourceCode(data,Teacher_Exams_Create)),
-        changeClassCode: (data) => dispatch(actions.changeClassCode(data,Teacher_Exams_Create)),
-        changeDeadLine: (data) => dispatch(actions.changeDeadLine(data,Teacher_Exams_Create)),
-        changeSem: (data) => dispatch(actions.changeSemester(data,Teacher_Exams_Create)),
-        changeQuarter: (data) => dispatch(actions.changeQuarter(data,Teacher_Exams_Create)),
-        changeLowGrade: (data) => dispatch(actions.changeLowGrade(data,Teacher_Exams_Create)),
-        changeHighGrade: (data) => dispatch(actions.changeHighGrade(data,Teacher_Exams_Create)),
-        changeDescription: (data) => dispatch(actions.changeDescription(data,Teacher_Exams_Create)),
+        changeResourceCode: (data) => dispatch(actions.changeResourceCode(data, Teacher_Exams_Create)),
+        changeClassCode: (data) => dispatch(actions.changeClassCode(data, Teacher_Exams_Create)),
+        changeDeadLine: (data) => dispatch(actions.changeDeadLine(data, Teacher_Exams_Create)),
+        changeSem: (data) => dispatch(actions.changeSemester(data, Teacher_Exams_Create)),
+        changeQuarter: (data) => dispatch(actions.changeQuarter(data, Teacher_Exams_Create)),
+        changeLowGrade: (data) => dispatch(actions.changeLowGrade(data, Teacher_Exams_Create)),
+        changeHighGrade: (data) => dispatch(actions.changeHighGrade(data, Teacher_Exams_Create)),
+        changeDescription: (data) => dispatch(actions.changeDescription(data, Teacher_Exams_Create)),
 
         registerDialogMessageClose: () => dispatch(dialogAction.registerDialogMessageClose(Teacher_Exams_Create)),
         create: () => dispatch(dialogAction.dialogRegister(Teacher_Exams_Create))

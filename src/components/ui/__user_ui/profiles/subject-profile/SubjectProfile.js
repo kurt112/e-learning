@@ -1,13 +1,12 @@
 import { Avatar, Button, Container, Divider, Grid, Hidden, Paper, Typography } from "@material-ui/core"
 import ProfileStyle from '../ProfileStyle'
 import Picture from '../../../../../assets/asd.jpg'
-import CreateRoundedIcon from '@material-ui/icons/CreateRounded'
 import { useState } from "react"
 import Data from './data/Data'
 import { withRouter } from 'react-router-dom'
-const  SubjectProfile= ()=>{
+const  SubjectProfile= ({translation})=>{
     const style = ProfileStyle()
-    const [component, setComponent] = useState(<Data />)
+    const [component, setComponent] = useState(<Data translation={translation}/>)
 
     const attendance = () => {
         // setComponent(<Attendance />)
@@ -17,9 +16,9 @@ const  SubjectProfile= ()=>{
         setComponent(<Data />)
     }
 
-    const logs = () => {
+    // const logs = () => {
         // setComponent(<Logs />)
-    }
+    // }
 
 
     return (
@@ -36,15 +35,9 @@ const  SubjectProfile= ()=>{
                 </Hidden>
                 <Grid className={style.profileButton} container >
                     <Grid className={style.buttonGroup} item md={12} sm={12} xs={12} lg={12} >
-                        <Button color="primary" onClick={data}>Details</Button>
-                        <Button color="primary" onClick={attendance}>Room Classes</Button>
+                        <Button color="primary" onClick={data}>{translation.language["label.global.details"]}</Button>
+                        <Button color="primary" onClick={attendance}>{translation.languages["label.global.room.class"]}</Button>
                     </Grid>
-                    <Button
-                        color="primary"
-                        startIcon={<CreateRoundedIcon />}
-                    >
-                        Edit Profile
-                    </Button>
                 </Grid>
             </Grid>
 

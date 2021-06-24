@@ -42,6 +42,7 @@ export function* TeacherResourceUpload() {
             data
         }).catch(e=> {
             console.log(e)
+             return "";
         })
         i++;
 

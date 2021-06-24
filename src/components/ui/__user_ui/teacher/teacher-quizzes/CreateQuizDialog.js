@@ -24,7 +24,6 @@ import {
     twoOptionSelected,
     changeTextWithRole
 } from '../../../utils/autoComplete/autoCompleteAction'
-import {AddedAssignmentFail, AddedAssignmentSuccess} from "../../../../../__Messages/teacher/TeacherAssignmentMessage"
 
 const CreateQuizDialog = ({
                               dialog,
@@ -40,7 +39,8 @@ const CreateQuizDialog = ({
                               changeQuarter,
                               changeLowGrade,
                               changeHighGrade,
-                              changeDescription
+                              changeDescription,
+                              translation
                           }) => {
 
 
@@ -73,13 +73,13 @@ const CreateQuizDialog = ({
     >
         <form noValidate>
             <DialogTitle id="create-quiz"
-            >Create Quiz</DialogTitle>
+            >{translation.language["label.teacher.quiz.dialog.create.title"]}</DialogTitle>
             <Divider/>
             <DialogContent>
 
                 <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
-                          messageFail={AddedAssignmentFail}
-                          messageSuccess={AddedAssignmentSuccess}/>
+                          messageFail={translation.language["message.teacher.dialog.quiz.delete.fail"]}
+                          messageSuccess={translation.language["message.teacher.dialog.quiz.delete.success"]}/>
 
                 <Grid container spacing={1}>
                     <Grid item md={4} xs={12}>
@@ -93,8 +93,8 @@ const CreateQuizDialog = ({
                             InputText={resourceText}
                             changeAutoComplete={OutputResources}
                             changeText={(value) => changeTextWithRole(value, setResourceText, setResourceLoading, setResourceOptions, autoCompleteGetTeacherQuiz, email)}
-                            noOptionText={"Search By Class"}
-                            label={"Quiz Resource"}
+                            noOptionText={translation.language["label.teacher.quiz.dialog.create.resource"]}
+                            label={translation.language["label.teacher.quiz.dialog.create.resource.search"]}
                             optionLabel={twoOptionLabel}
                             optionSelected={twoOptionSelected}
                         />
@@ -110,8 +110,8 @@ const CreateQuizDialog = ({
                             InputText={classText}
                             changeAutoComplete={OutputClass}
                             changeText={(value) => changeTextWithRole(value, setClassText, setClassLoading, setClassOptions, autoCompleteGetTeacherClass, email)}
-                            noOptionText={"No Class Found"}
-                            label={"Your Class"}
+                            noOptionText={translation.language["label.teacher.quiz.dialog.create.resource.search"]}
+                            label={translation.language["label.teacher.quiz.dialog.create.resource"]}
                             optionLabel={twoOptionLabel}
                             optionSelected={twoOptionSelected}
                         />
@@ -120,7 +120,7 @@ const CreateQuizDialog = ({
                     <Grid item md={4} xs={6}>
                         <TextField
                             margin="dense"
-                            label="Deadline"
+                            label={translation.language["label.global.date.deadline"]}
                             type="datetime-local"
                             fullWidth
                             variant="outlined"
@@ -132,10 +132,11 @@ const CreateQuizDialog = ({
 
                     <Grid item md={3} xs={12}>
                         <FormControl variant="outlined" margin='dense' fullWidth>
-                            <InputLabel htmlFor="Semester">Semester</InputLabel>
+                            <InputLabel
+                                htmlFor={translation.language["label.global.semester"]}>{translation.language["label.global.semester"]}</InputLabel>
                             <Select
                                 native
-                                label="Semester"
+                                label={translation.language["label.global.semester"]}
                                 inputProps={{
                                     name: 'type',
                                     id: 'type',
@@ -153,10 +154,10 @@ const CreateQuizDialog = ({
 
                     <Grid item md={3} xs={12}>
                         <FormControl variant="outlined" margin='dense' fullWidth>
-                            <InputLabel htmlFor="Quarter">Quarter</InputLabel>
+                            <InputLabel htmlFor={translation.language["label.global.quarter"]}>{translation.language["label.global.quarter"]}</InputLabel>
                             <Select
                                 native
-                                label="Quarter"
+                                label={translation.language["label.global.quarter"]}
                                 inputProps={{
                                     name: 'type',
                                     id: 'type',
@@ -177,7 +178,7 @@ const CreateQuizDialog = ({
                     <Grid item md={3} xs={4}>
                         <TextField
                             margin="dense"
-                            label="Low Grade"
+                            label={translation.language["label.global.low.grade"]}
                             type="number"
                             fullWidth
                             variant="outlined"
@@ -189,7 +190,7 @@ const CreateQuizDialog = ({
                     <Grid item md={3} xs={4}>
                         <TextField
                             margin="dense"
-                            label="High Grade"
+                            label={translation.language["label.global.high.grade"]}
                             type="number"
                             fullWidth
                             variant="outlined"
@@ -199,10 +200,9 @@ const CreateQuizDialog = ({
                     </Grid>
 
                     <Grid item md={12} xs={12}>
-                        <InputLabel htmlFor="ActivityDescription">Assignment Description(Optional)</InputLabel>
+                        <InputLabel htmlFor={translation.language["label.teacher.quiz.dialog.create.description"]}>{translation.language["label.teacher.quiz.dialog.create.description"]}</InputLabel>
                         <TextareaAutosize
-
-                            label="Description"
+                            label={translation.language["label.global.description"]}
                             rowsMin={10}
                             aria-label="maximum height"
                             style={{width: '100%', marginBottom: '10px', marginTop: '10px'}}
@@ -215,10 +215,10 @@ const CreateQuizDialog = ({
 
             <DialogActions>
                 <Button variant={'contained'} disableElevation onClick={create} color='primary'>
-                    Create
+                    {translation.language["label.button.delete"]}
                 </Button>
                 <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
-                    Cancel
+                    {translation.language["label.button.back"]}
                 </Button>
             </DialogActions>
         </form>

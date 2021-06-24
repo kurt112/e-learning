@@ -1,13 +1,12 @@
 import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
 import MUIDataTable from "mui-datatables"
 import {TeacherResources as columns} from "../../../utils/tableColumn"
-import style, {TableOptions as options, TableOptionsNoPaging} from "../../../_style/TableStyle"
+import style, {TableOptions as options} from "../../../_style/TableStyle"
 import {Fragment, lazy, useEffect} from "react";
 import * as dialogAction from "../../../../../store/action/__ActionGlobal/TableAction"
 // icons
 import IconButton from "@material-ui/core/IconButton"
 import UpdateIcon from '@material-ui/icons/Update'
-import FolderSharedIcon from '@material-ui/icons/FolderShared'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import {connect} from "react-redux";
@@ -22,7 +21,6 @@ import {
 
 // dialogs
 const DeleteResourceDialog = lazy(() => import(`./DeleteResourceDialog`))
-const ShareDialog = lazy(() => import(`./ShareResources`))
 const UpdateResourceDialog = lazy(() => import(`./UpdateResourceDialog`))
 const UploadResources = lazy(() => import(`./UploadResourceDialog`))
 
@@ -34,7 +32,8 @@ const TeacherResources = ({
                               searchChange,
                               pageChange,
                               DeleteOpenDialog,
-                              DeleteCloseDialog
+                              DeleteCloseDialog,
+                              translation
                           }) => {
 
     const classes = style()
@@ -48,39 +47,28 @@ const TeacherResources = ({
 
     return (
         <Fragment>
-            <DeleteResourceDialog dialog={state.deleteResourceDialog} closeDialog={DeleteCloseDialog}/>
-            <UploadResources dialog={state.uploadResourceDialog} closeDialog={UploadCloseDialog}/>
+            <DeleteResourceDialog translation={translation} dialog={state.deleteResourceDialog} closeDialog={DeleteCloseDialog}/>
+            <UploadResources translation={translation} dialog={state.uploadResourceDialog} closeDialog={UploadCloseDialog}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
                         <Box className={classes.tableNavbarBox}>
-
-                            <Tooltip title="Upload Resource">
+                            <Tooltip title={translation.language["tooltip.teacher.resource.upload.resource"]}>
                                 <IconButton aria-label="Add" onClick={UploadOpenDialog}>
                                     <CloudUploadIcon color='primary' fontSize={"large"}/>
                                 </IconButton>
                             </Tooltip>
-
-                            <Tooltip title="Update Resource">
+                            <Tooltip title={translation.language["tooltip.teacher.resource.update.resource"]}>
                                 <IconButton aria-label="update">
                                     <UpdateIcon color='primary' fontSize={"large"}/>
                                 </IconButton>
                             </Tooltip>
-
-                            <Tooltip title="Share Resources">
-                                <IconButton aria-label="update">
-                                    <FolderSharedIcon color='primary' fontSize={"large"}/>
-                                </IconButton>
-                            </Tooltip>
-
-                            <Tooltip title="Delete Resources">
+                            <Tooltip title={translation.language["tooltip.teacher.resource.delete.resource"]}>
                                 <IconButton aria-label="delete" onClick={DeleteOpenDialog}>
                                     <DeleteForeverIcon color='secondary' fontSize={"large"}/>
                                 </IconButton>
                             </Tooltip>
-
                         </Box>
-
                     </Toolbar>
                 </Grid>
 
@@ -88,12 +76,13 @@ const TeacherResources = ({
                     <MUIDataTable
                         title={
                             <Typography variant="h6">
-                                Resource List
-                                {state.loading && <CircularProgress size={24} style={{ marginLeft: 15, position: 'relative', top: 4 }} />}
+                                {translation.language["label.teacher.resource.table.title"]}
+                                {state.loading &&
+                                <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}}/>}
                             </Typography>
                         }
                         data={state.data}
-                        columns={columns}
+                        columns={columns(translation)}
                         options={options(
                             pageChange,
                             searchChange,
@@ -118,12 +107,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         // // for opening and closing delete dialog
-        DeleteOpenDialog: ()=> dispatch(dialogAction.openDialog(Teacher_Resource_Delete)),
+        DeleteOpenDialog: () => dispatch(dialogAction.openDialog(Teacher_Resource_Delete)),
         DeleteCloseDialog: () => dispatch(dialogAction.closeDialog(Teacher_Resource_Delete)),
         // for opening and closing upload dialog
         UploadOpenDialog: () => dispatch(dialogAction.openDialog(Teacher_Resource_Upload)),
         UploadCloseDialog: () => dispatch(dialogAction.closeDialog(Teacher_Resource_Upload)),
-
 
 
         initData: () => dispatch(actions.InitDataTable(Teacher_Resource)),

@@ -80,14 +80,14 @@ const TeacherRoute = ({email,translation}) => {
 
     return (
         <Fragment>
-            <Route path={translation.language["route.teacher.subjects"]} exact render={() => <TeacherSubjects subjects={subjects}/>}/>
-            <Route path={translation.language["route.teacher.students"]} exact render={() => <TeacherStudent students={students}/>}/>
-            <Route path={translation.language["route.teacher.lectures"]} exact render={() => <TeacherLectures/>}/>
-            <Route path={translation.language["route.teacher.classes"]} exact render={() => <Classes currentClass={currentClass} archiveClass={doneClass}/>}/>
-            <Route path={translation.language["route.teacher.resources"]} exact render={() => <TeacherResources/>}/>
-            <Route path={translation.language["route.teacher.assignments"]} exact render={() => <TeacherAssignments/>}/>
-            <Route path={translation.language["route.teacher.exams"]} exact render={() => <TeacherExams/>}/>
-            <Route path={translation.language["route.teacher.quizzes"]} exact render={() => <TeacherQuizzes/>}/>
+            <Route path={translation.language["route.teacher.subjects"]} exact render={() => <TeacherSubjects translation={translation} subjects={subjects}/>}/>
+            <Route path={translation.language["route.teacher.students"]} exact render={() => <TeacherStudent translation={translation} students={students}/>}/>
+            <Route path={translation.language["route.teacher.lectures"]} exact render={() => <TeacherLectures translation={translation}/>}/>
+            <Route path={translation.language["route.teacher.classes"]} exact render={() => <Classes translation={translation} currentClass={currentClass} archiveClass={doneClass}/>}/>
+            <Route path={translation.language["route.teacher.resources"]} exact render={() => <TeacherResources translation={translation}/>}/>
+            <Route path={translation.language["route.teacher.assignments"]} exact render={() => <TeacherAssignments translation={translation}/>}/>
+            <Route path={translation.language["route.teacher.exams"]} exact render={() => <TeacherExams translation={translation}/>}/>
+            <Route path={translation.language["route.teacher.quizzes"]} exact render={() => <TeacherQuizzes translation={translation}/>}/>
 
             <Redirect to={'teacher/classes'}/>
         </Fragment>

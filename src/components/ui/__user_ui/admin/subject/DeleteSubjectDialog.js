@@ -42,7 +42,7 @@ const DeleteRoomShiftDialog = ({
                 value={state.id}
                 margin="dense"
                 variant={'outlined'}
-                label="Enter Subject Code"
+                label={translation.language["label.subject.dialog.input.code"]}
                 type="text"
                 fullWidth
                 onChange={(event) => dialogId(event.target.value)}

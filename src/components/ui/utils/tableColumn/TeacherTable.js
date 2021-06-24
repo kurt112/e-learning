@@ -75,18 +75,18 @@ export function TeacherInsertRoom(id, roomName, roomSubject, students, timeStart
  **/
 
 
-export const TeacherSubjectTable = [
+export const TeacherSubjectTable = translation => [
     {
         name: 'subjectName',
-        label: 'Subject Name'
+        label: translation.language["label.global.subject.name"]
     },
     {
         name: 'subjectCode',
-        label: 'Subject Code'
+        label: translation.language["label.global.subject.code"]
     },
     {
         name: 'major',
-        label: 'Major'
+        label: translation.language["label.global.major"]
     },
 ]
 
@@ -103,44 +103,44 @@ export function TeacherInsertSubject(subjectName, subjectCode, major) {
  *
  **/
 
-export const TeacherStudentTable = [
+export const TeacherStudentTable =(translation) => [
 
     {
         name: "firstName",
-        label: "First Name",
+        label: translation.language["label.global.first.name"],
 
     },
     {
         name: "lastName",
-        label: "Last Name",
+        label: translation.language["label.global.last.name"],
     },
     {
         name: "grade",
-        label: "Grade",
+        label: translation.language["label.global.grade"],
     },
     {
         name: "section",
-        label: "Section",
+        label: translation.language["label.global.section"],
     },
     {
         name: "subject",
-        label: "Subject"
+        label: translation.language["label.global.subject"]
     },
     {
         name: "adviser",
-        label: "Adviser"
+        label: translation.language["label.global.adviser"]
     },
     {
         name: "profile",
-        label: "Profile",
+        label: translation.language["label.global.profile"],
         options: {
             filter: false,
             sort: false,
             customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to={'/student/profile/' + value} style={{textDecoration: 'none'}}>
+                    <Link to={translation.language["route.profile.student"] + value} style={{textDecoration: 'none'}}>
                         <Button variant="outlined" color="primary">
-                            Visit Profile
+                            {translation.language["label.global.visit.profile"]}
                         </Button>
                     </Link>
             },
@@ -225,23 +225,23 @@ export function TeacherInsertLecture(code, documentName, gradeSection, sem, quar
  **/
 
 
-export const TeacherAttendace = [
+export const TeacherAttendace = (translation) => [
 
     {
         name: 'month',
-        label: 'Month',
+        label: translation.language["label.global.month"],
     },
     {
         name: 'day',
-        label: 'Day'
+        label: translation.language["label.global.day"]
     },
     {
         name: 'year',
-        label: 'Year'
+        label: translation.language["label.global.year"]
     },
     {
         name: 'time',
-        label: 'Time'
+        label: translation.language["label.global.time"]
     },
 
 ]
@@ -259,30 +259,30 @@ export function TeacherInsertAttendace(month, day, year, time) {
  *
  **/
 
-export const TeacherLogs = [
+export const TeacherLogs = (translation) => [
     {
         name: 'date',
-        label: 'Date'
+        label: translation.language["label.global.date"]
     },
     {
         name: 'subjectName',
-        label: 'Subject Name',
+        label: translation.language["label.global.subject.name"]
     },
     {
         name: 'grade',
-        label: 'Grade'
+        label: translation.language["label.global.grade"]
     },
     {
         name: 'section',
-        label: 'Section'
+        label: translation.language["label.global.section"]
     },
     {
         name: 'timeStart',
-        label: 'Time Start'
+        label: translation.language["label.global.time.start"]
     },
     {
         name: 'timeEnd',
-        label: 'Time End'
+        label: translation.language["label.global.time.end"]
     },
 
 ]
@@ -300,43 +300,44 @@ export function TeacherInsertLogs(date, subjectName, grade, section, timeStart, 
  *
  **/
 
-export const TeacherResources = [
+export const TeacherResources = (translation) => [
     {
         name: 'documentCode',
-        label: 'Document Code'
+        label: translation.language["label.global.document.code"]
     },
     {
         name: 'documentName',
-        label: 'Document Name',
+        label: translation.language["label.global.document.name"],
     },
     {
         name: 'description',
-        label: 'Description'
+        label: translation.language["label.global.description"]
     },
     {
         name: 'dateUploaded',
-        label: 'Uploaded On'
+        label: translation.language["label.global.date.upload"]
     },
     {
         name: 'type',
-        label: 'Type'
+        label: translation.language["label.global.type"]
     },
     {
         name: 'status',
-        label: 'Status'
+        label: translation.language["label.global.status"]
     },
     {
         name: "download",
-        label: "Download",
+        label: translation.language["label.global.download"],
         options: {
             filter: false,
             sort: false,
             customBodyRender: (value) => {
-                return <a href={JavaEndpoint + '/teacher/resource/download?code=' + value} target="_blank"
+                return <a href={JavaEndpoint + translation.language["route.teacher.resource.download"] + value}
+                          target="_blank"
                           style={{textDecoration: 'none', marginRight: '10px'}}
                           rel="noopener noreferrer">
                     <Button variant="outlined" color="primary">
-                        Download
+                        {translation.language["label.global.download"]}
                     </Button>
                 </a>
             },
@@ -345,8 +346,6 @@ export const TeacherResources = [
             }
         }
     },
-
-
 ]
 
 export function TeacherInsertResources(documentCode, documentName, description, dateUploaded, type, status) {
@@ -361,56 +360,57 @@ export function TeacherInsertResources(documentCode, documentName, description, 
  *
  **/
 
-export const TeacherAssignments = [
+export const TeacherAssignments = (translation) => [
     {
         name: 'code',
-        label: 'Assignment Code'
+        label: translation.language["label.teacher.assignment.table.column"]
     },
     {
         name: 'lowGrade',
-        label: 'Low Grade'
+        label: translation.language["label.global.low.grade"]
     },
     {
         name: 'highGrade',
-        label: 'High Grade'
+        label: translation.language["label.global.high.grade"]
     },
     {
         name: 'semester',
-        label: 'Semester'
+        label: translation.language["label.global.semester"]
     },
     {
         name: 'quarter',
-        label: 'Quarter'
+        label: translation.language["label.global.quarter"]
     },
     {
         name: 'classes',
-        label: 'Class'
+        label: translation.language["label.global.class"]
     },
     {
         name: 'dateUploaded',
-        label: 'Uploaded On'
+        label: translation.language["label.global.date.upload"]
     },
 
     {
         name: 'deadline',
-        label: 'Deadline'
+        label: translation.language["label.global.date.deadline"]
     },
     {
         name: 'description',
-        label: 'Description'
+        label: translation.language["label.global.description"]
     },
     {
         name: "download",
-        label: "Download",
+        label: translation.language["label.global.download"],
         options: {
             filter: false,
             sort: false,
             customBodyRender: (value) => {
-                return <a href={JavaEndpoint + '/teacher/resource/download?code=' + value} target="_blank"
+                return <a href={JavaEndpoint + translation.language["route.teacher.resource.download"] + value}
+                          target="_blank"
                           style={{textDecoration: 'none', marginRight: '10px'}}
                           rel="noopener noreferrer">
                     <Button variant="outlined" color="primary">
-                        Download
+                        {translation.language["label.global.download"]}
                     </Button>
                 </a>
             },
@@ -419,8 +419,6 @@ export const TeacherAssignments = [
             }
         }
     },
-
-
 ]
 
 export function TeacherInsertAssignment(code, lowGrade, highGrade, semester, quarter, classes, dateUploaded, deadline, description, documentCode) {
@@ -439,56 +437,57 @@ export function TeacherInsertAssignment(code, lowGrade, highGrade, semester, qua
     }
 }
 
-export const TeacherExams = [
+export const TeacherExams = (translation) => [
     {
         name: 'code',
-        label: 'Exam Code'
+        label: translation.language["label.teacher.exam.table.column"]
     },
     {
         name: 'lowGrade',
-        label: 'Low Grade'
+        label: translation.language["label.global.low.grade"]
     },
     {
         name: 'highGrade',
-        label: 'High Grade'
+        label: translation.language["label.global.high.grade"]
     },
     {
         name: 'semester',
-        label: 'Semester'
+        label: translation.language["label.global.semester"]
     },
     {
         name: 'quarter',
-        label: 'Quarter'
+        label: translation.language["label.global.quarter"]
     },
     {
         name: 'classes',
-        label: 'Class'
+        label: translation.language["label.global.class"]
     },
     {
         name: 'dateUploaded',
-        label: 'Uploaded On'
+        label: translation.language["label.global.date.upload"]
     },
 
     {
         name: 'deadline',
-        label: 'Deadline'
+        label: translation.language["label.global.date.deadline"]
     },
     {
         name: 'description',
-        label: 'Description'
+        label: translation.language["label.global.description"]
     },
     {
         name: "download",
-        label: "Download",
+        label: translation.language["label.global.download"],
         options: {
             filter: false,
             sort: false,
             customBodyRender: (value) => {
-                return <a href={JavaEndpoint + '/teacher/resource/download?code=' + value} target="_blank"
+                return <a href={JavaEndpoint + translation.language["route.teacher.resource.download"] + value}
+                          target="_blank"
                           style={{textDecoration: 'none', marginRight: '10px'}}
                           rel="noopener noreferrer">
                     <Button variant="outlined" color="primary">
-                        Download
+                        {translation.language["label.global.download"]}
                     </Button>
                 </a>
             },
@@ -516,56 +515,56 @@ export function TeacherInsertExam(code, lowGrade, highGrade, semester, quarter, 
     }
 }
 
-export const TeacherQuiz = [
+export const TeacherQuiz = (translation) => [
     {
         name: 'code',
-        label: 'Quiz Code'
+        label: translation.language["label.teacher.quiz.table.column.code"]
     },
     {
         name: 'lowGrade',
-        label: 'Low Grade'
+        label: translation.language["label.global.low.grade"]
     },
     {
         name: 'highGrade',
-        label: 'High Grade'
+        label: translation.language["label.global.high.grade"]
     },
     {
         name: 'semester',
-        label: 'Semester'
+        label: translation.language["label.global.semester"]
     },
     {
         name: 'quarter',
-        label: 'Quarter'
+        label: translation.language["label.global.quarter"]
     },
     {
         name: 'classes',
-        label: 'Class'
+        label: translation.language["label.global.class"]
     },
     {
         name: 'dateUploaded',
-        label: 'Uploaded On'
+        label: translation.language["label.global.date.upload"]
     },
 
     {
         name: 'deadline',
-        label: 'Deadline'
+        label: translation.language["label.global.date.deadline"]
     },
     {
         name: 'description',
-        label: 'Description'
+        label: translation.language["label.global.description"]
     },
     {
         name: "download",
-        label: "Download",
+        label: translation.language["label.global.download"],
         options: {
             filter: false,
             sort: false,
             customBodyRender: (value) => {
-                return <a href={JavaEndpoint + '/teacher/resource/download?code=' + value} target="_blank"
+                return <a href={JavaEndpoint + translation.language["route.teacher.resource.download"] + value} target="_blank"
                           style={{textDecoration: 'none', marginRight: '10px'}}
                           rel="noopener noreferrer">
                     <Button variant="outlined" color="primary">
-                        Download
+                        {translation.language["label.global.download"]}
                     </Button>
                 </a>
             },

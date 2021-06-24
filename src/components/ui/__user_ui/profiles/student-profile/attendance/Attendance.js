@@ -1,20 +1,18 @@
 import MUIDataTable from "mui-datatables";
 import { Fragment } from "react";
-import { TeacherInsertLogs as insert, TeacherAttendace as columns } from '../../../../utils/tableColumn'
+import { TeacherAttendace as columns } from '../../../../utils/tableColumn'
 import style from '../StudentProfileStyle'
-export default function () {
+export default function ({translation}) {
     const classes = style()
     return (
         <Fragment>
             <MUIDataTable
-                title={"Attendance"}
-                // data={data}
-                columns={columns}
+                title={translation.language["label.global.attendance"]}
+                columns={columns(translation)}
                 options={{
                     selectableRows: false // <===== will turn off checkboxes in rows
                 }}
                 className={classes.table}
-            // options={options(rowClicked, rowDeleted)}
             />
         </Fragment>
     )

@@ -1,7 +1,6 @@
 import {Avatar, Button, CircularProgress, Container, Divider, Grid, Hidden, Paper, Typography} from "@material-ui/core";
 import ProfileStyle from '../ProfileStyle'
 import Picture from '../../../../../assets/asd.jpg'
-import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
 import {connect} from 'react-redux'
 import {useEffect, useState} from "react";
 import {withRouter} from 'react-router-dom';
@@ -12,7 +11,7 @@ import {Fragment} from 'react'
 import * as action from '../../../../../store/action/__ActionGlobal/ProfileAction'
 import {Student} from "../../../../../store/utils/Specify";
 
-const StudentProfile = ({studentState, match, initData}) => {
+const StudentProfile = ({studentState, match, initData,translation}) => {
 
     const style = ProfileStyle()
     const [component, setComponent] = useState(null)
@@ -29,7 +28,7 @@ const StudentProfile = ({studentState, match, initData}) => {
 
     useEffect(() => {
         if (studentState.profile !== null) {
-            setComponent(<Data student={studentState.profile} assignedRoom={studentState.profile.roomShifts[0]}/>)
+            setComponent(<Data translation={translation} student={studentState.profile} assignedRoom={studentState.profile.roomShifts[0]}/>)
 
             setName(`${studentState.profile.user.firstName} ${studentState.profile.user.lastName}`)
         }
@@ -37,15 +36,15 @@ const StudentProfile = ({studentState, match, initData}) => {
     }, [studentState])
 
     const attendance = () => {
-        setComponent(<Attendance student={studentState.profile}/>)
+        setComponent(<Attendance translation={translation} student={studentState.profile}/>)
     }
 
     const data = () => {
-        setComponent(<Data student={studentState.profile} assignedRoom={studentState.profile.roomShifts[0]}/>)
+        setComponent(<Data translation={translation} student={studentState.profile} assignedRoom={studentState.profile.roomShifts[0]}/>)
     }
 
     const logs = () => {
-        setComponent(<Logs student={studentState.profile.student}/>)
+        setComponent(<Logs translation={translation} student={studentState.profile.student}/>)
     }
 
 
@@ -70,16 +69,10 @@ const StudentProfile = ({studentState, match, initData}) => {
                         </Hidden>
                         <Grid className={style.profileButton} container>
                             <Grid className={style.buttonGroup} item md={12} sm={12} xs={12} lg={12}>
-                                <Button color="primary" onClick={data}>Details</Button>
-                                <Button color="primary" onClick={attendance}>Attendance</Button>
-                                <Button color="primary" onClick={logs}>Class Logs</Button>
+                                <Button color="primary" onClick={data}>{translation.language["label.global.details"]}</Button>
+                                <Button color="primary" onClick={attendance}>{translation.language["label.global.attendance"]}</Button>
+                                <Button color="primary" onClick={logs}>{translation.language["label.global.class.logs"]}</Button>
                             </Grid>
-                            <Button
-                                color="primary"
-                                startIcon={<CreateRoundedIcon/>}
-                            >
-                                Edit Profile
-                            </Button>
                         </Grid>
                     </Grid>
 

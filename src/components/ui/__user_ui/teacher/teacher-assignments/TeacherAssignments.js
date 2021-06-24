@@ -26,7 +26,8 @@ const TeacherAssignments = ({
                                 createAssignmentDialogOpen,
                                 createAssignmentDialogClose,
                                 deleteAssignmentDialogOpen,
-                                deleteAssignmentDialogClose
+                                deleteAssignmentDialogClose,
+                                translation
                             }) => {
     useEffect(() => {
         if (state.data.length === 0) initData()
@@ -36,40 +37,35 @@ const TeacherAssignments = ({
     const classes = style()
     return (
         <Fragment>
-            <TeacherAssignmentCreateDialog dialog={state.createDialog} closeDialog={createAssignmentDialogClose}/>
-            <TeacherAssignmentDeleteDialog dialog={state.deleteDialog} closeDialog={deleteAssignmentDialogClose}/>
+            <TeacherAssignmentCreateDialog translation={translation} dialog={state.createDialog} closeDialog={createAssignmentDialogClose}/>
+            <TeacherAssignmentDeleteDialog translation={translation} dialog={state.deleteDialog} closeDialog={deleteAssignmentDialogClose}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
                         <Box className={classes.tableNavbarBox}>
-
-                            <Tooltip title="Create Assignment">
+                            <Tooltip title={translation.language["tooltip.teacher.assignment.create.assignment"]}>
                                 <IconButton aria-label="Add" onClick={createAssignmentDialogOpen}>
                                     <CloudUploadIcon color='primary' fontSize={"large"}/>
                                 </IconButton>
                             </Tooltip>
-
-                            <Tooltip title="Delete Assignment">
-                                <IconButton aria-label="delete" onClick={deleteAssignmentDialogOpen} >
+                            <Tooltip title={translation.language["tooltip.teacher.assignment.delete.assignment"]}>
+                                <IconButton aria-label="delete" onClick={deleteAssignmentDialogOpen}>
                                     <DeleteForeverIcon color='secondary' fontSize={"large"}/>
                                 </IconButton>
                             </Tooltip>
-
-
                         </Box>
-
                     </Toolbar>
                 </Grid>
-
                 <Grid item md={12} component={Paper} className={classes.tableContainerWrapper}>
                     <MUIDataTable
                         title={
                             <Typography variant="h6">
-                                Assignment List
-                                {state.loading && <CircularProgress size={24} style={{ marginLeft: 15, position: 'relative', top: 4 }} />}
+                                {translation.language["label.teacher.assignment.table.title"]}
+                                {state.loading &&
+                                <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}}/>}
                             </Typography>
                         }
-                        columns={columns}
+                        columns={columns(translation)}
                         data={state.data}
                         options={options(
                             pageChange,

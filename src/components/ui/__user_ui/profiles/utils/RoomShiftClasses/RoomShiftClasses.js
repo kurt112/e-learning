@@ -5,12 +5,12 @@ import ProfileStyle from '../../ProfileStyle'
 import Box from "@material-ui/core/Box";
 import ClassesData from "./ClassesData";
 
-const RoomShiftClasses = ({classes}) => {
+const RoomShiftClasses = ({classes,translation}) => {
     const style = ProfileStyle()
     return (
         <Fragment>
             <Container>
-                <h1>Classes Schedule</h1>
+                <h1>{translation.language["label.global.class.schedule"]}</h1>
                 <hr className={style.classPeopleDivider}/>
                 <Box className={style.peopleListContainer}>
                     {

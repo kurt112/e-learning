@@ -4,10 +4,10 @@ import MenuBookIcon from "@material-ui/icons/MenuBook";
 import VideoCallIcon from '@material-ui/icons/VideoCall';
 import {Link} from "react-router-dom";
 
-const ClassesCard = ({style, classes}) => {
+const ClassesCard = ({style, classes,translation}) => {
 
 
-    return classes === undefined || classes.length === 0 ? <h3>Class is Empty</h3> :
+        return classes === undefined || classes.length === 0 ? <h3>{translation.language["label.global.class.empty"]}</h3> :
         classes.map((e) => {
             return (
                 <Fragment key={e.id}>
@@ -33,10 +33,7 @@ const ClassesCard = ({style, classes}) => {
                                 </p>
                             </div>
                         </div>
-
                         <Avatar className={style.image}>{e.subject.subjectName.substring(0, 1).toUpperCase()}</Avatar>
-
-
                         <div className={style.classDescription}>
                             <p>orem Ipsum is sunchanged. It was asdas popularised inasdfasdfasdf the 1960s with the
                                 release
@@ -54,23 +51,18 @@ const ClassesCard = ({style, classes}) => {
                             <div className={style.schedule}>
                                 <p>{`${e.day} `}</p>
                             </div>
-                            <Link to={`/roomShiftClass/profile/${e.id}`}>
+                            <Link to={`${translation.language["route.profile.room.shift.class"]}${e.id}`}>
                                 <div className={style.iconsFooter}>
-
-                                    <Tooltip title="View Class" aria-label="add">
-
+                                    <Tooltip title={translation.language["tooltip.class.view"]} aria-label="add">
                                         <MenuBookIcon style={{fontSize: 30}}/>
-
                                     </Tooltip>
                                 </div>
                             </Link>
                             <Link to={`/classroom/${e.roomShift.room.id}${e.id}${e.subject.subjectCode}`}>
                                 <div className={style.iconsFooter}>
-                                    <Tooltip title={e.teacher === undefined?'Start Class':'Join Class'} aria-label="add">
+                                    <Tooltip title={e.teacher === undefined?translation.language["tooltip.class.start"]:translation.language["tooltip.class.join"]} aria-label="add">
                                         <VideoCallIcon fontSize={'large'}/>
-
                                     </Tooltip>
-
                                 </div>
                             </Link>
                         </div>

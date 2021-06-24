@@ -1,18 +1,13 @@
 import ProfileStyle from '../../ProfileStyle'
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Divider from "@material-ui/core/Divider";
-import {Chip} from "@material-ui/core";
-import GetAppIcon from '@material-ui/icons/GetApp';
-import PublishIcon from '@material-ui/icons/Publish';
+import Grid from "@material-ui/core/Grid"
 import TaskCard from "../TaskCard";
 
-const ClassLecture = ({lectures}) => {
+const ClassLecture = ({lectures,translation}) => {
     const style = ProfileStyle()
     return (
         <Grid container>
             <Grid item container justify="center">
-                <h1>Lectures</h1>
+                <h1>{translation.language["label.global.lecture"]}</h1>
                 {
                     lectures.map((e) =>
                         <TaskCard style={style}
@@ -27,6 +22,7 @@ const ClassLecture = ({lectures}) => {
                                   resourceCode={e.resource.code}
                                   resourceName={e.resource.name}
                                   lecture={true}
+                                  translation={translation}
                         />)
                 }
 

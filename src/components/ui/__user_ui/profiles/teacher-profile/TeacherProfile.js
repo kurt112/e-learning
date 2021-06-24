@@ -1,7 +1,6 @@
 import {Avatar, Button, CircularProgress, Container, Divider, Grid, Hidden, Paper, Typography} from "@material-ui/core";
 import ProfileStyle from '../ProfileStyle'
 import Picture from '../../../../../assets/asd.jpg'
-import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
 import {connect} from 'react-redux'
 import {useEffect, useState} from "react";
 import Logs from './logs/Logs'
@@ -12,7 +11,7 @@ import * as action from "../../../../../store/action/__ActionGlobal/ProfileActio
 import {Teacher} from "../../../../../store/utils/Specify";
 import {Fragment} from "react";
 
-const  TeacherProfile= ({teacherState,initData, match})=>{
+const  TeacherProfile= ({teacherState,initData, match,translation})=>{
     const style = ProfileStyle()
     const [name, setName] = useState('')
 
@@ -26,7 +25,7 @@ const  TeacherProfile= ({teacherState,initData, match})=>{
 
         if (teacherState.profile !== null) {
             setName(`${teacherState.profile.user.firstName} ${teacherState.profile.user.lastName}`)
-            setComponent(<Data teacher={teacherState.profile}/>)
+            setComponent(<Data translation={translation} teacher={teacherState.profile}/>)
         }
 
     }, [teacherState])
@@ -34,19 +33,16 @@ const  TeacherProfile= ({teacherState,initData, match})=>{
     const [component, setComponent] = useState(null)
 
     const attendance = () => {
-        setComponent(<Attendance teacher={teacherState.profile.teacher}/>)
+        setComponent(<Attendance translation={translation} teacher={teacherState.profile.teacher}/>)
     }
 
     const data = () => {
-        setComponent(<Data teacher={teacherState.profile}/>)
+        setComponent(<Data translation={translation} teacher={teacherState.profile}/>)
     }
 
     const logs = () => {
-        setComponent(<Logs teacher={teacherState.profile.teacher}/>)
+        setComponent(<Logs translation={translation} teacher={teacherState.profile.teacher}/>)
     }
-
-    console.log("i am in profile")
-    console.log(teacherState)
 
     return (
         <Grid container className={style.container}>
@@ -68,16 +64,10 @@ const  TeacherProfile= ({teacherState,initData, match})=>{
                             </Hidden>
                             <Grid className={style.profileButton} container >
                                 <Grid className={style.buttonGroup} item md={12} sm={12} xs={12} lg={12} >
-                                    <Button color="primary" onClick={data}>Details</Button>
-                                    <Button color="primary" onClick={attendance}>Attendance</Button>
-                                    <Button color="primary" onClick={logs}>Class Logs</Button>
+                                    <Button color="primary" onClick={data}>{translation.language["label.global.details"]}</Button>
+                                    <Button color="primary" onClick={attendance}>{translation.language["label.global.attendance"]}</Button>
+                                    <Button color="primary" onClick={logs}>{translation.language["label.global.class.logs"]}</Button>
                                 </Grid>
-                                <Button
-                                    color="primary"
-                                    startIcon={<CreateRoundedIcon />}
-                                >
-                                    Edit Profile
-                                </Button>
                             </Grid>
                         </Grid>
 

@@ -5,7 +5,7 @@ import style, {TableOptions} from '../../../_style/TableStyle'
 
 
 
-export default function TeacherStudents({students}) {
+export default function TeacherStudents({students, translation}) {
 
     const classes = style()
   
@@ -13,9 +13,9 @@ export default function TeacherStudents({students}) {
         <Grid component="main" className={classes.root}>
             <Grid item md={12} component={Paper} className={classes.tableContainerWrapper}>
                 <MUIDataTable
-                    title={"Student List"}
+                    title={translation.language["label.global.student.list"]}
                     data={students}
-                    columns={columns}
+                    columns={columns(translation)}
                     options={TableOptions()}
                 />
             </Grid>

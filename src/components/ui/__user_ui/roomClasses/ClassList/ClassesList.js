@@ -5,7 +5,7 @@ import clsx from "clsx";
 import ClassesCard from "./ClassesCard";
 import ClassesStyle from "../../../_style/ClassesStyle";
 
-const ClassesList = ({currentClass,archiveClass}) => {
+const ClassesList = ({currentClass,archiveClass,translation}) => {
 
 
     const currentStyle = ClassesStyle()
@@ -25,7 +25,7 @@ const ClassesList = ({currentClass,archiveClass}) => {
             <Box className={currentStyle.boxNavButtonContainer}>
                 <Box onClick={currentClassClick}
                      className={clsx(currentStyle.boxNavButton, currentClassActive === true ? currentStyle.active : null)}>
-                    <span>Current Class</span>
+                    <span>{translation.language["label.global.current.class"]}</span>
                     <br/>
                     <AccessTimeIcon/>
 
@@ -33,7 +33,7 @@ const ClassesList = ({currentClass,archiveClass}) => {
 
                 <Box onClick={archiveClassClick}
                      className={clsx(currentStyle.boxNavButton, currentClassActive !== true ? currentStyle.active : null)}>
-                    <span>Archive Classes</span>
+                    <span>{translation.language["label.global.archive.class"]}</span>
                     <br/>
                     <AccessTimeIcon/>
                 </Box>
@@ -43,9 +43,9 @@ const ClassesList = ({currentClass,archiveClass}) => {
             <div className={currentStyle.classesContainer}>
                 {
                     currentClassActive ?
-                        <ClassesCard style={currentStyle} classes={currentClass}/>
+                        <ClassesCard translation={translation} style={currentStyle} classes={currentClass}/>
                         :
-                        <ClassesCard style={currentStyle} classes={archiveClass}/>
+                        <ClassesCard translation={translation} style={currentStyle} classes={archiveClass}/>
                 }
             </div>
         </Grid>

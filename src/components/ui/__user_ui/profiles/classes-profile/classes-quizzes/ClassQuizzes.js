@@ -1,12 +1,12 @@
 import ProfileStyle from '../../ProfileStyle'
 import Grid from "@material-ui/core/Grid";
 import TaskCard from "../TaskCard";
-const ClassQuizzes = ({quizzes}) => {
+const ClassQuizzes = ({quizzes,translation}) => {
     const style = ProfileStyle()
     return (
         <Grid container>
             <Grid item container justify="center">
-                <h1>Quizzes</h1>
+                <h1>{translation.language["label.global.quiz"]}</h1>
                 {
                     quizzes.map((e) =>
                         <TaskCard style={style}
@@ -21,6 +21,7 @@ const ClassQuizzes = ({quizzes}) => {
                                   resourceCode={e.resource.code}
                                   resourceName={e.resource.name}
                                   lecture={false}
+                                  translation={translation}
                         />)
                 }
             </Grid>

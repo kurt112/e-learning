@@ -25,7 +25,8 @@ const TeacherLecture = ({
                             deleteLectureDialogClose,
                             pageChange,
                             initData,
-                            searchChange
+                            searchChange,
+                            translation
                         }) => {
     const classes = style()
 
@@ -34,27 +35,27 @@ const TeacherLecture = ({
     }, [])
     return (
         <Fragment>
-            <CreateLectureDialog closeDialog={createLectureDialogClose}
+            <CreateLectureDialog translation={translation} closeDialog={createLectureDialogClose}
                                  dialog={state.createDialog}/>
-            <DeleteLectureDialog closeDialog={deleteLectureDialogClose}
+            <DeleteLectureDialog translation={translation} closeDialog={deleteLectureDialogClose}
                                  dialog={state.deleteDialog}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
                         <Box className={classes.tableNavbarBox}>
-                            <Tooltip title="Create Lecture">
+                            <Tooltip title={translation.language["tooltip.teacher.lecture.create"]}>
                                 <IconButton aria-label="Add" onClick={createLectureDialogOpen}>
                                     <CloudUploadIcon color='primary' fontSize={"large"}/>
                                 </IconButton>
                             </Tooltip>
 
-                            <Tooltip title="Update Lecture">
+                            <Tooltip title={translation.language["tooltip.teacher.lecture.update"]}>
                                 <IconButton aria-label="update">
                                     <UpdateIcon color='primary' fontSize={"large"}/>
                                 </IconButton>
                             </Tooltip>
 
-                            <Tooltip title="Delete Lecture">
+                            <Tooltip title={translation.language["tooltip.teacher.lecture.delete"]}>
                                 <IconButton aria-label="delete" onClick={deleteLectureDialogOpen}>
                                     <DeleteForeverIcon color='secondary' fontSize={"large"}/>
                                 </IconButton>
@@ -65,7 +66,7 @@ const TeacherLecture = ({
 
                 <Grid item md={12} component={Paper} className={classes.tableContainerWrapper}>
                     <MUIDataTable
-                        title={"Lecture List"}
+                        title={translation.language["label.teacher.lecture.table.title"]}
                         data={state.data}
                         columns={columns}
                         options={options(
@@ -82,8 +83,6 @@ const TeacherLecture = ({
         </Fragment>
     )
 }
-
-
 const mapStateToProps = (state) => {
     return {
         state: state.TeacherLectures

@@ -10,7 +10,6 @@ import {connect} from 'react-redux'
 import * as actions from '../../../../../store/action/__ActionGlobal/DialogAction'
 import {Teacher_Assignment_Delete} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
-import {DeleteAssignmentFail, DeleteAssignmentSuccess} from "../../../../../__Messages/teacher/TeacherAssignmentMessage";
 
 const DeleteAssignmentDialog = ({
                                            dialog,
@@ -18,7 +17,8 @@ const DeleteAssignmentDialog = ({
                                            closeDialog,
                                            dialogId,
                                            registerDialogMessageClose,
-                                           dialogRegister
+                                           dialogRegister,
+    translation
                                        }) => {
 
     const RegisterEnter = (event) => {
@@ -32,19 +32,19 @@ const DeleteAssignmentDialog = ({
         fullWidth
         maxWidth={"md"}
     >
-        <DialogTitle id="delete-resource">Delete Assignment</DialogTitle>
+        <DialogTitle id="delete-resource">{translation.language["label.teacher.assignment.dialog.delete.assignment.title"]}</DialogTitle>
         <Divider/>
         <DialogContent>
 
             <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
-                      messageFail={DeleteAssignmentFail}
-                      messageSuccess={DeleteAssignmentSuccess}/>
+                      messageFail={translation.language["message.teacher.dialog.delete.fail"]}
+                      messageSuccess={translation.language["message.teacher.dialog.delete.success"]}/>
             <TextField
                 autoFocus
                 value={state.id}
                 margin="dense"
                 variant={'outlined'}
-                label="Enter Assignment Code"
+                label={translation.language["label.teacher.assignment.dialog.input"]}
                 type="text"
                 fullWidth
                 onChange={(event) => dialogId(event.target.value)}
@@ -55,15 +55,14 @@ const DeleteAssignmentDialog = ({
         </DialogContent>
         <DialogActions>
             <Button variant={'contained'} disableElevation onClick={dialogRegister} color='secondary'>
-                Delete
+                {translation.language["label.button.delete"]}
             </Button>
             <Button variant={'contained'} disableElevation onClick={closeDialog} color='primary'>
-                Cancel
+                {translation.language["label.button.back"]}
             </Button>
         </DialogActions>
     </Dialog>
 }
-
 const mapToState = (state) => {
     return {
         state: state.DeleteAssignmentDialog
@@ -77,6 +76,4 @@ const mapDispatchToState = (dispatch) => {
         registerDialogMessageClose: () => dispatch(actions.registerDialogMessageClose(Teacher_Assignment_Delete))
     }
 }
-
-
 export default connect(mapToState, mapDispatchToState)(DeleteAssignmentDialog)

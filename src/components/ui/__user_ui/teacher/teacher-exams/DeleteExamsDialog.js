@@ -8,18 +8,18 @@ import {
 } from "@material-ui/core"
 import {connect} from 'react-redux'
 import * as actions from '../../../../../store/action/__ActionGlobal/DialogAction'
-import {Teacher_Exams_Delete} from "../../../../../store/utils/Specify";
-import Response from "../../../utils/Response";
-// import {DeleteAssignmentFail, DeleteAssignmentSuccess} from "../../../../../__Messages/teacher/TeacherAssignmentMessage";
+import {Teacher_Exams_Delete} from "../../../../../store/utils/Specify"
+import Response from "../../../utils/Response"
 
 const DeleteExamsDialog = ({
-                                           dialog,
-                                           state,
-                                           closeDialog,
-                                           dialogId,
-                                           registerDialogMessageClose,
-                                           dialogRegister
-                                       }) => {
+                               dialog,
+                               state,
+                               closeDialog,
+                               dialogId,
+                               registerDialogMessageClose,
+                               dialogRegister,
+                               translation
+                           }) => {
 
     const RegisterEnter = (event) => {
         if (event.key === "Enter" && state.id.length > 0) dialogRegister()
@@ -32,18 +32,18 @@ const DeleteExamsDialog = ({
         fullWidth
         maxWidth={"md"}
     >
-        <DialogTitle id="delete-exam">Delete Exam</DialogTitle>
+        <DialogTitle id="delete-exam">{translation.language["label.teacher.dialog.input"]}</DialogTitle>
         <Divider/>
         <DialogContent>
             <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
-                      messageFail={'Exam Delete Not Success'}
-                      messageSuccess={'Exam Delete Success'}/>
+                      messageFail={translation.language["message.teacher.dialog.exam.delete.fail"]}
+                      messageSuccess={translation.language["message.teacher.dialog.exam.delete.success"]}/>
             <TextField
                 autoFocus
                 value={state.id}
                 margin="dense"
                 variant={'outlined'}
-                label="Enter Exam Code"
+                label={translation.language["label.teacher.exam.dialog.input"]}
                 type="text"
                 fullWidth
                 onChange={(event) => dialogId(event.target.value)}
@@ -54,10 +54,10 @@ const DeleteExamsDialog = ({
         </DialogContent>
         <DialogActions>
             <Button variant={'contained'} disableElevation onClick={dialogRegister} color='secondary'>
-                Delete
+                {translation.language["label.button.delete"]}
             </Button>
             <Button variant={'contained'} disableElevation onClick={closeDialog} color='primary'>
-                Cancel
+                {translation.language["label.button.back"]}
             </Button>
         </DialogActions>
     </Dialog>

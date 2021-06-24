@@ -2,7 +2,7 @@ import { Box, Container, Typography } from "@material-ui/core";
 import { Fragment } from "react";
 import ProfileStyle from '../../ProfileStyle'
 import {convertDateTime} from "../../../../utils/dateFormat/DateTimeFormatToDateWord";
-export default function Data({teacher}) {
+export default function Data({teacher,translation}) {
     const style = ProfileStyle()
     return (
         <Fragment>
@@ -10,37 +10,37 @@ export default function Data({teacher}) {
             <Container>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainerTitle}>
-                        <p>First Name: </p>
+                        <p>{translation.language["label.global.first.name"]}: </p>
                     </Box>
                     <p>{teacher.user.firstName}</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainerTitle}>
-                        <p>Last Name: </p>
+                        <p>{translation.language["label.global.last.name"]}: </p>
                     </Box>
                     <p>{teacher.user.lastName}</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainerTitle}>
-                        <p>Birthdate </p>
+                        <p>{translation.language["label.global.birth.date"]}:</p>
                     </Box>
                     <p>{teacher.user.birthdate}</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainerTitle}>
-                        <p>Account Registered </p>
+                        <p>{translation.language["label.global.birth.date"]}:</p>
                     </Box>
                     <p>{convertDateTime(teacher.user.createdAt)}</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainerTitle}>
-                        <p>Email </p>
+                        <p>{translation.language["label.global.email"]}: </p>
                     </Box>
                     <p>{teacher.user.email}</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainerTitle}>
-                        <p>Birthdate </p>
+                        <p>{translation.language["label.global.birth.date"]}:</p>
                     </Box>
                     <p>{teacher.user.birthdate}</p>
                 </Box>

@@ -1,7 +1,6 @@
 import {Avatar, Button, CircularProgress, Divider, Grid, Hidden, Paper, Typography} from "@material-ui/core";
 import ProfileStyle from '../ProfileStyle'
 import Picture from '../../../../../assets/asd.jpg'
-import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
     import {Fragment, useEffect, useState} from "react";
 import {connect} from 'react-redux'
 
@@ -17,7 +16,7 @@ import ClassQuizzes from './classes-quizzes/ClassQuizzes'
 import ClassExams from './classes-exams/ClassExams'
 import ClassLectures from "./classes-lecture/ClassLectures";
 
-const  RoomShiftClassProfile= ({roomShiftClass, match, initData})=>{
+const  RoomShiftClassProfile= ({roomShiftClass, match, initData,translation})=>{
 
     const style = ProfileStyle()
     const [component, setComponent] = useState(null)
@@ -46,33 +45,33 @@ const  RoomShiftClassProfile= ({roomShiftClass, match, initData})=>{
     useEffect(() => {
 
         if (roomShiftClass.profile !== null) {
-            setComponent(<Data roomShiftClass={profile}/>)
+            setComponent(<Data roomShiftClass={profile} translation={translation}/>)
         }
     }, [roomShiftClass.profile])
 
 
     const data = () => {
-        setComponent(<Data roomShiftClass={profile}/>)
+        setComponent(<Data roomShiftClass={profile} translation={translation}/>)
     }
 
     const classAssignment = () => {
-        setComponent(<ClassAssignment assignments={assignments}/>)
+        setComponent(<ClassAssignment assignments={assignments} translation={translation}/>)
     }
 
     const classQuizzes = () => {
-        setComponent(<ClassQuizzes quizzes={quizzes}/>)
+        setComponent(<ClassQuizzes quizzes={quizzes} translation={translation}/>)
     }
 
     const classExams = () => {
-        setComponent(<ClassExams exams={exams}/>)
+        setComponent(<ClassExams exams={exams} translation={translation}/>)
     }
 
     const classLectures = () => {
-        setComponent(<ClassLectures lectures={lectures}/>)
+        setComponent(<ClassLectures lectures={lectures} translation={translation}/>)
     }
 
     const RoomClassPeople = () => {
-        setComponent(<PeopleList teacher={profile.teacher} students={profile.students}/>)
+        setComponent(<PeopleList teacher={profile.teacher} students={profile.students} translation={translation}/>)
     }
     console.log(roomShiftClass.profile)
 
@@ -108,12 +107,7 @@ const  RoomShiftClassProfile= ({roomShiftClass, match, initData})=>{
                                     <Button color="primary" onClick={RoomClassPeople}>People</Button>
                                     <Button color="primary" onClick={RoomClassPeople}>Join</Button>
                                 </Grid>
-                                <Button
-                                    color="primary"
-                                    startIcon={<CreateRoundedIcon />}
-                                >
-                                    Edit Profile
-                                </Button>
+
                             </Grid>
                         </Grid>
 

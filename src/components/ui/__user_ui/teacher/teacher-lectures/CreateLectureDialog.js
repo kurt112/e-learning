@@ -23,22 +23,22 @@ import {
     twoOptionSelected,
     changeTextWithRole
 } from '../../../utils/autoComplete/autoCompleteAction'
-import {AddedLectureFail, AddedLectureSuccess} from "../../../../../__Messages/teacher/TeacherLectureMessages";
 
 const CreateLectureDialog = ({
 
-                                           dialog,
-                                           closeDialog,
-                                           create,
-                                           registerDialogMessageClose,
-                                           email,
-                                           state,
-                                           changeResourceCode,
-                                           changeClassCode,
-                                           changeSem,
-                                           changeQuarter,
-                                           changeDescription
-                                       }) => {
+                                 dialog,
+                                 closeDialog,
+                                 create,
+                                 registerDialogMessageClose,
+                                 email,
+                                 state,
+                                 changeResourceCode,
+                                 changeClassCode,
+                                 changeSem,
+                                 changeQuarter,
+                                 changeDescription,
+                                 translation
+                             }) => {
 
     // for assignment resource autoComplete
     const [resourceOpen, setResourceOpen] = useState(false);
@@ -46,7 +46,7 @@ const CreateLectureDialog = ({
     const [resourceLoading, setResourceLoading] = useState(false)
     const [resourceText, setResourceText] = useState('')
     const OutputResources = (event, value) => {
-        changeResourceCode(value  === null? '': value[1].toString())
+        changeResourceCode(value === null ? '' : value[1].toString())
     }
 
 
@@ -56,7 +56,7 @@ const CreateLectureDialog = ({
     const [classLoading, setClassLoading] = useState(false)
     const [classText, setClassText] = useState('')
     const OutputClass = (event, value) => {
-        changeClassCode(value  === null? '': value[2].toString())
+        changeClassCode(value === null ? '' : value[2].toString())
     }
 
 
@@ -69,13 +69,13 @@ const CreateLectureDialog = ({
     >
         <form noValidate>
             <DialogTitle id="create-lecture"
-            >Create Lecture</DialogTitle>
+            >{translation.language["label.teacher.lecture.dialog.create.title"]}</DialogTitle>
             <Divider/>
             <DialogContent>
 
                 <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
-                          messageFail={AddedLectureFail}
-                          messageSuccess={AddedLectureSuccess}/>
+                          messageFail={translation.language["message.teacher.dialog.lecture.create.fail"]}
+                          messageSuccess={translation.language["message.teacher.dialog.lecture.create.success"]}/>
 
                 <Grid container spacing={1}>
                     <Grid item md={3} xs={12}>
@@ -89,8 +89,8 @@ const CreateLectureDialog = ({
                             InputText={resourceText}
                             changeAutoComplete={OutputResources}
                             changeText={(value) => changeTextWithRole(value, setResourceText, setResourceLoading, setResourceOptions, autoCompleteGetTeacherLecture, email)}
-                            noOptionText={"Search By Resource Name"}
-                            label={"Lecture Resource"}
+                            noOptionText={translation.language["label.teacher.lecture.dialog.create.resource.search"]}
+                            label={translation.language["label.teacher.lecture.dialog.create.resource"]}
                             optionLabel={twoOptionLabel}
                             optionSelected={twoOptionSelected}
                         />
@@ -106,8 +106,8 @@ const CreateLectureDialog = ({
                             InputText={classText}
                             changeAutoComplete={OutputClass}
                             changeText={(value) => changeTextWithRole(value, setClassText, setClassLoading, setClassOptions, autoCompleteGetTeacherClass, email)}
-                            noOptionText={"No Class Found"}
-                            label={"Your Class"}
+                            noOptionText={translation.language["label.global.search.class"]}
+                            label={translation.language["label.global.your.class"]}
                             optionLabel={twoOptionLabel}
                             optionSelected={twoOptionSelected}
                         />
@@ -116,10 +116,11 @@ const CreateLectureDialog = ({
 
                     <Grid item md={3} xs={12}>
                         <FormControl variant="outlined" margin='dense' fullWidth>
-                            <InputLabel htmlFor="Semester">Semester</InputLabel>
+                            <InputLabel
+                                htmlFor={translation.language["label.global.semester"]}>{translation.language["label.global.semester"]}</InputLabel>
                             <Select
                                 native
-                                label="Semester"
+                                label={translation.language["label.global.semester"]}
                                 inputProps={{
                                     name: 'type',
                                     id: 'type',
@@ -137,10 +138,11 @@ const CreateLectureDialog = ({
 
                     <Grid item md={3} xs={12}>
                         <FormControl variant="outlined" margin='dense' fullWidth>
-                            <InputLabel htmlFor="Quarter">Quarter</InputLabel>
+                            <InputLabel
+                                htmlFor={translation.language["label.global.quarter"]}>{translation.language["label.global.quarter"]}</InputLabel>
                             <Select
                                 native
-                                label="Quarter"
+                                label={translation.language["label.global.quarter"]}
                                 inputProps={{
                                     name: 'type',
                                     id: 'type',
@@ -157,9 +159,10 @@ const CreateLectureDialog = ({
                         </FormControl>
                     </Grid>
                     <Grid item md={12} xs={12}>
-                        <InputLabel htmlFor="ActivityDescription">Lecture Description(Optional)</InputLabel>
+                        <InputLabel
+                            htmlFor={translation.language["label.teacher.lecture.dialog.description"]}>{translation.language["label.teacher.lecture.dialog.description"]}</InputLabel>
                         <TextareaAutosize
-                            label="Description"
+                            label={translation.language["label.global.description"]}
                             rowsMin={10}
                             aria-label="maximum height"
                             style={{width: '100%', marginBottom: '10px', marginTop: '10px'}}
@@ -172,10 +175,10 @@ const CreateLectureDialog = ({
 
             <DialogActions>
                 <Button variant={'contained'} disableElevation onClick={create} color='primary'>
-                    Create
+                    {translation.language["label.global.create"]}
                 </Button>
                 <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
-                    Cancel
+                    {translation.language["label.button.back"]}
                 </Button>
             </DialogActions>
         </form>
@@ -191,11 +194,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changeResourceCode: (data) => dispatch(actions.changeResourceCode(data,Teacher_Lecture_Create)),
-        changeClassCode: (data) => dispatch(actions.changeClassCode(data,Teacher_Lecture_Create)),
-        changeSem: (data) => dispatch(actions.changeSemester(data,Teacher_Lecture_Create)),
-        changeQuarter: (data) => dispatch(actions.changeQuarter(data,Teacher_Lecture_Create)),
-        changeDescription: (data) => dispatch(actions.changeDescription(data,Teacher_Lecture_Create)),
+        changeResourceCode: (data) => dispatch(actions.changeResourceCode(data, Teacher_Lecture_Create)),
+        changeClassCode: (data) => dispatch(actions.changeClassCode(data, Teacher_Lecture_Create)),
+        changeSem: (data) => dispatch(actions.changeSemester(data, Teacher_Lecture_Create)),
+        changeQuarter: (data) => dispatch(actions.changeQuarter(data, Teacher_Lecture_Create)),
+        changeDescription: (data) => dispatch(actions.changeDescription(data, Teacher_Lecture_Create)),
 
         registerDialogMessageClose: () => dispatch(dialogAction.registerDialogMessageClose(Teacher_Lecture_Create)),
         create: () => dispatch(dialogAction.dialogRegister(Teacher_Lecture_Create))

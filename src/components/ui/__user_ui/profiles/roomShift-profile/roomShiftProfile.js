@@ -1,7 +1,6 @@
 import {Avatar, Button, CircularProgress, Container, Divider, Grid, Hidden, Paper, Typography} from "@material-ui/core";
 import ProfileStyle from '../ProfileStyle'
 import Picture from '../../../../../assets/asd.jpg'
-import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
 import {useEffect, useState} from "react";
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom';
@@ -11,7 +10,7 @@ import {RoomShift} from "../../../../../store/utils/Specify";
 import {Fragment} from "react";
 import PeopleList from "../utils/PeopleData/PeopleList";
 import RoomShiftClasses from "../utils/RoomShiftClasses/RoomShiftClasses";
-const RoomShiftProfile = ({roomShift, match, initData}) => {
+const RoomShiftProfile = ({roomShift, match, initData,translation}) => {
     const style = ProfileStyle()
     const [component, setComponent] = useState(null)
     const profile = roomShift.profile !== null? roomShift.profile.roomShift: null
@@ -24,30 +23,26 @@ const RoomShiftProfile = ({roomShift, match, initData}) => {
 
     useEffect(() => {
 
-        if (roomShift.profile !== null) setComponent(<Data roomShift={profile}/>)
+        if (roomShift.profile !== null) setComponent(<Data translation={translation} roomShift={profile}/>)
     }, [roomShift.profile])
 
 
     const data = () => {
-        setComponent(<Data roomShift={profile}/>)
+        setComponent(<Data  translation={translation} roomShift={profile}/>)
     }
 
     const people = () => {
-        setComponent(<PeopleList teacher={profile.teacher} students={profile.students} />)
+        setComponent(<PeopleList translation={translation} teacher={profile.teacher} students={profile.students} />)
     }
 
     const roomClasses = () => {
-        setComponent(<RoomShiftClasses classes={profile.roomShiftClasses}/>)
+        setComponent(<RoomShiftClasses translation={translation} classes={profile.roomShiftClasses}/>)
     }
-
-    console.log("The room ")
-    console.log(roomShift.profile)
 
     return (
         <Grid container className={style.container}>
             {
                 roomShift.loading === true? <CircularProgress style={{margin: 'auto'}} disableShrink/>:
-
                     <Fragment>
                         <Grid container className={style.profileHeader} component={Paper} >
                             <Grid className={style.avatarContainer} item md={12} sm={12} xs={12} lg={12}>
@@ -62,20 +57,12 @@ const RoomShiftProfile = ({roomShift, match, initData}) => {
                             </Hidden>
                             <Grid className={style.profileButton} container >
                                 <Grid className={style.buttonGroup} item md={12} sm={12} xs={12} lg={12} >
-                                    <Button color="primary" onClick={data}>RoomShift Info</Button>
-                                    <Button color="primary" onClick={roomClasses}>Room Class</Button>
-                                    <Button color="primary" onClick={people}>People</Button>
+                                    <Button color="primary" onClick={data}>{translation.language["label.global.room.shift.info"]}</Button>
+                                    <Button color="primary" onClick={roomClasses}>{translation.language["label.global.room.classes"]}</Button>
+                                    <Button color="primary" onClick={people}>{translation.language["label.global.people"]}</Button>
                                 </Grid>
-                                <Button
-                                    color="primary"
-                                    startIcon={<CreateRoundedIcon />}
-                                >
-                                    Edit Profile
-                                </Button>
                             </Grid>
                         </Grid>
-
-
                         <Grid container component={Container} className={style.profileData}  >
                             <Grid className={style.profileInfo} container component={Paper} >
                                 {component}

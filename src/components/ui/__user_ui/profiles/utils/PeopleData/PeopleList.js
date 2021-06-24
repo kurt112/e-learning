@@ -5,12 +5,12 @@ import ProfileStyle from '../../ProfileStyle'
 import Box from "@material-ui/core/Box";
 import PeopleData from "./PeopleData";
 
-const PeopleList = ({students, teacher}) => {
+const PeopleList = ({students, teacher,translation}) => {
     const style = ProfileStyle()
     return (
         <Fragment>
             <Container>
-                <h1>Teachers</h1>
+                <h1>{translation.language["label.global.teacher"]}</h1>
                 <hr className={style.classPeopleDivider}/>
                 <Box className={style.peopleListContainer}>
                     {
@@ -19,7 +19,7 @@ const PeopleList = ({students, teacher}) => {
                                         name={`${teacher.user.firstName}  ${teacher.user.lastName}`}/>
                     }
                 </Box>
-                <h1>Students</h1>
+                <h1>{translation.language["label.global.student"]}</h1>
                 <hr className={style.classPeopleDivider}/>
                 {
                     students.map((student, index) => {

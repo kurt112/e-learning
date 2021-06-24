@@ -16,7 +16,8 @@ const TaskCard = ({
                       highGrade,
                       lowGrade,
                       resourceCode,
-                      lecture
+                      lecture,
+                      translation
                   }) => {
     return <Grid component={Paper} container style={{padding: 10, marginBottom: 10}}>
         <Grid item container>
@@ -26,7 +27,7 @@ const TaskCard = ({
                     {resourceName}
                 </h2>
                 <p className={style.marginZero}>
-                    <b>Date Upload: </b>
+                    <b>{translation.language["label.global.date.upload"]}: </b>
                     {createdAt}
                 </p>
             </Grid>
@@ -36,7 +37,7 @@ const TaskCard = ({
                     {teacherName}
                 </h4>
                 <p className={style.marginZero}>
-                    <b>DeadLine: </b>
+                    <b>{translation.language["label.global.date.deadline"]}: </b>
                     {deadLine}
                 </p>
             </Grid>
@@ -55,9 +56,12 @@ const TaskCard = ({
                     {
                         lecture === true ? null :
                             <Grid item md={12} container>
-                                <p style={{marginBottom: 0, marginRight: 10}}><b>Low Grade:</b>{highGrade}</p>
-                                <p style={{marginBottom: 0, marginRight: 10}}><b>High Grade: </b>{lowGrade}</p>
-                                <p style={{marginBottom: 0, marginRight: 10}}><b>Your Grade: </b></p>
+                                <p style={{marginBottom: 0, marginRight: 10}}>
+                                    <b>{translation.language["label.global.high.grade"]}:</b>{highGrade}</p>
+                                <p style={{marginBottom: 0, marginRight: 10}}>
+                                    <b>{translation.language["label.global.low.grade"]}: </b>{lowGrade}</p>
+                                <p style={{marginBottom: 0, marginRight: 10}}>
+                                    <b>{translation.language["label.global.your.grade"]} </b></p>
                             </Grid>
                     }
                 </Grid>
@@ -65,9 +69,9 @@ const TaskCard = ({
                 <Grid item>
                     <Grid container alignItems="center" style={{marginTop: 10}}>
                         <Chip icon={<GetAppIcon style={{color: 'white'}}/>}
-                              label="Download"
+                              label={translation.language["label.global.download"]}
                               component="a"
-                              href={JavaEndpoint + '/teacher/resource/download?code=' + resourceCode}
+                              href={JavaEndpoint + translation.language["route.teacher.resource.download"] + resourceCode}
                               target="_blank"
                               clickable
                               style={{backgroundColor: 'green', color: 'white'}}
@@ -78,7 +82,7 @@ const TaskCard = ({
                     <Grid container alignItems="center" style={{marginTop: 10}}>
                         <Chip
                             icon={<PublishIcon/>}
-                            label="Submit"
+                            label={translation.language["label.global.submit"]}
                             component="a"
                             href="#chip" clickable
                             color={'primary'}

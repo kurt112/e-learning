@@ -10,7 +10,6 @@ import {connect} from 'react-redux'
 import * as actions from '../../../../../store/action/__ActionGlobal/DialogAction'
 import {Teacher_Lecture_Delete} from "../../../../../store/utils/Specify"
 import Response from "../../../utils/Response"
-import {DeleteLectureFail, DeleteLectureSuccess} from "../../../../../__Messages/teacher/TeacherLectureMessages";
 
 const DeleteLectureDialog = ({
                                  state,
@@ -18,7 +17,8 @@ const DeleteLectureDialog = ({
                                  dialog,
                                  dialogId,
                                  registerDialogMessageClose,
-                                 dialogRegister
+                                 dialogRegister,
+                                 translation
                              }) => {
 
 
@@ -33,19 +33,20 @@ const DeleteLectureDialog = ({
         fullWidth
         maxWidth={"md"}
     >
-        <DialogTitle id="delete-lecture">Delete Lecture</DialogTitle>
+        <DialogTitle
+            id="delete-lecture">{translation.language["label.teacher.lecture.dialog.delete.title"]}</DialogTitle>
         <Divider/>
         <DialogContent>
 
             <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
-                      messageFail={DeleteLectureFail}
-                      messageSuccess={DeleteLectureSuccess}/>
+                      messageFail={translation.language["message.teacher.dialog.lecture.delete.fail"]}
+                      messageSuccess={translation.language["message.teacher.dialog.lecture.delete.success"]}/>
             <TextField
                 autoFocus
                 value={state.id}
                 margin="dense"
                 variant={'outlined'}
-                label="Enter Lecture Code"
+                label={translation.language["label.teacher.lecture.dialog.input"]}
                 type="text"
                 fullWidth
                 onChange={(event) => dialogId(event.target.value)}
@@ -56,10 +57,10 @@ const DeleteLectureDialog = ({
         </DialogContent>
         <DialogActions>
             <Button variant={'contained'} disableElevation onClick={dialogRegister} color='secondary'>
-                Delete
+                {translation.language["label.button.delete"]}
             </Button>
             <Button variant={'contained'} disableElevation onClick={closeDialog} color='primary'>
-                Cancel
+                {translation.language["label.button.back"]}
             </Button>
         </DialogActions>
     </Dialog>
