@@ -55,7 +55,7 @@ const reducer = (state = initState, action) => {
 
     switch (action.type) {
         case actions.LOGIN:
-            return Login(state, action)
+            return Login(state)
         case actions.CHANGE_EMAIL:
             return updateObject(state, {username: action.data})
         case actions.CHANGE_PASSWORD:

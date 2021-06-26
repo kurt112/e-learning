@@ -1,7 +1,6 @@
 import {Box} from "@material-ui/core";
 import {useEffect, useRef, useState} from "react";
 import style from './VideoStyle'
-import Peer from "simple-peer";
 import {connect} from 'react-redux'
 const Video =  ({video,mic,socket}) =>{
     const classes = style()

@@ -1,6 +1,6 @@
 import state from '../../../__StateGlobal/AdminTableDialogState'
 import * as dialogAction from "../../../../ActionType/Teacher/GlobalActiontype";
-import {Teacher_Exams_Create, Teacher_Quiz_Create} from "../../../../utils/Specify";
+import {Teacher_Quiz_Create} from "../../../../utils/Specify";
 import {updateObject} from "../../../../utils/UpdateObject";
 import * as globalActionDialog from "../../../../ActionType/__ActionTypeGlobal/DialogActionType";
 
