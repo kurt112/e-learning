@@ -1,4 +1,3 @@
-
 import {
     autoCompleteRoomShift
 } from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
@@ -20,22 +19,23 @@ import {
 import {Fragment, useState} from "react";
 import RoomShiftAddStudentTransfer from "./RoomShiftAddStudentTransferDialog";
 
-const RoomShiftAddStudentDialog = ({closeDialog, dialog,translation}) => {
+const RoomShiftAddStudentDialog = ({closeDialog, dialog, translation}) => {
 
     const [openRoomShift, setOpenRoomShift] = useState(false)
     const [roomShiftOptions, setRoomShiftOptions] = useState([])
     const [roomShiftLoading, setRoomShiftLoading] = useState(false)
     const [roomShiftText, setRoomShiftText] = useState('')
-    const [id,setId] = useState('')
-
-    const OutputRoomShift = (event, value) => {
-        setId(value  === null? '': value[2].toString())
-    }
-
+    const [id, setId] = useState('')
     const [transfer, setTransfer] = useState(false);
 
+
+    const OutputRoomShift = (event, value) => {
+        setId(value === null ? '' : value[2].toString())
+    }
+
+
     const closeTransfer = () => {
-        setTransfer( false)
+        setTransfer(false)
     }
 
     const openTransfer = () => {
@@ -44,7 +44,8 @@ const RoomShiftAddStudentDialog = ({closeDialog, dialog,translation}) => {
 
     return <Fragment>
         {
-            id.length === 0? null:  <RoomShiftAddStudentTransfer shiftID={id} translation={translation} open={transfer} closeDialog={closeTransfer}/>
+            id.length === 0 ? null : <RoomShiftAddStudentTransfer shiftID={id} translation={translation} open={transfer}
+                                                                  closeDialog={closeTransfer}/>
         }
         <Dialog
             open={dialog}
@@ -58,11 +59,10 @@ const RoomShiftAddStudentDialog = ({closeDialog, dialog,translation}) => {
                 <Divider/>
                 <br/>
                 <DialogContent>
-
                     <Grid container spacing={1}>
                         <Grid item md={12} xs={12}>
                             <AutoComplete
-                                autoFocus={true }
+                                autoFocus={true}
                                 open={openRoomShift}
                                 setOpen={setOpenRoomShift}
                                 filterOptions={TwoFilterOption}
@@ -78,13 +78,12 @@ const RoomShiftAddStudentDialog = ({closeDialog, dialog,translation}) => {
 
                             />
                         </Grid>
-
-
                     </Grid>
                 </DialogContent>
 
                 <DialogActions>
-                    <Button variant={'contained'} disableElevation onClick={id.length === 0 ?null: openTransfer} color='primary'>
+                    <Button variant={'contained'} disableElevation onClick={id.length === 0 ? null : openTransfer}
+                            color='primary'>
                         {translation.language["label.global.find"]}
                     </Button>
                     <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>

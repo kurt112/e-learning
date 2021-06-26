@@ -39,7 +39,6 @@ const DeleteRoomShiftDialog = ({
                       messageFail={translation.language['message.room.shift.dialog.delete.fail']}
                       messageSuccess={translation.language['message.room.shift.dialog.delete.success']}/>
             <TextField
-                autoFocus
                 value={state.id}
                 margin="dense"
                 variant={'outlined'}
@@ -50,6 +49,7 @@ const DeleteRoomShiftDialog = ({
                 onKeyDown={event => {
                     RegisterEnter(event)
                 }}
+                autoFocus
             />
         </DialogContent>
         <DialogActions>

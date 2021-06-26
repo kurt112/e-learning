@@ -19,7 +19,7 @@ import style from '../mainUI/MainUiStyle'
 import {connect} from "react-redux";
 import * as action from '../../store/action/CurrentUser/CurrentUserAction'
 import {Link} from "react-router-dom";
-import {Student, Teacher} from "../../store/utils/Specify";
+import {Student} from "../../store/utils/Specify";
 
 const StyledMenu = withStyles({
     paper: {
@@ -87,7 +87,6 @@ const Navbar = ({handleDrawerOpen, currentUser, logout}) => {
         <AppBar
             elevation={0}
             position="fixed"
-            className={classes.appBar}
         >
             <Toolbar>
                 <IconButton
@@ -152,7 +151,6 @@ const Navbar = ({handleDrawerOpen, currentUser, logout}) => {
                         <StyledMenuItem>
                             <ListItemIcon>
                                 <FormControlLabel
-                                    className={classes.colorBlack}
                                     control={
                                         <Switch
                                             checked={enable}
@@ -163,9 +161,7 @@ const Navbar = ({handleDrawerOpen, currentUser, logout}) => {
                                     label="Night Mode"
                                 />
                             </ListItemIcon>
-
                         </StyledMenuItem>
-
                         <StyledMenuItem onClick={logout}>
                             <ListItemIcon>
                                 <ExitToAppIcon fontSize="small"/>

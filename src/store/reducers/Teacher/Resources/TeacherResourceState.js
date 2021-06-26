@@ -2,7 +2,6 @@ import {TeacherInsertResources as insert} from '../../../../components/ui/utils/
 import {updateObject} from "../../../utils/UpdateObject";
 import {convertDateTime} from "../../../../components/ui/utils/dateFormat/DateTimeFormatToDateWord";
 import * as dialogAction from '../../../ActionType/__ActionTypeGlobal/TableActionType'
-import * as teacherDialog from '../../../ActionType/Teacher/GlobalActiontype'
 import {
     Teacher_Resource,
     Teacher_Resource_Delete,
@@ -22,24 +21,8 @@ const initState = {
 
 
 const transforms = (items) => items.map((item) =>
-    insert(item.code, item.name, item.description, convertDateTime(item.createdAt), item.type, item.status, item.location))
+    insert(item.code, item.name, item.description, convertDateTime(item.createdAt), item.type, item.status))
 
-
-const successData = (state, action) => {
-    const newData = action.data
-    const tempData = [...state.data]
-
-    tempData.unshift(insert(newData.code, newData.name, newData.description, newData.date, newData.type, newData.status, newData.location))
-
-    return updateObject(state, {data: tempData})
-}
-
-const successDelete = (state, action) => {
-    const resourceCode = action.data
-    const tempData = state.data.filter(resource => resource.documentCode !== resourceCode)
-
-    return updateObject(state, {data: tempData})
-}
 
 const reducer = (state = initState, action) => {
     switch (action.type) {
@@ -56,8 +39,6 @@ const reducer = (state = initState, action) => {
             return updateObject(state, {uploadResourceDialog: true})
         case dialogAction.DIALOG_CLOSE(Teacher_Resource_Upload):
             return updateObject(state, {uploadResourceDialog: false})
-        case teacherDialog.Dialog_Success(Teacher_Resource_Upload):
-            return successData(state, action)
 
 
         // for opening and closing of delete dialog
@@ -65,8 +46,6 @@ const reducer = (state = initState, action) => {
             return updateObject(state, {deleteResourceDialog: true})
         case dialogAction.DIALOG_CLOSE(Teacher_Resource_Delete):
             return updateObject(state, {deleteResourceDialog: false})
-        case teacherDialog.Dialog_Success(Teacher_Resource_Delete):
-            return successDelete(state, action)
 
 
         default:

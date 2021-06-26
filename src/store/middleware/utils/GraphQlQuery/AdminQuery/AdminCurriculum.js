@@ -23,4 +23,18 @@ export const
         }
         `
         }
+    },
+
+    GetCurriculum = (id) => {
+        return {
+            query: `
+                    query{getCurriculum(id:"${id}"){
+                        name,
+                        subjects{
+                            subjectCode
+                            subjectName
+                        }
+                    }
+            }`
+        }
     }

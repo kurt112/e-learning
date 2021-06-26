@@ -76,5 +76,6 @@ export const
     autoCompleteGetTeacherClass = autoComplete + 'getTeacherClass',
     autoCompleteGetTeacherLecture = autoComplete + 'getTeacherLectures',
     autoCompleteGetTeacherExams = autoComplete + 'getTeacherExam',
-    autoCompleteGetTeacherQuiz = autoComplete + 'getTeacherQuizzes'
+    autoCompleteGetTeacherQuiz = autoComplete + 'getTeacherQuizzes',
+    autoCompleteGetCurriculum = autoComplete + 'curriculum'
 

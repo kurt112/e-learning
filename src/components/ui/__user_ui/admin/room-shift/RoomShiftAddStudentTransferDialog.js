@@ -10,7 +10,6 @@ import {
     TextField
 } from "@material-ui/core";
 
-import {makeStyles} from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -21,26 +20,8 @@ import {
     getStudentsForRoomShift
 } from "../../../../../store/middleware/utils/GraphQlQuery/AdminQuery/AdminRoomShiftQuery";
 import {graphQlRequestAsync, PostData} from "../../../../../store/middleware/utils/HttpRequest";
+import style from "../../../_style/TransferDialogStyle";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        margin: 'auto',
-    },
-    cardHeader: {
-        padding: theme.spacing(1, 2),
-    },
-    list: {
-        width: '100%',
-        height: 500,
-        backgroundColor: theme.palette.background.paper,
-        overflow: 'auto',
-        textAlign: 'center'
-    },
-    button: {
-        margin: theme.spacing(1, 0),
-        borderWidth: 3
-    },
-}));
 
 // Checking if the current check list has a member of the entity
 function not(a, b) {
@@ -58,8 +39,7 @@ function intersection(a, b) {
  *
  */
 const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID, translation}) => {
-
-    const classes = useStyles();
+    const classes = style();
     const [checked, setChecked] = useState([])
     const [availStudent, setAvailStudent] = useState([])
     const [roomShiftStudents, setRoomShiftStudents] = useState([])
@@ -291,7 +271,7 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID, translation}) 
             <form>
                 <DialogContent>
                     <Grid container spacing={2} justify="center" alignItems="center"
-                          className={classes.root}>
+                    >
                         <Grid md={5}
                               item sm={12} xs={12}
                               item>{customList(translation.language["label.room.shift.dialog.transfer.student.available"], availStudent, leftText, setLeftText)}</Grid>

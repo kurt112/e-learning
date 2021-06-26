@@ -11,18 +11,9 @@ import {connect} from "react-redux";
 const MainUi = ({user,translation}) => {
 
     const classes = style();
-
-
     const [open, setOpen] = useState(false);
-
-    const handleDrawerOpen = () => {
-
-        setOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
+    const handleDrawerOpen = () => setOpen(true);
+    const handleDrawerClose = () => setOpen(false);
 
     return (
         <div className={classes.root}>
@@ -42,12 +33,10 @@ const MainUi = ({user,translation}) => {
                         </Switch>
                     </Suspense>
                 }
-
             </main>
         </div>
     );
 }
-
 const mapStateToProps = (state) => {
     return {
         translation: state.languageReducer,

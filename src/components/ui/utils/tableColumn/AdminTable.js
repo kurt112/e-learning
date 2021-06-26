@@ -225,11 +225,14 @@ export const AdminSubjectTable = (translation) => [
             sort: false,
             customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to="/admin/dashboard" style={{textDecoration: 'none'}}>
-                        <Button variant="outlined" color="primary">
-                            {translation.language["label.global.visit.profile"]}
-                        </Button>
-                    </Link>
+                    <Button variant="outlined" color="primary" onClick={() => alert("wala pa ako profile tanga")}>
+                        {translation.language["label.global.visit.profile"]}
+                    </Button>
+                    // <Link to="/admin/dashboard" style={{textDecoration: 'none'}}>
+                    //     <Button variant="outlined" color="primary">
+                    //         {translation.language["label.global.visit.profile"]}
+                    //     </Button>
+                    // </Link>
             },
             filterOptions: {
                 fullWidth: false
@@ -437,12 +440,13 @@ export const AdminCurriculumTable = (translation) => [
             sort: false,
             customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Link to={`${translation.language["route.profile.room"]}${value}`}
-                          style={{textDecoration: 'none'}}>
-                        <Button variant="outlined" color="primary">
-                            {translation.language["label.global.visit.profile"]}
-                        </Button>
-                    </Link>
+                    <Button variant="outlined" color="primary" onClick={() => alert("wala pa ako profile tanga")}>
+                        {translation.language["label.global.visit.profile"]}
+                    </Button>
+                    // <Link to={`${translation.language["route.profile.room"]}${value}`}
+                    //       style={{textDecoration: 'none'}}>
+                    //
+                    // </Link>
             },
             filterOptions: {
                 fullWidth: false

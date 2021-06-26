@@ -10,7 +10,6 @@ import {
     TextField
 } from "@material-ui/core";
 
-import {makeStyles} from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -20,25 +19,9 @@ import {
     getStudentsForRoomShift
 } from "../../../../../store/middleware/utils/GraphQlQuery/AdminQuery/AdminRoomShiftQuery";
 import {graphQlRequestAsync,PostData } from "../../../../../store/middleware/utils/HttpRequest";
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-    },
-    cardHeader: {
-        padding: theme.spacing(1, 2),
-    },
-    list: {
-        width: '100%',
-        height: 500,
-        backgroundColor: theme.palette.background.paper,
-        overflow: 'auto',
-        textAlign: 'center',
-    },
-    button: {
-        margin: theme.spacing(1, 0),
-        borderWidth: 3
-    },
-}));
+import style from '../../../_style/TransferDialogStyle'
+import {GetCurriculum} from "../../../../../store/middleware/utils/GraphQlQuery/AdminQuery/AdminCurriculum";
+import {AdminSubjectBodyDataQuery} from "../../../../../store/middleware/utils/GraphQlQuery/AdminQuery/AdminSubjectQuery";
 
 // Checking if the current check list has a member of the entity
 function not(a, b) {
@@ -55,64 +38,43 @@ function intersection(a, b) {
  * @param {{student_id:string}} id of the student
  *
  */
-const InsertSubjectInCurriculumDialog = ({open, closeDialog,translation}) => {
+const InsertSubjectInCurriculumDialog = ({open, closeDialog,translation,curriculumCode}) => {
 
-    const classes = useStyles();
+    const classes = style();
     const [checked, setChecked] = useState([])
-    const [availStudent, setAvailStudent] = useState([])
-    const [roomShiftStudents, setRoomShiftStudents] = useState([])
+    const [availableSubjects, setAvailSubjects] = useState([])
+    const [curriculumSubjects, setCurriculumSubjects] = useState([])
     const [rightText, setRightText] = useState('')
     const [leftText, setLeftText] = useState('')
-    const [roomName, setRoomName] = useState('')
-    const [studentHashMap] = useState({})
-    let leftChecked = intersection(checked, availStudent)
-    let rightChecked = intersection(checked, roomShiftStudents)
+    const [curriculumName, setCurriculumName] = useState('')
+    const [subjectHashMap] = useState({})
+    let leftChecked = intersection(checked, availableSubjects)
+    let rightChecked = intersection(checked, curriculumSubjects)
 
 
-    const uploadStudent = (roomShiftID, list) => {
-
-
-        // This method will post all the student in the room
-        // and then it will update all the current students in that room
-        const registerStudents = async () => {
-            return await list.map((e) => {
-                const params = new URLSearchParams();
-                params.append('student-id', e.student_id)
-                PostData("/admin/add-studentRoomShift", params)
-            })
+    const uploadSubjects = () => {
+        const data = {
+            curriculumCode,
+            subjects: curriculumSubjects.map(e=> e.subjectCode)
         }
 
-        // Since we Will not do anything we ignore it for now
-        registerStudents().then(r => {
-
-        }).catch(error => {
-            console.log(error)
+        PostData("/admin/curriculum/add/subject", data).then(r => {
+            console.log(r)
         })
-
-
-        // This post it will update the students in roomShift
-        const addStudentInRoomShift = async () => {
-            const params = new URLSearchParams();
-            params.append('roomShiftID', roomShiftID)
-            await PostData("/admin/doneAddingStudentInRoomShift", params)
-        }
-
-        // ignore the returning value
-        addStudentInRoomShift().then()
     }
 
 
     // This method will handle the checkbox in the transfer list;
-    const handleToggle = (student) => () => {
-        studentHashMap[student.student_id] = student;
-        const currentIndex = checked.indexOf(student);
+    const handleToggle = (subject) => () => {
+        subjectHashMap[subject.subjectCode] = subject;
+        const currentIndex = checked.indexOf(subject);
 
         const newChecked = [...checked];
 
         if (currentIndex === -1) {
-            newChecked.push(student);
+            newChecked.push(subject);
         } else {
-            delete studentHashMap[student.student_id]
+            delete subjectHashMap[subject.subjectCode]
             newChecked.splice(currentIndex, 1);
         }
 
@@ -124,18 +86,18 @@ const InsertSubjectInCurriculumDialog = ({open, closeDialog,translation}) => {
     // left transfer list to the right transfer list
     const handleCheckedRight = () => {
 
-        const array = roomShiftStudents.concat(leftChecked)
-        const uniqueStudent = array.filter((v, i, a) => a.findIndex(t => (t.student_id === v.student_id)) === i);
+        const array = curriculumSubjects.concat(leftChecked)
+        const uniqueStudent = array.filter((v, i, a) => a.findIndex(t => (t.subjectCode === v.subjectCode)) === i);
         const newChecked = not(checked, rightChecked);
-        setRoomShiftStudents(uniqueStudent);
-        setAvailStudent(not(availStudent, leftChecked));
-        newChecked.map((student) => delete studentHashMap[student.student_id])
+        setCurriculumSubjects(uniqueStudent);
+        setAvailSubjects(not(availableSubjects, leftChecked));
+        newChecked.map((student) => delete subjectHashMap[student.subjectCode])
         const updatedChecked = []
 
         // eslint-disable-next-line array-callback-return
-        Object.entries(studentHashMap).map((e) => {
+        Object.entries(subjectHashMap).map((e) => {
             const key = e[0]
-            updatedChecked.push(studentHashMap[key])
+            updatedChecked.push(subjectHashMap[key])
         })
         setChecked(updatedChecked)
 
@@ -144,18 +106,18 @@ const InsertSubjectInCurriculumDialog = ({open, closeDialog,translation}) => {
     // This method transfer the student from the
     // right transfer list to left right transfer list
     const handleCheckedLeft = () => {
-        const array = availStudent.concat(rightChecked)
-        const uniqueStudent = array.filter((v, i, a) => a.findIndex(t => (t.student_id === v.student_id)) === i);
+        const array = availableSubjects.concat(rightChecked)
+        const uniqueStudent = array.filter((v, i, a) => a.findIndex(t => (t.subjectCode === v.subjectCode)) === i);
 
         const newChecked = not(checked, leftChecked);
 
 
-        setAvailStudent(uniqueStudent);
-        setRoomShiftStudents(not(roomShiftStudents, rightChecked));
+        setAvailSubjects(uniqueStudent);
+        setCurriculumSubjects(not(curriculumSubjects, rightChecked));
 
         // eslint-disable-next-line array-callback-return
         newChecked.map((student) => {
-            delete studentHashMap[student.student_id]
+            delete subjectHashMap[student.subjectCode]
         })
 
 
@@ -163,9 +125,9 @@ const InsertSubjectInCurriculumDialog = ({open, closeDialog,translation}) => {
 
 
         // eslint-disable-next-line array-callback-return
-        Object.entries(studentHashMap).map((e) => {
+        Object.entries(subjectHashMap).map((e) => {
             const key = e[0]
-            updatedChecked.push(studentHashMap[key])
+            updatedChecked.push(subjectHashMap[key])
         })
 
 
@@ -173,7 +135,7 @@ const InsertSubjectInCurriculumDialog = ({open, closeDialog,translation}) => {
     };
 
 
-    const customList = (title, students, text, changeText) => (
+    const customList = (title, subjects, text, changeText) => (
 
         <Card>
             <CardHeader
@@ -190,32 +152,26 @@ const InsertSubjectInCurriculumDialog = ({open, closeDialog,translation}) => {
             />
 
             <List className={classes.list} dense component="div" role="list">
-
                 {
-
-                    students.length === 0 ?
-
-                        <p> No Student Currently</p> :
-
-                        students.filter(student => (
-                            student.user.firstName +
-                            student.user.lastName +
-                            student.student_id).toLowerCase().includes(rightText.toLowerCase().replace(/\s+/g, ''))).map((student) => {
-                            const labelId = `transfer-list-all-item-${student.student_id}-label`;
-
+                    subjects.length === 0 ?
+                        <p> {translation.language["label.curriculum.dialog.transfer.subject.warning"]}</p> :
+                        subjects.filter(subject => (
+                            subject.subjectName +
+                            subject.subjectCode).toLowerCase().includes(rightText.toLowerCase().replace(/\s+/g, ''))).map((subject) => {
+                            const labelId = `transfer-list-all-item-${subject.subjectCode}-label`;
                             return (
-                                <ListItem key={student.student_id} role="listitem" button
-                                          onClick={handleToggle(student)}>
+                                <ListItem key={subject.subjectCode} role="listitem" button
+                                          onClick={handleToggle(subject)}>
                                     <ListItemIcon>
                                         <Checkbox
-                                            checked={checked.indexOf(student) !== -1}
+                                            checked={checked.indexOf(subject) !== -1}
                                             tabIndex={-1}
                                             disableRipple
                                             inputProps={{'aria-labelledby': labelId}}
                                         />
                                     </ListItemIcon>
                                     <ListItemText id={labelId}
-                                                  primary={`${student.user.lastName} ${student.user.firstName}`}/>
+                                                  primary={`${subject.subjectName} - ${subject.subjectCode}`}/>
                                 </ListItem>
                             );
                         })}
@@ -229,16 +185,16 @@ const InsertSubjectInCurriculumDialog = ({open, closeDialog,translation}) => {
     // If the shift id is change
     useEffect(() => {
 
-        // async function fetchData() {
-        //     return await graphQlRequestAsync(getRoomShift(shiftID))
-        // }
+        async function fetchData() {
+            return await graphQlRequestAsync(GetCurriculum(curriculumCode))
+        }
 
 
-        // fetchData().then(r => {
-        //     const response = r.data.data.roomShift
-        //     setRoomName(response.grade + ' ' + response.section)
-        //     setRoomShiftStudents(response.students)
-        // })
+        fetchData().then(r => {
+            const response = r.data.data.getCurriculum
+            setCurriculumName(response.name)
+            setCurriculumSubjects(response.subjects)
+        })
 
 
     }, [])
@@ -249,16 +205,17 @@ const InsertSubjectInCurriculumDialog = ({open, closeDialog,translation}) => {
     useEffect(() => {
 
         async function fetchData() {
-            return await graphQlRequestAsync(getStudentsForRoomShift(leftText))
+            return await graphQlRequestAsync(AdminSubjectBodyDataQuery(leftText,0))
         }
 
         fetchData().then(r => {
-            const students = r.data.data.getStudentsForRoomShift
+            console.log(r)
+            const subjects = r.data.data.subjects
 
             // eslint-disable-next-line array-callback-return
-            students.map((e) => {
-                if (studentHashMap[e.student_id]) {
-                    studentHashMap[e.student_id] = e;
+            subjects.map((e) => {
+                if (subjectHashMap[e.student_id]) {
+                    subjectHashMap[e.subjectCode] = e;
                 }
 
             })
@@ -266,13 +223,13 @@ const InsertSubjectInCurriculumDialog = ({open, closeDialog,translation}) => {
             const newCheck = [];
 
             // eslint-disable-next-line array-callback-return
-            Object.entries(studentHashMap).map((e) => {
+            Object.entries(subjectHashMap).map((e) => {
                 const key = e[0]
-                newCheck.push(studentHashMap[key])
+                newCheck.push(subjectHashMap[key])
             })
 
 
-            setAvailStudent(students)
+            setAvailSubjects(subjects)
             setChecked(newCheck)
         })
 
@@ -291,9 +248,8 @@ const InsertSubjectInCurriculumDialog = ({open, closeDialog,translation}) => {
                 <DialogContent>
 
 
-                    <Grid container spacing={2} justify="space-between" alignItems="center"
-                          className={classes.root}>
-                        <Grid md={5} sm={12} xs={12} item>{customList('Available Subject', availStudent, leftText, setLeftText)}</Grid>
+                    <Grid container spacing={2} justify="space-between" alignItems="center">
+                        <Grid md={5} sm={12} xs={12} item>{customList(translation.language["label.curriculum.dialog.add.subject.title.available"], availableSubjects, leftText, setLeftText)}</Grid>
                         <Grid item md={2} sm={12} xs={12}>
                             <Grid container direction="column" alignItems="center">
                                 <Button
@@ -321,18 +277,18 @@ const InsertSubjectInCurriculumDialog = ({open, closeDialog,translation}) => {
                             </Grid>
                         </Grid>
                         <Grid md={5}
-                            item sm={12} xs={12}>{customList(roomName + ' Current Subject', roomShiftStudents, rightText, setRightText)}</Grid>
+                              item sm={12} xs={12}>{customList(curriculumName + " "  + translation.language["label.curriculum.dialog.add.subject.title.current"], curriculumSubjects, rightText, setRightText)}</Grid>
                     </Grid>
 
                 </DialogContent>
 
                 <DialogActions>
                     <Button variant={'contained'} disableElevation
-                            color='primary'>
-                        Save
+                            color='primary' onClick={uploadSubjects}>
+                        {translation.language["label.button.save"]}
                     </Button>
-                    <Button variant={'contained'} disableElevation onClick={closeDialog} color='Secondary'>
-                        Back
+                    <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
+                        {translation.language["label.button.back"]}
                     </Button>
                 </DialogActions>
             </form>

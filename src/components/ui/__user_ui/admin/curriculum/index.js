@@ -21,7 +21,7 @@ import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 
 const CreateCurriculumDialog = lazy(() => import(`./CreateCurriculumDialog`))
 const DeleteCurriculumDialog = lazy(() => import(`./DeleteCurriculumDialog`))
-const InsertSubjectCurriculumDialog= lazy(() => import(`./InsertSubjectInCurriculum`))
+const FindSubject = lazy(() => import(`./FindCurriculum`))
 
 const Index = ({
                    state,
@@ -50,7 +50,8 @@ const Index = ({
         <Fragment>
             <CreateCurriculumDialog translation={translation} dialog={state.dialog} closeDialog={closeDialog}/>
             <DeleteCurriculumDialog translation={translation} dialog={state.deleteDialog} closeDialog={closeDeleteDialog}/>
-            <InsertSubjectCurriculumDialog translation={translation} open={state.insertSubjectDialog} closeDialog={closeInsertSubjectDialog}/>
+            <FindSubject translation={translation} dialog={state.insertSubjectDialog} closeDialog={closeInsertSubjectDialog}/>
+            {/*<InsertSubjectCurriculumDialog translation={translation} open={state.insertSubjectDialog} closeDialog={closeInsertSubjectDialog}/>*/}
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>

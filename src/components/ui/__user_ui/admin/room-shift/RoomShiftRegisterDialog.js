@@ -18,7 +18,7 @@ import AutoComplete from "../../../utils/autoComplete/AutoComplete";
 import {useEffect, useState} from "react";
 import {createFilterOptions} from "@material-ui/lab";
 import {autoCompleteRoom} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
-import {baseUrl} from "../../../../../store/middleware/axios";
+import {changeText, optionLabel, optionSelected} from "../../../utils/autoComplete/autoCompleteAction";
 
 const RoomShiftRegisterDialog = ({
                                      closeDialog,
@@ -41,22 +41,6 @@ const RoomShiftRegisterDialog = ({
     const [loading, setLoading] = useState(false)
     const [roomText, setRoomText] = useState('')
 
-    const changeRoom = async (value) => {
-        setLoading(true)
-        const response = await baseUrl.get(autoCompleteRoom, {
-            params: {
-                search: value,
-            }
-        })
-        setLoading(false)
-
-        setRoomText(value)
-
-        const teacher = response.data.items
-
-        setRoomOptions(teacher)
-    }
-
     useEffect(() => {
         if (!openRoomName) setRoomOptions([])
     }, [openRoomName])
@@ -70,9 +54,6 @@ const RoomShiftRegisterDialog = ({
         stringify: (option) => option[0],
     });
 
-    const optionLabel = (option) => option[0]
-
-    const optionSelected = (option, value) => option[1] === value[1]
 
     return <Dialog
         open={dialog}
@@ -101,7 +82,7 @@ const RoomShiftRegisterDialog = ({
                             loading={loading}
                             InputText={roomText}
                             changeAutoComplete={OutputRoom}
-                            changeText={changeRoom}
+                            changeText={(value) => changeText(value,setRoomText,setLoading,setRoomOptions,autoCompleteRoom)}
                             noOptionText={translation.language["label.room.shift.dialog.create.input.room.name"]}
                             label={translation.language["label.global.room"]}
                             optionLabel={optionLabel}

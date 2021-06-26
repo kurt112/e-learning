@@ -3,7 +3,6 @@ import * as Selector from "../selector";
 import { baseUrlNoAuth} from "../axios";
 import {param} from "./Parameter";
 import * as action from '../../action/login/LoginAction'
-import * as currentUserAction from '../../action/CurrentUser/CurrentUserAction'
 export function* StudentRegisterData() {
     const student = yield select(Selector.StudentRegister)
     const {id}   = yield select(Selector.Login)
@@ -13,7 +12,7 @@ export function* StudentRegisterData() {
 
         const response = yield baseUrlNoAuth.post('/student-fillUp', params)
         alert("Success Register")
-        const  data = response.data
+        // const  data = response.data
         // yield put(action.successLogin(data))
         // yield put(currentUserAction.changeToken(data.token))
         // yield put(currentUserAction.changeUser(data.user))

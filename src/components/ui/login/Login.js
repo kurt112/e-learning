@@ -8,20 +8,28 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Typography from '@material-ui/core/Typography';
-import {Divider, Hidden, LinearProgress} from '@material-ui/core';
+import {Divider, FormControl, Hidden, InputLabel, LinearProgress, MenuItem, Select} from '@material-ui/core';
 import Copyright from '../copyright/Copyright';
 import {connect} from 'react-redux'
 import * as action from '../../../store/action/login/LoginAction'
-import {StudentRegisterForm, TeacherRegisterForm,UserIDForm} from "../registerForm";
+import {StudentRegisterForm, TeacherRegisterForm, UserIDForm} from "../registerForm";
 import style from './LoginStyle'
 import {useEffect, useState} from "react";
 import {Student, Teacher} from "../../../store/utils/Specify";
+import {changeLanguage} from '../../../store/action/__ActionGlobal/ProfileAction'
 
-const Login = ({loginState, changeEmail, changePassword, login, changeId,
-                   registerInit, registerOpen,registerClose,translation}) => {
-
-    console.log(translation)
-
+const Login = ({
+                   loginState,
+                   changeEmail,
+                   changePassword,
+                   login,
+                   changeId,
+                   registerInit,
+                   registerOpen,
+                   registerClose,
+                   translation,
+                   changeLanguage
+               }) => {
     const classes = style();
 
     const [studentForm, setStudentForm] = useState(false)
@@ -34,13 +42,13 @@ const Login = ({loginState, changeEmail, changePassword, login, changeId,
     useEffect(() => {
 
 
-        if(loginState.form === Student) {
+        if (loginState.form === Student) {
             setStudentForm(true)
             setTeacherForm(false)
-        }else if(loginState.form === Teacher){
+        } else if (loginState.form === Teacher) {
             setStudentForm(false)
             setTeacherForm(true)
-        }else {
+        } else {
             setTeacherForm(false)
             setStudentForm(false)
         }
@@ -48,34 +56,35 @@ const Login = ({loginState, changeEmail, changePassword, login, changeId,
 
     }, [loginState.form])
 
-    const ClickEnter = (event) =>{
-        if(event  === "Enter") login()
+    const ClickEnter = (event) => {
+        if (event === "Enter") login()
     }
 
 
     return (
-        <Grid container component="main"  className={classes.root}>
+        <Grid container component="main" className={classes.root}>
 
 
-            {studentForm === false && teacherForm === false?
+            {studentForm === false && teacherForm === false ?
                 <UserIDForm openStudent={setStudentForm}
                             submit={registerInit}
                             changeId={changeId}
                             dialog={loginState.dialog}
-                            registerClose={registerClose}/>:null}
-            {studentForm === true? <StudentRegisterForm setStudent={setStudentForm} open={studentForm}/>: null}
-            {teacherForm === true? <TeacherRegisterForm setTeacher={setTeacherForm} open={teacherForm}/>: null}
+                            registerClose={registerClose}/> : null}
+            {studentForm === true ? <StudentRegisterForm setStudent={setStudentForm} open={studentForm}/> : null}
+            {teacherForm === true ? <TeacherRegisterForm setTeacher={setTeacherForm} open={teacherForm}/> : null}
 
 
             <CssBaseline/>
 
-           <Hidden mdDown>
-               <Grid item xs={false} sm={false} md={8} className={classes.image}>
-                   <p className={classes.textSide}><em><b>{translation.language["label.login.heading.title"]}</b></em></p>
-                   <Divider style={{marginRight: 260, marginLeft: 260, backgroundColor: '#333'}}/>
-                   <p style={{cursor: 'default'}}>  {new Date().getFullYear()}</p>
-               </Grid>
-           </Hidden>
+            <Hidden mdDown>
+                <Grid item xs={false} sm={false} md={8} className={classes.image}>
+                    <p className={classes.textSide}><em><b>{translation.language["label.login.heading.title"]}</b></em>
+                    </p>
+                    <Divider style={{marginRight: 260, marginLeft: 260, backgroundColor: '#333'}}/>
+                    <p style={{cursor: 'default'}}>  {new Date().getFullYear()}</p>
+                </Grid>
+            </Hidden>
             <Grid item xs={12} sm={12} md={4} component={Paper} elevation={6} square>
 
 
@@ -142,8 +151,26 @@ const Login = ({loginState, changeEmail, changePassword, login, changeId,
                                 </Grid>
                             </Grid>
                             <Grid item>
-                                <Button color="primary" onClick={registerOpen}>{translation.language["label.login.button.sing.up"]}</Button>
+                                <Button color="primary"
+                                        onClick={registerOpen}>{translation.language["label.login.button.sing.up"]}</Button>
                             </Grid>
+                        </Grid>
+                        <br/>
+                        <Grid md={4}>
+                            <FormControl fullWidth variant="outlined" >
+                                <InputLabel id="demo-simple-select-outlined-label">{translation.language["label.global.select.language"]}</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-outlined-label"
+                                    id="demo-simple-select-outlined"
+                                    value={translation.index}
+                                    onChange={(event) => changeLanguage(event.target.value)}
+                                    label={translation.language["label.global.select.language"]}
+                                >
+                                    <MenuItem value={0}>English</MenuItem>
+                                    <MenuItem value={1}>Cebuano</MenuItem>
+                                    <MenuItem value={2}>Ilocano</MenuItem>
+                                </Select>
+                            </FormControl>
                         </Grid>
                         <Box mt={5}>
                             <Copyright/>
@@ -158,7 +185,7 @@ const Login = ({loginState, changeEmail, changePassword, login, changeId,
 const mapStateToProps = (state) => {
     return {
         loginState: state.Login,
-        translation: state.languageReducer,
+        translation: state.languageReducer
     }
 }
 
@@ -172,7 +199,8 @@ const mapDispatchToProps = (dispatch) => {
         registerOpen: () => dispatch(action.registerOpen()),
         registerInit: () => dispatch(action.registerInit()),
         registerClose: () => dispatch(action.registerClose()),
-        changeId: (data) => dispatch(action.changeId(data))
+        changeId: (data) => dispatch(action.changeId(data)),
+        changeLanguage: (data) => dispatch(changeLanguage(data))
 
     }
 }

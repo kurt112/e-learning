@@ -1,4 +1,4 @@
- import {Route} from "react-router";
+  import {Route} from "react-router";
 import {Fragment, lazy} from "react";
 
 const DashBoard = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({ default: module.DashBoard })))
