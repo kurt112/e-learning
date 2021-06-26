@@ -13,8 +13,8 @@ import languageReducer from './store/reducers/__StateGlobal/Language'
 import {
     DeleteAssignmentDialog, DeleteResource,
     TeacherResource, UploadResource, TeacherAssignment,
-    TeacherAssignmentCreateDialog,TeacherLectureCreateDialog,
-    TeacherLectures,TeacherLectureDeleteDialog,
+    TeacherAssignmentCreateDialog, TeacherLectureCreateDialog,
+    TeacherLectures, TeacherLectureDeleteDialog,
     TeacherExamsCreateDialog,
     TeacherExamsDeleteDialog,
     TeacherExams,
@@ -24,7 +24,10 @@ import {
 } from './store/reducers/Teacher'
 
 //Student
-import {StudentActivity, StudentSubject, StudentRoom, StudentTeacher} from './store/reducers/Student'
+import {
+    StudentLectureState,
+    StudentTodoState
+} from './store/reducers/Student'
 
 
 import {
@@ -189,11 +192,8 @@ const reducers = combineReducers({
     TeacherQuizDeleteDialog,
 
     // Student State
-    StudentActivity,
-    StudentSubject,
-    StudentRoom,
-    StudentTeacher,
-
+    StudentLectureState,
+    StudentTodoState,
 
     // Admin State
     AdminDashBoard,
@@ -295,7 +295,6 @@ sagaMiddleware.run(watchCurriculumSearchChange)
 sagaMiddleware.run(watchCurriculumTableNextData)
 sagaMiddleware.run(watchAdminRegisterCurriculum)
 sagaMiddleware.run(watchAdminDeleteCurriculum)
-
 
 
 // profile

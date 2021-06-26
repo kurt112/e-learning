@@ -19,6 +19,10 @@ import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 
+// icons student
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import {Book} from "@material-ui/icons";
+
 export function TeacherItems({translation}) {
     return (
         <div>
@@ -84,25 +88,18 @@ export function StudentItems({translation}) {
                 </ListItemIcon>
                 <ListItemText primary={translation.language["label.sidebar.classes"]}/>
             </ListItem>
-            <ListItem component={NavLink} to={translation.language["route.student.subjects"]} button>
+            <ListItem component={NavLink} to={translation.language["route.student.lectures"]} button>
                 <ListItemIcon>
                     <MenuBookIcon/>
                 </ListItemIcon>
-                <ListItemText primary={translation.language["label.sidebar.subjects"]}/>
+                <ListItemText primary={translation.language["label.sidebar.lecture"]}/>
             </ListItem>
-            <ListItem component={NavLink} to={translation.language["route.student.teachers"]} button>
+            <ListItem component={NavLink} to={translation.language["route.student.todos"]} button>
                 <ListItemIcon>
-                    <PeopleIcon/>
+                    <FormatListBulletedIcon/>
                 </ListItemIcon>
-                <ListItemText primary={translation.language["label.sidebar.teachers"]}/>
+                <ListItemText primary={translation.language["label.sidebar.todos"]}/>
             </ListItem>
-            <ListItem component={NavLink} to={translation.language["route.student.resources"]} button>
-                <ListItemIcon>
-                    <CloudUploadIcon/>
-                </ListItemIcon>
-                <ListItemText primary={translation.language["label.sidebar.resources"]}/>
-            </ListItem>
-
         </div>
     )
 }

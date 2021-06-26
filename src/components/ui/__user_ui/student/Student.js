@@ -1,8 +1,7 @@
+export {
+    default as StudentLecture
+} from './lectures/Lectures'
 
 export {
-    default as StudentSubjects
-} from './student-subjects/StudentSubjects'
-
-export {
-    default as StudentTeachers
-} from './student-teachers/StudentTeachers'
+    default as StudentTodo
+} from './todos/Todos'

@@ -1,15 +1,7 @@
 export {
-    default as StudentActivity
-} from './StudentActivityState'
+    default as StudentLectureState
+}from './StudentLectureState'
 
 export {
-    default as StudentRoom
-} from './StudentRoomState'
-
-export {
-    default as StudentSubject
-} from './StudentSubjectState'
-
-export {
-    default as StudentTeacher
-} from './StudentTeacherState'
+    default as StudentTodoState
+} from './StudentTodoState'
