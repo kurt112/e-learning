@@ -21,7 +21,7 @@ import {
 
 // dialogs
 const DeleteResourceDialog = lazy(() => import(`./DeleteResourceDialog`))
-const UpdateResourceDialog = lazy(() => import(`./UpdateResourceDialog`))
+// const UpdateResourceDialog = lazy(() => import(`./UpdateResourceDialog`))
 const UploadResources = lazy(() => import(`./UploadResourceDialog`))
 
 const TeacherResources = ({
