@@ -1,4 +1,4 @@
-import {PasswordEncrypt} from "../utils/EncryptPassword";
+// import {PasswordEncrypt} from "../utils/EncryptPassword";
 const params = new URLSearchParams();
 export function* param(user,id) {
 
@@ -13,6 +13,5 @@ export function* param(user,id) {
     yield params.append('email', user.email)
     yield params.append('password', user.password)
 
-    console.log(params)
     return params
 }

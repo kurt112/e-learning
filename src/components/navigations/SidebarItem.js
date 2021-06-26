@@ -21,7 +21,6 @@ import AcUnitIcon from '@material-ui/icons/AcUnit';
 
 // icons student
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
-import {Book} from "@material-ui/icons";
 
 export function TeacherItems({translation}) {
     return (

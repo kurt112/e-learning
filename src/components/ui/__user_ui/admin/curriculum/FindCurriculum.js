@@ -4,9 +4,7 @@ import {Fragment, useState} from "react";
 import AutoComplete from "../../../utils/autoComplete/AutoComplete";
 import {
     changeText, optionLabel, optionSelected,
-    TwoFilterOption,
-    twoOptionLabel,
-    twoOptionSelected
+    TwoFilterOption
 } from "../../../utils/autoComplete/autoCompleteAction";
 import {
     autoCompleteGetCurriculum

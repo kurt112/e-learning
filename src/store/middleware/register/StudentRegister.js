@@ -10,7 +10,7 @@ export function* StudentRegisterData() {
 
     try {
 
-        const response = yield baseUrlNoAuth.post('/student-fillUp', params)
+        yield baseUrlNoAuth.post('/student-fillUp', params)
         alert("Success Register")
         // const  data = response.data
         // yield put(action.successLogin(data))

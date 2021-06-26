@@ -5,7 +5,8 @@ import {AdminInsertStudentTable as insert} from "../../../../components/ui/utils
 import {updateObject} from "../../../utils/UpdateObject";
 
 const transforms = (items) => items.map((item) =>
-    insert(item.student_id, item.user.firstName,item.user.lastName,item.user.email,item.user.birthdate,"to be insert", "to be insert", "to be insert",item.student_id))
+    insert(item.student_id, item.user.firstName,item.user.lastName,item.user.email,item.user.birthdate,
+        "to be insert", "to be insert", "to be insert"))
 
 const newState = new state()
 

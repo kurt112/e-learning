@@ -3,11 +3,10 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText,
     DialogTitle,
     TextField
 } from "@material-ui/core";
-const UserId = ({submit,id, changeId,dialog, registerClose,openStudent}) => {
+const UserId = ({submit,id, changeId,dialog, registerClose}) => {
 
     return <Dialog
         open={dialog}

@@ -1,7 +1,6 @@
 import style from '../GlobalStyle'
 import {Box} from "@material-ui/core";
 import {useEffect, useRef, useState} from "react";
-import Peer from "simple-peer";
 
 const Participant = () => {
 
@@ -29,8 +28,6 @@ const Participant = () => {
 
     }, [])
 
-
-    let UserVideo;
 
     // if (stream) {
     //     UserVideo = (<video playsInline width={'100%%'}  muted ref={userVideo} autoPlay />)

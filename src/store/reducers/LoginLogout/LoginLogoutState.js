@@ -32,7 +32,7 @@ const failLogin = (state, action) => {
     return updateObject(state, {message: action.message})
 }
 
-const registerClose = (state, action) => {
+const registerClose = (state) => {
     state = updateObject(state, {dialog: false})
 
     return updateObject(state, {id: ''})
@@ -71,7 +71,7 @@ const reducer = (state = initState, action) => {
         case actions.REGISTER_OPEN:
             return updateObject(state, {dialog: true})
         case actions.REGISTER_CLOSE:
-            return registerClose(state, action)
+            return registerClose(state)
         case actions.CHANGE_ID:
             return updateObject(state, {id: action.data})
         case actions.CHANGE_FORM:

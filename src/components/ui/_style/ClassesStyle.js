@@ -1,5 +1,4 @@
-import {makeStyles} from "@material-ui/styles";
-import { deepPurple } from '@material-ui/core/colors';
+import {makeStyles} from "@material-ui/styles"
 
 const classesStyle = makeStyles((theme) => ({
     boxNavButtonContainer: {

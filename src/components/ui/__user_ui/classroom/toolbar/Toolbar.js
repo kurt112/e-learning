@@ -3,13 +3,12 @@ import MicIcon from '@material-ui/icons/Mic'
 import MicOffIcon from '@material-ui/icons/MicOff'
 import VideocamIcon from '@material-ui/icons/Videocam'
 import VideocamOffIcon from '@material-ui/icons/VideocamOff'
-import MoreHorizSharpIcon from '@material-ui/icons/MoreHorizSharp';
-import GroupAddSharpIcon from '@material-ui/icons/GroupAddSharp';
-import PresentToAllIcon from '@material-ui/icons/PresentToAll';
+import MoreHorizSharpIcon from '@material-ui/icons/MoreHorizSharp'
+import PresentToAllIcon from '@material-ui/icons/PresentToAll'
 import {Box, Hidden} from "@material-ui/core"
 import { useState } from 'react'
 import ParticiPantDialog from "../Dialog/ParticiPantDialog";
-import * as actions from "../../../../../store/action/ClassroomAction";
+import * as actions from "../../../../../store/action/ClassroomAction"
 import {connect} from 'react-redux'
 const Toolbar = ({ClassroomState, setMic,setVideo, setDrawer}) =>{
     const classes = style()

@@ -15,9 +15,6 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import ListItem from '@material-ui/core/ListItem';
 import {useEffect, useState} from "react";
-import {
-    getStudentsForRoomShift
-} from "../../../../../store/middleware/utils/GraphQlQuery/AdminQuery/AdminRoomShiftQuery";
 import {graphQlRequestAsync,PostData } from "../../../../../store/middleware/utils/HttpRequest";
 import style from '../../../_style/TransferDialogStyle'
 import {GetCurriculum} from "../../../../../store/middleware/utils/GraphQlQuery/AdminQuery/AdminCurriculum";
