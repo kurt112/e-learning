@@ -274,7 +274,7 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID, translation}) 
                     >
                         <Grid md={5}
                               item sm={12} xs={12}
-                              item>{customList(translation.language["label.room.shift.dialog.transfer.student.available"], availStudent, leftText, setLeftText)}</Grid>
+                              >{customList(translation.language["label.room.shift.dialog.transfer.student.available"], availStudent, leftText, setLeftText)}</Grid>
                         <Grid md={2} sm={12} xs={12} item>
                             <Grid container direction="column" alignItems="center">
                                 <Button
@@ -303,7 +303,7 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID, translation}) 
                         </Grid>
                         <Grid md={5}
                               item sm={12} xs={12}
-                              item>{customList(roomName + translation.language['label.global.student'], roomShiftStudents, rightText, setRightText)}</Grid>
+                              >{customList(roomName + translation.language['label.global.student'], roomShiftStudents, rightText, setRightText)}</Grid>
                     </Grid>
 
                 </DialogContent>
