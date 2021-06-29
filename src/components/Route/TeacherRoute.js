@@ -19,7 +19,7 @@ const TeacherExams = lazy(() => import('../ui/__user_ui/teacher').then(module =>
 const TeacherQuizzes = lazy(() => import('../ui/__user_ui/teacher').then(module => ({default: module.TeacherQuizzes})))
 const Classes = lazy(() => import(`../ui/__user_ui/roomClasses/ClassList/ClassesList`))
 
-const TeacherRoute = ({email,translation}) => {
+const TeacherRoute = ({email, translation}) => {
 
     const [teacher, setTeacher] = useState(null)
     const [students, setStudents] = useState([])
@@ -49,22 +49,18 @@ const TeacherRoute = ({email,translation}) => {
                 setCurrentClass(classes)
 
                 // eslint-disable-next-line array-callback-return
-                classes.map(c => {
-                    const students = c.students
-                    const roomShift = c.roomShift
-                    const subject = c.subject
-                    console.log(c)
 
-                    // eslint-disable-next-line array-callback-return
-                    students.map(student => {
+                for (const class_ of classes) {
+                    const students = class_.students
+                    const roomShift = class_.roomShift
+                    const subject = class_.subject
+                    for (const student of students) {
                         const user = student.user
-                        tempStudent.push(insertStudent(user.firstName, user.lastName, roomShift.grade, roomShift.section, subject.subjectName, `${roomShift.teacher.user.firstName} ${roomShift.teacher.user.lastName}`, user.email))
-                    })
-
+                        tempStudent.push(insertStudent(user.firstName, user.lastName, roomShift.grade,
+                            roomShift.section, subject.subjectName, roomShift.teacher !== null ? `${roomShift.teacher.user.firstName} ${roomShift.teacher.user.lastName}` : translation.language["label.global.tba"], user.email))
+                    }
                     tempSubject.push(insertSubject(subject.subjectName, subject.subjectCode, subject.subjectMajor))
-                })
-
-
+                }
                 setSubjects(tempSubject)
                 setStudents(tempStudent)
             })
@@ -80,16 +76,25 @@ const TeacherRoute = ({email,translation}) => {
 
     return (
         <Fragment>
-            <Route path={translation.language["route.teacher.subjects"]} exact render={() => <TeacherSubjects translation={translation} subjects={subjects}/>}/>
-            <Route path={translation.language["route.teacher.students"]} exact render={() => <TeacherStudent translation={translation} students={students}/>}/>
-            <Route path={translation.language["route.teacher.lectures"]} exact render={() => <TeacherLectures translation={translation}/>}/>
-            <Route path={translation.language["route.teacher.classes"]} exact render={() => <Classes translation={translation} currentClass={currentClass} archiveClass={doneClass}/>}/>
-            <Route path={translation.language["route.teacher.resources"]} exact render={() => <TeacherResources translation={translation}/>}/>
-            <Route path={translation.language["route.teacher.assignments"]} exact render={() => <TeacherAssignments translation={translation}/>}/>
-            <Route path={translation.language["route.teacher.exams"]} exact render={() => <TeacherExams translation={translation}/>}/>
-            <Route path={translation.language["route.teacher.quizzes"]} exact render={() => <TeacherQuizzes translation={translation}/>}/>
+            <Route path={translation.language["route.teacher.subjects"]} exact
+                   render={() => <TeacherSubjects translation={translation} subjects={subjects}/>}/>
+            <Route path={translation.language["route.teacher.students"]} exact
+                   render={() => <TeacherStudent translation={translation} students={students}/>}/>
+            <Route path={translation.language["route.teacher.lectures"]} exact
+                   render={() => <TeacherLectures translation={translation}/>}/>
+            <Route path={translation.language["route.teacher.classes"]} exact
+                   render={() => <Classes translation={translation} currentClass={currentClass}
+                                          archiveClass={doneClass}/>}/>
+            <Route path={translation.language["route.teacher.resources"]} exact
+                   render={() => <TeacherResources translation={translation}/>}/>
+            <Route path={translation.language["route.teacher.assignments"]} exact
+                   render={() => <TeacherAssignments translation={translation}/>}/>
+            <Route path={translation.language["route.teacher.exams"]} exact
+                   render={() => <TeacherExams translation={translation}/>}/>
+            <Route path={translation.language["route.teacher.quizzes"]} exact
+                   render={() => <TeacherQuizzes translation={translation}/>}/>
 
-            <Redirect to={'teacher/classes'}/>
+            <Redirect to={translation.language["route.teacher.classes"]}/>
         </Fragment>
     )
 }

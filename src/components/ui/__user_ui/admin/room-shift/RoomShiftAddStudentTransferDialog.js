@@ -21,6 +21,7 @@ import {
 } from "../../../../../store/middleware/utils/GraphQlQuery/AdminQuery/AdminRoomShiftQuery";
 import {graphQlRequestAsync, PostData} from "../../../../../store/middleware/utils/HttpRequest";
 import style from "../../../_style/TransferDialogStyle";
+import {AddStudentInRoomShift} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 
 
 // Checking if the current check list has a member of the entity
@@ -51,36 +52,19 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID, translation}) 
     let rightChecked = intersection(checked, roomShiftStudents)
 
 
-    const uploadStudent = (roomShiftID, list) => {
+    const uploadStudent = () => {
 
-
-        // This method will post all the student in the room
-        // and then it will update all the current students in that room
-        const registerStudents = async () => {
-            return await list.map((e) => {
-                const params = new URLSearchParams();
-                params.append('student-id', e.student_id)
-                PostData("/admin/add-studentRoomShift", params)
-            })
+        const data = {
+            students: roomShiftStudents.map(e => e.student_id),
+            shiftID
         }
-
-        // Since we Will not do anything we ignore it for now
-        registerStudents().then(r => {
-
-        }).catch(error => {
-            console.log(error)
+        PostData(AddStudentInRoomShift, data).then(ignored => {
+            console.log(ignored)
+        }).catch(ignored => {
+            console.log(ignored)
         })
 
-
-        // This post it will update the students in roomShift
-        const addStudentInRoomShift = async () => {
-            const params = new URLSearchParams();
-            params.append('roomShiftID', roomShiftID)
-            await PostData("/admin/doneAddingStudentInRoomShift", params)
-        }
-
-        // ignore the returning value
-        addStudentInRoomShift().then()
+        alert("Student Added In RoomShift")
     }
 
 
@@ -274,7 +258,7 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID, translation}) 
                     >
                         <Grid md={5}
                               item sm={12} xs={12}
-                              >{customList(translation.language["label.room.shift.dialog.transfer.student.available"], availStudent, leftText, setLeftText)}</Grid>
+                        >{customList(translation.language["label.room.shift.dialog.transfer.student.available"], availStudent, leftText, setLeftText)}</Grid>
                         <Grid md={2} sm={12} xs={12} item>
                             <Grid container direction="column" alignItems="center">
                                 <Button
@@ -303,18 +287,18 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID, translation}) 
                         </Grid>
                         <Grid md={5}
                               item sm={12} xs={12}
-                              >{customList(roomName + translation.language['label.global.student'], roomShiftStudents, rightText, setRightText)}</Grid>
+                        >{customList(roomName + translation.language['label.global.student'], roomShiftStudents, rightText, setRightText)}</Grid>
                     </Grid>
 
                 </DialogContent>
 
                 <DialogActions>
                     <Button variant={'contained'} disableElevation
-                            onClick={() => uploadStudent(shiftID, roomShiftStudents)}
+                            onClick={uploadStudent}
                             color='primary'>
                         {translation.language["label.button.save"]}
                     </Button>
-                    <Button variant={'contained'} disableElevation onClick={closeDialog} color='Secondary'>
+                    <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
                         {translation.language["label.button.back"]}
                     </Button>
                 </DialogActions>

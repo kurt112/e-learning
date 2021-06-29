@@ -2,22 +2,23 @@ import {Redirect, Route} from "react-router";
 import {Fragment, lazy, useEffect, useState} from "react";
 import {getStudentDataByEmail} from "../../store/middleware/utils/GraphQlQuery/StudentQuery/StudentDataQuery";
 import {graphQlRequestAsync} from "../../store/middleware/utils/HttpRequest";
-import {
-    StudentInsertTeacher as insertTeacher,
-    StudentInsertSubject as insertSubject,
-} from "../ui/utils/tableColumn";
+
 const StudentLecture = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({default: module.StudentLecture})))
 const StudentTodo = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({default: module.StudentTodo})))
 const Classes = lazy(() => import(`../ui/__user_ui/roomClasses/ClassList/ClassesList`))
 
-const StudentRoute = ({email,translation}) => {
+const StudentRoute = ({email, translation}) => {
 
     const [student, setStudent] = useState(null);
-    const [teachers,setTeacher] = useState([])
-    const [subjects, setSubjects] = useState([])
 
     const [currentClass, setCurrentClass] = useState()
     const [doneClass, setDoneClass] = useState()
+
+    // for classwork filter
+    const [all, setAll] = useState([])
+    const [exam, setExam] = useState([])
+    const [assignment, setAssignment] = useState([])
+    const [quiz, setQuiz] = useState([])
 
     useEffect(() => {
 
@@ -30,37 +31,53 @@ const StudentRoute = ({email,translation}) => {
         })
 
 
-
-
     }, [email])
 
     useEffect(() => {
-        if(student !== null){
-            const tempTeacher = []
-            const tempSubject = []
+        if (student !== null) {
+            const tempAssignment = [], tempExam = [], tempQuiz = [], tempAll = []
 
-            const tempDoneClass = student.roomShiftClasses.filter(e => e.status ===0)
+            const tempDoneClass = student.roomShiftClasses.filter(e => e.status === 0)
             const tempCurrentClass = student.roomShiftClasses.filter(e => e.status === 1)
 
             setCurrentClass(tempCurrentClass)
             setDoneClass(tempDoneClass)
 
-            // eslint-disable-next-line array-callback-return
-            tempCurrentClass.map(e => {
-                tempTeacher.push(insertTeacher(e.teacher.user.firstName, e.teacher.user.lastName, e.subject.subjectName, e.teacher.user.email))
-                tempSubject.push(insertSubject(e.subject.subjectName,e.subject.subjectCode,e.startTime,e.endTime,e.subject.subjectMajor))
+            student.roomShiftClasses.map(classes => {
+
+                classes.teacherAssignments.map(assignment => {
+                    tempAssignment.push(assignment)
+                    return tempAll.push(assignment)
+                })
+
+                classes.teacherQuizzes.map(quiz => {
+                    tempQuiz.push(quiz)
+                    return tempAll.push(quiz)
+                })
+
+                return classes.teacherExams.map(exam => {
+                    tempExam.push(exam)
+                    return tempAll.push(exam)
+                })
+
             })
 
-            setTeacher(tempTeacher)
-            setSubjects(tempSubject)
+            setAssignment(tempAssignment)
+            setExam(tempExam)
+            setQuiz(tempQuiz)
+            return setAll(tempAll)
         }
-    },[student])
+    }, [student])
 
     return student === null ? null :
         <Fragment>
-            <Route path={translation.language["route.student.todos"]} exact render={() => <StudentTodo translation={translation}/>}/>
-            <Route path={translation.language["route.student.lectures"]} exact render={() => <StudentLecture translation={translation}/>}/>
-            <Route path={translation.language["route.student.classes"]} exact render={() => <Classes translation={translation} currentClass={currentClass} archiveClass={doneClass}/>}/>
+            <Route path={translation.language["route.student.todos"]} exact
+                   render={() => <StudentTodo all={all} exams={exam} assignments={assignment} quiz={quiz} translation={translation}/>}/>
+            <Route path={translation.language["route.student.lectures"]} exact
+                   render={() => <StudentLecture translation={translation}/>}/>
+            <Route path={translation.language["route.student.classes"]} exact
+                   render={() => <Classes translation={translation} currentClass={currentClass}
+                                          archiveClass={doneClass}/>}/>
             <Redirect to={translation.language["route.student.classes"]}/>
         </Fragment>
 }

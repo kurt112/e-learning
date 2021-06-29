@@ -7,7 +7,6 @@ import ClassesStyle from "../../../_style/ClassesStyle";
 
 const ClassesList = ({currentClass,archiveClass,translation}) => {
 
-
     const currentStyle = ClassesStyle()
     const [currentClassActive, setCurrentClassActive] = useState(true)
 

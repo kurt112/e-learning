@@ -34,12 +34,13 @@ export const
     AdminRoomShiftRegister = "admin/register-roomShift",
     AdminRoomShift = "admin/roomShift",
     DeleteRoomShift = 'admin/delete/roomShift',
-
+    AddStudentInRoomShift = 'admin/room-shift/add/student',
 
     // RoomClass Admin Endpoint
     AdminRoomClassRegister = "admin/classes/register",
     AdminRoomClass = "admin/classes/roomClass",
     DeleteRoomClass = 'admin/classes/delete/class',
+
 
 
     /**

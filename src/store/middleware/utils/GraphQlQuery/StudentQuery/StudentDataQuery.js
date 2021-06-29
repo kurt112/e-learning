@@ -30,6 +30,66 @@ export const
                                     lastName,
                                     email,
                                   }
+                                },
+                                teacherExams{
+                                    resource{
+                                       name,
+                                       code,
+                                       teacher{
+                                        user{
+                                            firstName,
+                                            lastName
+                                        }
+                                    }
+                                    },
+                                    code,
+                                    createdAt,
+                                    deadLine,
+                                    description,
+                                    highGrade,
+                                    lowGrade,
+                                    sem,
+                                    quarter
+                                },
+                                teacherQuizzes{
+                                    resource{
+                                        name,
+                                        code,
+                                        teacher{
+                                        user{
+                                            firstName,
+                                            lastName
+                                        }
+                                    }
+                                    },
+                                    code,
+                                    createdAt,
+                                    deadLine,
+                                    description,
+                                    highGrade,
+                                    lowGrade,
+                                    sem,
+                                    quarter
+                                },
+                                teacherAssignments{
+                                    resource{
+                                        name,
+                                        code,
+                                        teacher{
+                                        user{
+                                            firstName,
+                                            lastName
+                                        }
+                                    }
+                                    },
+                                    code,
+                                    createdAt,
+                                    deadLine,
+                                    description,
+                                    highGrade,
+                                    lowGrade,
+                                    sem,
+                                    quarter
                                 }
                             }          
                        }

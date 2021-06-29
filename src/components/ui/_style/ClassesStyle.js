@@ -6,6 +6,7 @@ const classesStyle = makeStyles((theme) => ({
         display: 'flex',
         marginTop: 10,
         marginBottom: 10,
+        flex:1
 
     },
     boxNavButton: {
