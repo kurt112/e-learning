@@ -1,43 +1,61 @@
 import {useState, Fragment} from "react";
 import {
-    Avatar,
     Box,
     Container,
     Divider,
     FormControl,
     Grid,
     InputLabel,
-    Paper,
     Select,
-    Tooltip
 } from "@material-ui/core";
 import clsx from "clsx";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import ClassesStyle from "../../../_style/ClassesStyle";
-import {Link} from "react-router-dom";
-import MenuBookIcon from "@material-ui/icons/MenuBook";
-import VideoCallIcon from "@material-ui/icons/VideoCall";
 import TaskCard from "../../profiles/classes-profile/TaskCard";
+import ProfileStyle from '../../profiles/ProfileStyle'
+
 
 const Todo = ({translation, exams, all, assignments, quiz}) => {
     const style = ClassesStyle()
+    const taskCardStyle = ProfileStyle()
     const [todos, setTodo] = useState(true)
+    const [filterIndex, setFilterIndex] = useState(0)
+    const [filter, setFilter] = useState(all)
 
-    const currentClassClick = () => {
+    const filterType = [
+        translation.language["label.global.all"],
+        translation.language["label.global.exam"],
+        translation.language["label.global.assignment"],
+        translation.language["label.global.quiz"]
+    ]
+
+    const [filterValue, setFilterValue] = useState(filterType[filterIndex])
+
+
+    const classWorkClick = () => {
         setTodo(true)
     }
 
-    const archiveClassClick = () => {
+    const finishWorkClick = () => {
         setTodo(false)
     }
 
-    console.log(all)
+    const filterChange = (data) => {
+        data = parseInt(data)
+        if (data === 0) setFilter(all)
+        else if (data === 1) setFilter(exams)
+        else if (data === 2) setFilter(assignments)
+        else if (data === 3) setFilter(quiz)
+        setFilterIndex(data)
+        setFilterValue(data)
+    }
+
 
     return (
         <Fragment>
             <Grid container component="main" justify={"space-around"}>
                 <Box className={style.boxNavButtonContainer}>
-                    <Box onClick={currentClassClick}
+                    <Box onClick={classWorkClick}
                          className={clsx(style.boxNavButton, todos === true ? style.active : null)}>
                         <span>{translation.language["label.global.classwork"]}</span>
                         <br/>
@@ -45,7 +63,7 @@ const Todo = ({translation, exams, all, assignments, quiz}) => {
 
                     </Box>
 
-                    <Box onClick={archiveClassClick}
+                    <Box onClick={finishWorkClick}
                          className={clsx(style.boxNavButton, todos !== true ? style.active : null)}>
                         <span>{translation.language["label.global.finished.work"]}</span>
                         <br/>
@@ -58,21 +76,17 @@ const Todo = ({translation, exams, all, assignments, quiz}) => {
                     <Select
                         fullWidth
                         native
-                        // value={state.age}
-                        // onChange={handleChange}
+                        value={filterValue}
+                        onChange={(event) => filterChange(event.target.value)}
                         inputProps={{
                             name: translation.language["label.global.type"],
                             id: 'type-native-simple',
                         }}
                     >
-                        <option
-                            value={translation.language["label.global.all"]}>{translation.language["label.global.all"]}</option>
-                        <option
-                            value={translation.language["label.global.exam"]}>{translation.language["label.global.exam"]}</option>
-                        <option
-                            value={translation.language["label.global.assignment"]}>{translation.language["label.global.assignment"]}</option>
-                        <option
-                            value={translation.language["label.global.quiz"]}>{translation.language["label.global.quiz"]}</option>
+                        {
+                            filterType.map((filter, i) => <option key={i} value={i}>{filter}</option>)
+                        }
+
                     </Select>
                 </FormControl>
 
@@ -82,8 +96,9 @@ const Todo = ({translation, exams, all, assignments, quiz}) => {
 
             <Container>
                 {
-                    all.map((e,i) =>
-                        <TaskCard key={i} style={style}
+                    filter.map((e, i) =>
+                        <TaskCard key={i}
+                                  style={taskCardStyle}
                                   translation={translation}
                                   resourceCode={e.resource.code}
                                   createdAt={e.createdAt}

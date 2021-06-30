@@ -19,6 +19,8 @@ const StudentRoute = ({email, translation}) => {
     const [exam, setExam] = useState([])
     const [assignment, setAssignment] = useState([])
     const [quiz, setQuiz] = useState([])
+    const [lecture, setLecture] = useState([])
+    const [filterSubject, setFilterSubject] = useState([])
 
     useEffect(() => {
 
@@ -35,7 +37,8 @@ const StudentRoute = ({email, translation}) => {
 
     useEffect(() => {
         if (student !== null) {
-            const tempAssignment = [], tempExam = [], tempQuiz = [], tempAll = []
+            const tempAssignment = [], tempExam = [], tempQuiz = [], tempAll = [], tempLecture = [],
+                tempFilterSubject = []
 
             const tempDoneClass = student.roomShiftClasses.filter(e => e.status === 0)
             const tempCurrentClass = student.roomShiftClasses.filter(e => e.status === 1)
@@ -43,7 +46,7 @@ const StudentRoute = ({email, translation}) => {
             setCurrentClass(tempCurrentClass)
             setDoneClass(tempDoneClass)
 
-            student.roomShiftClasses.map(classes => {
+            tempCurrentClass.map(classes => {
 
                 classes.teacherAssignments.map(assignment => {
                     tempAssignment.push(assignment)
@@ -55,6 +58,12 @@ const StudentRoute = ({email, translation}) => {
                     return tempAll.push(quiz)
                 })
 
+                classes.teacherLectures.map(lecture => {
+                    tempLecture.push({...lecture, subjectCode:classes.subject.subjectCode})
+                })
+
+                tempFilterSubject.push({code: classes.subject.subjectCode, name: classes.subject.subjectName})
+
                 return classes.teacherExams.map(exam => {
                     tempExam.push(exam)
                     return tempAll.push(exam)
@@ -62,9 +71,13 @@ const StudentRoute = ({email, translation}) => {
 
             })
 
+
+            setFilterSubject(tempFilterSubject)
+            setLecture(tempLecture)
             setAssignment(tempAssignment)
             setExam(tempExam)
             setQuiz(tempQuiz)
+            console.log(filterSubject)
             return setAll(tempAll)
         }
     }, [student])
@@ -72,9 +85,13 @@ const StudentRoute = ({email, translation}) => {
     return student === null ? null :
         <Fragment>
             <Route path={translation.language["route.student.todos"]} exact
-                   render={() => <StudentTodo all={all} exams={exam} assignments={assignment} quiz={quiz} translation={translation}/>}/>
-            <Route path={translation.language["route.student.lectures"]} exact
-                   render={() => <StudentLecture translation={translation}/>}/>
+                   render={() => <StudentTodo all={all} exams={exam} assignments={assignment} quiz={quiz}
+                                              translation={translation}/>}/>
+            <Route
+                path={translation.language["route.student.lectures"]} exact
+                render={() => <StudentLecture filter={filterSubject} translation={translation} lecture={lecture}/>}
+
+            />
             <Route path={translation.language["route.student.classes"]} exact
                    render={() => <Classes translation={translation} currentClass={currentClass}
                                           archiveClass={doneClass}/>}/>

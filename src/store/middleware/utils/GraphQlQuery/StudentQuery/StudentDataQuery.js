@@ -31,6 +31,23 @@ export const
                                     email,
                                   }
                                 },
+                                 teacherLectures{
+                                   resource{
+                                        code,
+                                        name,
+                                        teacher{
+                                            user{
+                                                firstName,
+                                                lastName
+                                            }
+                                        }
+                                   },
+                                   code,
+                                   createdAt,
+                                   description,
+                                   sem,
+                                   quarter
+                                },
                                 teacherExams{
                                     resource{
                                        name,

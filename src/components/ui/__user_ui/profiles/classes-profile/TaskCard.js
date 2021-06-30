@@ -5,7 +5,7 @@ import {Chip} from "@material-ui/core";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import {JavaEndpoint} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 import PublishIcon from "@material-ui/icons/Publish";
-
+import {Fragment} from "react";
 const TaskCard = ({
                       style,
                       resourceName,
@@ -37,8 +37,13 @@ const TaskCard = ({
                     {teacherName}
                 </h4>
                 <p className={style.marginZero}>
-                    <b>{translation.language["label.global.date.deadline"]}: </b>
-                    {deadLine}
+                    {
+                        lecture === true ? null :
+                            <Fragment>
+                                <b>{translation.language["label.global.date.deadline"]}: </b>
+                                {deadLine}
+                            </Fragment>
+                    }
                 </p>
             </Grid>
 

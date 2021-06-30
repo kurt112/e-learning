@@ -90,6 +90,8 @@
   "label.global.create": "Create",
   "label.global.select.language": "Select Language",
   "label.global.tba": "TBA",
+  "label.global.lecture.archive": "Archive Lecture",
+  "label.global.lecture.current": "Current Lecture",
   "label.button.save": "Save",
   "label.button.back": "Back",
   "label.button.delete": "Delete",
