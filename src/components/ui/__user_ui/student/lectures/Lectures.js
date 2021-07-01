@@ -72,6 +72,7 @@ const Lecture = ({translation, lecture, filter}) => {
 
             <Container>
                 {
+
                     lecture.filter(data => data.subjectCode === filterValue)
                         .map((e, i) =>
                             <TaskCard key={i}
