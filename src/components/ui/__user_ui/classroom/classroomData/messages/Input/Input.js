@@ -2,7 +2,9 @@ import { Box } from "@material-ui/core"
 import style from './InputStyle'
 
 import SendIcon from '@material-ui/icons/Send'
-export default function Input({ message, setMessage, sendMessage }) {
+import {useState} from "react";
+export default function Input({  sendMessage }) {
+    const [message, setMessage] = useState('')
     const classes = style()
     return <Box className={classes.rightMessageTool}>
         <Box>
@@ -13,9 +15,9 @@ export default function Input({ message, setMessage, sendMessage }) {
                     placeholder="Type a message..."
                     value={message}
                     onChange={(event) => setMessage(event.target.value)}
-                    onKeyPress={event => event.key === 'Enter' ? sendMessage(event) : null}
+                    onKeyPress={event => event.key === 'Enter' ? sendMessage(event,setMessage,message) : null}
                 />
-                <SendIcon className="button" onClick={event => sendMessage(event)} />
+                <SendIcon className="button" onClick={event => sendMessage(event,setMessage,message)} />
             </form>
         </Box>
     </Box>

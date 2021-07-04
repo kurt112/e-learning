@@ -8,12 +8,13 @@ export default function Messages({messages, current}) {
 
     return <ScrollToBottom className={classes.messagesTab}>
         {
-            messages.map((message, index) => <Message key={index} message={{
-                user: message.sender,
-                text: message.message,
-                time: message.time,
-            }}
-                                                      name={current} isAnnouncement={message.isAnnouncement}/>)
+            messages.map((message, index) =>
+                <Message key={index} message={{
+                    user: message.message.sender,
+                    text: message.message.message,
+                    time: message.message.time,
+                }}
+                         name={current} isAnnouncement={message.isAnnouncement}/>)
         }
 
     </ScrollToBottom>

@@ -28,16 +28,15 @@ export default function Message({message: {user, text, time}, name, isAnnounceme
     }
 
 
-    return (
 
+    return (
         isAnnouncement ?
             <StyledTooltip title={time} placement="bottom">
                 <div className={clsx(classes.announcementBox)}>
-
                     <p className={clsx(classes.announcementText)}>{text}</p>
-
                 </div>
-            </StyledTooltip> :
+            </StyledTooltip>
+            :
             isSentByCurrentUser ?
                 (
                     <StyledTooltip title={time} placement="bottom-end">
@@ -60,7 +59,6 @@ export default function Message({message: {user, text, time}, name, isAnnounceme
                         </div>
                     </StyledTooltip>
                 )
-
 
     )
 }

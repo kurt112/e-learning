@@ -3,17 +3,16 @@ const { makeStyles } = require("@material-ui/core");
 const style = makeStyles((theme) => ({
     messageBox: {
         background: '#f7f7f7',
-        borderRadius: 30,
-        padding: '0px 10px',
+        borderRadius: 20,
+        padding: '0px 20px',
         color: 'white',
-        display: 'inline-block',
-        maxWidth: '80%',
+        maxWidth: '80%'
     },
     messageText: {
         width: '100%',
         letterSpacing: 0,
         float: 'left',
-        fontSize: '17px',
+        fontSize: '14px',
         fontFamily: 'Helvetica',
         wordWrap: 'break-word',
         '& img': {
@@ -77,7 +76,7 @@ const style = makeStyles((theme) => ({
         background: '#2979FF'
     },
     backgroundLight: {
-        background: '#F3F3F3'
+        background:'#EDE9E8'
     }
 }))
 

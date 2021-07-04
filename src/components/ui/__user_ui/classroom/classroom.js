@@ -13,16 +13,15 @@ import Toolbar from "./toolbar/Toolbar";
 
 const StyledDrawer = withStyles({
     paperAnchorRight: {
-       width: '100%',
+        width: '100%',
     },
 
 })(Drawer);
 
+
 const Classroom = (props) => {
     const classes = style();
 
-
-    const [message, setMessage] = useState('')
     const [receive, setReceive] = useState('')
 
     const [roomName, setRoom] = useState('')
@@ -30,74 +29,71 @@ const Classroom = (props) => {
     const [subjectName, setSubject] = useState('')
     const [people, setPeople] = useState([])
     const [messages, setMessages] = useState([])
-
+    const [role] = useState(props.user.userRole)
+    const [chatDrawer, setDrawer] = useState(false)
+    const [change, setChange] = useState(false)
     const [name] = useState(`${props.user.firstName} ${props.user.lastName}`)
     const socket = useRef()
-    const [chatDrawer, setDrawer] = useState(false)
-
 
     useEffect(() => {
+        if (socket.current === undefined) {
+            const m = moment()
+            socket.current = io(ExpressEndPoint)
 
-        const m = moment()
-        socket.current = io(ExpressEndPoint)
+            const path = props.match.params.path
+            socket.current.emit('joinClass', {path, name, role}, () => {
 
-        const path = props.match.params.path
-        socket.current.emit('join', {path, name}, () => {
+            })
 
-        })
+            socket.current.on('classData', ({users, messages}) => {
+                setPeople(users)
+                setMessages(messages)
+            })
+            socket.current.emit('sendMessage', name + ' Has Joined The Class ', m.format('h:mm a'), true)
+            setChange(true)
+            return () => {
+                socket.current.disconnect()
+            }
 
-        socket.current.on('roomData', ({users, messages}) => {
-            setPeople(users)
-            setMessages(messages)
-        })
-
-        socket.current.emit('sendMessage', name + ' Has Joined The Class ', m.format('h:mm a'), true, () => setMessage(''))
-
-
-        return () => {
-            socket.current.off('roomData')
         }
 
     }, [])
 
     useEffect(() => {
 
+    }, [change])
 
-        socket.current.on('message', (message) => {
+    useEffect(() => {
+
+        socket.current.on('messages', (message) => {
+            // console.log(message)
             setMessages([...messages, message])
         })
 
         return () => {
-            socket.current.off("message");
+            socket.current.off("messages");
         };
     }, [messages])
 
-    const sendMessage = (event) => {
+    const sendMessage = (event,setter,message) => {
         event.preventDefault()
         const m = moment()
         if (message) {
-            socket.current.emit('sendMessage', message, m.format('h:mm a'), false, () => setMessage(''))
+            socket.current.emit('sendMessage', message, m.format('h:mm a'), false, () => setter(''))
         }
 
     }
-
-
-
-
 
     const drawerClose = () => {
         setDrawer(false)
     }
 
-    const classRoomData =  <ClassRoomData classes={classes}
-                                          message={message}
-                                          messages={messages}
-                                          name={name}
-                                          sendMessage={sendMessage}
-                                          setMessage={setMessage}
-                                          onClose={drawerClose}
+    const classRoomData = <ClassRoomData classes={classes}
+                                         messages={messages}
+                                         name={name}
+                                         sendMessage={sendMessage}
+                                         onClose={drawerClose}
     />
-
 
     return (
         socket.current === undefined ? null :
@@ -127,7 +123,7 @@ const Classroom = (props) => {
                             <Hidden mdUp>
                                 <StyledDrawer anchor='right' open={chatDrawer}>
 
-                                       {classRoomData}
+                                    {classRoomData}
 
                                 </StyledDrawer>
                             </Hidden>
