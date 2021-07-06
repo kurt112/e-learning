@@ -18,7 +18,7 @@ const RoomShift = ({roomShifts,translation}) => {
                         roomShifts.map((roomShift, index) => {
                             let border ={border: 'none', marginTop: 0}
                             if(index !== 0) border = null
-                            return <RoomShiftData key={roomShift.id} roomShift={roomShift} border={border}/>
+                            return <RoomShiftData translation={translation} key={roomShift.id} roomShift={roomShift} border={border}/>
                         })
                     }
                 </Box>

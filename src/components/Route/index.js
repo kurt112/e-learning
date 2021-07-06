@@ -13,8 +13,7 @@ const Route = ({role,email,translation}) => {
             {
                 role === Teacher ? <TeacherRoute translation={translation} email={email}/> :
                     role === Student ? <StudentRoute translation={translation} email={email}/> :
-                        role === Admin ? <AdminRoute translation={translation} email={email}/> :
-                            <Redirect to={'/'}/>
+                        role === Admin ? <AdminRoute translation={translation} email={email}/> :null
             }
             <ProfileRoute translation={translation}/>
         </Fragment>

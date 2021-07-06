@@ -57,7 +57,7 @@ const Classroom = (props) => {
 
         }
 
-    }, [])
+    }, []) 
 
     useEffect(() => {
 

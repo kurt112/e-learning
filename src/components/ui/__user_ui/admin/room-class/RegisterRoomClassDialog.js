@@ -195,7 +195,6 @@ const RoomClassDialog = ({
                             optionLabel={twoOptionLabel}
                             optionSelected={twoOptionSelected}
                         />
-
                     </Grid>
                 </Grid>
             </DialogContent>

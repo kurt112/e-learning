@@ -3,8 +3,11 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle, Divider, FormControl,
-    Grid, InputLabel,
+    DialogTitle,
+    Divider,
+    FormControl,
+    Grid,
+    InputLabel,
     Select,
     TextField
 } from "@material-ui/core"
@@ -17,8 +20,17 @@ import Response from "../../../utils/Response";
 import AutoComplete from "../../../utils/autoComplete/AutoComplete";
 import {useEffect, useState} from "react";
 import {createFilterOptions} from "@material-ui/lab";
-import {autoCompleteRoom} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
-import {changeText, optionLabel, optionSelected} from "../../../utils/autoComplete/autoCompleteAction";
+import {
+    autoCompleteRoom,
+    autoCompleteTeacher
+} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
+import {
+    changeText,
+    optionLabel,
+    optionSelected,
+    TwoFilterOption,
+    twoOptionLabel, twoOptionSelected
+} from "../../../utils/autoComplete/autoCompleteAction";
 
 const RoomShiftRegisterDialog = ({
                                      closeDialog,
@@ -32,23 +44,44 @@ const RoomShiftRegisterDialog = ({
                                      changeRoomShift,
                                      registerDialogMessageClose,
                                      registerDialog,
-    translation
+                                     changeAdviser,
+                                     translation
                                  }) => {
 
 
+    const [openStrand, setOpenStrand] = useState(false)
+    const [openTeacher, setOpenTeacher] = useState(false)
     const [openRoomName, setOpenRoomName] = useState(false);
-    const [roomOptions, setRoomOptions] = useState([]); // value ng auto complete
+
+    const [teacherOptions, setTeacherOptions] = useState([])
+    const [roomOptions, setRoomOptions] = useState([]);
+    const [strandOptions, setStrandOptions] = useState([])
+
+    const [teacherLoading, setTeacherLoading] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [strandLoading, setStrandLoading] = useState(false)
+
+
+    const [teacherText, setTeacherText] = useState('')
     const [roomText, setRoomText] = useState('')
+    const [strandText, setStrandText] = useState('')
 
     useEffect(() => {
-        if (!openRoomName) setRoomOptions([])
-    }, [openRoomName])
+        changeRoomShift(translation.language["label.global.first"])
+    }, [])
 
-    const OutputRoom = (event, value) => {
+    const OutputRoom = (event,value) => {
         value = value === null ? '' : value[1]
         changeRoomName(value)
     }
+    const OutputTeacher = (event,value) => {
+        changeAdviser(value[2] === null ? '' : value[2])
+    }
+
+    const OutputStrand = (event, value) => {
+
+    }
+
     const filterOptionsTeacher = createFilterOptions({
         matchFrom: 'start',
         stringify: (option) => option[0],
@@ -82,7 +115,7 @@ const RoomShiftRegisterDialog = ({
                             loading={loading}
                             InputText={roomText}
                             changeAutoComplete={OutputRoom}
-                            changeText={(value) => changeText(value,setRoomText,setLoading,setRoomOptions,autoCompleteRoom)}
+                            changeText={(value) => changeText(value, setRoomText, setLoading, setRoomOptions, autoCompleteRoom)}
                             noOptionText={translation.language["label.room.shift.dialog.create.input.room.name"]}
                             label={translation.language["label.global.room"]}
                             optionLabel={optionLabel}
@@ -91,7 +124,8 @@ const RoomShiftRegisterDialog = ({
                     </Grid>
                     <Grid item md={6} xs={12}>
                         <FormControl variant="outlined" margin='dense' fullWidth>
-                            <InputLabel htmlFor={translation.language["label.global.room.shift"]}>{translation.language["label.global.room.shift"]}</InputLabel>
+                            <InputLabel
+                                htmlFor={translation.language["label.global.room.shift"]}>{translation.language["label.global.room.shift"]}</InputLabel>
                             <Select
                                 native
                                 label={translation.language["label.global.room.shift"]}
@@ -101,9 +135,9 @@ const RoomShiftRegisterDialog = ({
                                 }}
                                 onChange={(event => changeRoomShift(event.target.value))}
                             >
-                                <option value='First'>First</option>
-                                <option value='Second'>Second</option>
-                                <option value='Third'>Third</option>
+                                <option value={translation.language["label.global.first"]}>{translation.language["label.global.first"]}</option>
+                                <option value={translation.language["label.global.second"]}>{translation.language["label.global.second"]}</option>
+                                <option value={translation.language["label.global.third"]}>{translation.language["label.global.third"]}</option>
                             </Select>
                         </FormControl>
                     </Grid>
@@ -151,6 +185,38 @@ const RoomShiftRegisterDialog = ({
                             variant="outlined"
                         />
                     </Grid>
+                    <Grid item md={6} xs={12}>
+                        <AutoComplete
+                            open={openStrand}
+                            setOpen={setOpenStrand}
+                            filterOptions={TwoFilterOption}
+                            options={strandOptions}
+                            loading={strandLoading}
+                            InputText={strandText}
+                            changeAutoComplete={OutputStrand}
+                            changeText={(value) => changeText(value, setStrandText, setStrandLoading, setStrandOptions, autoCompleteTeacher)}
+                            noOptionText={translation.language["label.room.class.dialog.add.input.teacher.search"]}
+                            label={translation.language["label.global.adviser"]}
+                            optionLabel={twoOptionLabel}
+                            optionSelected={twoOptionSelected}
+                        />
+                    </Grid>
+                    <Grid item md={6} xs={12}>
+                        <AutoComplete
+                            open={openTeacher}
+                            setOpen={setOpenTeacher}
+                            filterOptions={TwoFilterOption}
+                            options={teacherOptions}
+                            loading={teacherLoading}
+                            InputText={teacherText}
+                            changeAutoComplete={OutputTeacher}
+                            changeText={(value) => changeText(value, setTeacherText, setTeacherLoading, setTeacherOptions, autoCompleteTeacher)}
+                            noOptionText={translation.language["label.room.class.dialog.add.input.teacher.search"]}
+                            label={translation.language["label.global.adviser"]}
+                            optionLabel={twoOptionLabel}
+                            optionSelected={twoOptionSelected}
+                        />
+                    </Grid>
                 </Grid>
             </DialogContent>
 
@@ -174,12 +240,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changeSection: (value) => dispatch(roomShiftAction.roomShiftSectionChange(value)),
-        changeGrade: (value) => dispatch(roomShiftAction.roomShiftGradeChange(value)),
-        changeRoomName: (value) => dispatch(roomShiftAction.roomShiftRoomChange(value)),
-        changeTimeStart: (value) => dispatch(roomShiftAction.roomShiftTimeStartChange(value)),
-        changeTimeEnd: (value) => dispatch(roomShiftAction.roomShiftTimeEndChange(value)),
-        changeRoomShift: (value) => dispatch(roomShiftAction.roomShiftChange(value)),
+        changeSection: (value) => dispatch(roomShiftAction.changeSection(value)),
+        changeGrade: (value) => dispatch(roomShiftAction.changeGrade(value)),
+        changeRoomName: (value) => dispatch(roomShiftAction.changeRoom(value)),
+        changeTimeStart: (value) => dispatch(roomShiftAction.changeTimeStart(value)),
+        changeTimeEnd: (value) => dispatch(roomShiftAction.changeTimeEnd(value)),
+        changeRoomShift: (value) => dispatch(roomShiftAction.changeRoomShift(value)),
+        changeAdviser: (value) => dispatch(roomShiftAction.changeAdviser(value)),
 
         registerDialogMessageClose: () => dispatch(action.registerDialogMessageClose(RoomShift)),
         registerDialog: () => dispatch(action.dialogRegister(RoomShift))

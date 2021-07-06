@@ -1,7 +1,7 @@
 import {Avatar} from "@material-ui/core";
 import ProfileStyle from '../../ProfileStyle'
 
-const ClassesData = ({border, classes}) => {
+const ClassesData = ({border, classes,translation}) => {
     const style = ProfileStyle()
 
     return (
@@ -14,7 +14,7 @@ const ClassesData = ({border, classes}) => {
             <div className={style.classDataContainerRight}>
                 <p>
                     {
-                        `${classes.teacher.user.firstName} ${classes.teacher.user.lastName}`
+                        classes.teacher === null?translation.language['label.global.tba']:`${classes.teacher.user.firstName} ${classes.teacher.user.lastName}`
                     }
                 </p>
             </div>

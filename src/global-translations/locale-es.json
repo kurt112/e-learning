@@ -7,6 +7,10 @@
     ]
   },
 
+  "label.global.info": "Info",
+  "label.global.first": "First",
+  "label.global.second": "Second",
+  "label.global.third": "Third",
   "label.global.time.start": "Time Start",
   "label.global.time.end": "Time End",
   "label.global.visit.profile": "Visit Profile",

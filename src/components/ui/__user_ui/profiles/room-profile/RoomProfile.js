@@ -1,19 +1,20 @@
-import {Avatar, Button, CircularProgress, Container, Divider, Grid, Hidden, Paper, Typography} from "@material-ui/core";
+import {Avatar, Button, CircularProgress, Container, Divider, Grid, Hidden, Paper, Typography} from "@material-ui/core"
 import ProfileStyle from '../ProfileStyle'
 import Picture from '../../../../../assets/asd.jpg'
-import {useEffect, useState} from "react";
+import {useEffect, useState} from "react"
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom'
 import Data from './data/Data'
-import * as action from "../../../../../store/action/__ActionGlobal/ProfileAction";
-import {Room} from "../../../../../store/utils/Specify";
-import {Fragment} from "react";
-import RoomShiftClasses from "../utils/RoomShiftClasses/RoomShiftClasses";
-import RoomShift from "./room-shift/RoomShift";
+import * as action from "../../../../../store/action/__ActionGlobal/ProfileAction"
+import {Room} from "../../../../../store/utils/Specify"
+import {Fragment} from "react"
+import RoomShiftClasses from "../utils/RoomShiftClasses/RoomShiftClasses"
+import RoomShift from "./room-shift/RoomShift"
 
 const RoomProfile = ({room, match, initData,translation}) => {
     const style = ProfileStyle()
     const [component, setComponent] = useState(null)
+    const [classes,setClasses] = useState([])
     const profile = room.profile !== null ? room.profile.room : null
 
     useEffect(() => {
@@ -24,28 +25,29 @@ const RoomProfile = ({room, match, initData,translation}) => {
 
     useEffect(() => {
 
-        if (room.profile !== null) setComponent(<Data translation={translation} room={profile}/>)
+        if (room.profile !== null) {
+            const  tempClasses = []
+            setComponent(<Data translation={translation} room={profile}/>)
+
+            profile.roomShifts.map((roomShift) => roomShift.roomShiftClasses.map((c) => tempClasses.push(c)))
+
+            setClasses(tempClasses)
+        }
     }, [room.profile])
 
 
-    const roomShift = () => {
+    const roomShiftClick = () => {
         setComponent(<RoomShift translation={translation} roomShifts={profile.roomShifts}/>)
     }
 
-    const roomInfo = () => {
+    const roomInfoClick = () => {
         setComponent(<Data translation={translation} room={profile}/>)
     }
 
-    const roomClasses = () => {
-
-        const classes = []
-
-        profile.roomShifts.map((roomShift) =>
-            roomShift.roomShiftClasses.map((lecture) => classes.push(lecture))
-        )
-
+    const roomClassesClick = () => {
         setComponent(<RoomShiftClasses translation={translation} classes={classes} />)
     }
+
 
 
     return (
@@ -67,9 +69,9 @@ const RoomProfile = ({room, match, initData,translation}) => {
                             </Hidden>
                             <Grid className={style.profileButton} container>
                                 <Grid className={style.buttonGroup} item md={12} sm={12} xs={12} lg={12}>
-                                    <Button color="primary" onClick={roomInfo}>{translation.language["label.global.room.info"]}</Button>
-                                    <Button color="primary" onClick={roomShift}>{translation.language["label.global.room.shift"]}</Button>
-                                    <Button color="primary" onClick={roomClasses}>{translation.language["label.global.room.classes"]}</Button>
+                                    <Button color="primary" onClick={roomInfoClick}>{translation.language["label.global.room.info"]}</Button>
+                                    <Button color="primary" onClick={roomShiftClick}>{translation.language["label.global.room.shift"]}</Button>
+                                    <Button color="primary" onClick={roomClassesClick}>{translation.language["label.global.room.classes"]}</Button>
                                 </Grid>
                             </Grid>
                         </Grid>

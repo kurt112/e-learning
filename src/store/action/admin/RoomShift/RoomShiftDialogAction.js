@@ -1,43 +1,51 @@
 import * as actions from '../../../ActionType/Admin/RoomShift/RoomShiftDialogActionType'
-export const roomShiftSectionChange = (data) => {
-    return {
-        type: actions.ROOMSHIFT_DIALOG_ROOMSECTION_CHANGE,
-        data
-    }
-}
 
-export const roomShiftGradeChange = (data) => {
-    return {
-        type: actions.ROOMSHIFT_DIALOG_ROOMGRADE_CHANGE,
-        data
-    }
-}
+export const
+    changeSection = (data) => {
+        return {
+            type: actions.ROOMSHIFT_DIALOG_ROOMSECTION_CHANGE,
+            data
+        }
+    },
+    changeGrade = (data) => {
+        return {
+            type: actions.ROOMSHIFT_DIALOG_ROOMGRADE_CHANGE,
+            data
+        }
+    },
+    changeTimeStart = (data) => {
+        return {
+            type: actions.ROOMSHIFT_DIALOG_TIMESTART_CHANGE,
+            data
+        }
+    },
 
-export const roomShiftTimeStartChange = (data) => {
-    return{
-        type: actions.ROOMSHIFT_DIALOG_TIMESTART_CHANGE,
-        data
-    }
-}
+    changeTimeEnd = (data) => {
+        return {
+            type: actions.ROOMSHIFT_DIALOG_TIMEEND_CHANGE,
+            data
+        }
+    },
 
-export const roomShiftTimeEndChange =(data) => {
-    return {
-        type: actions.ROOMSHIFT_DIALOG_TIMEEND_CHANGE,
-        data
-    }
-}
 
-export const roomShiftChange = (data) => {
-    return {
-        type: actions.ROOMSHIFT_DIALOG_ROOMSHIFT_SET,
-        data
-    }
-}
+    changeRoomShift = (data) => {
+        return {
+            type: actions.ROOMSHIFT_DIALOG_ROOMSHIFT_SET,
+            data
+        }
+    },
 
-export const roomShiftRoomChange = (data) => {
-    return {
-        type: actions.ROOMSHIFT_DIALOG_ROOM_SET,
-        data
+    changeRoom = (data) => {
+        return {
+            type: actions.ROOMSHIFT_DIALOG_ROOM_SET,
+            data
+        }
+    },
+
+    changeAdviser = (data) => {
+        return {
+            type: actions.ROOMSHIFT_DIALOG_ADVISER_CHANGE,
+            data
+        }
     }
-}
 

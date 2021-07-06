@@ -5,7 +5,13 @@ export const
                     query{roomShifts(search:"${search}", page:${page}){
                         id,
                             room{
-                                   roomName
+                                roomName
+                            },
+                        teacher{
+                            user{
+                                firstName,
+                                lastName
+                            }
                         },
                         roomShiftName,
                         grade,

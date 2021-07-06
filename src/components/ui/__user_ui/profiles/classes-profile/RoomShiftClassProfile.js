@@ -99,13 +99,13 @@ const  RoomShiftClassProfile= ({roomShiftClass, match, initData,translation})=>{
                             </Hidden>
                             <Grid className={style.profileButton} container >
                                 <Grid className={style.buttonGroup} item md={12} sm={12} xs={12} lg={12} >
-                                    <Button color="primary" onClick={data}>Info</Button>
-                                    <Button color="primary" onClick={classAssignment}>Assignment</Button>
-                                    <Button color="primary" onClick={classLectures}>Lectures</Button>
-                                    <Button color="primary" onClick={classExams}>Exams</Button>
-                                    <Button color="primary" onClick={classQuizzes}>Quiz</Button>
-                                    <Button color="primary" onClick={RoomClassPeople}>People</Button>
-                                    <Button color="primary" onClick={RoomClassPeople}>Join</Button>
+                                    <Button color="primary" onClick={data}>{translation.language["label.global.info"]}</Button>
+                                    <Button color="primary" onClick={classAssignment}>{translation.language["label.global.assignment"]}</Button>
+                                    <Button color="primary" onClick={classLectures}>{translation.language["label.global.lecture"]}</Button>
+                                    <Button color="primary" onClick={classExams}>{translation.language["label.global.exam"]}</Button>
+                                    <Button color="primary" onClick={classQuizzes}>{translation.language["label.global.quiz"]}</Button>
+                                    <Button color="primary" onClick={RoomClassPeople}>{translation.language["label.global.people"]}</Button>
+                                    <Button color="primary" onClick={RoomClassPeople}>{translation.language["label.global.join.class"]}</Button>
                                 </Grid>
 
                             </Grid>

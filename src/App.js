@@ -21,6 +21,7 @@ const App = ({currentUser, reLogin}) => {
             <BrowserRouter>
                 <Suspense fallback={'Loading'}>
                     <Switch>
+
                         {currentUser.user === null ? null : <Route path='/classroom/:path' exact
                                                                    render={(props) =>
                                                                        <Classroom
@@ -36,7 +37,6 @@ const App = ({currentUser, reLogin}) => {
                         }
 
 
-                        <Redirect to={'/'}/>
                     </Switch>
                 </Suspense>
 

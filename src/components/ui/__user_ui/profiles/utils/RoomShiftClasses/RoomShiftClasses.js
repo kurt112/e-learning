@@ -17,7 +17,7 @@ const RoomShiftClasses = ({classes,translation}) => {
                         classes.map((lecture, index) => {
                             let border ={border: 'none', marginTop: 0}
                             if(index !== 0) border = null
-                            return <ClassesData key={lecture.id} classes={lecture} border={border}/>
+                            return <ClassesData translation={translation} key={lecture.id} classes={lecture} border={border}/>
                         })
                     }
                 </Box>

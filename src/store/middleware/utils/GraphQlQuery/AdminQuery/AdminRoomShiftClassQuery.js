@@ -4,6 +4,9 @@ export const
             query: `
                     query{roomShiftClasses(search:"${search}", page:${page}){
                            id,
+                           day,
+                           startTime,
+                           endTime,
                            roomShift{
                               roomShiftName,
                               grade,
@@ -17,9 +20,12 @@ export const
                               subjectName,
                               subjectCode
                            },
-                           day,
-                           startTime,
-                           endTime
+                           teacher{
+                                user{
+                                    firstName,
+                                    lastName
+                                }
+                           }
             }
         }
         `

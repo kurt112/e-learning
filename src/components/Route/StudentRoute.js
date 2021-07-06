@@ -95,7 +95,7 @@ const StudentRoute = ({email, translation}) => {
             <Route path={translation.language["route.student.classes"]} exact
                    render={() => <Classes translation={translation} currentClass={currentClass}
                                           archiveClass={doneClass}/>}/>
-            <Redirect to={translation.language["route.student.classes"]}/>
+            {/*<Redirect to={translation.language["route.student.classes"]}/>*/}
         </Fragment>
 }
 

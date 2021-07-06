@@ -8,12 +8,14 @@ const initState = {
 }
 
 const logout = (state) => {
-    localStorage.clear()
-    window.location.reload()
-    return updateObject(state, {
+
+    state = updateObject(state, {
         user: null,
         token: '',
     })
+    localStorage.clear()
+    window.location.reload()
+    return state
 }
 
 const reducer = (state = initState, action) => {

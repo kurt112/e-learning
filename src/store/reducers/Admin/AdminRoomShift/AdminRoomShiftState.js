@@ -9,8 +9,10 @@ const newState = new state()
 
 
 
-const transforms = (items) => items.map((item) =>
-        insert(item.id,item.room.roomName, item.roomShiftName, item.grade, item.section, item.timeStart,item.timeEnd,item.id))
+const transforms = (items) => items.map((item) =>{
+    const teacher = item.teacher === null? 'TBA': `${item.teacher.user.firstName} ${item.teacher.user.lastName}`
+    return insert(item.id,item.room.roomName, item.roomShiftName, item.grade, item.section,teacher, item.timeStart,item.timeEnd,item.id)
+})
 
 const initState = {
     ...newState.init_state,

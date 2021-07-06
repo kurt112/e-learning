@@ -1,7 +1,7 @@
 import ProfileStyle from "../../ProfileStyle";
 import {Avatar} from "@material-ui/core";
 
-const RoomShiftData = ({border, roomShift}) => {
+const RoomShiftData = ({border, roomShift,translation}) => {
     const style = ProfileStyle()
 
     return (
@@ -14,7 +14,7 @@ const RoomShiftData = ({border, roomShift}) => {
             <div className={style.classDataContainerRight}>
                 <p>
                     {
-                        `${roomShift.teacher.user.firstName} ${roomShift.teacher.user.lastName}`
+                        roomShift.teacher === null? translation.language['label.global.tba']:`${roomShift.teacher.user.firstName} ${roomShift.teacher.user.lastName}`
                     }
                 </p>
             </div>
