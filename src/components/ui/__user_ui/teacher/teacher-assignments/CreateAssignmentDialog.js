@@ -15,10 +15,8 @@ import {
 import {connect} from 'react-redux'
 import * as dialogAction from '../../../../../store/action/__ActionGlobal/DialogAction'
 import * as actions from '../../../../../store/action/teacher/GlobalAction'
-import {useState} from "react"
 import Response from "../../../utils/Response"
 import {Teacher_Assignment_Create} from "../../../../../store/utils/Specify"
-import AutoComplete from "../../../utils/autoComplete/AutoComplete"
 import {
     autoCompleteGetTeacherAssignment,
     autoCompleteGetTeacherClass
@@ -26,9 +24,9 @@ import {
 import {
     TwoFilterOption,
     twoOptionLabel,
-    twoOptionSelected,
-    changeTextWithRole
+    twoOptionSelected
 } from '../../../utils/autoComplete/autoCompleteAction'
+import AutoCompleteImplementation from "../../../utils/autoComplete/ui/AutoCompleteImplementation";
 
 const CreateAssignmentDialog = ({
 
@@ -51,20 +49,12 @@ const CreateAssignmentDialog = ({
 
 
     // for assignment resource autoComplete
-    const [resourceOpen, setResourceOpen] = useState(false);
-    const [resourceOptions, setResourceOptions] = useState([])
-    const [resourceLoading, setResourceLoading] = useState(false)
-    const [resourceText, setResourceText] = useState('')
     const OutputResources = (event, value) => {
         changeResourceCode(value === null ? '' : value[1].toString())
     }
 
 
     // for teacher class autoComplete
-    const [classOpen, setClassOpen] = useState(false);
-    const [classOptions, setClassOptions] = useState([])
-    const [classLoading, setClassLoading] = useState(false)
-    const [classText, setClassText] = useState('')
     const OutputClass = (event, value) => {
         changeClassCode(value === null ? '' : value[2].toString())
     }
@@ -78,7 +68,8 @@ const CreateAssignmentDialog = ({
         maxWidth={"lg"}
     >
         <form noValidate>
-            <DialogTitle id="create-resource">{translation.language["label.teacher.assignment.table.create.title"]}</DialogTitle>
+            <DialogTitle
+                id="create-resource">{translation.language["label.teacher.assignment.table.create.title"]}</DialogTitle>
             <Divider/>
             <DialogContent>
                 <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
@@ -86,35 +77,28 @@ const CreateAssignmentDialog = ({
                           messageSuccess={translation.language["message.teacher.dialog.assignment.create.success"]}/>
                 <Grid container spacing={1}>
                     <Grid item md={4} xs={12}>
-                        <AutoComplete
-                            open={resourceOpen}
-                            setOpen={setResourceOpen}
-                            filterOptions={TwoFilterOption}
-                            options={resourceOptions}
-                            loading={resourceLoading}
-                            InputText={resourceText}
-                            changeAutoComplete={OutputResources}
-                            changeText={(value) => changeTextWithRole(value, setResourceText, setResourceLoading, setResourceOptions, autoCompleteGetTeacherAssignment, email)}
-                            noOptionText={translation.language["label.teacher.assignment.dialog.create.assignment.resource.search"]}
+                        <AutoCompleteImplementation
+                            filterOption={TwoFilterOption}
+                            url={autoCompleteGetTeacherAssignment}
+                            autoFocus={true}
                             label={translation.language["label.teacher.assignment.dialog.create.assignment.resource"]}
-                            optionLabel={twoOptionLabel}
+                            output={OutputResources}
                             optionSelected={twoOptionSelected}
+                            optionLabel={twoOptionLabel}
+                            noOptionText={translation.language["label.teacher.assignment.dialog.create.assignment.resource.search"]}
+                            email={email}
                         />
                     </Grid>
                     <Grid item md={4} xs={12}>
-                        <AutoComplete
-                            open={classOpen}
-                            setOpen={setClassOpen}
-                            filterOptions={TwoFilterOption}
-                            options={classOptions}
-                            loading={classLoading}
-                            InputText={classText}
-                            changeAutoComplete={OutputClass}
-                            changeText={(value) => changeTextWithRole(value, setClassText, setClassLoading, setClassOptions, autoCompleteGetTeacherClass, email)}
-                            noOptionText={translation.language["label.global.search.class"]}
-                            label={translation.language["label.global.your.class"]}
-                            optionLabel={twoOptionLabel}
-                            optionSelected={twoOptionSelected}
+                        <AutoCompleteImplementation
+                        filterOption={TwoFilterOption}
+                        email={email}
+                        noOptionText={translation.language["label.global.search.class"]}
+                        optionLabel={twoOptionLabel}
+                        optionSelected={twoOptionSelected}
+                        output={OutputClass}
+                        label={translation.language["label.global.your.class"]}
+                        url={autoCompleteGetTeacherClass}
                         />
                     </Grid>
                     <Grid item md={4} xs={6}>
@@ -130,7 +114,8 @@ const CreateAssignmentDialog = ({
                     </Grid>
                     <Grid item md={3} xs={12}>
                         <FormControl variant="outlined" margin='dense' fullWidth>
-                            <InputLabel htmlFor={translation.language["label.global.semester"]}>{translation.language["label.global.semester"]}</InputLabel>
+                            <InputLabel
+                                htmlFor={translation.language["label.global.semester"]}>{translation.language["label.global.semester"]}</InputLabel>
                             <Select
                                 native
                                 label={translation.language["label.global.semester"]}
@@ -149,7 +134,8 @@ const CreateAssignmentDialog = ({
                     </Grid>
                     <Grid item md={3} xs={12}>
                         <FormControl variant="outlined" margin='dense' fullWidth>
-                            <InputLabel htmlFor={translation.language["label.global.quarter"]}>{translation.language["label.global.quarter"]}</InputLabel>
+                            <InputLabel
+                                htmlFor={translation.language["label.global.quarter"]}>{translation.language["label.global.quarter"]}</InputLabel>
                             <Select
                                 native
                                 label={translation.language["label.global.quarter"]}
@@ -190,7 +176,8 @@ const CreateAssignmentDialog = ({
                         />
                     </Grid>
                     <Grid item md={12} xs={12}>
-                        <InputLabel htmlFor="ActivityDescription">{translation.language["label.teacher.assignment.dialog.create.description"]}</InputLabel>
+                        <InputLabel
+                            htmlFor="ActivityDescription">{translation.language["label.teacher.assignment.dialog.create.description"]}</InputLabel>
                         <TextareaAutosize
                             label={translation.language["label.global.description"]}
                             rowsMin={10}

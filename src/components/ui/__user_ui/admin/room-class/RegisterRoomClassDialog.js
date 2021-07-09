@@ -8,7 +8,6 @@ import {
     Select,
     TextField
 } from "@material-ui/core"
-import {useEffect, useState} from "react";
 import {connect} from 'react-redux'
 import * as action from '../../../../../store/action/__ActionGlobal/DialogAction'
 import * as roomClassDialogAction from '../../../../../store/action/admin/RoomClass/RoomClassDialogAction'
@@ -19,13 +18,12 @@ import {
     autoCompleteRoomShift,
     autoCompleteSubject
 } from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
-import AutoComplete from "../../../utils/autoComplete/AutoComplete";
 import {
     TwoFilterOption,
     twoOptionLabel,
-    twoOptionSelected,
-    changeText
+    twoOptionSelected
 } from '../../../utils/autoComplete/autoCompleteAction'
+import AutoCompleteImplementation from "../../../utils/autoComplete/ui/AutoCompleteImplementation";
 
 const RoomClassDialog = ({
                              closeDialog,
@@ -41,33 +39,6 @@ const RoomClassDialog = ({
                              changeDay,
                              translation
                          }) => {
-
-    const [openTeacher, setOpenTeacher] = useState(false)
-    const [openSubject, setOpenSubject] = useState(false)
-    const [openRoomShift, setOpenRoomShift] = useState(false)
-
-
-    // value of the autoComplete
-    const [teacherOptions, setTeacherOptions] = useState([])
-    const [subjectOptions, setSubjectOptions] = useState([])
-    const [roomShiftOptions, setRoomShiftOptions] = useState([])
-
-    // set the autoComplete when fetching data
-    const [teacherLoading, setTeacherLoading] = useState(false)
-    const [subjectLoading, setSubjectLoading] = useState(false)
-    const [roomShiftLoading, setRoomShiftLoading] = useState(false)
-
-    // init text
-    const [teacherText, setTeacherText] = useState('')
-    const [subjectText, setSubjectText] = useState('')
-    const [roomShiftText, setRoomShiftText] = useState('')
-
-
-    useEffect(() => {
-        if (!openTeacher) setTeacherOptions([])
-        if (!openSubject) setTeacherOptions([])
-        if (!openRoomShift) setTeacherOptions([])
-    }, [openTeacher, openSubject, openRoomShift])
 
     const OutputTeacher = (event, value) => {
         changeTeacherId(value[2] === null ? '' : value[2])
@@ -100,38 +71,27 @@ const RoomClassDialog = ({
 
                 <Grid container spacing={1}>
                     <Grid item md={6} xs={12}>
-                        <AutoComplete
+                        <AutoCompleteImplementation
+                            filterOption={TwoFilterOption}
+                            url={autoCompleteRoomShift}
                             autoFocus={true}
-                            open={openRoomShift}
-                            setOpen={setOpenRoomShift}
-                            filterOptions={TwoFilterOption}
-                            options={roomShiftOptions}
-                            loading={roomShiftLoading}
-                            InputText={roomShiftText}
-                            changeAutoComplete={OutputRoomShift}
-                            changeText={(value) => changeText(value, setRoomShiftText, setRoomShiftLoading, setRoomShiftOptions, autoCompleteRoomShift)}
-                            noOptionText={translation.language["label.room.class.dialog.add.input.room.shift.search"]}
                             label={translation.language["label.global.room.shift"]}
-                            optionLabel={twoOptionLabel}
+                            output={OutputRoomShift}
                             optionSelected={twoOptionSelected}
-
+                            optionLabel={twoOptionLabel}
+                            noOptionText={translation.language["label.room.class.dialog.add.input.room.shift.search"]}
                         />
                     </Grid>
                     <Grid item md={6} xs={12}>
-                        <AutoComplete
-                            open={openSubject}
-                            setOpen={setOpenSubject}
-                            filterOptions={TwoFilterOption}
-                            options={subjectOptions}
-                            loading={subjectLoading}
-                            InputText={subjectText}
-                            changeText={(value) => changeText(value, setSubjectText, setSubjectLoading, setSubjectOptions, autoCompleteSubject)}
-                            changeAutoComplete={OutputSubject}
+                        <AutoCompleteImplementation
+                            filterOption={TwoFilterOption}
                             noOptionText={translation.language["label.room.class.dialog.add.input.subject.search"]}
-                            label={translation.language["label.global.subject"]}
                             optionLabel={twoOptionLabel}
                             optionSelected={twoOptionSelected}
-
+                            output={OutputSubject}
+                            label={translation.language["label.global.subject"]}
+                            autoFocus={false}
+                            url={autoCompleteSubject}
                         />
                     </Grid>
 
@@ -181,19 +141,15 @@ const RoomClassDialog = ({
 
                     </Grid>
                     <Grid item md={6} xs={12}>
-                        <AutoComplete
-                            open={openTeacher}
-                            setOpen={setOpenTeacher}
-                            filterOptions={TwoFilterOption}
-                            options={teacherOptions}
-                            loading={teacherLoading}
-                            InputText={teacherText}
-                            changeAutoComplete={OutputTeacher}
-                            changeText={(value) => changeText(value, setTeacherText, setTeacherLoading, setTeacherOptions, autoCompleteTeacher)}
-                            noOptionText={translation.language["label.room.class.dialog.add.input.teacher.search"]}
-                            label={translation.language["label.global.teacher"]}
-                            optionLabel={twoOptionLabel}
-                            optionSelected={twoOptionSelected}
+                        <AutoCompleteImplementation
+                        filterOption={TwoFilterOption}
+                        url={autoCompleteTeacher}
+                        autoFocus={false}
+                        label={translation.language["label.global.teacher"]}
+                        optionSelected={twoOptionSelected}
+                        output={OutputTeacher}
+                        optionLabel={twoOptionLabel}
+                        noOptionText={translation.language["label.room.class.dialog.add.input.teacher.search"]}
                         />
                     </Grid>
                 </Grid>

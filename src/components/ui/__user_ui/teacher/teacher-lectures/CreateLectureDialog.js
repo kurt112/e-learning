@@ -13,16 +13,15 @@ import * as actions from '../../../../../store/action/teacher/GlobalAction'
 import {useState} from "react"
 import Response from "../../../utils/Response"
 import {Teacher_Lecture_Create} from "../../../../../store/utils/Specify"
-import AutoComplete from "../../../utils/autoComplete/AutoComplete"
 import {
     autoCompleteGetTeacherClass, autoCompleteGetTeacherLecture
 } from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint"
 import {
     TwoFilterOption,
     twoOptionLabel,
-    twoOptionSelected,
-    changeTextWithRole
+    twoOptionSelected
 } from '../../../utils/autoComplete/autoCompleteAction'
+import AutoCompleteImplementation from "../../../utils/autoComplete/ui/AutoCompleteImplementation";
 
 const CreateLectureDialog = ({
 
@@ -41,20 +40,12 @@ const CreateLectureDialog = ({
                              }) => {
 
     // for assignment resource autoComplete
-    const [resourceOpen, setResourceOpen] = useState(false);
-    const [resourceOptions, setResourceOptions] = useState([])
-    const [resourceLoading, setResourceLoading] = useState(false)
-    const [resourceText, setResourceText] = useState('')
     const OutputResources = (event, value) => {
         changeResourceCode(value === null ? '' : value[1].toString())
     }
 
 
     // for teacher class autoComplete
-    const [classOpen, setClassOpen] = useState(false);
-    const [classOptions, setClassOptions] = useState([])
-    const [classLoading, setClassLoading] = useState(false)
-    const [classText, setClassText] = useState('')
     const OutputClass = (event, value) => {
         changeClassCode(value === null ? '' : value[2].toString())
     }
@@ -79,37 +70,29 @@ const CreateLectureDialog = ({
 
                 <Grid container spacing={1}>
                     <Grid item md={3} xs={12}>
-                        <AutoComplete
+                        <AutoCompleteImplementation
                             autoFocus={true}
-                            open={resourceOpen}
-                            setOpen={setResourceOpen}
-                            filterOptions={TwoFilterOption}
-                            options={resourceOptions}
-                            loading={resourceLoading}
-                            InputText={resourceText}
-                            changeAutoComplete={OutputResources}
-                            changeText={(value) => changeTextWithRole(value, setResourceText, setResourceLoading, setResourceOptions, autoCompleteGetTeacherLecture, email)}
-                            noOptionText={translation.language["label.teacher.lecture.dialog.create.resource.search"]}
                             label={translation.language["label.teacher.lecture.dialog.create.resource"]}
-                            optionLabel={twoOptionLabel}
+                            output={OutputResources}
                             optionSelected={twoOptionSelected}
+                            optionLabel={twoOptionLabel}
+                            noOptionText={translation.language["label.teacher.lecture.dialog.create.resource.search"]}
+                            email={email}
+                            filterOption={TwoFilterOption}
+                            url={autoCompleteGetTeacherLecture}
                         />
                     </Grid>
 
                     <Grid item md={3} xs={12}>
-                        <AutoComplete
-                            open={classOpen}
-                            setOpen={setClassOpen}
-                            filterOptions={TwoFilterOption}
-                            options={classOptions}
-                            loading={classLoading}
-                            InputText={classText}
-                            changeAutoComplete={OutputClass}
-                            changeText={(value) => changeTextWithRole(value, setClassText, setClassLoading, setClassOptions, autoCompleteGetTeacherClass, email)}
+                        <AutoCompleteImplementation
+                            url={autoCompleteGetTeacherClass}
+                            email={email}
+                            filterOption={TwoFilterOption}
                             noOptionText={translation.language["label.global.search.class"]}
-                            label={translation.language["label.global.your.class"]}
                             optionLabel={twoOptionLabel}
                             optionSelected={twoOptionSelected}
+                            output={OutputClass}
+                            label={translation.language["label.global.your.class"]}
                         />
                     </Grid>
 

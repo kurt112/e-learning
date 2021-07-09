@@ -11,19 +11,17 @@ import {
 import {connect} from 'react-redux'
 import * as dialogAction from '../../../../../store/action/__ActionGlobal/DialogAction'
 import * as actions from '../../../../../store/action/teacher/GlobalAction'
-import {useState} from "react"
 import Response from "../../../utils/Response"
 import {Teacher_Exams_Create} from "../../../../../store/utils/Specify"
-import AutoComplete from "../../../utils/autoComplete/AutoComplete"
 import {
     autoCompleteGetTeacherClass, autoCompleteGetTeacherExams
 } from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint"
 import {
     TwoFilterOption,
     twoOptionLabel,
-    twoOptionSelected,
-    changeTextWithRole
+    twoOptionSelected
 } from '../../../utils/autoComplete/autoCompleteAction'
+import AutoCompleteImplementation from "../../../utils/autoComplete/ui/AutoCompleteImplementation";
 
 const CreateExamsDialog = ({
 
@@ -45,21 +43,11 @@ const CreateExamsDialog = ({
                            }) => {
 
 
-    // for assignment resource autoComplete
-    const [resourceOpen, setResourceOpen] = useState(false);
-    const [resourceOptions, setResourceOptions] = useState([])
-    const [resourceLoading, setResourceLoading] = useState(false)
-    const [resourceText, setResourceText] = useState('')
     const OutputResources = (event, value) => {
         changeResourceCode(value === null ? '' : value[1].toString())
     }
 
 
-    // for teacher class autoComplete
-    const [classOpen, setClassOpen] = useState(false);
-    const [classOptions, setClassOptions] = useState([])
-    const [classLoading, setClassLoading] = useState(false)
-    const [classText, setClassText] = useState('')
     const OutputClass = (event, value) => {
         changeClassCode(value === null ? '' : value[2].toString())
     }
@@ -83,37 +71,29 @@ const CreateExamsDialog = ({
 
                 <Grid container spacing={1}>
                     <Grid item md={4} xs={12}>
-                        <AutoComplete
+                        <AutoCompleteImplementation
+                            url={autoCompleteGetTeacherExams}
                             autoFocus={true}
-                            open={resourceOpen}
-                            setOpen={setResourceOpen}
-                            filterOptions={TwoFilterOption}
-                            options={resourceOptions}
-                            loading={resourceLoading}
-                            InputText={resourceText}
-                            changeAutoComplete={OutputResources}
-                            changeText={(value) => changeTextWithRole(value, setResourceText, setResourceLoading, setResourceOptions, autoCompleteGetTeacherExams, email)}
-                            noOptionText={translation.language["label.teacher.exam.dialog.resource.search"]}
                             label={translation.language["label.teacher.exam.dialog.resource"]}
-                            optionLabel={twoOptionLabel}
+                            output={OutputResources}
                             optionSelected={twoOptionSelected}
+                            optionLabel={twoOptionLabel}
+                            noOptionText={translation.language["label.teacher.exam.dialog.resource.search"]}
+                            email={email}
+                            filterOption={TwoFilterOption}
                         />
                     </Grid>
 
                     <Grid item md={4} xs={12}>
-                        <AutoComplete
-                            open={classOpen}
-                            setOpen={setClassOpen}
-                            filterOptions={TwoFilterOption}
-                            options={classOptions}
-                            loading={classLoading}
-                            InputText={classText}
-                            changeAutoComplete={OutputClass}
-                            changeText={(value) => changeTextWithRole(value, setClassText, setClassLoading, setClassOptions, autoCompleteGetTeacherClass, email)}
+                        <AutoCompleteImplementation
+                            url={autoCompleteGetTeacherClass}
+                            email={email}
+                            filterOption={TwoFilterOption}
                             noOptionText={translation.language["label.global.search.class"]}
-                            label={translation.language["label.global.your.class"]}
                             optionLabel={twoOptionLabel}
                             optionSelected={twoOptionSelected}
+                            output={OutputClass}
+                            label={translation.language["label.global.your.class"]}
                         />
                     </Grid>
 
@@ -132,7 +112,8 @@ const CreateExamsDialog = ({
 
                     <Grid item md={3} xs={12}>
                         <FormControl variant="outlined" margin='dense' fullWidth>
-                            <InputLabel htmlFor={translation.language["label.global.semester"]}>{translation.language["label.global.semester"]}</InputLabel>
+                            <InputLabel
+                                htmlFor={translation.language["label.global.semester"]}>{translation.language["label.global.semester"]}</InputLabel>
                             <Select
                                 native
                                 label={translation.language["label.global.semester"]}
@@ -153,7 +134,8 @@ const CreateExamsDialog = ({
 
                     <Grid item md={3} xs={12}>
                         <FormControl variant="outlined" margin='dense' fullWidth>
-                            <InputLabel htmlFor={translation.language["label.global.quarter"]}>{translation.language["label.global.quarter"]}</InputLabel>
+                            <InputLabel
+                                htmlFor={translation.language["label.global.quarter"]}>{translation.language["label.global.quarter"]}</InputLabel>
                             <Select
                                 native
                                 label={translation.language["label.global.quarter"]}

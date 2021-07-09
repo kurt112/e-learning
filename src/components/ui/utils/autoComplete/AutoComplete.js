@@ -16,7 +16,7 @@ export default function AutoComplete({
                                          label,
                                          optionLabel,
                                          optionSelected,
-    autoFocus
+                                         autoFocus
                                      }) {
 
     return <FormControl variant="outlined" margin='dense' fullWidth>

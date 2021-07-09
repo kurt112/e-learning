@@ -9,22 +9,17 @@ import {
     DialogTitle, Divider,
     Grid,
 } from "@material-ui/core";
-import AutoComplete from "../../../utils/autoComplete/AutoComplete";
 import {
-    changeText,
     TwoFilterOption,
     twoOptionLabel,
     twoOptionSelected
 } from "../../../utils/autoComplete/autoCompleteAction";
 import {Fragment, useState} from "react";
 import RoomShiftAddStudentTransfer from "./RoomShiftAddStudentTransferDialog";
+import AutoCompleteImplementation from "../../../utils/autoComplete/ui/AutoCompleteImplementation";
 
 const RoomShiftAddStudentDialog = ({closeDialog, dialog, translation}) => {
 
-    const [openRoomShift, setOpenRoomShift] = useState(false)
-    const [roomShiftOptions, setRoomShiftOptions] = useState([])
-    const [roomShiftLoading, setRoomShiftLoading] = useState(false)
-    const [roomShiftText, setRoomShiftText] = useState('')
     const [id, setId] = useState('')
     const [transfer, setTransfer] = useState(false);
 
@@ -61,22 +56,15 @@ const RoomShiftAddStudentDialog = ({closeDialog, dialog, translation}) => {
                 <DialogContent>
                     <Grid container spacing={1}>
                         <Grid item md={12} xs={12}>
-                            <AutoComplete
-                                autoFocus={true}
-                                open={openRoomShift}
-                                setOpen={setOpenRoomShift}
-                                filterOptions={TwoFilterOption}
-                                options={roomShiftOptions}
-                                loading={roomShiftLoading}
-                                InputText={roomShiftText}
-                                changeAutoComplete={OutputRoomShift}
-                                changeText={(value) => changeText(value, setRoomShiftText, setRoomShiftLoading, setRoomShiftOptions, autoCompleteRoomShift)}
+                            <AutoCompleteImplementation
                                 noOptionText={translation.language["label.room.shift.dialog.find.input.search"]}
-                                label={translation.language["label.global.room.shift"]}
                                 optionLabel={twoOptionLabel}
                                 optionSelected={twoOptionSelected}
-
-                            />
+                                output={OutputRoomShift}
+                                label={translation.language["label.global.room.shift"]}
+                                autoFocus={true}
+                                url={autoCompleteRoomShift}
+                                filterOption={TwoFilterOption}/>
                         </Grid>
                     </Grid>
                 </DialogContent>

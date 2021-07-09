@@ -3,6 +3,12 @@ import {baseUrl} from "../../../../store/middleware/axios";
 
 export const
 
+    filterOption = createFilterOptions({
+        matchFrom: 'any',
+        stringify: (option) => option[0],
+    }),
+
+
     TwoFilterOption = createFilterOptions({
         matchFrom: 'any',
         stringify: (option) => (option[0] + " " + option[1] + " " + option[2]),

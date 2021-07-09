@@ -3,27 +3,29 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle, Divider, FormControl,
-    Grid, InputLabel,
-    Select, TextareaAutosize,
+    DialogTitle,
+    Divider,
+    FormControl,
+    Grid,
+    InputLabel,
+    Select,
+    TextareaAutosize,
     TextField
 } from "@material-ui/core"
 import {connect} from 'react-redux'
 import * as dialogAction from '../../../../../store/action/__ActionGlobal/DialogAction'
 import * as actions from '../../../../../store/action/teacher/GlobalAction'
-import {useState} from "react"
 import Response from "../../../utils/Response"
 import {Teacher_Quiz_Create} from "../../../../../store/utils/Specify"
-import AutoComplete from "../../../utils/autoComplete/AutoComplete"
 import {
     autoCompleteGetTeacherClass, autoCompleteGetTeacherQuiz
 } from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint"
 import {
     TwoFilterOption,
     twoOptionLabel,
-    twoOptionSelected,
-    changeTextWithRole
+    twoOptionSelected
 } from '../../../utils/autoComplete/autoCompleteAction'
+import AutoCompleteImplementation from "../../../utils/autoComplete/ui/AutoCompleteImplementation";
 
 const CreateQuizDialog = ({
                               dialog,
@@ -45,23 +47,12 @@ const CreateQuizDialog = ({
 
 
     // for assignment resource autoComplete
-    const [resourceOpen, setResourceOpen] = useState(false);
-    const [resourceOptions, setResourceOptions] = useState([])
-    const [resourceLoading, setResourceLoading] = useState(false)
-    const [resourceText, setResourceText] = useState('')
-    const OutputResources = (event, value) => {
+    const OutputResources = (event, value) =>
         changeResourceCode(value === null ? '' : value[1].toString())
-    }
 
 
-    // for teacher class autoComplete
-    const [classOpen, setClassOpen] = useState(false);
-    const [classOptions, setClassOptions] = useState([])
-    const [classLoading, setClassLoading] = useState(false)
-    const [classText, setClassText] = useState('')
-    const OutputClass = (event, value) => {
+    const OutputClass = (event, value) =>
         changeClassCode(value === null ? '' : value[2].toString())
-    }
 
 
     return <Dialog
@@ -83,37 +74,29 @@ const CreateQuizDialog = ({
 
                 <Grid container spacing={1}>
                     <Grid item md={4} xs={12}>
-                        <AutoComplete
-                            autoFocus={true}
-                            open={resourceOpen}
-                            setOpen={setResourceOpen}
-                            filterOptions={TwoFilterOption}
-                            options={resourceOptions}
-                            loading={resourceLoading}
-                            InputText={resourceText}
-                            changeAutoComplete={OutputResources}
-                            changeText={(value) => changeTextWithRole(value, setResourceText, setResourceLoading, setResourceOptions, autoCompleteGetTeacherQuiz, email)}
-                            noOptionText={translation.language["label.teacher.quiz.dialog.create.resource"]}
+                        <AutoCompleteImplementation
                             label={translation.language["label.teacher.quiz.dialog.create.resource.search"]}
-                            optionLabel={twoOptionLabel}
                             optionSelected={twoOptionSelected}
+                            output={OutputResources}
+                            optionLabel={twoOptionLabel}
+                            noOptionText={translation.language["label.teacher.quiz.dialog.create.resource"]}
+                            email={email}
+                            filterOption={TwoFilterOption}
+                            url={autoCompleteGetTeacherQuiz}
+                            autoFocus={true}
                         />
                     </Grid>
 
                     <Grid item md={4} xs={12}>
-                        <AutoComplete
-                            open={classOpen}
-                            setOpen={setClassOpen}
-                            filterOptions={TwoFilterOption}
-                            options={classOptions}
-                            loading={classLoading}
-                            InputText={classText}
-                            changeAutoComplete={OutputClass}
-                            changeText={(value) => changeTextWithRole(value, setClassText, setClassLoading, setClassOptions, autoCompleteGetTeacherClass, email)}
-                            noOptionText={translation.language["label.teacher.quiz.dialog.create.resource.search"]}
+                        <AutoCompleteImplementation
                             label={translation.language["label.teacher.quiz.dialog.create.resource"]}
+                            url={autoCompleteGetTeacherClass}
+                            email={email}
+                            filterOption={TwoFilterOption}
+                            noOptionText={translation.language["label.teacher.quiz.dialog.create.resource.search"]}
                             optionLabel={twoOptionLabel}
                             optionSelected={twoOptionSelected}
+                            output={OutputClass}
                         />
                     </Grid>
 
@@ -154,7 +137,8 @@ const CreateQuizDialog = ({
 
                     <Grid item md={3} xs={12}>
                         <FormControl variant="outlined" margin='dense' fullWidth>
-                            <InputLabel htmlFor={translation.language["label.global.quarter"]}>{translation.language["label.global.quarter"]}</InputLabel>
+                            <InputLabel
+                                htmlFor={translation.language["label.global.quarter"]}>{translation.language["label.global.quarter"]}</InputLabel>
                             <Select
                                 native
                                 label={translation.language["label.global.quarter"]}
@@ -200,7 +184,8 @@ const CreateQuizDialog = ({
                     </Grid>
 
                     <Grid item md={12} xs={12}>
-                        <InputLabel htmlFor={translation.language["label.teacher.quiz.dialog.create.description"]}>{translation.language["label.teacher.quiz.dialog.create.description"]}</InputLabel>
+                        <InputLabel
+                            htmlFor={translation.language["label.teacher.quiz.dialog.create.description"]}>{translation.language["label.teacher.quiz.dialog.create.description"]}</InputLabel>
                         <TextareaAutosize
                             label={translation.language["label.global.description"]}
                             rowsMin={10}
