@@ -20,10 +20,8 @@ const App = ({currentUser, reLogin}) => {
         <Fragment>
             <BrowserRouter>
                 <Suspense fallback={'Loading'}>
-                    {
-                        token == null ? <Redirect to='/'/> : null
-                    }
                     <Switch>
+
 
                         {currentUser.user === null ? null : <Route path='/classroom/:path' exact
                                                                    render={(props) =>
@@ -39,8 +37,11 @@ const App = ({currentUser, reLogin}) => {
                                 </Fragment>
                         }
 
+                        {currentUser.user === null && token === null ? <Redirect to={'/'}/> : null}
+
 
                     </Switch>
+
                 </Suspense>
 
             </BrowserRouter>

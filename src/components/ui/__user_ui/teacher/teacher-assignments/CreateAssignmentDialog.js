@@ -17,16 +17,9 @@ import * as dialogAction from '../../../../../store/action/__ActionGlobal/Dialog
 import * as actions from '../../../../../store/action/teacher/GlobalAction'
 import Response from "../../../utils/Response"
 import {Teacher_Assignment_Create} from "../../../../../store/utils/Specify"
-import {
-    autoCompleteGetTeacherAssignment,
-    autoCompleteGetTeacherClass
-} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint"
-import {
-    TwoFilterOption,
-    twoOptionLabel,
-    twoOptionSelected
-} from '../../../utils/autoComplete/autoCompleteAction'
-import AutoCompleteImplementation from "../../../utils/autoComplete/ui/AutoCompleteImplementation";
+import GetTeacherClassAutoComplete from "../../../utils/autoComplete/ui/GetTeacherClassAutoComplete";
+import GetTeacherAssignmentResourceAutoComplete
+    from "../../../utils/autoComplete/ui/GetTeacherAssignmentResourceAutoComplete";
 
 const CreateAssignmentDialog = ({
 
@@ -77,29 +70,18 @@ const CreateAssignmentDialog = ({
                           messageSuccess={translation.language["message.teacher.dialog.assignment.create.success"]}/>
                 <Grid container spacing={1}>
                     <Grid item md={4} xs={12}>
-                        <AutoCompleteImplementation
-                            filterOption={TwoFilterOption}
-                            url={autoCompleteGetTeacherAssignment}
-                            autoFocus={true}
-                            label={translation.language["label.teacher.assignment.dialog.create.assignment.resource"]}
-                            output={OutputResources}
-                            optionSelected={twoOptionSelected}
-                            optionLabel={twoOptionLabel}
-                            noOptionText={translation.language["label.teacher.assignment.dialog.create.assignment.resource.search"]}
+                        <GetTeacherAssignmentResourceAutoComplete
                             email={email}
+                            output={OutputResources}
+                            translation={translation}
+                            autoFocus={true}
                         />
                     </Grid>
                     <Grid item md={4} xs={12}>
-                        <AutoCompleteImplementation
-                        filterOption={TwoFilterOption}
-                        email={email}
-                        noOptionText={translation.language["label.global.search.class"]}
-                        optionLabel={twoOptionLabel}
-                        optionSelected={twoOptionSelected}
-                        output={OutputClass}
-                        label={translation.language["label.global.your.class"]}
-                        url={autoCompleteGetTeacherClass}
-                        />
+                        <GetTeacherClassAutoComplete
+                            translation={translation}
+                            output={OutputClass}
+                            email={email}/>
                     </Grid>
                     <Grid item md={4} xs={6}>
                         <TextField

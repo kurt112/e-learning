@@ -18,18 +18,9 @@ import * as roomShiftAction from '../../../../../store/action/admin/RoomShift/Ro
 import {RoomShift} from "../../../../../store/utils/Specify"
 import Response from "../../../utils/Response"
 import {useEffect} from "react"
-import {
-    autoCompleteRoom,
-    autoCompleteTeacher
-} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
-import {
-     filterOption,
-    optionLabel,
-    optionSelected,
-    TwoFilterOption,
-    twoOptionLabel, twoOptionSelected
-} from "../../../utils/autoComplete/autoCompleteAction";
-import AutoCompleteImplementation from "../../../utils/autoComplete/ui/AutoCompleteImplementation";
+import RoomAutoComplete from "../../../utils/autoComplete/ui/RoomAutoComplete";
+import TeacherAutoComplete from "../../../utils/autoComplete/ui/TeacherAutoComplete";
+import CurriculumAutoComplete from "../../../utils/autoComplete/ui/CurriculumAutoComplete";
 
 const RoomShiftRegisterDialog = ({
                                      closeDialog,
@@ -82,15 +73,10 @@ const RoomShiftRegisterDialog = ({
 
                 <Grid container spacing={1}>
                     <Grid item md={6} xs={12}>
-                        <AutoCompleteImplementation
-                            noOptionText={translation.language["label.room.shift.dialog.create.input.room.name"]}
-                            label={translation.language["label.global.room"]}
-                            url={autoCompleteRoom}
+                        <RoomAutoComplete
                             output={OutputRoom}
-                            filterOption={filterOption}
+                            translation={translation}
                             autoFocus={true}
-                            optionSelected={optionSelected}
-                            optionLabel={optionLabel}
                         />
                     </Grid>
                     <Grid item md={6} xs={12}>
@@ -160,27 +146,13 @@ const RoomShiftRegisterDialog = ({
                         />
                     </Grid>
                     <Grid item md={6} xs={12}>
-                        <AutoCompleteImplementation
-                            noOptionText={translation.language["label.room.class.dialog.add.input.teacher.search"]}
-                            optionLabel={twoOptionLabel}
-                            optionSelected={twoOptionSelected}
-                            output={OutputStrand}
-                            label={translation.language["label.global.adviser"]}
-                            autoFocus={false}
-                            url={autoCompleteTeacher}
-                            filterOption={TwoFilterOption}
-                        />
+                        <TeacherAutoComplete translation={translation} output={OutputTeacher}/>
                     </Grid>
                     <Grid item md={6} xs={12}>
-                        <AutoCompleteImplementation
-                            noOptionText={translation.language["label.room.class.dialog.add.input.teacher.search"]}
-                            optionLabel={twoOptionLabel}
-                            optionSelected={twoOptionSelected}
-                            output={OutputTeacher}
-                            label={translation.language["label.global.curriculum"]}
-                            autoFocus={false}
-                            url={autoCompleteTeacher}
-                            filterOption={TwoFilterOption}/>
+                        <CurriculumAutoComplete
+                            output={OutputStrand}
+                            translation={translation}
+                        />
                     </Grid>
                 </Grid>
             </DialogContent>

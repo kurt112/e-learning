@@ -1,22 +1,13 @@
 import {
-    autoCompleteRoomShift
-} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
-
-import {
     Button,
     Dialog, DialogActions,
     DialogContent,
     DialogTitle, Divider,
     Grid,
-} from "@material-ui/core";
-import {
-    TwoFilterOption,
-    twoOptionLabel,
-    twoOptionSelected
-} from "../../../utils/autoComplete/autoCompleteAction";
-import {Fragment, useState} from "react";
-import RoomShiftAddStudentTransfer from "./RoomShiftAddStudentTransferDialog";
-import AutoCompleteImplementation from "../../../utils/autoComplete/ui/AutoCompleteImplementation";
+} from "@material-ui/core"
+import {Fragment, useState} from "react"
+import RoomShiftAddStudentTransfer from "./RoomShiftAddStudentTransferDialog"
+import RoomShiftAutoComplete from "../../../utils/autoComplete/ui/RoomShiftAutoComplete"
 
 const RoomShiftAddStudentDialog = ({closeDialog, dialog, translation}) => {
 
@@ -56,15 +47,11 @@ const RoomShiftAddStudentDialog = ({closeDialog, dialog, translation}) => {
                 <DialogContent>
                     <Grid container spacing={1}>
                         <Grid item md={12} xs={12}>
-                            <AutoCompleteImplementation
-                                noOptionText={translation.language["label.room.shift.dialog.find.input.search"]}
-                                optionLabel={twoOptionLabel}
-                                optionSelected={twoOptionSelected}
+                            <RoomShiftAutoComplete
+                                translation={translation}
                                 output={OutputRoomShift}
-                                label={translation.language["label.global.room.shift"]}
                                 autoFocus={true}
-                                url={autoCompleteRoomShift}
-                                filterOption={TwoFilterOption}/>
+                            />
                         </Grid>
                     </Grid>
                 </DialogContent>

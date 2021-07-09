@@ -54,7 +54,8 @@ const UploadResourceDialog = ({
             <Divider/>
             <DialogContent>
 
-                <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
+                <Response dialogState={dialogState}
+                          registerDialogMessageClose={registerDialogMessageClose}
                           messageFail={translation.language["message.teacher.dialog.register.fail"]}
                           messageSuccess={translation.language["message.teacher.dialog.register.success"]}/>
 

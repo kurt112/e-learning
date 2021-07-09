@@ -17,15 +17,8 @@ import * as dialogAction from '../../../../../store/action/__ActionGlobal/Dialog
 import * as actions from '../../../../../store/action/teacher/GlobalAction'
 import Response from "../../../utils/Response"
 import {Teacher_Quiz_Create} from "../../../../../store/utils/Specify"
-import {
-    autoCompleteGetTeacherClass, autoCompleteGetTeacherQuiz
-} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint"
-import {
-    TwoFilterOption,
-    twoOptionLabel,
-    twoOptionSelected
-} from '../../../utils/autoComplete/autoCompleteAction'
-import AutoCompleteImplementation from "../../../utils/autoComplete/ui/AutoCompleteImplementation";
+import GetTeacherQuizResourceAutoComplete from "../../../utils/autoComplete/ui/GetTeacherQuizResourceAutoComplete";
+import GetTeacherClassAutoComplete from "../../../utils/autoComplete/ui/GetTeacherClassAutoComplete";
 
 const CreateQuizDialog = ({
                               dialog,
@@ -74,28 +67,18 @@ const CreateQuizDialog = ({
 
                 <Grid container spacing={1}>
                     <Grid item md={4} xs={12}>
-                        <AutoCompleteImplementation
-                            label={translation.language["label.teacher.quiz.dialog.create.resource.search"]}
-                            optionSelected={twoOptionSelected}
-                            output={OutputResources}
-                            optionLabel={twoOptionLabel}
-                            noOptionText={translation.language["label.teacher.quiz.dialog.create.resource"]}
+                        <GetTeacherQuizResourceAutoComplete
+                            translation={translation}
                             email={email}
-                            filterOption={TwoFilterOption}
-                            url={autoCompleteGetTeacherQuiz}
+                            output={OutputResources}
                             autoFocus={true}
                         />
                     </Grid>
 
                     <Grid item md={4} xs={12}>
-                        <AutoCompleteImplementation
-                            label={translation.language["label.teacher.quiz.dialog.create.resource"]}
-                            url={autoCompleteGetTeacherClass}
+                        <GetTeacherClassAutoComplete
+                            translation={translation}
                             email={email}
-                            filterOption={TwoFilterOption}
-                            noOptionText={translation.language["label.teacher.quiz.dialog.create.resource.search"]}
-                            optionLabel={twoOptionLabel}
-                            optionSelected={twoOptionSelected}
                             output={OutputClass}
                         />
                     </Grid>
@@ -200,7 +183,7 @@ const CreateQuizDialog = ({
 
             <DialogActions>
                 <Button variant={'contained'} disableElevation onClick={create} color='primary'>
-                    {translation.language["label.button.delete"]}
+                    {translation.language["label.global.create"]}
                 </Button>
                 <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
                     {translation.language["label.button.back"]}

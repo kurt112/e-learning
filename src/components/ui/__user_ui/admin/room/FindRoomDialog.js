@@ -1,28 +1,13 @@
 import {Fragment, useState} from "react";
-import RoomShiftAddStudentTransfer from "../room-shift/RoomShiftAddStudentTransferDialog";
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Grid} from "@material-ui/core";
-import AutoComplete from "../../../utils/autoComplete/AutoComplete";
-import {
-    changeText, filterOption, optionLabel, optionSelected,
-    TwoFilterOption,
-    twoOptionLabel,
-    twoOptionSelected
-} from "../../../utils/autoComplete/autoCompleteAction";
-import {
-    autoCompleteRoom,
-    autoCompleteRoomShift
-} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
+import RoomAutoComplete from "../../../utils/autoComplete/ui/RoomAutoComplete";
 
 const FindRoomDialog = ({
                             translation,
                             dialog,
                             closeDialog
                         }) => {
-    const [openRoomName, setOpenRoomName] = useState(false);
-    const [roomOptions, setRoomOptions] = useState([]);
-    const [loading, setLoading] = useState(false)
-    const [roomText, setRoomText] = useState('')
-    const OutputRoom = (event,value) => {
+    const OutputRoom = (event, value) => {
         value = value === null ? '' : value[1]
         console.log(value)
         // changeRoomName(value)
@@ -46,21 +31,10 @@ const FindRoomDialog = ({
                 <DialogContent>
                     <Grid container spacing={1}>
                         <Grid item md={12} xs={12}>
-                            <AutoComplete
+                            <RoomAutoComplete
                                 autoFocus={true}
-                                open={openRoomName}
-                                setOpen={setOpenRoomName}
-                                filterOptions={filterOption}
-                                options={roomOptions}
-                                loading={loading}
-                                InputText={roomText}
-                                changeAutoComplete={OutputRoom}
-                                changeText={(value) => changeText(value, setRoomText, setLoading, setRoomOptions, autoCompleteRoom)}
-                                noOptionText={translation.language["label.room.shift.dialog.create.input.room.name"]}
-                                label={translation.language["label.global.room"]}
-                                optionLabel={optionLabel}
-                                optionSelected={optionSelected}
-                            />
+                                output={OutputRoom}
+                                translation={translation}/>
                         </Grid>
                     </Grid>
                 </DialogContent>

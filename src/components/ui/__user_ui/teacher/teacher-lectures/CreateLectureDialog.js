@@ -1,27 +1,24 @@
 import {
-    Button,
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle, Divider, FormControl,
-    Grid, InputLabel,
-    Select, TextareaAutosize
+    DialogTitle,
+    InputLabel,
+    Select,
+    TextareaAutosize,
+    Button,
+    Divider,
+    FormControl,
+    Grid
 } from "@material-ui/core"
 import {connect} from 'react-redux'
 import * as dialogAction from '../../../../../store/action/__ActionGlobal/DialogAction'
 import * as actions from '../../../../../store/action/teacher/GlobalAction'
-import {useState} from "react"
 import Response from "../../../utils/Response"
 import {Teacher_Lecture_Create} from "../../../../../store/utils/Specify"
-import {
-    autoCompleteGetTeacherClass, autoCompleteGetTeacherLecture
-} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint"
-import {
-    TwoFilterOption,
-    twoOptionLabel,
-    twoOptionSelected
-} from '../../../utils/autoComplete/autoCompleteAction'
-import AutoCompleteImplementation from "../../../utils/autoComplete/ui/AutoCompleteImplementation";
+import GetTeacherLectureResourceAutoComplete
+    from "../../../utils/autoComplete/ui/GetTeacherLectureResourceAutoComplete"
+import GetTeacherClassAutoComplete from "../../../utils/autoComplete/ui/GetTeacherClassAutoComplete"
 
 const CreateLectureDialog = ({
 
@@ -70,29 +67,19 @@ const CreateLectureDialog = ({
 
                 <Grid container spacing={1}>
                     <Grid item md={3} xs={12}>
-                        <AutoCompleteImplementation
-                            autoFocus={true}
-                            label={translation.language["label.teacher.lecture.dialog.create.resource"]}
+                        <GetTeacherLectureResourceAutoComplete
+                            translation={translation}
                             output={OutputResources}
-                            optionSelected={twoOptionSelected}
-                            optionLabel={twoOptionLabel}
-                            noOptionText={translation.language["label.teacher.lecture.dialog.create.resource.search"]}
                             email={email}
-                            filterOption={TwoFilterOption}
-                            url={autoCompleteGetTeacherLecture}
+                            autoFocus={true}
                         />
                     </Grid>
 
                     <Grid item md={3} xs={12}>
-                        <AutoCompleteImplementation
-                            url={autoCompleteGetTeacherClass}
+                        <GetTeacherClassAutoComplete
                             email={email}
-                            filterOption={TwoFilterOption}
-                            noOptionText={translation.language["label.global.search.class"]}
-                            optionLabel={twoOptionLabel}
-                            optionSelected={twoOptionSelected}
                             output={OutputClass}
-                            label={translation.language["label.global.your.class"]}
+                            translation={translation}
                         />
                     </Grid>
 

@@ -1,10 +1,10 @@
-import {Fragment} from "react";
+import {Fragment} from "react"
 import TeacherRoute from './TeacherRoute'
-import StudentRoute from "./StudentRoute";
-import ProfileRoute from "./ProfileRoute";
-import AdminRoute from "./AdminRoute";
-import {Redirect} from "react-router";
+import StudentRoute from "./StudentRoute"
+import ProfileRoute from "./ProfileRoute"
+import AdminRoute from "./AdminRoute"
 import {Teacher, Student,Admin} from "../../store/utils/Specify";
+import {Redirect} from "react-router";
 
 
 const Route = ({role,email,translation}) => {
@@ -16,6 +16,9 @@ const Route = ({role,email,translation}) => {
                         role === Admin ? <AdminRoute translation={translation} email={email}/> :null
             }
             <ProfileRoute translation={translation}/>
+            {
+                role !== Admin? <Redirect to={'/'}/>: null
+            }
         </Fragment>
     )
 }

@@ -1,30 +1,19 @@
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid} from "@material-ui/core";
-import Divider from "@material-ui/core/Divider";
-import {Fragment, useState} from "react";
-import AutoComplete from "../../../utils/autoComplete/AutoComplete";
-import {
-    changeText, optionLabel, optionSelected,
-    TwoFilterOption
-} from "../../../utils/autoComplete/autoCompleteAction";
-import {
-    autoCompleteGetCurriculum
-} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
-import InsertSubjectInCurriculum from "./InsertSubjectInCurriculum";
+import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid} from "@material-ui/core"
+import Divider from "@material-ui/core/Divider"
+import {Fragment, useState} from "react"
+import InsertSubjectInCurriculum from "./InsertSubjectInCurriculum"
+import CurriculumAutoComplete from "../../../utils/autoComplete/ui/CurriculumAutoComplete"
 
 const FindCurriculum = ({
-                         translation,
-                         closeDialog,
-                         dialog,
-                     }) => {
+                            translation,
+                            closeDialog,
+                            dialog,
+                        }) => {
 
-    const [openSubject, setOpenSubject] = useState(false)
-    const [subjectOptions, setSubjectOptions] = useState([])
-    const [subjectLoading, setRoomShiftLoading] = useState(false)
-    const [subjectText, setSubjectText] = useState('')
     const [transfer, setTransfer] = useState(false);
     const [id, setId] = useState('')
 
-    const OutputSubject = (event, value) => {
+    const OutputCurriculum = (event, value) => {
         setId(value === null ? '' : value[1].toString())
     }
 
@@ -39,8 +28,9 @@ const FindCurriculum = ({
 
     return (
         <Fragment>
-            {id.length === 0? null: <InsertSubjectInCurriculum curriculumCode={id} translation={translation} open={transfer}
-                                                               closeDialog={closeTransfer}/> }
+            {id.length === 0 ? null :
+                <InsertSubjectInCurriculum curriculumCode={id} translation={translation} open={transfer}
+                                           closeDialog={closeTransfer}/>}
             <Dialog
                 open={dialog}
                 onClose={closeDialog}
@@ -54,29 +44,20 @@ const FindCurriculum = ({
 
                     <Grid container spacing={1}>
                         <Grid item md={12} xs={12}>
-                            <AutoComplete
+                            <CurriculumAutoComplete
+                                translation={translation}
+                                output={OutputCurriculum}
                                 autoFocus={true}
-                                open={openSubject}
-                                setOpen={setOpenSubject}
-                                filterOptions={TwoFilterOption}
-                                options={subjectOptions}
-                                loading={subjectLoading}
-                                InputText={subjectText}
-                                changeAutoComplete={OutputSubject}
-                                changeText={(value) => changeText(value, setSubjectText, setRoomShiftLoading, setSubjectOptions, autoCompleteGetCurriculum)}
-                                noOptionText={translation.language["label.curriculum.dialog.find.search"]}
-                                label={translation.language["label.sidebar.curriculum"]}
-                                optionLabel={optionLabel}
-                                optionSelected={optionSelected}
                             />
                         </Grid>
                     </Grid>
                 </DialogContent>
                 <DialogActions>
-                    <Button variant={'contained'} disableElevation  color='primary' onClick={id.length === 0 ? null : openTransfer}>
+                    <Button variant={'contained'} disableElevation color='primary'
+                            onClick={id.length === 0 ? null : openTransfer}>
                         {translation.language["label.global.find"]}
                     </Button>
-                    <Button variant={'contained'}  color='secondary' disableElevation onClick={closeDialog}>
+                    <Button variant={'contained'} color='secondary' disableElevation onClick={closeDialog}>
                         {translation.language["label.button.back"]}
                     </Button>
                 </DialogActions>

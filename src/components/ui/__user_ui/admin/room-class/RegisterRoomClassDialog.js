@@ -3,27 +3,22 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle, Divider, FormControl,
-    Grid, InputLabel,
+    DialogTitle,
+    Divider,
+    FormControl,
+    Grid,
+    InputLabel,
     Select,
     TextField
 } from "@material-ui/core"
 import {connect} from 'react-redux'
 import * as action from '../../../../../store/action/__ActionGlobal/DialogAction'
 import * as roomClassDialogAction from '../../../../../store/action/admin/RoomClass/RoomClassDialogAction'
-import {RoomShiftClass} from "../../../../../store/utils/Specify";
-import Response from "../../../utils/Response";
-import {
-    autoCompleteTeacher,
-    autoCompleteRoomShift,
-    autoCompleteSubject
-} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
-import {
-    TwoFilterOption,
-    twoOptionLabel,
-    twoOptionSelected
-} from '../../../utils/autoComplete/autoCompleteAction'
-import AutoCompleteImplementation from "../../../utils/autoComplete/ui/AutoCompleteImplementation";
+import {RoomShiftClass} from "../../../../../store/utils/Specify"
+import Response from "../../../utils/Response"
+import RoomShiftAutoComplete from "../../../utils/autoComplete/ui/RoomShiftAutoComplete"
+import SubjectAutoComplete from "../../../utils/autoComplete/ui/SubjectAutoComplete"
+import TeacherAutoComplete from "../../../utils/autoComplete/ui/TeacherAutoComplete"
 
 const RoomClassDialog = ({
                              closeDialog,
@@ -71,27 +66,16 @@ const RoomClassDialog = ({
 
                 <Grid container spacing={1}>
                     <Grid item md={6} xs={12}>
-                        <AutoCompleteImplementation
-                            filterOption={TwoFilterOption}
-                            url={autoCompleteRoomShift}
-                            autoFocus={true}
-                            label={translation.language["label.global.room.shift"]}
+                        <RoomShiftAutoComplete
                             output={OutputRoomShift}
-                            optionSelected={twoOptionSelected}
-                            optionLabel={twoOptionLabel}
-                            noOptionText={translation.language["label.room.class.dialog.add.input.room.shift.search"]}
+                            translation={translation}
+                            autoFocus={true}
                         />
                     </Grid>
                     <Grid item md={6} xs={12}>
-                        <AutoCompleteImplementation
-                            filterOption={TwoFilterOption}
-                            noOptionText={translation.language["label.room.class.dialog.add.input.subject.search"]}
-                            optionLabel={twoOptionLabel}
-                            optionSelected={twoOptionSelected}
+                        <SubjectAutoComplete
+                            translation={translation}
                             output={OutputSubject}
-                            label={translation.language["label.global.subject"]}
-                            autoFocus={false}
-                            url={autoCompleteSubject}
                         />
                     </Grid>
 
@@ -141,16 +125,9 @@ const RoomClassDialog = ({
 
                     </Grid>
                     <Grid item md={6} xs={12}>
-                        <AutoCompleteImplementation
-                        filterOption={TwoFilterOption}
-                        url={autoCompleteTeacher}
-                        autoFocus={false}
-                        label={translation.language["label.global.teacher"]}
-                        optionSelected={twoOptionSelected}
-                        output={OutputTeacher}
-                        optionLabel={twoOptionLabel}
-                        noOptionText={translation.language["label.room.class.dialog.add.input.teacher.search"]}
-                        />
+                        <TeacherAutoComplete
+                            output={OutputTeacher}
+                            translation={translation}/>
                     </Grid>
                 </Grid>
             </DialogContent>

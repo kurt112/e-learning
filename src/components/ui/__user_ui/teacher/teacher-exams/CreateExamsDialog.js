@@ -13,18 +13,10 @@ import * as dialogAction from '../../../../../store/action/__ActionGlobal/Dialog
 import * as actions from '../../../../../store/action/teacher/GlobalAction'
 import Response from "../../../utils/Response"
 import {Teacher_Exams_Create} from "../../../../../store/utils/Specify"
-import {
-    autoCompleteGetTeacherClass, autoCompleteGetTeacherExams
-} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint"
-import {
-    TwoFilterOption,
-    twoOptionLabel,
-    twoOptionSelected
-} from '../../../utils/autoComplete/autoCompleteAction'
-import AutoCompleteImplementation from "../../../utils/autoComplete/ui/AutoCompleteImplementation";
+import GetTeacherExamResourceAutoComplete from "../../../utils/autoComplete/ui/GetTeacherExamResourceAutoComplete";
+import GetTeacherClassAutoComplete from "../../../utils/autoComplete/ui/GetTeacherClassAutoComplete";
 
 const CreateExamsDialog = ({
-
                                dialog,
                                closeDialog,
                                create,
@@ -71,29 +63,18 @@ const CreateExamsDialog = ({
 
                 <Grid container spacing={1}>
                     <Grid item md={4} xs={12}>
-                        <AutoCompleteImplementation
-                            url={autoCompleteGetTeacherExams}
-                            autoFocus={true}
-                            label={translation.language["label.teacher.exam.dialog.resource"]}
-                            output={OutputResources}
-                            optionSelected={twoOptionSelected}
-                            optionLabel={twoOptionLabel}
-                            noOptionText={translation.language["label.teacher.exam.dialog.resource.search"]}
-                            email={email}
-                            filterOption={TwoFilterOption}
-                        />
+                        <GetTeacherExamResourceAutoComplete
+                        autoFocus={true}
+                        translation={translation}
+                        output={OutputResources}
+                        email={email}/>
                     </Grid>
 
                     <Grid item md={4} xs={12}>
-                        <AutoCompleteImplementation
-                            url={autoCompleteGetTeacherClass}
-                            email={email}
-                            filterOption={TwoFilterOption}
-                            noOptionText={translation.language["label.global.search.class"]}
-                            optionLabel={twoOptionLabel}
-                            optionSelected={twoOptionSelected}
-                            output={OutputClass}
-                            label={translation.language["label.global.your.class"]}
+                        <GetTeacherClassAutoComplete
+                        email={email}
+                        output={OutputClass}
+                        translation={translation}
                         />
                     </Grid>
 
