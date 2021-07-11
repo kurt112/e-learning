@@ -5,6 +5,7 @@ import {AdminRoomTable as columns} from '../../../utils/tableColumn'
 import style, {TableOptions as options} from '../../../_style/TableStyle'
 import {connect} from 'react-redux'
 import * as actions from "../../../../../store/action/__ActionGlobal/TableAction"
+import {reInitState} from '../../../../../store/action/__ActionGlobal/DialogAction'
 import {Room, Room_Delete, Room_Update} from "../../../../../store/utils/Specify"
 import Typography from "@material-ui/core/Typography"
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
@@ -28,7 +29,8 @@ const Index = ({
                    openUpdateDialog,
                    closeUpdateDialog,
                    translation,
-                   setData
+                   setData,
+                   reInitState
                }) => {
 
     const classes = style()
@@ -42,7 +44,7 @@ const Index = ({
 
             <RegisterRoom translation={translation} dialog={room.dialog} closeDialog={closeDialog}/>
             <DeleteRoomDialog translation={translation} dialog={room.deleteDialog} closeDialog={closeDeleteDialog}/>
-            <FindRoomDialog setData={setData} translation={translation} dialog={room.updateDialog} closeDialog={closeUpdateDialog}/>
+            <FindRoomDialog reInitState={reInitState} setData={setData} translation={translation} dialog={room.updateDialog} closeDialog={closeUpdateDialog}/>
 
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
@@ -119,7 +121,8 @@ const mapDispatchToProps = (dispatch) => {
         openUpdateDialog: () => dispatch(actions.openDialog(Room_Update)),
         closeUpdateDialog: () => dispatch(actions.closeDialog(Room_Update)),
 
-        setData: (data) => dispatch(actions.setData(data,Room))
+        setData: (data) => dispatch(actions.setData(data,Room)),
+        reInitState: () => dispatch(reInitState(Room))
 
     }
 }

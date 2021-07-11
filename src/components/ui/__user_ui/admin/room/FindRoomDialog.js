@@ -8,7 +8,8 @@ const FindRoomDialog = ({
                             translation,
                             dialog,
                             closeDialog,
-                            setData
+                            setData,
+                            reInitState
                         }) => {
 
     const [id, setId] = useState('')
@@ -22,6 +23,11 @@ const FindRoomDialog = ({
                 setUpdate(true)
             }
         })
+    }
+
+    const closeUpdate = () => {
+        reInitState()
+        setUpdate(false)
     }
 
     return update === false ? <Dialog
@@ -60,7 +66,7 @@ const FindRoomDialog = ({
                 </DialogActions>
             </form>
         </Dialog> :
-        <UpdateRoomDialog translation={translation} dialog={update} closeDialog={() => setUpdate(false)}/>
+        <UpdateRoomDialog translation={translation} dialog={update} closeDialog={closeUpdate}/>
 }
 
 export default FindRoomDialog
