@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import {Fragment, Suspense, useEffect} from 'react'
 import DashBoard from './components/mainUI/MainUI'
 import {BrowserRouter} from 'react-router-dom'

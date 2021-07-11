@@ -1,4 +1,9 @@
-import {Redirect, Route} from "react-router";
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
+import {Route} from "react-router";
 import {Fragment, lazy, useEffect, useState} from "react";
 import {getStudentDataByEmail} from "../../store/middleware/utils/GraphQlQuery/StudentQuery/StudentDataQuery";
 import {graphQlRequestAsync} from "../../store/middleware/utils/HttpRequest";

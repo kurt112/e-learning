@@ -1,71 +1,77 @@
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid} from "@material-ui/core"
-import Divider from "@material-ui/core/Divider"
-import {Fragment, useState} from "react"
-import InsertSubjectInCurriculum from "./InsertSubjectInCurriculum"
-import CurriculumAutoComplete from "../../../utils/autoComplete/ui/CurriculumAutoComplete"
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
+import {useState} from "react"
+import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Grid, TextField} from "@material-ui/core"
+import {graphQlRequestAsync} from "../../../../../store/middleware/utils/HttpRequest";
+import {getRoomBasic} from "../../../../../store/middleware/utils/GraphQlQuery/ProfileQuery/RoomProfile";
+import UpdateRoomDialog from "./UpdateRoomDialog";
 
-const FindCurriculum = ({
+const FindCurriculumDialog = ({
                             translation,
-                            closeDialog,
                             dialog,
+                            closeDialog,
+                            setData,
+                            reInitState
                         }) => {
 
-    const [transfer, setTransfer] = useState(false);
     const [id, setId] = useState('')
+    const [update, setUpdate] = useState(false)
 
-    const OutputCurriculum = (event, value) => {
-        setId(value === null ? '' : value[1].toString())
+    const getRoom = () => {
+        graphQlRequestAsync(getRoomBasic(id)).then(room => {
+            if(room.data.data.room !== null){
+                setId('')
+                setData(room.data.data.room)
+                setUpdate(true)
+            }
+        })
     }
 
-
-    const closeTransfer = () => {
-        setTransfer(false)
+    const closeUpdate = () => {
+        reInitState()
+        setUpdate(false)
     }
 
-    const openTransfer = () => {
-        setTransfer(true)
-    }
-
-    return (
-        <Fragment>
-            {id.length === 0 ? null :
-                <InsertSubjectInCurriculum curriculumCode={id} translation={translation} open={transfer}
-                                           closeDialog={closeTransfer}/>}
-            <Dialog
-                open={dialog}
-                onClose={closeDialog}
-                aria-labelledby="delete-room"
-                fullWidth
-                maxWidth={"md"}
-            >
-                <DialogTitle>{translation.language["label.curriculum.dialog.find.curriculum.title"]}</DialogTitle>
+    return update === false ? <Dialog
+            open={dialog}
+            onClose={closeDialog}
+            aria-labelledby="add-student"
+            maxWidth="lg"
+            fullWidth
+        >
+            <form noValidate>
+                <DialogTitle
+                    id="add-student">{translation.language["label.room.dialog.find.room.title"]}</DialogTitle>
                 <Divider/>
+                <br/>
                 <DialogContent>
-
                     <Grid container spacing={1}>
                         <Grid item md={12} xs={12}>
-                            <CurriculumAutoComplete
-                                translation={translation}
-                                output={OutputCurriculum}
-                                autoFocus={true}
-                            />
+                            <TextField autoFocus
+                                       value={id}
+                                       margin={'dense'}
+                                       variant={'outlined'} fullWidth
+                                       onChange={event => setId(event.target.value)}
+                                       placeholder={translation.language["label.room.dialog.delete.input"]}/>
                         </Grid>
                     </Grid>
                 </DialogContent>
+
                 <DialogActions>
-                    <Button variant={'contained'} disableElevation color='primary'
-                            onClick={id.length === 0 ? null : openTransfer}>
+                    <Button variant={'contained'} disableElevation onClick={getRoom}
+                            color='primary'>
                         {translation.language["label.global.find"]}
                     </Button>
-                    <Button variant={'contained'} color='secondary' disableElevation onClick={closeDialog}>
+                    <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
                         {translation.language["label.button.back"]}
                     </Button>
                 </DialogActions>
-            </Dialog>
-        </Fragment>
-
-    )
-
+            </form>
+        </Dialog> :
+        <UpdateRoomDialog translation={translation} dialog={update} closeDialog={closeUpdate}/>
 }
 
-export default FindCurriculum
+export default FindCurriculumDialog

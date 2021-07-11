@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import {put} from "redux-saga/effects";
 import * as tableActions from "../../action/__ActionGlobal/TableAction";
 import {baseUrl} from "../axios";

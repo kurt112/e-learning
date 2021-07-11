@@ -1,6 +1,10 @@
-// // components for teacher UI
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import {lazy, Fragment, useState, useEffect} from "react";
-import {Redirect, Route} from "react-router";
+import {Route} from "react-router";
 import {graphQlRequestAsync} from "../../store/middleware/utils/HttpRequest";
 import {
     getTeacherClasses,

@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import {autoCompleteRoom} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 import {filterOption, optionLabel, optionSelected} from "../autoCompleteAction";
 import AutoCompleteImplementation from "./AutoCompleteImplementation";

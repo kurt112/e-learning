@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import {Student, Student_Delete} from '../../utils/Specify'
 import {select} from "redux-saga/effects";
 import * as Selector from "../selector";

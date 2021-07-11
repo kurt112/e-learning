@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 // for upload dialog in teacher resource,
 export const
     Dialog_Success = (to) => to + 'Upload_Dialog_Success',

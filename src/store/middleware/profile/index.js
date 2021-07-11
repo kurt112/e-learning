@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import {takeLeading} from "redux-saga/effects";
 import * as profile from "../../ActionType/__ActionTypeGlobal/ProfileActionType";
 import {Room, RoomShift, RoomShiftClass, Student, Teacher} from "../../utils/Specify";

@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import state from '../__StateGlobal/UserForm'
 import * as userAction from '../../ActionType/__ActionTypeGlobal/UserRegisterActionType'
 import {Student} from "../../utils/Specify";

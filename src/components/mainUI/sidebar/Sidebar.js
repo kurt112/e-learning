@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import {TeacherItems, StudentItems, AdminItems} from '../../navigations/SidebarItem';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';

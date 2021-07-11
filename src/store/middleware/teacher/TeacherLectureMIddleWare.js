@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import {put, select} from "redux-saga/effects"
 import * as Selector from "../selector"
 import {TableDataInit, TableNextData} from "../admin/__MiddleWareGlobal"

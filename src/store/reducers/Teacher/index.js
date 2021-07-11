@@ -1,7 +1,8 @@
-export {
-    default as TeacherActivity
-} from './TeacherActivityState'
-
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 export {
     default as TeacherProfileState
 } from './TeacherProfileState'

@@ -1,3 +1,9 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
+
 import {LinearProgress, Snackbar} from "@material-ui/core";
 import {Alert, AlertTitle} from "@material-ui/lab";
 import {Fragment} from "react";

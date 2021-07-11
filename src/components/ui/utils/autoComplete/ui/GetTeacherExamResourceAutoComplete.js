@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import AutoCompleteImplementation from "./AutoCompleteImplementation";
 import {autoCompleteGetTeacherExams} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 import {TwoFilterOption, twoOptionLabel, twoOptionSelected} from "../autoCompleteAction";

@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import {takeLeading} from "redux-saga/effects";
 import * as adminDialog from "../../ActionType/__ActionTypeGlobal/DialogActionType";
 import {

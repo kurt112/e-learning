@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import {Box, Paper} from "@material-ui/core";
 import style from '../GlobalStyle'
 import Button from "@material-ui/core/Button";

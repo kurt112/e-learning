@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import state from '../../__StateGlobal/AdminTableDialogState'
 import * as actions from '../../../ActionType/__ActionTypeGlobal/DialogActionType'
 import * as roomAction from '../../../ActionType/Admin/Room/RoomDialogActionType'

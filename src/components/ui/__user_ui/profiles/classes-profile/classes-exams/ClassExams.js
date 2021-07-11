@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import ProfileStyle from '../../ProfileStyle'
 import Grid from "@material-ui/core/Grid"
 import TaskCard from "../TaskCard"

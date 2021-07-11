@@ -1,6 +1,11 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 const { makeStyles } = require("@material-ui/core");
 
-const style = makeStyles((theme) => ({
+const style = makeStyles(() => ({
     messageBox: {
         background: '#f7f7f7',
         borderRadius: 20,

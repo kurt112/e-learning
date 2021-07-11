@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 const Create = '_CREATE', Delete = '_DELETE', Update = '_UPDATE'
 
 export const

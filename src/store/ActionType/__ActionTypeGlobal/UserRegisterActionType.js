@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 export const
     CHANGE_EMAIL= to => to+'_CHANGE_EMAIL',
     CHANGE_FIRST_NAME= to => to+'_CHANGE_FIRST_NAME',

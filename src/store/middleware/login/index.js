@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import {takeLeading} from "redux-saga/effects";
 import * as loginAction from "../../ActionType/Login/LoginActionType";
 import {Login, PreRegister, ReLogin} from "./LoginMiddleware";

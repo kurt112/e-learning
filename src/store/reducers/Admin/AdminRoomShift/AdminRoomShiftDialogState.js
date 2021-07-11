@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import * as actions from "../../../ActionType/__ActionTypeGlobal/DialogActionType";
 import {RoomShift} from "../../../utils/Specify";
 import * as roomShiftAction from "../../../ActionType/Admin/RoomShift/RoomShiftDialogActionType";

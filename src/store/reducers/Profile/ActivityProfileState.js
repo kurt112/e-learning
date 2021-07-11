@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import * as profileAction from '../../ActionType/__ActionTypeGlobal/ProfileActionType'
 
 import state from '../__StateGlobal/ProfileState'

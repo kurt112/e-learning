@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import state from "../../__StateGlobal/AdminTableState"
 import * as actions from "../../../ActionType/__ActionTypeGlobal/TableActionType"
 import {Teacher_Assignment, Teacher_Assignment_Create, Teacher_Assignment_Delete} from "../../../utils/Specify"

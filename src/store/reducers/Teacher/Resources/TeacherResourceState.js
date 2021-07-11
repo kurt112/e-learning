@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import {TeacherInsertResources as insert} from '../../../../components/ui/utils/tableColumn/TeacherTable'
 import {updateObject} from "../../../utils/UpdateObject";
 import {convertDateTime} from "../../../../components/ui/utils/dateFormat/DateTimeFormatToDateWord";

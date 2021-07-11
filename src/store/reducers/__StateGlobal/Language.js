@@ -1,3 +1,8 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 11/07/2021, Sunday
+ **/
 import es from '../../../global-translations/locale-es.json'
 import cebuano from '../../../global-translations/locale-ceb.json'
 import illocano from '../../../global-translations/locale-iloc.json'
