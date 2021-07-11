@@ -3,13 +3,15 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-const Create = '_CREATE', Delete = '_DELETE', Update = '_UPDATE'
+const Create = '_CREATE', Delete = '_DELETE', Update = '_UPDATE', Find = "_FIND"
 
 export const
     // For Curriculum
     Curriculum = "CURRICULUM",
     Curriculum_Create = Curriculum+Create,
     Curriculum_Delete = Curriculum+Delete,
+    Curriculum_Update = Curriculum+Update,
+    Curriculum_Find = Curriculum+Find,
     Curriculum_Insert_Subject = Curriculum+"_INSERT_SUBJECT",
 
     // For Teacher

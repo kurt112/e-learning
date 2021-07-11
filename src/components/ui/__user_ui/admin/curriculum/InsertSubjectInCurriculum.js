@@ -20,9 +20,8 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import ListItem from '@material-ui/core/ListItem';
 import {useEffect, useState} from "react";
-import {graphQlRequestAsync,PostData } from "../../../../../store/middleware/utils/HttpRequest";
+import {graphQlRequestAsync, PostData} from "../../../../../store/middleware/utils/HttpRequest";
 import style from '../../../_style/TransferDialogStyle'
-import {GetCurriculum} from "../../../../../store/middleware/utils/GraphQlQuery/AdminQuery/AdminCurriculum";
 import {AdminSubjectBodyDataQuery} from "../../../../../store/middleware/utils/GraphQlQuery/AdminQuery/AdminSubjectQuery";
 
 // Checking if the current check list has a member of the entity
@@ -40,15 +39,22 @@ function intersection(a, b) {
  * @param {{student_id:string}} id of the student
  *
  */
-const InsertSubjectInCurriculumDialog = ({open, closeDialog,translation,curriculumCode}) => {
+const InsertSubjectInCurriculumDialog = (
+    {
+        open,
+        closeDialog,
+        translation,
+        curriculumCode,
+        subjects,
+        name
+    }) => {
 
     const classes = style();
     const [checked, setChecked] = useState([])
     const [availableSubjects, setAvailSubjects] = useState([])
-    const [curriculumSubjects, setCurriculumSubjects] = useState([])
+    const [curriculumSubjects, setCurriculumSubjects] = useState(subjects)
     const [rightText, setRightText] = useState('')
     const [leftText, setLeftText] = useState('')
-    const [curriculumName, setCurriculumName] = useState('')
     const [subjectHashMap] = useState({})
     let leftChecked = intersection(checked, availableSubjects)
     let rightChecked = intersection(checked, curriculumSubjects)
@@ -57,7 +63,7 @@ const InsertSubjectInCurriculumDialog = ({open, closeDialog,translation,curricul
     const uploadSubjects = () => {
         const data = {
             curriculumCode,
-            subjects: curriculumSubjects.map(e=> e.subjectCode)
+            subjects: curriculumSubjects.map(e => e.subjectCode)
         }
 
         PostData("/admin/curriculum/add/subject", data).then(r => {
@@ -183,35 +189,14 @@ const InsertSubjectInCurriculumDialog = ({open, closeDialog,translation,curricul
     );
 
 
-    // Getting the current Students in RoomShift and it will re render
-    // If the shift id is change
-    useEffect(() => {
-
-        async function fetchData() {
-            return await graphQlRequestAsync(GetCurriculum(curriculumCode))
-        }
-
-
-        fetchData().then(r => {
-            const response = r.data.data.getCurriculum
-            setCurriculumName(response.name)
-            setCurriculumSubjects(response.subjects)
-        })
-
-
-    }, [])
-
-
-    // Getting all the students
+    // Getting all the Subject
 
     useEffect(() => {
 
         async function fetchData() {
-            return await graphQlRequestAsync(AdminSubjectBodyDataQuery(leftText,0))
+            return await graphQlRequestAsync(AdminSubjectBodyDataQuery(leftText, 0))
         }
-
         fetchData().then(r => {
-            console.log(r)
             const subjects = r.data.data.subjects
 
             // eslint-disable-next-line array-callback-return
@@ -251,7 +236,8 @@ const InsertSubjectInCurriculumDialog = ({open, closeDialog,translation,curricul
 
 
                     <Grid container spacing={2} justify="space-between" alignItems="center">
-                        <Grid md={5} sm={12} xs={12} item>{customList(translation.language["label.curriculum.dialog.add.subject.title.available"], availableSubjects, leftText, setLeftText)}</Grid>
+                        <Grid md={5} sm={12} xs={12}
+                              item>{customList(translation.language["label.curriculum.dialog.add.subject.title.available"], availableSubjects, leftText, setLeftText)}</Grid>
                         <Grid item md={2} sm={12} xs={12}>
                             <Grid container direction="column" alignItems="center">
                                 <Button
@@ -279,7 +265,8 @@ const InsertSubjectInCurriculumDialog = ({open, closeDialog,translation,curricul
                             </Grid>
                         </Grid>
                         <Grid md={5}
-                              item sm={12} xs={12}>{customList(curriculumName + " "  + translation.language["label.curriculum.dialog.add.subject.title.current"], curriculumSubjects, rightText, setRightText)}</Grid>
+                              item sm={12}
+                              xs={12}>{customList(name + " " + translation.language["label.curriculum.dialog.add.subject.title.current"], curriculumSubjects, rightText, setRightText)}</Grid>
                     </Grid>
 
                 </DialogContent>

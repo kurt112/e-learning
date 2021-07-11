@@ -6,7 +6,12 @@
 import {AdminInsertCurriculum as insert} from "../../../../components/ui/utils/tableColumn";
 import state from "../../__StateGlobal/AdminTableState";
 import * as actions from "../../../ActionType/__ActionTypeGlobal/TableActionType";
-import {Curriculum, Curriculum_Create, Curriculum_Delete, Curriculum_Insert_Subject} from "../../../utils/Specify";
+import {
+    Curriculum,
+    Curriculum_Create,
+    Curriculum_Delete, Curriculum_Find,
+    Curriculum_Update
+} from "../../../utils/Specify";
 import {updateObject} from "../../../utils/UpdateObject";
 const newState = new state()
 
@@ -16,7 +21,7 @@ const transforms = (items) => items.map((item) =>
 const currentState = {
     ...newState.init_state,
     deleteDialog: false,
-    insertSubjectDialog: false
+    findDialog: false
 }
 
 const reducer = (state = currentState, action) =>{
@@ -36,8 +41,8 @@ const reducer = (state = currentState, action) =>{
         case actions.DIALOG_CLOSE(Curriculum_Delete): return updateObject(state, {deleteDialog: false})
 
 
-        case actions.DIALOG_OPEN(Curriculum_Insert_Subject): return updateObject(state, {insertSubjectDialog: true})
-        case actions.DIALOG_CLOSE(Curriculum_Insert_Subject): return updateObject(state, {insertSubjectDialog: false})
+        case actions.DIALOG_OPEN(Curriculum_Find): return updateObject(state, {findDialog: true})
+        case actions.DIALOG_CLOSE(Curriculum_Find): return updateObject(state, {findDialog: false})
 
         default: return state;
     }

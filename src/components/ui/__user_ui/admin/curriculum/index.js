@@ -5,7 +5,7 @@
  **/
 import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
-import {Fragment, lazy, useEffect} from "react"
+import {Fragment, lazy, useEffect, useState} from "react"
 import {AdminCurriculumTable as columns} from '../../../utils/tableColumn'
 
 import style, {TableOptions as options} from '../../../_style/TableStyle'
@@ -15,7 +15,7 @@ import {
     Curriculum,
     Curriculum_Create,
     Curriculum_Delete,
-    Curriculum_Insert_Subject
+    Curriculum_Find, Room
 } from "../../../../../store/utils/Specify"
 import Typography from "@material-ui/core/Typography"
 import IconButton from "@material-ui/core/IconButton";
@@ -23,10 +23,11 @@ import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+import {reInitState} from "../../../../../store/action/__ActionGlobal/DialogAction";
 
 const CreateCurriculumDialog = lazy(() => import(`./CreateCurriculumDialog`))
 const DeleteCurriculumDialog = lazy(() => import(`./DeleteCurriculumDialog`))
-const FindSubject = lazy(() => import(`./FindCurriculum`))
+const FindCurriculum = lazy(() => import(`./FindCurriculum`))
 
 const Index = ({
                    state,
@@ -37,12 +38,35 @@ const Index = ({
                    closeDialog,
                    openDeleteDialog,
                    closeDeleteDialog,
-                   openInsertSubjectDialog,
-                   closeInsertSubjectDialog,
-                   translation
+                   openFindCurriculum,
+                   closeFindCurriculum,
+                   translation,
+                   setData,
+                   reInitState
                }) => {
 
     const classes = style()
+
+    const [update, setUpdate] = useState(false)
+    const [insertSubject, setInsertSubject] = useState(false)
+
+    // alert(state.findDialog)
+
+    const updateClick = () => {
+        setUpdate(true)
+        openFindCurriculum()
+    }
+
+    const insertSubjectClick = () => {
+        setInsertSubject(true)
+        openFindCurriculum()
+    }
+
+    const closeClick = () => {
+        setUpdate(false)
+        setInsertSubject(false)
+        closeFindCurriculum()
+    }
 
     useEffect(() => {
 
@@ -54,9 +78,20 @@ const Index = ({
     return (
         <Fragment>
             <CreateCurriculumDialog translation={translation} dialog={state.dialog} closeDialog={closeDialog}/>
-            <DeleteCurriculumDialog translation={translation} dialog={state.deleteDialog} closeDialog={closeDeleteDialog}/>
-            <FindSubject translation={translation} dialog={state.insertSubjectDialog} closeDialog={closeInsertSubjectDialog}/>
-            {/*<InsertSubjectCurriculumDialog translation={translation} open={state.insertSubjectDialog} closeDialog={closeInsertSubjectDialog}/>*/}
+            <DeleteCurriculumDialog translation={translation} dialog={state.deleteDialog}
+                                    closeDialog={closeDeleteDialog}/>
+            <FindCurriculum
+                update={update}
+                insertSubject={insertSubject}
+                translation={translation}
+                dialog={state.findDialog}
+                closeDialog={closeClick}
+                closeUpdate={() => setUpdate(false)}
+                closeInsertSubject={() => setInsertSubject(false)}
+                setData={setData}
+                reInitState={reInitState}
+            />
+
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
@@ -74,13 +109,13 @@ const Index = ({
                             </Tooltip>
 
                             <Tooltip title={translation.language["tooltip.curriculum.update"]}>
-                                <IconButton aria-label="update-curriculum" onClick={() => alert('gagawin mo pa to')}>
+                                <IconButton aria-label="update-curriculum" onClick={updateClick}>
                                     <UpdateIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
                             </Tooltip>
 
                             <Tooltip title={translation.language["tooltip.curriculum.add.subject"]}>
-                                <IconButton aria-label="update-curriculum" onClick={openInsertSubjectDialog}>
+                                <IconButton aria-label="update-curriculum" onClick={insertSubjectClick}>
                                     <ImportContactsIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
                             </Tooltip>
@@ -139,8 +174,11 @@ const mapDispatchToProps = (dispatch) => {
         openDeleteDialog: () => dispatch(actions.openDialog(Curriculum_Delete)),
         closeDeleteDialog: () => dispatch(actions.closeDialog(Curriculum_Delete)),
 
-        openInsertSubjectDialog: () =>dispatch(actions.openDialog(Curriculum_Insert_Subject)),
-        closeInsertSubjectDialog: () =>dispatch(actions.closeDialog(Curriculum_Insert_Subject))
+        openFindCurriculum: () => dispatch(actions.openDialog(Curriculum_Find)),
+        closeFindCurriculum: () => dispatch(actions.closeDialog(Curriculum_Find)),
+
+        setData: (data) => dispatch(actions.setData(data,Curriculum_Create)),
+        reInitState: () => dispatch(reInitState(Curriculum_Create))
     }
 }
 

@@ -6,35 +6,48 @@
 import {useState} from "react"
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Grid, TextField} from "@material-ui/core"
 import {graphQlRequestAsync} from "../../../../../store/middleware/utils/HttpRequest";
-import {getRoomBasic} from "../../../../../store/middleware/utils/GraphQlQuery/ProfileQuery/RoomProfile";
+import {
+    getCurriculumBasic
+} from "../../../../../store/middleware/utils/GraphQlQuery/ProfileQuery/CurriculumProfile";
+import UpdateCurriculumDialog from "./UpdateCurriculumDialog";
+import InsertSubjectInCurriculum from "./InsertSubjectInCurriculum";
 
 const FindCurriculumDialog = ({
-                            translation,
-                            dialog,
-                            closeDialog,
-                            setData,
-                            reInitState
-                        }) => {
+                                  translation,
+                                  dialog,
+                                  closeDialog,
+                                  reInitState,
+                                  update,
+                                  insertSubject,
+                                  setData
+                              }) => {
 
     const [id, setId] = useState('')
-    const [update, setUpdate] = useState(false)
+    const [curriculum, setCurriculum] = useState(null)
 
-    const getRoom = () => {
-        graphQlRequestAsync(getRoomBasic(id)).then(room => {
-            if(room.data.data.room !== null){
+
+    const getCurriculum = () => {
+        graphQlRequestAsync(getCurriculumBasic(id)).then(curriculum => {
+            if (curriculum.data.data.getCurriculum !== null) {
                 setId('')
-                setData(room.data.data.room)
-                setUpdate(true)
+                setCurriculum(curriculum.data.data.getCurriculum)
+                setData(curriculum.data.data.getCurriculum)
             }
         })
     }
 
-    const closeUpdate = () => {
+    const closeUpdateClick = () => {
+        setCurriculum(null)
         reInitState()
-        setUpdate(false)
     }
 
-    return update === false ? <Dialog
+    const closeInsertSubjectClick = () => {
+        setCurriculum(null)
+        reInitState()
+    }
+
+    return curriculum === null ?
+        <Dialog
             open={dialog}
             onClose={closeDialog}
             aria-labelledby="add-student"
@@ -43,7 +56,7 @@ const FindCurriculumDialog = ({
         >
             <form noValidate>
                 <DialogTitle
-                    id="add-student">{translation.language["label.room.dialog.find.room.title"]}</DialogTitle>
+                    id="add-student">{translation.language["label.curriculum.dialog.find.title"]}</DialogTitle>
                 <Divider/>
                 <br/>
                 <DialogContent>
@@ -54,13 +67,13 @@ const FindCurriculumDialog = ({
                                        margin={'dense'}
                                        variant={'outlined'} fullWidth
                                        onChange={event => setId(event.target.value)}
-                                       placeholder={translation.language["label.room.dialog.delete.input"]}/>
+                                       label={translation.language["label.curriculum.dialog.input.enter.code"]}/>
                         </Grid>
                     </Grid>
                 </DialogContent>
 
                 <DialogActions>
-                    <Button variant={'contained'} disableElevation onClick={getRoom}
+                    <Button variant={'contained'} disableElevation onClick={getCurriculum}
                             color='primary'>
                         {translation.language["label.global.find"]}
                     </Button>
@@ -69,7 +82,18 @@ const FindCurriculumDialog = ({
                     </Button>
                 </DialogActions>
             </form>
-        </Dialog> :null
+        </Dialog> : update === true ?
+            <UpdateCurriculumDialog
+                translation={translation}
+                dialog={update}
+                closeDialog={closeUpdateClick}
+            /> :
+            <InsertSubjectInCurriculum open={insertSubject}
+                                       closeDialog={closeInsertSubjectClick}
+                                       translation={translation}
+                                       curriculumCode={curriculum.code}
+                                       subjects={curriculum.subjects}
+                                       name={curriculum.name}/>
 }
 
 export default FindCurriculumDialog

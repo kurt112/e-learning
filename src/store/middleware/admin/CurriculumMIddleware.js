@@ -3,24 +3,27 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {select} from "redux-saga/effects";
+import {put, select} from "redux-saga/effects";
 import * as Selector from "../selector";
 import {Delete, RegisterBody, TableDataInit, TableNextData} from "./__MiddleWareGlobal";
 import {CreateCurriculum, DeleteCurriculum as deleteCurriculum} from "../utils/ApiEndpoint/ClassroomEndPoint";
 import {
     Curriculum,
     Curriculum_Create,
-    Curriculum_Delete
+    Curriculum_Delete, Room
 } from "../../utils/Specify";
 import {
     AdminCurriculumBodyDataQuery,
     AdminCurriculumBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/AdminQuery/AdminCurriculum";
 import uuid from "short-uuid";
+import {reInitState} from "../../action/__ActionGlobal/DialogAction";
 export function* CurriculumRegister() {
     const data = yield select(Selector.AdminCreateCurriculum)
-    data.code = yield uuid.generate()
+    if(data.code === undefined) data.code = yield uuid.generate()
     yield RegisterBody(data, CreateCurriculum, Curriculum_Create,CurriculumTableDataInit)
+    yield put(reInitState(Curriculum_Create))
+
 }
 
 export function * DeleteCurriculum(){
