@@ -7,7 +7,6 @@ import {useState} from "react"
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Grid, TextField} from "@material-ui/core"
 import {graphQlRequestAsync} from "../../../../../store/middleware/utils/HttpRequest";
 import {getRoomBasic} from "../../../../../store/middleware/utils/GraphQlQuery/ProfileQuery/RoomProfile";
-import UpdateRoomDialog from "./UpdateRoomDialog";
 
 const FindCurriculumDialog = ({
                             translation,
@@ -70,8 +69,7 @@ const FindCurriculumDialog = ({
                     </Button>
                 </DialogActions>
             </form>
-        </Dialog> :
-        <UpdateRoomDialog translation={translation} dialog={update} closeDialog={closeUpdate}/>
+        </Dialog> :null
 }
 
 export default FindCurriculumDialog
