@@ -1,23 +1,30 @@
-import {Fragment, useState} from "react";
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Grid} from "@material-ui/core";
-import RoomAutoComplete from "../../../utils/autoComplete/ui/RoomAutoComplete";
+import {useState} from "react"
+import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Grid, TextField} from "@material-ui/core"
+import {graphQlRequestAsync} from "../../../../../store/middleware/utils/HttpRequest";
+import {getRoomBasic} from "../../../../../store/middleware/utils/GraphQlQuery/ProfileQuery/RoomProfile";
+import UpdateRoomDialog from "./UpdateRoomDialog";
 
 const FindRoomDialog = ({
                             translation,
                             dialog,
-                            closeDialog
+                            closeDialog,
+                            setData
                         }) => {
-    const OutputRoom = (event, value) => {
-        value = value === null ? '' : value[1]
-        console.log(value)
-        // changeRoomName(value)
+
+    const [id, setId] = useState('')
+    const [update, setUpdate] = useState(false)
+
+    const getRoom = () => {
+        graphQlRequestAsync(getRoomBasic(id)).then(room => {
+            if(room.data.data.room !== null){
+                setId('')
+                setData(room.data.data.room)
+                setUpdate(true)
+            }
+        })
     }
-    return <Fragment>
-        {/*{*/}
-        {/*    id.length === 0 ? null : <RoomShiftAddStudentTransfer shiftID={id} translation={translation} open={transfer}*/}
-        {/*                                                          closeDialog={closeTransfer}/>*/}
-        {/*}*/}
-        <Dialog
+
+    return update === false ? <Dialog
             open={dialog}
             onClose={closeDialog}
             aria-labelledby="add-student"
@@ -25,22 +32,25 @@ const FindRoomDialog = ({
             fullWidth
         >
             <form noValidate>
-                <DialogTitle id="add-student">{translation.language["label.room.shift.dialog.find.title"]}</DialogTitle>
+                <DialogTitle
+                    id="add-student">{translation.language["label.room.dialog.find.room.title"]}</DialogTitle>
                 <Divider/>
                 <br/>
                 <DialogContent>
                     <Grid container spacing={1}>
                         <Grid item md={12} xs={12}>
-                            <RoomAutoComplete
-                                autoFocus={true}
-                                output={OutputRoom}
-                                translation={translation}/>
+                            <TextField autoFocus
+                                       value={id}
+                                       margin={'dense'}
+                                       variant={'outlined'} fullWidth
+                                       onChange={event => setId(event.target.value)}
+                                       placeholder={translation.language["label.room.dialog.delete.input"]}/>
                         </Grid>
                     </Grid>
                 </DialogContent>
 
                 <DialogActions>
-                    <Button variant={'contained'} disableElevation onClick={id.length === 0 ? null : openTransfer}
+                    <Button variant={'contained'} disableElevation onClick={getRoom}
                             color='primary'>
                         {translation.language["label.global.find"]}
                     </Button>
@@ -49,9 +59,8 @@ const FindRoomDialog = ({
                     </Button>
                 </DialogActions>
             </form>
-        </Dialog>
-    </Fragment>
-
+        </Dialog> :
+        <UpdateRoomDialog translation={translation} dialog={update} closeDialog={() => setUpdate(false)}/>
 }
 
 export default FindRoomDialog

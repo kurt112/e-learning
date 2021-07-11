@@ -10,4 +10,13 @@ export const
 
     // for opening and closing dialog
     TABLE_DIALOG_OPEN= to => to+"TABLE_DIALOG_OPEN",
-    TABLE_DIALOG_CLOSE = to => to+"TABLE_DIALOG_CLOSE"
+    TABLE_DIALOG_CLOSE = to => to+"TABLE_DIALOG_CLOSE",
+
+
+    // For Getting The data
+    SET_DATA = to => to + "_SET_DATA",
+
+
+    // For ReInit the state
+    RE_INIT = to => to + "_RE_INIT"
+

@@ -3,8 +3,11 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle, Divider, FormControl,
-    Grid, InputLabel,
+    DialogTitle,
+    Divider,
+    FormControl,
+    Grid,
+    InputLabel,
     Select, TextareaAutosize,
     TextField
 } from "@material-ui/core"
@@ -12,9 +15,9 @@ import {
 import {connect} from 'react-redux'
 import * as UploadResourceAction from '../../../../../store/action/teacher/TeacherResource/TeacherResourceUploadDialogAction'
 import * as dialogAction from '../../../../../store/action/__ActionGlobal/DialogAction'
-import {useState} from "react";
+import {useState} from "react"
 import Response from "../../../utils/Response";
-import {Teacher_Resource_Upload} from "../../../../../store/utils/Specify";
+import {Teacher_Resource_Upload} from "../../../../../store/utils/Specify"
 
 const UploadResourceDialog = ({
                                   dialog,

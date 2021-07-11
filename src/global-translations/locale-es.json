@@ -100,6 +100,9 @@
   "label.button.save": "Save",
   "label.button.back": "Back",
   "label.button.delete": "Delete",
+
+  "label.button.update": "Update",
+
   "label.login.heading.title": "Virtual  School",
   "label.login.heading.login": "Login",
   "label.login.check.remember": "Remember Me",
@@ -131,6 +134,9 @@
   "label.room.dialog.update.room.title": "Update Room",
   "label.room.dialog.delete.input": "Enter Room Id",
   "label.room.dialog.delete.room.title": "Delete Room",
+
+  "label.room.dialog.find.room.title": "Find Room",
+
   "label.room.shift.table.title":"Room Shift List",
   "label.room.shift.table.column.shift": "Shift",
   "label.room.shift.dialog.delete.title": "Delete Room Shift",
@@ -294,6 +300,10 @@
   "message.room.dialog.create.fail": "Room Register Failed",
   "message.room.dialog.delete.fail": "Room Delete Fail",
   "message.room.dialog.delete.success": "Room Delete Success",
+
+  "message.room.dialog.update.success": "Room Update Success",
+  "message.room.dialog.update.fail": "Room Update Failed",
+
   "message.room.shift.dialog.create.success": "Room Shift Register Success",
   "message.room.shift.dialog.create.fail": "Room Shift Register Failed",
   "message.room.shift.dialog.delete.success": "Room Shift Create Success",

@@ -1,4 +1,4 @@
-const Create = '_CREATE', Delete = '_DELETE'
+const Create = '_CREATE', Delete = '_DELETE', Update = '_UPDATE'
 
 export const
     // For Curriculum
@@ -40,6 +40,7 @@ export const
     Room = "ROOM",
     Room_Create = Room+Create,
     Room_Delete = Room+Delete,
+    Room_Update = Room+Update,
 
 
     // Teacher User Resource

@@ -1,18 +1,20 @@
-import state from "../../__StateGlobal/AdminTableState";
-import * as actions from "../../../ActionType/__ActionTypeGlobal/TableActionType";
-import {Room, Room_Delete} from "../../../utils/Specify";
-import {AdminInsertRoom as insert} from "../../../../components/ui/utils/tableColumn";
-import {updateObject} from "../../../utils/UpdateObject";
+import state from "../../__StateGlobal/AdminTableState"
+import * as actions from "../../../ActionType/__ActionTypeGlobal/TableActionType"
+import {Room, Room_Delete, Room_Update} from "../../../utils/Specify"
+import {AdminInsertRoom as insert} from "../../../../components/ui/utils/tableColumn"
+import {updateObject} from "../../../utils/UpdateObject"
 
 const newState = new state()
 
 const currentState = {
     ...newState.init_state,
-    deleteDialog: false
+    deleteDialog: false,
+    updateDialog: false
 }
 
 const transforms = (items) => items.map((item) =>
     insert(item.id, item.roomName, item.timeStart, item.timeEnd, item.id))
+
 
 const reducer = (state = currentState, action) => {
 
@@ -44,6 +46,13 @@ const reducer = (state = currentState, action) => {
             return updateObject(state, {deleteDialog: true})
         case actions.DIALOG_CLOSE(Room_Delete):
             return updateObject(state, {deleteDialog: false})
+
+        case actions.DIALOG_OPEN(Room_Update):
+            return updateObject(state, {updateDialog: true})
+        case actions.DIALOG_CLOSE(Room_Update):
+            return updateObject(state, {updateDialog: false})
+
+
         default:
             return state;
     }

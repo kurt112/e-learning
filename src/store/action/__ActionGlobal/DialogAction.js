@@ -28,6 +28,12 @@ export const
         return {
             type: actions.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(to)
         }
+    },
+
+    reInitState = (to) => {
+        return {
+            type: actions.RE_INIT(to)
+        }
     }
 
 

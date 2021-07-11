@@ -1,4 +1,4 @@
-import {select} from 'redux-saga/effects'
+import {put, select} from 'redux-saga/effects'
 import * as Selector from '../selector'
 import {Room, Room_Delete} from '../../utils/Specify'
 import {AdminRoomRegister, DeleteRoom as deleteRoom} from '../utils/ApiEndpoint/ClassroomEndPoint'
@@ -8,6 +8,7 @@ import {
     AdminRoomBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/AdminQuery/AdminRoomQuery";
 import uuid from "short-uuid";
+import {reInitState} from "../../action/__ActionGlobal/DialogAction";
 
 export function * DeleteRoom(){
     const classState = yield select(Selector.DeleteRoomDialog)
@@ -18,9 +19,10 @@ export function * DeleteRoom(){
 
 export function* RoomRegister() {
     const room = yield select(Selector.AdminRoomDialog)
-    room.id = yield uuid.generate()
+    if(room.id === undefined)  room.id = yield uuid.generate()
 
     yield RegisterBody(room,AdminRoomRegister,Room, RoomTableDataInit)
+    yield put(reInitState(Room))
 }
 
 export function* RoomTableDataNext(action) {

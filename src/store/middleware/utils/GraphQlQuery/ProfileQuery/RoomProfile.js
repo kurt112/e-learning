@@ -44,4 +44,16 @@ export const
                     }
             }
         `}
+    },
+    getRoomBasic = (id) => {
+        return {
+            query: `
+                    query{room(id:"${id}"){
+                        id,
+                        roomName,
+                        timeStart,
+                        timeEnd
+                    }
+            }
+        `}
     }

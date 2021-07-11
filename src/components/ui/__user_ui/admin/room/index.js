@@ -4,18 +4,19 @@ import {Fragment, lazy, useEffect} from "react"
 import {AdminRoomTable as columns} from '../../../utils/tableColumn'
 import style, {TableOptions as options} from '../../../_style/TableStyle'
 import {connect} from 'react-redux'
-import * as actions from "../../../../../store/action/__ActionGlobal/TableAction";
-import {Room, Room_Delete} from "../../../../../store/utils/Specify";
-import Typography from "@material-ui/core/Typography";
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from '@material-ui/icons/Delete';
-import UpdateIcon from '@material-ui/icons/Update';
-
-const RegisterRoom = lazy(() => import(`./RegisterRoomDialog`));
+import * as actions from "../../../../../store/action/__ActionGlobal/TableAction"
+import {Room, Room_Delete, Room_Update} from "../../../../../store/utils/Specify"
+import Typography from "@material-ui/core/Typography"
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
+import IconButton from "@material-ui/core/IconButton"
+import DeleteIcon from '@material-ui/icons/Delete'
+import UpdateIcon from '@material-ui/icons/Update'
+const RegisterRoom = lazy(() => import(`./RegisterRoomDialog`))
 const DeleteRoomDialog = lazy(() => import(`./DeleteRoomDialog`))
+const FindRoomDialog = lazy(() => import(`./FindRoomDialog`))
 
 const Index = ({
+
                    room,
                    initData,
                    searchChange,
@@ -24,7 +25,10 @@ const Index = ({
                    closeDialog,
                    openDeleteDialog,
                    closeDeleteDialog,
-                   translation
+                   openUpdateDialog,
+                   closeUpdateDialog,
+                   translation,
+                   setData
                }) => {
 
     const classes = style()
@@ -38,6 +42,7 @@ const Index = ({
 
             <RegisterRoom translation={translation} dialog={room.dialog} closeDialog={closeDialog}/>
             <DeleteRoomDialog translation={translation} dialog={room.deleteDialog} closeDialog={closeDeleteDialog}/>
+            <FindRoomDialog setData={setData} translation={translation} dialog={room.updateDialog} closeDialog={closeUpdateDialog}/>
 
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
@@ -56,7 +61,7 @@ const Index = ({
                             </Tooltip>
 
                             <Tooltip title={translation.language["tooltip.room.update"]}>
-                                <IconButton aria-label="update-room" onClick={() => alert('gagawin mo pa to')}>
+                                <IconButton aria-label="update-room" onClick={openUpdateDialog}>
                                     <UpdateIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
                             </Tooltip>
@@ -109,7 +114,12 @@ const mapDispatchToProps = (dispatch) => {
         closeDialog: () => dispatch(actions.closeDialog(Room)),
 
         openDeleteDialog: () => dispatch(actions.openDialog(Room_Delete)),
-        closeDeleteDialog: () => dispatch(actions.closeDialog(Room_Delete))
+        closeDeleteDialog: () => dispatch(actions.closeDialog(Room_Delete)),
+
+        openUpdateDialog: () => dispatch(actions.openDialog(Room_Update)),
+        closeUpdateDialog: () => dispatch(actions.closeDialog(Room_Update)),
+
+        setData: (data) => dispatch(actions.setData(data,Room))
 
     }
 }
