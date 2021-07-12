@@ -4,9 +4,7 @@
  * @created : 11/07/2021, Sunday
  **/
 export const
-
-    // Production endpoint https://eellearning.herokuapp.com/
-    JavaEndpoint = 'http://localhost:8080',
+    JavaEndpoint = process.env.NODE_ENV==='development'? 'http://localhost:8080':'https://eellearning.herokuapp.com',
     ExpressEndPoint = 'http://localhost:5000',
     GraphQlEndpoint = JavaEndpoint + '/Elearning',
 
