@@ -36,6 +36,7 @@ export const
     Subject = "SUBJECT",
     Subject_Create =Subject+Create,
     Subject_Delete = Subject+Delete,
+    Subject_Find = Subject+Find,
 
     // For RoomShiftClass
     RoomShiftClass = "ROOM_SHIFT_CLASS",

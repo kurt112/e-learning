@@ -21,6 +21,9 @@ const App = ({currentUser, reLogin}) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    // alert(process.env)
+    console.log(process.env)
+
     return (
         <Fragment>
             <BrowserRouter>

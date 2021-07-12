@@ -6,7 +6,7 @@
 import {AdminInsertSubject as insert} from "../../../../components/ui/utils/tableColumn";
 import state from "../../__StateGlobal/AdminTableState";
 import * as actions from "../../../ActionType/__ActionTypeGlobal/TableActionType";
-import {Subject, Subject_Delete} from "../../../utils/Specify";
+import {Subject, Subject_Delete, Subject_Find} from "../../../utils/Specify";
 import {updateObject} from "../../../utils/UpdateObject";
 
 const newState = new state()
@@ -16,7 +16,8 @@ const transforms = (items) => items.map((item) =>
 
 const currentState = {
     ...newState.init_state,
-    deleteDialog: false
+    deleteDialog: false,
+    findDialog: false
 }
 
 const reducer = (state = currentState, action) =>{
@@ -32,8 +33,14 @@ const reducer = (state = currentState, action) =>{
         // for opening and closing dialog
         case actions.DIALOG_OPEN(Subject): return newState.openDialog(state)
         case actions.DIALOG_CLOSE(Subject): return newState.closeDialog(state)
+
         case actions.DIALOG_OPEN(Subject_Delete): return updateObject(state, {deleteDialog: true})
         case actions.DIALOG_CLOSE(Subject_Delete): return updateObject(state, {deleteDialog: false})
+
+        case actions.DIALOG_OPEN(Subject_Find): return updateObject(state, {findDialog: true})
+        case actions.DIALOG_CLOSE(Subject_Find): return updateObject(state, {findDialog: false})
+
+
         default: return state;
     }
 }

@@ -21,6 +21,30 @@ const init_state = {
     ...newState.init_state
 }
 
+const setState = (state, action) => {
+
+    state = updateObject(state, {subjectCode: action.subjectCode})
+    state = updateObject(state, {subjectName: action.subjectName})
+    state = updateObject(state, {subjectMajor: action.subjectMajor})
+    state = updateObject(state, {status: action.status})
+    state = updateObject(state, {subject_code: action.subject_code})
+
+    return state
+}
+
+const reInit = (state) => {
+
+
+    state = updateObject(state, {subjectCode: ''})
+    state = updateObject(state, {subjectName: ''})
+    state = updateObject(state, {subjectMajor: 'Minor'})
+    state = updateObject(state, {status: 'Active'})
+
+    delete state.subjectCode
+
+    return state
+}
+
 const reducer = (state=init_state, action)=>{
     switch(action.type){
         case actions.ADMIN_DIALOG_REGISTER(Subject): return newState.initRegister(state)
@@ -32,6 +56,9 @@ const reducer = (state=init_state, action)=>{
         case dialogActions.CHANGE_SUBJECT_NAME: return updateObject(state, {subjectName:action.value})
         case dialogActions.CHANGE_SUBJECT_CODE: return updateObject(state,{subjectCode:action.value})
         case dialogActions.CHANGE_SUBJECT_MAJOR: return updateObject(state, {subjectMajor: action.value})
+
+        case actions.RE_INIT(Subject): return reInit(state)
+        case actions.SET_DATA(Subject): return setState(state, action.data)
 
         default: return state;
     }

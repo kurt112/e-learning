@@ -11,12 +11,14 @@ import {AdminSubjectTable as columns} from '../../../utils/tableColumn'
 import style, {TableOptions as options} from '../../../_style/TableStyle'
 import {connect} from "react-redux"
 import * as actions from "../../../../../store/action/__ActionGlobal/TableAction"
-import {Subject, Subject_Delete} from "../../../../../store/utils/Specify"
+import {Subject, Subject_Delete, Subject_Find} from "../../../../../store/utils/Specify"
 import Typography from "@material-ui/core/Typography"
 import IconButton from "@material-ui/core/IconButton";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
+import FindSubjectDialog from "./FindSubjectDialog";
+import {reInitState} from "../../../../../store/action/__ActionGlobal/DialogAction";
 
 const RegisterSubject = lazy(() => import(`./RegisterSubjectDialog`))
 const DeleteSubjectDialog = lazy(() => import(`./DeleteSubjectDialog`))
@@ -30,7 +32,11 @@ const Index = ({
                    initData,
                    openDeleteDialog,
                    closeDeleteDialog,
-                   translation
+                   translation,
+                   closeFindDialog,
+                   openFindDialog,
+                   setData,
+                   reInitState
                }) => {
 
     const classes = style()
@@ -45,7 +51,14 @@ const Index = ({
     return (
         <Fragment>
             <RegisterSubject translation={translation} dialog={subject.dialog} closeDialog={closeDialog}/>
-            <DeleteSubjectDialog translation={translation} dialog={subject.deleteDialog} closeDialog={closeDeleteDialog}/>
+            <DeleteSubjectDialog translation={translation} dialog={subject.deleteDialog}
+                                 closeDialog={closeDeleteDialog}/>
+            <FindSubjectDialog reInitState={reInitState}
+                               setData={setData}
+                               translation={translation}
+                               dialog={subject.findDialog}
+                               closeDialog={closeFindDialog}
+            />
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
@@ -63,7 +76,7 @@ const Index = ({
                             </Tooltip>
 
                             <Tooltip title={translation.language["tooltip.subject.update"]}>
-                                <IconButton aria-label="update-room" onClick={() => alert('gagawin mo pa to')}>
+                                <IconButton aria-label="update-room" onClick={openFindDialog}>
                                     <UpdateIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
                             </Tooltip>
@@ -117,8 +130,16 @@ const mapDispatchToProps = (dispatch) => {
         // for opening and closing dialog
         openDialog: () => dispatch(actions.openDialog(Subject)),
         closeDialog: () => dispatch(actions.closeDialog(Subject)),
+
         openDeleteDialog: () => dispatch(actions.openDialog(Subject_Delete)),
-        closeDeleteDialog: () => dispatch(actions.closeDialog(Subject_Delete))
+        closeDeleteDialog: () => dispatch(actions.closeDialog(Subject_Delete)),
+
+        openFindDialog: () => dispatch(actions.openDialog(Subject_Find)),
+        closeFindDialog: () => dispatch(actions.closeDialog(Subject_Find)),
+
+        setData: (data) => dispatch(actions.setData(data,Subject)),
+        reInitState: () => dispatch(reInitState(Subject))
+
     }
 }
 
