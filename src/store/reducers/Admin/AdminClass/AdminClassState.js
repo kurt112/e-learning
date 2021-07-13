@@ -12,8 +12,12 @@ const newState = new state()
 
 const transforms = (items) => items.map((item) =>{
     const teacher = item.teacher === null? 'TBA': `${item.teacher.user.firstName} ${item.teacher.user.lastName}`
+    const day = item.day === null ? 'TBA': item.day
+    const timeStart = item.startTime === null? 'TBA': item.startTime
+    const timeEnd = item.endTime === null? 'TBA': item.endTime
+
     return insert(item.id,item.roomShift.room.roomName, item.roomShift.grade, item.roomShift.section, item.subject.subjectName,
-        teacher, item.day, item.startTime, item.endTime, item.roomShift.room.id+item.id+item.subject.subjectCode,item.id)
+        teacher, day, timeStart, timeEnd, item.roomShift.room.id+item.id+item.subject.subjectCode,item.id)
 })
 
 

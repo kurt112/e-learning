@@ -52,5 +52,12 @@ export const
             type: actions.ROOMSHIFT_DIALOG_ADVISER_CHANGE,
             data
         }
+    },
+
+    changeCurriculum = (data) => {
+        return {
+            type: actions.ROOMSHIFT_DIALOG_CURRICULUM_CHANGE,
+            data
+        }
     }
 

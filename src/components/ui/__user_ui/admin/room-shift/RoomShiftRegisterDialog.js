@@ -26,6 +26,7 @@ import {useEffect} from "react"
 import RoomAutoComplete from "../../../utils/autoComplete/ui/RoomAutoComplete";
 import TeacherAutoComplete from "../../../utils/autoComplete/ui/TeacherAutoComplete";
 import CurriculumAutoComplete from "../../../utils/autoComplete/ui/CurriculumAutoComplete";
+import {changeCurriculum} from "../../../../../store/action/admin/RoomShift/RoomShiftDialogAction";
 
 const RoomShiftRegisterDialog = ({
                                      closeDialog,
@@ -40,7 +41,8 @@ const RoomShiftRegisterDialog = ({
                                      registerDialogMessageClose,
                                      registerDialog,
                                      changeAdviser,
-                                     translation
+                                     translation,
+                                     changeCurriculum
                                  }) => {
 
     useEffect(() => {
@@ -57,7 +59,8 @@ const RoomShiftRegisterDialog = ({
     }
 
     const OutputStrand = (event, value) => {
-
+        value = value === null ? '' : value[1]
+        changeCurriculum(value)
     }
 
     return <Dialog
@@ -189,6 +192,7 @@ const mapDispatchToProps = (dispatch) => {
         changeTimeEnd: (value) => dispatch(roomShiftAction.changeTimeEnd(value)),
         changeRoomShift: (value) => dispatch(roomShiftAction.changeRoomShift(value)),
         changeAdviser: (value) => dispatch(roomShiftAction.changeAdviser(value)),
+        changeCurriculum: (value) => dispatch(roomShiftAction.changeCurriculum(value)),
 
         registerDialogMessageClose: () => dispatch(action.registerDialogMessageClose(RoomShift)),
         registerDialog: () => dispatch(action.dialogRegister(RoomShift))

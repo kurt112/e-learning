@@ -22,6 +22,7 @@ const init_state ={
     timeStart: '',
     timeEnd: '',
     teacherID:'',
+    curriculumCode: '',
     ...newState.init_state
 }
 
@@ -39,6 +40,7 @@ const reducer = (state=init_state, action)=>{
         case roomShiftAction.ROOMSHIFT_DIALOG_ROOMSHIFT_SET: return updateObject(state, {roomShift: action.data})
         case roomShiftAction.ROOMSHIFT_DIALOG_ROOMSECTION_CHANGE: return updateObject(state, {section: action.data})
         case roomShiftAction.ROOMSHIFT_DIALOG_ADVISER_CHANGE: return updateObject(state, {teacherID: action.data})
+        case roomShiftAction.ROOMSHIFT_DIALOG_CURRICULUM_CHANGE: return updateObject(state, {curriculumCode: action.data})
 
 
         default: return state;

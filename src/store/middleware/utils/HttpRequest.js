@@ -14,7 +14,7 @@ export function* graphQLRequest(body) {
 }
 
 export const graphQlRequestAsync = async (body) => {
-
+    alert("i am called")
     return await graphQl.post("", body, {
         headers: {
             Authorization: "Bearer " + localStorage.getItem('token')
