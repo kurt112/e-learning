@@ -5,7 +5,8 @@
  **/
 import {takeLeading} from "redux-saga/effects";
 import * as loginAction from "../../ActionType/Login/LoginActionType";
-import {Login, PreRegister, ReLogin} from "./LoginMiddleware";
+import {LOGOUT} from '../../ActionType/CurrentUser/CurrenUserActionType'
+import {Login, PreRegister, ReLogin,Logout} from "./authMiddleware";
 
 export function * watchLogin() {
     yield takeLeading(loginAction.LOGIN, Login)
@@ -17,4 +18,8 @@ export function * watchPreRegister(){
 
 export  function * watchReLogin () {
     yield takeLeading(loginAction.RE_LOGIN, ReLogin)
+}
+
+export function * watchLogout () {
+    yield takeLeading(LOGOUT, Logout)
 }

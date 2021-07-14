@@ -166,8 +166,9 @@ import {
 import {
     watchLogin,
     watchPreRegister,
-    watchReLogin
-} from './store/middleware/login'
+    watchReLogin,
+    watchLogout
+} from './store/middleware/auth'
 
 import {
     watchTeacherRegister,
@@ -313,6 +314,8 @@ sagaMiddleware.run(watchRoomShiftClassGetProfile)
 sagaMiddleware.run(watchLogin)
 sagaMiddleware.run(watchPreRegister)
 sagaMiddleware.run(watchReLogin)
+sagaMiddleware.run(watchLogout)
+
 
 // REGISTER STUDENT TEACHER
 sagaMiddleware.run(watchStudentRegister)

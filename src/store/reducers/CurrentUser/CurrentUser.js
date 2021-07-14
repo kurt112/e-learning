@@ -14,12 +14,12 @@ const initState = {
 
 const logout = (state) => {
 
-    state = updateObject(state, {
-        user: null,
-        token: '',
-    })
-    localStorage.clear()
-    window.location.reload()
+    // state = updateObject(state, {
+    //     user: null,
+    //     token: '',
+    // })
+    // localStorage.clear()
+    // window.location.reload()
     return state
 }
 

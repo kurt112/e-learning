@@ -41,7 +41,7 @@ const Login = ({
     const [teacherForm, setTeacherForm] = useState(false)
 
     useEffect(() => {
-        // login()
+        // auth()
     }, [])
 
     useEffect(() => {
@@ -138,7 +138,7 @@ const Login = ({
                                 control={<Checkbox value="remember" color="primary"/>}
                                 label={translation.language["label.login.check.remember"]}
                             />
-                            <p>{translation.language["validation.login.error"]}</p>
+                            {loginState.error === true? <p>{translation.language["validation.login.error"]}</p>: null}
                         </Box>
                         <Button
                             fullWidth
@@ -157,7 +157,7 @@ const Login = ({
                             </Grid>
                             <Grid item>
                                 <Button color="primary"
-                                        onClick={registerOpen}>{translation.language["label.login.button.sing.up"]}</Button>
+                                        onClick={registerOpen}>{translation.language["label.login.button.sign.up"]}</Button>
                             </Grid>
                         </Grid>
                         <br/>

@@ -12,7 +12,7 @@ export const
     RE_LOGIN = 'RE_LOGIN',
     RESET_LOGIN_PAGE = 'RESET_LOGIN_PAGE',
 
-    // for sign up action in login
+    // for sign up action in auth
     CHANGE_ID = 'CHANGE_ID',
     CHANGE_FORM = 'CHANGE_FORM',
     REGISTER_OPEN = 'REGISTER_OPEN',

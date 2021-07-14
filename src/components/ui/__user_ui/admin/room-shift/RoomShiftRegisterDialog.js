@@ -26,7 +26,6 @@ import {useEffect} from "react"
 import RoomAutoComplete from "../../../utils/autoComplete/ui/RoomAutoComplete";
 import TeacherAutoComplete from "../../../utils/autoComplete/ui/TeacherAutoComplete";
 import CurriculumAutoComplete from "../../../utils/autoComplete/ui/CurriculumAutoComplete";
-import {changeCurriculum} from "../../../../../store/action/admin/RoomShift/RoomShiftDialogAction";
 
 const RoomShiftRegisterDialog = ({
                                      closeDialog,

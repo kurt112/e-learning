@@ -12,6 +12,7 @@ const initState = {
     message: '',
     loading: false,
     dialog: false,
+    error: false,
     form: '',
     id: ''
 }
@@ -25,16 +26,15 @@ const Login = (state) => {
 const successLogin = (state, action) => {
     state = updateObject(state, {message: action.data.message})
     state = updateObject(state, {loading: false})
-
+    state = updateObject( state, {error: false})
     window.localStorage.setItem("token", action.data.token)
-
     return state
 }
 
 const failLogin = (state, action) => {
     state = updateObject(state, {loading: false})
-
-    return updateObject(state, {message: action.message})
+    state = updateObject( state, {error: true})
+    return state
 }
 
 const registerClose = (state) => {

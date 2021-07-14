@@ -10,7 +10,6 @@ import * as actions from "../../action/__ActionGlobal/DialogAction";
 import {graphQLRequest} from '../utils/HttpRequest'
 import * as dialogAction from "../../action/__ActionGlobal/DialogAction";
 
-
 export function * Delete(params,URL,to, reload){
     try {
         yield baseUrl.delete(URL, {params})

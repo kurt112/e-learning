@@ -10,23 +10,20 @@ import * as action from '../../action/login/LoginAction'
 import * as currentUserAction from '../../action/CurrentUser/CurrentUserAction'
 export function* Login() {
     const login = yield select(Selector.Login)
-    // console.log(login)
     const userData = yield {
         username: login.username,
-        password: login.password //PasswordEncrypt(login.password)
+        password: login.password //PasswordEncrypt(auth.password)
     }
 
     try {
 
         const response = yield baseUrlNoAuth.post('/login', userData)
-        console.log(response)
         const  data = response.data
         yield put(action.successLogin(data))
         yield put(currentUserAction.changeToken(data.token))
         yield put(currentUserAction.changeUser(data.user))
-        yield put(action.resetLoginPage())
+        window.location.reload()
     } catch (error) {
-        console.log(error)
         yield put(action.failLogin(error))
     }
 }
@@ -39,14 +36,12 @@ export function *ReLogin (actions) {
         const response = yield baseUrlNoAuth.post('/re-login',params )
 
         const  data = response.data
-
-
         yield put(action.successLogin(data))
         yield put(currentUserAction.changeToken(data.token))
         yield put(currentUserAction.changeUser(data.user))
         yield put(action.resetLoginPage())
     }catch (error){
-        console.log(error)
+        yield put(action.failLogin(error))
     }
 }
 
@@ -62,4 +57,13 @@ export function* PreRegister() {
     }catch (error){
 
     }
+}
+
+export function* Logout() {
+    const user = yield select(Selector.CurrentUser)
+    const params = new URLSearchParams();
+    params.append('token', user.token)
+    yield baseUrlNoAuth.post('/logoutUser',params )
+    localStorage.clear()
+    window.location.reload()
 }
