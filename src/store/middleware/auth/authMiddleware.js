@@ -41,6 +41,8 @@ export function *ReLogin (actions) {
         yield put(currentUserAction.changeUser(data.user))
         yield put(action.resetLoginPage())
     }catch (error){
+        localStorage.clear()
+        window.location.reload()
         yield put(action.failLogin(error))
     }
 }

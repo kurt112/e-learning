@@ -31,7 +31,7 @@ const successLogin = (state, action) => {
     return state
 }
 
-const failLogin = (state, action) => {
+const failLogin = (state) => {
     state = updateObject(state, {loading: false})
     state = updateObject( state, {error: true})
     return state

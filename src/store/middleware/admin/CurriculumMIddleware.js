@@ -10,7 +10,7 @@ import {CreateCurriculum, DeleteCurriculum as deleteCurriculum} from "../utils/A
 import {
     Curriculum,
     Curriculum_Create,
-    Curriculum_Delete, Room
+    Curriculum_Delete
 } from "../../utils/Specify";
 import {
     AdminCurriculumBodyDataQuery,

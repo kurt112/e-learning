@@ -15,7 +15,7 @@ import {
     Curriculum,
     Curriculum_Create,
     Curriculum_Delete,
-    Curriculum_Find, Room
+    Curriculum_Find
 } from "../../../../../store/utils/Specify"
 import Typography from "@material-ui/core/Typography"
 import IconButton from "@material-ui/core/IconButton";
