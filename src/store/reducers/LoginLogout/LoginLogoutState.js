@@ -68,7 +68,7 @@ const reducer = (state = initState, action) => {
         case actions.SUCCESS_LOGIN:
             return successLogin(state, action)
         case actions.FAIL_LOGIN:
-            return failLogin(state, action)
+            return failLogin(state)
         case actions.RESET_LOGIN_PAGE:
             return logout(state);
 

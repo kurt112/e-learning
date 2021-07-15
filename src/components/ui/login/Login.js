@@ -161,7 +161,7 @@ const Login = ({
                             </Grid>
                         </Grid>
                         <br/>
-                        <Grid md={4}>
+                        <Grid item md={4}>
                             <FormControl fullWidth variant="outlined" >
                                 <InputLabel id="demo-simple-select-outlined-label">{translation.language["label.global.select.language"]}</InputLabel>
                                 <Select
