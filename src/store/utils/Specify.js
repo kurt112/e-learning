@@ -31,6 +31,7 @@ export const
     RoomShift = 'ROOM_SHIFT',
     RoomShift_Create =RoomShift+Create,
     RoomShift_Delete=RoomShift+Delete,
+    RoomShift_Find = RoomShift+Find,
 
     // For Subject
     Subject = "SUBJECT",

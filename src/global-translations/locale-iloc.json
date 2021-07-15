@@ -123,7 +123,7 @@
   "label.room.shift.dialog.add.student.available.title": "Available Student",
   "label.room.shift.dialog.create.title": "Register Room Shift",
   "label.room.shift.dialog.create.input.room.name": "Search By Room Name",
-  "label.room.shift.dialog.delete.input": "Enter Room shift ID",
+  "label.room.shift.input.id": "Enter Room shift ID",
   "label.room.shift.dialog.find.title": "Enter  Grade And Section",
   "label.room.shift.dialog.find.input.search": "Search by grade fallowed by section",
   "label.room.shift.dialog.transfer.student.warning": "No Student Currently",

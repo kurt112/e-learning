@@ -44,14 +44,14 @@ function intersection(a, b) {
  * @param {{student_id:string}} id of the student
  *
  */
-const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID, translation}) => {
+const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID, translation, studentRoomShift, shiftName}) => {
+
     const classes = style();
     const [checked, setChecked] = useState([])
     const [availStudent, setAvailStudent] = useState([])
-    const [roomShiftStudents, setRoomShiftStudents] = useState([])
+    const [roomShiftStudents, setRoomShiftStudents] = useState(studentRoomShift)
     const [rightText, setRightText] = useState('')
     const [leftText, setLeftText] = useState('')
-    const [roomName, setRoomName] = useState('')
     const [studentHashMap] = useState({})
     let leftChecked = intersection(checked, availStudent)
     let rightChecked = intersection(checked, roomShiftStudents)
@@ -171,7 +171,7 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID, translation}) 
                         students.filter(student => (
                             student.user.firstName +
                             student.user.lastName +
-                            student.student_id).toLowerCase().includes(rightText.toLowerCase().replace(/\s+/g, ''))).map((student) => {
+                            student.student_id).toLowerCase().includes(text.toLowerCase().replace(/\s+/g, ''))).map((student) => {
                             const labelId = `transfer-list-all-item-${student.student_id}-label`;
                             return (
                                 <ListItem key={student.student_id} role="listitem" button
@@ -195,29 +195,9 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID, translation}) 
     );
 
 
-    // Getting the current Students in RoomShift and it will re render
-    // If the shift id is change
-    useEffect(() => {
-
-        async function fetchData() {
-            return await graphQlRequestAsync(getRoomShift(shiftID))
-        }
-
-
-        fetchData().then(r => {
-            const response = r.data.data.roomShift
-            setRoomName(response.grade + ' ' + response.section)
-            setRoomShiftStudents(response.students)
-        })
-
-
-    }, [shiftID])
-
-
     // Getting all the students
 
     useEffect(() => {
-
         async function fetchData() {
             return await graphQlRequestAsync(getStudentsForRoomShift(leftText))
         }
@@ -246,7 +226,7 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID, translation}) 
             setChecked(newCheck)
         })
 
-    }, [shiftID, leftText])
+    }, [leftText])
 
     return (
 
@@ -292,7 +272,7 @@ const RoomShiftAddStudentTransfer = ({open, closeDialog, shiftID, translation}) 
                         </Grid>
                         <Grid md={5}
                               item sm={12} xs={12}
-                        >{customList(roomName + translation.language['label.global.student'], roomShiftStudents, rightText, setRightText)}</Grid>
+                        >{customList(shiftName + ' ' + translation.language['label.global.student'], roomShiftStudents, rightText, setRightText)}</Grid>
                     </Grid>
 
                 </DialogContent>

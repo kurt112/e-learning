@@ -5,26 +5,25 @@
  **/
 import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
-import {Fragment, lazy, useEffect} from "react"
+import {Fragment, lazy, useEffect, useState} from "react"
 import {AdminRoomShiftTable as columns} from '../../../utils/tableColumn'
 import style, {TableOptions as options} from '../../../_style/TableStyle'
 import {connect} from 'react-redux'
-import {RoomShift, RoomShift_Delete} from "../../../../../store/utils/Specify";
+import {RoomShift, RoomShift_Delete, RoomShift_Find} from "../../../../../store/utils/Specify";
 import Typography from "@material-ui/core/Typography";
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
 
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 
 // actions
 import * as actions from "../../../../../store/action/__ActionGlobal/TableAction";
-import * as roomShiftListAction from "../../../../../store/action/admin/RoomShift/RoomShiftListAction"
 import IconButton from "@material-ui/core/IconButton";
 import UpdateIcon from "@material-ui/icons/Update";
 import DeleteIcon from "@material-ui/icons/Delete";
-
-const AddStudentDialog = lazy(() => import(`./RoomShiftAddStudentDialog`));
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
 const RegisterRoomShiftDialog = lazy(() => import(`./RoomShiftRegisterDialog`));
 const DeleteRooShiftDialog = lazy(() => import(`./DeleteRoomShiftDialog`))
+const FindRoomShiftDialog = lazy(() => import(`./FindRoomShiftDialog`))
+
 const RoomShiftList = ({
                            roomShift,
                            initData,
@@ -32,13 +31,35 @@ const RoomShiftList = ({
                            pageChange,
                            openDialog,
                            closeDialog,
-                           openAddStudent,
-                           closeAddStudent,
                            openDeleteDialog,
                            closeDeleteDialog,
-                           translation
+                           translation,
+                           openFindDialog,
+                           closeFindDialog
                        }) => {
     const classes = style()
+
+    // dialog State
+    const [update,setUpdate] = useState(false)
+    const [addStudent, setAddStudent] = useState(false)
+
+    const updateClick = () => {
+        setUpdate(true)
+        openFindDialog()
+    }
+
+    const addStudentClick = () => {
+
+        setAddStudent(true)
+        openFindDialog()
+    }
+
+    const closeDialogClick = () => {
+        setUpdate(false)
+        setAddStudent(false)
+        closeFindDialog()
+    }
+
     useEffect(() => {
         if (roomShift.data.length === 0) initData()
 
@@ -48,10 +69,13 @@ const RoomShiftList = ({
         <Fragment>
 
             <RegisterRoomShiftDialog translation={translation} dialog={roomShift.dialog} closeDialog={closeDialog}/>
-            <AddStudentDialog translation={translation} dialog={roomShift.addStudentDialog}
-                              closeDialog={closeAddStudent}/>
             <DeleteRooShiftDialog translation={translation} dialog={roomShift.deleteDialog}
                                   closeDialog={closeDeleteDialog}/>
+            <FindRoomShiftDialog translation={translation}
+                                 dialog={roomShift.findDialog}
+                                 update={update}
+                                 addStudent={addStudent}
+                                 closeDialog={closeDialogClick}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
@@ -70,12 +94,12 @@ const RoomShiftList = ({
                             </Tooltip>
 
                             <Tooltip title={translation.language['tooltip.room.shift.update']}>
-                                <IconButton aria-label="update-room" onClick={() => alert('gagawin mo pa to')}>
+                                <IconButton aria-label="update-room" onClick={updateClick}>
                                     <UpdateIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
                             </Tooltip>
                             <Tooltip title={translation.language['tooltip.room.shift.add.student']}>
-                                <IconButton aria-label="update-room" onClick={openAddStudent}>
+                                <IconButton aria-label="update-room" onClick={addStudentClick}>
                                     <GroupAddIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
                             </Tooltip>
@@ -121,14 +145,16 @@ const mapDispatchToProps = (dispatch) => {
         initData: () => dispatch(actions.InitDataTable(RoomShift)),
         searchChange: (data) => dispatch(actions.SearchChange(data, RoomShift)),
         pageChange: (page) => dispatch(actions.DataNextPage(page, RoomShift)),
-        openAddStudent: () => dispatch(roomShiftListAction.openAddStudent()),
-        closeAddStudent: () => dispatch(roomShiftListAction.closeAddStudent()),
 
         // for opening dialog
         openDialog: () => dispatch(actions.openDialog(RoomShift)),
         closeDialog: () => dispatch(actions.closeDialog(RoomShift)),
         openDeleteDialog: () => dispatch(actions.openDialog(RoomShift_Delete)),
-        closeDeleteDialog: () => dispatch(actions.closeDialog(RoomShift_Delete))
+        closeDeleteDialog: () => dispatch(actions.closeDialog(RoomShift_Delete)),
+        openFindDialog: () => dispatch(actions.openDialog(RoomShift_Find)),
+        closeFindDialog: () => dispatch(actions.closeDialog(RoomShift_Find))
+
+
     }
 }
 

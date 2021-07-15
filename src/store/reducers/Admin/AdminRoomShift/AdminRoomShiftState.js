@@ -3,12 +3,12 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {AdminInsertRoomShift as insert} from "../../../../components/ui/utils/tableColumn";
-import state from "../../__StateGlobal/AdminTableState";
-import * as actions from "../../../ActionType/__ActionTypeGlobal/TableActionType";
-import * as roomShiftListAction from "../../../ActionType/Admin/RoomShift/RoomShiftListActionType"
-import {RoomShift, RoomShift_Delete} from "../../../utils/Specify";
-import {updateObject} from "../../../utils/UpdateObject";
+
+import {AdminInsertRoomShift as insert} from "../../../../components/ui/utils/tableColumn"
+import state from "../../__StateGlobal/AdminTableState"
+import * as actions from "../../../ActionType/__ActionTypeGlobal/TableActionType"
+import {RoomShift, RoomShift_Delete, RoomShift_Find} from "../../../utils/Specify"
+import {updateObject} from "../../../utils/UpdateObject"
 
 const newState = new state()
 
@@ -21,7 +21,7 @@ const transforms = (items) => items.map((item) =>{
 
 const initState = {
     ...newState.init_state,
-    addStudentDialog: false,
+    findDialog: false,
     deleteDialog: false
 }
 
@@ -36,8 +36,8 @@ const reducer = (state = initState, action) =>{
         case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(RoomShift): return newState.searchChange(state,action)
 
         // Adding Student in Room Shift List
-        case roomShiftListAction.ADD_STUDENT_DIALOG_CLOSE: return updateObject(state, {addStudentDialog:false})
-        case roomShiftListAction.ADD_STUDENT_DIALOG_OPEN: return updateObject(state, {addStudentDialog: true})
+        case actions.DIALOG_OPEN(RoomShift_Find): return updateObject(state, {findDialog: true})
+        case actions.DIALOG_CLOSE(RoomShift_Find): return updateObject(state, {findDialog: false})
 
 
         // for opening and closing dialog

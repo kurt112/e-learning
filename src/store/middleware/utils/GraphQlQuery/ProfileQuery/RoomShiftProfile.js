@@ -28,7 +28,7 @@ export const
                                     firstName,
                                     lastName
                                 }
-                            },
+                        },
                         roomShiftClasses{
                             startTime,
                             endTime,
@@ -44,6 +44,39 @@ export const
                                 subjectName
                             }
                         }             
+                    }   
+            }
+        `}
+    },
+
+    getRoomShiftBasic = (id) => {
+        return {
+            query: `
+                    query{roomShift(id:"${id}"){
+                        id,
+                        roomShiftName,
+                        grade,
+                        section,
+                        timeStart,
+                        timeEnd,
+                        room {
+                           id,
+                           roomName
+                        },
+                        teacher{
+                            id,
+                            user{
+                                firstName,
+                                lastName
+                            }
+                        },
+                        students{
+                            student_id,
+                                user{
+                                    firstName,
+                                    lastName
+                                }
+                        }           
                     }   
             }
         `}

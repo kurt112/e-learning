@@ -47,7 +47,7 @@ const DeleteRoomShiftDialog = ({
                 value={state.id}
                 margin="dense"
                 variant={'outlined'}
-                label={translation.language['label.room.shift.dialog.delete.input']}
+                label={translation.language['label.room.shift.input.id']}
                 type="text"
                 fullWidth
                 onChange={(event) => dialogId(event.target.value)}
