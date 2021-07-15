@@ -4,14 +4,14 @@
  * @created : 11/07/2021, Sunday
  **/
 export const
-    JavaEndpoint = process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : 'https://eellearning.herokuapp.com',
-    ExpressEndPoint = process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : ' https://e-learning-classroom-server.herokuapp.com',
+    JavaEndpoint = process.env.NODE_ENV==='development'? 'http://localhost:8080':'https://eellearning.herokuapp.com',
+    ExpressEndPoint = process.env.NODE_ENV==='development'?'http://localhost:5000':'https://e-learning-classroom-server.herokuapp.com',
     GraphQlEndpoint = JavaEndpoint + '/Elearning',
     /**
      * for Admin end point
      * */
 
-        // Curriculum admin endpoint
+    // Curriculum admin endpoint
     CreateCurriculum = 'admin/curriculum-register',
     DeleteCurriculum = 'admin/delete/curriculum',
 
@@ -42,6 +42,7 @@ export const
     AdminRoomClassRegister = "admin/classes/register",
     AdminRoomClass = "admin/classes/roomClass",
     DeleteRoomClass = 'admin/classes/delete/class',
+
 
 
     /**

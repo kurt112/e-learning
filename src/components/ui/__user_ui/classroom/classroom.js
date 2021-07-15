@@ -26,9 +26,6 @@ const StyledDrawer = withStyles({
 
 const Classroom = (props) => {
     const classes = style();
-
-    console.log(ExpressEndPoint)
-
     const [receive, setReceive] = useState('')
 
     const [roomName, setRoom] = useState('')
@@ -43,6 +40,7 @@ const Classroom = (props) => {
     const socket = useRef()
 
     useEffect(() => {
+        console.log(ExpressEndPoint)
         if (socket.current === undefined) {
             const m = moment()
             socket.current = io(ExpressEndPoint)
