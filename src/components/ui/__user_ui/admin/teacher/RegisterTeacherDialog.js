@@ -43,8 +43,8 @@ const TeacherRegister = ({
         <Divider/>
         <DialogContent>
             <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
-                      messageFail={translation.language["message.teacher.dialog.delete.fail"]}
-                      messageSuccess={translation.language["message.teacher.dialog.delete.fail"]}/>
+                      messageFail={translation.language["message.teacher.dialog.register.fail"]}
+                      messageSuccess={translation.language["message.teacher.dialog.register.success"]}/>
 
             <TextField
                 autoFocus

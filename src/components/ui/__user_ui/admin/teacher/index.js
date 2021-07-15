@@ -18,7 +18,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
 
 const TeacherDialogRegister = lazy(() => import(`./RegisterTeacherDialog`))
-const TeacherDeleteDialog = lazy(() => import(`./DeleteDialogTeacher`))
+const TeacherDeleteDialog = lazy(() => import(`./DeleteTeacherDialog`))
+
 const Index = ({
                    teacher, pageChange, searchChange, openDialog, closeDialog, initData, openDeleteDialog,
                    closeDeleteDialog, translation

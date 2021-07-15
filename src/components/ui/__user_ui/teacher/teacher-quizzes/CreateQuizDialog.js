@@ -91,6 +91,7 @@ const CreateQuizDialog = ({
                     <Grid item md={4} xs={6}>
                         <TextField
                             margin="dense"
+                            InputLabelProps={{ shrink: true }}
                             label={translation.language["label.global.date.deadline"]}
                             type="datetime-local"
                             fullWidth

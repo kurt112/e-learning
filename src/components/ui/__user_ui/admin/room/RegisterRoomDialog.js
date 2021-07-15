@@ -63,6 +63,7 @@ const RegisterRoomDialog = ({
                     <Grid item md={6} xs={12}>
                         <TextField
                             margin="dense"
+                            InputLabelProps={{ shrink: true }}
                             label={translation.language["label.global.time.start"]}
                             value={dialogState.timeStart}
                             onChange={(event) => changeTimeStart(event.target.value)}
@@ -74,6 +75,7 @@ const RegisterRoomDialog = ({
                     <Grid item md={6} xs={12}>
                         <TextField
                             margin="dense"
+                            InputLabelProps={{ shrink: true }}
                             label={translation.language["label.global.time.end"]}
                             value={dialogState.timeEnd}
                             onChange={(event) => changeTimeEnd(event.target.value)}

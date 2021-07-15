@@ -21,9 +21,9 @@ const Route = ({role,email,translation}) => {
                         role === Admin ? <AdminRoute translation={translation} email={email}/> :null
             }
             <ProfileRoute translation={translation}/>
-            {
-                role !== Admin? <Redirect to={'/'}/>: null
-            }
+            {/*{*/}
+            {/*    role !== Admin? <Redirect to={'/'}/>: null*/}
+            {/*}*/}
         </Fragment>
     )
 }

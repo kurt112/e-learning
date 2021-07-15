@@ -52,7 +52,7 @@ const RegisterSubject = (
                           messageSuccess={translation.language["message.subject.dialog.register.success"]}/>
 
                 <Grid container spacing={1}>
-                    <Grid item md={4} xs={12}>
+                    <Grid item md={12} xs={12}>
                         <TextField autoFocus
                                    margin="dense"
                                    label={translation.language["label.global.subject.name"]}
@@ -65,7 +65,7 @@ const RegisterSubject = (
                         />
 
                     </Grid>
-                    <Grid item md={4} xs={12}>
+                    <Grid item md={6} xs={12}>
                         <TextField
                             margin="dense"
                             label={translation.language["label.global.subject.code"]}
@@ -76,7 +76,7 @@ const RegisterSubject = (
                             onChange={(event) => changeSubjectCode(event)}
                         />
                     </Grid>
-                    <Grid item md={4} xs={12}>
+                    <Grid item md={6} xs={12}>
                         <FormControl variant="outlined" margin='dense' fullWidth>
                             <InputLabel
                                 htmlFor={translation.language["label.global.major"]}>{translation.language["label.global.major"]}</InputLabel>

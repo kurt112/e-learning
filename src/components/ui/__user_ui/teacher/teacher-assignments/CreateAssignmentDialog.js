@@ -92,6 +92,7 @@ const CreateAssignmentDialog = ({
                         <TextField
                             margin="dense"
                             label={translation.language["label.global.date.deadline"]}
+                            InputLabelProps={{ shrink: true }}
                             type="datetime-local"
                             fullWidth
                             variant="outlined"

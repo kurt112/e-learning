@@ -63,8 +63,8 @@ export const
 
     // Teacher User  Lecture
     Teacher_Lecture = Teacher+'_LECTURE',
-    Teacher_Lecture_Create = Teacher+'_LECTURE',
-    Teacher_Lecture_Delete = Teacher+Delete,
+    Teacher_Lecture_Create = Teacher_Lecture+Create,
+    Teacher_Lecture_Delete = Teacher_Lecture+Delete,
 
     // Teacher User Exams,
     Teacher_Exams = Teacher+'_EXAMS',

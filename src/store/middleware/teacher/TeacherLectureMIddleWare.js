@@ -47,7 +47,7 @@ export function* DeleteLecture() {
         yield TeacherLectureTableDataInit()
         yield put(dialogAction.registerDialogSuccess(Teacher_Lecture_Delete))
     } catch (error) {
-        yield put(dialogAction.registerDialogFail(error, Teacher_Resource_Delete))
+        yield put(dialogAction.registerDialogFail(error, Teacher_Lecture_Delete))
     }
 }
 

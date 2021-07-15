@@ -4,7 +4,7 @@
  * @created : 11/07/2021, Sunday
  **/
 import {lazy, Fragment, useState, useEffect} from "react";
-import {Route} from "react-router";
+import {Redirect, Route} from "react-router";
 import {graphQlRequestAsync} from "../../store/middleware/utils/HttpRequest";
 import {
     getTeacherClasses,
@@ -97,7 +97,6 @@ const TeacherRoute = ({email, translation}) => {
                    render={() => <TeacherExams translation={translation}/>}/>
             <Route path={translation.language["route.teacher.quizzes"]} exact
                    render={() => <TeacherQuizzes translation={translation}/>}/>
-
             {/*<Redirect to={translation.language["route.teacher.classes"]}/>*/}
         </Fragment>
     )
