@@ -12,9 +12,9 @@ import {
   export function mode(state){
     if(state  === false)
       enableDarkMode({
-      brightness: 100,
-      contrast: 900,
-      sepia: 10,
+        brightness: 100,
+        contrast: 90,
+        sepia: 10
     });
 
     else disableDarkMode()

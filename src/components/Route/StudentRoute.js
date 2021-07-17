@@ -3,16 +3,21 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {Route} from "react-router";
+import {Redirect, Route} from "react-router";
 import {Fragment, lazy, useEffect, useState} from "react";
 import {getStudentDataByEmail} from "../../store/middleware/utils/GraphQlQuery/StudentQuery/StudentDataQuery";
 import {graphQlRequestAsync} from "../../store/middleware/utils/HttpRequest";
 
+import { useLocation } from 'react-router-dom'
+
+import ClassesList from "../ui/__user_ui/roomClasses/ClassList/ClassesList";
+
 const StudentLecture = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({default: module.StudentLecture})))
 const StudentTodo = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({default: module.StudentTodo})))
-const Classes = lazy(() => import(`../ui/__user_ui/roomClasses/ClassList/ClassesList`))
 
 const StudentRoute = ({email, translation}) => {
+
+    const location = useLocation()
 
     const [student, setStudent] = useState(null);
 
@@ -26,6 +31,8 @@ const StudentRoute = ({email, translation}) => {
     const [quiz, setQuiz] = useState([])
     const [lecture, setLecture] = useState([])
     const [filterSubject, setFilterSubject] = useState([])
+
+    console.log(student)
 
     useEffect(() => {
 
@@ -89,6 +96,9 @@ const StudentRoute = ({email, translation}) => {
 
     return student === null ? null :
         <Fragment>
+            <Route path={translation.language["route.student.classes"]} exact
+                   render={() => <ClassesList translation={translation} currentClass={currentClass}
+                                              archiveClass={doneClass}/>}/>
             <Route path={translation.language["route.student.todos"]} exact
                    render={() => <StudentTodo all={all} exams={exam} assignments={assignment} quiz={quiz}
                                               translation={translation}/>}/>
@@ -97,10 +107,9 @@ const StudentRoute = ({email, translation}) => {
                 render={() => <StudentLecture filter={filterSubject} translation={translation} lecture={lecture}/>}
 
             />
-            <Route path={translation.language["route.student.classes"]} exact
-                   render={() => <Classes translation={translation} currentClass={currentClass}
-                                          archiveClass={doneClass}/>}/>
-            {/*<Redirect to={translation.language["route.student.classes"]}/>*/}
+            {
+                location.pathname === '/'?<Redirect to={translation.language["route.student.classes"]}/>: null
+            }
         </Fragment>
 }
 

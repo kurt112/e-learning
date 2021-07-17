@@ -3,13 +3,13 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {Fragment} from "react"
-import TeacherRoute from './TeacherRoute'
-import StudentRoute from "./StudentRoute"
-import ProfileRoute from "./ProfileRoute"
-import AdminRoute from "./AdminRoute"
+import {Fragment, lazy} from "react"
 import {Teacher, Student,Admin} from "../../store/utils/Specify";
-import {Redirect} from "react-router";
+
+
+const TeacherRoute = lazy(() => import(`./TeacherRoute`))
+const StudentRoute = lazy(() => import(`./StudentRoute`))
+const AdminRoute = lazy(() => import(`./AdminRoute`))
 
 
 const Route = ({role,email,translation}) => {
@@ -20,10 +20,6 @@ const Route = ({role,email,translation}) => {
                     role === Student ? <StudentRoute translation={translation} email={email}/> :
                         role === Admin ? <AdminRoute translation={translation} email={email}/> :null
             }
-            <ProfileRoute translation={translation}/>
-            {/*{*/}
-            {/*    role !== Admin? <Redirect to={'/'}/>: null*/}
-            {/*}*/}
         </Fragment>
     )
 }

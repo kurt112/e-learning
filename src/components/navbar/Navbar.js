@@ -129,6 +129,7 @@ const Navbar = ({handleDrawerOpen, currentUser, logout}) => {
                         aria-haspopup="true"
                         variant="contained"
                         onClick={handleClick}
+
                     />
 
                     <StyledMenu
@@ -137,7 +138,6 @@ const Navbar = ({handleDrawerOpen, currentUser, logout}) => {
                         keepMounted
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
-
                     >
 
                         <StyledMenuItem>

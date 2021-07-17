@@ -40,16 +40,19 @@ const reInit = (state) => {
     state = updateObject(state, {subjectMajor: 'Minor'})
     state = updateObject(state, {status: 'Active'})
 
-    delete state.subjectCode
-
     return state
+}
+
+const success= (state) => {
+    state = reInit(state)
+    return newState.successRegister(state)
 }
 
 const reducer = (state=init_state, action)=>{
     switch(action.type){
         case actions.ADMIN_DIALOG_REGISTER(Subject): return newState.initRegister(state)
         case actions.ADMIN_DIALOG_REGISTER_FAIL(Subject): return newState.failRegister(state, action)
-        case actions.ADMIN_DIALOG_REGISTER_SUCCESS(Subject): return newState.successRegister(state)
+        case actions.ADMIN_DIALOG_REGISTER_SUCCESS(Subject): return success(state)
         case actions.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(Subject): return newState.handleClose(state,action)
 
 

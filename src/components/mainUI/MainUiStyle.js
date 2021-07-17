@@ -37,11 +37,12 @@ const useStyles = makeStyles((theme) => ({
         color: 'black !important',
     },
     dropDownLight: {
+        cursor: 'pointer',
+        // color:'white',
         backgroundColor: 'white !important',
-        borderRadius: 50,
-        fontSize: 31,
+        borderRadius: 60,
+        fontSize: 35,
         marginTop:10,
-        // marginRight: 10,
         marginBottom: 4,
     }
 

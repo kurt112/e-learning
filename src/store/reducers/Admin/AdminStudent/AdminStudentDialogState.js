@@ -9,12 +9,18 @@ import * as actions from '../../../ActionType/__ActionTypeGlobal/DialogActionTyp
 import {Student} from '../../../utils/Specify'
 const newState = new state()
 
+const successRegister = (state) => {
+    state = updateObject(state, {id:''})
+    return newState.successRegister(state)
+}
+
+
 const reducer = (state = newState.init_state, action) =>{
     switch(action.type){
         case actions.ADMIN_DIALOG_ID_CHANGE(Student): return updateObject(state, {id: action.value})
         case actions.ADMIN_DIALOG_REGISTER(Student): return newState.initRegister(state)
         case actions.ADMIN_DIALOG_REGISTER_FAIL(Student): return newState.failRegister(state, action)
-        case actions.ADMIN_DIALOG_REGISTER_SUCCESS(Student): return newState.successRegister(state)
+        case actions.ADMIN_DIALOG_REGISTER_SUCCESS(Student): return successRegister(state)
         case actions.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(Student): return newState.handleClose(state,action)
         default: return state;
     }

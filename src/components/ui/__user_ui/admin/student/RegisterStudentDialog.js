@@ -49,6 +49,7 @@ const RegisterStudentDialog = ({
                 label={translation.language["label.student.dialog.input.lrn"]}
                 type="text"
                 fullWidth
+                value={student.id}
                 onChange={(event) => dialogId(event)}
                 onKeyDown={event => {
                     RegisterEnter(event)

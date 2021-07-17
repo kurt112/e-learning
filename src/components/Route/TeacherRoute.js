@@ -11,6 +11,8 @@ import {
     getTeacherDataByEmail
 } from "../../store/middleware/utils/GraphQlQuery/TeacherQuery/TeacherDataQuery";
 import {TeacherInsertStudent as insertStudent, TeacherInsertSubject as insertSubject} from '../ui/utils/tableColumn'
+import { useLocation } from 'react-router-dom'
+import ClassesList from "../ui/__user_ui/roomClasses/ClassList/ClassesList";
 
 
 // import {get} from "../../store/middleware/utils/GraphQlQuery/TeacherQuery";
@@ -21,7 +23,6 @@ const TeacherResources = lazy(() => import('../ui/__user_ui/teacher').then(modul
 const TeacherAssignments = lazy(() => import('../ui/__user_ui/teacher').then(module => ({default: module.TeacherAssignments})))
 const TeacherExams = lazy(() => import('../ui/__user_ui/teacher').then(module => ({default: module.TeacherExams})))
 const TeacherQuizzes = lazy(() => import('../ui/__user_ui/teacher').then(module => ({default: module.TeacherQuizzes})))
-const Classes = lazy(() => import(`../ui/__user_ui/roomClasses/ClassList/ClassesList`))
 
 const TeacherRoute = ({email, translation}) => {
 
@@ -30,6 +31,7 @@ const TeacherRoute = ({email, translation}) => {
     const [subjects, setSubjects] = useState([])
     const [currentClass, setCurrentClass] = useState()
     const [doneClass, setDoneClass] = useState()
+    const location = useLocation();
 
     useEffect(() => {
         fetchData().then(r => {
@@ -87,7 +89,8 @@ const TeacherRoute = ({email, translation}) => {
             <Route path={translation.language["route.teacher.lectures"]} exact
                    render={() => <TeacherLectures translation={translation}/>}/>
             <Route path={translation.language["route.teacher.classes"]} exact
-                   render={() => <Classes translation={translation} currentClass={currentClass}
+                   render={() => <ClassesList translation={translation}
+                                          currentClass={currentClass}
                                           archiveClass={doneClass}/>}/>
             <Route path={translation.language["route.teacher.resources"]} exact
                    render={() => <TeacherResources translation={translation}/>}/>
@@ -97,7 +100,11 @@ const TeacherRoute = ({email, translation}) => {
                    render={() => <TeacherExams translation={translation}/>}/>
             <Route path={translation.language["route.teacher.quizzes"]} exact
                    render={() => <TeacherQuizzes translation={translation}/>}/>
-            {/*<Redirect to={translation.language["route.teacher.classes"]}/>*/}
+
+            {
+                location.pathname === '/'? <Redirect to={translation.language["route.teacher.classes"]}/>:null
+            }
+
         </Fragment>
     )
 }
