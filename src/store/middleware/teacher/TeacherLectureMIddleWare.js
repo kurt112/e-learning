@@ -66,8 +66,13 @@ export function* TeacherLectureCreate() {
         ...classState
     }
 
+
     try {
-        yield baseUrl.post(createLecture, data)
+        yield baseUrl.post(createLecture, data).then(e => {
+
+        }).catch(error => {
+            console.log(error)
+        })
         yield put(dialogAction.registerDialogSuccess(Teacher_Lecture_Create))
         yield TeacherLectureTableDataInit()
     } catch (error) {

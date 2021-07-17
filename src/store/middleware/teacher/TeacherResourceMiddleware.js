@@ -5,7 +5,10 @@
  **/
 import {put, select} from "redux-saga/effects";
 import * as Selector from "../selector";
-import {TeacherResourceUpload as destination, TeacherResourceDelete as deleteResource} from "../utils/ApiEndpoint/ClassroomEndPoint";
+import {
+    TeacherResourceUpload as destination,
+    TeacherResourceDelete as deleteResource
+} from "../utils/ApiEndpoint/ClassroomEndPoint";
 import {uniqueNamesGenerator, adjectives, colors, animals} from 'unique-names-generator'
 import {baseUrl} from "../axios"
 
@@ -15,6 +18,7 @@ import {TableDataInit, TableNextData} from "../admin/__MiddleWareGlobal";
 
 import {AdminTeacherBodyDataSettingsQuery} from "../utils/GraphQlQuery/AdminQuery/AdminTeacherQuery";
 import {getTeacherResource} from "../utils/GraphQlQuery/TeacherQuery/TeacherResourceQuery";
+import {deleteToS3, uploadToS3} from "../utils/S3bukcet/s3";
 
 export function* TeacherResourceUpload() {
     const teacherResource = yield select(Selector.TeacherResourceUploadDialog)
@@ -31,23 +35,23 @@ export function* TeacherResourceUpload() {
     let i = 0;
 
     while (teacherResource.file[i] !== undefined) {
-        const data = new FormData();
-        data.append("file", teacherResource.file[i])
-        data.append("name", teacherResource.name)
-        data.append("type", teacherResource.type)
-        data.append("description", teacherResource.description)
-        data.append("code", code)
-        data.append("email", email)
-         yield baseUrl({
+
+        const path = yield uploadToS3(teacherResource.file[i])
+        const params = new URLSearchParams();
+
+        params.append("filePath", path)
+        params.append("name", teacherResource.name)
+        params.append("type", teacherResource.type)
+        params.append("description", teacherResource.description)
+        params.append("code", code)
+        params.append("email", email)
+        yield baseUrl({
             method: 'post',
             url: destination,
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-            data
-        }).catch(e=> {
+            params
+        }).catch(e => {
             console.log(e)
-             return "";
+            return "";
         })
         i++;
 
@@ -57,7 +61,7 @@ export function* TeacherResourceUpload() {
 
 }
 
-export function *TeacherResourceDelete(){
+export function* TeacherResourceDelete() {
 
     const teacherResource = yield select(Selector.TeacherResourceDeleteDialog)
     const currentUser = yield select(Selector.CurrentUser)
@@ -66,11 +70,12 @@ export function *TeacherResourceDelete(){
     params.append('code', teacherResource.id)
     params.append('email', email)
     try {
-        yield baseUrl.delete(deleteResource, {params})
+        const response = yield baseUrl.delete(deleteResource, {params})
+        yield deleteToS3 (response.data.item)
         yield TeacherResourceTableDataInit()
         yield put(dialogAction.registerDialogSuccess(Teacher_Resource_Delete))
-    }catch (error) {
-        yield put(dialogAction.registerDialogFail(error,Teacher_Resource_Delete))
+    } catch (error) {
+        yield put(dialogAction.registerDialogFail(error, Teacher_Resource_Delete))
     }
 
 }
@@ -79,12 +84,12 @@ export function *TeacherResourceDelete(){
 export function* TeacherResourceDataNext(action) {
     const teacherResource = yield select(Selector.TeacherResource)
     const user = yield  select(Selector.CurrentUser)
-    yield TableNextData(action, teacherResource, getTeacherResource(teacherResource.search,user.user.email,teacherResource.page), AdminTeacherBodyDataSettingsQuery(),Teacher_Resource)
+    yield TableNextData(action, teacherResource, getTeacherResource(teacherResource.search, user.user.email, teacherResource.page), AdminTeacherBodyDataSettingsQuery(), Teacher_Resource)
 }
 
 export function* TeacherResourceTableDataInit() {
 
     const teacherResource = yield select(Selector.TeacherResource)
     const user = yield  select(Selector.CurrentUser)
-    yield TableDataInit(getTeacherResource(teacherResource.search,user.user.email,teacherResource.page),AdminTeacherBodyDataSettingsQuery(),Teacher_Resource)
+    yield TableDataInit(getTeacherResource(teacherResource.search, user.user.email, teacherResource.page), AdminTeacherBodyDataSettingsQuery(), Teacher_Resource)
 }

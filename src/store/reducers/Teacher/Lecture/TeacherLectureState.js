@@ -22,8 +22,7 @@ const newState = {
     deleteDialog: false
 }
 const transforms = (items) => items.map((item) =>
-    insert(item.code, item.name, `${item.class_.roomShift.grade} ${item.class_.roomShift.section}`,item.sem, item.quarter,convertDateTime(item.createdAt),item.description,item.resource.code))
-
+    insert(item.code, item.name, `${item.class_.roomShift.grade} ${item.class_.roomShift.section}`,item.sem, item.quarter,convertDateTime(item.createdAt),item.description,item.resource.location))
 
 
 const reducer = (state = newState, action) => {

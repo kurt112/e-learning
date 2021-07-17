@@ -20,9 +20,10 @@ const newSate = {
 
 }
 
-const transforms = (items) => items.map((item) => insert(item.code, item.lowGrade, item.highGrade, item.sem, item.quarter, `${item.roomShiftClass.roomShift.grade} - ${item.roomShiftClass.roomShift.section}`, item.createdAt,item.deadLine,item.description, item.resource.code))
+const transforms = (items) => items.map((item) =>  {
 
-
+    return insert(item.code, item.lowGrade, item.highGrade, item.sem, item.quarter, `${item.roomShiftClass.roomShift.grade} - ${item.roomShiftClass.roomShift.section}`, item.createdAt,item.deadLine,item.description, item.resource.location)
+})
 const reducer = (state = newSate, action) => {
     switch (action.type) {
         case actions.ADMIN_TABLE_SETTINGS_INIT(Teacher_Assignment):

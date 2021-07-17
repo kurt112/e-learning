@@ -21,7 +21,6 @@ import CardHeader from '@material-ui/core/CardHeader';
 import ListItem from '@material-ui/core/ListItem';
 import {useEffect, useState} from "react";
 import {
-    getRoomShift,
     getStudentsForRoomShift
 } from "../../../../../store/middleware/utils/GraphQlQuery/AdminQuery/AdminRoomShiftQuery";
 import {graphQlRequestAsync, PostData} from "../../../../../store/middleware/utils/HttpRequest";

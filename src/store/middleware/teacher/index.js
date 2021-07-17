@@ -13,7 +13,7 @@ import {
     Teacher_Exams,
     Teacher_Exams_Create,
     Teacher_Exams_Delete,
-    Teacher_Lecture,
+    Teacher_Lecture, Teacher_Lecture_Create,
     Teacher_Lecture_Delete, Teacher_Quiz, Teacher_Quiz_Create, Teacher_Quiz_Delete,
     Teacher_Resource,
     Teacher_Resource_Delete,
@@ -107,7 +107,7 @@ export function* watchTeacherLectureTableNext(){
 }
 
 export function * watchTeacherCreateLecture() {
-    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Lecture), TeacherLectureCreate)
+    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Lecture_Create), TeacherLectureCreate)
 }
 
 export function * watchDeleteLecture() {

@@ -7,7 +7,7 @@
 import {Button} from "@material-ui/core"
 import {Link} from "react-router-dom"
 import {convertDateTime} from "../dateFormat/DateTimeFormatToDateWord";
-import {JavaEndpoint} from "../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
+import {S3BucketEndPoint} from "../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 
 
 /*
@@ -203,7 +203,7 @@ export const TeacherLectureTable = [
             filter: false,
             sort: false,
             customBodyRender: (value) => {
-                return <a href={JavaEndpoint + `/teacher/resource/download?code=` + value} target="_blank"
+                return <a href={S3BucketEndPoint + value} target="_blank"
                           style={{textDecoration: 'none', marginRight: '10px'}} rel="noopener noreferrer">
                     <Button variant="outlined" color="primary">
                         Download
@@ -338,7 +338,7 @@ export const TeacherResources = (translation) => [
             filter: false,
             sort: false,
             customBodyRender: (value) => {
-                return <a href={JavaEndpoint + translation.language["route.teacher.resource.download"] + value}
+                return <a href={S3BucketEndPoint+value}
                           target="_blank"
                           style={{textDecoration: 'none', marginRight: '10px'}}
                           rel="noopener noreferrer">
@@ -354,8 +354,8 @@ export const TeacherResources = (translation) => [
     },
 ]
 
-export function TeacherInsertResources(documentCode, documentName, description, dateUploaded, type, status) {
-    return {documentCode, documentName, description, dateUploaded, type, status, download: documentCode}
+export function TeacherInsertResources(documentCode, documentName, description, dateUploaded, type, status, location) {
+    return {documentCode, documentName, description, dateUploaded, type, status, download: location}
 }
 
 /**
@@ -411,7 +411,7 @@ export const TeacherAssignments = (translation) => [
             filter: false,
             sort: false,
             customBodyRender: (value) => {
-                return <a href={JavaEndpoint + translation.language["route.teacher.resource.download"] + value}
+                return <a href={S3BucketEndPoint+value}
                           target="_blank"
                           style={{textDecoration: 'none', marginRight: '10px'}}
                           rel="noopener noreferrer">
@@ -427,7 +427,7 @@ export const TeacherAssignments = (translation) => [
     },
 ]
 
-export function TeacherInsertAssignment(code, lowGrade, highGrade, semester, quarter, classes, dateUploaded, deadline, description, documentCode) {
+export function TeacherInsertAssignment(code, lowGrade, highGrade, semester, quarter, classes, dateUploaded, deadline, description, location) {
 
     return {
         code,
@@ -439,7 +439,7 @@ export function TeacherInsertAssignment(code, lowGrade, highGrade, semester, qua
         dateUploaded: convertDateTime(dateUploaded),
         deadline: convertDateTime(deadline),
         description,
-        download: documentCode
+        download: location
     }
 }
 
@@ -488,7 +488,7 @@ export const TeacherExams = (translation) => [
             filter: false,
             sort: false,
             customBodyRender: (value) => {
-                return <a href={JavaEndpoint + translation.language["route.teacher.resource.download"] + value}
+                return <a href={S3BucketEndPoint+value}
                           target="_blank"
                           style={{textDecoration: 'none', marginRight: '10px'}}
                           rel="noopener noreferrer">
@@ -505,7 +505,7 @@ export const TeacherExams = (translation) => [
 ]
 
 
-export function TeacherInsertExam(code, lowGrade, highGrade, semester, quarter, classes, dateUploaded, deadline, description, documentCode) {
+export function TeacherInsertExam(code, lowGrade, highGrade, semester, quarter, classes, dateUploaded, deadline, description, location) {
 
     return {
         code,
@@ -517,7 +517,7 @@ export function TeacherInsertExam(code, lowGrade, highGrade, semester, quarter, 
         dateUploaded: convertDateTime(dateUploaded),
         deadline: convertDateTime(deadline),
         description,
-        download: documentCode
+        download: location
     }
 }
 
@@ -566,7 +566,7 @@ export const TeacherQuiz = (translation) => [
             filter: false,
             sort: false,
             customBodyRender: (value) => {
-                return <a href={JavaEndpoint + translation.language["route.teacher.resource.download"] + value} target="_blank"
+                return <a href={S3BucketEndPoint+value} target="_blank"
                           style={{textDecoration: 'none', marginRight: '10px'}}
                           rel="noopener noreferrer">
                     <Button variant="outlined" color="primary">
@@ -582,7 +582,7 @@ export const TeacherQuiz = (translation) => [
 ]
 
 
-export function TeacherInsertQuiz(code, lowGrade, highGrade, semester, quarter, classes, dateUploaded, deadline, description, documentCode) {
+export function TeacherInsertQuiz(code, lowGrade, highGrade, semester, quarter, classes, dateUploaded, deadline, description, location) {
 
     return {
         code,
@@ -594,6 +594,6 @@ export function TeacherInsertQuiz(code, lowGrade, highGrade, semester, quarter, 
         dateUploaded: convertDateTime(dateUploaded),
         deadline: convertDateTime(deadline),
         description,
-        download: documentCode
+        download: location
     }
 }

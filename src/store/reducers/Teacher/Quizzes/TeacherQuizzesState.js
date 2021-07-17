@@ -17,7 +17,9 @@ const newState = {
     createDialog: false,
     deleteDialog: false
 }
-const transforms = (items) => items.map((item) => insert(item.code, item.lowGrade, item.highGrade, item.sem, item.quarter, `${item.roomShiftClass.roomShift.grade} - ${item.roomShiftClass.roomShift.section}`, item.createdAt,item.deadLine,item.description, item.resource.code))
+const transforms = (items) => items.map((item) => {
+    return insert(item.code, item.lowGrade, item.highGrade, item.sem, item.quarter, `${item.roomShiftClass.roomShift.grade} - ${item.roomShiftClass.roomShift.section}`, item.createdAt,item.deadLine,item.description, item.resource.location)
+})
 
 const reducer = (state = newState, action) => {
     switch (action.type) {
@@ -27,8 +29,11 @@ const reducer = (state = newState, action) => {
         case dialogAction.ADMIN_TABLE_INIT(Teacher_Quiz):
             return init.initData(state)
 
-        case dialogAction.ADMIN_TABLE_SUCCESS(Teacher_Quiz):
+        case dialogAction.ADMIN_TABLE_SUCCESS(Teacher_Quiz):{
+            console.log("i am here")
+            console.log(action)
             return init.successData(state, action,transforms)
+        }
         case dialogAction.ADMIN_TABLE_FAIL(Teacher_Quiz):
             return init.failData(state)
         case dialogAction.ADMIN_TABLE_NEXT_PAGE(Teacher_Quiz):

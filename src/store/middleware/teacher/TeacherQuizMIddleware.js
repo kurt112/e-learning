@@ -7,7 +7,9 @@ import {put, select} from "redux-saga/effects";
 import * as Selector from "../selector";
 import {TableDataInit, TableNextData} from "../admin/__MiddleWareGlobal";
 import {
-    Teacher_Quiz, Teacher_Quiz_Create, Teacher_Quiz_Delete
+    Teacher_Quiz,
+    Teacher_Quiz_Create,
+    Teacher_Quiz_Delete
 } from "../../utils/Specify";
 
 import {
@@ -51,7 +53,7 @@ export function* TeacherQuizzesDelete() {
 
 export function* TeacherQuizzesCreate() {
     const classState = yield select(Selector.TeacherQuizCreateDialog)
-
+    alert("i am here")
     const code = yield uniqueNamesGenerator({
             dictionaries: [adjectives, colors, animals],
             separator: '-',

@@ -30,6 +30,7 @@ export const
                             deadLine,
                             description,
                             resource{
+                                location,
                                 code
                             },
                             roomShiftClass{

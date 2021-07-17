@@ -37,7 +37,7 @@ const DeleteExamsDialog = ({
         fullWidth
         maxWidth={"md"}
     >
-        <DialogTitle id="delete-exam">{translation.language["label.teacher.dialog.input"]}</DialogTitle>
+        <DialogTitle id="delete-exam">{translation.language["label.teacher.exam.dialog.delete.title"]}</DialogTitle>
         <Divider/>
         <DialogContent>
             <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}

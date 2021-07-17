@@ -25,8 +25,10 @@ const initState = {
 }
 
 
-const transforms = (items) => items.map((item) =>
-    insert(item.code, item.name, item.description, convertDateTime(item.createdAt), item.type, item.status))
+const transforms = (items) => items.map((item) =>{
+    return insert(item.code, item.name, item.description, convertDateTime(item.createdAt), item.type, item.status, item.location)
+})
+
 
 
 const reducer = (state = initState, action) => {

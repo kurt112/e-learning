@@ -190,6 +190,9 @@
   "label.teacher.exam.dialog.create":"Create Exam",
   "label.teacher.exam.dialog.resource": "Exam Resources",
   "label.teacher.exam.dialog.resource.search": "Search By Exam Resources",
+
+  "label.teacher.exam.dialog.delete.title": "Delete Exam",
+
   "label.teacher.lecture.table.title": "Lecture List",
   "label.teacher.lecture.dialog.delete.title": "Delete Lecture",
   "label.teacher.lecture.dialog.input": "Enter Lecture Code",
@@ -342,5 +345,8 @@
   "message.teacher.dialog.lecture.create.success": "Create Lecture Success",
   "message.teacher.dialog.lecture.create.fail": "Create Lecture Fail",
   "message.teacher.dialog.quiz.delete.success": "Delete Quiz Success",
-  "message.teacher.dialog.quiz.delete.fail": "Delete Quiz Fail"
+  "message.teacher.dialog.quiz.delete.fail": "Delete Quiz Fail",
+
+  "message.teacher.dialog.quiz.create.success": "Create Quiz Success",
+  "message.teacher.dialog.quiz.create.fail": "Create Quiz Fail"
 }

@@ -37,6 +37,8 @@ const TeacherQuizzes = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const classes = style()
+
+    console.log(state)
     return (
         <Fragment>
             <CreateQuizDialog translation={translation} dialog={state.createDialog} closeDialog={createExamDialogClose}/>

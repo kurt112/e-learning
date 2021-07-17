@@ -14,7 +14,8 @@ export const
                              quarter,
                              sem,
                              resource{
-                                code,
+                                location,
+                                code
                             },
                             class_{
                                 roomShift{

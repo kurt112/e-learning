@@ -67,8 +67,8 @@ const CreateQuizDialog = ({
             <DialogContent>
 
                 <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
-                          messageFail={translation.language["message.teacher.dialog.quiz.delete.fail"]}
-                          messageSuccess={translation.language["message.teacher.dialog.quiz.delete.success"]}/>
+                          messageFail={translation.language["message.teacher.dialog.quiz.create.fail"]}
+                          messageSuccess={translation.language["message.teacher.dialog.quiz.create.success"]}/>
 
                 <Grid container spacing={1}>
                     <Grid item md={4} xs={12}>
