@@ -9,14 +9,18 @@ export const
             query: `
                     query{roomShifts(search:"${search}", page:${page}){
                         id,
-                            room{
-                                roomName
-                            },
+                        room{
+                            roomName
+                        },
                         teacher{
                             user{
                                 firstName,
                                 lastName
                             }
+                        },
+                        curriculum{
+                            code,
+                            name
                         },
                         roomShiftName,
                         grade,
@@ -75,7 +79,7 @@ export const
         `
         }
     },
-    uploadStudentInRoomShift = (id,list) => {
+    uploadStudentInRoomShift = (id, list) => {
 
         return {
             query: `.

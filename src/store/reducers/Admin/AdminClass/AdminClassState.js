@@ -8,13 +8,14 @@ import state from "../../__StateGlobal/AdminTableState";
 import * as actions from "../../../ActionType/__ActionTypeGlobal/TableActionType";
 import {RoomShiftClass, RoomShiftClass_Delete} from "../../../utils/Specify";
 import {updateObject} from "../../../utils/UpdateObject";
+import {format24Hour} from "../../../../components/ui/utils/dateFormat/TimeConverter";
 const newState = new state()
 
 const transforms = (items) => items.map((item) =>{
     const teacher = item.teacher === null? 'TBA': `${item.teacher.user.firstName} ${item.teacher.user.lastName}`
     const day = item.day === null ? 'TBA': item.day
-    const timeStart = item.startTime === null? 'TBA': item.startTime
-    const timeEnd = item.endTime === null? 'TBA': item.endTime
+    const timeStart = item.startTime === null? 'TBA': format24Hour(item.startTime)
+    const timeEnd = item.endTime === null? 'TBA': format24Hour(item.endTime)
 
     return insert(item.id,item.roomShift.room.roomName, item.roomShift.grade, item.roomShift.section, item.subject.subjectName,
         teacher, day, timeStart, timeEnd, item.roomShift.room.id+item.id+item.subject.subjectCode,item.id)

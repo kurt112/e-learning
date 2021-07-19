@@ -7,7 +7,7 @@ import {autoCompleteRoom} from "../../../../../store/middleware/utils/ApiEndpoin
 import {filterOption, optionLabel, optionSelected} from "../autoCompleteAction";
 import AutoCompleteImplementation from "./AutoCompleteImplementation";
 
-const RoomAutoComplete = ({translation, output, autoFocus}) => {
+const RoomAutoComplete = ({translation, output, autoFocus,focusHandler}) => {
     return <AutoCompleteImplementation
         noOptionText={translation.language["label.room.shift.dialog.create.input.room.name"]}
         label={translation.language["label.global.room"]}
@@ -17,6 +17,7 @@ const RoomAutoComplete = ({translation, output, autoFocus}) => {
         optionSelected={optionSelected}
         optionLabel={optionLabel}
         autoFocus={autoFocus}
+        focusHandler={focusHandler}
     />
 }
 

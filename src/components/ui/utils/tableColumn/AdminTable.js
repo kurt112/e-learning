@@ -382,6 +382,10 @@ export const AdminRoomShiftTable = (translation) => [
         label: translation.language["label.global.adviser"]
     },
     {
+        name: "curriculum",
+        label: translation.language["label.global.curriculum"]
+    },
+    {
         name: 'timeStart',
         label: translation.language["label.global.time.start"]
     },
@@ -411,8 +415,8 @@ export const AdminRoomShiftTable = (translation) => [
     },
 ]
 
-export function AdminInsertRoomShift(id, roomName, roomShiftName, grade, section, adviser,timeStart, timeEnd, profile) {
-    return {id, roomName, roomShiftName, grade, section,adviser, timeStart, timeEnd, profile}
+export function AdminInsertRoomShift(id, roomName, roomShiftName, grade, section, curriculum, adviser,timeStart, timeEnd, profile) {
+    return {id, roomName, roomShiftName, grade, section,curriculum,adviser, timeStart, timeEnd, profile}
 }
 
 /*

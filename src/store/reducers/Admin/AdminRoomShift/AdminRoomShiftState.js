@@ -9,6 +9,7 @@ import state from "../../__StateGlobal/AdminTableState"
 import * as actions from "../../../ActionType/__ActionTypeGlobal/TableActionType"
 import {RoomShift, RoomShift_Delete, RoomShift_Find} from "../../../utils/Specify"
 import {updateObject} from "../../../utils/UpdateObject"
+import {format24Hour} from "../../../../components/ui/utils/dateFormat/TimeConverter";
 
 const newState = new state()
 
@@ -16,7 +17,9 @@ const newState = new state()
 
 const transforms = (items) => items.map((item) =>{
     const teacher = item.teacher === null? 'TBA': `${item.teacher.user.firstName} ${item.teacher.user.lastName}`
-    return insert(item.id,item.room.roomName, item.roomShiftName, item.grade, item.section,teacher, item.timeStart,item.timeEnd,item.id)
+    const curriculum = item.curriculum === null? 'TBA': item.curriculum.name
+
+    return insert(item.id,item.room.roomName, item.roomShiftName, item.grade, item.section,curriculum,teacher, format24Hour(item.timeStart),format24Hour(item.timeEnd),item.id)
 })
 
 const initState = {

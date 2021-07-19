@@ -76,6 +76,10 @@ export const
                                     firstName,
                                     lastName
                                 }
+                        },
+                        curriculum{
+                            code,
+                            name
                         }           
                     }   
             }

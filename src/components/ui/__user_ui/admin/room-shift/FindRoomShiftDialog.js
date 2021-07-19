@@ -26,6 +26,7 @@ const FindRoomShiftDialog = ({
         graphQlRequestAsync(getRoomShiftBasic(id)).then(roomShift => {
             if (roomShift.data.data.roomShift !== null) {
                 setId('')
+                setData(roomShift.data.data.roomShift)
                 setRoomShift(roomShift.data.data.roomShift)
             }
         })
@@ -77,7 +78,11 @@ const FindRoomShiftDialog = ({
             </DialogActions>
         </form>
     </Dialog> : update === true ?
-        <UpdateRoomShift/> :
+        <UpdateRoomShift
+            closeDialog={closeUpdate}
+            dialog={update}
+            translation={translation}
+        /> :
         <RoomShiftAddStudentTransferDialog translation={translation}
                                            closeDialog={closeAddStudent}
                                            open={addStudent}

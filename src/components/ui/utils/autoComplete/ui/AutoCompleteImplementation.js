@@ -5,7 +5,7 @@
  **/
 import AutoComplete from "../AutoComplete";
 import {changeText, changeTextWithRole} from "../autoCompleteAction";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const AutoCompleteImplementation = ({
                                         autoFocus,
@@ -16,13 +16,26 @@ const AutoCompleteImplementation = ({
                                         label,
                                         optionLabel,
                                         optionSelected,
-                                        email
+                                        email,
+                                        focusHandler
                                     }) => {
 
     const [open, setOpen] = useState(false)
-    const [text, setText] = useState('')
     const [loading, setLoading] = useState(false)
     const [options, setOption] = useState([])
+    const [text, setText] = useState('')
+
+
+    const onChangeText = (value) => {
+        if (email !== undefined) {
+            changeTextWithRole(value, setText, setLoading, setOption, url, email).then(ignored => {
+            })
+        } else {
+            changeText(value, setText, setLoading, setOption, url).then(ignored => {
+            })
+        }
+    }
+
 
     return <AutoComplete
         autoFocus={autoFocus}
@@ -33,12 +46,12 @@ const AutoCompleteImplementation = ({
         loading={loading}
         InputText={text}
         changeAutoComplete={output}
-        changeText={(value) => email !== undefined ? changeTextWithRole(value, setText, setLoading, setOption, url, email) :
-            changeText(value, setText, setLoading, setOption, url)}
+        changeText={(value) => onChangeText(value)}
         noOptionText={noOptionText}
         label={label}
         optionLabel={optionLabel}
         optionSelected={optionSelected}
+        focusHandler={focusHandler}
     />
 }
 

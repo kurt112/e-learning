@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {
     Button,
     Dialog, DialogActions,
@@ -27,39 +27,96 @@ import {connect} from "react-redux";
  **/
 
 const UpdateRoomShiftDialog = ({
-                                     closeDialog,
-                                     dialog,
-                                     dialogState,
-                                     changeRoomName,
-                                     changeSection,
-                                     changeGrade,
-                                     changeTimeStart,
-                                     changeTimeEnd,
-                                     changeRoomShift,
-                                     registerDialogMessageClose,
-                                     registerDialog,
-                                     changeAdviser,
-                                     translation,
-                                     changeCurriculum
-                                 }) => {
+                                   closeDialog,
+                                   dialog,
+                                   dialogState,
+                                   changeRoomName,
+                                   changeSection,
+                                   changeGrade,
+                                   changeTimeStart,
+                                   changeTimeEnd,
+                                   changeRoomShift,
+                                   registerDialogMessageClose,
+                                   registerDialog,
+                                   changeAdviser,
+                                   translation,
+                                   changeCurriculum
+                               }) => {
+
+
+    const [roomStartValue] = useState(dialogState.room)
+    const [adviserValue] = useState(dialogState.teacher)
+    const [curriculumValue] = useState(dialogState.curriculum)
+
+    const [focusRoom, setFocusRoom] = useState(false)
+    const [focusAdviser, setFocusAdviser] = useState(adviserValue!==null)
+    const [focusCurriculum, setFocusCurriculum] = useState(false)
+
 
 
     useEffect(() => {
-        changeRoomShift(translation.language["label.global.first"])
+        if(dialogState.roomShift)changeRoomShift(dialogState.roomShift)
+        else changeRoomShift(translation.language["label.global.first"])
     }, [])
 
     const OutputRoom = (event, value) => {
         value = value === null ? '' : value[1]
-        changeRoomName(value)
+        if (value === '') {
+            changeRoomName(roomStartValue.id)
+            setFocusRoom(false)
+        } else changeRoomName(value)
     }
 
     const OutputTeacher = (event, value) => {
-        changeAdviser(value[2] === null ? '' : value[2])
+
+        value = value === null ? '' : value[2]
+        if (value === '') {
+            changeAdviser(adviserValue.id)
+            setFocusAdviser(false)
+        } else  changeAdviser(value)
+
     }
 
     const OutputStrand = (event, value) => {
         value = value === null ? '' : value[1]
-        changeCurriculum(value)
+        if (value === '') {
+            changeCurriculum(curriculumValue.code)
+            setFocusCurriculum(false)
+        } else changeCurriculum(value)
+    }
+
+    const onFocusHandlerRoom = () => {
+        setFocusRoom(true)
+    }
+
+    const onBlurRoom = () => {
+        if (dialogState.room.id === roomStartValue.id) setFocusRoom(false)
+        if (dialogState.room === roomStartValue.id) setFocusRoom(false)
+    }
+
+    const onBlurAdviser = () => {
+        if (adviserValue !== null && dialogState.teacher.id === adviserValue.id) setFocusAdviser(false)
+        if (adviserValue !== null && dialogState.teacher === adviserValue.id) setFocusAdviser(false)
+    }
+
+    const onFocusHandlerAdviser = () => {
+        setFocusAdviser(true)
+    }
+
+    const onBlurStrand = () => {
+        if (dialogState.curriculum.code === curriculumValue.code) setFocusCurriculum(false)
+        if (dialogState.curriculum === curriculumValue.code) setFocusCurriculum(false)
+    }
+
+    const onFocusHandlerStrand = () => {
+        setFocusCurriculum(true)
+    }
+
+    const updateClick = async () => {
+        registerDialog()
+        await new Promise(r => setTimeout(r, 1000));
+        registerDialogMessageClose()
+        closeDialog()
     }
 
     return <Dialog
@@ -70,7 +127,7 @@ const UpdateRoomShiftDialog = ({
         fullWidth
     >
         <form noValidate>
-            <DialogTitle id="add-roomShift">{translation.language["label.room.shift.dialog.create.title"]}</DialogTitle>
+            <DialogTitle id="add-roomShift">{translation.language["label.room.shift.dialog.update.title"]}</DialogTitle>
 
             <Divider/>
             <DialogContent>
@@ -80,11 +137,23 @@ const UpdateRoomShiftDialog = ({
 
                 <Grid container spacing={1}>
                     <Grid item md={6} xs={12}>
-                        <RoomAutoComplete
-                            output={OutputRoom}
-                            translation={translation}
-                            autoFocus={true}
-                        />
+                        {
+                            focusRoom === false ? <TextField
+                                    onFocus={onFocusHandlerRoom}
+                                    margin="dense"
+                                    value={roomStartValue.roomName}
+                                    label={translation.language["label.global.room"]}
+                                    type="text"
+                                    fullWidth
+                                    variant="outlined"
+                                /> :
+                                <RoomAutoComplete
+                                    output={OutputRoom}
+                                    translation={translation}
+                                    autoFocus={focusRoom}
+                                    focusHandler={onBlurRoom}
+                                />
+                        }
                     </Grid>
                     <Grid item md={6} xs={12}>
                         <FormControl variant="outlined" margin='dense' fullWidth>
@@ -97,6 +166,7 @@ const UpdateRoomShiftDialog = ({
                                     name: 'age',
                                     id: 'RoomShift',
                                 }}
+                                value={dialogState.roomShift}
                                 onChange={(event => changeRoomShift(event.target.value))}
                             >
                                 <option
@@ -133,7 +203,7 @@ const UpdateRoomShiftDialog = ({
                     <Grid item md={6} xs={12}>
                         <TextField
                             margin="dense"
-                            InputLabelProps={{ shrink: true }}
+                            InputLabelProps={{shrink: true}}
                             label={translation.language['label.global.time.start']}
                             value={dialogState.timeStart}
                             onChange={(event) => changeTimeStart(event.target.value)}
@@ -145,7 +215,7 @@ const UpdateRoomShiftDialog = ({
                     <Grid item md={6} xs={12}>
                         <TextField
                             margin="dense"
-                            InputLabelProps={{ shrink: true }}
+                            InputLabelProps={{shrink: true}}
                             label={translation.language['label.global.time.end']}
                             value={dialogState.timeEnd}
                             onChange={(event) => changeTimeEnd(event.target.value)}
@@ -155,20 +225,54 @@ const UpdateRoomShiftDialog = ({
                         />
                     </Grid>
                     <Grid item md={6} xs={12}>
-                        <TeacherAutoComplete translation={translation} output={OutputTeacher}/>
+                        {
+                            focusAdviser === false ?
+                                <TextField
+                                    onFocus={onFocusHandlerAdviser}
+                                    margin="dense"
+                                    value={adviserValue === null?'': `${adviserValue.user.firstName} ${adviserValue.user.lastName}`}
+                                    label={translation.language["label.global.adviser"]}
+                                    type="text"
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                                :
+                                <TeacherAutoComplete
+                                    translation={translation}
+                                    output={OutputTeacher}
+                                    autoFocus={focusAdviser}
+                                    focusHandler={onBlurAdviser}
+                                />
+
+
+                        }
                     </Grid>
                     <Grid item md={6} xs={12}>
-                        <CurriculumAutoComplete
-                            output={OutputStrand}
-                            translation={translation}
-                        />
+                        {
+                            focusCurriculum === false ? <TextField
+                                    onFocus={onFocusHandlerStrand}
+                                    margin="dense"
+                                    value={`${curriculumValue.name} ${curriculumValue.code}`}
+                                    label={translation.language["label.sidebar.curriculum"]}
+                                    type="text"
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                                : <CurriculumAutoComplete
+                                    output={OutputStrand}
+                                    translation={translation}
+                                    autoFocus={focusCurriculum}
+                                    focusHandler={onBlurStrand}
+                                />
+
+                        }
                     </Grid>
                 </Grid>
             </DialogContent>
 
             <DialogActions>
-                <Button variant={'contained'} disableElevation onClick={registerDialog} color='primary'>
-                    {translation.language["label.button.save"]}
+                <Button variant={'contained'} disableElevation onClick={updateClick} color='primary'>
+                    {translation.language["label.button.update"]}
                 </Button>
                 <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
                     {translation.language["label.button.back"]}

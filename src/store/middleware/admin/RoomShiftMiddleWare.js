@@ -7,44 +7,51 @@ import {select} from "redux-saga/effects";
 import * as Selector from "../selector";
 import {Delete, Register, TableDataInit, TableNextData} from "./__MiddleWareGlobal";
 import {AdminRoomShiftRegister, DeleteRoomShift as deleteRoomShift} from "../utils/ApiEndpoint/ClassroomEndPoint";
-import {    RoomShift, RoomShift_Delete} from "../../utils/Specify";
+import {RoomShift, RoomShift_Delete} from "../../utils/Specify";
 import {
     AdminRoomShiftBodyDataQuery,
     AdminRoomShiftBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/AdminQuery/AdminRoomShiftQuery";
 import uuid from "short-uuid";
 
-export function * DeleteRoomShift(){
+export function* DeleteRoomShift() {
     const classState = yield select(Selector.DeleteRoomShiftDialog)
     const params = new URLSearchParams();
     params.append('id', classState.id)
 
-    yield Delete(params,deleteRoomShift,RoomShift_Delete,RoomShiftTableDataInit)
+    yield Delete(params, deleteRoomShift, RoomShift_Delete, RoomShiftTableDataInit)
 }
 
 export function* RoomShiftRegister() {
 
     const roomShift = yield select(Selector.AdminRoomShiftDialog)
     const params = new URLSearchParams();
-    params.append('id',yield uuid.generate())
+
+    const id = roomShift.id === undefined? uuid.generate(): roomShift.id
+
+    roomShift.room = roomShift.room.roomName === undefined ? roomShift.room : roomShift.room.id
+    roomShift.teacher = roomShift.teacher.user === undefined? roomShift.teacher: roomShift.teacher.id
+    roomShift.curriculum = roomShift.curriculum.name === undefined? roomShift.curriculum: roomShift.curriculum.code
+
+    params.append('id',id)
     params.append('room-id', roomShift.room)
     params.append('room-shiftID',roomShift.roomShift)
     params.append('shiftID-grade',roomShift.grade)
     params.append('shiftID-section',roomShift.section)
     params.append('shiftID-timeStart',roomShift.timeStart)
     params.append('shiftID-timeEnd',roomShift.timeEnd)
-    params.append('teacher-id', roomShift.teacherID)
-    params.append('curriculum-code', roomShift.curriculumCode)
+    params.append('teacher-id', roomShift.teacher)
+    params.append('curriculum-code', roomShift.curriculum)
     yield Register(params, AdminRoomShiftRegister, RoomShift,RoomShiftTableDataInit)
 }
 
 
 export function* RoomShiftTableDataNext(action) {
     const roomShift = yield select(Selector.AdminRoomShift)
-    yield TableNextData(action, roomShift, AdminRoomShiftBodyDataQuery(roomShift.search,roomShift.page),AdminRoomShiftBodyDataSettingsQuery(),RoomShift)
+    yield TableNextData(action, roomShift, AdminRoomShiftBodyDataQuery(roomShift.search, roomShift.page), AdminRoomShiftBodyDataSettingsQuery(), RoomShift)
 }
 
 export function* RoomShiftTableDataInit() {
     const roomShift = yield select(Selector.AdminRoomShift)
-    yield TableDataInit(AdminRoomShiftBodyDataQuery(roomShift.search,roomShift.page),AdminRoomShiftBodyDataSettingsQuery(), RoomShift)
+    yield TableDataInit(AdminRoomShiftBodyDataQuery(roomShift.search, roomShift.page), AdminRoomShiftBodyDataSettingsQuery(), RoomShift)
 }

@@ -22,7 +22,7 @@ import * as action from '../../../../../store/action/__ActionGlobal/DialogAction
 import * as roomShiftAction from '../../../../../store/action/admin/RoomShift/RoomShiftDialogAction'
 import {RoomShift} from "../../../../../store/utils/Specify"
 import Response from "../../../utils/Response"
-import {useEffect} from "react"
+import {useEffect, useState} from "react"
 import RoomAutoComplete from "../../../utils/autoComplete/ui/RoomAutoComplete";
 import TeacherAutoComplete from "../../../utils/autoComplete/ui/TeacherAutoComplete";
 import CurriculumAutoComplete from "../../../utils/autoComplete/ui/CurriculumAutoComplete";
@@ -43,7 +43,7 @@ const RoomShiftRegisterDialog = ({
                                      translation,
                                      changeCurriculum
                                  }) => {
-
+    const [roomText, setRoomText] = useState('fa')
 
     useEffect(() => {
         changeRoomShift(translation.language["label.global.first"])
@@ -82,6 +82,8 @@ const RoomShiftRegisterDialog = ({
                 <Grid container spacing={1}>
                     <Grid item md={6} xs={12}>
                         <RoomAutoComplete
+                            setText={setRoomText}
+                            text={roomText}
                             output={OutputRoom}
                             translation={translation}
                             autoFocus={true}

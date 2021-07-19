@@ -9,7 +9,7 @@ import {
 } from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 import AutoCompleteImplementation from "./AutoCompleteImplementation";
 
-const CurriculumAutoComplete = ({translation, output, autoFocus}) => {
+const CurriculumAutoComplete = ({translation, output, autoFocus,focusHandler}) => {
     return <AutoCompleteImplementation
         noOptionText={translation.language["label.curriculum.dialog.find.search"]}
         optionLabel={twoOptionLabel}
@@ -19,6 +19,7 @@ const CurriculumAutoComplete = ({translation, output, autoFocus}) => {
         url={autoCompleteGetCurriculum}
         filterOption={TwoFilterOption}
         autoFocus={autoFocus}
+        focusHandler={focusHandler}
     />
 }
 

@@ -7,7 +7,7 @@ import {TwoFilterOption, twoOptionLabel, twoOptionSelected} from "../autoComplet
 import {autoCompleteTeacher} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 import AutoCompleteImplementation from "./AutoCompleteImplementation";
 
-const TeacherAutoComplete = ({output, translation, autoFocus}) => {
+const TeacherAutoComplete = ({output, translation, autoFocus,focusHandler}) => {
     return <AutoCompleteImplementation
         noOptionText={translation.language["label.room.class.dialog.add.input.teacher.search"]}
         optionLabel={twoOptionLabel}
@@ -17,6 +17,7 @@ const TeacherAutoComplete = ({output, translation, autoFocus}) => {
         url={autoCompleteTeacher}
         filterOption={TwoFilterOption}
         autoFocus={autoFocus}
+        focusHandler={focusHandler}
     />
 }
 

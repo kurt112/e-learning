@@ -8,6 +8,7 @@ import * as actions from "../../../ActionType/__ActionTypeGlobal/TableActionType
 import {Room, Room_Delete, Room_Update} from "../../../utils/Specify"
 import {AdminInsertRoom as insert} from "../../../../components/ui/utils/tableColumn"
 import {updateObject} from "../../../utils/UpdateObject"
+import {format24Hour} from "../../../../components/ui/utils/dateFormat/TimeConverter";
 
 const newState = new state()
 
@@ -17,8 +18,9 @@ const currentState = {
     updateDialog: false
 }
 
-const transforms = (items) => items.map((item) =>
-    insert(item.id, item.roomName, item.timeStart, item.timeEnd, item.id))
+const transforms = (items) => items.map((item) =>{
+    return insert(item.id, item.roomName, format24Hour(item.timeStart), format24Hour(item.timeEnd), item.id)
+})
 
 
 const reducer = (state = currentState, action) => {

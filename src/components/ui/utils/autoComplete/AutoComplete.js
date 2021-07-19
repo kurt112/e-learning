@@ -21,8 +21,10 @@ export default function AutoComplete({
                                          label,
                                          optionLabel,
                                          optionSelected,
-                                         autoFocus
+                                         autoFocus,
+                                         focusHandler
                                      }) {
+
 
     return <FormControl variant="outlined" margin='dense' fullWidth>
         <Autocomplete
@@ -31,9 +33,11 @@ export default function AutoComplete({
             open={open}
             filterOptions={filterOptions}
             noOptionsText={noOptionText}
+            placeholder={InputText}
             onOpen={() => {
                 setOpen(true);
             }}
+            onBlur={focusHandler !== undefined? focusHandler: null}
             onClose={() => {
                 setOpen(false);
             }}

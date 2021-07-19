@@ -9,7 +9,7 @@ import {Fragment, lazy, useEffect, useState} from "react"
 import {AdminRoomShiftTable as columns} from '../../../utils/tableColumn'
 import style, {TableOptions as options} from '../../../_style/TableStyle'
 import {connect} from 'react-redux'
-import {RoomShift, RoomShift_Delete, RoomShift_Find} from "../../../../../store/utils/Specify";
+import {Room, RoomShift, RoomShift_Delete, RoomShift_Find} from "../../../../../store/utils/Specify";
 import Typography from "@material-ui/core/Typography";
 
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
@@ -20,6 +20,7 @@ import IconButton from "@material-ui/core/IconButton";
 import UpdateIcon from "@material-ui/icons/Update";
 import DeleteIcon from "@material-ui/icons/Delete";
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import {reInitState} from "../../../../../store/action/__ActionGlobal/DialogAction";
 const RegisterRoomShiftDialog = lazy(() => import(`./RoomShiftRegisterDialog`));
 const DeleteRooShiftDialog = lazy(() => import(`./DeleteRoomShiftDialog`))
 const FindRoomShiftDialog = lazy(() => import(`./FindRoomShiftDialog`))
@@ -35,7 +36,9 @@ const RoomShiftList = ({
                            closeDeleteDialog,
                            translation,
                            openFindDialog,
-                           closeFindDialog
+                           closeFindDialog,
+                           setData,
+                           reInitState
                        }) => {
     const classes = style()
 
@@ -75,7 +78,10 @@ const RoomShiftList = ({
                                  dialog={roomShift.findDialog}
                                  update={update}
                                  addStudent={addStudent}
-                                 closeDialog={closeDialogClick}/>
+                                 closeDialog={closeDialogClick}
+                                 setData={setData}
+                                 reInitState={reInitState}
+            />
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
@@ -152,8 +158,10 @@ const mapDispatchToProps = (dispatch) => {
         openDeleteDialog: () => dispatch(actions.openDialog(RoomShift_Delete)),
         closeDeleteDialog: () => dispatch(actions.closeDialog(RoomShift_Delete)),
         openFindDialog: () => dispatch(actions.openDialog(RoomShift_Find)),
-        closeFindDialog: () => dispatch(actions.closeDialog(RoomShift_Find))
+        closeFindDialog: () => dispatch(actions.closeDialog(RoomShift_Find)),
 
+        setData: (data) => dispatch(actions.setData(data,RoomShift)),
+        reInitState: () => dispatch(reInitState(RoomShift))
 
     }
 }

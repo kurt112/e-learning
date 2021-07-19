@@ -20,7 +20,7 @@ import uuid from "short-uuid";
 import {reInitState} from "../../action/__ActionGlobal/DialogAction";
 export function* CurriculumRegister() {
     const data = yield select(Selector.AdminCreateCurriculum)
-    if(data.code === undefined) data.code = yield uuid.generate()
+    if(data.code === undefined || data.code === '') data.code = yield uuid.generate()
     yield RegisterBody(data, CreateCurriculum, Curriculum_Create,CurriculumTableDataInit)
     yield put(reInitState(Curriculum_Create))
 
