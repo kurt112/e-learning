@@ -5,6 +5,7 @@
  **/
 import {Avatar} from "@material-ui/core";
 import ProfileStyle from '../../ProfileStyle'
+import {format24Hour} from "../../../../utils/dateFormat/TimeConverter";
 
 const ClassesData = ({border, classes,translation}) => {
     const style = ProfileStyle()
@@ -13,7 +14,7 @@ const ClassesData = ({border, classes,translation}) => {
         <div style={border} className={style.classDataContainer}>
             <div className={style.classDataContainerLeft}>
                 <Avatar>{classes.subject.subjectName.substring(0,1).toUpperCase()}</Avatar>
-                <p>{`${classes.subject.subjectName} (${classes.startTime} -  ${classes.endTime}) ${classes.day}`}</p>
+                <p>{`${classes.subject.subjectName} (${classes.startTime !== null?format24Hour(classes.startTime): 'TBA'} - ${classes.endTime !== null? format24Hour(classes.endTime): 'TBA'}) ${classes.day !==null?classes.day: 'TBA'}`}</p>
             </div>
 
             <div className={style.classDataContainerRight}>

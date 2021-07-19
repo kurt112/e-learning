@@ -5,7 +5,7 @@
  **/
 import AutoComplete from "../AutoComplete";
 import {changeText, changeTextWithRole} from "../autoCompleteAction";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 const AutoCompleteImplementation = ({
                                         autoFocus,

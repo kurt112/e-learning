@@ -8,7 +8,7 @@ import * as Selector from "../selector"
 import {TableDataInit, TableNextData} from "../admin/__MiddleWareGlobal"
 import {
     Teacher_Lecture,
-    Teacher_Lecture_Create, Teacher_Lecture_Delete, Teacher_Resource_Delete
+    Teacher_Lecture_Create, Teacher_Lecture_Delete
 } from "../../utils/Specify"
 import {
     getTeacherLectureByEmail,
@@ -68,7 +68,7 @@ export function* TeacherLectureCreate() {
 
 
     try {
-        yield baseUrl.post(createLecture, data).then(e => {
+        yield baseUrl.post(createLecture, data).then(ignored=> {
 
         }).catch(error => {
             console.log(error)

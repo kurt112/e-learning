@@ -5,6 +5,7 @@
  **/
 import {Box, Container, Grid, Paper, Typography} from "@material-ui/core";
 import ProfileStyle from '../../ProfileStyle'
+import {format24Hour} from "../../../../utils/dateFormat/TimeConverter";
 export default function Data({roomShiftClass,translation}) {
 
     const {roomShift} = roomShiftClass
@@ -62,9 +63,9 @@ export default function Data({roomShiftClass,translation}) {
 
                     <Box className={style.profileDataContainer}>
                         <Box className={style.profileDataContainerTitle}>
-                            <p>{translation.language["label.global.time.end"]}: </p>
+                            <p>{format24Hour(translation.language["label.global.time.end"])}: </p>
                         </Box>
-                        <p>{roomShiftClass.endTime}</p>
+                        <p>{format24Hour(roomShiftClass.endTime)}</p>
                     </Box>
                 </Container>
             </Grid>

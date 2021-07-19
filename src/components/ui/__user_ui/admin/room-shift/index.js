@@ -9,7 +9,7 @@ import {Fragment, lazy, useEffect, useState} from "react"
 import {AdminRoomShiftTable as columns} from '../../../utils/tableColumn'
 import style, {TableOptions as options} from '../../../_style/TableStyle'
 import {connect} from 'react-redux'
-import {Room, RoomShift, RoomShift_Delete, RoomShift_Find} from "../../../../../store/utils/Specify";
+import {RoomShift, RoomShift_Delete, RoomShift_Find} from "../../../../../store/utils/Specify";
 import Typography from "@material-ui/core/Typography";
 
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
