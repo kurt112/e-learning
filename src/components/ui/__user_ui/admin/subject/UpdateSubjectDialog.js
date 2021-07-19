@@ -22,7 +22,7 @@ import * as actions from '../../../../../store/action/admin/Subject'
 import {Subject} from "../../../../../store/utils/Specify";
 import * as action from "../../../../../store/action/__ActionGlobal/DialogAction";
 import Response from "../../../utils/Response";
-
+import {useEffect} from "react";
 
 const UpdateSubject = (
     {
@@ -37,6 +37,23 @@ const UpdateSubject = (
         translation
     }) => {
 
+    const alert = async () => {
+        await new Promise(r => setTimeout(r, 1000));
+        registerDialogMessageClose()
+        closeDialog()
+    }
+
+    useEffect(() => {
+
+        if(subject.done === true && subject.error === false) alert().then(ignored=>{})
+
+    }, [subject.done])
+
+    const updateClick = async () => {
+        registerDialog()
+
+    }
+
     return <Dialog
         open={dialog}
         onClose={closeDialog}
@@ -45,7 +62,7 @@ const UpdateSubject = (
         fullWidth
     >
         <form noValidate>
-            <DialogTitle id="add-subject">{translation.language["label.subject.dialog.add.title"]}</DialogTitle>
+            <DialogTitle id="add-subject">{translation.language["tooltip.subject.update"]}</DialogTitle>
             <Divider/>
             <DialogContent>
                 <Response dialogState={subject} registerDialogMessageClose={registerDialogMessageClose}
@@ -102,7 +119,7 @@ const UpdateSubject = (
             </DialogContent>
 
             <DialogActions>
-                <Button variant={'contained'} disableElevation color='primary' onClick={registerDialog}>
+                <Button variant={'contained'} disableElevation color='primary' onClick={updateClick}>
                     {translation.language["label.button.update"]}
                 </Button>
                 <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>

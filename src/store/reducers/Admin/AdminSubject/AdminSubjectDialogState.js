@@ -23,11 +23,12 @@ const init_state = {
 
 const setState = (state, action) => {
 
+    state.id = action.id
     state = updateObject(state, {subjectCode: action.subjectCode})
     state = updateObject(state, {subjectName: action.subjectName})
     state = updateObject(state, {subjectMajor: action.subjectMajor})
     state = updateObject(state, {status: action.status})
-    state = updateObject(state, {subject_code: action.subject_code})
+    state = updateObject(state, {done: false})
 
     return state
 }
@@ -39,6 +40,7 @@ const reInit = (state) => {
     state = updateObject(state, {subjectName: ''})
     state = updateObject(state, {subjectMajor: 'Minor'})
     state = updateObject(state, {status: 'Active'})
+    delete state.id
 
     return state
 }
@@ -51,7 +53,7 @@ const success= (state) => {
 const reducer = (state=init_state, action)=>{
     switch(action.type){
         case actions.ADMIN_DIALOG_REGISTER(Subject): return newState.initRegister(state)
-        case actions.ADMIN_DIALOG_REGISTER_FAIL(Subject): return newState.failRegister(state, action)
+        case actions.ADMIN_DIALOG_REGISTER_FAIL(Subject): return newState.failRegister(state, action, action.customError)
         case actions.ADMIN_DIALOG_REGISTER_SUCCESS(Subject): return success(state)
         case actions.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(Subject): return newState.handleClose(state,action)
 

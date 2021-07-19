@@ -33,14 +33,17 @@ const FindSubjectDialog = ({
     }
 
     const closeUpdate = () => {
-        // reInitState()
-        reInitState()
         setUpdate(false)
+    }
+
+    const closeFindDialog = () => {
+        reInitState()
+        closeDialog()
     }
 
     return update === false ? <Dialog
         open={dialog}
-        onClose={closeDialog}
+        onClose={closeFindDialog}
         aria-labelledby="find-subject"
         maxWidth="md"
         fullWidth
@@ -68,7 +71,7 @@ const FindSubjectDialog = ({
                         color='primary'>
                     {translation.language["label.global.find"]}
                 </Button>
-                <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
+                <Button variant={'contained'} disableElevation onClick={closeFindDialog} color='secondary'>
                     {translation.language["label.button.back"]}
                 </Button>
             </DialogActions>

@@ -9,6 +9,7 @@ export const
         return {
             query: `
                     query{getSubject(code:"${code}"){
+                        id,
                         subjectCode,
                         subjectName,
                         subjectMajor,

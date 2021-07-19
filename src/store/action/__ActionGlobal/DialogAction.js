@@ -23,10 +23,11 @@ export const
         }
     },
 
-    registerDialogFail = (message, to) => {
+    registerDialogFail = (message, to,customError) => {
         return {
             type: actions.ADMIN_DIALOG_REGISTER_FAIL(to),
-            message
+            message,
+            customError
         }
     },
     registerDialogMessageClose = (to) => {
