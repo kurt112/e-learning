@@ -7,7 +7,7 @@ import {TwoFilterOption, twoOptionLabel, twoOptionSelected} from "../autoComplet
 import {autoCompleteSubject} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 import AutoCompleteImplementation from "./AutoCompleteImplementation";
 
-const SubjectAutoComplete = ({translation, output, autoFocus}) => {
+const SubjectAutoComplete = ({translation, output, autoFocus,focusHandler}) => {
     return <AutoCompleteImplementation
         filterOption={TwoFilterOption}
         noOptionText={translation.language["label.room.class.dialog.add.input.subject.search"]}
@@ -17,6 +17,7 @@ const SubjectAutoComplete = ({translation, output, autoFocus}) => {
         label={translation.language["label.global.subject"]}
         autoFocus={autoFocus}
         url={autoCompleteSubject}
+        focusHandler={focusHandler}
     />
 }
 

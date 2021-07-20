@@ -13,7 +13,7 @@ const TeacherAutoComplete = ({output, translation, autoFocus,focusHandler}) => {
         optionLabel={twoOptionLabel}
         optionSelected={twoOptionSelected}
         output={output}
-        label={translation.language["label.global.adviser"]}
+        label={translation.language["label.global.teacher"]}
         url={autoCompleteTeacher}
         filterOption={TwoFilterOption}
         autoFocus={autoFocus}

@@ -108,5 +108,36 @@ export const
                            
                     }
             }
-        `}
+        `
+        }
+    },
+    getRoomShiftClassBasic = (id) => {
+        return {
+            query: `
+                    query{roomShiftClass(id:"${id}"){
+                           id,
+                           day,
+                           startTime,
+                           endTime,  
+                           roomShift{
+                                id,
+                                grade,
+                                section,
+                           },
+                           teacher{
+                                id
+                                user{
+                                    firstName,
+                                    lastName
+                                }
+                           },
+                           subject{
+                                id,
+                                subjectCode,
+                                subjectName
+                           }                   
+                    }
+            }
+        `
+        }
     }

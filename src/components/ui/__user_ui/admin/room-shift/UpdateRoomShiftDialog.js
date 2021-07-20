@@ -43,19 +43,20 @@ const UpdateRoomShiftDialog = ({
                                    changeCurriculum
                                }) => {
 
-
+    // get the current value
     const [roomStartValue] = useState(dialogState.room)
     const [adviserValue] = useState(dialogState.teacher)
     const [curriculumValue] = useState(dialogState.curriculum)
 
+    // setting if the autocomplete is visible
+
     const [focusRoom, setFocusRoom] = useState(false)
-    const [focusAdviser, setFocusAdviser] = useState(adviserValue!==null)
+    const [focusAdviser, setFocusAdviser] = useState(false)
     const [focusCurriculum, setFocusCurriculum] = useState(false)
 
 
-
     useEffect(() => {
-        if(dialogState.roomShift)changeRoomShift(dialogState.roomShift)
+        if (dialogState.roomShift) changeRoomShift(dialogState.roomShift)
         else changeRoomShift(translation.language["label.global.first"])
     }, [])
 
@@ -73,7 +74,7 @@ const UpdateRoomShiftDialog = ({
         if (value === '') {
             changeAdviser(adviserValue.id)
             setFocusAdviser(false)
-        } else  changeAdviser(value)
+        } else changeAdviser(value)
 
     }
 
@@ -226,11 +227,11 @@ const UpdateRoomShiftDialog = ({
                     </Grid>
                     <Grid item md={6} xs={12}>
                         {
-                            focusAdviser === false ?
+                            focusAdviser === false && adviserValue !== null ?
                                 <TextField
                                     onFocus={onFocusHandlerAdviser}
                                     margin="dense"
-                                    value={adviserValue === null?'': `${adviserValue.user.firstName} ${adviserValue.user.lastName}`}
+                                    value={adviserValue === null ? '' : `${adviserValue.user.firstName} ${adviserValue.user.lastName}`}
                                     label={translation.language["label.global.adviser"]}
                                     type="text"
                                     fullWidth

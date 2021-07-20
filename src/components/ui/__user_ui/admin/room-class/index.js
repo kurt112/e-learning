@@ -11,19 +11,25 @@ import style, {TableOptions as options} from '../../../_style/TableStyle'
 
 import {connect} from 'react-redux'
 import * as actions from "../../../../../store/action/__ActionGlobal/TableAction";
-import {RoomShiftClass, RoomShiftClass_Delete} from "../../../../../store/utils/Specify";
+import {
+    RoomShiftClass,
+    RoomShiftClass_Delete,
+    RoomShiftClass_Find, Subject
+} from "../../../../../store/utils/Specify";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
+import {reInitState} from "../../../../../store/action/__ActionGlobal/DialogAction";
 
 
 const RegisterRoom = lazy(() => import(`./RegisterRoomClassDialog`));
 const DeleteRoomClass = lazy(() => import(`./DeleteRoomClassDialog`))
+const FindClassDialog = lazy(() => import(`./FindClassDialog`))
 
 const Index = ({
-                   room,
+                   state,
                    initData,
                    searchChange,
                    pageChange,
@@ -31,20 +37,30 @@ const Index = ({
                    closeDialog,
                    openDeleteDialog,
                    closeDeleteDialog,
-                   translation
+                   translation,
+                   openFindDialog,
+                   closeFindDialog,
+                   setData,
+                   reInitState
                }) => {
 
     const classes = style()
     useEffect(() => {
-        if (room.data.length === 0) initData()
+        if (state.data.length === 0) initData()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
         <Fragment>
 
-            <RegisterRoom translation={translation} dialog={room.dialog} closeDialog={closeDialog}/>
-            <DeleteRoomClass translation={translation} dialog={room.deleteDialog} closeDialog={closeDeleteDialog}/>
+            <RegisterRoom translation={translation} dialog={state.dialog} closeDialog={closeDialog}/>
+            <DeleteRoomClass translation={translation} dialog={state.deleteDialog} closeDialog={closeDeleteDialog}/>
+            <FindClassDialog reInitState={reInitState}
+                             setData={setData}
+                             translation={translation}
+                             dialog={state.findDialog}
+                             closeDialog={closeFindDialog}/>
+
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
@@ -59,7 +75,7 @@ const Index = ({
                             </IconButton>
                         </Tooltip>
                         <Tooltip title={translation.language["tooltip.class.update"]}>
-                            <IconButton aria-label="update-room" onClick={() => alert('gagawin mo pa to')}>
+                            <IconButton aria-label="update-room" onClick={openFindDialog}>
                                 <UpdateIcon fontSize={'large'} color={'primary'}/>
                             </IconButton>
                         </Tooltip>
@@ -71,20 +87,20 @@ const Index = ({
                         title={
                             <Typography variant="h6">
                                 {translation.language["label.room.class.table.title"]}
-                                {room.loading &&
+                                {state.loading &&
                                 <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}}/>}
                             </Typography>
                         }
-                        data={room.data}
+                        data={state.data}
                         columns={columns(translation)}
                         options={options(
                             pageChange,
                             searchChange,
-                            room.search,
-                            room.totalPages,
-                            room.totalItems,
-                            room.page,
-                            room.loading)}
+                            state.search,
+                            state.totalPages,
+                            state.totalItems,
+                            state.page,
+                            state.loading)}
                     />
                 </Grid>
             </Grid>
@@ -94,7 +110,7 @@ const Index = ({
 
 const mapStateToProps = (state) => {
     return {
-        room: state.AdminClass
+        state: state.AdminClass
     }
 }
 
@@ -109,7 +125,13 @@ const mapDispatchToProps = (dispatch) => {
         closeDialog: () => dispatch(actions.closeDialog(RoomShiftClass)),
 
         openDeleteDialog: () => dispatch(actions.openDialog(RoomShiftClass_Delete)),
-        closeDeleteDialog: () => dispatch(actions.closeDialog(RoomShiftClass_Delete))
+        closeDeleteDialog: () => dispatch(actions.closeDialog(RoomShiftClass_Delete)),
+
+        openFindDialog: () => dispatch(actions.openDialog(RoomShiftClass_Find)),
+        closeFindDialog: () => dispatch(actions.closeDialog(RoomShiftClass_Find)),
+
+        setData: (data) => dispatch(actions.setData(data, RoomShiftClass)),
+        reInitState: () => dispatch(reInitState(RoomShiftClass))
     }
 }
 

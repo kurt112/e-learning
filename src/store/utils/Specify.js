@@ -43,6 +43,7 @@ export const
     RoomShiftClass = "ROOM_SHIFT_CLASS",
     RoomShiftClass_Create = RoomShiftClass+Create,
     RoomShiftClass_Delete = RoomShiftClass+Delete,
+    RoomShiftClass_Find = RoomShiftClass+Find,
 
 
     // For Room

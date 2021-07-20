@@ -16,13 +16,21 @@ import uuid from 'short-uuid'
 export function* RoomClassRegister() {
     const roomClass = yield select(Selector.AdminRoomClassDialog)
     const params = new URLSearchParams();
-    params.append('id',yield uuid.generate())
-    params.append('roomShift-id', roomClass.shiftID)
-    params.append('subject-id',roomClass.subjectID)
+
+    console.log(roomClass)
+    const id = roomClass.id === undefined? yield uuid.generate(): roomClass.id
+
+    roomClass.teacher = roomClass.teacher.user === undefined? roomClass.teacher: roomClass.teacher.id
+    roomClass.subject = roomClass.subject.subjectCode === undefined? roomClass.subject: roomClass.subject.id
+    roomClass.shift = roomClass.shift.grade === undefined? roomClass.shift: roomClass.shift.id
+
+    params.append('id',id)
+    params.append('roomShift-id', roomClass.shift)
+    params.append('subject-id',roomClass.subject)
     params.append('time-start',roomClass.timeStart)
     params.append('time-end',roomClass.timeEnd)
     params.append('day',roomClass.day)
-    params.append('teacher-id',roomClass.teacherID)
+    params.append('teacher-id',roomClass.teacher)
     yield Register(params, AdminRoomClassRegister, RoomShiftClass,RoomClassTableDataInit)
 }
 

@@ -49,7 +49,7 @@ const DeleteRoomDialog = ({
                 value={state.id}
                 margin="dense"
                 variant={'outlined'}
-                label={translation.language["label.room.class.dialog.delete.input"]}
+                label={translation.language["label.room.class.dialog.input"]}
                 type="text"
                 fullWidth
                 onChange={(event) => dialogId(event.target.value)}

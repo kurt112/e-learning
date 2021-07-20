@@ -154,7 +154,10 @@
   "label.room.shift.dialog.transfer.student.available": "Available Student",
   "label.room.class.table.title": "Class List",
   "label.room.class.dialog.delete.title": "Delete Room Class",
-  "label.room.class.dialog.delete.input": "Enter Room Class Id",
+
+  "label.room.class.dialog.update.title": "Update Room Class",
+  "label.room.class.dialog.input": "Enter Room Class Id",
+
   "label.room.class.dialog.add.title": "Register class",
   "label.room.class.dialog.add.input.room.shift.search": "Search by grade fallowed by section",
   "label.room.class.dialog.add.input.subject.search": "Search by subjectName name fallowed by Subject Major",
@@ -318,6 +321,11 @@
   "message.room.class.dialog.delete.success": "Room Class Delete Success",
   "message.room.class.dialog.add.fail" : "Class Register Failed",
   "message.room.class.dialog.add.success": "Class Register Success",
+
+  "message.room.class.dialog.update.fail" : "Class Update Failed",
+  "message.room.class.dialog.update.success": "Class Update Success",
+
+
   "message.student.dialog.delete.success": "Student Delete success",
   "message.student.dialog.delete.fail": "Student Delete Failed",
   "message.student.dialog.register.success": "Student Register Success",

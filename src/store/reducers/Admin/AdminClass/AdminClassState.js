@@ -6,7 +6,11 @@
 import {AdminInsertRoomClass as insert} from "../../../../components/ui/utils/tableColumn";
 import state from "../../__StateGlobal/AdminTableState";
 import * as actions from "../../../ActionType/__ActionTypeGlobal/TableActionType";
-import {RoomShiftClass, RoomShiftClass_Delete} from "../../../utils/Specify";
+import {
+    RoomShiftClass,
+    RoomShiftClass_Delete,
+    RoomShiftClass_Find
+} from "../../../utils/Specify";
 import {updateObject} from "../../../utils/UpdateObject";
 import {format24Hour} from "../../../../components/ui/utils/dateFormat/TimeConverter";
 const newState = new state()
@@ -24,7 +28,8 @@ const transforms = (items) => items.map((item) =>{
 
 const currentState = {
     ...newState.init_state,
-    deleteDialog: false
+    deleteDialog: false,
+    findDialog: false
 }
 
 const reducer = (state = currentState, action) =>{
@@ -42,6 +47,11 @@ const reducer = (state = currentState, action) =>{
 
         case actions.DIALOG_OPEN(RoomShiftClass_Delete): return updateObject(state, {deleteDialog: true})
         case actions.DIALOG_CLOSE(RoomShiftClass_Delete): return updateObject(state, {deleteDialog: false})
+
+        case actions.DIALOG_OPEN(RoomShiftClass_Find): return updateObject(state, {findDialog: true})
+        case actions.DIALOG_CLOSE(RoomShiftClass_Find): return updateObject(state, {findDialog: false})
+
+
         default: return state;
     }
 }
