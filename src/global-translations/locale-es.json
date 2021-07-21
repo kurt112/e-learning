@@ -128,7 +128,7 @@
   "label.curriculum.table.column.name": "Name"  ,
   "label.curriculum.dialog.transfer.subject.warning": "No Subject Currently",
   "label.curriculum.dialog.find.curriculum.title": "Find Subject",
-  "label.curriculum.dialog.find.search": "Search By Curriculum",
+  "label.curriculum.dialog.find.search": "Search By Curriculum Name",
   "label.room.table.title": "Room List",
   "label.room.dialog.add.room.title": "Register Room",
   "label.room.dialog.update.room.title": "Update Room",

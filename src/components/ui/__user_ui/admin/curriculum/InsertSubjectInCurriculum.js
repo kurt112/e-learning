@@ -23,6 +23,7 @@ import {useEffect, useState} from "react";
 import {graphQlRequestAsync, PostData} from "../../../../../store/middleware/utils/HttpRequest";
 import style from '../../../_style/TransferDialogStyle'
 import {AdminSubjectBodyDataQuery} from "../../../../../store/middleware/utils/GraphQlQuery/AdminQuery/AdminSubjectQuery";
+import {searchSubject} from "../../../../../store/middleware/utils/GraphQlQuery/ProfileQuery/SubjectProfile";
 
 // Checking if the current check list has a member of the entity
 function not(a, b) {
@@ -164,8 +165,8 @@ const InsertSubjectInCurriculumDialog = (
                     subjects.length === 0 ?
                         <p> {translation.language["label.curriculum.dialog.transfer.subject.warning"]}</p> :
                         subjects.filter(subject => (
-                            subject.subjectName +
-                            subject.subjectCode).toLowerCase().includes(rightText.toLowerCase().replace(/\s+/g, ''))).map((subject) => {
+                            subject.subjectName+
+                            subject.subjectCode).toLowerCase().includes(text.toLowerCase())).map((subject) => {
                             const labelId = `transfer-list-all-item-${subject.subjectCode}-label`;
                             return (
                                 <ListItem key={subject.subjectCode} role="listitem" button
@@ -179,7 +180,7 @@ const InsertSubjectInCurriculumDialog = (
                                         />
                                     </ListItemIcon>
                                     <ListItemText id={labelId}
-                                                  primary={`${subject.subjectName} - ${subject.subjectCode}`}/>
+                                                  primary={`${subject.subjectName} (${subject.subjectCode})`}/>
                                 </ListItem>
                             );
                         })}
@@ -192,19 +193,17 @@ const InsertSubjectInCurriculumDialog = (
     // Getting all the Subject
 
     useEffect(() => {
-
         async function fetchData() {
-            return await graphQlRequestAsync(AdminSubjectBodyDataQuery(leftText, 0))
+            return await graphQlRequestAsync(searchSubject(leftText, 0))
         }
         fetchData().then(r => {
-            const subjects = r.data.data.subjects
+            const subjects = r.data.data.searchSubject
 
             // eslint-disable-next-line array-callback-return
             subjects.map((e) => {
-                if (subjectHashMap[e.student_id]) {
+                if (subjectHashMap[e.subjectCode]) {
                     subjectHashMap[e.subjectCode] = e;
                 }
-
             })
 
             const newCheck = [];
@@ -212,6 +211,7 @@ const InsertSubjectInCurriculumDialog = (
             // eslint-disable-next-line array-callback-return
             Object.entries(subjectHashMap).map((e) => {
                 const key = e[0]
+                console.log(e[0])
                 newCheck.push(subjectHashMap[key])
             })
 

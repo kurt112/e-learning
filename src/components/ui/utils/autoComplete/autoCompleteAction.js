@@ -16,11 +16,11 @@ export const
 
     TwoFilterOption = createFilterOptions({
         matchFrom: 'any',
-        stringify: (option) => (option[0] + " " + option[1] + " " + option[2]),
+        stringify: (option) => `${option[0]} ${option[1]} ${option[2]}`,
     }),
 
 
-    twoOptionLabel = (option) => option[0] + " " + option[1],
+    twoOptionLabel = (option) =>`${option[0]} ${option[1]}`,
 
     twoOptionSelected = (option, value) => option[2] === value[2],
 
@@ -45,7 +45,6 @@ export const
                 email
             }
         })
-        console.log(response)
         setLoading(false)
         setter(value)
         const data = response.data.items

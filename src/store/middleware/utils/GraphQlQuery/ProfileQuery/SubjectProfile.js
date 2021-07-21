@@ -18,4 +18,15 @@ export const
         }
         `
         }
+    },
+    searchSubject = (search, page) => {
+        return {
+            query: `
+                    query{searchSubject(search:"${search}", page:${page}){
+                        id,
+                        subjectCode,
+                        subjectName
+                    }
+            }
+        `}
     }
