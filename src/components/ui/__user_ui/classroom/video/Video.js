@@ -7,7 +7,9 @@ import {Box} from "@material-ui/core";
 import {useEffect, useRef, useState} from "react";
 import style from './VideoStyle'
 import {connect} from 'react-redux'
-const Video =  ({video,mic,socket}) =>{
+import Peer from "simple-peer";
+
+const Video = ({video, mic, socket}) => {
     const classes = style()
 
     const [yourID, setYourID] = useState("");
@@ -17,150 +19,117 @@ const Video =  ({video,mic,socket}) =>{
     const [caller, setCaller] = useState("");
     const [callerSignal, setCallerSignal] = useState();
     const [callAccepted, setCallAccepted] = useState(false);
+    const [peers,setPeers] = useState([])
+    const peersRef = useRef([])
     const userVideo = useRef();
-    const partnerVideo = useRef();
 
 
     useEffect(() => {
+        console.log(socket.id)
 
         navigator.mediaDevices.getUserMedia({
             audio: mic,
             video: {video, height: '100%', width: '100%'}
-        })
-            .then(stream => {
-                setStream(stream)
-                if(userVideo.current){
-                    userVideo.current.srcObject = stream
+        }).then(stream => {
+            setStream(stream)
+            if (userVideo.current) {
+                userVideo.current.srcObject = stream
+                socket.emit("join room")
+                socket.on("all users", users => {
+                    const peers = []
+                    users.forEach(userId => {
+                        const peer  = createPeer(userId,socket.id,stream)
+                        peersRef.current.push({
+                            peerID: userId,
+                            peer
+                        })
+                        peers.push(peer)
+                    })
+                    setPeers(peers)
+                })
+            }
 
-                }
+            socket.on("user joined", payload => {
+                const peer = addPeer(payload.signal,payload.callerId, stream)
+                peersRef.current.push({
+                    peerID: payload.callerId,
+                    peer
+                })
+                setPeers(users => [...users, peer])
             })
 
-        // socket.on('yourID', (id) => {
-        //     setYourID(id)
-        // })
-        //
-        // socket.on('allUsers', (users) => {
-        //     setUsers(users)
-        // })
-        // socket.on("hey", (data) => {
-        //     setReceivingCall(true);
-        //     setCaller(data.from);
-        //     setCallerSignal(data.signal);
-        // })
+            socket.on("Receiving returnd signal", payload => {
+                const item  = peersRef.current.find(p => p.peerId === payload.id)
 
-    }, [mic,video])
+                item.peer.signal(payload.signal)
+            })
 
-    //  function callPeer(id) {
-    //
-    //     const peer = new Peer({
-    //         initiator: true,
-    //         trickle: false,
-    //         config: {
-    //
-    //             iceServers: [
-    //                 {
-    //                     urls: "stun:numb.viagenie.ca",
-    //                     username: "sultan1640@gmail.com",
-    //                     credential: "98376683"
-    //                 },
-    //                 {
-    //                     urls: "turn:numb.viagenie.ca",
-    //                     username: "sultan1640@gmail.com",
-    //                     credential: "98376683"
-    //                 }
-    //             ]
-    //         },
-    //         stream: stream,
-    //     });
-    //
-    //     peer.on("signal", data => {
-    //         socket.emit("callUser", { userToCall: id, signalData: data, from: yourID })
-    //     })
-    //
-    //     peer.on("stream", stream => {
-    //         if (partnerVideo.current) {
-    //             partnerVideo.current.srcObject = stream;
-    //         }
-    //     });
-    //
-    //     socket.on("callAccepted", signal => {
-    //         setCallAccepted(true);
-    //         peer.signal(signal);
-    //
-    //     })
-    //
-    // }
-
-    // function acceptCall() {
-    //     setCallAccepted(true);
-    //
-    //     setReceivingCall(false)
-    //     const peer = new Peer({
-    //         initiator: false,
-    //         trickle: false,
-    //         stream: stream,
-    //     });
-    //     peer.on("signal", data => {
-    //         socket.emit("acceptCall", { signal: data, to: caller })
-    //     })
-    //
-    //     peer.on("stream", stream => {
-    //         partnerVideo.current.srcObject = stream;
-    //     });
-    //
-    //     peer.signal(callerSignal);
-    // }
+        })
 
 
+    }, [mic, video])
 
+    const createPeer = (userToSignal, callerId, stream) =>{
+        const peer = new Peer({
+            initiator: true,
+            trickle: false,
+            stream
+        })
+
+
+        peer.on("signal", signal => {
+            socket.emit("Sending Signal", {userToSignal,callerId,signal})
+        })
+
+        return peer
+    }
+
+    const addPeer =(incomingSignal, calledID, stream) => {
+        const peer = new Peer({
+            initiator: false,
+            tickle: false,
+            stream
+        })
+
+
+        peer.on("signal", signal => {
+            socket.emit("returning signal", {signal,calledID})
+        })
+
+        peer.signal(incomingSignal)
+
+        return peer
+    }
 
     let UserVideo;
 
     if (stream) {
-        UserVideo = (<video playsInline  muted ref={userVideo} autoPlay controls/>)
+        UserVideo = (<video playsInline muted ref={userVideo} autoPlay controls/>)
     }
 
-    let PartnerVideo;
-    if (callAccepted) {
-        PartnerVideo = (
-            <video playsInline ref={partnerVideo} autoPlay />
-        );
-    }
-    let incomingCall
-
-    if (receivingCall) {
-         incomingCall = (
-            <div>
-                <h1>{caller} is calling you</h1>
-                {/*<button onClick={acceptCall}>Accept</button>*/}
-            </div>
-        )
-
-    }
 
     return <Box className={classes.leftUp}>
         {UserVideo}
 
-        {PartnerVideo}
+        {/*{PartnerVideo}*/}
         {Object.keys(users).map(key => {
-            if (key === yourID) {
+                if (key === yourID) {
 
-                return null;
+                    return null;
+                }
+                return (
+                    <p key={key}>ahksjd</p>
+                    // <button key={key} onClick={() => callPeer(key)}>Call {key}</button>
+                );
             }
-            return (
-                <p key={key}>ahksjd</p>
-                // <button key={key} onClick={() => callPeer(key)}>Call {key}</button>
-            );
-        }
         )}
 
-        {incomingCall}
 
     </Box>
 }
 
 const mapStateToProps = (state) => {
-    return{
+    return {
         video: state.Classroom.video,
         mic: state.Classroom.mic
     }

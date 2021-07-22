@@ -35,11 +35,11 @@ export function *ReLogin (actions) {
     try {
         const response = yield baseUrlNoAuth.post('/re-login',params )
 
-        const  data = response.data
+        const  data = yield response.data
         yield put(action.successLogin(data))
         yield put(currentUserAction.changeToken(data.token))
         yield put(currentUserAction.changeUser(data.user))
-        yield put(action.resetLoginPage())
+        // window.location.reload()
     }catch (error){
         localStorage.clear()
         window.location.reload()

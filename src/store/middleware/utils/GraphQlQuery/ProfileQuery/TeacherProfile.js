@@ -14,6 +14,8 @@ export const
                                 email,
                                 createdAt,
                                 birthdate,
+                                picture
+                                
                          }                         
                     }
             }

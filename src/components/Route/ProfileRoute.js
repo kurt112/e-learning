@@ -4,7 +4,7 @@
  * @created : 11/07/2021, Sunday
  **/
 import {lazy, Fragment} from "react";
-import {Route} from "react-router";
+import {Redirect, Route} from "react-router";
 
 const RoomProfile = lazy(() => import('../ui/__user_ui/profiles/Profile').then(module => ({default: module.RoomProfile})))
 const RoomShiftClassProfile = lazy(() => import('../ui/__user_ui/profiles/Profile').then(module => ({default: module.RoomShiftClassProfile})))
@@ -25,6 +25,8 @@ const ProfileRoute = ({translation}) => {
             <Route path={`${translation.language["route.profile.room.shift"]}:id`} exact render ={() => <RoomShiftProfile translation={translation}/>}/>
             <Route path={`${translation.language["route.profile.room.shift.class"]}:id`} exact render={() => <RoomShiftClassProfile translation={translation}/>}/>
 
+            {/*<Redirect to={'/'}/>*/}
+            {/*<Redirect to={translation.language["route.invalid.path"]}/>*/}
             {/*<Route path='/classes/profile/:id' exact render={() => <Classes {...props} />}/>*/}
         </Fragment>
     )

@@ -6,6 +6,7 @@
 import {Box, Container, Typography} from "@material-ui/core";
 import {Fragment} from "react";
 import ProfileStyle from '../../ProfileStyle'
+import {format24Hour} from "../../../../utils/dateFormat/TimeConverter";
 
 export default function Data({roomShift, translation}) {
     const style = ProfileStyle()
@@ -39,13 +40,13 @@ export default function Data({roomShift, translation}) {
                     <Box className={style.profileDataContainerTitle}>
                         <p>{translation.language["label.global.time.start"]}</p>
                     </Box>
-                    <p>{roomShift.timeStart}</p>
+                    <p>{format24Hour(roomShift.timeStart)}</p>
                 </Box>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainerTitle}>
                         <p>{translation.language["label.global.time.end"]}</p>
                     </Box>
-                    <p>{roomShift.timeEnd}</p>
+                    <p>{format24Hour(roomShift.timeEnd)}</p>
                 </Box>
 
                 <Box className={style.profileDataContainer}>

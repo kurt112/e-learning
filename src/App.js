@@ -12,7 +12,7 @@ import Login from './components/ui/login/Login'
 import {connect} from 'react-redux'
 import * as action from './store/action/login/LoginAction'
 
-const App = ({currentUser, reLogin}) => {
+const App = ({currentUser, reLogin,translation}) => {
 
     const token = localStorage.getItem('token')
 
@@ -26,11 +26,10 @@ const App = ({currentUser, reLogin}) => {
             <BrowserRouter>
                 <Suspense fallback={'Loading'}>
                     <Switch>
-
-
                         {currentUser.user === null ? null : <Route path='/classroom/:path' exact
                                                                    render={(props) =>
                                                                        <Classroom
+                                                                           translation={translation}
                                                                            user={currentUser.user} {...props}/>}/>}
                         {
                             currentUser.user === null ?
@@ -38,12 +37,11 @@ const App = ({currentUser, reLogin}) => {
                                 token !== null ? null : <Route path={'/'} exact render={() => <Login/>}/> :
 
                                 <Fragment>
-                                    <DashBoard user={currentUser.user}/>
+                                    <DashBoard user={currentUser.user} translation={translation}/>
                                 </Fragment>
                         }
 
                         {currentUser.user === null && token === null ? <Redirect to={'/'}/> : null}
-
 
                     </Switch>
 
@@ -57,7 +55,8 @@ const App = ({currentUser, reLogin}) => {
 
 const mapStateToProps = (state) => {
     return {
-        currentUser: state.CurrentUser
+        currentUser: state.CurrentUser,
+        translation: state.languageReducer
     }
 }
 

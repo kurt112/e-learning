@@ -8,12 +8,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import style from './MainUiStyle'
 import Sidebar from './sidebar/Sidebar';
 import Navbar from '../navbar/Navbar';
-import {Switch} from 'react-router';
+import {Route, Switch} from 'react-router';
 import Skeleton from '../ui/utils/skeleton/TableUISkeleton'
-import Route from '../Route'
+import Routes from '../Route'
 import {connect} from "react-redux";
+import InvalidPath from "../ui/utils/error404/InvalidPath";
 
-const MainUi = ({user,translation}) => {
+const MainUi = ({user, translation}) => {
 
     const classes = style();
     const [open, setOpen] = useState(false);
@@ -30,11 +31,11 @@ const MainUi = ({user,translation}) => {
                 handleDrawerClose={handleDrawerClose}
                 handleDrawerOpen={handleDrawerOpen} role={user.userRole}/>
             <main className={classes.content}>
-                <div />
+                <div/>
                 {
                     <Suspense fallback={<Skeleton/>}>
                         <Switch>
-                            <Route translation={translation}  role={user.userRole} email={user.email}/>
+                            <Routes translation={translation} role={user.userRole} email={user.email}/>
                         </Switch>
                     </Suspense>
                 }
@@ -42,12 +43,5 @@ const MainUi = ({user,translation}) => {
         </div>
     );
 }
-const mapStateToProps = (state) => {
-    return {
-        translation: state.languageReducer,
-    }
-}
 
-
-export default connect(mapStateToProps, null)(MainUi)
-
+export default MainUi

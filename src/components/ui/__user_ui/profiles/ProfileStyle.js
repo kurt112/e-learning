@@ -4,6 +4,7 @@
  * @created : 11/07/2021, Sunday
  **/
 import { makeStyles } from '@material-ui/core/styles';
+import {deepPurple} from "@material-ui/core/colors";
 
 const style = makeStyles((theme) => ({
     container: {
@@ -14,7 +15,10 @@ const style = makeStyles((theme) => ({
     },
     avatar: {
         width: theme.spacing(20),
-        height: theme.spacing(20)
+        height: theme.spacing(20),
+        color: theme.palette.getContrastText(deepPurple[500]),
+        backgroundColor: deepPurple[500],
+        fontSize:60
     },
     avatarContainer: {
         margin: 'auto',
@@ -60,8 +64,7 @@ const style = makeStyles((theme) => ({
         flex: 1,
         [theme.breakpoints.down('sm')]: {
             width: '100%'
-        },
-        cursor:'pointer'
+        }
     },
     profileDataContainer: {
         display: 'flex',
@@ -111,7 +114,10 @@ const style = makeStyles((theme) => ({
 
     marginZero: {
         margin: 0
-    }
+    },
+    button: {
+        margin: theme.spacing(1),
+    },
 
 }))
 

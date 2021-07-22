@@ -101,7 +101,10 @@
   "label.button.back": "Back",
   "label.button.delete": "Delete",
 
+  "label.button.cancel": "Cancel",
   "label.button.update": "Update",
+  "label.button.upload.photo": "Upload Photo",
+  "label.button.edit": "Edit",
 
   "label.login.heading.title": "Virtual  School",
   "label.login.heading.login": "Login",
@@ -260,6 +263,7 @@
   "route.profile.room.shift.class": "/roomShiftClass/profile/",
   "route.classroom": "/classroom/",
   "route.teacher.resource.download": "/teacher/resource/download?code=",
+  "route.invalid.path": "/invalid",
 
   "tooltip.curriculum.add": "Add Curriculum",
   "tooltip.curriculum.delete": "Delete Curriculum",

@@ -4,7 +4,7 @@
  * @created : 11/07/2021, Sunday
  **/
 import {Drawer, Grid, Hidden, withStyles} from "@material-ui/core"
-import {useEffect, useRef, useState, Fragment} from "react"
+import {useEffect, useRef, useState, Fragment, lazy} from "react"
 import io from 'socket.io-client'
 import {ExpressEndPoint} from '../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint'
 
@@ -12,8 +12,9 @@ import style from './classroomStyle'
 import moment from 'moment'
 import {connect} from 'react-redux'
 import ClassRoomData from "./classroomData/ClassRoomData";
-import Video from "./video/Video";
 import Toolbar from "./toolbar/Toolbar";
+
+const Video = lazy(() => import(`./video/Video`))
 
 
 const StyledDrawer = withStyles({
@@ -40,9 +41,9 @@ const Classroom = (props) => {
     const socket = useRef()
 
     useEffect(() => {
-        console.log(ExpressEndPoint)
         if (socket.current === undefined) {
             const m = moment()
+
             socket.current = io(ExpressEndPoint)
 
             const path = props.match.params.path
@@ -54,8 +55,11 @@ const Classroom = (props) => {
                 setPeople(users)
                 setMessages(messages)
             })
+
             socket.current.emit('sendMessage', name + ' Has Joined The Class ', m.format('h:mm a'), true)
+
             setChange(true)
+
             return () => {
                 socket.current.disconnect()
             }

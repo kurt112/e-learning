@@ -58,12 +58,12 @@ export default function Data({roomShiftClass,translation}) {
                         <Box className={style.profileDataContainerTitle}>
                             <p>{translation.language["label.global.time.start"]}:</p>
                         </Box>
-                        <p>{roomShiftClass.startTime}</p>
+                        <p>{format24Hour(roomShiftClass.startTime)}</p>
                     </Box>
 
                     <Box className={style.profileDataContainer}>
                         <Box className={style.profileDataContainerTitle}>
-                            <p>{format24Hour(translation.language["label.global.time.end"])}: </p>
+                            <p>{translation.language["label.global.time.end"]}: </p>
                         </Box>
                         <p>{format24Hour(roomShiftClass.endTime)}</p>
                     </Box>
