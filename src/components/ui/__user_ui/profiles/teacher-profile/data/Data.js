@@ -19,7 +19,8 @@ const Data = ({
                   cancel,
                   update,
                   canUpdate,
-                  photo
+                  photo,
+                  getProfileData
               }) => {
     const style = ProfileStyle()
 
@@ -28,30 +29,32 @@ const Data = ({
     const [birthdate, setBirthDate] = useState(teacher.user.birthdate)
     const [email, setEmail] = useState(teacher.user.email)
 
-
     const saveProfileClick = async () => {
         let currentPhoto = teacher.user.picture
 
-        if (currentPhoto !== photo) {
+        if (currentPhoto !== photo && currentPhoto !== '') {
             await deleteToS3(currentPhoto)
+            currentPhoto = await uploadToS3(photo)
+        } else if (currentPhoto === '') {
             currentPhoto = await uploadToS3(photo)
         }
 
+
         const params = new URLSearchParams();
-        params.append("email",email)
-        params.append("firstName",firstName)
-        params.append("lastName",lastName)
-        params.append("picture",currentPhoto)
-        params.append("birthdate",birthdate)
+        params.append("email", email)
+        params.append("firstName", firstName)
+        params.append("lastName", lastName)
+        params.append("picture", currentPhoto)
+        params.append("birthdate", birthdate)
 
 
-        await baseUrl.post(updateAccount, params).then(e => {
-            console.log(e)
+        await baseUrl.post(updateAccount, params).then(ignored => {
+            getProfileData()
+            alert("profile Updated")
         }).catch(error => {
             console.log(error)
         })
 
-        alert("i am here")
     }
 
 

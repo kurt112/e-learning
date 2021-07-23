@@ -34,12 +34,10 @@ const TeacherProfile = ({teacherState, initData, match, translation, user}) => {
 
     // for changing the photo
     const [photo, setPhoto] = useState('')
-    const [photoDisplay, setPhotoDisplay] = useState('')
+    const [photoDisplay, setPhotoDisplay] = useState(null)
 
     useEffect(() => {
-        const id = match.params.id;
-        if (id === user.user.email) setCanUpdate(true)
-        initData(id)
+        getProfileData()
     }, [initData, match.params.id])
 
 
@@ -47,8 +45,8 @@ const TeacherProfile = ({teacherState, initData, match, translation, user}) => {
 
         if (teacherState.profile !== null) {
             setName(`${teacherState.profile.user.firstName} ${teacherState.profile.user.lastName}`)
-            setPhoto(teacherState.profile.user.picture)
             setDataComponent(true)
+            setPhoto(teacherState.profile.user.picture)
         }
 
     }, [teacherState])
@@ -84,6 +82,12 @@ const TeacherProfile = ({teacherState, initData, match, translation, user}) => {
         setPhotoDisplay(URL.createObjectURL(newPhoto))
     }
 
+    const getProfileData = () => {
+        const id = match.params.id;
+        if (id === user.user.email) setCanUpdate(true)
+        initData(id)
+    }
+
 
     return (
         <Grid container className={style.container}>
@@ -94,7 +98,7 @@ const TeacherProfile = ({teacherState, initData, match, translation, user}) => {
                         <Grid container className={style.profileHeader} component={Paper}>
                             <Grid className={style.avatarContainer} item md={12} sm={12} xs={12} lg={12}>
                                 <Avatar className={style.avatar} alt="Remy Sharp"
-                                        src={photoDisplay === '' ? S3BucketEndPoint + photo + '2' : photoDisplay}
+                                        src={teacherState.profile.user.picture !== '' && photoDisplay ===null ? S3BucketEndPoint + teacherState.profile.user.picture: photoDisplay}
                                 >
                                     {`${teacherState.profile.user.firstName.charAt(0).toUpperCase()} 
                                     ${teacherState.profile.user.lastName.charAt(0).toUpperCase()}`}
@@ -164,6 +168,7 @@ const TeacherProfile = ({teacherState, initData, match, translation, user}) => {
                                               canUpdate={canUpdate}
                                               update={update}
                                               photo={photo}
+                                              getProfileData={getProfileData}
                                         />
                                         :
                                         attendComponent ?
