@@ -15,6 +15,7 @@ export const
                                 email,
                                 createdAt,
                                 birthdate,
+                                picture,
                                 password
                          },
                          roomShifts{

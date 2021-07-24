@@ -13,6 +13,7 @@ import {
 import {TeacherInsertStudent as insertStudent, TeacherInsertSubject as insertSubject} from '../ui/utils/tableColumn'
 import { useLocation } from 'react-router-dom'
 import ClassesList from "../ui/__user_ui/roomClasses/ClassList/ClassesList";
+import ProfileRoute from "./ProfileRoute";
 
 
 // import {get} from "../../store/middleware/utils/GraphQlQuery/TeacherQuery";
@@ -100,6 +101,8 @@ const TeacherRoute = ({email, translation}) => {
                    render={() => <TeacherExams translation={translation}/>}/>
             <Route path={translation.language["route.teacher.quizzes"]} exact
                    render={() => <TeacherQuizzes translation={translation}/>}/>
+
+            <ProfileRoute translation={translation}/>
 
             {
                 location.pathname === '/'? <Redirect to={translation.language["route.teacher.classes"]}/>:null

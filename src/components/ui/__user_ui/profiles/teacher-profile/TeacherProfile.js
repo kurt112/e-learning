@@ -18,7 +18,12 @@ import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import {S3BucketEndPoint} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 
 
-const TeacherProfile = ({teacherState, initData, match, translation, user}) => {
+const TeacherProfile = ({
+                            teacherState,
+                            initData,
+                            match,
+                            translation,
+                            user}) => {
 
 
     const style = ProfileStyle()
