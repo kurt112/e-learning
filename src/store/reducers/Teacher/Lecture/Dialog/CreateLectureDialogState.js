@@ -17,6 +17,16 @@ const init_state = {
     sem: 1,
     quarter: 1,
     description: '',
+
+    // error
+    resourceCodeError: false,
+    classCodeError: false,
+
+    // error message
+    resourceCodeErrorMessage: false,
+    classCodeErrorMessage: false,
+
+
     ...newState.init_state
 }
 

@@ -18,6 +18,20 @@ class State {
             birthdate: '',
             gender: 'Male',
             userRole: '',
+
+            // error
+            emailError: false,
+            firstNameError: false,
+            lastNameError: false,
+            middleNameError: false,
+            passwordError: false,
+
+            // error message
+            emailErrorMessage: '',
+            firstNameErrorMessage:'',
+            lastNameErrorMessage:'',
+            middleNameErrorMessage: '',
+            passwordErrorMessage: '',
         }
 
         this.changeEmail = (state, action) =>

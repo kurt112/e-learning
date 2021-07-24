@@ -12,13 +12,28 @@ import * as globalActionDialog from "../../../../ActionType/__ActionTypeGlobal/D
 const newState = new state()
 
 const init_state = {
-    lassCode: '',
+    resourceCode: '',
+    classCode: '',
     deadLine: '',
     sem: 1,
     quarter: 1,
     lowGrade: 0,
     highGrade: 100,
     description: '',
+
+    // error
+    resourceCodeError: false,
+    classCodeError: false,
+    lowGradeError: false,
+    highGradeError: false,
+
+
+    // errorMessage
+    resourceCodeErrorMessage: false,
+    classCodeErrorMessage: false,
+    lowGradeErrorMessage: false,
+    highGradeErrorMessage: false,
+
     ...newState.init_state
 }
 

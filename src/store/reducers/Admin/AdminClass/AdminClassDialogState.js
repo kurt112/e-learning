@@ -21,6 +21,17 @@ const init_state = {
     day: 'MWF',
     timeStart: '',
     timeEnd: '',
+
+    // error
+    shiftError: false,
+    subjectError: false,
+    teacherError:false,
+
+
+    // error message
+    shiftErrorMessage:'',
+
+
     ...newState.init_state
 }
 

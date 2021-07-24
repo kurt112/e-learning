@@ -16,6 +16,15 @@ delete newState.init_state.id
 const init_state ={
     name:'',
     description: '',
+
+    // error
+    nameError: '',
+
+
+    // error Message
+    nameErrorMessage:'',
+
+
     ...newState.init_state,
 
 }

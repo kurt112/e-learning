@@ -20,6 +20,21 @@ const init_state = {
     lowGrade: 0,
     highGrade: 100,
     description: '',
+
+
+    // error
+    resourceCodeError: false,
+    classCodeError: false,
+    lowGradeError: false,
+    highGradeError: false,
+
+
+    // errorMessage
+    resourceCodeErrorMessage: false,
+    classCodeErrorMessage: false,
+    lowGradeErrorMessage: false,
+    highGradeErrorMessage: false,
+
     ...newState.init_state
 }
 

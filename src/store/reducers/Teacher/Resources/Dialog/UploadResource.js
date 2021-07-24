@@ -18,6 +18,17 @@ const init_state = {
     type: 'Lecture',
     description: '',
     file: '',
+
+    // error
+    nameError: false,
+    descriptionError: false,
+    fileError: false,
+
+    // errorMessage
+    nameErrorMessage:  '',
+    descriptionErrorMessage: '',
+    fileErrorMessage: '',
+
     ...newState.init_state
 }
 

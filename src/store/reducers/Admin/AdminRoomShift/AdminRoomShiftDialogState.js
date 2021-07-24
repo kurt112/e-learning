@@ -23,6 +23,20 @@ const init_state ={
     timeEnd: '',
     teacher:'',
     curriculum: '',
+
+    // error
+    roomError: false,
+    gradeError: false,
+    sectionError: false,
+    curriculumError: false,
+
+    roomErrorMessage: '',
+    gradeErrorMessage: '',
+    sectionErrorMessage: '',
+    curriculumErrorMessage:'',
+
+
+    // errorMessage
     ...newState.init_state
 }
 

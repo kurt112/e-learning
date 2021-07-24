@@ -18,6 +18,17 @@ const init_state = {
     subjectName: '',
     subjectMajor: 'Minor',
     status: 'Active',
+
+
+    // error
+    subjectCodeError: false,
+    subjectNameError: false,
+
+    subjectCodeErrorMessage: '',
+    subjectNameErrorMessage: '',
+
+
+    // error Message
     ...newState.init_state
 }
 

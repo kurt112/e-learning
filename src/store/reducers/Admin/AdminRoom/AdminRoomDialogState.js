@@ -17,6 +17,13 @@ const init_state = {
     roomName: '',
     timeStart: '',
     timeEnd: '',
+
+    // Error
+    roomNameError: '',
+
+    // Error Message
+    roomNameErrorMessage: '',
+
     ...newState.init_state,
 
 }
