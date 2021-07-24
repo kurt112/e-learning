@@ -98,6 +98,9 @@ const TeacherProfile = ({teacherState, initData, match, translation, user}) => {
                         <Grid container className={style.profileHeader} component={Paper}>
                             <Grid className={style.avatarContainer} item md={12} sm={12} xs={12} lg={12}>
                                 <Avatar className={style.avatar} alt="Remy Sharp"
+                                        style={{
+                                            border: '.1px solid lightgray'
+                                        }}
                                         src={teacherState.profile.user.picture !== '' && photoDisplay ===null ? S3BucketEndPoint + teacherState.profile.user.picture: photoDisplay}
                                 >
                                     {`${teacherState.profile.user.firstName.charAt(0).toUpperCase()} 

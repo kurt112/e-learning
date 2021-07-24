@@ -7,6 +7,12 @@
     ]
   },
 
+  "label.global.change.password": "Change Password",
+  "label.global.new.password": "New Password",
+  "label.global.current.password": "Current Password",
+  "label.global.retype.password": "Re-Type Password",
+
+
   "label.global.info": "Info",
   "label.global.first": "First",
   "label.global.second": "Second",
@@ -46,6 +52,9 @@
   "label.global.minor": "Minor",
   "label.global.active": "Active",
   "label.global.major": "Major",
+
+  "label.global.category": "Category",
+
   "label.global.assignment": "Assignment",
   "label.global.exam": "Exam",
   "label.global.semester": "Semester",

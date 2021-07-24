@@ -9,9 +9,17 @@ import {Student, Student_Delete} from "../../../utils/Specify";
 import {AdminInsertStudentTable as insert} from "../../../../components/ui/utils/tableColumn";
 import {updateObject} from "../../../utils/UpdateObject";
 
-const transforms = (items) => items.map((item) =>
-    insert(item.student_id, item.user.firstName,item.user.lastName,item.user.email,item.user.birthdate,
-        "to be insert", "to be insert", "to be insert"))
+const transforms = (items) => items.map((item) =>{
+
+    const roomShift = item.roomShifts
+    const grade = roomShift.length === 0? 'TBA' : roomShift[0].grade
+    const section = roomShift.length ===0? 'TBA' : roomShift[0].section
+    const adviser = roomShift.length ===0? 'TBA': `${roomShift[0].teacher.user.firstName} ${roomShift[0].teacher.user.lastName}`
+
+
+    return insert(item.student_id, item.user.firstName,item.user.lastName,item.user.email,item.user.birthdate,
+        grade, section, adviser)
+})
 
 const newState = new state()
 

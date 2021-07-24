@@ -79,14 +79,14 @@ const RegisterSubject = (
                     <Grid item md={6} xs={12}>
                         <FormControl variant="outlined" margin='dense' fullWidth>
                             <InputLabel
-                                htmlFor={translation.language["label.global.major"]}>{translation.language["label.global.major"]}</InputLabel>
+                                htmlFor={translation.language["label.global.category"]}>{translation.language["label.global.category"]}</InputLabel>
                             <Select
                                 native
                                 value={subject.subjectMajor}
-                                label={translation.language["label.global.major"]}
+                                label={translation.language["label.global.category"]}
                                 inputProps={{
-                                    name: translation.language["label.global.major"],
-                                    id: translation.language["label.global.major"],
+                                    name: translation.language["label.global.category"],
+                                    id: translation.language["label.global.category"],
                                 }}
                                 onChange={(event => changeSubjectMajor(event))}
                             >

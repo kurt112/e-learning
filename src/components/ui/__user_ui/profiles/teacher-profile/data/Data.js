@@ -29,8 +29,27 @@ const Data = ({
     const [birthdate, setBirthDate] = useState(teacher.user.birthdate)
     const [email, setEmail] = useState(teacher.user.email)
 
+    // setting new password
+    const [currentPassword, setCurrentPassword] = useState('')
+    const [newPassword, setNewPassword] = useState('')
+    const [reTypeNewPassword, setReTypePassword] = useState('')
+
     const saveProfileClick = async () => {
         let currentPhoto = teacher.user.picture
+
+        if(currentPassword !== '' || newPassword !== '' || reTypeNewPassword !==''){
+
+            if(currentPassword !== teacher.user.password){
+                alert("Password Not Match")
+                return
+            }
+
+            if(newPassword !== reTypeNewPassword){
+                alert("Password Does Not Match")
+                return;
+            }
+
+        }
 
         if (currentPhoto !== photo && currentPhoto !== '') {
             await deleteToS3(currentPhoto)
@@ -40,17 +59,28 @@ const Data = ({
         }
 
 
+        // console.log(birthdate)
+
         const params = new URLSearchParams();
+        const password = newPassword ===''? teacher.user.password: newPassword
+
         params.append("email", email)
         params.append("firstName", firstName)
         params.append("lastName", lastName)
         params.append("picture", currentPhoto)
         params.append("birthdate", birthdate)
+        params.append("id", teacher.user.id)
+        params.append("password",password)
 
 
         await baseUrl.post(updateAccount, params).then(ignored => {
+            if (email !== teacher.user.email || newPassword !== '') {
+                alert("redirecting to login page")
+                localStorage.clear()
+                window.location.reload()
+            }
+            alert("Update User Success")
             getProfileData()
-            alert("profile Updated")
         }).catch(error => {
             console.log(error)
         })
@@ -137,6 +167,63 @@ const Data = ({
                         </Box> : null
                 }
 
+                {
+                    update === false ?
+                        <Box className={style.profileDataContainer}>
+                            <Box className={style.profileDataContainerTitle}>
+                                <p>{translation.language["label.global.account.registered"]}:</p>
+                            </Box>
+                            <p>{convertDateTime(teacher.user.createdAt)}</p>
+                        </Box> : null
+                }
+
+
+                {
+                    update ? <Box className={style.profileDataContainer}>
+                        <Box className={style.profileDataContainerTitle}>
+                            <p>{translation.language["label.global.current.password"]}: </p>
+                        </Box>
+                        <TextField variant="outlined"
+                                   margin={'dense'}
+                                   label={translation.language["label.global.current.password"]}
+                                   value={currentPassword}
+                                   onChange={(e) => setCurrentPassword(e.target.value)}
+                                   type={'password'}
+                        />
+                    </Box> : null
+                }
+
+                {
+                    update ? <Box className={style.profileDataContainer}>
+                        <Box className={style.profileDataContainerTitle}>
+                            <p>{translation.language["label.global.new.password"]}: </p>
+                        </Box>
+                        <TextField variant="outlined"
+                                   margin={'dense'}
+                                   label={translation.language["label.global.new.password"]}
+                                   value={newPassword}
+                                   onChange={(e) => setNewPassword(e.target.value)}
+                                   type={'password'}
+                        />
+                    </Box>:null
+                }
+
+                {
+                    update?<Box className={style.profileDataContainer}>
+                        <Box className={style.profileDataContainerTitle}>
+                            <p>{translation.language["label.global.retype.password"]}: </p>
+                        </Box>
+                        <TextField variant="outlined"
+                                   margin={'dense'}
+                                   label={translation.language["label.global.retype.password"]}
+                                   value={reTypeNewPassword}
+                                   onChange={(e) => setReTypePassword(e.target.value)}
+                                   type={'password'}
+                        />
+                    </Box>:null
+                }
+
+
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainerTitle}>
                         <p></p>
@@ -152,7 +239,7 @@ const Data = ({
                                 <Button variant="contained"
                                         color="primary"
                                         onClick={saveProfileClick}
-                                        className={style.button}>{translation.language["label.button.save"]}
+                                        className={style.button}>{translation.language["label.button.update"]}
                                 </Button>
                             </Fragment> : null
                     }

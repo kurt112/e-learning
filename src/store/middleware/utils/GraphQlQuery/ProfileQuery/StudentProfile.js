@@ -9,11 +9,13 @@ export const
             query: `
                     query{getStudentByUserEmail(email:"${email}"){
                          user{
+                                id,
                                 firstName,
                                 lastName,
                                 email,
                                 createdAt,
                                 birthdate,
+                                password
                          },
                          roomShifts{
                                 grade,

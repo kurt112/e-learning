@@ -10,13 +10,23 @@ export const
                     query{students(search:"${search}", page:${page}){
                         student_id,
                             user{
-                                   firstName,
-                                   email,
-                                   lastName,
-                                   birthdate,
-                             }
-                }
-            }
+                                 firstName,
+                                 email,
+                                 lastName,
+                                 birthdate,
+                            },
+                            roomShifts{
+                                grade,
+                                section,
+                                  teacher{
+                                    user{
+                                        firstName
+                                        lastName
+                                    }
+                                  }
+                                }
+                            }
+                        }
         `
         }
     },

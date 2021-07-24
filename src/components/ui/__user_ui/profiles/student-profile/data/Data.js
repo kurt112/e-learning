@@ -9,6 +9,10 @@ import ProfileStyle from '../../ProfileStyle'
 import {convertDateTime} from "../../../../utils/dateFormat/DateTimeFormatToDateWord";
 export default function Data({student,translation}) {
     const style = ProfileStyle()
+
+
+    console.log(student)
+
     return (
         <Fragment>
             <Typography className={style.profileName} variant="h4" component="h2">{translation.language["label.global.student.information"]}</Typography>
@@ -29,7 +33,9 @@ export default function Data({student,translation}) {
                     <Box className={style.profileDataContainerTitle}>
                         <p>{translation.language["label.global.grade.section"]}</p>
                     </Box>
-                    {/*<p>{`${assignedRoom.grade} - ${assignedRoom.section}`}</p>*/}
+                    {
+                        student.roomShifts.length === 0? <p>{translation.language['label.global.tba']}</p>:<p>{`${student.roomShifts[0].grade} - ${student.roomShifts[0].section}`}</p>
+                    }
                 </Box>
                 <Box className={style.profileDataContainer}>
                     <Box className={style.profileDataContainerTitle}>

@@ -9,13 +9,14 @@ export const
             query: `
                     query{getTeacherByUserEmail(email:"${id}"){
                          user{
+                                id,
                                 firstName,
                                 lastName,
                                 email,
                                 createdAt,
                                 birthdate,
-                                picture
-                                
+                                picture,
+                                password
                          }                         
                     }
             }

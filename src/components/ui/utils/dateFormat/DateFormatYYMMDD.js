@@ -4,8 +4,7 @@
  * @created : 23/07/2021, Friday
  **/
 import moment from "moment";
-
 const yyyymmddFromat = "YYYY-MM-DD"
 export const convertToYYMMDD = (date) => {
-    return moment(date).format(yyyymmddFromat)
+    return moment(date.toString().substring(0,10)).format(yyyymmddFromat)
 }

@@ -216,7 +216,7 @@ export const AdminSubjectTable = (translation) => [
 
     {
         name: 'major',
-        label: translation.language["label.global.major"]
+        label: translation.language["label.global.category"]
     },
     {
         name: 'active',
