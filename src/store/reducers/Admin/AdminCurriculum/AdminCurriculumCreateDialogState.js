@@ -31,23 +31,22 @@ const init_state ={
 
 const setState = (state, action) => {
 
-    state = updateObject(state, {name: action.name})
-    state = updateObject(state, {description: action.description})
-    state = updateObject(state, {code: action.code})
-
-    return state
+    return updateObject(state, {
+        code: action.code,
+        description: action.description,
+        name: action.name
+    })
 }
 
 const reInit = (state) => {
 
-
-    state = updateObject(state, {name: ''})
-    state = updateObject(state, {description: ''})
-    state = updateObject(state, {code: ''})
-
     delete state.code
 
-    return state
+    return updateObject(state, {
+        code: '',
+        description: '',
+        name: ''
+    })
 }
 
 

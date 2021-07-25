@@ -25,7 +25,7 @@ const init_state = {
     fileError: false,
 
     // errorMessage
-    nameErrorMessage:  '',
+    nameErrorMessage: '',
     descriptionErrorMessage: '',
     fileErrorMessage: '',
 
@@ -42,11 +42,12 @@ const closing = (state) => {
     return newState.handleClose(state)
 }
 
-const reset = (state) =>{
-    state = updateObject(state,{name: ''})
-    state = updateObject(state, {description: ''})
-    state = updateObject(state, {file: ''})
-    return state
+const reset = (state) => {
+    return updateObject(state, {
+        file: '',
+        description: '',
+        name: ''
+    })
 }
 
 const reducer = (state = init_state, action) => {
@@ -65,12 +66,17 @@ const reducer = (state = init_state, action) => {
 
         // action for dialog
 
-        case dialogAction.ADMIN_DIALOG_REGISTER(Teacher_Resource_Upload): return newState.initRegister(state)
-        case dialogAction.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(Teacher_Resource_Upload):  return closing(state)
-        case dialogAction.ADMIN_DIALOG_REGISTER_FAIL(Teacher_Resource_Upload): return newState.failRegister(state,action)
-        case dialogAction.ADMIN_DIALOG_REGISTER_SUCCESS(Teacher_Resource_Upload): return success(state)
+        case dialogAction.ADMIN_DIALOG_REGISTER(Teacher_Resource_Upload):
+            return newState.initRegister(state)
+        case dialogAction.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(Teacher_Resource_Upload):
+            return closing(state)
+        case dialogAction.ADMIN_DIALOG_REGISTER_FAIL(Teacher_Resource_Upload):
+            return newState.failRegister(state, action)
+        case dialogAction.ADMIN_DIALOG_REGISTER_SUCCESS(Teacher_Resource_Upload):
+            return success(state)
 
-        default: return state;
+        default:
+            return state;
     }
 
 }

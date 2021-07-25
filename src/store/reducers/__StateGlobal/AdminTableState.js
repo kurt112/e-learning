@@ -34,25 +34,28 @@ class State {
             else new_Data = fetchData
             const set = new Set(new_Data)
             const unique = [...set]
-            state = updateObject(state, {loading: false})
-            state = updateObject(state, {data: unique})
-            return state
+            return updateObject(state, {
+                loading: false,
+                data: unique
+            })
         }
 
-        this.apiSettingsInit = (state,action) => {
+        this.apiSettingsInit = (state, action) => {
             const object = action.data
             const key = Object.keys(object)
             const settings = object[key]
 
-            state = updateObject(state, {totalPages: settings.totalPages})
-            state = updateObject(state, {totalItems: settings.totalElements})
-
-            return state
+            return updateObject(state, {
+                totalPages: settings.totalPages,
+                totalItems: settings.totalElements
+            })
         }
         this.nextData = (state, action) => {
             if (state.page > state.highPage) {
-                state = updateObject(state, {loading: true})
-                state = updateObject(state, {highPage: state.page})
+                state = updateObject(state, {
+                    loading: true,
+                    highPage: state.page
+                })
             }
             state = updateObject(state, {page: action.page})
             return state
@@ -67,10 +70,12 @@ class State {
         }
 
         this.searchChange = (state, action) => {
-            state = updateObject(state, {loading: true})
-            state = updateObject(state, {highPage: -1})
-            state = updateObject(state, {page: 0})
-            return updateObject(state, {search: action.text === null? '': action.text})
+            return updateObject(state, {
+                search: action.text === null ? '' : action.text,
+                page: 0,
+                highPage: -1,
+                loading: true
+            })
         }
     }
 }

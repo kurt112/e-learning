@@ -17,16 +17,14 @@ class State {
         }
 
         this.successData =(state, action) => {
-            state = updateObject(state, {loading: false})
-
-            return updateObject(state,{profile: action.data})
+            return updateObject(state,{
+                profile: action.data,
+                loading: false
+            })
         }
 
-        this.failData= (state, action) =>{
-
-            state = updateObject(state, {loading: false})
-
-            return state
+        this.failData= (state) =>{
+            return updateObject(state, {loading: false})
         }
     }
 }

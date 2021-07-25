@@ -33,27 +33,25 @@ const init_state = {
 }
 
 const setState = (state, action) => {
-
     state.id = action.id
-    state = updateObject(state, {subjectCode: action.subjectCode})
-    state = updateObject(state, {subjectName: action.subjectName})
-    state = updateObject(state, {subjectMajor: action.subjectMajor})
-    state = updateObject(state, {status: action.status})
-    state = updateObject(state, {done: false})
-
-    return state
+    return updateObject(state, {
+        done: false,
+        status: action.status,
+        subjectMajor: action.subjectMajor,
+        subjectName: action.subjectName,
+        subjectCode: action.subjectCode
+    })
 }
 
 const reInit = (state) => {
-
-
-    state = updateObject(state, {subjectCode: ''})
-    state = updateObject(state, {subjectName: ''})
-    state = updateObject(state, {subjectMajor: 'Minor'})
-    state = updateObject(state, {status: 'Active'})
     delete state.id
 
-    return state
+    return updateObject(state, {
+        status: 'Active',
+        subjectMajor: 'Minor',
+        subjectName: '',
+        subjectCode: ''
+    })
 }
 
 const success= (state) => {

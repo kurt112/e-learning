@@ -33,23 +33,32 @@ const Login = (state) => {
 }
 
 const successLogin = (state, action) => {
-    state = updateObject(state, {message: action.data.message})
-    state = updateObject(state, {loading: false})
-    state = updateObject( state, {error: false})
+    state = updateObject(state, {
+        message: action.data.message,
+        loading: false,
+        error: false
+    })
+
     window.localStorage.setItem("token", action.data.token)
     return state
 }
 
 const failLogin = (state) => {
-    state = updateObject(state, {loading: false})
-    state = updateObject( state, {error: true})
-    return state
+    return updateObject(state, {
+        loading: false,
+        error: true
+    })
 }
 
 const registerClose = (state) => {
-    state = updateObject(state, {dialog: false})
 
-    return updateObject(state, {id: ''})
+    return updateObject(state,
+        {
+            dialog: false,
+            errorPreregister: false,
+            id: ''
+        }
+    )
 }
 
 const logout = (state) => {
@@ -76,11 +85,11 @@ const errorPreRegister = (state) => {
 }
 
 const changeForm = (state, action) => {
-    if(action === Student) state = updateObject(state, {studentForm: true})
+    if (action === Student) state = updateObject(state, {studentForm: true})
 
-    if(action === Teacher) state = updateObject(state, {teacherForm: true})
+    if (action === Teacher) state = updateObject(state, {teacherForm: true})
 
-    return updateObject(state, {form: action.data,errorPreregister: false})
+    return updateObject(state, {form: action.data, errorPreregister: false})
 }
 
 const closeRegisterForm = (state) => {
@@ -95,22 +104,33 @@ const reducer = (state = initState, action) => {
     switch (action.type) {
         case actions.LOGIN:
             return Login(state)
-        case actions.CHANGE_EMAIL:return updateObject(state, {username: action.data})
-        case actions.CHANGE_PASSWORD:return updateObject(state, {password: action.data})
-        case actions.SUCCESS_LOGIN:return successLogin(state, action)
-        case actions.FAIL_LOGIN:return failLogin(state)
-        case actions.RESET_LOGIN_PAGE:return logout(state)
+        case actions.CHANGE_EMAIL:
+            return updateObject(state, {username: action.data})
+        case actions.CHANGE_PASSWORD:
+            return updateObject(state, {password: action.data})
+        case actions.SUCCESS_LOGIN:
+            return successLogin(state, action)
+        case actions.FAIL_LOGIN:
+            return failLogin(state)
+        case actions.RESET_LOGIN_PAGE:
+            return logout(state)
 
         // for Registration in LoginLogout
-        case actions.REGISTER_OPEN:return updateObject(state, {dialog: true})
-        case actions.REGISTER_CLOSE:return registerClose(state)
+        case actions.REGISTER_OPEN:
+            return updateObject(state, {dialog: true})
+        case actions.REGISTER_CLOSE:
+            return registerClose(state)
 
-        case actions.CHANGE_ID:return updateObject(state, {id: action.data})
-        case actions.CHANGE_FORM:return changeForm(state,action.data)
+        case actions.CHANGE_ID:
+            return updateObject(state, {id: action.data})
+        case actions.CHANGE_FORM:
+            return changeForm(state, action.data)
 
-        case actions.FAIL_PREREGISTER: return errorPreRegister(state)
+        case actions.FAIL_PREREGISTER:
+            return errorPreRegister(state)
 
-        case actions.REGISTER_FORM_CLOSE: return closeRegisterForm(state)
+        case actions.REGISTER_FORM_CLOSE:
+            return closeRegisterForm(state)
 
         default:
             return state;

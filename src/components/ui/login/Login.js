@@ -144,6 +144,7 @@ const Login = ({
                             color="primary"
                             className={classes.submit}
                             onClick={login}
+                            disableElevation
                         >
                             {translation.language["label.login.button.login"]}
                         </Button>

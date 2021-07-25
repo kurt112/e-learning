@@ -42,34 +42,30 @@ const init_state ={
 
 
 const setState = (state, action) => {
-
-    state = updateObject(state, {id: action.id})
-    state = updateObject(state, {room: action.room})
-    state = updateObject(state, {roomShift: action.roomShiftName})
-    state = updateObject(state, {grade: action.grade})
-    state = updateObject(state, {section: action.section})
-    state = updateObject(state, {timeStart: action.timeStart})
-    state = updateObject(state, {timeEnd: action.timeEnd})
-    state = updateObject(state, {teacher: action.teacher})
-    state = updateObject(state, {curriculum: action.curriculum})
-
-    console.log(state)
-
-    return state
+    return updateObject(state, {
+        curriculum: action.curriculum,
+        teacher: action.teacher,
+        timeEnd: action.timeEnd,
+        timeStart: action.timeStart,
+        section: action.section,
+        grade: action.grade,
+        roomShift: action.roomShiftName,
+        room: action.room,
+        id: action.id
+    })
 }
 
 const reInit = (state) => {
-
-
-    state = updateObject(state, {room: ''})
-    state = updateObject(state, {roomShift: ''})
-    state = updateObject(state, {grade: ''})
-    state = updateObject(state, {section: ''})
-    state = updateObject(state, {timeStart: ''})
-    state = updateObject(state, {timeEnd: ''})
-    state = updateObject(state, {teacher: ''})
-    state = updateObject(state, {curriculum: ''})
-    return state
+    return updateObject(state, {
+        curriculum: '',
+        teacher: '',
+        timeEnd: '',
+        timeStart: '',
+        section: '',
+        grade: '',
+        roomShift: '',
+        room: ''
+    })
 }
 
 const reducer = (state=init_state, action)=>{

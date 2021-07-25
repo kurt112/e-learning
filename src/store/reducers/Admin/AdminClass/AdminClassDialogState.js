@@ -38,31 +38,29 @@ const init_state = {
 
 const setState = (state, action) => {
 
-
     state.id = action.id
-    state = updateObject(state, {shift: action.roomShift})
-    state = updateObject(state, {subject: action.subject})
-    state = updateObject(state, {teacher: action.teacher})
-    state = updateObject(state, {day: action.day})
-    state = updateObject(state, {timeStart: action.startTime})
-    state = updateObject(state, {timeEnd: action.endTime})
 
-    state = updateObject(state, {done: false})
-
-    return state
+    return updateObject(state, {
+        done: false,
+        timeEnd: action.endTime,
+        timeStart: action.startTime,
+        day: action.day,
+        teacher: action.teacher,
+        subject: action.subject,
+        shift: action.roomShift
+    })
 }
 
 const reInit = (state) => {
-
-    state = updateObject(state, {shift: ''})
-    state = updateObject(state, {subject: ''})
-    state = updateObject(state, {teacher: ''})
-    state = updateObject(state, {day: 'MWF'})
-    state = updateObject(state, {timeStart: ''})
-    state = updateObject(state, {timeEnd: ''})
-
     delete state.id
-    return state
+    return updateObject(state, {
+        timeEnd: '',
+        timeStart: '',
+        day: 'MWF',
+        teacher: '',
+        subject: '',
+        shift: ''
+    })
 }
 
 

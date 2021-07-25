@@ -61,10 +61,17 @@ const UserId = ({
             />
         </DialogContent>
         <DialogActions>
-            <Button variant={'contained'} onClick={submit} color='primary'>
+            <Button variant={'contained'}
+                    disableElevation
+                    onClick={submit}
+                    color='primary'>
                 {translation.language["label.button.next"]}
             </Button>
-            <Button variant={'contained'} color='secondary' onClick={registerClose}>
+            <Button variant={'contained'}
+                    disableElevation
+                    color='secondary'
+                    onClick={registerClose}
+            >
                 {translation.language["label.button.cancel"]}
             </Button>
         </DialogActions>

@@ -17,32 +17,31 @@ class state{
         }
 
         this.successRegister = (state) => {
-            state = updateObject(state, {error: false})
-            state = updateObject(state, {showMessage: true})
+            state = updateObject(state, {error: false,showMessage: true})
             if(state.id !== undefined) state = updateObject(state, {id: ''})
-            state = updateObject(state, {loading: false})
-            state = updateObject(state, {done: true})
+            state = updateObject(state, {done: true,loading: false})
             return state
         }
         this.initRegister = (state) => {
-
-            state = updateObject(state, {done: false})
-            state = updateObject(state,{showMessage: true})
-            state = updateObject(state, updateObject({loading: true}))
-
-            return state
+            return updateObject(state,{
+                showMessage: true,
+                done: false,
+                loading: true
+            })
         }
 
         this.failRegister = (state, action,customError) => {
             if(action.message.response === undefined && customError === undefined) state = updateObject(state, {message: "Check your internet Connection"})
             else if(customError === undefined) state = updateObject(state, {message: action.message.response.data.message})
             else state = updateObject(state, {message: customError})
-            state = updateObject(state, {error: true})
-            state = updateObject(state, {showMessage: true})
-            state = updateObject(state, {done: true})
-            return updateObject(state, updateObject({loading: false}))
-        }
 
+            return updateObject(state, {
+                error: true,
+                showMessage: true,
+                done: true,
+                loading: false
+            })
+        }
 
         this.handleClose = (state) => {
             return updateObject(state, {showMessage: false})

@@ -30,25 +30,25 @@ const init_state = {
 
 const setState = (state, action) => {
 
-    state = updateObject(state, {roomName: action.roomName})
-    state = updateObject(state, {timeEnd: action.timeEnd})
-    state = updateObject(state, {timeStart: action.timeStart})
-    state = updateObject(state, {id: action.id})
+    return updateObject(state, {
+        id: action.id,
+        timeStart: action.timeStart,
+        roomName: action.roomName,
+        timeEnd: action.timeEnd
 
-    return state
+    })
 }
 
 const reInit = (state) => {
 
-
-    state = updateObject(state, {roomName: ''})
-    state = updateObject(state, {timeEnd: ''})
-    state = updateObject(state, {timeStart: ''})
-    state = updateObject(state, {id: ''})
-
     delete state.id
 
-    return state
+    return updateObject(state, {
+        id: '',
+        timeStart: '',
+        timeEnd: '',
+        roomName: ''
+    })
 }
 
 

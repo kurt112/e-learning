@@ -28,10 +28,8 @@ const initState = {
 }
 
 const changeLanguage = (state, action) => {
-    state = updateObject(state, {language: language[action.data]});
-    state = updateObject(state, {index: action.data})
     localStorage.setItem("language",action.data);
-    return state;
+    return updateObject(state, {index: action.data,language: language[action.data]});
 }
 
 const reducer = (state = initState, action) => {
