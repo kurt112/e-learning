@@ -11,7 +11,17 @@
   "label.global.new.password": "New Password",
   "label.global.current.password": "Current Password",
   "label.global.retype.password": "Re-Type Password",
-
+  "label.global.check.id": "Please Input Your Id",
+  "label.global.enter.your.id": "Enter Your Id",
+  "label.global.student.register.form": "Student Register Form",
+  "label.global.teacher.register.form": "Teacher Register Form",
+  "label.global.middle.name": "Middle Name",
+  "label.global.suffix": "Suffix",
+  "label.global.gender": "Gender",
+  "label.global.male": "Male",
+  "label.global.female": "Female",
+  "label.global.retypePassword": "Re-type Password",
+  "label.global.register": "Register",
 
   "label.global.info": "Info",
   "label.global.first": "First",
@@ -114,6 +124,7 @@
   "label.button.update": "Update",
   "label.button.upload.photo": "Upload Photo",
   "label.button.edit": "Edit",
+  "label.button.next": "Next",
 
   "label.login.heading.title": "Virtual  School",
   "label.login.heading.login": "Login",
@@ -227,6 +238,8 @@
   "label.teacher.quiz.dialog.create.resource.search": "Search By Quiz Resource",
 
   "validation.login.error": "No Account Found",
+
+  "validation.invalid.id": "Invalid Id",
 
   "label.sidebar.dashboard": "Dashboard",
   "label.sidebar.rooms": "Rooms",

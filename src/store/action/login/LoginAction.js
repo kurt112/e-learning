@@ -83,4 +83,15 @@ export const
         return {
             type: action.RESET_LOGIN_PAGE
         }
+    },
+
+    errorPreRegister = () => {
+        return {
+            type: action.FAIL_PREREGISTER
+        }
+    },
+    closeRegisterForm = () => {
+        return {
+            type: action.REGISTER_FORM_CLOSE
+        }
     }

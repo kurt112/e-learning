@@ -52,11 +52,16 @@ export function* PreRegister() {
 
     const params = new URLSearchParams();
     params.append('id', login.id)
+
+
+
     try {
         const response = yield baseUrlNoAuth.post('/pre-register',params )
-
+        console.log(response)
         yield put(action.changeForm(response.data))
     }catch (error){
+
+        yield put(action.errorPreRegister())
 
     }
 }

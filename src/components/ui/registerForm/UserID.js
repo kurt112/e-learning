@@ -8,47 +8,64 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle,
+    DialogTitle, Divider,
     TextField
 } from "@material-ui/core";
-const UserId = ({submit,id, changeId,dialog, registerClose}) => {
+import {Alert, AlertTitle} from "@material-ui/lab";
+import {Fragment} from "react";
+
+const UserId = ({
+                    submit,
+                    id,
+                    changeId,
+                    dialog,
+                    registerClose,
+                    state,
+                    translation
+                }) => {
+
 
     return <Dialog
         open={dialog}
         onClose={registerClose}
         aria-labelledby="add-teacher"
         fullWidth={true}
+        maxWidth={"md"}
     >
-        <DialogTitle id="add-teacher"><strong>Enter Your Id</strong>
-
+        <DialogTitle id="add-teacher">
+            {translation.language["label.global.check.id"]}
         </DialogTitle>
+        <Divider/>
         <DialogContent>
 
-
-            {/*<DialogContentText style={{color: 'black'}}>*/}
-
-
-            {/*</DialogContentText>*/}
-
+            {
+                state.errorPreregister ? <Fragment>
+                    <br/>
+                    <Alert variant="filled" severity="error">
+                        <AlertTitle><strong>{translation.language["validation.invalid.id"]}</strong></AlertTitle>
+                        <strong>{state.errorPreregisterMessage}</strong>
+                    </Alert>
+                    <br/>
+                </Fragment> : null
+            }
 
             <TextField
                 autoFocus
                 margin="dense"
-                id="user-id"
-                label="Enter User ID"
+                label={translation.language["label.global.enter.your.id"]}
                 type="text"
                 value={id}
                 fullWidth
+                variant={'outlined'}
                 onChange={(event) => changeId(event.target.value)}
-                // onKeyDown={event => {RegisterEnter(event)}}
             />
         </DialogContent>
         <DialogActions>
-           <Button onClick={submit} color='primary'>
-                next
+            <Button variant={'contained'} onClick={submit} color='primary'>
+                {translation.language["label.button.next"]}
             </Button>
-            <Button color='secondary' onClick={registerClose}>
-                Cancel
+            <Button variant={'contained'} color='secondary' onClick={registerClose}>
+                {translation.language["label.button.cancel"]}
             </Button>
         </DialogActions>
 

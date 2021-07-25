@@ -34,7 +34,7 @@ const App = ({currentUser, reLogin,translation}) => {
                         {
                             currentUser.user === null ?
 
-                                token !== null ? null : <Route path={'/'} exact render={() => <Login/>}/> :
+                                token !== null ? null : <Route path={'/'} exact render={() => <Login translation={translation} />}/> :
 
                                 <Fragment>
                                     <DashBoard user={currentUser.user} translation={translation}/>

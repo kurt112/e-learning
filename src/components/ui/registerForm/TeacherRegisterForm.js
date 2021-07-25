@@ -18,7 +18,7 @@ import {Teacher} from "../../../store/utils/Specify";
 const TeacherRegisterForm = ({
                                  teacher,
                                  open,
-                                 setTeacher,
+                                 closeDialog,
                                  changeFirstName,
                                  changeLastName,
                                  changeMiddleName,
@@ -28,12 +28,13 @@ const TeacherRegisterForm = ({
                                  changeEmail,
                                  changePassword,
                                  changeReTypePassword,
-                                 register
+                                 register,
+                                 translation
                              }) => {
 
     return <Dialog
         open={open}
-        onClose={() => setTeacher(false)}
+        onClose={closeDialog}
         aria-labelledby="add-teacher"
         fullWidth={true}
         maxWidth={"lg"}
@@ -54,10 +55,9 @@ const TeacherRegisterForm = ({
                         <TextField
                             // helperText='Wwe'
                             margin="dense"
-                            id="firstName"
-                            label="First Name"
                             type="text"
                             fullWidth
+                            label={translation.language['label.global.first.name']}
                             variant="outlined"
                             value={teacher.firstName}
                             onChange={(event) => changeFirstName(event.target.value)}
@@ -66,8 +66,7 @@ const TeacherRegisterForm = ({
                     <Grid item md={3} xs={12}>
                         <TextField
                             margin="dense"
-                            id="middleName"
-                            label="Middle Name"
+                            label={translation.language['label.global.middle.name']}
                             type="text"
                             fullWidth
                             variant="outlined"
@@ -80,8 +79,7 @@ const TeacherRegisterForm = ({
                     <Grid item md={4} xs={12}>
                         <TextField
                             margin="dense"
-                            id="lastName"
-                            label="Last Name"
+                            label={translation.language['label.global.last.name']}
                             type="text"
                             fullWidth
                             variant="outlined"
@@ -92,8 +90,7 @@ const TeacherRegisterForm = ({
                     <Grid item md={1} xs={12}>
                         <TextField
                             margin="dense"
-                            id="lastName"
-                            label="Suffix "
+                            label={translation.language['label.global.suffix']}
                             type="text"
                             fullWidth
                             variant="outlined"
@@ -104,9 +101,9 @@ const TeacherRegisterForm = ({
 
                     <Grid item md={6} xs={12}>
                         <TextField
+                            InputLabelProps={{shrink: true}}
                             margin="dense"
-                            id="birthdate"
-                            label="BirthDate"
+                            label={translation.language['label.global.birth.date']}
                             type="date"
                             fullWidth
                             variant="outlined"
@@ -116,20 +113,19 @@ const TeacherRegisterForm = ({
                     </Grid>
                     <Grid item md={6} xs={12}>
                         <FormControl variant="outlined" margin='dense' fullWidth>
-                            <InputLabel htmlFor="gender">Gender</InputLabel>
+                            <InputLabel htmlFor={translation.language['label.global.gender']}>{translation.language['label.global.gender']}</InputLabel>
                             <Select
                                 native
-                                label="gender"
+                                label={translation.language['label.global.gender']}
                                 inputProps={{
-                                    name: 'gender',
-                                    id: 'gender',
+                                    name: translation.language['label.global.gender'],
+                                    id: translation.language['label.global.gender'],
                                 }}
                                 value={teacher.gender}
                                 onChange={(event) => changeGender(event.target.value)}
                             >
-                                <option value='Male'>Male</option>
-                                <option value='Female'>Female</option>
-
+                                <option value={translation.language['label.global.male']}>{translation.language['label.global.male']}</option>
+                                <option value={translation.language['label.global.female']}>{translation.language['label.global.female']}</option>
                             </Select>
                         </FormControl>
 
@@ -139,8 +135,7 @@ const TeacherRegisterForm = ({
                     <Grid item md={4} xs={12}>
                         <TextField
                             margin="dense"
-                            id="email"
-                            label="Email"
+                            label={translation.language['label.global.email']}
                             type="text"
                             fullWidth
                             variant="outlined"
@@ -153,8 +148,7 @@ const TeacherRegisterForm = ({
                         <TextField
                             // helperText={'asdf'}
                             margin="dense"
-                            id="password"
-                            label="Password"
+                            label={translation.language['label.login.input.password']}
                             type="password"
                             fullWidth
                             variant="outlined"
@@ -167,8 +161,7 @@ const TeacherRegisterForm = ({
                         <TextField
                             // helperText={'asdf'}
                             margin="dense"
-                            id="ReTypePassword"
-                            label="Re type Password"
+                            label={translation.language['label.global.retypePassword']}
                             type="password"
                             fullWidth
                             variant="outlined"
@@ -182,11 +175,15 @@ const TeacherRegisterForm = ({
             </DialogContent>
 
             <DialogActions>
-                <Button color='primary' onClick={(register)}>
-                    Register
+                <Button color='primary' onClick={register}>
+                    {
+                        translation.language["label.global.register"]
+                    }
                 </Button>
-                <Button onClick={() => setTeacher(false)} color='secondary'>
-                    Cancel
+                <Button onClick={closeDialog} color='secondary'>
+                    {
+                        translation.language["label.button.cancel"]
+                    }
                 </Button>
             </DialogActions>
         </form>
@@ -209,7 +206,7 @@ const mapDispatchToProps = (dispatch) => {
         changeGender: (data) => dispatch(actions.changeGender(data, Teacher)),
         changeEmail: (data) => dispatch(actions.changeEmail(data, Teacher)),
         changePassword: (data) => dispatch(actions.changePassword(data, Teacher)),
-        changeReTypePassword: (data) => dispatch(actions.changeReTypePassword(data,Teacher)),
+        changeReTypePassword: (data) => dispatch(actions.changeReTypePassword(data, Teacher)),
 
         register: () => dispatch(actions.initRegister(Teacher))
     }

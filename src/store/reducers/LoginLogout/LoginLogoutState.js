@@ -5,6 +5,7 @@
  **/
 import * as actions from '../../ActionType/Login/LoginActionType'
 import {updateObject} from "../../utils/UpdateObject";
+import {Student, Teacher} from "../../utils/Specify";
 
 const initState = {
     username: '',
@@ -12,9 +13,17 @@ const initState = {
     message: '',
     loading: false,
     dialog: false,
-    error: false,
     form: '',
-    id: ''
+    id: '',
+    studentForm: false,
+    teacherForm: false,
+
+    //  error
+    error: false,
+    errorPreregister: false,
+
+    // error message
+    errorPreregisterMessage: ''
 }
 
 const Login = (state) => {
@@ -52,7 +61,32 @@ const logout = (state) => {
         loading: false,
         dialog: false,
         form: '',
-        id: ''
+        id: '',
+
+        studentForm: false,
+        teacherForm: false
+    })
+}
+
+const errorPreRegister = (state) => {
+    return updateObject(state, {
+        errorPreregister: true,
+        errorPreregisterMessage: 'User Not Existing'
+    })
+}
+
+const changeForm = (state, action) => {
+    if(action === Student) state = updateObject(state, {studentForm: true})
+
+    if(action === Teacher) state = updateObject(state, {teacherForm: true})
+
+    return updateObject(state, {form: action.data,errorPreregister: false})
+}
+
+const closeRegisterForm = (state) => {
+    return updateObject(state, {
+        studentForm: false,
+        teacherForm: false
     })
 }
 
@@ -61,26 +95,23 @@ const reducer = (state = initState, action) => {
     switch (action.type) {
         case actions.LOGIN:
             return Login(state)
-        case actions.CHANGE_EMAIL:
-            return updateObject(state, {username: action.data})
-        case actions.CHANGE_PASSWORD:
-            return updateObject(state, {password: action.data})
-        case actions.SUCCESS_LOGIN:
-            return successLogin(state, action)
-        case actions.FAIL_LOGIN:
-            return failLogin(state)
-        case actions.RESET_LOGIN_PAGE:
-            return logout(state);
+        case actions.CHANGE_EMAIL:return updateObject(state, {username: action.data})
+        case actions.CHANGE_PASSWORD:return updateObject(state, {password: action.data})
+        case actions.SUCCESS_LOGIN:return successLogin(state, action)
+        case actions.FAIL_LOGIN:return failLogin(state)
+        case actions.RESET_LOGIN_PAGE:return logout(state)
 
         // for Registration in LoginLogout
-        case actions.REGISTER_OPEN:
-            return updateObject(state, {dialog: true})
-        case actions.REGISTER_CLOSE:
-            return registerClose(state)
-        case actions.CHANGE_ID:
-            return updateObject(state, {id: action.data})
-        case actions.CHANGE_FORM:
-            return updateObject(state, {form: action.data})
+        case actions.REGISTER_OPEN:return updateObject(state, {dialog: true})
+        case actions.REGISTER_CLOSE:return registerClose(state)
+
+        case actions.CHANGE_ID:return updateObject(state, {id: action.data})
+        case actions.CHANGE_FORM:return changeForm(state,action.data)
+
+        case actions.FAIL_PREREGISTER: return errorPreRegister(state)
+
+        case actions.REGISTER_FORM_CLOSE: return closeRegisterForm(state)
+
         default:
             return state;
     }

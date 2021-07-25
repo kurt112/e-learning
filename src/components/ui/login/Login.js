@@ -19,8 +19,6 @@ import {connect} from 'react-redux'
 import * as action from '../../../store/action/login/LoginAction'
 import {StudentRegisterForm, TeacherRegisterForm, UserIDForm} from "../registerForm";
 import style from './LoginStyle'
-import {useEffect, useState} from "react";
-import {Student, Teacher} from "../../../store/utils/Specify";
 import {changeLanguage} from '../../../store/action/__ActionGlobal/ProfileAction'
 
 const Login = ({
@@ -33,36 +31,19 @@ const Login = ({
                    registerOpen,
                    registerClose,
                    translation,
-                   changeLanguage
+                   changeLanguage,
+                   closeRegisterForm
                }) => {
     const classes = style();
 
-    const [studentForm, setStudentForm] = useState(false)
-    const [teacherForm, setTeacherForm] = useState(false)
-
-    useEffect(() => {
-        // auth()
-    }, [])
-
-    useEffect(() => {
-
-
-        if (loginState.form === Student) {
-            setStudentForm(true)
-            setTeacherForm(false)
-        } else if (loginState.form === Teacher) {
-            setStudentForm(false)
-            setTeacherForm(true)
-        } else {
-            setTeacherForm(false)
-            setStudentForm(false)
-        }
-
-
-    }, [loginState.form])
 
     const ClickEnter = (event) => {
         if (event === "Enter") login()
+    }
+
+
+    const register = async () => {
+        await registerInit()
     }
 
 
@@ -70,14 +51,31 @@ const Login = ({
         <Grid container component="main" className={classes.root}>
 
 
-            {studentForm === false && teacherForm === false ?
-                <UserIDForm openStudent={setStudentForm}
-                            submit={registerInit}
-                            changeId={changeId}
-                            dialog={loginState.dialog}
-                            registerClose={registerClose}/> : null}
-            {studentForm === true ? <StudentRegisterForm setStudent={setStudentForm} open={studentForm}/> : null}
-            {teacherForm === true ? <TeacherRegisterForm setTeacher={setTeacherForm} open={teacherForm}/> : null}
+            {
+                loginState.studentForm === false && loginState.teacherForm === false ?
+                    <UserIDForm
+                        submit={register}
+                        changeId={changeId}
+                        dialog={loginState.dialog}
+                        state={loginState}
+                        registerClose={registerClose}
+                        translation={translation}
+                    /> : null}
+
+            {
+                loginState.studentForm === true ?
+                    <StudentRegisterForm translation={translation}
+                                         closeDialog={closeRegisterForm}
+                                         open={loginState.studentForm}
+                    /> : null
+            }
+            {
+                loginState.teacherForm === true ?
+                    <TeacherRegisterForm translation={translation}
+                                         closeDialog={closeRegisterForm}
+                                         open={loginState.teacherForm}
+                    /> : null
+            }
 
 
             <CssBaseline/>
@@ -138,7 +136,7 @@ const Login = ({
                                 control={<Checkbox value="remember" color="primary"/>}
                                 label={translation.language["label.login.check.remember"]}
                             />
-                            {loginState.error === true? <p>{translation.language["validation.login.error"]}</p>: null}
+                            {loginState.error === true ? <p>{translation.language["validation.login.error"]}</p> : null}
                         </Box>
                         <Button
                             fullWidth
@@ -162,8 +160,9 @@ const Login = ({
                         </Grid>
                         <br/>
                         <Grid item md={4}>
-                            <FormControl fullWidth variant="outlined" >
-                                <InputLabel id="demo-simple-select-outlined-label">{translation.language["label.global.select.language"]}</InputLabel>
+                            <FormControl fullWidth variant="outlined">
+                                <InputLabel
+                                    id="demo-simple-select-outlined-label">{translation.language["label.global.select.language"]}</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-outlined-label"
                                     id="demo-simple-select-outlined"
@@ -189,8 +188,7 @@ const Login = ({
 
 const mapStateToProps = (state) => {
     return {
-        loginState: state.Login,
-        translation: state.languageReducer
+        loginState: state.Login
     }
 }
 
@@ -205,7 +203,8 @@ const mapDispatchToProps = (dispatch) => {
         registerInit: () => dispatch(action.registerInit()),
         registerClose: () => dispatch(action.registerClose()),
         changeId: (data) => dispatch(action.changeId(data)),
-        changeLanguage: (data) => dispatch(changeLanguage(data))
+        changeLanguage: (data) => dispatch(changeLanguage(data)),
+        closeRegisterForm: () => dispatch(action.closeRegisterForm())
 
     }
 }
