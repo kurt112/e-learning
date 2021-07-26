@@ -60,6 +60,24 @@ const UpdateRoomShiftDialog = ({
         else changeRoomShift(translation.language["label.global.first"])
     }, [])
 
+    useEffect(() => {
+        if (dialogState.done === true &&
+            dialogState.roomError === false &&
+            dialogState.gradeError === false &&
+            dialogState.sectionError === false &&
+            dialogState.curriculumError === false) {
+
+            console.log(dialogState)
+            updateClick().then(ignored => {})
+        }
+    }, [dialogState.done])
+
+    const updateClick = async () => {
+        await new Promise(r => setTimeout(r, 1000));
+        registerDialogMessageClose()
+        closeDialog()
+    }
+
     const OutputRoom = (event, value) => {
         value = value === null ? '' : value[1]
         if (value === '') {
@@ -113,13 +131,6 @@ const UpdateRoomShiftDialog = ({
         setFocusCurriculum(true)
     }
 
-    const updateClick = async () => {
-        registerDialog()
-        await new Promise(r => setTimeout(r, 1000));
-        registerDialogMessageClose()
-        closeDialog()
-    }
-
     return <Dialog
         open={dialog}
         onClose={closeDialog}
@@ -149,6 +160,8 @@ const UpdateRoomShiftDialog = ({
                                     variant="outlined"
                                 /> :
                                 <RoomAutoComplete
+                                    error={dialogState.roomError}
+                                    errorMessage={dialogState.roomErrorMessage}
                                     output={OutputRoom}
                                     translation={translation}
                                     autoFocus={focusRoom}
@@ -181,6 +194,8 @@ const UpdateRoomShiftDialog = ({
                     </Grid>
                     <Grid item md={6} xs={12}>
                         <TextField
+                            error={dialogState.gradeError}
+                            helperText={dialogState.gradeErrorMessage}
                             margin="dense"
                             value={dialogState.grade}
                             onChange={(event) => changeGrade(event.target.value)}
@@ -192,6 +207,8 @@ const UpdateRoomShiftDialog = ({
                     </Grid>
                     <Grid item md={6} xs={12}>
                         <TextField
+                            error={dialogState.sectionError}
+                            helperText={dialogState.sectionErrorMessage}
                             margin="dense"
                             label={translation.language['label.global.section']}
                             value={dialogState.section}
@@ -231,7 +248,7 @@ const UpdateRoomShiftDialog = ({
                                 <TextField
                                     onFocus={onFocusHandlerAdviser}
                                     margin="dense"
-                                    value={adviserValue === null ? '' : `${adviserValue.user.firstName} ${adviserValue.user.lastName}`}
+                                    value={`${adviserValue.user.firstName} ${adviserValue.user.lastName}`}
                                     label={translation.language["label.global.adviser"]}
                                     type="text"
                                     fullWidth
@@ -260,6 +277,8 @@ const UpdateRoomShiftDialog = ({
                                     variant="outlined"
                                 />
                                 : <CurriculumAutoComplete
+                                    error={dialogState.curriculumError}
+                                    errorMessage={dialogState.curriculumErrorMessage}
                                     output={OutputStrand}
                                     translation={translation}
                                     autoFocus={focusCurriculum}
@@ -272,7 +291,7 @@ const UpdateRoomShiftDialog = ({
             </DialogContent>
 
             <DialogActions>
-                <Button variant={'contained'} disableElevation onClick={updateClick} color='primary'>
+                <Button variant={'contained'} disableElevation onClick={registerDialog} color='primary'>
                     {translation.language["label.button.update"]}
                 </Button>
                 <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>

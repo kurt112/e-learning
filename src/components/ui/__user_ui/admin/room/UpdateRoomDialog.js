@@ -19,6 +19,7 @@ import * as action from '../../../../../store/action/__ActionGlobal/DialogAction
 import * as dialogAction from '../../../../../store/action/admin/Room/RoomDialogAction'
 import {Room} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
+import {useEffect} from "react";
 
 const RegisterRoomDialog = ({
                                 closeDialog,
@@ -32,12 +33,17 @@ const RegisterRoomDialog = ({
                                 translation
                             }) => {
 
-    const updateClick = async () => {
-        registerDialog()
+
+    useEffect(() => {
+        if(dialogState.done === true && dialogState.roomNameError === false){
+            updateClick().then(ignored=>{})
+        }
+    }, [dialogState.done])
+
+    const updateClick =  async () => {
         await new Promise(r => setTimeout(r, 1000));
         registerDialogMessageClose()
         closeDialog()
-
     }
 
     return <Dialog
@@ -60,6 +66,8 @@ const RegisterRoomDialog = ({
                 <Grid container spacing={1}>
                     <Grid item md={12} xs={12}>
                         <TextField
+                            error={dialogState.roomNameError}
+                            helperText={dialogState.roomNameErrorMessage}
                             autoFocus
                             margin="dense"
                             label="Room Name"
@@ -97,7 +105,7 @@ const RegisterRoomDialog = ({
             </DialogContent>
 
             <DialogActions>
-                <Button variant={'contained'} disableElevation onClick={updateClick} color='primary'>
+                <Button variant={'contained'} disableElevation onClick={registerDialog} color='primary'>
                     {translation.language["label.button.update"]}
                 </Button>
                 <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>

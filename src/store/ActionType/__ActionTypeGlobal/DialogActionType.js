@@ -23,5 +23,8 @@ export const
 
 
     // For ReInit the state
-    RE_INIT = to => to + "_RE_INIT"
+    RE_INIT = to => to + "_RE_INIT",
+
+    // Error Handler
+    SET_ERROR_EMPTY_ID =  to => to +'_SET_ERROR_EMPTY_ID'
 

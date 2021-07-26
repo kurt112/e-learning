@@ -6,5 +6,11 @@
 import moment from "moment";
 
 export const format24Hour = (time) => {
-    return moment(time, ["HH.mm"]).format("hh:mm a");
+
+    const newDate = moment(time, ["HH.mm"]).format("hh:mm a")
+
+    if(newDate === 'Invalid date') return 'TBA'
+
+
+    return newDate
 }

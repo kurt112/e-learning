@@ -7,8 +7,17 @@ import {autoCompleteRoom} from "../../../../../store/middleware/utils/ApiEndpoin
 import {filterOption, optionLabel, optionSelected} from "../autoCompleteAction";
 import AutoCompleteImplementation from "./AutoCompleteImplementation";
 
-const RoomAutoComplete = ({translation, output, autoFocus,focusHandler}) => {
+const RoomAutoComplete = ({
+                              translation,
+                              output,
+                              autoFocus,
+                              focusHandler,
+                              error,
+                              errorMessage
+                          }) => {
     return <AutoCompleteImplementation
+        errorMessage={errorMessage}
+        error={error}
         noOptionText={translation.language["label.room.shift.dialog.create.input.room.name"]}
         label={translation.language["label.global.room"]}
         url={autoCompleteRoom}

@@ -16,8 +16,10 @@ import {
 } from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 import AutoCompleteImplementation from "./AutoCompleteImplementation";
 
-const CurriculumAutoComplete = ({translation, output, autoFocus,focusHandler}) => {
+const CurriculumAutoComplete = ({translation, output, autoFocus,focusHandler,error,errorMessage}) => {
     return <AutoCompleteImplementation
+        error={error}
+        errorMessage={errorMessage}
         noOptionText={translation.language["label.curriculum.dialog.find.search"]}
         optionSelected={optionSelected}
         optionLabel={optionLabel}

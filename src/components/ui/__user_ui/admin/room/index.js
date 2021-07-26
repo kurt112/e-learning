@@ -22,7 +22,6 @@ const DeleteRoomDialog = lazy(() => import(`./DeleteRoomDialog`))
 const FindRoomDialog = lazy(() => import(`./FindRoomDialog`))
 
 const Index = ({
-
                    room,
                    initData,
                    searchChange,
@@ -41,7 +40,6 @@ const Index = ({
     const classes = style()
     useEffect(() => {
         if (room.data.length === 0) initData()
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (

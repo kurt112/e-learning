@@ -28,13 +28,13 @@ const FindRoomShiftDialog = ({
                 setId('')
                 setData(roomShift.data.data.roomShift)
                 setRoomShift(roomShift.data.data.roomShift)
-            }
+            }else alert("Room Shift Not Found")
         })
     }
 
     const closeUpdate = () => {
         setRoomShift(null)
-        // reInitState()
+        reInitState()
     }
 
     const closeAddStudent = () => {

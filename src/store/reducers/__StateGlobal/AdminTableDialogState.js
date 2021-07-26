@@ -11,9 +11,11 @@ class state{
             id: '',
             loading: false,
             showMessage: false,
-            error:'',
+            error:false,
             message: '',
-            done: false
+            done: false,
+            errorId:false,
+            errorMessageId: ''
         }
 
         this.successRegister = (state) => {
@@ -24,7 +26,6 @@ class state{
         }
         this.initRegister = (state) => {
             return updateObject(state,{
-                showMessage: true,
                 done: false,
                 loading: true
             })
@@ -45,7 +46,15 @@ class state{
 
         this.handleClose = (state) => {
             return updateObject(state, {showMessage: false})
-        };
+        }
+
+        this.emptyIdErrorHandler = (state) => {
+            return updateObject(state, {
+                loading: false,
+                errorId:true,
+                errorMessageId: 'Please Input Id'
+            })
+        }
     }
 
 }

@@ -23,7 +23,7 @@ export const
         }
     },
 
-    registerDialogFail = (message, to,customError) => {
+    registerDialogFail = (message, to, customError) => {
         return {
             type: actions.ADMIN_DIALOG_REGISTER_FAIL(to),
             message,
@@ -39,6 +39,12 @@ export const
     reInitState = (to) => {
         return {
             type: actions.RE_INIT(to)
+        }
+    },
+
+    setErrorEmptyId = (to) => {
+        return {
+            type: actions.SET_ERROR_EMPTY_ID(to)
         }
     }
 

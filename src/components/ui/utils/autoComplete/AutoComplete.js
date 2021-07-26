@@ -22,7 +22,9 @@ export default function AutoComplete({
                                          optionLabel,
                                          optionSelected,
                                          autoFocus,
-                                         focusHandler
+                                         focusHandler,
+                                         error,
+                                         errorMessage
                                      }) {
 
 
@@ -37,7 +39,7 @@ export default function AutoComplete({
             onOpen={() => {
                 setOpen(true);
             }}
-            onBlur={focusHandler !== undefined? focusHandler: null}
+            onBlur={focusHandler !== undefined ? focusHandler : null}
             onClose={() => {
                 setOpen(false);
             }}
@@ -48,6 +50,8 @@ export default function AutoComplete({
             loading={loading}
             renderInput={(params) => (
                 <TextField
+                    error={error}
+                    helperText={errorMessage}
                     autoFocus={autoFocus !== undefined}
                     value={InputText}
                     onChange={(event) => changeText(event.target.value)}

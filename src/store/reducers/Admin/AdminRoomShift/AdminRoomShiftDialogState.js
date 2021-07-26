@@ -64,7 +64,80 @@ const reInit = (state) => {
         section: '',
         grade: '',
         roomShift: '',
-        room: ''
+        room: '',
+        done: false,
+        lading: false
+    })
+}
+
+// error handler
+
+const roomErrorHandler = (state) => {
+    return updateObject(state, {
+        roomError: true,
+        roomErrorMessage: 'Please Select A Room',
+        loading:false,
+        done: true
+    })
+}
+
+const gradeErrorHandler = (state) => {
+    return updateObject(state, {
+        gradeError: true,
+        gradeErrorMessage: 'Please Input A Value',
+        loading:false,
+        done: true
+    })
+}
+
+const   sectionErrorHandler = (state) => {
+    return updateObject(state, {
+        sectionError: true,
+        sectionErrorMessage: 'Please Input A Value',
+        loading:false,
+        done: true
+    })
+}
+
+const curriculumErrorHandler = (state) => {
+    return updateObject(state, {
+        curriculumError: true,
+        curriculumErrorMessage: 'Please Select A Curriculum',
+        loading:false,
+        done: true
+    })
+
+}
+
+const changeRoom = (state, data) => {
+    return updateObject(state, {
+        room: data,
+        roomError: false,
+        roomErrorMessage: ''
+    })
+}
+
+const changeGrade = (state,data) => {
+    return updateObject(state, {
+        grade: data,
+        gradeError:false,
+        gradeErrorMessage: ''
+    })
+}
+
+const changeSection = (state, data) => {
+    return updateObject(state, {
+        section: data,
+        sectionError: false,
+        sectionErrorMessage: ''
+    })
+}
+
+const changeCurriculum = (state,data) => {
+    return updateObject(state, {
+        curriculum: data,
+        curriculumError:false,
+        curriculumErrorMessage: '',
     })
 }
 
@@ -75,17 +148,24 @@ const reducer = (state=init_state, action)=>{
         case actions.ADMIN_DIALOG_REGISTER_SUCCESS(RoomShift): return newState.successRegister(state)
         case actions.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(RoomShift): return newState.handleClose(state,action)
 
-        case roomShiftAction.ROOMSHIFT_DIALOG_ROOM_SET: return updateObject(state, {room: action.data})
+        case roomShiftAction.ROOMSHIFT_DIALOG_ROOM_SET: return changeRoom(state,action.data)
         case roomShiftAction.ROOMSHIFT_DIALOG_TIMEEND_CHANGE: return updateObject(state, {timeEnd: action.data})
         case roomShiftAction.ROOMSHIFT_DIALOG_TIMESTART_CHANGE:return updateObject(state, {timeStart: action.data})
-        case roomShiftAction.ROOMSHIFT_DIALOG_ROOMGRADE_CHANGE: return updateObject(state, {grade: action.data})
+        case roomShiftAction.ROOMSHIFT_DIALOG_ROOMGRADE_CHANGE: return changeGrade(state,action.data)
         case roomShiftAction.ROOMSHIFT_DIALOG_ROOMSHIFT_SET: return updateObject(state, {roomShift: action.data})
-        case roomShiftAction.ROOMSHIFT_DIALOG_ROOMSECTION_CHANGE: return updateObject(state, {section: action.data})
+        case roomShiftAction.ROOMSHIFT_DIALOG_ROOMSECTION_CHANGE: return changeSection(state, action.data)
         case roomShiftAction.ROOMSHIFT_DIALOG_ADVISER_CHANGE: return updateObject(state, {teacher: action.data})
-        case roomShiftAction.ROOMSHIFT_DIALOG_CURRICULUM_CHANGE: return updateObject(state, {curriculum: action.data})
+        case roomShiftAction.ROOMSHIFT_DIALOG_CURRICULUM_CHANGE: return changeCurriculum(state,action.data)
 
         case actions.RE_INIT(RoomShift): return reInit(state)
         case actions.SET_DATA(RoomShift): return setState(state, action.data)
+
+
+        // error handler
+        case roomShiftAction.SET_ERROR_ROOM_EMPTY: return roomErrorHandler(state)
+        case roomShiftAction.SET_ERROR_CURRICULUM_EMPTY: return curriculumErrorHandler(state)
+        case roomShiftAction.SET_ERROR_SECTION_EMPTY: return sectionErrorHandler(state)
+        case roomShiftAction.SET_ERROR_GRADE_EMPTY: return gradeErrorHandler(state)
 
         default: return state;
     }

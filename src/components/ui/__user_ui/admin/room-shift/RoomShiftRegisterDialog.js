@@ -82,6 +82,8 @@ const RoomShiftRegisterDialog = ({
                 <Grid container spacing={1}>
                     <Grid item md={6} xs={12}>
                         <RoomAutoComplete
+                            error={dialogState.roomError}
+                            errorMessage={dialogState.roomErrorMessage}
                             setText={setRoomText}
                             text={roomText}
                             output={OutputRoom}
@@ -113,6 +115,8 @@ const RoomShiftRegisterDialog = ({
                     </Grid>
                     <Grid item md={6} xs={12}>
                         <TextField
+                            error={dialogState.gradeError}
+                            helperText={dialogState.gradeErrorMessage}
                             margin="dense"
                             value={dialogState.grade}
                             onChange={(event) => changeGrade(event.target.value)}
@@ -124,6 +128,8 @@ const RoomShiftRegisterDialog = ({
                     </Grid>
                     <Grid item md={6} xs={12}>
                         <TextField
+                            error={dialogState.sectionError}
+                            helperText={dialogState.sectionErrorMessage}
                             margin="dense"
                             label={translation.language['label.global.section']}
                             value={dialogState.section}
@@ -162,6 +168,8 @@ const RoomShiftRegisterDialog = ({
                     </Grid>
                     <Grid item md={6} xs={12}>
                         <CurriculumAutoComplete
+                            error={dialogState.curriculumError}
+                            errorMessage={dialogState.curriculumErrorMessage}
                             output={OutputStrand}
                             translation={translation}
                         />

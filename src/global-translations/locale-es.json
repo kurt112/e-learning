@@ -240,6 +240,7 @@
   "validation.login.error": "No Account Found",
 
   "validation.invalid.id": "Invalid Id",
+  "validation.room.invalid": "Room Not Found",
 
   "label.sidebar.dashboard": "Dashboard",
   "label.sidebar.rooms": "Rooms",

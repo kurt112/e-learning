@@ -27,7 +27,7 @@ const DeleteRoomShiftDialog = ({
                                }) => {
 
     const RegisterEnter = (event) => {
-        if (event.key === "Enter" && state.id.length > 0) dialogRegister()
+        if (event.key === "Enter") dialogRegister()
     }
 
     return <Dialog
@@ -44,6 +44,8 @@ const DeleteRoomShiftDialog = ({
                       messageFail={translation.language['message.room.shift.dialog.delete.fail']}
                       messageSuccess={translation.language['message.room.shift.dialog.delete.success']}/>
             <TextField
+                error={state.errorId || state.error}
+                helperText={state.errorMessageId}
                 value={state.id}
                 margin="dense"
                 variant={'outlined'}

@@ -26,7 +26,9 @@ const FindRoomDialog = ({
                 setId('')
                 setData(room.data.data.room)
                 setUpdate(true)
-            }
+            }else alert(translation.language['validation.room.invalid'])
+
+
         })
     }
 

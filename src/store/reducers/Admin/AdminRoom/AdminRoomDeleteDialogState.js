@@ -14,6 +14,17 @@ const newState = new state();
 const init_state = {
     ...newState.init_state
 }
+
+const changeId = (state,value) => {
+    return updateObject(state, {
+        id: value,
+        errorId: false,
+        errorMessageId: '',
+        showMessage: false,
+        error:false
+    })
+}
+
 const reducer = (state = init_state, action) => {
 
     switch (action.type) {
@@ -26,7 +37,11 @@ const reducer = (state = init_state, action) => {
             return newState.successRegister(state)
         case globalActionDialog.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(Room_Delete):
             return newState.handleClose(state, action)
-        case globalActionDialog.ADMIN_DIALOG_ID_CHANGE(Room_Delete): return updateObject(state, {id: action.value})
+        case globalActionDialog.ADMIN_DIALOG_ID_CHANGE(Room_Delete): return changeId(state, action.value)
+
+        // error Handler
+        case globalActionDialog.SET_ERROR_EMPTY_ID(Room_Delete):
+            return newState.emptyIdErrorHandler(state)
         default:
             return state;
     }

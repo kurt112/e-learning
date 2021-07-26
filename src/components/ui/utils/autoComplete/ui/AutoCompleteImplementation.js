@@ -17,7 +17,9 @@ const AutoCompleteImplementation = ({
                                         optionLabel,
                                         optionSelected,
                                         email,
-                                        focusHandler
+                                        focusHandler,
+                                        error,
+                                        errorMessage
                                     }) => {
 
     const [open, setOpen] = useState(false)
@@ -38,6 +40,8 @@ const AutoCompleteImplementation = ({
 
 
     return <AutoComplete
+        error={error === undefined? false: error}
+        errorMessage={errorMessage === undefined? null: errorMessage}
         autoFocus={autoFocus}
         open={open}
         setOpen={setOpen}

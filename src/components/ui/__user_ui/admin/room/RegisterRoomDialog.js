@@ -18,6 +18,7 @@ import * as action from '../../../../../store/action/__ActionGlobal/DialogAction
 import * as dialogAction from '../../../../../store/action/admin/Room/RoomDialogAction'
 import {Room} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
+import {useEffect} from "react";
 
 const RegisterRoomDialog = ({
                                 closeDialog,
@@ -28,8 +29,14 @@ const RegisterRoomDialog = ({
                                 changeTimeEnd,
                                 registerDialogMessageClose,
                                 registerDialog,
-    translation
+                                translation
                             }) => {
+
+    useEffect(() => {
+        changeRoomName('')
+        changeTimeEnd('')
+        changeTimeStart('')
+    }, [])
 
     return <Dialog
         open={dialog}
@@ -38,7 +45,7 @@ const RegisterRoomDialog = ({
         maxWidth="md"
         fullWidth
     >
-        <form noValidate >
+        <form noValidate>
             <DialogTitle id="add-room">{translation.language["label.room.dialog.add.room.title"]}</DialogTitle>
             <Divider/>
             <DialogContent>
@@ -50,6 +57,8 @@ const RegisterRoomDialog = ({
                 <Grid container spacing={1}>
                     <Grid item md={12} xs={12}>
                         <TextField
+                            error={dialogState.roomNameError}
+                            helperText={dialogState.roomNameErrorMessage}
                             autoFocus
                             margin="dense"
                             label="Room Name"
@@ -63,7 +72,7 @@ const RegisterRoomDialog = ({
                     <Grid item md={6} xs={12}>
                         <TextField
                             margin="dense"
-                            InputLabelProps={{ shrink: true }}
+                            InputLabelProps={{shrink: true}}
                             label={translation.language["label.global.time.start"]}
                             value={dialogState.timeStart}
                             onChange={(event) => changeTimeStart(event.target.value)}
@@ -75,7 +84,7 @@ const RegisterRoomDialog = ({
                     <Grid item md={6} xs={12}>
                         <TextField
                             margin="dense"
-                            InputLabelProps={{ shrink: true }}
+                            InputLabelProps={{shrink: true}}
                             label={translation.language["label.global.time.end"]}
                             value={dialogState.timeEnd}
                             onChange={(event) => changeTimeEnd(event.target.value)}

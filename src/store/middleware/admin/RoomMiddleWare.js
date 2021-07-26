@@ -13,17 +13,30 @@ import {
     AdminRoomBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/AdminQuery/AdminRoomQuery";
 import uuid from "short-uuid";
-import {reInitState} from "../../action/__ActionGlobal/DialogAction";
-
+import {reInitState,setErrorEmptyId} from "../../action/__ActionGlobal/DialogAction";
+import {setErrorRoomNameEmpty} from '../../action/admin/Room/RoomDialogAction'
+import {checkStringEmpty} from "../../../components/ui/utils/validation";
 export function * DeleteRoom(){
-    const classState = yield select(Selector.DeleteRoomDialog)
+    const room = yield select(Selector.DeleteRoomDialog)
+
+    if(checkStringEmpty(room.id)) {
+        yield put(setErrorEmptyId(Room_Delete))
+        return;
+    }
+
     const params = new URLSearchParams();
-    params.append('id', classState.id)
+    params.append('id', room.id)
     yield Delete(params,deleteRoom,Room_Delete,RoomTableDataInit)
 }
 
 export function* RoomRegister() {
     const room = yield select(Selector.AdminRoomDialog)
+
+    if(checkStringEmpty(room.roomName)) {
+        yield put(setErrorRoomNameEmpty())
+        return;
+    }
+
     if(room.id === undefined)  room.id = yield uuid.generate()
 
     yield RegisterBody(room,AdminRoomRegister,Room, RoomTableDataInit)
