@@ -54,7 +54,7 @@ const Data = ({
         if (currentPhoto !== photo && currentPhoto !== '') {
             await deleteToS3(currentPhoto)
             currentPhoto = await uploadToS3(photo)
-        } else if (currentPhoto === '') {
+        } else if (currentPhoto === ''&& currentPhoto !== '') {
             currentPhoto = await uploadToS3(photo)
         }
 

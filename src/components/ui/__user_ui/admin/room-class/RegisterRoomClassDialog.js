@@ -24,6 +24,7 @@ import Response from "../../../utils/Response"
 import RoomShiftAutoComplete from "../../../utils/autoComplete/ui/RoomShiftAutoComplete"
 import SubjectAutoComplete from "../../../utils/autoComplete/ui/SubjectAutoComplete"
 import TeacherAutoComplete from "../../../utils/autoComplete/ui/TeacherAutoComplete"
+import {useEffect} from "react";
 
 const RoomClassDialog = ({
                              closeDialog,
@@ -72,6 +73,8 @@ const RoomClassDialog = ({
                 <Grid container spacing={1}>
                     <Grid item md={6} xs={12}>
                         <RoomShiftAutoComplete
+                            error={dialogState.shiftError}
+                            errorMessage={dialogState.shiftErrorMessage}
                             output={OutputRoomShift}
                             translation={translation}
                             autoFocus={true}
@@ -79,6 +82,8 @@ const RoomClassDialog = ({
                     </Grid>
                     <Grid item md={6} xs={12}>
                         <SubjectAutoComplete
+                            error={dialogState.subjectError}
+                            errorMessage={dialogState.subjectErrorMessage}
                             translation={translation}
                             output={OutputSubject}
                         />

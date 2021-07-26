@@ -7,7 +7,7 @@ import {TwoFilterOption, twoOptionLabel, twoOptionSelected} from "../autoComplet
 import {autoCompleteRoomShift} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 import AutoCompleteImplementation from "./AutoCompleteImplementation";
 
-const RoomShiftAutoComplete = ({translation, output, autoFocus,focusHandler}) => {
+const RoomShiftAutoComplete = ({translation, output, autoFocus,focusHandler,error,errorMessage}) => {
     return <AutoCompleteImplementation
         noOptionText={translation.language["label.room.shift.dialog.find.input.search"]}
         optionLabel={twoOptionLabel}
@@ -18,6 +18,8 @@ const RoomShiftAutoComplete = ({translation, output, autoFocus,focusHandler}) =>
         filterOption={TwoFilterOption}
         autoFocus={autoFocus}
         focusHandler={focusHandler}
+        error={error}
+        errorMessage={errorMessage}
     />
 }
 

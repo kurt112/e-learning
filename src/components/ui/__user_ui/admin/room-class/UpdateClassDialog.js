@@ -18,7 +18,7 @@ import * as action from "../../../../../store/action/__ActionGlobal/DialogAction
 import {RoomShiftClass} from "../../../../../store/utils/Specify";
 import * as roomClassDialogAction from "../../../../../store/action/admin/RoomClass/RoomClassDialogAction";
 import {connect} from "react-redux";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 /**
  * @author : Kurt Lupin Orioque
@@ -41,8 +41,6 @@ const UpdateClassDialog = ({
                                translation
                            }) => {
 
-    console.log(dialogState)
-
     // get the current value
     const [roomShiftValue] = useState(dialogState.shift)
     const [teacherValue] = useState(dialogState.teacher)
@@ -54,6 +52,20 @@ const UpdateClassDialog = ({
     const [focusTeacher, setFocusTeacher] = useState(false)
     const [focusSubject, setFocusSubject] = useState(false)
 
+    useEffect(() => {
+        if (dialogState.done === true &&
+            dialogState.shiftError === false &&
+            dialogState.subjectError === false ) {
+            updateClick().then(ignored => {
+            })
+        }
+    }, [dialogState.done])
+
+    const updateClick = async () => {
+        await new Promise(r => setTimeout(r, 1000));
+        registerDialogMessageClose()
+        closeDialog()
+    }
 
     const OutputTeacher = (event, value) => {
 
@@ -67,19 +79,19 @@ const UpdateClassDialog = ({
     const OutputSubject = (event, value) => {
         value = value === null ? '' : value[2]
 
-        if(value === ''){
+        if (value === '') {
             changeSubject(subjectValue.id)
             setFocusSubject(false)
-        }else changeSubject(value)
+        } else changeSubject(value)
     }
 
     const OutputRoomShift = (event, value) => {
         value = value === null ? '' : value[2]
-        if(value===''){
+        if (value === '') {
             console.log(roomShiftValue.id)
             changeRoomShift(roomShiftValue.id)
             setFocusRoomShift(false)
-        }else changeRoomShift(value)
+        } else changeRoomShift(value)
 
     }
     // autoComplete Handler
@@ -112,15 +124,6 @@ const UpdateClassDialog = ({
         setFocusSubject(true)
     }
 
-    // update
-
-    const updateClick = async () => {
-        registerDialog()
-        await new Promise(r => setTimeout(r, 1000));
-        registerDialogMessageClose()
-        closeDialog()
-    }
-
 
     return <Dialog
         open={dialog}
@@ -130,7 +133,7 @@ const UpdateClassDialog = ({
         fullWidth
     >
         <form noValidate>
-            <DialogTitle id="add-class">{translation.language["label.room.class.dialog.add.title"]}</DialogTitle>
+            <DialogTitle id="add-class">{translation.language["label.room.class.dialog.update.title"]}</DialogTitle>
             <Divider/>
             <DialogContent>
 
@@ -146,7 +149,7 @@ const UpdateClassDialog = ({
                                 <TextField
                                     onFocus={onFocusRoomShiftHandler}
                                     margin="dense"
-                                    value={roomShiftValue === null ? '' : `${roomShiftValue.grade} ${roomShiftValue.section}`}
+                                    value={`${roomShiftValue.grade} ${roomShiftValue.section}`}
                                     label={translation.language["label.global.room.shift"]}
                                     type="text"
                                     fullWidth
@@ -154,6 +157,8 @@ const UpdateClassDialog = ({
                                 />
                                 :
                                 <RoomShiftAutoComplete
+                                    error={dialogState.shiftError}
+                                    errorMessage={dialogState.shiftErrorMessage}
                                     output={OutputRoomShift}
                                     translation={translation}
                                     autoFocus={focusRoomShift}
@@ -167,7 +172,7 @@ const UpdateClassDialog = ({
                                 <TextField
                                     onFocus={onFocusSubjectHandler}
                                     margin="dense"
-                                    value={subjectValue === null ? '' : `${subjectValue.subjectName} ${subjectValue.subjectCode}`}
+                                    value={`${subjectValue.subjectName} ${subjectValue.subjectCode}`}
                                     label={translation.language["label.global.subject"]}
                                     type="text"
                                     fullWidth
@@ -175,6 +180,8 @@ const UpdateClassDialog = ({
                                 />
                                 :
                                 <SubjectAutoComplete
+                                    error={dialogState.subjectError}
+                                    errorMessage={dialogState.subjectErrorMessage}
                                     translation={translation}
                                     output={OutputSubject}
                                     autoFocus={focusSubject}
@@ -241,7 +248,7 @@ const UpdateClassDialog = ({
                                 <TextField
                                     onFocus={onFocusHandlerTeacher}
                                     margin="dense"
-                                    value={teacherValue === null ? '' : `${teacherValue.user.firstName} ${teacherValue.user.lastName}`}
+                                    value={`${teacherValue.user.firstName} ${teacherValue.user.lastName}`}
                                     label={translation.language["label.global.teacher"]}
                                     type="text"
                                     fullWidth
@@ -261,7 +268,7 @@ const UpdateClassDialog = ({
             </DialogContent>
 
             <DialogActions>
-                <Button disableElevation variant={"contained"} onClick={updateClick} color='primary'>
+                <Button disableElevation variant={"contained"} onClick={registerDialog} color='primary'>
                     {translation.language["label.button.update"]}
                 </Button>
                 <Button disableElevation variant={"contained"} onClick={closeDialog} color='secondary'>

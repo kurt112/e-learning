@@ -36,7 +36,6 @@ export function* DeleteRoomShift() {
 }
 
 export function* RoomShiftRegister() {
-    alert("i am clickeds")
 
     const roomShift = yield select(Selector.AdminRoomShiftDialog)
     const params = new URLSearchParams();

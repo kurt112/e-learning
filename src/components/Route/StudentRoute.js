@@ -33,7 +33,6 @@ const StudentRoute = ({email, translation}) => {
     const [lecture, setLecture] = useState([])
     const [filterSubject, setFilterSubject] = useState([])
 
-    console.log(student)
 
     useEffect(() => {
 

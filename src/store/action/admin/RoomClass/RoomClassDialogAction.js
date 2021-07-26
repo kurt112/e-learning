@@ -5,45 +5,53 @@
  **/
 import * as roomClassAction from '../../../ActionType/Admin/RoomShiftClass/RoomShiftClassDialogActionType'
 
-export const changeRoomShiftId = (data) => {
-    return {
-        type: roomClassAction.CHANGE_ROOMCLASS_ROOMSHIFT_ID,
-        data
-    }
-}
+export const
+    changeRoomShiftId = (data) => {
+        return {
+            type: roomClassAction.CHANGE_ROOMCLASS_ROOMSHIFT_ID,
+            data
+        }
+    },
+    changeTeacherId = (data) => {
+        return {
+            type: roomClassAction.CHANGE_ROOMCLASS_TEACHERID,
+            data
+        }
+    },
+    changeSubjectId = (data) => {
+        return {
+            type: roomClassAction.CHANGE_ROOMCLASS_SUBJECT_ID,
+            data
+        }
+    },
+    changeTimeStart = (data) => {
+        return {
+            type: roomClassAction.CHANGE_ROOMCLASS_TIMESTART,
+            data
+        }
+    },
+    changeTimeEnd = (data) => {
+        return {
+            type: roomClassAction.CHANGE_ROOMCLASS_TIMEEND,
+            data
+        }
+    },
+    changeDay = (data) => {
+        return {
+            type: roomClassAction.CHANGE_ROOMCLASS_DAY,
+            data
+        }
+    },
 
-export const changeTeacherId = (data) => {
-    return {
-        type: roomClassAction.CHANGE_ROOMCLASS_TEACHERID,
-        data
-    }
-}
+    // for validation
 
-export const changeSubjectId = (data) => {
-    return {
-        type: roomClassAction.CHANGE_ROOMCLASS_SUBJECT_ID,
-        data
+    setErrorSubjectEmpty = () => {
+        return {
+            type: roomClassAction.SET_ERROR_SUBJECT_EMPTY
+        }
+    },
+    setErrorRoomShiftEmpty = () => {
+        return {
+            type: roomClassAction.SET_ERROR_ROOM_SHIFT_EMPTY
+        }
     }
-}
-
-export const changeTimeStart = (data) => {
-    return {
-        type: roomClassAction.CHANGE_ROOMCLASS_TIMESTART,
-        data
-    }
-}
-
-export const changeTimeEnd = (data) => {
-    return {
-        type: roomClassAction.CHANGE_ROOMCLASS_TIMEEND,
-        data
-    }
-}
-
-export const changeDay = (data) => {
-
-    return {
-        type: roomClassAction.CHANGE_ROOMCLASS_DAY,
-        data
-    }
-}

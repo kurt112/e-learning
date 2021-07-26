@@ -25,11 +25,10 @@ const init_state = {
     // error
     shiftError: false,
     subjectError: false,
-    teacherError:false,
-
 
     // error message
     shiftErrorMessage:'',
+    subjectErrorMessage: '',
 
 
     ...newState.init_state
@@ -38,9 +37,8 @@ const init_state = {
 
 const setState = (state, action) => {
 
-    state.id = action.id
-
     return updateObject(state, {
+        id: action.id,
         done: false,
         timeEnd: action.endTime,
         timeStart: action.startTime,
@@ -63,6 +61,40 @@ const reInit = (state) => {
     })
 }
 
+const roomShiftErrorHandler = (state) => {
+    return updateObject(state,{
+        shiftError: true,
+        shiftErrorMessage:'Please Insert Room Shift',
+        loading:false,
+        done: true
+    })
+}
+
+const subjectErrorHandler = (state) => {
+    return updateObject(state, {
+        subjectError: true,
+        subjectErrorMessage: 'Please Insert Subject',
+        loading:false,
+        done: true
+    })
+}
+
+const subjectChange = (state,data) => {
+    return updateObject(state, {
+        subject:data,
+        subjectError: false,
+        subjectErrorMessage: ''
+    })
+}
+
+const roomShiftChange = (state,data) => {
+    return updateObject(state, {
+        shift:data,
+        shiftError: false,
+        shiftErrorMessage:''
+    })
+}
+
 
 const reducer = (state=init_state, action) => {
 
@@ -73,11 +105,15 @@ const reducer = (state=init_state, action) => {
         case globalActionDialog.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(RoomShiftClass): return newState.handleClose(state,action)
 
         case actionClass.CHANGE_ROOMCLASS_DAY: return updateObject(state, {day: action.data})
-        case actionClass.CHANGE_ROOMCLASS_ROOMSHIFT_ID: return updateObject(state, {shift: action.data})
-        case actionClass.CHANGE_ROOMCLASS_SUBJECT_ID: return updateObject(state, {subject: action.data})
+        case actionClass.CHANGE_ROOMCLASS_ROOMSHIFT_ID: return roomShiftChange(state,action.data)
+        case actionClass.CHANGE_ROOMCLASS_SUBJECT_ID: return subjectChange(state,action.data)
         case actionClass.CHANGE_ROOMCLASS_TEACHERID: return updateObject(state, {teacher: action.data})
         case actionClass.CHANGE_ROOMCLASS_TIMEEND: return updateObject(state, {timeEnd: action.data})
         case actionClass.CHANGE_ROOMCLASS_TIMESTART: return updateObject(state, {timeStart: action.data})
+
+        //error handler
+        case actionClass.SET_ERROR_ROOM_SHIFT_EMPTY: return roomShiftErrorHandler(state)
+        case actionClass.SET_ERROR_SUBJECT_EMPTY: return subjectErrorHandler(state)
 
         case actions.RE_INIT(RoomShiftClass): return reInit(state)
         case actions.SET_DATA(RoomShiftClass): return setState(state, action.data)

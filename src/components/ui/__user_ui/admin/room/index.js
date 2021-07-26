@@ -17,6 +17,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import IconButton from "@material-ui/core/IconButton"
 import DeleteIcon from '@material-ui/icons/Delete'
 import UpdateIcon from '@material-ui/icons/Update'
+
 const RegisterRoom = lazy(() => import(`./RegisterRoomDialog`))
 const DeleteRoomDialog = lazy(() => import(`./DeleteRoomDialog`))
 const FindRoomDialog = lazy(() => import(`./FindRoomDialog`))
@@ -45,9 +46,23 @@ const Index = ({
     return (
         <Fragment>
 
-            <RegisterRoom translation={translation} dialog={room.dialog} closeDialog={closeDialog}/>
-            <DeleteRoomDialog translation={translation} dialog={room.deleteDialog} closeDialog={closeDeleteDialog}/>
-            <FindRoomDialog reInitState={reInitState} setData={setData} translation={translation} dialog={room.updateDialog} closeDialog={closeUpdateDialog}/>
+            <RegisterRoom
+                translation={translation}
+                dialog={room.dialog}
+                closeDialog={closeDialog}
+            />
+            <DeleteRoomDialog
+                translation={translation}
+                dialog={room.deleteDialog}
+                closeDialog={closeDeleteDialog}
+            />
+            <FindRoomDialog
+                reInitState={reInitState}
+                setData={setData}
+                translation={translation}
+                dialog={room.updateDialog}
+                closeDialog={closeUpdateDialog}
+            />
 
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
@@ -124,7 +139,7 @@ const mapDispatchToProps = (dispatch) => {
         openUpdateDialog: () => dispatch(actions.openDialog(Room_Update)),
         closeUpdateDialog: () => dispatch(actions.closeDialog(Room_Update)),
 
-        setData: (data) => dispatch(actions.setData(data,Room)),
+        setData: (data) => dispatch(actions.setData(data, Room)),
         reInitState: () => dispatch(reInitState(Room))
 
     }

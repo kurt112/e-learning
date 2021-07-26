@@ -53,8 +53,16 @@ const Index = ({
     return (
         <Fragment>
 
-            <RegisterRoom translation={translation} dialog={state.dialog} closeDialog={closeDialog}/>
-            <DeleteRoomClass translation={translation} dialog={state.deleteDialog} closeDialog={closeDeleteDialog}/>
+            <RegisterRoom
+                translation={translation}
+                dialog={state.dialog}
+                closeDialog={closeDialog}
+            />
+            <DeleteRoomClass
+                translation={translation}
+                dialog={state.deleteDialog}
+                closeDialog={closeDeleteDialog}
+            />
             <FindClassDialog reInitState={reInitState}
                              setData={setData}
                              translation={translation}

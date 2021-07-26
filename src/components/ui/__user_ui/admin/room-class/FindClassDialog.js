@@ -28,7 +28,7 @@ const FindClassDialog = ({
                 setId('')
                 setData(roomClass.data.data.roomShiftClass)
                 setUpdate(true)
-            }
+            }else alert("Class Not Found")
         })
     }
 

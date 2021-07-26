@@ -36,7 +36,7 @@ const setState = (state, action) => {
         roomName: action.roomName,
         timeEnd: action.timeEnd,
         roomNameError: false,
-        roomNameErrorMessage: ''
+        roomNameErrorMessage: '',
     })
 }
 
