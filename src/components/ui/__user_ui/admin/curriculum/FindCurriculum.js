@@ -32,7 +32,7 @@ const FindCurriculumDialog = ({
                 setId('')
                 setCurriculum(curriculum.data.data.getCurriculum)
                 setData(curriculum.data.data.getCurriculum)
-            }
+            }else alert('Curriculum Not Found')
         })
     }
 

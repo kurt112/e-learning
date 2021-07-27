@@ -18,8 +18,16 @@ import {
 } from "../utils/GraphQlQuery/AdminQuery/AdminCurriculum";
 import uuid from "short-uuid";
 import {reInitState} from "../../action/__ActionGlobal/DialogAction";
+import {checkStringEmpty} from "../../../components/ui/utils/validation";
+import {SET_ERROR_CURRICULUM_NAME_EMPTY, SET_ERROR_EMPTY_ID} from "../../action/__ActionGlobal/ValidationAction";
 export function* CurriculumRegister() {
     const data = yield select(Selector.AdminCreateCurriculum)
+
+    if(checkStringEmpty(data.name))
+        return yield put(SET_ERROR_CURRICULUM_NAME_EMPTY(Curriculum_Create))
+
+
+
     if(data.code === undefined || data.code === '') data.code = yield uuid.generate()
     yield RegisterBody(data, CreateCurriculum, Curriculum_Create,CurriculumTableDataInit)
     yield put(reInitState(Curriculum_Create))
@@ -27,9 +35,13 @@ export function* CurriculumRegister() {
 }
 
 export function * DeleteCurriculum(){
-    const classState = yield select(Selector.AdminDeleteCurriculum)
+    const curriculum = yield select(Selector.AdminDeleteCurriculum)
     const params = new URLSearchParams();
-    params.append('id', classState.id)
+
+
+    if(checkStringEmpty(curriculum.id)) return yield put(SET_ERROR_EMPTY_ID(Curriculum_Delete))
+
+    params.append('id', curriculum.id)
     yield Delete(params,deleteCurriculum,Curriculum_Delete,CurriculumTableDataInit)
 }
 

@@ -23,7 +23,7 @@ import Divider from "@material-ui/core/Divider";
 const CreateCurriculumDialog = ({
                                     closeDialog,
                                     dialog,
-                                    dialogState,
+                                    state,
                                     changeName,
                                     changeDescription,
                                     registerDialogMessageClose,
@@ -43,17 +43,19 @@ const CreateCurriculumDialog = ({
             <Divider/>
             <DialogContent>
 
-                <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
+                <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
                           messageFail={translation.language["message.curriculum.dialog.create.fail"]}
                           messageSuccess={translation.language["message.curriculum.dialog.create.success"]}/>
 
                 <Grid container spacing={1}>
                     <Grid item md={12} xs={12}>
                         <TextField
+                            error={state.nameError}
+                            helperText={state.nameErrorMessage}
                             autoFocus
                             margin="dense"
                             label={translation.language["label.curriculum.dialog.create.input.name"]}
-                            value={dialogState.name}
+                            value={state.name}
                             onChange={(event) => changeName(event.target.value)}
                             type="text"
                             fullWidth
@@ -66,7 +68,7 @@ const CreateCurriculumDialog = ({
                             rows={12}
                             style={{width: '100%'}}
                             margin="dense"
-                            value={dialogState.description}
+                            value={state.description}
                             onChange={(event) => changeDescription(event.target.value)}
                             variant="outlined"
                         />
@@ -88,7 +90,7 @@ const CreateCurriculumDialog = ({
 
 const mapStateToProps = (state) => {
     return {
-        dialogState: state.CreateCurriculum
+        state: state.CreateCurriculum
     }
 }
 

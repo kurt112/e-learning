@@ -16,6 +16,7 @@ import * as actions from '../../../../../store/action/__ActionGlobal/DialogActio
 import {Curriculum_Delete} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
 import Divider from "@material-ui/core/Divider";
+import {useEffect} from "react";
 
 const DeleteCurriculumDialog = ({
                                     dialog,
@@ -28,8 +29,16 @@ const DeleteCurriculumDialog = ({
                                 }) => {
 
     const RegisterEnter = (event) => {
-        if (event.key === "Enter" && state.id.length > 0) dialogRegister()
+        if (event.key === "Enter") dialogRegister()
     }
+
+    const changeId = (data) => {
+        dialogId(data)
+    }
+
+    useEffect(() => {
+        changeId('')
+    }, [dialog])
 
     return <Dialog
         open={dialog}
@@ -47,13 +56,15 @@ const DeleteCurriculumDialog = ({
                       messageSuccess={translation.language["message.curriculum.dialog.delete.success"]}/>
             <TextField
                 autoFocus
+                error={state.errorId || state.error}
+                helperText={state.errorMessageId}
                 value={state.id}
                 margin="dense"
                 variant={'outlined'}
                 label={translation.language["label.curriculum.dialog.input.enter.code"]}
                 type="text"
                 fullWidth
-                onChange={(event) => dialogId(event.target.value)}
+                onChange={(event) => changeId(event.target.value)}
                 onKeyDown={event => {
                     RegisterEnter(event)
                 }}

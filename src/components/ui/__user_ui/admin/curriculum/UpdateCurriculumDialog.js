@@ -19,20 +19,25 @@ import * as dialogAction from "../../../../../store/action/admin/Curriculum/Crea
 import * as action from "../../../../../store/action/__ActionGlobal/DialogAction";
 import {Curriculum_Create} from "../../../../../store/utils/Specify";
 import {connect} from "react-redux";
+import {useEffect} from "react";
 
 const UpdateCurriculumDialog = ({
                                     closeDialog,
                                     dialog,
-                                    dialogState,
+                                    state,
                                     changeName,
                                     changeDescription,
                                     registerDialogMessageClose,
                                     registerDialog,
                                     translation,
                                 }) => {
+    useEffect(() => {
+        if(state.done === true && state.nameError === false){
+            updateClick().then(ignored=>{})
+        }
+    }, [state.done])
 
-    const updateClick = async () => {
-        registerDialog()
+    const updateClick =  async () => {
         await new Promise(r => setTimeout(r, 1000));
         registerDialogMessageClose()
         closeDialog()
@@ -50,17 +55,19 @@ const UpdateCurriculumDialog = ({
             <Divider/>
             <DialogContent>
 
-                <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
+                <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
                           messageFail={translation.language["message.curriculum.dialog.update.fail"]}
                           messageSuccess={translation.language["message.curriculum.dialog.update.success"]}/>
 
                 <Grid container spacing={1}>
                     <Grid item md={12} xs={12}>
                         <TextField
+                            error={state.nameError}
+                            helperText={state.nameErrorMessage}
                             autoFocus
                             margin="dense"
                             label={translation.language["label.curriculum.dialog.create.input.name"]}
-                            value={dialogState.name}
+                            value={state.name}
                             onChange={(event) => changeName(event.target.value)}
                             type="text"
                             fullWidth
@@ -73,7 +80,7 @@ const UpdateCurriculumDialog = ({
                             rows={12}
                             style={{width: '100%'}}
                             margin="dense"
-                            value={dialogState.description}
+                            value={state.description}
                             onChange={(event) => changeDescription(event.target.value)}
                             variant="outlined"
                         />
@@ -82,7 +89,7 @@ const UpdateCurriculumDialog = ({
             </DialogContent>
 
             <DialogActions>
-                <Button variant={'contained'} disableElevation onClick={updateClick} color='primary'>
+                <Button variant={'contained'} disableElevation onClick={registerDialog} color='primary'>
                     {translation.language["label.button.update"]}
                 </Button>
                 <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
@@ -95,7 +102,7 @@ const UpdateCurriculumDialog = ({
 
 const mapStateToProps = (state) => {
     return {
-        dialogState: state.CreateCurriculum
+        state: state.CreateCurriculum
     }
 }
 
