@@ -8,6 +8,10 @@ import * as actions from '../../../ActionType/__ActionTypeGlobal/DialogActionTyp
 import {updateObject} from '../../../utils/UpdateObject'
 import state from '../../__StateGlobal/AdminTableDialogState'
 import {Subject} from "../../../utils/Specify";
+import {
+    SET_ERROR_SUBJECT_CODE_EMPTY,
+    SET_ERROR_SUBJECT_NAME_EMPTY
+} from "../../../ActionType/__ActionTypeGlobal/ValidationActionType";
 
 const newState = new state()
 
@@ -77,7 +81,7 @@ const subjectNameChange = (state, data) => {
 const subjectCodeErrorHandler = (state) => {
     return updateObject(state, {
         subjectCodeError: true,
-        subjectCodeErrorMessage: '',
+        subjectCodeErrorMessage: 'Please Insert A Value',
         loading:false,
         done: true
     })
@@ -86,7 +90,7 @@ const subjectCodeErrorHandler = (state) => {
 const subjectNameErrorHandler = (state) => {
     return updateObject(state, {
         subjectNameError: true,
-        subjectNameErrorMessage: '',
+        subjectNameErrorMessage: 'Please Insert A Value',
         loading:false,
         done: true
     })
@@ -105,13 +109,16 @@ const reducer = (state=init_state, action)=>{
         case actions.ADMIN_DIALOG_REGISTER_SUCCESS(Subject): return success(state)
         case actions.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(Subject): return newState.handleClose(state,action)
 
-
         case dialogActions.CHANGE_SUBJECT_NAME: return subjectNameChange(state,action.value)
         case dialogActions.CHANGE_SUBJECT_CODE: return subjectCodeChange(state,action.value)
         case dialogActions.CHANGE_SUBJECT_MAJOR: return updateObject(state, {subjectMajor: action.value})
 
         case actions.RE_INIT(Subject): return reInit(state)
         case actions.SET_DATA(Subject): return setState(state, action.data)
+
+        // validation
+        case SET_ERROR_SUBJECT_NAME_EMPTY(Subject): return subjectNameErrorHandler(state)
+        case SET_ERROR_SUBJECT_CODE_EMPTY(Subject): return subjectCodeErrorHandler(state)
 
         default: return state;
     }

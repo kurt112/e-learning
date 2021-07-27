@@ -50,4 +50,16 @@ export const
         return {
             type: actions.SET_ERROR_ID_EMPTY(to)
         }
+    },
+
+    SET_ERROR_SUBJECT_NAME_EMPTY = (to) => {
+        return {
+            type: actions.SET_ERROR_SUBJECT_NAME_EMPTY(to)
+        }
+    },
+
+    SET_ERROR_SUBJECT_CODE_EMPTY = (to) => {
+        return {
+            type: actions.SET_ERROR_SUBJECT_CODE_EMPTY(to)
+        }
     }

@@ -28,7 +28,7 @@ const UpdateSubject = (
     {
         closeDialog,
         dialog,
-        subject,
+        state,
         changeSubjectName,
         changeSubjectCode,
         changeSubjectMajor,
@@ -37,7 +37,7 @@ const UpdateSubject = (
         translation
     }) => {
 
-    const alert = async () => {
+    const updateClick = async () => {
         await new Promise(r => setTimeout(r, 1000));
         registerDialogMessageClose()
         closeDialog()
@@ -45,14 +45,13 @@ const UpdateSubject = (
 
     useEffect(() => {
 
-        if(subject.done === true && subject.error === false) alert().then(ignored=>{})
+        if (state.done === true && state.subjectCodeError === false && state.subjectNameError === false) {
+            updateClick().then(ignored => {
+            })
+        }
 
-    }, [subject.done])
+    }, [state.done])
 
-    const updateClick = async () => {
-        registerDialog()
-
-    }
 
     return <Dialog
         open={dialog}
@@ -65,32 +64,37 @@ const UpdateSubject = (
             <DialogTitle id="add-subject">{translation.language["tooltip.subject.update"]}</DialogTitle>
             <Divider/>
             <DialogContent>
-                <Response dialogState={subject} registerDialogMessageClose={registerDialogMessageClose}
+                <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
                           messageFail={translation.language["message.subject.dialog.register.fail"]}
                           messageSuccess={translation.language["message.subject.dialog.register.success"]}/>
 
                 <Grid container spacing={1}>
                     <Grid item md={4} xs={12}>
-                        <TextField autoFocus
-                                   margin="dense"
-                                   label={translation.language["label.global.subject.name"]}
-                                   type="text"
-                                   fullWidth
-                                   variant="outlined"
-                                   name='subject-name'
-                                   value={subject.subjectName}
-                                   onChange={(event) => changeSubjectName(event)}
+                        <TextField
+                            error={state.subjectNameError}
+                            helperText={state.subjectNameErrorMessage}
+                            autoFocus
+                            margin="dense"
+                            label={translation.language["label.global.subject.name"]}
+                            type="text"
+                            fullWidth
+                            variant="outlined"
+                            name='subject-name'
+                            value={state.subjectName}
+                            onChange={(event) => changeSubjectName(event)}
                         />
 
                     </Grid>
                     <Grid item md={4} xs={12}>
                         <TextField
+                            error={state.subjectCodeError}
+                            helperText={state.subjectCodeErrorMessage}
                             margin="dense"
                             label={translation.language["label.global.subject.code"]}
                             type="text"
                             fullWidth
                             variant="outlined"
-                            value={subject.subjectCode}
+                            value={state.subjectCode}
                             onChange={(event) => changeSubjectCode(event)}
                         />
                     </Grid>
@@ -100,7 +104,7 @@ const UpdateSubject = (
                                 htmlFor={translation.language["label.global.major"]}>{translation.language["label.global.major"]}</InputLabel>
                             <Select
                                 native
-                                value={subject.subjectMajor}
+                                value={state.subjectMajor}
                                 label={translation.language["label.global.major"]}
                                 inputProps={{
                                     name: translation.language["label.global.major"],
@@ -119,7 +123,7 @@ const UpdateSubject = (
             </DialogContent>
 
             <DialogActions>
-                <Button variant={'contained'} disableElevation color='primary' onClick={updateClick}>
+                <Button variant={'contained'} disableElevation color='primary' onClick={registerDialog}>
                     {translation.language["label.button.update"]}
                 </Button>
                 <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
@@ -132,7 +136,7 @@ const UpdateSubject = (
 
 const mapStateToProps = (state) => {
     return {
-        subject: state.AdminSubjectDialog
+        state: state.AdminSubjectDialog
     }
 }
 

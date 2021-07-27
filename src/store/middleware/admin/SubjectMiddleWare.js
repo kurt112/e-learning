@@ -7,7 +7,7 @@ import {put, select} from 'redux-saga/effects'
 import * as Selector from '../selector'
 import {Delete, RegisterBody, TableDataInit, TableNextData} from "./__MiddleWareGlobal"
 import {AdminSubjectRegister, DeleteSubject as deleteSubject} from "../utils/ApiEndpoint/ClassroomEndPoint"
-import {Subject, Subject_Delete} from "../../utils/Specify"
+import { Subject, Subject_Delete} from "../../utils/Specify"
 import {
     AdminSubjectBodyDataQuery,
     AdminSubjectBodyDataSettingsQuery
@@ -15,11 +15,24 @@ import {
 import {graphQlRequestAsync} from "../utils/HttpRequest";
 import {getSubjectBasic} from "../utils/GraphQlQuery/ProfileQuery/SubjectProfile";
 import * as actions from "../../action/__ActionGlobal/DialogAction";
+import {checkStringEmpty} from "../../../components/ui/utils/validation";
+import {
+    SET_ERROR_EMPTY_ID,
+    SET_ERROR_SUBJECT_CODE_EMPTY,
+    SET_ERROR_SUBJECT_NAME_EMPTY
+} from "../../action/__ActionGlobal/ValidationAction";
 
 export function* DeleteSubject() {
-    const classState = yield select(Selector.DeleteSubjectDialog)
+    const subject = yield select(Selector.DeleteSubjectDialog)
+
+    if (checkStringEmpty(subject.id)) {
+        yield put(SET_ERROR_EMPTY_ID(Subject_Delete))
+        return;
+    }
+
+
     const params = new URLSearchParams();
-    params.append('id', classState.id)
+    params.append('id', subject.id)
 
 
     yield Delete(params, deleteSubject, Subject_Delete, SubjectTableDataInit)
@@ -31,6 +44,21 @@ export function* RegisterSubject() {
 
     const exist = yield graphQlRequestAsync(getSubjectBasic(subjectState.subjectCode))
     const subject = exist.data.data.getSubject
+
+    let error = false
+
+
+    if (checkStringEmpty(subjectState.subjectCode)) {
+        error = true
+        yield put(SET_ERROR_SUBJECT_CODE_EMPTY(Subject))
+    }
+
+    if (checkStringEmpty(subjectState.subjectName)) {
+        error = true
+        yield put(SET_ERROR_SUBJECT_NAME_EMPTY(Subject))
+    }
+
+    if (error) return;
 
     if (subject === null) {
         yield RegisterBody(subjectState, AdminSubjectRegister, Subject, SubjectTableDataInit)

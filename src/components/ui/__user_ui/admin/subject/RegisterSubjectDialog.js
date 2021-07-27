@@ -27,7 +27,7 @@ const RegisterSubject = (
     {
         closeDialog,
         dialog,
-        subject,
+        state,
         changeSubjectName,
         changeSubjectCode,
         changeSubjectMajor,
@@ -47,33 +47,38 @@ const RegisterSubject = (
             <DialogTitle id="add-subject">{translation.language["label.subject.dialog.add.title"]}</DialogTitle>
             <Divider/>
             <DialogContent>
-                <Response dialogState={subject} registerDialogMessageClose={registerDialogMessageClose}
+                <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
                           messageFail={translation.language["message.subject.dialog.register.fail"]}
                           messageSuccess={translation.language["message.subject.dialog.register.success"]}/>
 
                 <Grid container spacing={1}>
                     <Grid item md={12} xs={12}>
-                        <TextField autoFocus
-                                   margin="dense"
-                                   label={translation.language["label.global.subject.name"]}
-                                   type="text"
-                                   fullWidth
-                                   variant="outlined"
-                                   name='subject-name'
-                                   value={subject.subjectName}
-                                   onChange={(event) => changeSubjectName(event)}
+                        <TextField
+                            error={state.subjectNameError}
+                            helperText={state.subjectNameErrorMessage}
+                            autoFocus
+                            margin="dense"
+                            label={translation.language["label.global.subject.name"]}
+                            type="text"
+                            fullWidth
+                            variant="outlined"
+                            name='subject-name'
+                            value={state.subjectName}
+                            onChange={(event) => changeSubjectName(event.target.value)}
                         />
 
                     </Grid>
                     <Grid item md={6} xs={12}>
                         <TextField
+                            error={state.subjectCodeError}
+                            helperText={state.subjectCodeErrorMessage}
                             margin="dense"
                             label={translation.language["label.global.subject.code"]}
                             type="text"
                             fullWidth
                             variant="outlined"
-                            value={subject.subjectCode}
-                            onChange={(event) => changeSubjectCode(event)}
+                            value={state.subjectCode}
+                            onChange={(event) => changeSubjectCode(event.target.value)}
                         />
                     </Grid>
                     <Grid item md={6} xs={12}>
@@ -82,13 +87,13 @@ const RegisterSubject = (
                                 htmlFor={translation.language["label.global.category"]}>{translation.language["label.global.category"]}</InputLabel>
                             <Select
                                 native
-                                value={subject.subjectMajor}
+                                value={state.subjectMajor}
                                 label={translation.language["label.global.category"]}
                                 inputProps={{
                                     name: translation.language["label.global.category"],
                                     id: translation.language["label.global.category"],
                                 }}
-                                onChange={(event => changeSubjectMajor(event))}
+                                onChange={(event => changeSubjectMajor(event.target.value))}
                             >
                                 <option
                                     value={translation.language["label.global.minor"]}>{translation.language["label.global.minor"]}</option>
@@ -114,15 +119,15 @@ const RegisterSubject = (
 
 const mapStateToProps = (state) => {
     return {
-        subject: state.AdminSubjectDialog
+        state: state.AdminSubjectDialog
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changeSubjectName: (event) => dispatch(actions.changeSubjectName(event.target.value)),
-        changeSubjectCode: (event) => dispatch(actions.changeSubjectCode(event.target.value)),
-        changeSubjectMajor: (event) => dispatch(actions.changeSubjectMajor(event.target.value)),
+        changeSubjectName: (data) => dispatch(actions.changeSubjectName(data)),
+        changeSubjectCode: (data) => dispatch(actions.changeSubjectCode(data)),
+        changeSubjectMajor: (data) => dispatch(actions.changeSubjectMajor(data)),
 
         registerDialogMessageClose: () => dispatch(action.registerDialogMessageClose(Subject)),
         registerDialog: () => dispatch(action.dialogRegister(Subject))
