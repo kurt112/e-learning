@@ -4,16 +4,24 @@
  * @created : 11/07/2021, Sunday
  **/
 import {Student, Student_Delete} from '../../utils/Specify'
-import {select} from "redux-saga/effects";
+import {put, select} from "redux-saga/effects";
 import * as Selector from "../selector";
 import {AdminStudentRegister, DeleteStudent as deleteStudent} from "../utils/ApiEndpoint/ClassroomEndPoint";
 import {TableNextData, TableDataInit, Register, Delete} from './__MiddleWareGlobal'
 import {AdminStudentBodyDataSettingsQuery,AdminStudentBodyDataQuery} from "../utils/GraphQlQuery/AdminQuery/AdminStudentQuery";
+import {checkStringEmpty} from "../../../components/ui/utils/validation";
+import {setErrorEmptyId} from "../../action/__ActionGlobal/DialogAction";
 
 export function * DeleteStudent(){
-    const classState = yield select(Selector.DeleteStudentDialog)
+    const student = yield select(Selector.DeleteStudentDialog)
     const params = new URLSearchParams();
-    params.append('id', classState.id)
+
+    if(checkStringEmpty(student.id)) {
+        yield put(setErrorEmptyId(Student_Delete))
+        return
+    }
+
+    params.append('id',student.id)
 
     yield Delete(params,deleteStudent,Student_Delete,StudentTableDataInit)
 }
@@ -21,6 +29,12 @@ export function * DeleteStudent(){
 export function* StudentRegister() {
     const student = yield select(Selector.AdminStudentDialog)
     const params = new URLSearchParams();
+
+    if(checkStringEmpty(student.id)) {
+        yield put(setErrorEmptyId(Student))
+        return
+    }
+
     params.append('id', student.id)
     yield Register(params, AdminStudentRegister, Student, StudentTableDataInit)
 }

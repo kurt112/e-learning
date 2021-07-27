@@ -15,6 +15,7 @@ import {connect} from 'react-redux'
 import * as actions from '../../../../../store/action/__ActionGlobal/DialogAction'
 import {Teacher_Delete} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
+import {useEffect} from "react";
 
 const DeleteRoomShiftDialog = ({
                                    dialog,
@@ -26,8 +27,16 @@ const DeleteRoomShiftDialog = ({
                                    translation
                                }) => {
 
+    const changeId = (data) => {
+        dialogId(data)
+    }
+
+    useEffect(() => {
+        changeId('')
+    }, [dialog])
+
     const RegisterEnter = (event) => {
-        if (event.key === "Enter" && state.id.length > 0) dialogRegister()
+        if (event.key === "Enter") dialogRegister()
     }
 
     return <Dialog
@@ -45,6 +54,8 @@ const DeleteRoomShiftDialog = ({
                       messageFail={translation.language["message.teacher.dialog.delete.fail"]}
                       messageSuccess={translation.language["message.teacher.dialog.delete.success"]}/>
             <TextField
+                error={state.errorId || state.error}
+                helperText={state.errorMessageId}
                 autoFocus
                 value={state.id}
                 margin="dense"
@@ -52,7 +63,7 @@ const DeleteRoomShiftDialog = ({
                 label={translation.language["label.teacher.dialog.input.email"]}
                 type="text"
                 fullWidth
-                onChange={(event) => dialogId(event.target.value)}
+                onChange={(event) => changeId(event.target.value)}
                 onKeyDown={event => {
                     RegisterEnter(event)
                 }}

@@ -55,6 +55,17 @@ class state{
                 errorMessageId: 'Please Input Id'
             })
         }
+
+        this.changeId = (state,data) => {
+            return updateObject(state, {
+                id:data,
+                errorId: false,
+                errorMessageId: '',
+                showMessage: false,
+                error:false
+            })
+        }
+
     }
 
 }

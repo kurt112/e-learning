@@ -62,6 +62,7 @@ const InsertSubjectInCurriculumDialog = (
 
 
     const uploadSubjects = () => {
+        alert('i am licked')
         const data = {
             curriculumCode,
             subjects: curriculumSubjects.map(e => e.subjectCode)

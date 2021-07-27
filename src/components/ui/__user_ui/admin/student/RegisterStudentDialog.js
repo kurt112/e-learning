@@ -15,6 +15,7 @@ import {connect} from 'react-redux'
 import * as actions from '../../../../../store/action/__ActionGlobal/DialogAction'
 import {Student} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
+import {useEffect} from "react";
 
 const RegisterStudentDialog = ({
                                    dialog,
@@ -26,8 +27,16 @@ const RegisterStudentDialog = ({
                                    translation
                                }) => {
 
+    const changeId = (data) => {
+        dialogId(data)
+    }
+
+    useEffect(() => {
+        changeId('')
+    }, [dialog])
+
     const RegisterEnter = (event) => {
-        if (event.key === "Enter" && student.id.length > 0) dialogRegister()
+        if (event.key === "Enter") dialogRegister()
     }
 
     return <Dialog
@@ -44,13 +53,15 @@ const RegisterStudentDialog = ({
                       messageFail={translation.language["message.student.dialog.register.fail"]}
                       messageSuccess={translation.language["message.student.dialog.register.success"]}/>
             <TextField
+                error={student.errorId || student.error}
+                helperText={student.errorMessageId}
                 autoFocus
                 margin="dense"
                 label={translation.language["label.student.dialog.input.lrn"]}
                 type="text"
                 fullWidth
                 value={student.id}
-                onChange={(event) => dialogId(event)}
+                onChange={(event) => changeId(event.target.value)}
                 onKeyDown={event => {
                     RegisterEnter(event)
                 }}
@@ -77,7 +88,7 @@ const mapToState = (state) => {
 const mapDispatchToState = (dispatch) => {
     return {
         dialogRegister: () => dispatch(actions.dialogRegister(Student)),
-        dialogId: (event) => dispatch(actions.dialogId(event.target.value, Student)),
+        dialogId: (data) => dispatch(actions.dialogId(data, Student)),
         registerDialogMessageClose: (event) => dispatch(actions.registerDialogMessageClose(event, Student))
     }
 }
