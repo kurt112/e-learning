@@ -28,7 +28,7 @@ const FindSubjectDialog = ({
                 setCode('')
                 setData(subject.data.data.getSubject)
                 setUpdate(true)
-            }
+            }else alert("Subject Not Found")
         })
     }
 

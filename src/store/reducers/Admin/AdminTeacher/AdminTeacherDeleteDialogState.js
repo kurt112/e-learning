@@ -5,7 +5,8 @@
  **/
 import state from '../../__StateGlobal/AdminTableDialogState'
 import * as globalActionDialog from '../../../ActionType/__ActionTypeGlobal/DialogActionType'
-import {Student_Delete, Teacher_Delete} from "../../../utils/Specify";
+import {Teacher_Delete} from "../../../utils/Specify";
+import {SET_ERROR_ID_EMPTY} from "../../../ActionType/__ActionTypeGlobal/ValidationActionType";
 
 const newState = new state();
 
@@ -29,7 +30,7 @@ const reducer = (state = init_state, action) => {
             return newState.changeId(state,action.value)
 
         // error Handler
-        case globalActionDialog.SET_ERROR_EMPTY_ID(Teacher_Delete):
+        case SET_ERROR_ID_EMPTY(Teacher_Delete):
             return newState.emptyIdErrorHandler(state)
 
         default:

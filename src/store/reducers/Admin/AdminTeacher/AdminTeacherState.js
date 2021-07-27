@@ -8,10 +8,15 @@ import {AdminInsertTeacherTable as insert} from "../../../../components/ui/utils
 import {Teacher, Teacher_Delete} from '../../../utils/Specify'
 import state from '../../__StateGlobal/AdminTableState'
 import {updateObject} from "../../../utils/UpdateObject";
+import {convertDateTime} from "../../../../components/ui/utils/dateFormat/DateTimeFormatToDateWord";
 
 const newState = new state()
 
-const transforms = (items) => items.map((item) => insert(item.id,item.user.firstName, item.user.lastName, item.user.email, item.user.birthdate))
+const transforms = (items) => items.map((item) => {
+    const birthdate = item.user.birthdate === null ? 'No Info' : convertDateTime(item.user.birthdate)
+
+    return insert(item.id, item.user.firstName, item.user.lastName, item.user.email, birthdate)
+})
 const currentState = {
     ...newState.init_state,
     deleteDialog: false

@@ -4,8 +4,9 @@
  * @created : 11/07/2021, Sunday
  **/
 import * as actions from "../../../ActionType/__ActionTypeGlobal/DialogActionType";
-import {RoomShift} from "../../../utils/Specify";
 import * as roomShiftAction from "../../../ActionType/Admin/RoomShift/RoomShiftDialogActionType";
+import * as validationAction from '../../../ActionType/__ActionTypeGlobal/ValidationActionType'
+import {RoomShift} from "../../../utils/Specify";
 import {updateObject} from "../../../utils/UpdateObject";
 import State from "../../__StateGlobal/AdminTableDialogState"
 
@@ -162,10 +163,10 @@ const reducer = (state=init_state, action)=>{
 
 
         // error handler
-        case roomShiftAction.SET_ERROR_ROOM_EMPTY: return roomErrorHandler(state)
-        case roomShiftAction.SET_ERROR_CURRICULUM_EMPTY: return curriculumErrorHandler(state)
-        case roomShiftAction.SET_ERROR_SECTION_EMPTY: return sectionErrorHandler(state)
-        case roomShiftAction.SET_ERROR_GRADE_EMPTY: return gradeErrorHandler(state)
+        case validationAction.SET_ERROR_ROOM_EMPTY(RoomShift): return roomErrorHandler(state)
+        case validationAction.SET_ERROR_CURRICULUM_EMPTY(RoomShift): return curriculumErrorHandler(state)
+        case validationAction.SET_ERROR_SECTION_EMPTY(RoomShift): return sectionErrorHandler(state)
+        case validationAction.SET_ERROR_GRADE_EMPTY(RoomShift): return gradeErrorHandler(state)
 
         default: return state;
     }

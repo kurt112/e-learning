@@ -10,14 +10,14 @@ import {AdminStudentRegister, DeleteStudent as deleteStudent} from "../utils/Api
 import {TableNextData, TableDataInit, Register, Delete} from './__MiddleWareGlobal'
 import {AdminStudentBodyDataSettingsQuery,AdminStudentBodyDataQuery} from "../utils/GraphQlQuery/AdminQuery/AdminStudentQuery";
 import {checkStringEmpty} from "../../../components/ui/utils/validation";
-import {setErrorEmptyId} from "../../action/__ActionGlobal/DialogAction";
+import {SET_ERROR_EMPTY_ID} from "../../action/__ActionGlobal/ValidationAction";
 
 export function * DeleteStudent(){
     const student = yield select(Selector.DeleteStudentDialog)
     const params = new URLSearchParams();
 
     if(checkStringEmpty(student.id)) {
-        yield put(setErrorEmptyId(Student_Delete))
+        yield put(SET_ERROR_EMPTY_ID(Student_Delete))
         return
     }
 
@@ -31,7 +31,7 @@ export function* StudentRegister() {
     const params = new URLSearchParams();
 
     if(checkStringEmpty(student.id)) {
-        yield put(setErrorEmptyId(Student))
+        yield put(SET_ERROR_EMPTY_ID(Student))
         return
     }
 

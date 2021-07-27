@@ -41,17 +41,4 @@ export const
             type: roomClassAction.CHANGE_ROOMCLASS_DAY,
             data
         }
-    },
-
-    // for validation
-
-    setErrorSubjectEmpty = () => {
-        return {
-            type: roomClassAction.SET_ERROR_SUBJECT_EMPTY
-        }
-    },
-    setErrorRoomShiftEmpty = () => {
-        return {
-            type: roomClassAction.SET_ERROR_ROOM_SHIFT_EMPTY
-        }
     }

@@ -7,6 +7,8 @@ import state from '../../__StateGlobal/AdminTableDialogState'
 import * as globalActionDialog from '../../../ActionType/__ActionTypeGlobal/DialogActionType'
 import {updateObject} from "../../../utils/UpdateObject";
 import {RoomShiftClass_Delete} from "../../../utils/Specify";
+import {SET_ERROR_EMPTY_ID} from "../../../action/__ActionGlobal/ValidationAction";
+import {SET_ERROR_ID_EMPTY} from "../../../ActionType/__ActionTypeGlobal/ValidationActionType";
 
 const newState = new state();
 
@@ -39,8 +41,7 @@ const reducer = (state = init_state, action) => {
             return newState.handleClose(state, action)
         case globalActionDialog.ADMIN_DIALOG_ID_CHANGE(RoomShiftClass_Delete): return changeId(state,action.value)
 
-        case globalActionDialog.SET_ERROR_EMPTY_ID(RoomShiftClass_Delete):
-            return newState.emptyIdErrorHandler(state)
+        case SET_ERROR_ID_EMPTY(RoomShiftClass_Delete):return newState.emptyIdErrorHandler(state)
 
         default:
             return state;

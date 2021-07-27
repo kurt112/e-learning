@@ -3,9 +3,10 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import state from '../../__StateGlobal/AdminTableDialogState'
 import * as actions from '../../../ActionType/__ActionTypeGlobal/DialogActionType'
 import * as roomAction from '../../../ActionType/Admin/Room/RoomDialogActionType'
+import {SET_ERROR_ROOM_EMPTY} from '../../../ActionType/__ActionTypeGlobal/ValidationActionType'
+import state from '../../__StateGlobal/AdminTableDialogState'
 import {Room} from '../../../utils/Specify'
 import {updateObject} from "../../../utils/UpdateObject";
 
@@ -94,7 +95,7 @@ const reducer = (state = init_state, action) => {
             return updateObject(state, {timeEnd: action.data})
 
         // Error Handler
-        case roomAction.SET_ERROR_ROOM_EMPTY:
+        case SET_ERROR_ROOM_EMPTY(Room):
             return roomNameError(state)
 
 

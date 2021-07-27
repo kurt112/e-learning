@@ -15,17 +15,17 @@ import {
 import uuid from "short-uuid";
 import {checkStringEmpty} from "../../../components/ui/utils/validation";
 import {
+    SET_ERROR_EMPTY_ID,
     setCurriculumEmptyError,
-    setGradeEmptyError,
-    setRoomEmptyError, setSectionEmptyError
-} from "../../action/admin/RoomShift/RoomShiftDialogAction";
-import {setErrorEmptyId} from "../../action/__ActionGlobal/DialogAction";
+    setGradeEmptyError, setRoomEmptyError,
+    setSectionEmptyError
+} from "../../action/__ActionGlobal/ValidationAction";
 
 export function* DeleteRoomShift() {
     const roomShift = yield select(Selector.DeleteRoomShiftDialog)
 
     if(checkStringEmpty(roomShift.id)) {
-        yield put(setErrorEmptyId(RoomShift_Delete))
+        yield put(SET_ERROR_EMPTY_ID(RoomShift_Delete))
         return;
     }
 
@@ -47,22 +47,22 @@ export function* RoomShiftRegister() {
 
     if(checkStringEmpty(roomShift.room)){
         error = true
-        yield put(setRoomEmptyError())
+        yield put(setRoomEmptyError(RoomShift))
     }
 
     if(checkStringEmpty(roomShift.curriculum)){
         error = true
-        yield put(setCurriculumEmptyError())
+        yield put(setCurriculumEmptyError(RoomShift))
     }
 
     if(checkStringEmpty(roomShift.grade)){
         error = true
-        yield put(setGradeEmptyError())
+        yield put(setGradeEmptyError(RoomShift))
     }
 
     if(checkStringEmpty(roomShift.section)){
         error = true
-        yield put(setSectionEmptyError())
+        yield put(setSectionEmptyError(RoomShift))
     }
 
     if(error === false){

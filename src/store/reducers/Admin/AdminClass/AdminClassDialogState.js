@@ -9,6 +9,10 @@ import * as globalActionDialog from '../../../ActionType/__ActionTypeGlobal/Dial
 import {RoomShiftClass} from '../../../utils/Specify'
 import {updateObject} from "../../../utils/UpdateObject";
 import * as actions from "../../../ActionType/__ActionTypeGlobal/DialogActionType";
+import {
+    SET_ERROR_ROOM_SHIFT_EMPTY,
+    SET_ERROR_SUBJECT_EMPTY
+} from "../../../ActionType/__ActionTypeGlobal/ValidationActionType";
 
 const newState = new state();
 
@@ -112,8 +116,8 @@ const reducer = (state=init_state, action) => {
         case actionClass.CHANGE_ROOMCLASS_TIMESTART: return updateObject(state, {timeStart: action.data})
 
         //error handler
-        case actionClass.SET_ERROR_ROOM_SHIFT_EMPTY: return roomShiftErrorHandler(state)
-        case actionClass.SET_ERROR_SUBJECT_EMPTY: return subjectErrorHandler(state)
+        case SET_ERROR_ROOM_SHIFT_EMPTY(RoomShiftClass): return roomShiftErrorHandler(state)
+        case SET_ERROR_SUBJECT_EMPTY(RoomShiftClass): return subjectErrorHandler(state)
 
         case actions.RE_INIT(RoomShiftClass): return reInit(state)
         case actions.SET_DATA(RoomShiftClass): return setState(state, action.data)

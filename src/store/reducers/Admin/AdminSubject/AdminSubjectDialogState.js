@@ -54,6 +54,45 @@ const reInit = (state) => {
     })
 }
 
+// change handler
+const subjectCodeChange = (state, data) => {
+    return updateObject(state, {
+        subjectCode: data,
+        subjectCodeError: false,
+        subjectCodeErrorMessage: '',
+    })
+}
+
+const subjectNameChange = (state, data) => {
+    return updateObject(state, {
+        subjectName: data,
+        subjectNameError: false,
+        subjectNameErrorMessage: '',
+    })
+}
+
+
+
+// error handler
+const subjectCodeErrorHandler = (state) => {
+    return updateObject(state, {
+        subjectCodeError: true,
+        subjectCodeErrorMessage: '',
+        loading:false,
+        done: true
+    })
+}
+
+const subjectNameErrorHandler = (state) => {
+    return updateObject(state, {
+        subjectNameError: true,
+        subjectNameErrorMessage: '',
+        loading:false,
+        done: true
+    })
+}
+
+
 const success= (state) => {
     state = reInit(state)
     return newState.successRegister(state)
@@ -67,8 +106,8 @@ const reducer = (state=init_state, action)=>{
         case actions.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(Subject): return newState.handleClose(state,action)
 
 
-        case dialogActions.CHANGE_SUBJECT_NAME: return updateObject(state, {subjectName:action.value})
-        case dialogActions.CHANGE_SUBJECT_CODE: return updateObject(state,{subjectCode:action.value})
+        case dialogActions.CHANGE_SUBJECT_NAME: return subjectNameChange(state,action.value)
+        case dialogActions.CHANGE_SUBJECT_CODE: return subjectCodeChange(state,action.value)
         case dialogActions.CHANGE_SUBJECT_MAJOR: return updateObject(state, {subjectMajor: action.value})
 
         case actions.RE_INIT(Subject): return reInit(state)

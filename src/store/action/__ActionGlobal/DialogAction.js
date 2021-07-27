@@ -40,12 +40,6 @@ export const
         return {
             type: actions.RE_INIT(to)
         }
-    },
-
-    setErrorEmptyId = (to) => {
-        return {
-            type: actions.SET_ERROR_EMPTY_ID(to)
-        }
     }
 
 

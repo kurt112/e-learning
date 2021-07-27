@@ -59,29 +59,5 @@ export const
             type: actions.ROOMSHIFT_DIALOG_CURRICULUM_CHANGE,
             data
         }
-    },
-
-    setRoomEmptyError = () => {
-        return {
-            type: actions.SET_ERROR_ROOM_EMPTY
-        }
-    },
-
-    setCurriculumEmptyError = () => {
-        return {
-            type: actions.SET_ERROR_CURRICULUM_EMPTY
-        }
-    },
-
-    setGradeEmptyError = () => {
-        return {
-            type: actions.SET_ERROR_GRADE_EMPTY
-        }
-    },
-
-    setSectionEmptyError = () => {
-        return {
-            type: actions.SET_ERROR_SECTION_EMPTY
-        }
     }
 

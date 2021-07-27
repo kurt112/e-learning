@@ -13,14 +13,14 @@ import {
     AdminRoomBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/AdminQuery/AdminRoomQuery";
 import uuid from "short-uuid";
-import {reInitState,setErrorEmptyId} from "../../action/__ActionGlobal/DialogAction";
-import {setErrorRoomNameEmpty} from '../../action/admin/Room/RoomDialogAction'
+import {reInitState} from "../../action/__ActionGlobal/DialogAction";
 import {checkStringEmpty} from "../../../components/ui/utils/validation";
+import {SET_ERROR_EMPTY_ID, setErrorRoomNameEmpty} from "../../action/__ActionGlobal/ValidationAction";
 export function * DeleteRoom(){
     const room = yield select(Selector.DeleteRoomDialog)
 
     if(checkStringEmpty(room.id)) {
-        yield put(setErrorEmptyId(Room_Delete))
+        yield put(SET_ERROR_EMPTY_ID(Room_Delete))
         return;
     }
 
@@ -33,7 +33,7 @@ export function* RoomRegister() {
     const room = yield select(Selector.AdminRoomDialog)
 
     if(checkStringEmpty(room.roomName)) {
-        yield put(setErrorRoomNameEmpty())
+        yield put(setErrorRoomNameEmpty(Room))
         return;
     }
 

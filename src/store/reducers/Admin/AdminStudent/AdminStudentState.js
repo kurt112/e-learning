@@ -8,6 +8,7 @@ import * as actions from "../../../ActionType/__ActionTypeGlobal/TableActionType
 import {Student, Student_Delete} from "../../../utils/Specify";
 import {AdminInsertStudentTable as insert} from "../../../../components/ui/utils/tableColumn";
 import {updateObject} from "../../../utils/UpdateObject";
+import {convertDateTime} from "../../../../components/ui/utils/dateFormat/DateTimeFormatToDateWord";
 
 const transforms = (items) => items.map((item) =>{
 
@@ -15,9 +16,9 @@ const transforms = (items) => items.map((item) =>{
     const grade = roomShift.length === 0? 'TBA' : roomShift[0].grade
     const section = roomShift.length ===0? 'TBA' : roomShift[0].section
     const adviser = roomShift.length ===0? 'TBA': `${roomShift[0].teacher.user.firstName} ${roomShift[0].teacher.user.lastName}`
+    const birthdate = item.user.birthdate === null? 'No Info':convertDateTime(item.user.birthdate)
 
-
-    return insert(item.student_id, item.user.firstName,item.user.lastName,item.user.email,item.user.birthdate,
+    return insert(item.student_id, item.user.firstName,item.user.lastName,item.user.email,birthdate,
         grade, section, adviser)
 })
 

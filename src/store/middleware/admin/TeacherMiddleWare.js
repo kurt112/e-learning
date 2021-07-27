@@ -13,14 +13,14 @@ import {
     AdminTeacherBodyDataSettingsQuery
 } from "../utils/GraphQlQuery/AdminQuery/AdminTeacherQuery";
 import {checkStringEmpty} from "../../../components/ui/utils/validation";
-import {setErrorEmptyId} from "../../action/__ActionGlobal/DialogAction";
+import {SET_ERROR_EMPTY_ID} from "../../action/__ActionGlobal/ValidationAction";
 
 export function * DeleteTeacher (){
     const teacher = yield select(Selector.DeleteTeacherDialog)
     const params = new URLSearchParams();
 
     if(checkStringEmpty(teacher.id)){
-        yield put(setErrorEmptyId(Teacher_Delete))
+        yield put(SET_ERROR_EMPTY_ID(Teacher_Delete))
         return
     }
 
@@ -34,7 +34,7 @@ export function* TeacherRegister() {
     const params = new URLSearchParams();
 
     if(checkStringEmpty(teacher.id)) {
-        yield put(setErrorEmptyId(Teacher))
+        yield put(SET_ERROR_EMPTY_ID(Teacher))
         return
     }
 

@@ -6,7 +6,7 @@
 import * as actions from '../../../ActionType/__ActionTypeGlobal/DialogActionType'
 import state from '../../__StateGlobal/AdminTableDialogState'
 import {Teacher} from '../../../utils/Specify'
-import * as globalActionDialog from "../../../ActionType/__ActionTypeGlobal/DialogActionType";
+import {SET_ERROR_ID_EMPTY} from "../../../ActionType/__ActionTypeGlobal/ValidationActionType";
 const newState = new state();
 
 const reducer = (state=newState.init_state, action)=>{
@@ -18,7 +18,7 @@ const reducer = (state=newState.init_state, action)=>{
         case actions.ADMIN_DIALOG_REGISTER_MESSAGE_CLOSE(Teacher): return newState.handleClose(state,action)
 
         // error Handler
-        case globalActionDialog.SET_ERROR_EMPTY_ID(Teacher):
+        case SET_ERROR_ID_EMPTY(Teacher):
             return newState.emptyIdErrorHandler(state)
         default: return state;
     }

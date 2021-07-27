@@ -26,10 +26,4 @@ export const
             type: actions.ROOM_DIALOG_TIMEEND_CHANGE,
             data
         }
-    },
-
-    setErrorRoomNameEmpty = () => {
-        return {
-            type: actions.SET_ERROR_ROOM_EMPTY
-        }
     }

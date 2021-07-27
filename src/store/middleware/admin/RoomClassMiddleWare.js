@@ -14,8 +14,12 @@ import {
 } from "../utils/GraphQlQuery/AdminQuery/AdminRoomShiftClassQuery";
 import uuid from 'short-uuid'
 import {checkStringEmpty} from "../../../components/ui/utils/validation";
-import {setErrorRoomShiftEmpty, setErrorSubjectEmpty} from "../../action/admin/RoomClass/RoomClassDialogAction";
-import {reInitState, setErrorEmptyId} from "../../action/__ActionGlobal/DialogAction";
+import {reInitState} from "../../action/__ActionGlobal/DialogAction";
+import {
+    SET_ERROR_EMPTY_ID,
+    setErrorRoomShiftEmpty,
+    setErrorSubjectEmpty
+} from "../../action/__ActionGlobal/ValidationAction";
 export function* RoomClassRegister() {
 
     const roomClass = yield select(Selector.AdminRoomClassDialog)
@@ -31,12 +35,12 @@ export function* RoomClassRegister() {
 
     if(checkStringEmpty(roomClass.shift)){
         error = true
-        yield put(setErrorSubjectEmpty())
+        yield put(setErrorSubjectEmpty(RoomShiftClass))
     }
 
     if(checkStringEmpty(roomClass.subject)){
         error = true
-        yield put(setErrorRoomShiftEmpty())
+        yield put(setErrorRoomShiftEmpty(RoomShiftClass))
     }
 
     if(error) return
@@ -57,7 +61,7 @@ export function * DeleteRoomClass(){
     const params = new URLSearchParams();
 
     if(checkStringEmpty(roomClass.id)) {
-        yield put(setErrorEmptyId(RoomShiftClass_Delete))
+        yield put(SET_ERROR_EMPTY_ID(RoomShiftClass_Delete))
         return;
     }
     params.append('id', roomClass.id)
