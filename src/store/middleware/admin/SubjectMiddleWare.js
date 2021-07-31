@@ -17,16 +17,16 @@ import {getSubjectBasic} from "../utils/GraphQlQuery/ProfileQuery/SubjectProfile
 import * as actions from "../../action/__ActionGlobal/DialogAction";
 import {checkStringEmpty} from "../../../components/ui/utils/validation";
 import {
-    SET_ERROR_EMPTY_ID,
-    SET_ERROR_SUBJECT_CODE_EMPTY,
-    SET_ERROR_SUBJECT_NAME_EMPTY
+    setErrorEmptyId,
+    setErrorSubjectCodeEmpty,
+    setErrorSubjectNameEmpty
 } from "../../action/__ActionGlobal/ValidationAction";
 
 export function* DeleteSubject() {
     const subject = yield select(Selector.DeleteSubjectDialog)
 
     if (checkStringEmpty(subject.id)) {
-        yield put(SET_ERROR_EMPTY_ID(Subject_Delete))
+        yield put(setErrorEmptyId(Subject_Delete))
         return;
     }
 
@@ -50,12 +50,12 @@ export function* RegisterSubject() {
 
     if (checkStringEmpty(subjectState.subjectCode)) {
         error = true
-        yield put(SET_ERROR_SUBJECT_CODE_EMPTY(Subject))
+        yield put(setErrorSubjectCodeEmpty(Subject))
     }
 
     if (checkStringEmpty(subjectState.subjectName)) {
         error = true
-        yield put(SET_ERROR_SUBJECT_NAME_EMPTY(Subject))
+        yield put(setErrorSubjectNameEmpty(Subject))
     }
 
     if (error) return;

@@ -42,18 +42,12 @@ const TeacherRegisterForm = ({
 
         <form noValidate>
             <DialogTitle id="add-student">Register Teacher Form</DialogTitle>
-
             <DialogContent>
-
-
-                {/*<Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}*/}
-                {/*          messageFail="Room Register Not Successful"*/}
-                {/*          messageSuccess="Register Room Success"/>*/}
-
                 <Grid container spacing={1}>
                     <Grid item md={4} xs={12}>
                         <TextField
-                            // helperText='Wwe'
+                            error={teacher.firstNameError}
+                            helperText={teacher.firstNameErrorMessage}
                             margin="dense"
                             type="text"
                             fullWidth
@@ -65,6 +59,8 @@ const TeacherRegisterForm = ({
                     </Grid>
                     <Grid item md={3} xs={12}>
                         <TextField
+                            error={teacher.middleNameError}
+                            helperText={teacher.middleNameErrorMessage}
                             margin="dense"
                             label={translation.language['label.global.middle.name']}
                             type="text"
@@ -78,6 +74,8 @@ const TeacherRegisterForm = ({
 
                     <Grid item md={4} xs={12}>
                         <TextField
+                            error={teacher.lastNameError}
+                            helperText={teacher.lastNameErrorMessage}
                             margin="dense"
                             label={translation.language['label.global.last.name']}
                             type="text"
@@ -101,6 +99,8 @@ const TeacherRegisterForm = ({
 
                     <Grid item md={6} xs={12}>
                         <TextField
+                            error={teacher.birthdateError}
+                            helperText={teacher.birthdateErrorMessage}
                             InputLabelProps={{shrink: true}}
                             margin="dense"
                             label={translation.language['label.global.birth.date']}
@@ -134,6 +134,8 @@ const TeacherRegisterForm = ({
 
                     <Grid item md={4} xs={12}>
                         <TextField
+                            error={teacher.emailError}
+                            helperText={teacher.emailErrorMessage}
                             margin="dense"
                             label={translation.language['label.global.email']}
                             type="text"
@@ -146,7 +148,8 @@ const TeacherRegisterForm = ({
 
                     <Grid item md={4} xs={12}>
                         <TextField
-                            // helperText={'asdf'}
+                            error={teacher.passwordError}
+                            helperText={teacher.passwordErrorMessage}
                             margin="dense"
                             label={translation.language['label.login.input.password']}
                             type="password"
@@ -159,7 +162,8 @@ const TeacherRegisterForm = ({
 
                     <Grid item md={4} xs={12}>
                         <TextField
-                            // helperText={'asdf'}
+                            error={teacher.reTypePasswordError}
+                            helperText={teacher.reTypePasswordErrorMessage}
                             margin="dense"
                             label={translation.language['label.global.retypePassword']}
                             type="password"

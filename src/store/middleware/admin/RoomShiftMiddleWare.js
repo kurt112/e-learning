@@ -15,7 +15,7 @@ import {
 import uuid from "short-uuid";
 import {checkStringEmpty} from "../../../components/ui/utils/validation";
 import {
-    SET_ERROR_EMPTY_ID,
+    setErrorEmptyId,
     setCurriculumEmptyError,
     setGradeEmptyError, setRoomEmptyError,
     setSectionEmptyError
@@ -25,7 +25,7 @@ export function* DeleteRoomShift() {
     const roomShift = yield select(Selector.DeleteRoomShiftDialog)
 
     if(checkStringEmpty(roomShift.id)) {
-        yield put(SET_ERROR_EMPTY_ID(RoomShift_Delete))
+        yield put(setErrorEmptyId(RoomShift_Delete))
         return;
     }
 

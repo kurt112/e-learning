@@ -15,12 +15,12 @@ import {
 import uuid from "short-uuid";
 import {reInitState} from "../../action/__ActionGlobal/DialogAction";
 import {checkStringEmpty} from "../../../components/ui/utils/validation";
-import {SET_ERROR_EMPTY_ID, setErrorRoomNameEmpty} from "../../action/__ActionGlobal/ValidationAction";
+import {setErrorEmptyId, setErrorRoomNameEmpty} from "../../action/__ActionGlobal/ValidationAction";
 export function * DeleteRoom(){
     const room = yield select(Selector.DeleteRoomDialog)
 
     if(checkStringEmpty(room.id)) {
-        yield put(SET_ERROR_EMPTY_ID(Room_Delete))
+        yield put(setErrorEmptyId(Room_Delete))
         return;
     }
 

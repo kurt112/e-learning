@@ -19,12 +19,12 @@ import {
 import uuid from "short-uuid";
 import {reInitState} from "../../action/__ActionGlobal/DialogAction";
 import {checkStringEmpty} from "../../../components/ui/utils/validation";
-import {SET_ERROR_CURRICULUM_NAME_EMPTY, SET_ERROR_EMPTY_ID} from "../../action/__ActionGlobal/ValidationAction";
+import {setErrorCurriculumNameEmpty, setErrorEmptyId} from "../../action/__ActionGlobal/ValidationAction";
 export function* CurriculumRegister() {
     const data = yield select(Selector.AdminCreateCurriculum)
 
     if(checkStringEmpty(data.name))
-        return yield put(SET_ERROR_CURRICULUM_NAME_EMPTY(Curriculum_Create))
+        return yield put(setErrorCurriculumNameEmpty(Curriculum_Create))
 
 
 
@@ -39,7 +39,7 @@ export function * DeleteCurriculum(){
     const params = new URLSearchParams();
 
 
-    if(checkStringEmpty(curriculum.id)) return yield put(SET_ERROR_EMPTY_ID(Curriculum_Delete))
+    if(checkStringEmpty(curriculum.id)) return yield put(setErrorEmptyId(Curriculum_Delete))
 
     params.append('id', curriculum.id)
     yield Delete(params,deleteCurriculum,Curriculum_Delete,CurriculumTableDataInit)

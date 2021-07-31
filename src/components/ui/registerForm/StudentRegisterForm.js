@@ -47,8 +47,11 @@ const StudentRegisterForm = ({
                 <Grid container spacing={1}>
                     <Grid item md={4} xs={12}>
                         <TextField
+                            error={student.firstNameError}
+                            helperText={student.firstNameErrorMessage}
                             margin="dense"
                             label={translation.language['label.global.first.name']}
+                            autoFocus={true}
                             type="text"
                             fullWidth
                             variant="outlined"
@@ -58,6 +61,8 @@ const StudentRegisterForm = ({
                     </Grid>
                     <Grid item md={3} xs={12}>
                         <TextField
+                            error={student.middleNameError}
+                            helperText={student.middleNameErrorMessage}
                             margin="dense"
                             label={translation.language['label.global.middle.name']}
                             type="text"
@@ -71,6 +76,8 @@ const StudentRegisterForm = ({
 
                     <Grid item md={4} xs={12}>
                         <TextField
+                            error={student.lastNameError}
+                            helperText={student.lastNameErrorMessage}
                             margin="dense"
                             label={translation.language['label.global.last.name']}
                             type="text"
@@ -94,6 +101,8 @@ const StudentRegisterForm = ({
 
                     <Grid item md={6} xs={12}>
                         <TextField
+                            error={student.birthdateError}
+                            helperText={student.birthdateErrorMessage}
                             margin="dense"
                             label={translation.language['label.global.birth.date']}
                             type="date"
@@ -129,6 +138,8 @@ const StudentRegisterForm = ({
 
                     <Grid item md={4} xs={12}>
                         <TextField
+                            error={student.emailError}
+                            helperText={student.emailErrorMessage}
                             margin="dense"
                             label={translation.language['label.global.email']}
                             type="text"
@@ -141,7 +152,8 @@ const StudentRegisterForm = ({
 
                     <Grid item md={4} xs={12}>
                         <TextField
-                            // helperText={'asdf'}
+                            error={student.passwordError}
+                            helperText={student.passwordErrorMessage}
                             margin="dense"
                             label={translation.language['label.login.input.password']}
                             type="password"
@@ -154,7 +166,8 @@ const StudentRegisterForm = ({
 
                     <Grid item md={4} xs={12}>
                         <TextField
-                            // helperText={'asdf'}
+                            error={student.reTypePasswordError}
+                            helperText={student.reTypePasswordErrorMessage}
                             margin="dense"
                             label={translation.language['label.global.retypePassword']}
                             type="password"

@@ -94,6 +94,7 @@ const changeForm = (state, action) => {
 
 const closeRegisterForm = (state) => {
     return updateObject(state, {
+        id: '',
         studentForm: false,
         teacherForm: false
     })

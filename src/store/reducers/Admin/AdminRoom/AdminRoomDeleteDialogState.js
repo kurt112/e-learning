@@ -6,7 +6,7 @@
 import state from '../../__StateGlobal/AdminTableDialogState'
 import * as globalActionDialog from '../../../ActionType/__ActionTypeGlobal/DialogActionType'
 import {Room_Delete} from "../../../utils/Specify";
-import {SET_ERROR_EMPTY_ID} from "../../../action/__ActionGlobal/ValidationAction";
+import {setErrorEmptyId} from "../../../action/__ActionGlobal/ValidationAction";
 import {SET_ERROR_ID_EMPTY} from "../../../ActionType/__ActionTypeGlobal/ValidationActionType";
 
 const newState = new state();

@@ -16,7 +16,7 @@ import uuid from 'short-uuid'
 import {checkStringEmpty} from "../../../components/ui/utils/validation";
 import {reInitState} from "../../action/__ActionGlobal/DialogAction";
 import {
-    SET_ERROR_EMPTY_ID,
+    setErrorEmptyId,
     setErrorRoomShiftEmpty,
     setErrorSubjectEmpty
 } from "../../action/__ActionGlobal/ValidationAction";
@@ -61,7 +61,7 @@ export function * DeleteRoomClass(){
     const params = new URLSearchParams();
 
     if(checkStringEmpty(roomClass.id)) {
-        yield put(SET_ERROR_EMPTY_ID(RoomShiftClass_Delete))
+        yield put(setErrorEmptyId(RoomShiftClass_Delete))
         return;
     }
     params.append('id', roomClass.id)
