@@ -183,12 +183,12 @@ const StudentRegisterForm = ({
             </DialogContent>
 
             <DialogActions>
-                <Button color='primary' onClick={register}>
+                <Button color='primary' variant={'contained'} disableElevation onClick={register}>
                     {
                         translation.language["label.global.register"]
                     }
                 </Button>
-                <Button onClick={closeDialog} color='secondary'>
+                <Button onClick={closeDialog} variant={'contained'} disableElevation color='secondary'>
                     {
                         translation.language["label.button.cancel"]
                     }
