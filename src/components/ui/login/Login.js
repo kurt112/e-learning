@@ -82,10 +82,10 @@ const Login = ({
 
             <Hidden mdDown>
                 <Grid item xs={false} sm={false} md={8} className={classes.image}>
-                    <p className={classes.textSide}><em><b>{translation.language["label.login.heading.title"]}</b></em>
-                    </p>
-                    <Divider style={{marginRight: 260, marginLeft: 260, backgroundColor: '#333'}}/>
-                    <p style={{cursor: 'default'}}>  {new Date().getFullYear()}</p>
+                    {/*<p className={classes.textSide}><em><b>{translation.language["label.login.heading.title"]}</b></em>*/}
+                    {/*</p>*/}
+                    {/*<Divider style={{marginRight: 260, marginLeft: 260, backgroundColor: '#333'}}/>*/}
+                    {/*<p style={{cursor: 'default'}}>  {new Date().getFullYear()}</p>*/}
                 </Grid>
             </Hidden>
             <Grid item xs={12} sm={12} md={4} component={Paper} elevation={6} square>

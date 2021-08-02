@@ -4,7 +4,7 @@
  * @created : 11/07/2021, Sunday
  **/
 import {makeStyles} from "@material-ui/core/styles";
-import image from '../../../assets/gLogo.png'
+import image from '../../../assets/img_2.png'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
             theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
         // backgroundSize: '-moz-initial',
         backgroundSize: '65%',
-        backgroundPosition: 'bottom',
+        backgroundPosition: 'top',
     },
     paper: {
         margin: theme.spacing(8, 4),

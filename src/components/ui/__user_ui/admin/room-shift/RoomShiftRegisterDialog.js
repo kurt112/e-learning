@@ -41,7 +41,8 @@ const RoomShiftRegisterDialog = ({
                                      registerDialog,
                                      changeAdviser,
                                      translation,
-                                     changeCurriculum
+                                     changeCurriculum,
+                                     reInitState
                                  }) => {
     const [roomText, setRoomText] = useState('fa')
 
@@ -61,6 +62,11 @@ const RoomShiftRegisterDialog = ({
     const OutputStrand = (event, value) => {
         value = value === null ? '' : value[1]
         changeCurriculum(value)
+    }
+
+    const registerClick = () => {
+        registerDialog()
+        reInitState()
     }
 
     return <Dialog
@@ -178,7 +184,7 @@ const RoomShiftRegisterDialog = ({
             </DialogContent>
 
             <DialogActions>
-                <Button variant={'contained'} disableElevation onClick={registerDialog} color='primary'>
+                <Button variant={'contained'} disableElevation onClick={registerClick} color='primary'>
                     {translation.language["label.button.save"]}
                 </Button>
                 <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>

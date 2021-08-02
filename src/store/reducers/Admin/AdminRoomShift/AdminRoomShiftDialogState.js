@@ -52,22 +52,43 @@ const setState = (state, action) => {
         grade: action.grade,
         roomShift: action.roomShiftName,
         room: action.room,
-        id: action.id
+        id: action.id,
+
+        roomError: false,
+        gradeError: false,
+        sectionError: false,
+        curriculumError: false,
+
+        roomErrorMessage: '',
+        gradeErrorMessage: '',
+        sectionErrorMessage: '',
+        curriculumErrorMessage:'',
+
+        done: false,
+        loading: false,
     })
 }
 
 const reInit = (state) => {
+    delete state.id
     return updateObject(state, {
-        curriculum: '',
-        teacher: '',
         timeEnd: '',
         timeStart: '',
         section: '',
         grade: '',
         roomShift: '',
-        room: '',
         done: false,
-        lading: false
+        loading: false,
+
+        roomError: false,
+        gradeError: false,
+        sectionError: false,
+        curriculumError: false,
+
+        roomErrorMessage: '',
+        gradeErrorMessage: '',
+        sectionErrorMessage: '',
+        curriculumErrorMessage:'',
     })
 }
 

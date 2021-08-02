@@ -71,7 +71,11 @@ const RoomShiftList = ({
     return (
         <Fragment>
 
-            <RegisterRoomShiftDialog translation={translation} dialog={roomShift.dialog} closeDialog={closeDialog}/>
+            <RegisterRoomShiftDialog translation={translation}
+                                     dialog={roomShift.dialog}
+                                     closeDialog={closeDialog}
+                                     reInitState={reInitState}
+            />
             <DeleteRooShiftDialog translation={translation} dialog={roomShift.deleteDialog}
                                   closeDialog={closeDeleteDialog}/>
             <FindRoomShiftDialog translation={translation}
