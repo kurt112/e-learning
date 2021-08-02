@@ -24,7 +24,6 @@ import Response from "../../../utils/Response"
 import RoomShiftAutoComplete from "../../../utils/autoComplete/ui/RoomShiftAutoComplete"
 import SubjectAutoComplete from "../../../utils/autoComplete/ui/SubjectAutoComplete"
 import TeacherAutoComplete from "../../../utils/autoComplete/ui/TeacherAutoComplete"
-import {useEffect} from "react";
 
 const RoomClassDialog = ({
                              closeDialog,

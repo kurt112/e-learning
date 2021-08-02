@@ -7,7 +7,6 @@ import {
     setErrorFirstNameEmpty,
     setErrorInvalidEmail,
     setErrorLastNameEmpty,
-    setErrorMiddleNameEmpty,
     setErrorPasswordEmpty, setErrorPasswordNotMatch, setErrorPasswordStrength,
     setErrorReTypePasswordEmpty
 } from "../../action/__ActionGlobal/ValidationAction";
@@ -52,11 +51,6 @@ export function* validate(user,to) {
     if (checkStringEmpty(user.lastName)) {
         error = true
         yield put(setErrorLastNameEmpty(to))
-    }
-
-    if (checkStringEmpty(user.middleName)) {
-        error = true
-        yield put(setErrorMiddleNameEmpty(to))
     }
 
     if (checkStringEmpty(user.birthdate)) {

@@ -13,7 +13,6 @@ import {
     SET_ERROR_EMAIL_INVALID,
     SET_ERROR_FIRST_NAME_EMPTY,
     SET_ERROR_LAST_NAME_EMPTY,
-    SET_ERROR_MIDDLE_NAME_EMPTY,
     SET_ERROR_PASSWORD_EMPTY,
     SET_ERROR_PASSWORD_NOT_MATCH,
     SET_ERROR_PASSWORD_STRENGTH,
@@ -45,7 +44,6 @@ const reducer =(state = initState, action) => {
         case SET_ERROR_EMAIL_EMPTY(Teacher): return userState.emailEmptyErrorHandler(state)
         case SET_ERROR_FIRST_NAME_EMPTY(Teacher): return userState.firstNameEmptyErrorHandler(state)
         case SET_ERROR_LAST_NAME_EMPTY(Teacher): return userState.lastNameEmptyErrorHandler(state)
-        case SET_ERROR_MIDDLE_NAME_EMPTY(Teacher): return userState.middleNameEmptyErrorHandler(state)
         case SET_ERROR_PASSWORD_EMPTY(Teacher): return userState.passwordEmptyErrorHandler(state)
         case SET_ERROR_RETYPE_PASSWORD_EMPTY(Teacher): return userState.reTypePasswordEmptyErrorHandler(state)
         case SET_ERROR_PASSWORD_NOT_MATCH(Teacher): return userState.passwordNotMatchErrorHandler(state)

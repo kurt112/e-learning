@@ -8,11 +8,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import style from './MainUiStyle'
 import Sidebar from './sidebar/Sidebar';
 import Navbar from '../navbar/Navbar';
-import {Route, Switch} from 'react-router';
+import {Switch} from 'react-router';
 import Skeleton from '../ui/utils/skeleton/TableUISkeleton'
 import Routes from '../Route'
-import {connect} from "react-redux";
-import InvalidPath from "../ui/utils/error404/InvalidPath";
 
 const MainUi = ({user, translation}) => {
 

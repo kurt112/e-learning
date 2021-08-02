@@ -7,13 +7,13 @@ import ProfileStyle from "../../ProfileStyle";
 import {Avatar} from "@material-ui/core";
 import {format24Hour} from "../../../../utils/dateFormat/TimeConverter";
 
-const RoomShiftData = ({border, roomShift,translation}) => {
+const RoomShiftData = ({index,border, roomShift,translation}) => {
     const style = ProfileStyle()
 
     return (
         <div style={border} className={style.classDataContainer}>
             <div className={style.classDataContainerLeft}>
-                <Avatar>{roomShift.section.substring(0,1).toUpperCase()}</Avatar>
+                <Avatar className={index % 2 === 0? style.blue: style.orange}>{roomShift.section.substring(0,1).toUpperCase()}</Avatar>
                 <p>{`${roomShift.grade} ${roomShift.section} 
                 ( ${roomShift.timeStart!==null?format24Hour(roomShift.timeStart):'TBA'} - ${roomShift.timeEnd!==null?format24Hour(roomShift.timeEnd):'TBA'})`}</p>
             </div>

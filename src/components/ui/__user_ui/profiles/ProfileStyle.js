@@ -4,7 +4,7 @@
  * @created : 11/07/2021, Sunday
  **/
 import { makeStyles } from '@material-ui/core/styles';
-import {deepPurple} from "@material-ui/core/colors";
+import {blue, deepOrange, deepPurple} from "@material-ui/core/colors";
 
 const style = makeStyles((theme) => ({
     container: {
@@ -85,7 +85,6 @@ const style = makeStyles((theme) => ({
     },
     classDataContainer: {
         display: 'flex',
-
         paddingLeft: 10,
         borderTop:'1px solid #E0E0E0',
         '& p': {
@@ -97,6 +96,9 @@ const style = makeStyles((theme) => ({
         display: 'flex',
         alignItems:"center",
         flex: 1,
+        '& > *': {
+            margin: theme.spacing(1),
+        },
     },
     classDataContainerRight: {
         color: 'gray'
@@ -117,6 +119,15 @@ const style = makeStyles((theme) => ({
     },
     button: {
         margin: theme.spacing(1),
+    },
+
+    blue: {
+        color: theme.palette.getContrastText(blue[500]),
+        backgroundColor: blue[500],
+    },
+    orange: {
+        color: theme.palette.getContrastText(deepOrange[500]),
+        backgroundColor: deepOrange[500],
     },
 
 }))

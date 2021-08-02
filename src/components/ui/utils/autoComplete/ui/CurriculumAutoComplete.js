@@ -6,10 +6,7 @@
 import {
     filterOption,
     optionLabel,
-    optionSelected,
-    TwoFilterOption,
-    twoOptionLabel,
-    twoOptionSelected
+    optionSelected
 } from "../autoCompleteAction";
 import {
     autoCompleteGetCurriculum

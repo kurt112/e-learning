@@ -87,12 +87,6 @@ export const
         }
     },
 
-    setErrorMiddleNameEmpty = (to) => {
-        return {
-            type: SET_ERROR_MIDDLE_NAME_EMPTY(to)
-        }
-    },
-
     setErrorPasswordEmpty = (to) => {
         return {
             type: SET_ERROR_PASSWORD_EMPTY(to)

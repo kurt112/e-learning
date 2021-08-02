@@ -23,7 +23,6 @@ class State {
             emailError: false,
             firstNameError: false,
             lastNameError: false,
-            middleNameError: false,
             passwordError: false,
             reTypePasswordError: false,
             birthdateError: false,
@@ -32,7 +31,6 @@ class State {
             emailErrorMessage: '',
             firstNameErrorMessage: '',
             lastNameErrorMessage: '',
-            middleNameErrorMessage: '',
             passwordErrorMessage: '',
             reTypePasswordErrorMessage: '',
             birthdateErrorMessage: '',
@@ -54,9 +52,7 @@ class State {
             lastNameErrorMessage: ''
         })
         this.changeMiddleName = (state, data) => updateObject(state, {
-            middleName: data,
-            middleNameError: false,
-            middleNameErrorMessage: ''
+            middleName: data
         })
         this.changeSuffix = (state, data) => updateObject(state, {
             suffix: data
@@ -94,17 +90,11 @@ class State {
             lastNameError: true,
             lastNameErrorMessage: "Please Input A Value"
         })
-
-        this.middleNameEmptyErrorHandler = (state) => updateObject(state, {
-            middleNameError: true,
-            middleNameErrorMessage: "Please Input A Value"
-        })
-
         this.passwordNotMatchErrorHandler = (state) => updateObject(state, {
             passwordError: true,
-            passwordErrorMessage: "Password Not Match",
+            passwordErrorMessage: "Password does not match",
             reTypePasswordError: true,
-            reTypePasswordErrorMessage: "Password Not Match"
+            reTypePasswordErrorMessage: "Password does not match"
         })
 
         this.passwordEmptyErrorHandler = (state) => updateObject(state, {
@@ -129,7 +119,7 @@ class State {
 
         this.emailInvalidErrorHandler = (state) => updateObject(state, {
             emailError: true,
-            emailErrorMessage: "Not A Valid Email",
+            emailErrorMessage: "Please Input A Valid Email Address",
         })
 
         this.birthDateErrorHandler = (state) => updateObject(state, {

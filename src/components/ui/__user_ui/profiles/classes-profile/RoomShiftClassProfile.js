@@ -5,7 +5,7 @@
  **/
 import {Avatar, Button, CircularProgress, Divider, Grid, Hidden, Paper, Typography} from "@material-ui/core";
 import ProfileStyle from '../ProfileStyle'
-import Picture from '../../../../../assets/asd.jpg'
+import Picture from '../../../../../assets/classIcon.png'
     import {Fragment, useEffect, useState} from "react";
 import {connect} from 'react-redux'
 

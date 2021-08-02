@@ -5,7 +5,7 @@
  **/
 import {Avatar, Button, CircularProgress, Container, Divider, Grid, Hidden, Paper, Typography} from "@material-ui/core"
 import ProfileStyle from '../ProfileStyle'
-import Picture from '../../../../../assets/asd.jpg'
+import Picture from '../../../../../assets/room.png'
 import {useEffect, useState} from "react"
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
