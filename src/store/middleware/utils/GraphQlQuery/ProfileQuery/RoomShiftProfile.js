@@ -66,6 +66,7 @@ export const
                         teacher{
                             id,
                             user{
+                                email,
                                 firstName,
                                 lastName
                             }

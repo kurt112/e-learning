@@ -27,7 +27,7 @@ export function* RoomClassRegister() {
 
     const id = roomClass.id === undefined? yield uuid.generate(): roomClass.id
 
-    roomClass.teacher = roomClass.teacher === null? null: roomClass.teacher.user === undefined? roomClass.teacher: roomClass.teacher.id
+    roomClass.teacher = roomClass.teacher === null? null: roomClass.teacher.user === undefined? roomClass.teacher: roomClass.teacher.user.email
     roomClass.subject = roomClass.subject === null? null: roomClass.subject.subjectCode === undefined? roomClass.subject: roomClass.subject.id
     roomClass.shift =  roomClass.shift === null? null: roomClass.shift.grade === undefined? roomClass.shift: roomClass.shift.id
 

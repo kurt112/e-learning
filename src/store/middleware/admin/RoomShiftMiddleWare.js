@@ -41,8 +41,9 @@ export function* RoomShiftRegister() {
     const params = new URLSearchParams();
     const id = roomShift.id === undefined? uuid.generate(): roomShift.id
     let error = false
+
     roomShift.room = roomShift.room.roomName === undefined ? roomShift.room : roomShift.room.id
-    roomShift.teacher = roomShift.teacher === null? null: roomShift.teacher.user === undefined? roomShift.teacher: roomShift.teacher.id
+    roomShift.teacher = roomShift.teacher === null? null: roomShift.teacher.user === undefined? roomShift.teacher: roomShift.teacher.user.email
     roomShift.curriculum = roomShift.curriculum.name === undefined? roomShift.curriculum: roomShift.curriculum.code
 
     if(checkStringEmpty(roomShift.room)){
@@ -64,6 +65,7 @@ export function* RoomShiftRegister() {
         error = true
         yield put(setSectionEmptyError(RoomShift))
     }
+
 
     if(error === false){
         params.append('id',id)

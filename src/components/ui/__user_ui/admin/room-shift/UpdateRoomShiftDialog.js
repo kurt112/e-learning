@@ -131,6 +131,7 @@ const UpdateRoomShiftDialog = ({
         setFocusCurriculum(true)
     }
 
+
     return <Dialog
         open={dialog}
         onClose={closeDialog}
