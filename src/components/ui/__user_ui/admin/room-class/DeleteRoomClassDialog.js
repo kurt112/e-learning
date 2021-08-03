@@ -37,7 +37,7 @@ const DeleteRoomDialog = ({
 
 
     const RegisterEnter = (event) => {
-        if (event.key === "Enter" && state.id.length > 0) dialogRegister()
+        if (event.key === "Enter") dialogRegister()
     }
 
     return <Dialog

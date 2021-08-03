@@ -76,122 +76,120 @@ const RoomShiftRegisterDialog = ({
         maxWidth="lg"
         fullWidth
     >
-        <form noValidate>
-            <DialogTitle id="add-roomShift">{translation.language["label.room.shift.dialog.create.title"]}</DialogTitle>
+        <DialogTitle id="add-roomShift">{translation.language["label.room.shift.dialog.create.title"]}</DialogTitle>
 
-            <Divider/>
-            <DialogContent>
-                <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
-                          messageFail={translation.language["message.room.shift.dialog.create.fail"]}
-                          messageSuccess={translation.language["message.room.shift.dialog.create.success"]}/>
+        <Divider/>
+        <DialogContent>
+            <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
+                      messageFail={translation.language["message.room.shift.dialog.create.fail"]}
+                      messageSuccess={translation.language["message.room.shift.dialog.create.success"]}/>
 
-                <Grid container spacing={1}>
-                    <Grid item md={6} xs={12}>
-                        <RoomAutoComplete
-                            error={dialogState.roomError}
-                            errorMessage={dialogState.roomErrorMessage}
-                            setText={setRoomText}
-                            text={roomText}
-                            output={OutputRoom}
-                            translation={translation}
-                            autoFocus={true}
-                        />
-                    </Grid>
-                    <Grid item md={6} xs={12}>
-                        <FormControl variant="outlined" margin='dense' fullWidth>
-                            <InputLabel
-                                htmlFor={translation.language["label.global.room.shift"]}>{translation.language["label.global.room.shift"]}</InputLabel>
-                            <Select
-                                native
-                                label={translation.language["label.global.room.shift"]}
-                                inputProps={{
-                                    name: 'age',
-                                    id: 'RoomShift',
-                                }}
-                                onChange={(event => changeRoomShift(event.target.value))}
-                            >
-                                <option
-                                    value={translation.language["label.global.first"]}>{translation.language["label.global.first"]}</option>
-                                <option
-                                    value={translation.language["label.global.second"]}>{translation.language["label.global.second"]}</option>
-                                <option
-                                    value={translation.language["label.global.third"]}>{translation.language["label.global.third"]}</option>
-                            </Select>
-                        </FormControl>
-                    </Grid>
-                    <Grid item md={6} xs={12}>
-                        <TextField
-                            error={dialogState.gradeError}
-                            helperText={dialogState.gradeErrorMessage}
-                            margin="dense"
-                            value={dialogState.grade}
-                            onChange={(event) => changeGrade(event.target.value)}
-                            label={translation.language['label.global.grade']}
-                            type="text"
-                            fullWidth
-                            variant="outlined"
-                        />
-                    </Grid>
-                    <Grid item md={6} xs={12}>
-                        <TextField
-                            error={dialogState.sectionError}
-                            helperText={dialogState.sectionErrorMessage}
-                            margin="dense"
-                            label={translation.language['label.global.section']}
-                            value={dialogState.section}
-                            onChange={(event) => changeSection(event.target.value)}
-                            type="text"
-                            fullWidth
-                            variant="outlined"
-                        />
-                    </Grid>
-                    <Grid item md={6} xs={12}>
-                        <TextField
-                            margin="dense"
-                            InputLabelProps={{ shrink: true }}
-                            label={translation.language['label.global.time.start']}
-                            value={dialogState.timeStart}
-                            onChange={(event) => changeTimeStart(event.target.value)}
-                            type="time"
-                            fullWidth
-                            variant="outlined"
-                        />
-                    </Grid>
-                    <Grid item md={6} xs={12}>
-                        <TextField
-                            margin="dense"
-                            InputLabelProps={{ shrink: true }}
-                            label={translation.language['label.global.time.end']}
-                            value={dialogState.timeEnd}
-                            onChange={(event) => changeTimeEnd(event.target.value)}
-                            type="time"
-                            fullWidth
-                            variant="outlined"
-                        />
-                    </Grid>
-                    <Grid item md={6} xs={12}>
-                        <TeacherAutoComplete translation={translation} output={OutputTeacher}/>
-                    </Grid>
-                    <Grid item md={6} xs={12}>
-                        <CurriculumAutoComplete
-                            error={dialogState.curriculumError}
-                            errorMessage={dialogState.curriculumErrorMessage}
-                            output={OutputStrand}
-                            translation={translation}
-                        />
-                    </Grid>
+            <Grid container spacing={1}>
+                <Grid item md={6} xs={12}>
+                    <RoomAutoComplete
+                        error={dialogState.roomError}
+                        errorMessage={dialogState.roomErrorMessage}
+                        setText={setRoomText}
+                        text={roomText}
+                        output={OutputRoom}
+                        translation={translation}
+                        autoFocus={true}
+                    />
                 </Grid>
-            </DialogContent>
+                <Grid item md={6} xs={12}>
+                    <FormControl variant="outlined" margin='dense' fullWidth>
+                        <InputLabel
+                            htmlFor={translation.language["label.global.room.shift"]}>{translation.language["label.global.room.shift"]}</InputLabel>
+                        <Select
+                            native
+                            label={translation.language["label.global.room.shift"]}
+                            inputProps={{
+                                name: 'age',
+                                id: 'RoomShift',
+                            }}
+                            onChange={(event => changeRoomShift(event.target.value))}
+                        >
+                            <option
+                                value={translation.language["label.global.first"]}>{translation.language["label.global.first"]}</option>
+                            <option
+                                value={translation.language["label.global.second"]}>{translation.language["label.global.second"]}</option>
+                            <option
+                                value={translation.language["label.global.third"]}>{translation.language["label.global.third"]}</option>
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item md={6} xs={12}>
+                    <TextField
+                        error={dialogState.gradeError}
+                        helperText={dialogState.gradeErrorMessage}
+                        margin="dense"
+                        value={dialogState.grade}
+                        onChange={(event) => changeGrade(event.target.value)}
+                        label={translation.language['label.global.grade']}
+                        type="text"
+                        fullWidth
+                        variant="outlined"
+                    />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                    <TextField
+                        error={dialogState.sectionError}
+                        helperText={dialogState.sectionErrorMessage}
+                        margin="dense"
+                        label={translation.language['label.global.section']}
+                        value={dialogState.section}
+                        onChange={(event) => changeSection(event.target.value)}
+                        type="text"
+                        fullWidth
+                        variant="outlined"
+                    />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                    <TextField
+                        margin="dense"
+                        InputLabelProps={{shrink: true}}
+                        label={translation.language['label.global.time.start']}
+                        value={dialogState.timeStart}
+                        onChange={(event) => changeTimeStart(event.target.value)}
+                        type="time"
+                        fullWidth
+                        variant="outlined"
+                    />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                    <TextField
+                        margin="dense"
+                        InputLabelProps={{shrink: true}}
+                        label={translation.language['label.global.time.end']}
+                        value={dialogState.timeEnd}
+                        onChange={(event) => changeTimeEnd(event.target.value)}
+                        type="time"
+                        fullWidth
+                        variant="outlined"
+                    />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                    <TeacherAutoComplete translation={translation} output={OutputTeacher}/>
+                </Grid>
+                <Grid item md={6} xs={12}>
+                    <CurriculumAutoComplete
+                        error={dialogState.curriculumError}
+                        errorMessage={dialogState.curriculumErrorMessage}
+                        output={OutputStrand}
+                        translation={translation}
+                    />
+                </Grid>
+            </Grid>
+        </DialogContent>
 
-            <DialogActions>
-                <Button variant={'contained'} disableElevation onClick={registerClick} color='primary'>
-                    {translation.language["label.button.save"]}
-                </Button>
-                <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
-                    {translation.language["label.button.back"]}
-                </Button>
-            </DialogActions>
-        </form>
+        <DialogActions>
+            <Button variant={'contained'} disableElevation onClick={registerClick} color='primary'>
+                {translation.language["label.button.save"]}
+            </Button>
+            <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
+                {translation.language["label.button.back"]}
+            </Button>
+        </DialogActions>
     </Dialog>
 }
 

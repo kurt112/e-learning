@@ -46,6 +46,10 @@ const RegisterRoomDialog = ({
         closeDialog()
     }
 
+    const clickEnter = (event) => {
+        if (event.key === "Enter") registerDialog()
+    }
+
     return <Dialog
         open={dialog}
         onClose={closeDialog}
@@ -53,7 +57,6 @@ const RegisterRoomDialog = ({
         maxWidth="md"
         fullWidth
     >
-        <form noValidate>
             <DialogTitle id="update-room">{translation.language["label.room.dialog.update.room.title"]}</DialogTitle>
             <Divider/>
             <DialogContent>
@@ -76,6 +79,7 @@ const RegisterRoomDialog = ({
                             type="text"
                             fullWidth
                             variant="outlined"
+                            onKeyDown={(e)=>clickEnter(e)}
                         />
                     </Grid>
                     <Grid item md={6} xs={12}>
@@ -112,7 +116,6 @@ const RegisterRoomDialog = ({
                     {translation.language["label.button.back"]}
                 </Button>
             </DialogActions>
-        </form>
     </Dialog>
 }
 

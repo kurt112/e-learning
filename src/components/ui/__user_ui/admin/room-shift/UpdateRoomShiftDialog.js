@@ -139,14 +139,13 @@ const UpdateRoomShiftDialog = ({
         maxWidth="lg"
         fullWidth
     >
-        <form noValidate>
             <DialogTitle id="add-roomShift">{translation.language["label.room.shift.dialog.update.title"]}</DialogTitle>
 
             <Divider/>
             <DialogContent>
                 <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
-                          messageFail={translation.language["message.room.shift.dialog.create.fail"]}
-                          messageSuccess={translation.language["message.room.shift.dialog.create.success"]}/>
+                          messageFail={translation.language["message.room.shift.dialog.update.fail"]}
+                          messageSuccess={translation.language["message.room.shift.dialog.update.success"]}/>
 
                 <Grid container spacing={1}>
                     <Grid item md={6} xs={12}>
@@ -299,7 +298,6 @@ const UpdateRoomShiftDialog = ({
                     {translation.language["label.button.back"]}
                 </Button>
             </DialogActions>
-        </form>
     </Dialog>
 }
 

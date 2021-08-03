@@ -55,7 +55,7 @@ const UpdateClassDialog = ({
     useEffect(() => {
         if (dialogState.done === true &&
             dialogState.shiftError === false &&
-            dialogState.subjectError === false ) {
+            dialogState.subjectError === false) {
             updateClick().then(ignored => {
             })
         }
@@ -132,150 +132,148 @@ const UpdateClassDialog = ({
         maxWidth="lg"
         fullWidth
     >
-        <form noValidate>
-            <DialogTitle id="add-class">{translation.language["label.room.class.dialog.update.title"]}</DialogTitle>
-            <Divider/>
-            <DialogContent>
+        <DialogTitle id="add-class">{translation.language["label.room.class.dialog.update.title"]}</DialogTitle>
+        <Divider/>
+        <DialogContent>
 
-                <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
-                          messageFail={translation.language["message.room.class.dialog.update.fail"]}
-                          messageSuccess={translation.language["message.room.class.dialog.update.success"]}/>
+            <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
+                      messageFail={translation.language["message.room.class.dialog.update.fail"]}
+                      messageSuccess={translation.language["message.room.class.dialog.update.success"]}/>
 
-                <Grid container spacing={1}>
-                    <Grid item md={6} xs={12}>
+            <Grid container spacing={1}>
+                <Grid item md={6} xs={12}>
 
-                        {
-                            focusRoomShift === false && roomShiftValue !== null ?
-                                <TextField
-                                    onFocus={onFocusRoomShiftHandler}
-                                    margin="dense"
-                                    value={`${roomShiftValue.grade} ${roomShiftValue.section}`}
-                                    label={translation.language["label.global.room.shift"]}
-                                    type="text"
-                                    fullWidth
-                                    variant="outlined"
-                                />
-                                :
-                                <RoomShiftAutoComplete
-                                    error={dialogState.shiftError}
-                                    errorMessage={dialogState.shiftErrorMessage}
-                                    output={OutputRoomShift}
-                                    translation={translation}
-                                    autoFocus={focusRoomShift}
-                                    focusHandler={onBlurRoomShiftHandler}
-                                />
-                        }
-                    </Grid>
-                    <Grid item md={6} xs={12}>
-                        {
-                            focusSubject === false && subjectValue !== null ?
-                                <TextField
-                                    onFocus={onFocusSubjectHandler}
-                                    margin="dense"
-                                    value={`${subjectValue.subjectName} ${subjectValue.subjectCode}`}
-                                    label={translation.language["label.global.subject"]}
-                                    type="text"
-                                    fullWidth
-                                    variant="outlined"
-                                />
-                                :
-                                <SubjectAutoComplete
-                                    error={dialogState.subjectError}
-                                    errorMessage={dialogState.subjectErrorMessage}
-                                    translation={translation}
-                                    output={OutputSubject}
-                                    autoFocus={focusSubject}
-                                    focusHandler={onBlurSubject}
-
-                                />
-                        }
-
-
-                    </Grid>
-
-
-                    <Grid item md={6} xs={12}>
-                        <TextField
-                            margin="dense"
-                            InputLabelProps={{shrink: true}}
-                            label={translation.language["label.global.time.start"]}
-                            value={dialogState.timeStart}
-                            onChange={(event) => changeTimeStart(event.target.value)}
-                            type="time"
-                            fullWidth
-                            variant="outlined"
-                        />
-                    </Grid>
-                    <Grid item md={6} xs={12}>
-                        <TextField
-                            margin="dense"
-                            InputLabelProps={{shrink: true}}
-                            label={translation.language["label.global.time.end"]}
-                            value={dialogState.timeEnd}
-                            onChange={(event) => changeTimeEnd(event.target.value)}
-                            type="time"
-                            fullWidth
-                            variant="outlined"
-                        />
-                    </Grid>
-                    <Grid item md={6} xs={12}>
-                        <FormControl variant="outlined" margin='dense' fullWidth>
-                            <InputLabel
-                                htmlFor={translation.language["label.global.day"]}>{translation.language["label.global.day"]}</InputLabel>
-                            <Select
-                                native
-                                value={dialogState.day}
-                                label={translation.language["label.global.day"]}
-                                inputProps={{
-                                    name: translation.language["label.global.day"],
-                                    id: translation.language["label.global.day"],
-                                }}
-                                onChange={(event => changeDay(event.target.value))}
-                            >
-                                <option value='MWF'>MWF</option>
-                                <option value='TTH'>TTH</option>
-                                <option value='MTWTHF'>MTWTHF</option>
-                                <option value='SAT'>SAT</option>
-                            </Select>
-                        </FormControl>
-
-                    </Grid>
-                    <Grid item md={6} xs={12}>
-
-
-                        {
-                            focusTeacher === false && teacherValue !== null ?
-                                <TextField
-                                    onFocus={onFocusHandlerTeacher}
-                                    margin="dense"
-                                    value={`${teacherValue.user.firstName} ${teacherValue.user.lastName}`}
-                                    label={translation.language["label.global.teacher"]}
-                                    type="text"
-                                    fullWidth
-                                    variant="outlined"
-                                />
-                                :
-                                <TeacherAutoComplete
-                                    output={OutputTeacher}
-                                    translation={translation}
-                                    autoFocus={focusTeacher}
-                                    focusHandler={onBlurTeacher}
-                                />
-                        }
-
-                    </Grid>
+                    {
+                        focusRoomShift === false && roomShiftValue !== null ?
+                            <TextField
+                                onFocus={onFocusRoomShiftHandler}
+                                margin="dense"
+                                value={`${roomShiftValue.grade} ${roomShiftValue.section}`}
+                                label={translation.language["label.global.room.shift"]}
+                                type="text"
+                                fullWidth
+                                variant="outlined"
+                            />
+                            :
+                            <RoomShiftAutoComplete
+                                error={dialogState.shiftError}
+                                errorMessage={dialogState.shiftErrorMessage}
+                                output={OutputRoomShift}
+                                translation={translation}
+                                autoFocus={focusRoomShift}
+                                focusHandler={onBlurRoomShiftHandler}
+                            />
+                    }
                 </Grid>
-            </DialogContent>
+                <Grid item md={6} xs={12}>
+                    {
+                        focusSubject === false && subjectValue !== null ?
+                            <TextField
+                                onFocus={onFocusSubjectHandler}
+                                margin="dense"
+                                value={`${subjectValue.subjectName} ${subjectValue.subjectCode}`}
+                                label={translation.language["label.global.subject"]}
+                                type="text"
+                                fullWidth
+                                variant="outlined"
+                            />
+                            :
+                            <SubjectAutoComplete
+                                error={dialogState.subjectError}
+                                errorMessage={dialogState.subjectErrorMessage}
+                                translation={translation}
+                                output={OutputSubject}
+                                autoFocus={focusSubject}
+                                focusHandler={onBlurSubject}
 
-            <DialogActions>
-                <Button disableElevation variant={"contained"} onClick={registerDialog} color='primary'>
-                    {translation.language["label.button.update"]}
-                </Button>
-                <Button disableElevation variant={"contained"} onClick={closeDialog} color='secondary'>
-                    {translation.language["label.button.back"]}
-                </Button>
-            </DialogActions>
-        </form>
+                            />
+                    }
+
+
+                </Grid>
+
+
+                <Grid item md={6} xs={12}>
+                    <TextField
+                        margin="dense"
+                        InputLabelProps={{shrink: true}}
+                        label={translation.language["label.global.time.start"]}
+                        value={dialogState.timeStart}
+                        onChange={(event) => changeTimeStart(event.target.value)}
+                        type="time"
+                        fullWidth
+                        variant="outlined"
+                    />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                    <TextField
+                        margin="dense"
+                        InputLabelProps={{shrink: true}}
+                        label={translation.language["label.global.time.end"]}
+                        value={dialogState.timeEnd}
+                        onChange={(event) => changeTimeEnd(event.target.value)}
+                        type="time"
+                        fullWidth
+                        variant="outlined"
+                    />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                    <FormControl variant="outlined" margin='dense' fullWidth>
+                        <InputLabel
+                            htmlFor={translation.language["label.global.day"]}>{translation.language["label.global.day"]}</InputLabel>
+                        <Select
+                            native
+                            value={dialogState.day}
+                            label={translation.language["label.global.day"]}
+                            inputProps={{
+                                name: translation.language["label.global.day"],
+                                id: translation.language["label.global.day"],
+                            }}
+                            onChange={(event => changeDay(event.target.value))}
+                        >
+                            <option value='MWF'>MWF</option>
+                            <option value='TTH'>TTH</option>
+                            <option value='MTWTHF'>MTWTHF</option>
+                            <option value='SAT'>SAT</option>
+                        </Select>
+                    </FormControl>
+
+                </Grid>
+                <Grid item md={6} xs={12}>
+
+
+                    {
+                        focusTeacher === false && teacherValue !== null ?
+                            <TextField
+                                onFocus={onFocusHandlerTeacher}
+                                margin="dense"
+                                value={`${teacherValue.user.firstName} ${teacherValue.user.lastName}`}
+                                label={translation.language["label.global.teacher"]}
+                                type="text"
+                                fullWidth
+                                variant="outlined"
+                            />
+                            :
+                            <TeacherAutoComplete
+                                output={OutputTeacher}
+                                translation={translation}
+                                autoFocus={focusTeacher}
+                                focusHandler={onBlurTeacher}
+                            />
+                    }
+
+                </Grid>
+            </Grid>
+        </DialogContent>
+
+        <DialogActions>
+            <Button disableElevation variant={"contained"} onClick={registerDialog} color='primary'>
+                {translation.language["label.button.update"]}
+            </Button>
+            <Button disableElevation variant={"contained"} onClick={closeDialog} color='secondary'>
+                {translation.language["label.button.back"]}
+            </Button>
+        </DialogActions>
     </Dialog>
 }
 

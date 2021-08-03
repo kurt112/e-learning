@@ -41,6 +41,10 @@ const FindRoomShiftDialog = ({
         setRoomShift(null)
     }
 
+    const clickEnter = (event) => {
+        if (event.key === "Enter" ) getRoomShift()
+    }
+
 
     return roomShift === null ? <Dialog
         open={dialog}
@@ -49,7 +53,6 @@ const FindRoomShiftDialog = ({
         maxWidth="lg"
         fullWidth
     >
-        <form noValidate>
             <DialogTitle
                 id="add-student">{translation.language["label.room.dialog.find.room.shift.title"]}</DialogTitle>
             <Divider/>
@@ -60,6 +63,7 @@ const FindRoomShiftDialog = ({
                         <TextField autoFocus
                                    value={id}
                                    margin={'dense'}
+                                   onKeyDown={(e) => clickEnter(e)}
                                    variant={'outlined'} fullWidth
                                    onChange={event => setId(event.target.value)}
                                    placeholder={translation.language["label.room.shift.input.id"]}/>
@@ -76,7 +80,6 @@ const FindRoomShiftDialog = ({
                     {translation.language["label.button.back"]}
                 </Button>
             </DialogActions>
-        </form>
     </Dialog> : update === true ?
         <UpdateRoomShift
             closeDialog={closeUpdate}

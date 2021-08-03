@@ -36,6 +36,10 @@ const RegisterSubject = (
         translation
     }) => {
 
+    const clickEnter = (event) => {
+        if (event.key === "Enter") registerDialog()
+    }
+
     return <Dialog
         open={dialog}
         onClose={closeDialog}
@@ -43,77 +47,78 @@ const RegisterSubject = (
         maxWidth="md"
         fullWidth
     >
-        <form noValidate>
-            <DialogTitle id="add-subject">{translation.language["label.subject.dialog.add.title"]}</DialogTitle>
-            <Divider/>
-            <DialogContent>
-                <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
-                          messageFail={translation.language["message.subject.dialog.register.fail"]}
-                          messageSuccess={translation.language["message.subject.dialog.register.success"]}/>
 
-                <Grid container spacing={1}>
-                    <Grid item md={12} xs={12}>
-                        <TextField
-                            error={state.subjectNameError}
-                            helperText={state.subjectNameErrorMessage}
-                            autoFocus
-                            margin="dense"
-                            label={translation.language["label.global.subject.name"]}
-                            type="text"
-                            fullWidth
-                            variant="outlined"
-                            name='subject-name'
-                            value={state.subjectName}
-                            onChange={(event) => changeSubjectName(event.target.value)}
-                        />
+        <DialogTitle id="add-subject">{translation.language["label.subject.dialog.add.title"]}</DialogTitle>
+        <Divider/>
+        <DialogContent>
+            <Response dialogState={state} registerDialogMessageClose={registerDialogMessageClose}
+                      messageFail={translation.language["message.subject.dialog.register.fail"]}
+                      messageSuccess={translation.language["message.subject.dialog.register.success"]}/>
 
-                    </Grid>
-                    <Grid item md={6} xs={12}>
-                        <TextField
-                            error={state.subjectCodeError}
-                            helperText={state.subjectCodeErrorMessage}
-                            margin="dense"
-                            label={translation.language["label.global.subject.code"]}
-                            type="text"
-                            fullWidth
-                            variant="outlined"
-                            value={state.subjectCode}
-                            onChange={(event) => changeSubjectCode(event.target.value)}
-                        />
-                    </Grid>
-                    <Grid item md={6} xs={12}>
-                        <FormControl variant="outlined" margin='dense' fullWidth>
-                            <InputLabel
-                                htmlFor={translation.language["label.global.category"]}>{translation.language["label.global.category"]}</InputLabel>
-                            <Select
-                                native
-                                value={state.subjectMajor}
-                                label={translation.language["label.global.category"]}
-                                inputProps={{
-                                    name: translation.language["label.global.category"],
-                                    id: translation.language["label.global.category"],
-                                }}
-                                onChange={(event => changeSubjectMajor(event.target.value))}
-                            >
-                                <option
-                                    value={translation.language["label.global.minor"]}>{translation.language["label.global.minor"]}</option>
-                                <option
-                                    value={translation.language["label.global.major"]}>{translation.language["label.global.major"]}</option>
-                            </Select>
-                        </FormControl>
-                    </Grid>
+            <Grid container spacing={1}>
+                <Grid item md={12} xs={12}>
+                    <TextField
+                        onKeyDown={(e) =>clickEnter(e)}
+                        error={state.subjectNameError}
+                        helperText={state.subjectNameErrorMessage}
+                        autoFocus
+                        margin="dense"
+                        label={translation.language["label.global.subject.name"]}
+                        type="text"
+                        fullWidth
+                        variant="outlined"
+                        name='subject-name'
+                        value={state.subjectName}
+                        onChange={(event) => changeSubjectName(event.target.value)}
+                    />
+
                 </Grid>
-            </DialogContent>
+                <Grid item md={6} xs={12}>
+                    <TextField
+                        onKeyDown={(e) =>clickEnter(e)}
+                        error={state.subjectCodeError}
+                        helperText={state.subjectCodeErrorMessage}
+                        margin="dense"
+                        label={translation.language["label.global.subject.code"]}
+                        type="text"
+                        fullWidth
+                        variant="outlined"
+                        value={state.subjectCode}
+                        onChange={(event) => changeSubjectCode(event.target.value)}
+                    />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                    <FormControl variant="outlined" margin='dense' fullWidth>
+                        <InputLabel
+                            htmlFor={translation.language["label.global.category"]}>{translation.language["label.global.category"]}</InputLabel>
+                        <Select
+                            native
+                            value={state.subjectMajor}
+                            label={translation.language["label.global.category"]}
+                            inputProps={{
+                                name: translation.language["label.global.category"],
+                                id: translation.language["label.global.category"],
+                            }}
+                            onChange={(event => changeSubjectMajor(event.target.value))}
+                        >
+                            <option
+                                value={translation.language["label.global.minor"]}>{translation.language["label.global.minor"]}</option>
+                            <option
+                                value={translation.language["label.global.major"]}>{translation.language["label.global.major"]}</option>
+                        </Select>
+                    </FormControl>
+                </Grid>
+            </Grid>
+        </DialogContent>
 
-            <DialogActions>
-                <Button variant={'contained'} disableElevation color='primary' onClick={registerDialog}>
-                    {translation.language["label.button.save"]}
-                </Button>
-                <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
-                    {translation.language["label.button.back"]}
-                </Button>
-            </DialogActions>
-        </form>
+        <DialogActions>
+            <Button variant={'contained'} disableElevation color='primary' onClick={registerDialog}>
+                {translation.language["label.button.save"]}
+            </Button>
+            <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
+                {translation.language["label.button.back"]}
+            </Button>
+        </DialogActions>
     </Dialog>
 }
 

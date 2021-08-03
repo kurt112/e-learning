@@ -38,6 +38,10 @@ const RegisterRoomDialog = ({
         changeTimeStart('')
     }, [])
 
+    const clickEnter = (event) => {
+        if (event.key === "Enter") registerDialog()
+    }
+
     return <Dialog
         open={dialog}
         onClose={closeDialog}
@@ -45,67 +49,67 @@ const RegisterRoomDialog = ({
         maxWidth="md"
         fullWidth
     >
-        <form noValidate>
-            <DialogTitle id="add-room">{translation.language["label.room.dialog.add.room.title"]}</DialogTitle>
-            <Divider/>
-            <DialogContent>
+        <DialogTitle id="add-room">{translation.language["label.room.dialog.add.room.title"]}</DialogTitle>
+        <Divider/>
+        <DialogContent>
 
-                <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
-                          messageFail={translation.language["message.room.dialog.create.fail"]}
-                          messageSuccess={translation.language["message.room.dialog.create.success"]}/>
+            <Response dialogState={dialogState} registerDialogMessageClose={registerDialogMessageClose}
+                      messageFail={translation.language["message.room.dialog.create.fail"]}
+                      messageSuccess={translation.language["message.room.dialog.create.success"]}/>
 
-                <Grid container spacing={1}>
-                    <Grid item md={12} xs={12}>
-                        <TextField
-                            error={dialogState.roomNameError}
-                            helperText={dialogState.roomNameErrorMessage}
-                            autoFocus
-                            margin="dense"
-                            label="Room Name"
-                            value={dialogState.roomName}
-                            onChange={(event) => changeRoomName(event.target.value)}
-                            type="text"
-                            fullWidth
-                            variant="outlined"
-                        />
-                    </Grid>
-                    <Grid item md={6} xs={12}>
-                        <TextField
-                            margin="dense"
-                            InputLabelProps={{shrink: true}}
-                            label={translation.language["label.global.time.start"]}
-                            value={dialogState.timeStart}
-                            onChange={(event) => changeTimeStart(event.target.value)}
-                            type="time"
-                            fullWidth
-                            variant="outlined"
-                        />
-                    </Grid>
-                    <Grid item md={6} xs={12}>
-                        <TextField
-                            margin="dense"
-                            InputLabelProps={{shrink: true}}
-                            label={translation.language["label.global.time.end"]}
-                            value={dialogState.timeEnd}
-                            onChange={(event) => changeTimeEnd(event.target.value)}
-                            type="time"
-                            fullWidth
-                            variant="outlined"
-                        />
-                    </Grid>
+            <Grid container spacing={1}>
+                <Grid item md={12} xs={12}>
+                    <TextField
+                        error={dialogState.roomNameError}
+                        helperText={dialogState.roomNameErrorMessage}
+                        autoFocus
+                        margin="dense"
+                        label={translation.language["label.global.room.name"]}
+                        value={dialogState.roomName}
+                        onChange={(event) => changeRoomName(event.target.value)}
+                        type="text"
+                        fullWidth
+                        variant="outlined"
+                        onKeyDown={(event) => clickEnter(event)}
 
+                    />
                 </Grid>
-            </DialogContent>
+                <Grid item md={6} xs={12}>
+                    <TextField
+                        margin="dense"
+                        InputLabelProps={{shrink: true}}
+                        label={translation.language["label.global.time.start"]}
+                        value={dialogState.timeStart}
+                        onChange={(event) => changeTimeStart(event.target.value)}
+                        type="time"
+                        fullWidth
+                        variant="outlined"
+                    />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                    <TextField
+                        margin="dense"
+                        InputLabelProps={{shrink: true}}
+                        label={translation.language["label.global.time.end"]}
+                        value={dialogState.timeEnd}
+                        onChange={(event) => changeTimeEnd(event.target.value)}
+                        type="time"
+                        fullWidth
+                        variant="outlined"
+                    />
+                </Grid>
 
-            <DialogActions>
-                <Button variant={'contained'} disableElevation onClick={registerDialog} color='primary'>
-                    {translation.language["label.button.save"]}
-                </Button>
-                <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
-                    {translation.language["label.button.back"]}
-                </Button>
-            </DialogActions>
-        </form>
+            </Grid>
+        </DialogContent>
+
+        <DialogActions>
+            <Button variant={'contained'} disableElevation onClick={registerDialog} color='primary'>
+                {translation.language["label.button.save"]}
+            </Button>
+            <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
+                {translation.language["label.button.back"]}
+            </Button>
+        </DialogActions>
     </Dialog>
 }
 

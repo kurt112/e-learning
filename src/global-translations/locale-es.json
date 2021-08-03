@@ -336,12 +336,12 @@
   "message.room.dialog.create.fail": "Room Register Failed",
   "message.room.dialog.delete.fail": "Room Delete Fail",
   "message.room.dialog.delete.success": "Room Delete Success",
-
   "message.room.dialog.update.success": "Room Update Success",
   "message.room.dialog.update.fail": "Room Update Failed",
-
   "message.room.shift.dialog.create.success": "Room Shift Register Success",
   "message.room.shift.dialog.create.fail": "Room Shift Register Failed",
+  "message.room.shift.dialog.update.success": "Room Shift Update Success",
+  "message.room.shift.dialog.update.fail": "Room Shift Update Failed",
   "message.room.shift.dialog.delete.success": "Room Shift Create Success",
   "message.room.shift.dialog.delete.fail": "Room Shift Delete Failed",
   "message.room.class.dialog.delete.fail": "Room Class Delete Failed",

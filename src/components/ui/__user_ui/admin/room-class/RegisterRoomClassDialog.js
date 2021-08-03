@@ -60,7 +60,6 @@ const RoomClassDialog = ({
         maxWidth="lg"
         fullWidth
     >
-        <form noValidate>
             <DialogTitle id="add-class">{translation.language["label.room.class.dialog.add.title"]}</DialogTitle>
             <Divider/>
             <DialogContent>
@@ -151,7 +150,6 @@ const RoomClassDialog = ({
                     {translation.language["label.button.back"]}
                 </Button>
             </DialogActions>
-        </form>
     </Dialog>
 }
 

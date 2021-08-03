@@ -22,11 +22,11 @@ const FindRoomDialog = ({
 
     const getRoom = () => {
         graphQlRequestAsync(getRoomBasic(id)).then(room => {
-            if(room.data.data.room !== null){
+            if (room.data.data.room !== null) {
                 setId('')
                 setData(room.data.data.room)
                 setUpdate(true)
-            }else alert(translation.language['validation.room.invalid'])
+            } else alert(translation.language['validation.room.invalid'])
 
 
         })
@@ -37,6 +37,10 @@ const FindRoomDialog = ({
         setUpdate(false)
     }
 
+    const clickEnter = (event) => {
+        if (event.key === "Enter") getRoom()
+    }
+
     return update === false ? <Dialog
             open={dialog}
             onClose={closeDialog}
@@ -44,34 +48,35 @@ const FindRoomDialog = ({
             maxWidth="lg"
             fullWidth
         >
-            <form noValidate>
-                <DialogTitle
-                    id="add-student">{translation.language["label.room.dialog.find.room.title"]}</DialogTitle>
-                <Divider/>
-                <br/>
-                <DialogContent>
-                    <Grid container spacing={1}>
-                        <Grid item md={12} xs={12}>
-                            <TextField autoFocus
-                                       value={id}
-                                       margin={'dense'}
-                                       variant={'outlined'} fullWidth
-                                       onChange={event => setId(event.target.value)}
-                                       placeholder={translation.language["label.room.dialog.delete.input"]}/>
-                        </Grid>
-                    </Grid>
-                </DialogContent>
 
-                <DialogActions>
-                    <Button variant={'contained'} disableElevation onClick={getRoom}
-                            color='primary'>
-                        {translation.language["label.global.find"]}
-                    </Button>
-                    <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
-                        {translation.language["label.button.back"]}
-                    </Button>
-                </DialogActions>
-            </form>
+            <DialogTitle
+                id="add-student">{translation.language["label.room.dialog.find.room.title"]}</DialogTitle>
+            <Divider/>
+            <br/>
+            <DialogContent>
+                <Grid container spacing={1}>
+                    <Grid item md={12} xs={12}>
+                        <TextField
+                            onKeyDown={e =>clickEnter(e)}
+                            autoFocus
+                            value={id}
+                            margin={'dense'}
+                            variant={'outlined'} fullWidth
+                            onChange={event => setId(event.target.value)}
+                            placeholder={translation.language["label.room.dialog.delete.input"]}/>
+                    </Grid>
+                </Grid>
+            </DialogContent>
+
+            <DialogActions>
+                <Button variant={'contained'} disableElevation onClick={getRoom}
+                        color='primary'>
+                    {translation.language["label.global.find"]}
+                </Button>
+                <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
+                    {translation.language["label.button.back"]}
+                </Button>
+            </DialogActions>
         </Dialog> :
         <UpdateRoomDialog translation={translation} dialog={update} closeDialog={closeUpdate}/>
 }

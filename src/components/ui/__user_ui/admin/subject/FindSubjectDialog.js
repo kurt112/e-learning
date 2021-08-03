@@ -28,7 +28,7 @@ const FindSubjectDialog = ({
                 setCode('')
                 setData(subject.data.data.getSubject)
                 setUpdate(true)
-            }else alert("Subject Not Found")
+            } else alert("Subject Not Found")
         })
     }
 
@@ -41,6 +41,11 @@ const FindSubjectDialog = ({
         closeDialog()
     }
 
+    const clickEnter = (event) => {
+        if (event.key === "Enter") getSubject()
+    }
+
+
     return update === false ? <Dialog
         open={dialog}
         onClose={closeFindDialog}
@@ -48,34 +53,33 @@ const FindSubjectDialog = ({
         maxWidth="md"
         fullWidth
     >
-        <form noValidate>
-            <DialogTitle
-                id="find-subject">{translation.language["label.curriculum.dialog.find.curriculum.title"]}</DialogTitle>
-            <Divider/>
-            <br/>
-            <DialogContent>
-                <Grid container spacing={1}>
-                    <Grid item md={12} xs={12}>
-                        <TextField autoFocus
-                                   value={code}
-                                   margin={'dense'}
-                                   variant={'outlined'} fullWidth
-                                   onChange={event => setCode(event.target.value)}
-                                   label={translation.language["label.subject.dialog.input.code"]}/>
-                    </Grid>
+        <DialogTitle
+            id="find-subject">{translation.language["label.curriculum.dialog.find.curriculum.title"]}</DialogTitle>
+        <Divider/>
+        <br/>
+        <DialogContent>
+            <Grid container spacing={1}>
+                <Grid item md={12} xs={12}>
+                    <TextField autoFocus
+                               onKeyDown={(e) => clickEnter(e)}
+                               value={code}
+                               margin={'dense'}
+                               variant={'outlined'} fullWidth
+                               onChange={event => setCode(event.target.value)}
+                               label={translation.language["label.subject.dialog.input.code"]}/>
                 </Grid>
-            </DialogContent>
+            </Grid>
+        </DialogContent>
 
-            <DialogActions>
-                <Button variant={'contained'} disableElevation onClick={getSubject}
-                        color='primary'>
-                    {translation.language["label.global.find"]}
-                </Button>
-                <Button variant={'contained'} disableElevation onClick={closeFindDialog} color='secondary'>
-                    {translation.language["label.button.back"]}
-                </Button>
-            </DialogActions>
-        </form>
+        <DialogActions>
+            <Button variant={'contained'} disableElevation onClick={getSubject}
+                    color='primary'>
+                {translation.language["label.global.find"]}
+            </Button>
+            <Button variant={'contained'} disableElevation onClick={closeFindDialog} color='secondary'>
+                {translation.language["label.button.back"]}
+            </Button>
+        </DialogActions>
     </Dialog> : <UpdateSubjectDialog translation={translation} closeDialog={closeUpdate} dialog={update}/>
 }
 
