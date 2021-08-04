@@ -22,8 +22,9 @@ const MainUi = ({user, translation}) => {
     return (
         <div className={classes.root}>
             <CssBaseline/>
-            <Navbar open={open} handleDrawerOpen={handleDrawerOpen}/>
+            <Navbar user={user} open={open} handleDrawerOpen={handleDrawerOpen}/>
             <Sidebar
+                user={user}
                 translation={translation}
                 open={open}
                 handleDrawerClose={handleDrawerClose}

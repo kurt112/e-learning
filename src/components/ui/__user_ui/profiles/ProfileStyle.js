@@ -7,12 +7,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import {blue, deepOrange, deepPurple} from "@material-ui/core/colors";
 
 const style = makeStyles((theme) => ({
-    container: {
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        overflow: 'hidden',
-    },
     avatar: {
         width: theme.spacing(20),
         height: theme.spacing(20),
@@ -30,14 +24,16 @@ const style = makeStyles((theme) => ({
         flexDirection: 'column'
     },
     profileData: {
+        '& p': {
+            fontSize: 20
+        },
         marginTop: 20,
-
+        marginBottom:20
     },
     profileName: {
         margin: 'auto',
         marginTop: 10,
-        minWidth: 100,
-        fontFamily: 'Segoe UI Semibold',
+        minWidth: 100
     },
     profileButton: {
         paddingLeft: 20,
@@ -55,30 +51,11 @@ const style = makeStyles((theme) => ({
             },
         },
     },
-    profileInfo: {
-        margin: 'auto',
-        // backgroundColor: 'pink',
-        marginBottom: 20,
-    },
     buttonGroup: {
         flex: 1,
         [theme.breakpoints.down('sm')]: {
             width: '100%'
         }
-    },
-    profileDataContainer: {
-        display: 'flex',
-        '& p': {
-            fontSize: 20
-        }
-    },
-    profileDataContainerTitle: {
-        flex: 1,
-        '& p': {
-            fontWeight: 'bold',
-            fontSize: 20
-        },
-       
     },
     peopleListContainer:{
         marginTop: 10

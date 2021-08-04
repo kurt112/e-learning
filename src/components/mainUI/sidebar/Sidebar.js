@@ -10,6 +10,12 @@ import {SwipeableDrawer} from "@material-ui/core";
 
 import {makeStyles} from '@material-ui/core/styles';
 import {Teacher, Student, Admin} from "../../../store/utils/Specify";
+import ListItem from "@material-ui/core/ListItem";
+import {NavLink} from "react-router-dom";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import AcUnitIcon from "@material-ui/icons/AcUnit";
+import ListItemText from "@material-ui/core/ListItemText";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles({
     list: {
@@ -24,7 +30,7 @@ const useStyles = makeStyles({
     },
 });
 
-const Sidebar = ({open, handleDrawerClose, handleDrawerOpen, role,translation}) => {
+const Sidebar = ({user, open, handleDrawerClose, handleDrawerOpen, role, translation}) => {
 
     const classes = useStyles();
 
@@ -49,6 +55,16 @@ const Sidebar = ({open, handleDrawerClose, handleDrawerOpen, role,translation}) 
                             role === Student ? <StudentItems translation={translation}/> :
                                 role === Admin ? <AdminItems translation={translation}/> : null
                     }
+                    <ListItem component={NavLink}
+                              to={'/'
+                              + (user.userRole === Student ? 'student' : 'teacher') +
+                              '/profile/' + user.email} button
+                    >
+                        <ListItemIcon>
+                            <AccountCircleIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary={translation.language["label.global.your.profile"]}/>
+                    </ListItem>
                 </List>
             </div>
         </SwipeableDrawer>

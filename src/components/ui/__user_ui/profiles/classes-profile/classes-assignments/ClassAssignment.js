@@ -14,6 +14,10 @@ const ClassAssignment = ({assignments,translation}) => {
             <Grid item container justify="center">
                 <h1>{translation.language["label.global.assignment"]}</h1>
                 {
+                    assignments.length ===0?
+                        <Grid container justify={"center"}>
+                            <h1>No Post Currently</h1>
+                        </Grid>:
                     assignments.map((e) =>
                         <TaskCard style={style}
                                   key={e.code}

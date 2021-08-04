@@ -29,9 +29,11 @@ const ClassesCard = ({style, classes,translation}) => {
                             </div>
 
                             <div className={style.classTeacher}>
+
                                 <p>
                                     {
                                         e.teacher === undefined ? 'You' :
+                                            e.teacher === null? <p>TBA</p>:
                                             `${e.teacher.user.firstName} 
                                              ${e.teacher.user.lastName}`
                                     }

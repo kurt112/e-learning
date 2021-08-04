@@ -61,7 +61,7 @@ const StyledMenuItem = withStyles((theme) => ({
     },
 }))(MenuItem);
 
-const Navbar = ({handleDrawerOpen, currentUser, logout}) => {
+const Navbar = ({handleDrawerOpen, user, logout}) => {
     const [enable, setEnable] = useState(false)
     const classes = style()
 
@@ -107,13 +107,13 @@ const Navbar = ({handleDrawerOpen, currentUser, logout}) => {
                 </Typography>
 
                 <Link  style={{textDecoration: 'none', color: 'white'}} to={'/'
-                +(currentUser.user.userRole === Student? 'student': 'teacher') +
-                '/profile/'+currentUser.user.email}>
+                +(user.userRole === Student? 'student': 'teacher') +
+                '/profile/'+user.email}>
                     <Typography variant="h6" noWrap style={{marginRight: '10px'}}>
                         {
-                            currentUser.user.firstName
+                            user.firstName
                             + ' ' +
-                            currentUser.user.lastName
+                            user.lastName
                         }
                     </Typography>
                 </Link>
@@ -181,16 +181,10 @@ const Navbar = ({handleDrawerOpen, currentUser, logout}) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        currentUser: state.CurrentUser
-    }
-}
-
 const mapDispatchToProps = (dispatch) => {
     return {
         logout: () => dispatch(action.logout())
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
+export default connect(null, mapDispatchToProps)(Navbar)

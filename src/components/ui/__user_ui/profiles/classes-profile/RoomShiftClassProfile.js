@@ -3,7 +3,7 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {Avatar, Button, CircularProgress, Divider, Grid, Hidden, Paper, Typography} from "@material-ui/core";
+import {Avatar, Button, CircularProgress, Container, Divider, Grid, Hidden, Paper, Typography} from "@material-ui/core";
 import ProfileStyle from '../ProfileStyle'
 import Picture from '../../../../../assets/classIcon.png'
     import {Fragment, useEffect, useState} from "react";
@@ -117,8 +117,8 @@ const  RoomShiftClassProfile= ({roomShiftClass, match, initData,translation})=>{
                         </Grid>
 
 
-                        <Grid container className={style.profileData}  >
-                            <Grid className={style.profileInfo} container  >
+                        <Grid container component={Container} className={style.profileData}>
+                            <Grid container component={Paper}>
                                 {component}
                             </Grid>
 

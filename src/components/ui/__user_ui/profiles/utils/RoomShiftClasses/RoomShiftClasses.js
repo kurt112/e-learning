@@ -19,6 +19,7 @@ const RoomShiftClasses = ({classes,translation}) => {
                 <hr className={style.classPeopleDivider}/>
                 <Box className={style.peopleListContainer}>
                     {
+                        classes.length ===0?<p>No Class Available</p>:
                         classes.map((lecture, index) => {
                             let border ={border: 'none', marginTop: 0}
                             if(index !== 0) border = null

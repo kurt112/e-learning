@@ -7,28 +7,32 @@ import ProfileStyle from '../../ProfileStyle'
 import Grid from "@material-ui/core/Grid"
 import TaskCard from "../TaskCard";
 
-const ClassLecture = ({lectures,translation}) => {
+const ClassLecture = ({lectures, translation}) => {
     const style = ProfileStyle()
     return (
         <Grid container>
             <Grid item container justify="center">
                 <h1>{translation.language["label.global.lecture"]}</h1>
                 {
-                    lectures.map((e) =>
-                        <TaskCard style={style}
-                                  key={e.code}
-                                  description={e.resource.description}
-                                  lowGrade={e.lowGrade}
-                                  highGrade={e.highGrade}
-                                  deadLine={e.deadLine}
-                                  createdAt={e.createdAt}
-                                  teacherName={`${e.resource.teacher.user.firstName} ${e.resource.teacher.user.lastName}`}
-                                  code={e.code}
-                                  resourceCode={e.resource.code}
-                                  resourceName={e.resource.name}
-                                  lecture={true}
-                                  translation={translation}
-                        />)
+                    lectures.length === 0 ?
+                        <Grid container justify={"center"}>
+                            <h1>No Post Currently</h1>
+                        </Grid> :
+                        lectures.map((e) =>
+                            <TaskCard style={style}
+                                      key={e.code}
+                                      description={e.resource.description}
+                                      lowGrade={e.lowGrade}
+                                      highGrade={e.highGrade}
+                                      deadLine={e.deadLine}
+                                      createdAt={e.createdAt}
+                                      teacherName={`${e.resource.teacher.user.firstName} ${e.resource.teacher.user.lastName}`}
+                                      code={e.code}
+                                      resourceCode={e.resource.code}
+                                      resourceName={e.resource.name}
+                                      lecture={true}
+                                      translation={translation}
+                            />)
                 }
 
             </Grid>

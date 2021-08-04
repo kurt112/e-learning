@@ -56,7 +56,7 @@ const RoomProfile = ({room, match, initData,translation}) => {
 
 
     return (
-        <Grid container className={style.container}>
+        <Grid container>
             {
                 room.loading === true ? <CircularProgress style={{margin: 'auto'}} disableShrink/> :
 
@@ -81,7 +81,7 @@ const RoomProfile = ({room, match, initData,translation}) => {
                             </Grid>
                         </Grid>
                         <Grid container component={Container} className={style.profileData}>
-                            <Grid className={style.profileInfo} container component={Paper}>
+                            <Grid container component={Paper}>
                                 {component}
                             </Grid>
                         </Grid>

@@ -163,7 +163,7 @@ const StudentProfile = ({
                     </Grid>
 
                     <Grid container component={Container} className={style.profileData}>
-                        <Grid className={style.profileInfo} container component={Paper}>
+                        <Grid container component={Paper}>
                             {
                                 dataComponent ? <Data
                                         translation={translation}

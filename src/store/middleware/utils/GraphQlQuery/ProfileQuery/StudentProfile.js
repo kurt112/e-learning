@@ -16,7 +16,9 @@ export const
                                 createdAt,
                                 birthdate,
                                 picture,
-                                password
+                                password,
+                                gender,
+                                middleName
                          },
                          roomShifts{
                                 grade,

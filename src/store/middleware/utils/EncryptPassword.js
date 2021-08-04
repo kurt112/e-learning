@@ -12,3 +12,7 @@ export const PasswordEncrypt = async (password) => {
        return newPassword
     })
 }
+
+export const compareBCrypt = async (decrypt,encrypted) => {
+    return await bcrypt.compare(encrypted,decrypt)
+}
