@@ -3,7 +3,7 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {Drawer, Grid, Hidden, withStyles} from "@material-ui/core"
+import {Divider, Drawer, Grid, Hidden, ListItem, ListItemIcon, ListItemText, withStyles} from "@material-ui/core"
 import {useEffect, useRef, useState, Fragment, lazy} from "react"
 import io from 'socket.io-client'
 import {ExpressEndPoint} from '../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint'
@@ -13,16 +13,12 @@ import moment from 'moment'
 import {connect} from 'react-redux'
 import ClassRoomData from "./classroomData/ClassRoomData";
 import Toolbar from "./toolbar/Toolbar";
+import List from "@material-ui/core/List";
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
 
 const Video = lazy(() => import(`./video/Video`))
 
-
-const StyledDrawer = withStyles({
-    paperAnchorRight: {
-        width: '100%',
-    },
-
-})(Drawer);
 
 
 const Classroom = (props) => {
@@ -35,7 +31,7 @@ const Classroom = (props) => {
     const [people, setPeople] = useState([])
     const [messages, setMessages] = useState([])
     const [role] = useState(props.user.userRole)
-    const [chatDrawer, setDrawer] = useState(false)
+    const [chatDrawer, setDrawer] = useState(true)
     const [change, setChange] = useState(false)
     const [name] = useState(`${props.user.firstName} ${props.user.lastName}`)
     const socket = useRef()
@@ -97,53 +93,39 @@ const Classroom = (props) => {
         setDrawer(false)
     }
 
-    const classRoomData = <ClassRoomData classes={classes}
-                                         messages={messages}
-                                         name={name}
-                                         sendMessage={sendMessage}
-                                         onClose={drawerClose}
-    />
-
     return (
         socket.current === undefined ? null :
-            <Grid container className={classes.classroom}>
-
-
-                <Grid className={classes.left} item xs={12} sm={12} md={props.messageBox ? 9 : 12}
-                      lg={props.messageBox ? 9 : 12}>
-
-
+            <div className={classes.root}>
+                <main className={classes.content}>
                     <Video message={receive} socket={socket.current}/>
-
-
                     <Toolbar setDrawer={setDrawer}/>
 
-
-                </Grid>
-
-                {
-                    props.messageBox
-                        ?
-                        <Fragment>
-                            <Hidden smDown>
-                                {classRoomData}
-                            </Hidden>
-
-                            <Hidden mdUp>
-                                <StyledDrawer anchor='right' open={chatDrawer}>
-
-                                    {classRoomData}
-
-                                </StyledDrawer>
-                            </Hidden>
-                        </Fragment>
+                </main>
 
 
-                        : null
-                }
+                <Hidden mdUp>
+                    <ClassRoomData classes={classes}
+                                   messages={messages}
+                                   name={name}
+                                   sendMessage={sendMessage}
+                                   onClose={drawerClose}
+                                   chatDrawer={chatDrawer}
+                                   small={true}
+                    />
+                </Hidden>
 
+                <Hidden mdDown>
+                    <ClassRoomData classes={classes}
+                                   messages={messages}
+                                   name={name}
+                                   sendMessage={sendMessage}
+                                   onClose={drawerClose}
+                                   chatDrawer={chatDrawer}
+                                   small={false}
+                    />
+                </Hidden>
 
-            </Grid>
+            </div>
     )
 }
 

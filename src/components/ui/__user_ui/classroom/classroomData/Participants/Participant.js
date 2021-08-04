@@ -4,8 +4,8 @@
  * @created : 11/07/2021, Sunday
  **/
 import style from '../GlobalStyle'
-import {Box} from "@material-ui/core";
-import {useEffect, useRef, useState} from "react";
+import {Box, Grid} from "@material-ui/core";
+import {useEffect, Fragment, useRef, useState} from "react";
 
 const Participant = () => {
 
@@ -39,12 +39,51 @@ const Participant = () => {
     // }
 
 
-    return <Box className={classes.participantTab}>
+    return <Fragment>
+        <Grid container>
+            <Grid container style={{position: 'relative'}} justify={"center"}>
+                <video playsInline muted ref={userVideo} autoPlay width='100%'/>
+                <span style=
+                          {{
+                              position: 'absolute',
+                              left: '4%',
+                              bottom: 2,
+                              color: 'black',
+                              cursor: 'default',
+                              backgroundColor:'white'
+                          }}
+                >Kurt Lupin Orioque</span>
+            </Grid>
+            {/*<Grid container style={{position: 'relative'}} justify={"center"}>*/}
+            {/*    <video playsInline muted ref={userVideo} autoPlay width='100%'/>*/}
+            {/*    <span style=*/}
+            {/*              {{*/}
+            {/*                  position: 'absolute',*/}
+            {/*                  left: '4%',*/}
+            {/*                  bottom: 2,*/}
+            {/*                  color: 'black',*/}
+            {/*                  cursor: 'default',*/}
+            {/*                  backgroundColor:'white'*/}
+            {/*              }}*/}
+            {/*    >KURT LUPIN ORIOQUE</span>*/}
+            {/*</Grid>*/}
 
-        <video playsInline width={'100%%'} muted ref={userVideo} autoPlay/>
-        {/*<span style={{position:'absolute', color:'white'}}>asds</span>*/}
+            {/*<Grid item md={12}>*/}
+            {/*    <video playsInline muted ref={userVideo} autoPlay/>*/}
+            {/*    <span style={{position: 'absolute', color: 'red'}}>asds</span>*/}
 
-    </Box>
+            {/*</Grid>*/}
+
+            {/*<Grid item md={12}>*/}
+            {/*    <video playsInline muted ref={userVideo} autoPlay/>*/}
+            {/*    <span style={{position: 'absolute', color: 'red'}}>asds</span>*/}
+
+            {/*</Grid>*/}
+
+        </Grid>
+
+
+    </Fragment>
 }
 
 export default Participant

@@ -3,7 +3,7 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {Box} from "@material-ui/core";
+import {Box, Grid} from "@material-ui/core";
 import {useEffect, useRef, useState} from "react";
 import style from './VideoStyle'
 import {connect} from 'react-redux'
@@ -19,7 +19,7 @@ const Video = ({video, mic, socket}) => {
     const [caller, setCaller] = useState("");
     const [callerSignal, setCallerSignal] = useState();
     const [callAccepted, setCallAccepted] = useState(false);
-    const [peers,setPeers] = useState([])
+    const [peers, setPeers] = useState([])
     const peersRef = useRef([])
     const userVideo = useRef();
 
@@ -29,7 +29,11 @@ const Video = ({video, mic, socket}) => {
 
         navigator.mediaDevices.getUserMedia({
             audio: mic,
-            video: {video, height: '100%', width: '100%'}
+            video: {
+                video,
+                height: '100%',
+                width: '100%'
+            }
         }).then(stream => {
             setStream(stream)
             if (userVideo.current) {
@@ -38,7 +42,7 @@ const Video = ({video, mic, socket}) => {
                 socket.on("all users", users => {
                     const peers = []
                     users.forEach(userId => {
-                        const peer  = createPeer(userId,socket.id,stream)
+                        const peer = createPeer(userId, socket.id, stream)
                         peersRef.current.push({
                             peerID: userId,
                             peer
@@ -50,7 +54,7 @@ const Video = ({video, mic, socket}) => {
             }
 
             socket.on("user joined", payload => {
-                const peer = addPeer(payload.signal,payload.callerId, stream)
+                const peer = addPeer(payload.signal, payload.callerId, stream)
                 peersRef.current.push({
                     peerID: payload.callerId,
                     peer
@@ -59,7 +63,7 @@ const Video = ({video, mic, socket}) => {
             })
 
             socket.on("Receiving returnd signal", payload => {
-                const item  = peersRef.current.find(p => p.peerId === payload.id)
+                const item = peersRef.current.find(p => p.peerId === payload.id)
 
                 item.peer.signal(payload.signal)
             })
@@ -69,7 +73,7 @@ const Video = ({video, mic, socket}) => {
 
     }, [mic, video])
 
-    const createPeer = (userToSignal, callerId, stream) =>{
+    const createPeer = (userToSignal, callerId, stream) => {
         const peer = new Peer({
             initiator: true,
             trickle: false,
@@ -78,13 +82,13 @@ const Video = ({video, mic, socket}) => {
 
 
         peer.on("signal", signal => {
-            socket.emit("Sending Signal", {userToSignal,callerId,signal})
+            socket.emit("Sending Signal", {userToSignal, callerId, signal})
         })
 
         return peer
     }
 
-    const addPeer =(incomingSignal, calledID, stream) => {
+    const addPeer = (incomingSignal, calledID, stream) => {
         const peer = new Peer({
             initiator: false,
             tickle: false,
@@ -93,7 +97,7 @@ const Video = ({video, mic, socket}) => {
 
 
         peer.on("signal", signal => {
-            socket.emit("returning signal", {signal,calledID})
+            socket.emit("returning signal", {signal, calledID})
         })
 
         peer.signal(incomingSignal)
@@ -104,28 +108,22 @@ const Video = ({video, mic, socket}) => {
     let UserVideo;
 
     if (stream) {
-        UserVideo = (<video playsInline muted ref={userVideo} autoPlay controls/>)
+        UserVideo = (<video playsInline muted ref={userVideo} controls className={classes.video} autoPlay/>)
     }
 
 
-    return <Box className={classes.leftUp}>
+    return  <Grid container alignItems={"center"} style={{position: 'relative',height: '100%'}} justify={'center'}>
         {UserVideo}
-
-        {/*{PartnerVideo}*/}
-        {Object.keys(users).map(key => {
-                if (key === yourID) {
-
-                    return null;
-                }
-                return (
-                    <p key={key}>ahksjd</p>
-                    // <button key={key} onClick={() => callPeer(key)}>Call {key}</button>
-                );
-            }
-        )}
-
-
-    </Box>
+        <span style=
+                  {{
+                      position: 'absolute',
+                      left: '50%',
+                      bottom: '50%',
+                      color: 'grey',
+                      cursor: 'default',
+                  }}
+        >Kurt Lupin Orioque</span>
+    </Grid>
 }
 
 const mapStateToProps = (state) => {

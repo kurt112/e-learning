@@ -10,7 +10,7 @@ import VideocamIcon from '@material-ui/icons/Videocam'
 import VideocamOffIcon from '@material-ui/icons/VideocamOff'
 import MoreHorizSharpIcon from '@material-ui/icons/MoreHorizSharp'
 import PresentToAllIcon from '@material-ui/icons/PresentToAll'
-import {Box, Hidden} from "@material-ui/core"
+import {Box, Grid, Hidden} from "@material-ui/core"
 import { useState } from 'react'
 import ParticiPantDialog from "../Dialog/ParticiPantDialog";
 import * as actions from "../../../../../store/action/ClassroomAction"
@@ -26,7 +26,7 @@ const Toolbar = ({ClassroomState, setMic,setVideo, setDrawer}) =>{
 
 
     return (
-        <Box className={classes.leftBottomToolbar}>
+        <div  className={classes.leftBottomToolbar}>
             <ParticiPantDialog dialog={participantDialog} closeDialog={participantAction}/>
             <Box className={classes.leftBottomToolbarLeft}>
                 <Box className={classes.centerItem} onClick={() => setMic(!ClassroomState.mic)}>
@@ -68,7 +68,7 @@ const Toolbar = ({ClassroomState, setMic,setVideo, setDrawer}) =>{
                    </Box>
                </Hidden>
             </Box>
-        </Box>
+        </div>
     )
 
 }

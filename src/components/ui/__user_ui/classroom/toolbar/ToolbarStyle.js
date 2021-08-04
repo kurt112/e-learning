@@ -11,7 +11,7 @@ const style = makeStyles((theme) => ({
 
         borderTop: '1px solid #d3d3d3',
         display: 'flex',
-
+        height:72,
         paddingBottom: 10,
         paddingTop: 10,
         color: '#333',

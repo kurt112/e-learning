@@ -4,22 +4,24 @@
  * @created : 11/07/2021, Sunday
  **/
 const { makeStyles } = require("@material-ui/core");
-
+const drawerWidth = 350
 const style = makeStyles(theme => ({
-    classroom: {
-        backgroundColor: '#f7f7f7',
-        height: '100vh',
+    drawerPaper: {
+        width: drawerWidth
     },
-    left: {
-        display: 'flex',
-        flexDirection: 'column',
+    drawer: {
+        width: drawerWidth,
+        flexShrink: 0,
     },
-    right: {
-        borderLeft: '1px solid #d3d3d3',
+    root: {
         height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-
+        display: 'flex'
+    },
+    content: {
+        height: '100%',
+        display:'flex',
+        flexDirection:'column',
+        flex:1
     },
     navChat: {
 
@@ -28,7 +30,6 @@ const style = makeStyles(theme => ({
     chatButtons: {
         display: 'flex',
         textAlign:'center',
-        fontFamily: 'Segoe UI Semibold',
         color: '#333',
 
         borderBottom:'1px solid #d3d3d3',
@@ -42,10 +43,6 @@ const style = makeStyles(theme => ({
             marginBottom:5,
             cursor: 'pointer',
         },
-        [theme.breakpoints.up('md')]: {
-            justifyContent: 'center'
-        }
-
     },
     rightDrawerButton:{
         marginLeft: 10,
