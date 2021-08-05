@@ -3,7 +3,7 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {Box, Divider, Drawer, Grid, Hidden, ListItem, ListItemIcon, ListItemText, withStyles} from "@material-ui/core";
+import {Box, Drawer, Grid, Hidden} from "@material-ui/core";
 import GroupSharpIcon from "@material-ui/icons/GroupSharp";
 import ForumSharpIcon from "@material-ui/icons/ForumSharp";
 import Messages from "./messages/Messages";
@@ -12,11 +12,13 @@ import Input from "./messages/Input/Input";
 import {Fragment, useState} from "react";
 import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
+import Members from "./members/Members";
 const ClassRoomData = ({classes,onClose, messages, sendMessage, name,chatDrawer, small}) => {
 
 
     const [messageTab, setMessageTab] = useState(true)
     const [participantTab, setParticipantTab] = useState(false)
+    const [membersTab,setMembersTab] = useState(false)
 
 
     const messageTabClick = () => {
@@ -27,6 +29,12 @@ const ClassRoomData = ({classes,onClose, messages, sendMessage, name,chatDrawer,
     const participantTabClick = () => {
         setMessageTab(false)
         setParticipantTab(true)
+    }
+
+    const membersTabClick = () => {
+        setMembersTab(true)
+        setMessageTab(false)
+        setParticipantTab(false)
     }
 
     return (
@@ -55,7 +63,7 @@ const ClassRoomData = ({classes,onClose, messages, sendMessage, name,chatDrawer,
                         <br/>
                         <span>Messages</span>
                     </Grid>
-                    <Grid item onClick={messageTabClick}>
+                    <Grid item onClick={membersTabClick}>
                         <EmojiPeopleIcon fontSize="large"/>
                         <br/>
                         <span>Members</span>
@@ -88,6 +96,11 @@ const ClassRoomData = ({classes,onClose, messages, sendMessage, name,chatDrawer,
 
                     <Participant/> : null
 
+            }
+
+            {
+                membersTab?
+                    <Members/>:null
             }
 
         </Drawer>

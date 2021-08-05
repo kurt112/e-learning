@@ -11,23 +11,14 @@ import VideocamOffIcon from '@material-ui/icons/VideocamOff'
 import MoreHorizSharpIcon from '@material-ui/icons/MoreHorizSharp'
 import PresentToAllIcon from '@material-ui/icons/PresentToAll'
 import {Box, Grid, Hidden} from "@material-ui/core"
-import { useState } from 'react'
-import ParticiPantDialog from "../Dialog/ParticiPantDialog";
 import * as actions from "../../../../../store/action/ClassroomAction"
 import {connect} from 'react-redux'
 const Toolbar = ({ClassroomState, setMic,setVideo, setDrawer}) =>{
     const classes = style()
 
-    const [participantDialog, setParticipant] = useState(false)
-
-    const participantAction = () => {
-        setParticipant(!participantDialog)
-    }
-
-
     return (
         <div  className={classes.leftBottomToolbar}>
-            <ParticiPantDialog dialog={participantDialog} closeDialog={participantAction}/>
+
             <Box className={classes.leftBottomToolbarLeft}>
                 <Box className={classes.centerItem} onClick={() => setMic(!ClassroomState.mic)}>
                     {ClassroomState.mic ? <MicIcon fontSize="large" /> : <MicOffIcon fontSize="large" />}
