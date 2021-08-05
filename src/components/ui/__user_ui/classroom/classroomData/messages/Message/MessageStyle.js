@@ -7,13 +7,13 @@ const { makeStyles } = require("@material-ui/core");
 
 const style = makeStyles(() => ({
     messageBox: {
-        background: '#f7f7f7',
+        background: '#black ',
         borderRadius: 20,
         padding: '0px 20px',
-        color: 'white',
-        maxWidth: '80%'
+        color: 'white'
     },
     messageText: {
+        color: 'black',
         width: '100%',
         letterSpacing: 0,
         float: 'left',
@@ -22,15 +22,17 @@ const style = makeStyles(() => ({
         wordWrap: 'break-word',
         '& img': {
             verticalAlign: 'middle'
-        }
+        },
     },
     messageContainer: {
         display: 'flex',
-        justifyContent: 'flex-end',
         padding: '0px 5%',
         marginTop: 5,
+        flexDirection:'column'
     },
     sentText: {
+        marginLeft: 3   ,
+        marginBottom:2,
         display: 'flex',
         fontSize: 12,
         alignItems: 'center',
@@ -58,14 +60,8 @@ const style = makeStyles(() => ({
         color: 'blue'
     },
 
-    plTen: {
-        paddingLeft: 10
-    },
     prTen: {
         paddingRight: 10
-    },
-    justifyStart: {
-        justifyContent: 'flex-start'
     },
     justifyEnd: {
         justifyContent: 'flex-end'
@@ -77,9 +73,6 @@ const style = makeStyles(() => ({
         color: '#353535'
     },
 
-    backgroundBlue: {
-        background: '#2979FF'
-    },
     backgroundLight: {
         background:'#EDE9E8'
     }

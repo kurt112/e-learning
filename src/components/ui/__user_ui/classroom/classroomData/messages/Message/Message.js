@@ -42,28 +42,14 @@ export default function Message({message: {user, text, time}, name, isAnnounceme
                 </div>
             </StyledTooltip>
             :
-            isSentByCurrentUser ?
-                (
-                    <StyledTooltip title={time} placement="bottom-end">
-                        <div className={clsx(classes.messageContainer, classes.justifyEnd)}>
-                            <p className={clsx(classes.sentText, classes.prTen)}>{name}</p>
-                            <div className={clsx(classes.messageBox, classes.backgroundBlue)}>
-                                <p className={clsx(classes.messageText, classes.colorWhite)}>{ReactEmoji.emojify(text)}</p>
-                            </div>
-                        </div>
-                    </StyledTooltip>
-                )
-                :
-                (
-                    <StyledTooltip title={time} placement="left-end">
-                        <div className={clsx(classes.messageContainer, classes.justifyStart)}>
-                            <div className={clsx(classes.messageBox, classes.backgroundLight)}>
-                                <p className={clsx(classes.messageText, classes.colorDark)}>{ReactEmoji.emojify(text)}</p>
-                            </div>
-                            <p className={clsx(classes.sentText, classes.plTen)}>{user}</p>
-                        </div>
-                    </StyledTooltip>
-                )
+            <StyledTooltip title={time} placement="bottom-end">
+                <div className={clsx(classes.messageContainer, classes.justifyEnd)}>
+                    <p className={clsx(classes.sentText, classes.prTen)}>{name}</p>
+                    <div className={clsx(classes.messageBox, classes.backgroundLight)}>
+                        <p className={clsx(classes.messageText)}>{ReactEmoji.emojify(text)}</p>
+                    </div>
+                </div>
+            </StyledTooltip>
 
     )
 }

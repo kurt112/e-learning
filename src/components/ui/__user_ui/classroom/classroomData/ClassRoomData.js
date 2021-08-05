@@ -13,22 +13,33 @@ import {Fragment, useState} from "react";
 import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import Members from "./members/Members";
-const ClassRoomData = ({classes,onClose, messages, sendMessage, name,chatDrawer, small}) => {
+
+const ClassRoomData = ({
+                           classes,
+                           onClose,
+                           messages,
+                           sendMessage,
+                           name,
+                           chatDrawer,
+                           small
+                       }) => {
 
 
     const [messageTab, setMessageTab] = useState(true)
     const [participantTab, setParticipantTab] = useState(false)
-    const [membersTab,setMembersTab] = useState(false)
+    const [membersTab, setMembersTab] = useState(false)
 
 
     const messageTabClick = () => {
         setMessageTab(true)
         setParticipantTab(false)
+        setMembersTab(false)
     }
 
     const participantTabClick = () => {
         setMessageTab(false)
         setParticipantTab(true)
+        setMembersTab(false)
     }
 
     const membersTabClick = () => {
@@ -42,7 +53,7 @@ const ClassRoomData = ({classes,onClose, messages, sendMessage, name,chatDrawer,
         <Drawer
 
             className={classes.drawer}
-            variant={small?'temporary':'permanent'}
+            variant={small ? 'temporary' : 'permanent'}
             classes={{
                 paper: classes.drawerPaper,
             }}
@@ -99,8 +110,8 @@ const ClassRoomData = ({classes,onClose, messages, sendMessage, name,chatDrawer,
             }
 
             {
-                membersTab?
-                    <Members/>:null
+                membersTab ?
+                    <Members/> : null
             }
 
         </Drawer>

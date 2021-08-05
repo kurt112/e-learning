@@ -45,7 +45,8 @@ const useStyles = makeStyles((theme) => ({
             margin: theme.spacing(1),
         },
         fontSize: 18,
-        alignItems:'center'
+        alignItems:'center',
+        flex:1,
     },
 
     avatar: {
