@@ -6,10 +6,24 @@
 import Message from './Message/Message'
 import style from '../GlobalStyle'
 import ScrollToBottom from 'react-scroll-to-bottom'
+import {useEffect} from "react";
 
-export default function Messages({messages, current}) {
+export default function Messages({setMessage,messages, current,socket}) {
 
     const classes = style()
+
+    useEffect(() => {
+
+        socket.current.on('messages', (message) => {
+            // console.log(message)
+            setMessage([...messages, message])
+        })
+
+        return () => {
+            socket.current.off("messages");
+        };
+    }, [messages])
+
 
     return <ScrollToBottom className={classes.messagesTab}>
         {

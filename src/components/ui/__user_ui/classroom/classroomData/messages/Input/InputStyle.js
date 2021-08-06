@@ -30,6 +30,7 @@ const styles = makeStyles(() => ({
             outline: 'none'
         },
         '& .button': {
+            cursor: 'pointer',
             color: ' #2979FF !important',
             textTransform: 'uppercase',
             margin: '0px 0px',

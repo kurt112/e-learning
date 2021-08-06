@@ -13,7 +13,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Typography from '@material-ui/core/Typography';
-import {Divider, FormControl, Hidden, InputLabel, LinearProgress, MenuItem, Select} from '@material-ui/core';
+import {FormControl, Hidden, InputLabel, LinearProgress, MenuItem, Select} from '@material-ui/core';
 import Copyright from '../copyright/Copyright';
 import {connect} from 'react-redux'
 import * as action from '../../../store/action/login/LoginAction'

@@ -6,81 +6,57 @@
 import style from '../GlobalStyle'
 import {Box, Grid} from "@material-ui/core";
 import {useEffect, Fragment, useRef, useState} from "react";
+import styled from "styled-components";
 
-const Participant = () => {
+const StyledVideo = styled.video`
+  width: 100%;
+  height: auto;
+`;
 
 
-    const classes = style()
-
-
-    const [stream, setStream] = useState();
-
-    const userVideo = useRef();
+const Video = (props) => {
+    const ref = useRef();
+    // console.log(props.peer)
+    console.log(ref)
     useEffect(() => {
-
-        navigator.mediaDevices.getUserMedia({
-            audio: true,
-            video: {video: true, width: '100%'}
+        props.peer.on("stream", stream => {
+            console.log(stream)
+            ref.current.srcObject = stream;
         })
-            .then(stream => {
-                setStream(stream)
-                if (userVideo.current) {
-                    userVideo.current.srcObject = stream
+    }, []);
 
-                }
-            })
+    return (
+        <StyledVideo playsInline autoPlay ref={ref}/>
+    );
+}
 
+const Participant = ({peers}) => {
 
-    }, [])
-
-
-    // if (stream) {
-    //     UserVideo = (<video playsInline width={'100%%'}  muted ref={userVideo} autoPlay />)
-    // }
-
+    console.log(peers)
 
     return <Fragment>
-        <Grid container>
-            <Grid container style={{position: 'relative'}} justify={"center"}>
-                <video playsInline muted ref={userVideo} autoPlay width='100%'/>
-                <span style=
-                          {{
-                              position: 'absolute',
-                              left: '4%',
-                              bottom: 2,
-                              color: 'black',
-                              cursor: 'default',
-                              backgroundColor:'white'
-                          }}
-                >Kurt Lupin Orioque</span>
-            </Grid>
-            {/*<Grid container style={{position: 'relative'}} justify={"center"}>*/}
-            {/*    <video playsInline muted ref={userVideo} autoPlay width='100%'/>*/}
-            {/*    <span style=*/}
-            {/*              {{*/}
-            {/*                  position: 'absolute',*/}
-            {/*                  left: '4%',*/}
-            {/*                  bottom: 2,*/}
-            {/*                  color: 'black',*/}
-            {/*                  cursor: 'default',*/}
-            {/*                  backgroundColor:'white'*/}
-            {/*              }}*/}
-            {/*    >KURT LUPIN ORIOQUE</span>*/}
-            {/*</Grid>*/}
+        {peers.map((peer, index) => {
+            console.log(peer)
+            return (
+                <Grid key={index} container>
+                    <Grid container style={{position: 'relative'}} justify={"center"}>
+                        <Video  peer={peer} s/>
+                        <span style=
+                                  {{
+                                      position: 'absolute',
+                                      left: '4%',
+                                      bottom: 2,
+                                      color: 'black',
+                                      cursor: 'default',
+                                      backgroundColor: 'white'
+                                  }}
+                        >Kurt Lupin Orioque</span>
+                    </Grid>
 
-            {/*<Grid item md={12}>*/}
-            {/*    <video playsInline muted ref={userVideo} autoPlay/>*/}
-            {/*    <span style={{position: 'absolute', color: 'red'}}>asds</span>*/}
 
-            {/*</Grid>*/}
-
-            {/*<Grid item md={12}>*/}
-            {/*    <video playsInline muted ref={userVideo} autoPlay/>*/}
-            {/*    <span style={{position: 'absolute', color: 'red'}}>asds</span>*/}
-
-            {/*</Grid>*/}
-
-        </Grid>
+                </Grid>
+            );
+        })}
 
 
     </Fragment>

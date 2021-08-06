@@ -44,7 +44,7 @@ export default function Message({message: {user, text, time}, name, isAnnounceme
             :
             <StyledTooltip title={time} placement="bottom-end">
                 <div className={clsx(classes.messageContainer, classes.justifyEnd)}>
-                    <p className={clsx(classes.sentText, classes.prTen)}>{name}</p>
+                    <p className={clsx(classes.sentText, classes.prTen)}>{user}</p>
                     <div className={clsx(classes.messageBox, classes.backgroundLight)}>
                         <p className={clsx(classes.messageText)}>{ReactEmoji.emojify(text)}</p>
                     </div>

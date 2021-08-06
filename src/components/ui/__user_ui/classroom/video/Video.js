@@ -8,112 +8,17 @@ import {useEffect, useRef, useState} from "react";
 import style from './VideoStyle'
 import {connect} from 'react-redux'
 import Peer from "simple-peer";
+import styled from "styled-components";
+const StyledVideo = styled.video`
+  width: 70%;
+  height: auto;
+`;
+const Video = ({userVideo, mic, socket}) => {
 
-const Video = ({video, mic, socket}) => {
-    const classes = style()
+    return   <Grid container alignItems={"center"} style={{position: 'relative', height: '100%'}}
+                   justify={'center'}>
+        <StyledVideo muted ref={userVideo} autoPlay playsInline/>
 
-    const [yourID, setYourID] = useState("");
-    const [users, setUsers] = useState({});
-    const [stream, setStream] = useState();
-    const [receivingCall, setReceivingCall] = useState(false);
-    const [caller, setCaller] = useState("");
-    const [callerSignal, setCallerSignal] = useState();
-    const [callAccepted, setCallAccepted] = useState(false);
-    const [peers, setPeers] = useState([])
-    const peersRef = useRef([])
-    const userVideo = useRef();
-
-
-    useEffect(() => {
-        console.log(socket.id)
-
-        navigator.mediaDevices.getUserMedia({
-            audio: mic,
-            video: {
-                video,
-                height: '100%',
-                width: '100%'
-            }
-        }).then(stream => {
-            setStream(stream)
-            if (userVideo.current) {
-                userVideo.current.srcObject = stream
-                socket.emit("join room")
-                socket.on("all users", users => {
-                    const peers = []
-                    users.forEach(userId => {
-                        const peer = createPeer(userId, socket.id, stream)
-                        peersRef.current.push({
-                            peerID: userId,
-                            peer
-                        })
-                        peers.push(peer)
-                    })
-                    setPeers(peers)
-                })
-            }
-
-            socket.on("user joined", payload => {
-                const peer = addPeer(payload.signal, payload.callerId, stream)
-                peersRef.current.push({
-                    peerID: payload.callerId,
-                    peer
-                })
-                setPeers(users => [...users, peer])
-            })
-
-            socket.on("Receiving returnd signal", payload => {
-                const item = peersRef.current.find(p => p.peerId === payload.id)
-
-                item.peer.signal(payload.signal)
-            })
-
-        })
-
-
-    }, [mic, video])
-
-    const createPeer = (userToSignal, callerId, stream) => {
-        const peer = new Peer({
-            initiator: true,
-            trickle: false,
-            stream
-        })
-
-
-        peer.on("signal", signal => {
-            socket.emit("Sending Signal", {userToSignal, callerId, signal})
-        })
-
-        return peer
-    }
-
-    const addPeer = (incomingSignal, calledID, stream) => {
-        const peer = new Peer({
-            initiator: false,
-            tickle: false,
-            stream
-        })
-
-
-        peer.on("signal", signal => {
-            socket.emit("returning signal", {signal, calledID})
-        })
-
-        peer.signal(incomingSignal)
-
-        return peer
-    }
-
-    let UserVideo;
-
-    if (stream) {
-        UserVideo = (<video playsInline muted ref={userVideo} controls className={classes.video} autoPlay/>)
-    }
-
-
-    return  <Grid container alignItems={"center"} style={{position: 'relative',height: '100%'}} justify={'center'}>
-        {UserVideo}
         <span style=
                   {{
                       position: 'absolute',
@@ -123,6 +28,7 @@ const Video = ({video, mic, socket}) => {
                       cursor: 'default',
                   }}
         >Kurt Lupin Orioque</span>
+
     </Grid>
 }
 

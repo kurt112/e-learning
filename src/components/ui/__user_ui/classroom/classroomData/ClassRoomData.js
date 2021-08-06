@@ -18,16 +18,20 @@ const ClassRoomData = ({
                            classes,
                            onClose,
                            messages,
-                           sendMessage,
                            name,
                            chatDrawer,
-                           small
+                           small,
+                           socket,
+                           setMessage,
+                           peers
                        }) => {
 
 
     const [messageTab, setMessageTab] = useState(true)
     const [participantTab, setParticipantTab] = useState(false)
     const [membersTab, setMembersTab] = useState(false)
+
+    console.log(peers)
 
 
     const messageTabClick = () => {
@@ -94,9 +98,9 @@ const ClassRoomData = ({
             {
                 messageTab ?
                     <Fragment>
-                        <Messages messages={messages} current={name}/>
+                        <Messages socket={socket} setMessage={setMessage} messages={messages} current={name}/>
                         <Input
-                            sendMessage={sendMessage}
+                            socket={socket}
                         />
                     </Fragment> :
                     null
@@ -105,7 +109,7 @@ const ClassRoomData = ({
             {
                 participantTab ?
 
-                    <Participant/> : null
+                    <Participant peers={peers}/> : null
 
             }
 
