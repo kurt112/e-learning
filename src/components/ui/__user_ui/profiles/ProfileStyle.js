@@ -107,6 +107,14 @@ const style = makeStyles((theme) => ({
         backgroundColor: deepOrange[500],
     },
 
+    alignRight: {
+        textAlign: 'right'
+    },
+
+    alignCenter : {
+        textAlign:'center'
+    }
+
 }))
 
 

@@ -13,6 +13,7 @@ import PresentToAllIcon from '@material-ui/icons/PresentToAll'
 import {Box, Grid, Hidden} from "@material-ui/core"
 import * as actions from "../../../../../store/action/ClassroomAction"
 import {connect} from 'react-redux'
+import {Link} from "react-router-dom";
 const Toolbar = ({ClassroomState, setMic,setVideo, setDrawer}) =>{
     const classes = style()
 
@@ -49,9 +50,11 @@ const Toolbar = ({ClassroomState, setMic,setVideo, setDrawer}) =>{
 
             <Box className={classes.leftBottomToolbarRight}>
                <Hidden mdDown>
-                   <Box className={classes.centerItem}>
-                       <p style={{color:'red'}}>Leave Classroom</p>
-                   </Box>
+                   <Link to='/' style={{textDecoration: 'none'}}>
+                       <Box className={classes.centerItem}>
+                           <p style={{color:'red'}}>Leave Classroom</p>
+                       </Box>
+                   </Link>
                </Hidden>
                <Hidden mdUp>
                    <Box className={classes.centerItem} onClick={() => setDrawer(true)}>

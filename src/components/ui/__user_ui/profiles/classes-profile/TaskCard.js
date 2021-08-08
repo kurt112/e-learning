@@ -8,9 +8,10 @@ import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 import {Chip} from "@material-ui/core";
 import GetAppIcon from "@material-ui/icons/GetApp";
-import {JavaEndpoint} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
+import {JavaEndpoint, S3BucketEndPoint} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 import PublishIcon from "@material-ui/icons/Publish";
 import {Fragment} from "react";
+import {convertDateTime} from "../../../utils/dateFormat/DateTimeFormatToDateWord";
 const TaskCard = ({
                       style,
                       resourceName,
@@ -24,7 +25,7 @@ const TaskCard = ({
                       lecture,
                       translation
                   }) => {
-    return <Grid component={Paper} container style={{padding: 10, marginBottom: 10}}>
+    return <Grid component={Paper}  container style={{padding: 10, marginBottom: 10}}>
         <Grid item container>
             <Grid item md={12} container
                   direction="row" justify="space-between">
@@ -33,7 +34,7 @@ const TaskCard = ({
                 </h2>
                 <p className={style.marginZero}>
                     <b>{translation.language["label.global.date.upload"]}: </b>
-                    {createdAt}
+                    {convertDateTime(createdAt)}
                 </p>
             </Grid>
             <Grid item md={12} container
@@ -46,7 +47,7 @@ const TaskCard = ({
                         lecture === true ? null :
                             <Fragment>
                                 <b>{translation.language["label.global.date.deadline"]}: </b>
-                                {deadLine}
+                                {convertDateTime(deadLine)}
                             </Fragment>
                     }
                 </p>
@@ -81,7 +82,7 @@ const TaskCard = ({
                         <Chip icon={<GetAppIcon style={{color: 'white'}}/>}
                               label={translation.language["label.global.download"]}
                               component="a"
-                              href={JavaEndpoint + translation.language["route.teacher.resource.download"] + resourceCode}
+                              href={S3BucketEndPoint + resourceCode}
                               target="_blank"
                               clickable
                               style={{backgroundColor: 'green', color: 'white'}}

@@ -15,12 +15,15 @@ import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
 import FaceIcon from '@material-ui/icons/Face';
 
 
-const Card = () => {
+const Card = ({data}) => {
     const style = DashBoardStyle()
-
+    const {teacher_count,subject_count,student_count,room_count,classes_count} = data
     const colors = ['#273c75', '#e84118', '#00a8ff', '#c56cf0', '#3d3d3d']
-    const label = ['Teachers','Subjects','Students','Rooms','Classes', "Classes"]
-    const [data, setData] = useState({})
+    const label = ['Teachers','Subjects','Students','Rooms','Classes']
+    const value = [teacher_count,subject_count,student_count,room_count,classes_count]
+
+
+
     const icons = [
         <StoreIcon className={style.icons}/>,
         <SupervisorAccountIcon className={style.icons}/>,
@@ -44,7 +47,7 @@ const Card = () => {
 
                         <h2 style={{padding: 0, margin: 5}}>{label[i]}</h2>
                         {icons[i]}
-                        <p style={{fontSize: 35, margin: 0}}><b>{e[1]}</b></p>
+                        <p style={{fontSize: 35, margin: 0}}><b>{value[i]}</b></p>
                     </Grid>
                 )
 

@@ -3,7 +3,7 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {Divider, Drawer, Grid, Hidden, ListItem, ListItemIcon, ListItemText, withStyles} from "@material-ui/core"
+import {Hidden} from "@material-ui/core"
 import {useEffect, useRef, useState, Fragment, lazy} from "react"
 import io from 'socket.io-client'
 import {ExpressEndPoint} from '../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint'
@@ -27,7 +27,7 @@ const Container = styled.div`
   height: 100vh;
   width: 90%;
   margin: auto;
-  flex-wrap: wrap;  
+  flex-wrap: wrap;
 `;
 
 const VideoElement = (props) => {
@@ -60,81 +60,77 @@ const Classroom = (props) => {
 
     const [peers, setPeers] = useState([])
     const peersRef = useRef([])
-    const socket = useRef()
+    const socket = props.io.socket
     const userVideo = useRef();
 
     useEffect(() => {
-        if (socket.current === undefined) {
-            const m = moment()
-
-            socket.current = io(ExpressEndPoint)
-
-            navigator.mediaDevices.getUserMedia({
-                video: true,
-                audio: true
-            }).then(stream => {
-                userVideo.current.srcObject = stream
-
-                socket.current.emit('joinClass', {path, name, role}, () => {
-
-                })
-
-                socket.current.on('classData', ({users, messages,usersFilter}) => {
-                    setPeople(users)
-                    setMessages(messages)
-                    console.log(usersFilter)
-
-                    // getting all user
-                    usersFilter.forEach(user => {
-                        const peer = createPeer(user.id, socket.current.id, stream)
-                        console.log(user)
-                        peersRef.current.push({
-                            peerID: user.id,
-                            peer
-                        })
-                        peers.push(peer)
-                    })
-                    setPeers(peers)
-                })
-
-                socket.current.emit('sendMessage', name + ' Has Joined The Class ', m.format('h:mm a'), true)
+        const m = moment()
 
 
-                // added when user join
-                socket.current.on("user joined", payload => {
-                    const peer = addPeer(payload.signal, payload.callerId, stream)
+        navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: true
+        }).then(stream => {
+            userVideo.current.srcObject = stream
+
+            socket.emit('joinClass', {path, name, role}, () => {
+
+            })
+
+            socket.on('classData', ({users, messages,usersFilter}) => {
+                setPeople(users)
+                setMessages(messages)
+                console.log(usersFilter)
+
+                // getting all user
+                usersFilter.forEach(user => {
+                    const peer = createPeer(user.id, socket.id, stream)
+                    console.log(user)
                     peersRef.current.push({
-                        peerID: payload.callerId,
+                        peerID: user.id,
                         peer
                     })
+                    peers.push(peer)
+                })
+                setPeers(peers)
+            })
 
-                    setPeers(users => [...users, peer]);
+            socket.emit('sendMessage', name + ' Has Joined The Class ', m.format('h:mm a'), true)
 
 
+            // added when user join
+            socket.on("user joined", payload => {
+                const peer = addPeer(payload.signal, payload.callerId, stream)
+                peersRef.current.push({
+                    peerID: payload.callerId,
+                    peer
                 })
 
-                socket.current.on("receiving returned signal", payload => {
-                    const item = peersRef.current.find(p => p.peerID === payload.id)
-                    item.peer.signal(payload.signal)
-                })
+                setPeers(users => [...users, peer]);
+
 
             })
 
-            const path = props.match.params.path
-
-
-            setChange(true)
-
-            socket.current.on('user-disconnected', userId => {
-                alert(userId)
-                if (peers[socket.id]) peers[userId].close()
+            socket.on("receiving returned signal", payload => {
+                const item = peersRef.current.find(p => p.peerID === payload.id)
+                item.peer.signal(payload.signal)
             })
 
+        })
 
-            return () => {
-                socket.current.disconnect()
-            }
+        const path = props.match.params.path
 
+
+        setChange(true)
+
+        socket.on('user-disconnected', userId => {
+            alert(userId)
+            if (peers[socket.id]) peers[userId].close()
+        })
+
+
+        return () => {
+            socket.disconnect()
         }
 
     }, [])
@@ -153,7 +149,7 @@ const Classroom = (props) => {
         })
 
         peer.on("signal", signal => {
-            socket.current.emit("sending signal", {
+            socket.emit("sending signal", {
                 userToSignal,
                 callerId, signal
             })
@@ -170,7 +166,7 @@ const Classroom = (props) => {
         })
 
         peer.on("signal", signal => {
-            socket.current.emit("returning signal", {signal, callerId})
+            socket.emit("returning signal", {signal, callerId})
         })
 
         peer.signal(incomingSignal)
@@ -180,55 +176,53 @@ const Classroom = (props) => {
 
 
     return (
-        socket.current === undefined ? null :
-            <div className={classes.root}>
-                <main className={classes.content}>
-                    <Container>
+        <div className={classes.root}>
+            <main className={classes.content}>
+                <Container>
 
-                    </Container>
-                    <StyledVideo ref={userVideo} autoPlay playsInline/>
+                </Container>
+                <StyledVideo ref={userVideo} autoPlay playsInline/>
+                <p>i am here bith</p>
+                <Toolbar setDrawer={setDrawer}/>
 
-
-                    <Toolbar setDrawer={setDrawer}/>
-
-                </main>
+            </main>
 
 
-                <Hidden mdUp>
-                    <ClassRoomData
-                        peers={peers}
-                        socket={socket}
-                        classes={classes}
-                        messages={messages}
-                        setMessage={setMessages}
-                        name={name}
-                        onClose={drawerClose}
-                        chatDrawer={chatDrawer}
-                        small={true}
-                    />
-                </Hidden>
+            <Hidden mdUp>
+                <ClassRoomData
+                    peers={peers}
+                    classes={classes}
+                    messages={messages}
+                    setMessage={setMessages}
+                    name={name}
+                    onClose={drawerClose}
+                    chatDrawer={chatDrawer}
+                    small={true}
+                />
+            </Hidden>
 
-                <Hidden mdDown>
-                    <ClassRoomData
-                        peers={peers}
-                        socket={socket}
-                        classes={classes}
-                        setMessage={setMessages}
-                        messages={messages}
-                        name={name}
-                        onClose={drawerClose}
-                        chatDrawer={chatDrawer}
-                        small={false}
-                    />
-                </Hidden>
+            <Hidden mdDown>
+                <ClassRoomData
+                    peers={peers}
+                    classes={classes}
+                    setMessage={setMessages}
+                    messages={messages}
+                    name={name}
+                    onClose={drawerClose}
+                    chatDrawer={chatDrawer}
+                    small={false}
+                />
+            </Hidden>
 
-            </div>
+        </div>
+
     )
 }
 
 const mapStateToProps = (state) => {
     return {
-        messageBox: state.Classroom.showMessage
+        messageBox: state.Classroom.showMessage,
+        io: state.Socket
     }
 }
 

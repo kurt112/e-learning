@@ -11,15 +11,26 @@ import {Redirect, Route, Switch} from "react-router";
 import Login from './components/ui/login/Login'
 import {connect} from 'react-redux'
 import * as action from './store/action/login/LoginAction'
-
-const App = ({currentUser, reLogin,translation}) => {
+import {initSocket} from "./store/action/__ActionGlobal/ConfigAction";
+import io from 'socket.io-client'
+import {ExpressEndPoint} from "./store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
+const App = ({
+                 currentUser,
+                 reLogin,
+                 translation,
+                 socket,
+                 initSocket
+             }) => {
 
     const token = localStorage.getItem('token')
-
+    console.log(socket)
     useEffect(() => {
         if (token !== null && currentUser.user === null) reLogin(localStorage.getItem('token'))
         // eslint-disable-next-line react-hooks/exhaustive-deps
+
+        if(socket.socket === null) initSocket(io(ExpressEndPoint))
     }, [])
+
 
     return (
         <Fragment>
@@ -34,7 +45,8 @@ const App = ({currentUser, reLogin,translation}) => {
                         {
                             currentUser.user === null ?
 
-                                token !== null ? null : <Route path={'/'} exact render={() => <Login translation={translation} />}/> :
+                                token !== null ? null :
+                                    <Route path={'/'} exact render={() => <Login translation={translation}/>}/> :
 
                                 <Fragment>
                                     <DashBoard user={currentUser.user} translation={translation}/>
@@ -56,13 +68,15 @@ const App = ({currentUser, reLogin,translation}) => {
 const mapStateToProps = (state) => {
     return {
         currentUser: state.CurrentUser,
-        translation: state.languageReducer
+        translation: state.languageReducer,
+        socket: state.Socket
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        reLogin: (data) => dispatch(action.reLogin(data))
+        reLogin: (data) => dispatch(action.reLogin(data)),
+        initSocket: (data) => dispatch(initSocket(data))
     }
 }
 

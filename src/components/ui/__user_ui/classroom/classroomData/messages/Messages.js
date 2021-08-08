@@ -14,13 +14,13 @@ export default function Messages({setMessage,messages, current,socket}) {
 
     useEffect(() => {
 
-        socket.current.on('messages', (message) => {
+        socket.on('messages', (message) => {
             // console.log(message)
             setMessage([...messages, message])
         })
 
         return () => {
-            socket.current.off("messages");
+            socket.off("messages");
         };
     }, [messages])
 

@@ -3,7 +3,9 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 06/08/2021, Friday
  **/
-const Peer = require("simple-peer");
+import io from 'socket.io-client'
+import Peer from "simple-peer";
+const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
 const myPeer = new Peer(undefined, {
     host: '/',
@@ -16,7 +18,8 @@ navigator.mediaDevices.getUserMedia({
     video: true,
     audio: true
 }).then(stream => {
-    addVideoStream(myVideo, stream)
+
+   // addVideoStream(myVideo, stream)
 
     myPeer.on('call', call => {
         call.answer(stream)

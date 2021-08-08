@@ -43,6 +43,7 @@ export const
                                 deadLine,
                                 createdAt
                                 resource{
+                                    location,
                                     code,
                                     name,
                                     description,
@@ -61,6 +62,7 @@ export const
                                 deadLine,
                                 createdAt
                                 resource{
+                                    location,
                                     code,
                                     name,
                                     description,
@@ -79,6 +81,7 @@ export const
                                 deadLine,
                                 createdAt
                                 resource{
+                                   location,
                                    code,
                                    name,
                                    description,
@@ -94,6 +97,7 @@ export const
                                 code,
                                 createdAt,
                                 resource{
+                                    location,
                                     code,
                                     name,
                                     description,

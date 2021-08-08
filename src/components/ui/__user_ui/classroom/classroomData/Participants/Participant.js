@@ -3,8 +3,7 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import style from '../GlobalStyle'
-import {Box, Grid} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import {useEffect, Fragment, useRef, useState} from "react";
 import styled from "styled-components";
 
@@ -13,11 +12,9 @@ const StyledVideo = styled.video`
   height: auto;
 `;
 
-
 const Video = (props) => {
     const ref = useRef();
-    // console.log(props.peer)
-    console.log(ref)
+
     useEffect(() => {
         props.peer.on("stream", stream => {
             console.log(stream)
@@ -39,7 +36,7 @@ const Participant = ({peers}) => {
             console.log(peer)
             return (
                 <Grid key={index} container>
-                    <Grid container style={{position: 'relative'}} justify={"center"}>
+                    <Grid container style={{position: 'relative'}} justify={"center"} id={'video-grid'}>
                         <Video  peer={peer} s/>
                         <span style=
                                   {{

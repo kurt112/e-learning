@@ -16,10 +16,15 @@ import languageReducer from './store/reducers/__StateGlobal/Language'
 
 // Teacher
 import {
-    DeleteAssignmentDialog, DeleteResource,
-    TeacherResource, UploadResource, TeacherAssignment,
-    TeacherAssignmentCreateDialog, TeacherLectureCreateDialog,
-    TeacherLectures, TeacherLectureDeleteDialog,
+    DeleteAssignmentDialog,
+    DeleteResource,
+    TeacherResource,
+    UploadResource,
+    TeacherAssignment,
+    TeacherAssignmentCreateDialog,
+    TeacherLectureCreateDialog,
+    TeacherLectures,
+    TeacherLectureDeleteDialog,
     TeacherExamsCreateDialog,
     TeacherExamsDeleteDialog,
     TeacherExams,
@@ -27,6 +32,7 @@ import {
     TeacherQuizCreateDialog,
     TeacherQuizDeleteDialog
 } from './store/reducers/Teacher'
+
 
 //Student
 import {
@@ -175,6 +181,8 @@ import {
     watchStudentRegister
 } from './store/middleware/register'
 
+import Socket from "./store/reducers/__StateGlobal/Socket";
+
 const reducers = combineReducers({
 
     // config language
@@ -243,7 +251,10 @@ const reducers = combineReducers({
 
     // Register From
     StudentRegisterForm,
-    TeacherRegisterForm
+    TeacherRegisterForm,
+
+    // config
+    Socket
 })
 
 

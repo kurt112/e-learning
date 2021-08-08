@@ -15,8 +15,6 @@ import {Teacher, Teacher_Delete} from '../../../../../store/utils/Specify'
 import IconButton from "@material-ui/core/IconButton";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import DeleteIcon from "@material-ui/icons/Delete";
-import UpdateIcon from "@material-ui/icons/Update";
-
 const TeacherDialogRegister = lazy(() => import(`./RegisterTeacherDialog`))
 const TeacherDeleteDialog = lazy(() => import(`./DeleteTeacherDialog`))
 
@@ -48,12 +46,6 @@ const Index = ({
                             <Tooltip title={translation.language["tooltip.teacher.delete"]}>
                                 <IconButton aria-label="delete-teacher" onClick={openDeleteDialog}>
                                     <DeleteIcon fontSize={'large'} color={'secondary'}/>
-                                </IconButton>
-                            </Tooltip>
-
-                            <Tooltip title={translation.language["tooltip.teacher.update"]}>
-                                <IconButton aria-label="update-teacher" onClick={() => alert('gagawin mo pa to')}>
-                                    <UpdateIcon fontSize={'large'} color={'primary'}/>
                                 </IconButton>
                             </Tooltip>
                         </Box>

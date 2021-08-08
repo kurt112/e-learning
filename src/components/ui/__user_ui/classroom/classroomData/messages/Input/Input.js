@@ -18,7 +18,7 @@ export default function Input({socket}) {
         if(message.trim() !== ''){
             const m = moment()
             if (message) {
-                socket.current.emit('sendMessage', message, m.format('h:mm a'), false, () => setMessage(''))
+                socket.emit('sendMessage', message, m.format('h:mm a'), false, () => setMessage(''))
             }
         }
     }

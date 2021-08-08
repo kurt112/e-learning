@@ -13,6 +13,7 @@ import {Fragment, useState} from "react";
 import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import Members from "./members/Members";
+import {connect} from "react-redux";
 
 const ClassRoomData = ({
                            classes,
@@ -21,17 +22,16 @@ const ClassRoomData = ({
                            name,
                            chatDrawer,
                            small,
-                           socket,
                            setMessage,
-                           peers
+                           peers,
+                          io
                        }) => {
 
 
     const [messageTab, setMessageTab] = useState(true)
     const [participantTab, setParticipantTab] = useState(false)
     const [membersTab, setMembersTab] = useState(false)
-
-    console.log(peers)
+    const socket = io.socket
 
 
     const messageTabClick = () => {
@@ -122,5 +122,10 @@ const ClassRoomData = ({
     )
 }
 
+const mapStateToProps = (state) => {
+    return {
+        io:state.Socket
+    }
+}
 
-export default ClassRoomData
+export default connect(mapStateToProps)(ClassRoomData)
