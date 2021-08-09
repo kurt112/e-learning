@@ -88,7 +88,10 @@ const Classroom = (props) => {
                     const {students, teacher} = classes
 
                     if (role === Teacher) {
-                        if (teacher === props.user.email) valid = true
+                        console.log(teacher)
+
+                        console.log(props.user.email)
+                        if (teacher.user.email === props.user.email) valid = true
 
                     }
 
@@ -159,8 +162,6 @@ const Classroom = (props) => {
             })
 
 
-
-
             return () => {
                 socket.disconnect()
             }
@@ -210,6 +211,8 @@ const Classroom = (props) => {
 
         return peer
     }
+
+    console.log(valid)
 
 
     return valid === false ? null :
