@@ -4,9 +4,7 @@
  * @created : 11/07/2021, Sunday
  **/
 import {Hidden} from "@material-ui/core"
-import {useEffect, useRef, useState, Fragment, lazy} from "react"
-import io from 'socket.io-client'
-import {ExpressEndPoint} from '../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint'
+import {useEffect, useRef, useState} from "react"
 
 import style from './classroomStyle'
 import moment from 'moment'
@@ -15,6 +13,11 @@ import ClassRoomData from "./classroomData/ClassRoomData";
 import Toolbar from "./toolbar/Toolbar";
 import styled from "styled-components";
 import Peer from 'simple-peer'
+import {graphQlRequestAsync} from "../../../../store/middleware/utils/HttpRequest";
+import {
+    getRoomShiftClass
+} from "../../../../store/middleware/utils/GraphQlQuery/ProfileQuery/RoomShiftClassProfile";
+import {Admin, Student, Teacher} from "../../../../store/utils/Specify";
 
 const StyledVideo = styled.video`
   width: 70%;
@@ -44,7 +47,10 @@ const VideoElement = (props) => {
     );
 }
 
+let valid = false
+
 const Classroom = (props) => {
+
     const classes = style();
     const [receive, setReceive] = useState('')
 
@@ -63,75 +69,106 @@ const Classroom = (props) => {
     const socket = props.io.socket
     const userVideo = useRef();
 
+
+    const path = props.match.params.path
     useEffect(() => {
         const m = moment()
 
+        const init = async () => {
 
-        navigator.mediaDevices.getUserMedia({
-            video: true,
-            audio: true
-        }).then(stream => {
-            userVideo.current.srcObject = stream
+            const classes = await graphQlRequestAsync(getRoomShiftClass(path))
+                .then(e => {
 
-            socket.emit('joinClass', {path, name, role}, () => {
+                    if (role === Admin) {
+                        valid = true
+                    }
 
-            })
 
-            socket.on('classData', ({users, messages,usersFilter}) => {
-                setPeople(users)
-                setMessages(messages)
-                console.log(usersFilter)
+                    const classes = e.data.data.roomShiftClass
+                    const {students, teacher} = classes
 
-                // getting all user
-                usersFilter.forEach(user => {
-                    const peer = createPeer(user.id, socket.id, stream)
-                    console.log(user)
+                    if (role === Teacher) {
+                        if (teacher === props.user.email) valid = true
+
+                    }
+
+                    if (role === Student) {
+                        const exist = students.find(e => e.user.email === props.user.email)
+                        if (exist) valid = true
+                    }
+
+                    return classes
+                })
+
+
+            if (valid === false) props.history.goBack()
+
+            navigator.mediaDevices.getUserMedia({
+                video: true,
+                audio: true
+            }).then(stream => {
+                // userVideo.current.srcObject = stream
+
+                socket.emit('joinClass', {path, name, role,classes}, () => {
+
+                })
+
+                socket.on('classData', ({users, messages, usersFilter}) => {
+                    setPeople(users)
+                    setMessages(messages)
+                    console.log(usersFilter)
+
+                    // getting all user
+                    usersFilter.forEach(user => {
+                        const peer = createPeer(user.id, socket.id, stream)
+                        console.log(user)
+                        peersRef.current.push({
+                            peerID: user.id,
+                            peer
+                        })
+                        peers.push(peer)
+                    })
+                    setPeers(peers)
+                })
+
+                socket.emit('sendMessage', name + ' Has Joined The Class ', m.format('h:mm a'), true)
+
+
+                // added when user join
+                socket.on("user joined", payload => {
+                    const peer = addPeer(payload.signal, payload.callerId, stream)
                     peersRef.current.push({
-                        peerID: user.id,
+                        peerID: payload.callerId,
                         peer
                     })
-                    peers.push(peer)
-                })
-                setPeers(peers)
-            })
 
-            socket.emit('sendMessage', name + ' Has Joined The Class ', m.format('h:mm a'), true)
-
-
-            // added when user join
-            socket.on("user joined", payload => {
-                const peer = addPeer(payload.signal, payload.callerId, stream)
-                peersRef.current.push({
-                    peerID: payload.callerId,
-                    peer
+                        setPeers(users => [...users, peer]);
                 })
 
-                setPeers(users => [...users, peer]);
+                socket.on("receiving returned signal", payload => {
+                    const item = peersRef.current.find(p => p.peerID === payload.id)
+                    item.peer.signal(payload.signal)
+                })
 
+                setChange(true)
+
+                socket.on('user-disconnected', userId => {
+                    if (peers[socket.id]) peers[userId].close()
+                })
 
             })
 
-            socket.on("receiving returned signal", payload => {
-                const item = peersRef.current.find(p => p.peerID === payload.id)
-                item.peer.signal(payload.signal)
-            })
-
-        })
-
-        const path = props.match.params.path
 
 
-        setChange(true)
 
-        socket.on('user-disconnected', userId => {
-            alert(userId)
-            if (peers[socket.id]) peers[userId].close()
-        })
-
-
-        return () => {
-            socket.disconnect()
+            return () => {
+                socket.disconnect()
+            }
         }
+
+
+        init().then(ignored => {})
+
 
     }, [])
 
@@ -175,14 +212,13 @@ const Classroom = (props) => {
     }
 
 
-    return (
+    return valid === false ? null :
         <div className={classes.root}>
             <main className={classes.content}>
                 <Container>
 
                 </Container>
                 <StyledVideo ref={userVideo} autoPlay playsInline/>
-                <p>i am here bith</p>
                 <Toolbar setDrawer={setDrawer}/>
 
             </main>
@@ -215,8 +251,6 @@ const Classroom = (props) => {
             </Hidden>
 
         </div>
-
-    )
 }
 
 const mapStateToProps = (state) => {

@@ -11,6 +11,7 @@ import {Link} from "react-router-dom";
 
 const ClassesCard = ({style, classes,translation}) => {
 
+    console.log(classes)
 
         return classes === undefined || classes.length === 0 ? <h3>{translation.language["label.global.class.empty"]}</h3> :
         classes.map((e) => {
@@ -65,7 +66,7 @@ const ClassesCard = ({style, classes,translation}) => {
                                     </Tooltip>
                                 </div>
                             </Link>
-                            <Link to={`/classroom/${e.roomShift.room.id}${e.id}${e.subject.subjectCode}`}>
+                            <Link to={`/classroom/${e.id}`}>
                                 <div className={style.iconsFooter}>
                                     <Tooltip title={e.teacher === undefined?translation.language["tooltip.class.start"]:translation.language["tooltip.class.join"]} aria-label="add">
                                         <VideoCallIcon fontSize={'large'}/>

@@ -27,10 +27,13 @@ const Index = ({io}) => {
         })
 
 
-        socket.on('dashboardData', (classroomData) =>{
-            console.log(classroomData)
-        })
+        // socket.on('dashboardData', (classroomData) =>{
+        //     const temp = classroomData.map(e => e.classes)
+        //     setClassNow(temp)
+        // })
     }, [])
+
+
 
 
     return data === null ? null :

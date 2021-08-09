@@ -15,7 +15,7 @@ export default function Messages({setMessage,messages, current,socket}) {
     useEffect(() => {
 
         socket.on('messages', (message) => {
-            // console.log(message)
+            console.log(message)
             setMessage([...messages, message])
         })
 

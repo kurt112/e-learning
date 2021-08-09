@@ -22,15 +22,19 @@ export const
                            teacher{
                                 id
                                 user{
+                                    email,
                                     firstName,
-                                    lastName
+                                    lastName,
+                                    picture
                                 }
                            },
                            students{
                                 student_id,
                                 user{
+                                    email,
                                     firstName,
-                                    lastName
+                                    lastName,
+                                    picture
                                 }
                            },
                            subject{

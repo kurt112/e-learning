@@ -34,7 +34,6 @@ const Sidebar = ({user, open, handleDrawerClose, handleDrawerOpen, role, transla
 
     const classes = useStyles();
 
-
     return (
         <SwipeableDrawer
             anchor={'left'}

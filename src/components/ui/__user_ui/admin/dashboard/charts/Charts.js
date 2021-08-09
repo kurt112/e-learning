@@ -12,9 +12,6 @@ import PieChartStudent from "./PieChartStudent";
 import SubjectUsed from "./SubjectUsed";
 import PieChartUserRole from "./PieChartUserRole";
 import ClassHappeningTodayTable from "./ClassHappeningTodayTable";
-// import {baseUrlWithAuth} from "../../../mainUI/BaseUrlWithAuth";
-// import {dashBoardSlowPace, dashBoardTopTenSales} from "../../../../utils/ServerEndPoint";
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Charts() {
+const  Charts = () => {
 
     const classes = useStyles();
     const [total, setTotal] = useState(0)
@@ -57,20 +54,6 @@ export default function Charts() {
     useEffect(() => {
 
     }, [])
-
-    // const getTopTen = async () => {
-    //     await baseUrlWithAuth.get(dashBoardTopTenSales).then(e => {
-    //         setTopTenData(e.data)
-    //     }).catch(ignored => {
-    //     })
-    // }
-    //
-    // const getTopTenSlowedPace = async () => {
-    //     await baseUrlWithAuth.get(dashBoardSlowPace).then(e => {
-    //         setTopTenSlowedProduct(e.data)
-    //     }).catch(ignored => {
-    //     })
-    // }
 
 
     return (
@@ -134,3 +117,6 @@ export default function Charts() {
         </div>
     );
 }
+
+
+export default Charts

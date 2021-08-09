@@ -109,7 +109,7 @@ const ClassRoomData = ({
             {
                 participantTab ?
 
-                    <Participant peers={peers}/> : null
+                    <Participant socket={socket} peers={peers}/> : null
 
             }
 

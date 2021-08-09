@@ -25,6 +25,7 @@ export function* StudentRegisterData() {
         alert("Success Register")
         yield put(action.resetLoginPage())
     } catch (error) {
+        console.log(error.response)
         console.log(error)
         yield put(action.failLogin(error))
     }

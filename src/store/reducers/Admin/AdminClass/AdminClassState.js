@@ -22,7 +22,7 @@ const transforms = (items) => items.map((item) =>{
     const timeEnd = item.endTime === null? 'TBA': format24Hour(item.endTime)
 
     return insert(item.id,item.roomShift.room.roomName, item.roomShift.grade, item.roomShift.section, item.subject.subjectName,
-        teacher, day, timeStart, timeEnd, item.roomShift.room.id+item.id+item.subject.subjectCode,item.id)
+        teacher, day, timeStart, timeEnd, item.id,item.id)
 })
 
 
