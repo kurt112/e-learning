@@ -7,7 +7,10 @@ import { makeStyles } from "@material-ui/core";
 
 const style = makeStyles(() => ({
     table: {
-        width: '100%'
+        width: '100%',
+        '& p': {
+            fontSize: 15
+        }
     }
 }))
 

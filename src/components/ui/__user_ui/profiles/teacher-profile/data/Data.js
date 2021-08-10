@@ -376,7 +376,6 @@ const Data = ({
                     </Grid>
                 </Grid>
 
-                =
                 <Grid container>
                     <Grid md={9} xs={6} item>
                         <h2>{translation.language["label.global.birth.date"]}: </h2>
@@ -398,7 +397,7 @@ const Data = ({
                             }
                         </Grid>
                     </Grid>
-                </Grid> :
+                </Grid>
 
                 {
                     update === false ?

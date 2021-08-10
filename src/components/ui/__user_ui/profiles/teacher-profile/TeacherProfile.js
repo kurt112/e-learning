@@ -8,7 +8,6 @@ import ProfileStyle from '../ProfileStyle'
 import {connect} from 'react-redux'
 import {useEffect, useState} from "react";
 import Logs from './logs/Logs'
-import Attendance from './attendace/Attendance'
 import Data from './data/Data'
 import {withRouter} from 'react-router-dom';
 import * as action from "../../../../../store/action/__ActionGlobal/ProfileAction";
@@ -33,7 +32,6 @@ const TeacherProfile = ({
     const [canUpdate, setCanUpdate] = useState(false)
 
     const [dataComponent, setDataComponent] = useState(false)
-    const [attendComponent, setAttendanceComponent] = useState(false)
     const [logsComponent, setLogsComponent] = useState(false)
 
 
@@ -57,20 +55,12 @@ const TeacherProfile = ({
     }, [teacherState])
 
 
-    const attendance = () => {
-        setAttendanceComponent(true)
-        setDataComponent(false)
-        setLogsComponent(false)
-    }
-
     const data = () => {
-        setAttendanceComponent(false)
         setDataComponent(true)
         setLogsComponent(false)
     }
 
     const logs = () => {
-        setAttendanceComponent(false)
         setDataComponent(false)
         setLogsComponent(true)
     }
@@ -79,6 +69,8 @@ const TeacherProfile = ({
     const editClick = () => {
         const isUpdate = !update
         setUpdate(isUpdate)
+        setLogsComponent(false)
+        setDataComponent(true)
     }
 
     const changePhoto = (event) => {
@@ -92,6 +84,8 @@ const TeacherProfile = ({
         if (id === user.user.email) setCanUpdate(true)
         initData(id)
     }
+
+    console.log(teacherState)
 
 
     return (
@@ -149,12 +143,8 @@ const TeacherProfile = ({
                                             onClick={data}>{translation.language["label.global.details"]}</Button>
                                     {
                                         update === true ? null :
-                                            <Fragment>
-                                                <Button color="primary"
-                                                        onClick={attendance}>{translation.language["label.global.attendance"]}</Button>
-                                                <Button color="primary"
-                                                        onClick={logs}>{translation.language["label.global.class.logs"]}</Button>
-                                            </Fragment>
+                                            <Button color="primary"
+                                                    onClick={logs}>{translation.language["label.global.class.logs"]}</Button>
                                     }
                                 </Grid>
 
@@ -179,11 +169,10 @@ const TeacherProfile = ({
                                               getProfileData={getProfileData}
                                         />
                                         :
-                                        attendComponent ?
-                                            <Attendance translation={translation}
-                                                        teacher={teacherState.profile.teacher}/> :
-                                            logsComponent ? <Logs translation={translation}
-                                                                  teacher={teacherState.profile.teacher}/> : null
+                                        logsComponent ?
+                                            <Logs translation={translation}
+                                                  attendances={teacherState.profile.classAttendances}
+                                                  teacher={teacherState.profile.teacher}/> : null
                                 }
                             </Grid>
 

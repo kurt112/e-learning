@@ -265,7 +265,7 @@ export function TeacherInsertAttendace(month, day, year, time) {
  *
  **/
 
-export const TeacherLogs = (translation) => [
+export const ClassLogs = (translation) => [
     {
         name: 'date',
         label: translation.language["label.global.date"]
@@ -293,7 +293,7 @@ export const TeacherLogs = (translation) => [
 
 ]
 
-export function TeacherInsertLogs(date, subjectName, grade, section, timeStart, timeEnd) {
+export function ClassInsertLogs(date, subjectName, grade, section, timeStart, timeEnd) {
     return {date, subjectName, grade, section, timeStart, timeEnd}
 }
 

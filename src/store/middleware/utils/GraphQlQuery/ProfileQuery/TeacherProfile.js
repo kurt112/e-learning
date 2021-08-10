@@ -8,6 +8,20 @@ export const
         return {
             query: `
                     query{getTeacherByUserEmail(email:"${id}"){
+                     classAttendances{
+                        teacher_class{
+                            roomShift{
+                                grade,
+                                section
+                            },
+                            subject{
+                                subjectName
+                            },
+                                startTime,
+                                endTime
+                        }
+                                createdAt
+                     },
                          user{
                                 id,
                                 firstName,
@@ -22,5 +36,6 @@ export const
                          }                         
                     }
             }
-        `}
+        `
+        }
     }

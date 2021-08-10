@@ -9,7 +9,6 @@ import {connect} from 'react-redux'
 import {useEffect, useState} from "react";
 import {withRouter} from 'react-router-dom';
 import Logs from './logs/Logs'
-import Attendance from './attendance/Attendance'
 import Data from './data/Data'
 import {Fragment} from 'react'
 import * as action from '../../../../../store/action/__ActionGlobal/ProfileAction'
@@ -33,7 +32,6 @@ const StudentProfile = ({
     const [canUpdate, setCanUpdate] = useState(false)
 
     const [dataComponent, setDataComponent] = useState(false)
-    const [attendComponent, setAttendanceComponent] = useState(false)
     const [logsComponent, setLogsComponent] = useState(false)
 
 
@@ -41,14 +39,13 @@ const StudentProfile = ({
     const [photo, setPhoto] = useState('')
     const [photoDisplay, setPhotoDisplay] = useState(null)
 
-    console.log(studentState)
-
     useEffect(() => {
         getProfileData()
     }, [initData, match.params.id])
 
     useEffect(() => {
         if (studentState.profile !== null) {
+            console.log(studentState)
             setName(`${studentState.profile.user.firstName} ${studentState.profile.user.lastName}`)
             setDataComponent(true)
             setPhoto(studentState.profile.user.picture)
@@ -56,20 +53,13 @@ const StudentProfile = ({
 
     }, [studentState])
 
-    const attendance = () => {
-        setAttendanceComponent(true)
-        setDataComponent(false)
-        setLogsComponent(false)
-    }
 
     const data = () => {
-        setAttendanceComponent(false)
         setDataComponent(true)
         setLogsComponent(false)
     }
 
     const logs = () => {
-        setAttendanceComponent(false)
         setDataComponent(false)
         setLogsComponent(true)
     }
@@ -77,6 +67,8 @@ const StudentProfile = ({
     const editClick = () => {
         const isUpdate = !update
         setUpdate(isUpdate)
+        setLogsComponent(false)
+        setDataComponent(true)
     }
 
     const changePhoto = (event) => {
@@ -93,7 +85,7 @@ const StudentProfile = ({
 
 
     return (
-        <Grid container className={style.container}>
+        <Grid container>
             {studentState.loading === true && studentState.error === null ?
                 <CircularProgress style={{margin: 'auto'}} disableShrink/> :
                 <Fragment>
@@ -149,9 +141,8 @@ const StudentProfile = ({
                                     update === true ? null :
                                         <Fragment>
                                             <Button color="primary"
-                                                    onClick={attendance}>{translation.language["label.global.attendance"]}</Button>
-                                            <Button color="primary"
                                                     onClick={logs}>{translation.language["label.global.class.logs"]}</Button>
+
                                         </Fragment>
                                 }
                             </Grid>
@@ -174,8 +165,7 @@ const StudentProfile = ({
                                         cancel={() => setUpdate(false)}
                                         getProfileData={getProfileData}
                                     /> :
-                                    attendComponent ? <Attendance translation={translation}/> :
-                                        logsComponent ? <Logs translation={translation}/> : null
+                                        logsComponent ? <Logs translation={translation} attendances={studentState.profile.classAttendances}/> : null
                             }
                         </Grid>
                     </Grid>
