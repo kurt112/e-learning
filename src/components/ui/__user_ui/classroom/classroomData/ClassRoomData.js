@@ -9,7 +9,7 @@ import ForumSharpIcon from "@material-ui/icons/ForumSharp";
 import Messages from "./messages/Messages";
 import Participant from "./Participants/Participant";
 import Input from "./messages/Input/Input";
-import {Fragment, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import Members from "./members/Members";
@@ -27,11 +27,47 @@ const ClassRoomData = ({
                           io
                        }) => {
 
-
+    const [offlineUsers, setOfflineUsers] = useState([])
+    const [onlineUsers, setOnlineUser] = useState([])
     const [messageTab, setMessageTab] = useState(true)
     const [participantTab, setParticipantTab] = useState(false)
     const [membersTab, setMembersTab] = useState(false)
     const socket = io.socket
+
+    useEffect(() => {
+        socket.emit('users', () => {
+
+        })
+
+        socket.on('getUsers', (e) => {
+            const {students, teacher} = e.classes
+            const tempOffline = []
+            const tempOnline = []
+            const map = new Map()
+
+            e.users.map(e => {
+                map.set(e.username, e.username)
+            })
+
+            students.map(student => {
+                const username = `${student.user.firstName} ${student.user.lastName}`
+
+                if (map.get(username) === undefined) tempOffline.push(student.user)
+                else tempOnline.push(student.user)
+
+            })
+
+            if (teacher !== null) {
+                const username = `${teacher.user.firstName} ${teacher.user.lastName}`
+                if (map.get(username) === undefined) tempOffline.push(teacher.user)
+                else tempOnline.push(teacher.user)
+            }
+
+            setOnlineUser(tempOnline)
+            setOfflineUsers(tempOffline)
+
+        })
+    }, [])
 
 
     const messageTabClick = () => {
@@ -115,7 +151,7 @@ const ClassRoomData = ({
 
             {
                 membersTab ?
-                    <Members/> : null
+                    <Members offlineUsers={offlineUsers} onlineUsers={onlineUsers}/> : null
             }
 
         </Drawer>

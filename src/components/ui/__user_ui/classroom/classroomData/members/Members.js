@@ -1,7 +1,6 @@
 import {Avatar, Badge, Grid, withStyles} from "@material-ui/core";
-import {Fragment, useEffect, useState} from 'react'
+import {Fragment} from 'react'
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {connect} from "react-redux";
 import {deepOrange, green} from "@material-ui/core/colors";
 import {S3BucketEndPoint} from "../../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 
@@ -88,48 +87,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Members = ({io}) => {
+const Members = ({offlineUsers,onlineUsers}) => {
     const classes = useStyles()
-    const socket = io.socket
-
-    const [offlineUsers, setOfflineUsers] = useState([])
-    const [onlineUsers, setOnlineUser] = useState([])
-
-    useEffect(() => {
-        socket.emit('users', () => {
-
-        })
-
-        socket.on('getUsers', (e) => {
-            const {students, teacher} = e.classes
-            const tempOffline = []
-            const tempOnline = []
-            const map = new Map()
-
-            e.users.map(e => {
-                map.set(e.username, e.username)
-            })
-
-            students.map(student => {
-                const username = `${student.user.firstName} ${student.user.lastName}`
-
-                if (map.get(username) === undefined) tempOffline.push(student.user)
-                else tempOnline.push(student.user)
-
-            })
-
-            if (teacher !== null) {
-                const username = `${teacher.user.firstName} ${teacher.user.lastName}`
-                if (map.get(username) === undefined) tempOffline.push(teacher.user)
-                else tempOnline.push(teacher.user)
-            }
-
-            setOnlineUser(tempOnline)
-            setOfflineUsers(tempOffline)
-
-        })
-    }, [])
-
 
     return <Fragment>
         {
@@ -181,10 +140,5 @@ const Members = ({io}) => {
     </Fragment>
 }
 
-const mapStateToProps = (state) => {
-    return {
-        io: state.Socket
-    }
-}
 
-export default connect(mapStateToProps)(Members)
+export default Members
