@@ -92,6 +92,7 @@ const Navbar = ({handleDrawerOpen, user, logout}) => {
         <AppBar
             elevation={0}
             position="fixed"
+
         >
             <Toolbar>
                 <IconButton

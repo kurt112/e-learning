@@ -86,5 +86,10 @@ export const
      * for User Endpoint
      */
 
-    updateAccount = 'update-account'
-
+    updateAccount = 'update-account',
+    /**
+    * for Attendance Endpoint
+    */
+    attendance = 'attendance/',
+    studentAttendance = attendance+'student',
+    teacherAttendance = attendance+'teacher'

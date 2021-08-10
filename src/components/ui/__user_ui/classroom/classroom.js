@@ -18,6 +18,8 @@ import {
     getRoomShiftClass
 } from "../../../../store/middleware/utils/GraphQlQuery/ProfileQuery/RoomShiftClassProfile";
 import {Admin, Student, Teacher} from "../../../../store/utils/Specify";
+import {baseUrl} from "../../../../store/middleware/axios";
+import {teacherAttendance} from "../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 
 const StyledVideo = styled.video`
   width: 70%;
@@ -54,9 +56,6 @@ const Classroom = (props) => {
     const classes = style();
     const [receive, setReceive] = useState('')
 
-    const [roomName, setRoom] = useState('')
-    const [roomClassName, setClasses] = useState('')
-    const [subjectName, setSubject] = useState('')
     const [people, setPeople] = useState([])
     const [messages, setMessages] = useState([])
     const [role] = useState(props.user.userRole)
@@ -88,10 +87,13 @@ const Classroom = (props) => {
                     const {students, teacher} = classes
 
                     if (role === Teacher) {
-                        console.log(teacher)
-
-                        console.log(props.user.email)
                         if (teacher.user.email === props.user.email) valid = true
+
+                        const params = new URLSearchParams();
+                        params.append('id', teacher.id)
+                        params.append('class-id', path)
+
+                        baseUrl.post(teacherAttendance,params).then(ignored => {})
 
                     }
 
@@ -115,6 +117,7 @@ const Classroom = (props) => {
                 socket.emit('joinClass', {path, name, role,classes}, () => {
 
                 })
+
 
                 socket.on('classData', ({users, messages, usersFilter}) => {
                     setPeople(users)
@@ -229,6 +232,8 @@ const Classroom = (props) => {
 
             <Hidden mdUp>
                 <ClassRoomData
+                    path={path}
+                    role={role}
                     peers={peers}
                     classes={classes}
                     messages={messages}
@@ -242,6 +247,8 @@ const Classroom = (props) => {
 
             <Hidden mdDown>
                 <ClassRoomData
+                    path={path}
+                    role={role}
                     peers={peers}
                     classes={classes}
                     setMessage={setMessages}
