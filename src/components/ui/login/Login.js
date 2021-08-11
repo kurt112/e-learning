@@ -32,7 +32,8 @@ const Login = ({
                    registerClose,
                    translation,
                    changeLanguage,
-                   closeRegisterForm
+                   closeRegisterForm,
+                   rememberClick
                }) => {
     const classes = style();
 
@@ -133,7 +134,7 @@ const Login = ({
                         />
                         <Box className={classes.util}>
                             <FormControlLabel
-                                control={<Checkbox value="remember" color="primary"/>}
+                                control={<Checkbox onClick={rememberClick} checked={loginState.remember} value="remember" color="primary"/>}
                                 label={translation.language["label.login.check.remember"]}
                             />
                             {loginState.error === true ? <p>{translation.language["validation.login.error"]}</p> : null}
@@ -205,7 +206,8 @@ const mapDispatchToProps = (dispatch) => {
         registerClose: () => dispatch(action.registerClose()),
         changeId: (data) => dispatch(action.changeId(data)),
         changeLanguage: (data) => dispatch(changeLanguage(data)),
-        closeRegisterForm: () => dispatch(action.closeRegisterForm())
+        closeRegisterForm: () => dispatch(action.closeRegisterForm()),
+        rememberClick: () => dispatch(action.rememberClick())
 
     }
 }

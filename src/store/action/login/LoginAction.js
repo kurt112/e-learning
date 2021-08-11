@@ -94,4 +94,9 @@ export const
         return {
             type: action.REGISTER_FORM_CLOSE
         }
+    },
+    rememberClick = () => {
+        return {
+            type: action.REMEMBER_CLICK
+        }
     }

@@ -15,9 +15,16 @@ export function* Login() {
         password: login.password //PasswordEncrypt(auth.password)
     }
 
+    let config = {
+        headers: {
+            remember: login.remember,
+        }
+    }
+
+
     try {
 
-        const response = yield baseUrlNoAuth.post('/login', userData)
+        const response = yield baseUrlNoAuth.post('/login', userData,config)
         const  data = response.data
         yield put(action.successLogin(data))
         yield put(currentUserAction.changeToken(data.token))

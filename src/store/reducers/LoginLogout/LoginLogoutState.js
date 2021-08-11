@@ -17,6 +17,7 @@ const initState = {
     id: '',
     studentForm: false,
     teacherForm: false,
+    remember: true,
 
     //  error
     error: false,
@@ -100,6 +101,13 @@ const closeRegisterForm = (state) => {
     })
 }
 
+const clickRemember = (state) => {
+
+    const remember = !state.remember
+
+    return updateObject(state, {remember})
+}
+
 const reducer = (state = initState, action) => {
 
     switch (action.type) {
@@ -132,6 +140,9 @@ const reducer = (state = initState, action) => {
 
         case actions.REGISTER_FORM_CLOSE:
             return closeRegisterForm(state)
+
+        case actions.REMEMBER_CLICK: return clickRemember(state)
+
 
         default:
             return state;
