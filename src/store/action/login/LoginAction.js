@@ -4,6 +4,7 @@
  * @created : 11/07/2021, Sunday
  **/
 import * as action from '../../ActionType/Login/LoginActionType'
+import {FORGOT_PASS_CLOSE} from "../../ActionType/Login/LoginActionType";
 
 export const
     changeEmail = (data) => {
@@ -98,5 +99,17 @@ export const
     rememberClick = () => {
         return {
             type: action.REMEMBER_CLICK
+        }
+    },
+
+    forgotPasswordClick = () => {
+        return {
+            type: action.FORGOT_PASS_CLICK
+        }
+    },
+
+    forgotPasswordClose = () => {
+        return {
+            type: action.FORGOT_PASS_CLOSE
         }
     }

@@ -17,6 +17,7 @@ const initState = {
     id: '',
     studentForm: false,
     teacherForm: false,
+    forgotPasswordForm: false,
     remember: true,
 
     //  error
@@ -142,6 +143,9 @@ const reducer = (state = initState, action) => {
             return closeRegisterForm(state)
 
         case actions.REMEMBER_CLICK: return clickRemember(state)
+
+        case actions.FORGOT_PASS_CLICK: return updateObject(state, {forgotPasswordForm: true})
+        case actions.FORGOT_PASS_CLOSE: return updateObject(state, {forgotPasswordForm: false})
 
 
         default:

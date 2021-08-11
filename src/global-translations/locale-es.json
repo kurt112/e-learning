@@ -12,6 +12,7 @@
   "label.global.current.password": "Current Password",
   "label.global.retype.password": "Re-Type Password",
   "label.global.check.id": "Please Input Your Id",
+  "label.global.check.email": "Please Input Your Email",
   "label.global.enter.your.id": "Enter Your Id",
   "label.global.student.register.form": "Student Register Form",
   "label.global.teacher.register.form": "Teacher Register Form",
@@ -98,6 +99,7 @@
   "label.global.logs": "Logs",
   "label.global.day": "Day",
   "label.global.time":"Time",
+  "label.global.enter.email": "Enter Your Email",
   "label.global.current.class": "Current Class",
   "label.global.archive.class": "Archive Class",
   "label.global.class.empty": "Class Is Empty",
@@ -126,6 +128,7 @@
   "label.button.upload.photo": "Upload Photo",
   "label.button.edit": "Edit",
   "label.button.next": "Next",
+  "label.button.send.email": "Send Email",
 
   "label.login.heading.title": "Virtual  School",
   "label.login.heading.login": "Login",

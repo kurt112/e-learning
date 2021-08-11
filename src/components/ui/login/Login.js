@@ -20,6 +20,8 @@ import * as action from '../../../store/action/login/LoginAction'
 import {StudentRegisterForm, TeacherRegisterForm, UserIDForm} from "../registerForm";
 import style from './LoginStyle'
 import {changeLanguage} from '../../../store/action/__ActionGlobal/ProfileAction'
+import {baseUrl, baseUrlNoAuth} from "../../../store/middleware/axios";
+import ForgotPassword from "./ForgotPassword";
 
 const Login = ({
                    loginState,
@@ -33,7 +35,10 @@ const Login = ({
                    translation,
                    changeLanguage,
                    closeRegisterForm,
-                   rememberClick
+                   rememberClick,
+                   forgotPasswordClick,
+                   forgotPasswordClose
+
                }) => {
     const classes = style();
 
@@ -46,7 +51,6 @@ const Login = ({
     const register = async () => {
         await registerInit()
     }
-
 
     return (
         <Grid container component="main" className={classes.root}>
@@ -75,6 +79,14 @@ const Login = ({
                     <TeacherRegisterForm translation={translation}
                                          closeDialog={closeRegisterForm}
                                          open={loginState.teacherForm}
+                    /> : null
+            }
+
+            {
+                loginState.forgotPasswordForm === true ?
+                    <ForgotPassword translation={translation}
+                                    closeDialog={forgotPasswordClose}
+                                    open={loginState.forgotPasswordForm}
                     /> : null
             }
 
@@ -134,7 +146,8 @@ const Login = ({
                         />
                         <Box className={classes.util}>
                             <FormControlLabel
-                                control={<Checkbox onClick={rememberClick} checked={loginState.remember} value="remember" color="primary"/>}
+                                control={<Checkbox onClick={rememberClick} checked={loginState.remember}
+                                                   value="remember" color="primary"/>}
                                 label={translation.language["label.login.check.remember"]}
                             />
                             {loginState.error === true ? <p>{translation.language["validation.login.error"]}</p> : null}
@@ -152,7 +165,8 @@ const Login = ({
                         <Grid container>
                             <Grid item xs>
                                 <Grid item>
-                                    <Button color="primary">{translation.language["label.login.button.forgot"]}</Button>
+                                    <Button onClick={forgotPasswordClick}
+                                            color="primary">{translation.language["label.login.button.forgot"]}</Button>
                                 </Grid>
                             </Grid>
                             <Grid item>
@@ -207,7 +221,9 @@ const mapDispatchToProps = (dispatch) => {
         changeId: (data) => dispatch(action.changeId(data)),
         changeLanguage: (data) => dispatch(changeLanguage(data)),
         closeRegisterForm: () => dispatch(action.closeRegisterForm()),
-        rememberClick: () => dispatch(action.rememberClick())
+        rememberClick: () => dispatch(action.rememberClick()),
+        forgotPasswordClick: () => dispatch(action.forgotPasswordClick()),
+        forgotPasswordClose: () => dispatch(action.forgotPasswordClose())
 
     }
 }
