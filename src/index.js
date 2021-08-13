@@ -77,7 +77,9 @@ import {
     RoomProfile,
     RoomShiftProfile,
     RoomShiftClassProfile,
-    ActivityProfile
+    ActivityProfile,
+    SubjectProfileState,
+    CurriculumProfile
 } from './store/reducers/Profile'
 
 
@@ -162,7 +164,9 @@ import {
     watchTeacherGetProfile,
     watchRoomGetProfile,
     watchRoomShiftGetProfile,
-    watchRoomShiftClassGetProfile
+    watchRoomShiftClassGetProfile,
+    watchCurriculumGetProfile,
+    watchSubjectGetProfile
 } from './store/middleware/profile'
 
 // import {
@@ -242,6 +246,8 @@ const reducers = combineReducers({
     RoomShiftProfile,
     RoomShiftClassProfile,
     ActivityProfile,
+    SubjectProfileState,
+    CurriculumProfile,
 
     // LOGIN
     Login,
@@ -320,6 +326,8 @@ sagaMiddleware.run(watchTeacherGetProfile)
 sagaMiddleware.run(watchRoomGetProfile)
 sagaMiddleware.run(watchRoomShiftGetProfile)
 sagaMiddleware.run(watchRoomShiftClassGetProfile)
+sagaMiddleware.run(watchCurriculumGetProfile)
+sagaMiddleware.run(watchSubjectGetProfile)
 
 // LOGIN
 sagaMiddleware.run(watchLogin)

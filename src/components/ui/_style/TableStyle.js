@@ -12,7 +12,8 @@ const style = makeStyles(() => ({
         height: '100%'
     },
     tableContainer: {
-        maxHeight: 520
+        height:'100%',
+        minHeight: 520
     },
     tableNavbar: {
         marginBottom: 10,
@@ -39,7 +40,8 @@ export function TableOptions(pageChange,searchChange,searchText, pageNumber,tota
     return {
         filter: true,
         filterType: "dropdown",
-        tableBodyMaxHeight: '490px',
+        tableBodyHeight: 'calc(100% - 128px)',
+        // tableBodyMaxHeight: '490px',
         selectableRowsHeader: true,
         rowsPerPageOptions:[],
         rowsPerPage:10,

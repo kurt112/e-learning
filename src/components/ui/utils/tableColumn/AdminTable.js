@@ -230,14 +230,11 @@ export const AdminSubjectTable = (translation) => [
             sort: false,
             customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Button variant="outlined" color="primary" onClick={() => alert("wala pa ako profile tanga")}>
-                        {translation.language["label.global.visit.profile"]}
-                    </Button>
-                    // <Link to="/admin/dashboard" style={{textDecoration: 'none'}}>
-                    //     <Button variant="outlined" color="primary">
-                    //         {translation.language["label.global.visit.profile"]}
-                    //     </Button>
-                    // </Link>
+                    <Link to={`${translation.language["route.profile.subject"]}${value}`} style={{textDecoration: 'none'}}>
+                        <Button variant="outlined" color="primary">
+                            {translation.language["label.global.visit.profile"]}
+                        </Button>
+                    </Link>
             },
             filterOptions: {
                 fullWidth: false
@@ -246,6 +243,8 @@ export const AdminSubjectTable = (translation) => [
     },
 
 ]
+
+
 
 export function AdminInsertSubject(subjectCode, subjectName, major, active, profile) {
     return {subjectCode, subjectName, major, active, profile}
@@ -444,6 +443,7 @@ export const AdminCurriculumTable = (translation) => [
         name: 'description',
         label: translation.language["label.curriculum.table.column.description"],
     },
+
     {
         name: "profile",
         label: translation.language["label.global.profile"],
@@ -452,13 +452,12 @@ export const AdminCurriculumTable = (translation) => [
             sort: false,
             customBodyRender: (value) => {
                 return value === undefined ? null :
-                    <Button variant="outlined" color="primary" onClick={() => alert("wala pa ako profile tanga")}>
-                        {translation.language["label.global.visit.profile"]}
-                    </Button>
-                    // <Link to={`${translation.language["route.profile.room"]}${value}`}
-                    //       style={{textDecoration: 'none'}}>
-                    //
-                    // </Link>
+                    <Link to={`${translation.language['route.profile.curriculum']}${value}`}
+                          style={{textDecoration: 'none'}}>
+                        <Button variant="outlined" color="primary">
+                            {translation.language["label.global.visit.profile"]}
+                        </Button>
+                    </Link>
             },
             filterOptions: {
                 fullWidth: false

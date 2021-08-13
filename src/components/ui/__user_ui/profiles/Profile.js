@@ -26,3 +26,7 @@ export {
 export {
     default as RoomShiftProfile
 } from './roomShift-profile/roomShiftProfile'
+
+export {
+    default as CurriculumProfile
+}from './cirriculum-profile/CurriculumProfile'

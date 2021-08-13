@@ -14,7 +14,7 @@ import * as action from "../../../../../store/action/__ActionGlobal/ProfileActio
 import {Room} from "../../../../../store/utils/Specify"
 import {Fragment} from "react"
 import RoomShiftClasses from "../utils/RoomShiftClasses/RoomShiftClasses"
-import RoomShift from "./room-shift/RoomShift"
+import RoomShift from "../utils/room-shift/RoomShift"
 
 const RoomProfile = ({room, match, initData,translation}) => {
     const style = ProfileStyle()

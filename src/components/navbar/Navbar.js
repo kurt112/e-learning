@@ -118,9 +118,9 @@ const Navbar = ({handleDrawerOpen, user, logout}) => {
                         }
                     </Typography>
                 </Link>
-                <Badge color="secondary" badgeContent={1} className={classes.badge}>
-                    <NotificationsIcon style={{fontSize: 25}} color="primary" variant="contained"/>
-                </Badge>
+                {/*<Badge color="secondary" badgeContent={1} className={classes.badge}>*/}
+                {/*    <NotificationsIcon style={{fontSize: 25}} color="primary" variant="contained"/>*/}
+                {/*</Badge>*/}
 
                 <div>
                     <ArrowDropDownIcon
@@ -141,18 +141,18 @@ const Navbar = ({handleDrawerOpen, user, logout}) => {
                         onClose={handleClose}
                     >
 
-                        <StyledMenuItem>
-                            <ListItemIcon>
-                                <DraftsIcon fontSize="small"/>
-                            </ListItemIcon>
-                            <ListItemText primary="Drafts"/>
-                        </StyledMenuItem>
-                        <StyledMenuItem>
-                            <ListItemIcon>
-                                <InboxIcon fontSize="small"/>
-                            </ListItemIcon>
-                            <ListItemText primary="Your Profile"/>
-                        </StyledMenuItem>
+                        {/*<StyledMenuItem>*/}
+                        {/*    <ListItemIcon>*/}
+                        {/*        <DraftsIcon fontSize="small"/>*/}
+                        {/*    </ListItemIcon>*/}
+                        {/*    <ListItemText primary="Drafts"/>*/}
+                        {/*</StyledMenuItem>*/}
+                        {/*<StyledMenuItem>*/}
+                        {/*    <ListItemIcon>*/}
+                        {/*        <InboxIcon fontSize="small"/>*/}
+                        {/*    </ListItemIcon>*/}
+                        {/*    <ListItemText primary="Your Profile"/>*/}
+                        {/*</StyledMenuItem>*/}
 
                         <StyledMenuItem>
                             <ListItemIcon>

@@ -15,8 +15,38 @@ export const
                         subjectMajor,
                         status
             }
+        }`
         }
-        `
+    },
+    getSubject = (code) => {
+        return {
+            query: `
+                    query{getSubject(code:"${code}"){
+                        id,
+                        subjectCode,
+                        subjectName,
+                        subjectMajor,
+                        status,
+                         roomShiftClasses{
+                                id,
+                                startTime,
+                                 day,
+                                endTime,
+                                    subject{
+                                        subjectName
+                                    }
+                                teacher{
+                                    user{
+                                        firstName,
+                                        lastName
+                                    }
+                                }
+                         },
+                          curriculumList{
+                                name
+                          }
+                    }
+        }`
         }
     },
     searchSubject = (search, page) => {
@@ -28,5 +58,6 @@ export const
                         subjectName
                     }
             }
-        `}
+        `
+        }
     }

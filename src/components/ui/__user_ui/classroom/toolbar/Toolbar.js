@@ -14,24 +14,16 @@ import {Box, Grid, Hidden} from "@material-ui/core"
 import * as actions from "../../../../../store/action/ClassroomAction"
 import {connect} from 'react-redux'
 import {Link} from "react-router-dom";
-import {useEffect} from "react";
-const Toolbar = ({ClassroomState, setMic,setVideo, setDrawer,io,path}) =>{
+const Toolbar = ({ClassroomState, setMic,setVideo, setDrawer}) =>{
     const classes = style()
-    const socket = io.socket
 
-    console.log(socket.id)
     const micClick = () => {
         setMic(!ClassroomState.mic)
-        socket.emit('remove-video', path,() => {
 
-        })
     }
 
     const videoClick =() => {
         setVideo(!ClassroomState.video)
-        socket.emit('remove-video', path,() => {
-
-        })
     }
 
     return (

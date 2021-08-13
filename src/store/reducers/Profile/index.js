@@ -26,3 +26,11 @@ export {
 export {
     default as ActivityProfile
 } from './ActivityProfileState'
+
+export {
+    default as CurriculumProfile
+} from './CurriculumProfileState'
+
+export {
+    default as SubjectProfileState
+}from './SubjectProfileState'

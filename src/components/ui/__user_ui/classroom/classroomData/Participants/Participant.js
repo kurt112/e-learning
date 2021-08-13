@@ -8,70 +8,85 @@ import {connect} from "react-redux";
 import Peer from 'peerjs'
 
 
-let participant = this;
+let myVideoStream;
+const peers = {}
+const myVideo = document.createElement('video')
+myVideo.muted = true
 
 const Participant = ({io, path, visible, classroom}) => {
     const socket = io.socket
     const peerRef = useRef()
     const videoGridRef = useRef()
-    const myVideo = document.createElement('video')
     const {mic, video} = classroom
-    const peers = {}
-    myVideo.muted = true
     console.log(socket.id)
+
+
 
 
     useEffect(() => {
 
-        if (mic || video) {
-            navigator.mediaDevices.getUserMedia({
-                video: video,
-                audio: mic
-            }).then(stream => {
-                socket.on('refresh',id =>{
-                    if(document.getElementById(id))
-                        document.getElementById(id).remove()
+        navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: true
+        }).then(stream => {
+            myVideoStream = stream;
 
-                })
-                addVideoStream(myVideo, stream)
-                myVideo.id = socket.id
-                peerRef.current.on('call', call => {
-                    call.answer(stream)
-                    const video = document.createElement('video')
-                    call.on('stream', userVideoStream => {
-                        addVideoStream(video, userVideoStream)
-                    })
-                })
+            addVideoStream(myVideo, stream)
 
-                socket.on('user-connected', userId => {
-                    peers[userId] =
-                    connectToNewUser(userId, stream)
-                })
-
-            })
-
-
-            peerRef.current = new Peer()
-            peerRef.current.on('open', id => {
-                console.log(id)
-                socket.emit('join-video', path, id, () => {
+            peerRef.current.on('call', call => {
+                call.answer(stream)
+                const video = document.createElement('video')
+                call.on('stream', userVideoStream => {
+                    addVideoStream(video, userVideoStream)
                 })
             })
 
-            socket.on('user-connected', (userId) => {
-                console.log(userId);
+            socket.on('user-connected', userId => {
+                connectToNewUser(userId, stream)
             })
 
-            socket.on('user-diconnected', userId => {
-                if (peers[userId]) peers[userId].close()
+        })
+
+
+        peerRef.current = new Peer()
+        peerRef.current.on('open', id => {
+            socket.emit('join-video', path, id, () => {
             })
+        })
 
+        socket.on('user-connected', (userId) => {
+        })
 
+        socket.on('user-diconnected', userId => {
+            if (peers[userId]) peers[userId].close()
+        })
 
-        }
 
 
     }, [])
+
+
+    useEffect(() => {
+        if(myVideoStream !== undefined){
+            const enabled = myVideoStream.getVideoTracks()[0].enabled;
+            if (enabled) {
+                myVideoStream.getVideoTracks()[0].enabled = false;
+            } else {
+                myVideoStream.getVideoTracks()[0].enabled = true;
+            }
+        }
+    },[video])
+
+    useEffect(()=> {;
+        if(myVideoStream !==undefined){
+            const enabled = myVideoStream.getAudioTracks()[0].enabled
+            if (enabled) {
+                myVideoStream.getAudioTracks()[0].enabled = false;
+            } else {
+                myVideoStream.getAudioTracks()[0].enabled = true;
+            }
+        }
+    }, [mic])
 
 
     const addVideoStream = (video, stream) => {
@@ -88,7 +103,6 @@ const Participant = ({io, path, visible, classroom}) => {
     const connectToNewUser = (userId, stream) => {
         const call = peerRef.current.call(userId, stream)
         const video = document.createElement('video')
-        console.log('connecting to new user');
         call.on('stream', userVideoStream => {
             addVideoStream(video, userVideoStream)
         })

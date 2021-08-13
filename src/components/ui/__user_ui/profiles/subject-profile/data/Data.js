@@ -3,42 +3,56 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import { Box, Container, Typography } from "@material-ui/core";
+import {Box, Container, Grid, Typography} from "@material-ui/core";
 import { Fragment } from "react";
 import ProfileStyle from '../../ProfileStyle'
-export default function Data({translation}) {
+import {format24Hour} from "../../../../utils/dateFormat/TimeConverter";
+export default function Data({translation,profile}) {
     const style = ProfileStyle()
+    console.log(profile)
     return (
-
         <Fragment>
-            <Typography className={style.profileName} variant="h4" component="h2">Personal Information</Typography>
-            <Container>
-                <Box className={style.profileDataContainer}>
-                    <Box className={style.profileDataContainertitle}>
-                        <p>{translation.language["label.global.subject.code"]}: </p>
-                    </Box>
-                    <p>Kurt Lupin</p>
-                </Box>
-                <Box className={style.profileDataContainer}>
-                    <Box className={style.profileDataContainertitle}>
-                        <p>{translation.language["label.global.subject.name"]}: </p>
-                    </Box>
-                    <p>Orioque</p>
-                </Box>
-                <Box className={style.profileDataContainer}>
-                    <Box className={style.profileDataContainertitle}>
-                        <p>{translation.language["label.global.major"]}</p>
-                    </Box>
-                    <p>December 20, 1999</p>
-                </Box>
-                <Box className={style.profileDataContainer}>
-                    <Box className={style.profileDataContainertitle}>
-                        <p>{translation.language["label.global.status"]}</p>
-                    </Box>
-                    <p>May 2, 2020</p>
-                </Box>
-            </Container>
+            <h1 className={style.profileName}>{translation.language["label.global.room.info"]}</h1>
 
+            <Grid component={Container} container>
+                <Grid container>
+                    <Grid md={9} xs={6} item>
+                        <h2>{translation.language["label.global.subject.code"]}: </h2>
+                    </Grid>
+
+                    <Grid md={3} xs={6} item>
+                        <Grid container justify="flex-end">
+                            <p>{profile.subjectCode}</p>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+                <Grid container>
+                    <Grid md={9} xs={6} item>
+                        <h2>{translation.language["label.global.subject.name"]}: </h2>
+                    </Grid>
+
+                    <Grid md={3} xs={6} item>
+                        <Grid container justify="flex-end">
+                            <p>{profile.subjectName}</p>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+                <Grid container>
+                    <Grid md={9} xs={6} item>
+                        <h2>{translation.language["label.global.category"]}: </h2>
+                    </Grid>
+
+                    <Grid md={3} xs={6} item>
+                        <Grid container justify="flex-end">
+                            <p>{profile.subjectMajor}</p>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+            </Grid>
         </Fragment>
+
     )
 }

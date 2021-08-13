@@ -25,11 +25,11 @@ export const
                                 },
                             teacher{
                                 id,
-                                    user{
-                                        firstName,
-                                        lastName
-                                    }
+                                user{
+                                    firstName,
+                                    lastName
                                 }
+                            }
                             roomShiftClasses{
                                 id,
                                 startTime,

@@ -19,4 +19,33 @@ export const
                     }
             }`
         }
+    },
+
+    getCurriculumProfile = (id) => {
+        return {
+            query: `
+                    query{getCurriculum(id:"${id}"){
+                               name,
+                               description,
+                               roomShifts{
+                                   grade,
+                                   section,
+                                   timeStart,
+                                   timeEnd,
+                                   teacher{
+                                        id,
+                                        user{
+                                           firstName,
+                                            lastName
+                                        }
+                                   }
+                               }
+                               subjects{
+                                   id,
+                                   subjectCode,
+                                   subjectName
+                               }
+                    }
+            }`
+        }
     }
