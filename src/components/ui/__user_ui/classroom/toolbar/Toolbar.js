@@ -14,20 +14,37 @@ import {Box, Grid, Hidden} from "@material-ui/core"
 import * as actions from "../../../../../store/action/ClassroomAction"
 import {connect} from 'react-redux'
 import {Link} from "react-router-dom";
-const Toolbar = ({ClassroomState, setMic,setVideo, setDrawer}) =>{
+import {useEffect} from "react";
+const Toolbar = ({ClassroomState, setMic,setVideo, setDrawer,io,path}) =>{
     const classes = style()
+    const socket = io.socket
+
+    console.log(socket.id)
+    const micClick = () => {
+        setMic(!ClassroomState.mic)
+        socket.emit('remove-video', path,() => {
+
+        })
+    }
+
+    const videoClick =() => {
+        setVideo(!ClassroomState.video)
+        socket.emit('remove-video', path,() => {
+
+        })
+    }
 
     return (
         <div  className={classes.leftBottomToolbar}>
 
             <Box className={classes.leftBottomToolbarLeft}>
-                <Box className={classes.centerItem} onClick={() => setMic(!ClassroomState.mic)}>
+                <Box className={classes.centerItem} onClick={micClick}>
                     {ClassroomState.mic ? <MicIcon fontSize="large" /> : <MicOffIcon fontSize="large" />}
                     <br/>
                     <span>Mic</span>
                 </Box>
 
-                <Box className={classes.centerItem} onClick={() => setVideo(!ClassroomState.video)}>
+                <Box className={classes.centerItem} onClick={videoClick}>
                     {ClassroomState.video ? <VideocamIcon fontSize="large" /> : <VideocamOffIcon fontSize="large" />}
                     <br/>
                     <span>Video</span>
@@ -69,6 +86,7 @@ const Toolbar = ({ClassroomState, setMic,setVideo, setDrawer}) =>{
 
 const mapStateToProps = (state) => {
     return {
+        io: state.Socket,
         ClassroomState: state.Classroom
     }
 }

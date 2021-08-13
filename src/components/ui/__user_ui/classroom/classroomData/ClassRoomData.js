@@ -27,17 +27,17 @@ const ClassRoomData = ({
                            chatDrawer,
                            small,
                            setMessage,
-                           peers,
                            io,
                            path,
                            role
                        }) => {
     const [offlineUsers, setOfflineUsers] = useState([])
     const [onlineUsers, setOnlineUser] = useState([])
-    const [messageTab, setMessageTab] = useState(true)
-    const [participantTab, setParticipantTab] = useState(false)
+    const [messageTab, setMessageTab] = useState(false)
+    const [participantTab, setParticipantTab] = useState(true)
     const [membersTab, setMembersTab] = useState(false)
     const socket = io.socket
+
 
     useEffect(() => {
         socket.emit('users', () => {
@@ -51,7 +51,7 @@ const ClassRoomData = ({
             const map = new Map()
 
             e.users.map(e => {
-                map.set(e.username, e.username)
+                return map.set(e.username, e.username)
             })
 
             students.map(student => {
@@ -158,7 +158,7 @@ const ClassRoomData = ({
 
                 <Hidden mdUp>
                     <Box onClick={onClose} className={classes.rightDrawerButton}>
-                        <ArrowBackOutlinedIcon className={classes.iconBlue} fontSize="large"/>
+                        <ArrowBackOutlinedIcon fontSize="large"/>
                         <br/>
                         <span>Exit</span>
                     </Box>
@@ -176,12 +176,7 @@ const ClassRoomData = ({
                     null
             }
 
-            {
-                participantTab ?
-
-                    <Participant socket={socket} peers={peers}/> : null
-
-            }
+            <Participant visible={participantTab} path={path}/>
 
             {
                 membersTab ?

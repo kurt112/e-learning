@@ -13,9 +13,7 @@ import {baseUrlNoAuth} from "../../../store/middleware/axios";
 
 
 const ForgotPassword = ({
-                            submit,
                             open,
-                            registerClose,
                             translation,
                             closeDialog
                         }) => {
@@ -24,21 +22,26 @@ const ForgotPassword = ({
 
 
 
-    const sendEmail = async () => {
+    const sendEmail = () => {
 
         const params = new URLSearchParams()
         params.append('email',email)
-        await baseUrlNoAuth.post("/forgot",params).then(ignored => {
+        baseUrlNoAuth.post("/forgot",params).then(ignored => {
             alert('Forgot Password Email Sent')
+            setEmail('')
         }).catch(ignored => {
             alert('Email Is Not Existing In Our Database')
         })
 
     }
 
+    const ClickEnter = (event) => {
+        if (event.key === "Enter")  sendEmail()
+    }
+
     return <Dialog
         open={open}
-        onClose={registerClose}
+        onClose={closeDialog}
         aria-labelledby="add-teacher"
         fullWidth={true}
         maxWidth={"md"}
@@ -59,6 +62,7 @@ const ForgotPassword = ({
                 fullWidth
                 variant={'outlined'}
                 onChange={(event) => setEmail(event.target.value)}
+                onKeyPress={(event) => ClickEnter(event)}
             />
         </DialogContent>
         <DialogActions>

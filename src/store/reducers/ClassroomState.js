@@ -8,8 +8,8 @@ import {updateObject} from "../utils/UpdateObject";
 
 const init_state = {
     showMessage: true,
-    video: false,
-    mic: false,
+    video: true,
+    mic: true,
     shareScreen: false,
 }
 
