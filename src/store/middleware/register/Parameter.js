@@ -5,10 +5,9 @@
  **/
 import {PasswordEncrypt} from "../utils/EncryptPassword";
 
-// import {PasswordEncrypt} from "../utils/EncryptPassword";
-const params = new URLSearchParams();
-export function* param(user,id) {
 
+export function* param(user,id) {
+    const params = new URLSearchParams();
     const password = yield PasswordEncrypt(user.password)
     yield params.append('id', id)
     yield params.append('first-name', user.firstName)

@@ -132,6 +132,35 @@ class State {
             passwordErrorMessage: "Password Should Contain 8 Characters, One Upper Case, One Lower Case, One Digit",
         })
 
+        this.resetForm = (state) => updateObject(state, {
+            email: '',
+            firstName: '',
+            lastName: '',
+            middleName: '',
+            suffix: '',
+            password: '',
+            reTypePassword: '',
+            birthdate: '',
+            gender: 'Male',
+            userRole: '',
+
+            // error
+            emailError: false,
+            firstNameError: false,
+            lastNameError: false,
+            passwordError: false,
+            reTypePasswordError: false,
+            birthdateError: false,
+
+            // error message
+            emailErrorMessage: '',
+            firstNameErrorMessage: '',
+            lastNameErrorMessage: '',
+            passwordErrorMessage: '',
+            reTypePasswordErrorMessage: '',
+            birthdateErrorMessage: '',
+        })
+
 
 
     }

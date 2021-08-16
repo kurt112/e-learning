@@ -72,4 +72,9 @@ export const
         return {
             type: action.INIT_REGISTER(to)
         }
+    },
+    successRegister = (to) => {
+        return {
+            type: action.SUCCESS_REGISTER(to)
+        }
     }

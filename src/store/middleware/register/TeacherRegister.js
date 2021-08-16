@@ -10,6 +10,7 @@ import {param} from "./Parameter";
 import * as action from '../../action/login/LoginAction'
 import {validate} from "./registrationValidation";
 import {Teacher} from "../../utils/Specify";
+import {successRegister} from "../../action/__ActionGlobal/UserRegisterAction";
 export function* TeacherRegisterData() {
 
     const teacher = yield select(Selector.TeacherRegister)
@@ -25,6 +26,8 @@ export function* TeacherRegisterData() {
     try {
         yield baseUrlNoAuth.post('/teacher-fillUp', params)
         alert("Success Register")
+        alert("Email Verification Sent")
+        yield put(successRegister(Teacher))
         yield put(action.resetLoginPage())
     } catch (ignored) {
     }

@@ -29,13 +29,14 @@ const initState = {
 }
 
 const Login = (state) => {
-    state = updateObject(state, {loading: true})
+    state = updateObject(state, {loading: true,id: ''})
 
     return state
 }
 
 const successLogin = (state, action) => {
     state = updateObject(state, {
+        id: '',
         message: action.data.message,
         loading: false,
         error: false
@@ -45,10 +46,12 @@ const successLogin = (state, action) => {
     return state
 }
 
-const failLogin = (state) => {
+const failLogin = (state,action) => {
     return updateObject(state, {
+        id: '',
         loading: false,
-        error: true
+        error: true,
+        message: action.data.response.data.message
     })
 }
 
@@ -58,7 +61,12 @@ const registerClose = (state) => {
         {
             dialog: false,
             errorPreregister: false,
-            id: ''
+            username: '',
+            password: '',
+            message: '',
+            loading: false,
+            form: '',
+            id: '',
         }
     )
 }
@@ -81,6 +89,7 @@ const logout = (state) => {
 
 const errorPreRegister = (state) => {
     return updateObject(state, {
+        id: '',
         errorPreregister: true,
         errorPreregisterMessage: 'User Not Existing'
     })
@@ -121,7 +130,7 @@ const reducer = (state = initState, action) => {
         case actions.SUCCESS_LOGIN:
             return successLogin(state, action)
         case actions.FAIL_LOGIN:
-            return failLogin(state)
+            return failLogin(state,action)
         case actions.RESET_LOGIN_PAGE:
             return logout(state)
 

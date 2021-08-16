@@ -137,7 +137,7 @@ export const
                                 user{
                                     email,
                                     firstName,
-                                    lastName
+                                    lastName,
                                 }
                            },
                            subject{

@@ -5,14 +5,16 @@
  **/
 import {Avatar} from "@material-ui/core";
 import ProfileStyle from '../../ProfileStyle'
+import {S3BucketEndPoint} from "../../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 
-const PeopleData = ({border, name}) => {
+const PeopleData = ({border, name,picture}) => {
     // console.log(border)
+    console.log(picture)
     const style = ProfileStyle()
     return (
         <div style={border} className={style.classDataContainer}>
             <div className={style.classDataContainerLeft}>
-                <Avatar>{name.substring(0,1).toUpperCase()}</Avatar>
+                <Avatar src={picture !== '' || picture !==null? S3BucketEndPoint + picture : null}>{name.substring(0,1).toUpperCase()}</Avatar>
                 <p>{name}</p>
             </div>
         </div>

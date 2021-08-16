@@ -150,7 +150,7 @@ const Login = ({
                                                    value="remember" color="primary"/>}
                                 label={translation.language["label.login.check.remember"]}
                             />
-                            {loginState.error === true ? <p>{translation.language["validation.login.error"]}</p> : null}
+                            {loginState.error === true ? <p>{loginState.message}</p> : null}
                         </Box>
                         <Button
                             fullWidth

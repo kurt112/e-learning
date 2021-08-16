@@ -38,6 +38,7 @@ const reducer =(state = initState, action) => {
 
         // for registering the user
         case userAction.INIT_REGISTER(Student): return state;
+        case userAction.SUCCESS_REGISTER(Student):return userState.resetForm(state)
 
         // for error handler
         case SET_ERROR_EMAIL_EMPTY(Student): return userState.emailEmptyErrorHandler(state)

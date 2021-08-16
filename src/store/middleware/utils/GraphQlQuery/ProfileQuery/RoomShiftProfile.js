@@ -19,14 +19,16 @@ export const
                         teacher{
                             user{
                                 firstName,
-                                lastName
+                                lastName,
+                                picture
                             }
                         },
                         students{
                             student_id,
                                 user{
                                     firstName,
-                                    lastName
+                                    lastName,
+                                    picture
                                 }
                         },
                         roomShiftClasses{
@@ -37,7 +39,8 @@ export const
                                 id
                                 user{
                                    firstName,
-                                   lastName
+                                   lastName,
+                                   picture
                                 }
                             },
                             subject{
