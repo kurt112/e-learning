@@ -26,6 +26,8 @@ export const
 
     // FOR ADMIN
     Admin = "ADMIN",
+    Admin_Create = Admin+Create,
+    Admin_Delete = Admin+Delete,
 
     // For RoomShift
     RoomShift = 'ROOM_SHIFT',

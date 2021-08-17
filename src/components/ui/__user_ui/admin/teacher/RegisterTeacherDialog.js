@@ -46,7 +46,8 @@ const TeacherRegister = ({
         maxWidth="md"
         fullWidth
     >
-        <DialogTitle id="add-teacher"><strong>{translation.language["label.teacher.dialog.add.title"]}</strong>
+        <DialogTitle id="add-teacher">
+            {translation.language["label.teacher.dialog.add.title"]}
         </DialogTitle>
         <Divider/>
         <DialogContent>

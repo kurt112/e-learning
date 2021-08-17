@@ -59,33 +59,7 @@ const  Charts = () => {
     return (
         <div className={classes.root}>
             <main style={{width: '100%'}}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} md={3} lg={3}>
-                        <Paper className={fixedHeightPaper} elevation={3}  style={{height: 400}}>
-                            <h1 className={classes.marginZero}>Subject Used Based On Students</h1>
-                            <SubjectUsed/>
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12} md={3} lg={3}>
-                        <Paper className={fixedHeightPaper} elevation={3}  style={{height: 400}}>
-                            <h1 className={classes.marginZero}>Number Of Student Base On Strand</h1>
-                            <PieChartStudent/>
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12} md={3} lg={3}>
-                        <Paper className={fixedHeightPaper} elevation={3}  style={{height: 400}}>
-                            <h1 className={classes.marginZero}>User's Base On Role</h1>
-                            <PieChartUserRole/>
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12} md={3} lg={3}>
-                        <Paper className={fixedHeightPaper} elevation={3}  style={{height: 400}}>
-                            <h1 className={classes.marginZero}>Today Online User's</h1>
-                            <PieChartUserRole/>
-                        </Paper>
-                    </Grid>
 
-                </Grid>
 
 
                     {/*/!* Today Sales *!/*/}
@@ -96,7 +70,7 @@ const  Charts = () => {
                     {/*</Grid>*/}
 
                     <Grid item xs={12} md={12} lg={12}>
-                        <Paper className={fixedHeightPaper} style={{height: 400}}>
+                        <Paper className={fixedHeightPaper} >
                           <ClassHappeningTodayTable/>
                         </Paper>
                     </Grid>

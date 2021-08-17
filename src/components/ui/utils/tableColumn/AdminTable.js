@@ -137,6 +137,47 @@ export function AdminInsertTeacherTable(id, firstName, lastName, email, birthdat
     return {id, firstName, lastName, email, birthdate, profile: email}
 }
 
+export const AdminTable=(translation) => [
+    {
+        name: "firstName",
+        label:translation.language["label.global.first.name"]
+    },
+    {
+        name: 'lastName',
+        label: translation.language["label.global.last.name"]
+    },
+    {
+        name: 'email',
+        label: translation.language["label.global.email"]
+    },
+    {
+        name: 'birthdate',
+        label: translation.language["label.global.birth.date"]
+    },
+    {
+        name: "profile",
+        label: translation.language["label.global.profile"],
+        options: {
+            filter: false,
+            sort: false,
+            customBodyRender: (value) => {
+                return value === undefined ? null :
+                    <Link to={`${translation.language["route.profile.teacher"]}${value}`}  style={{textDecoration: 'none'}}>
+                        <Button variant="outlined" color="primary">
+                            {translation.language["label.global.visit.profile"]}
+                        </Button>
+                    </Link>
+            },
+            filterOptions: {
+                fullWidth: false
+            }
+        }
+    },
+]
+
+export function AdminInsertTable(firstName, lastName, email, birthdate) {
+    return {firstName, lastName, email, birthdate, profile: email}
+}
 
 /*
 *

@@ -6,13 +6,19 @@
 import {takeLeading} from "redux-saga/effects";
 import * as adminDialog from "../../ActionType/__ActionTypeGlobal/DialogActionType";
 import {
-    Curriculum, Curriculum_Create, Curriculum_Delete,
+    Admin, Admin_Create, Admin_Delete,
+    Curriculum,
+    Curriculum_Create,
+    Curriculum_Delete,
     Room, Room_Delete,
-    RoomShift, RoomShift_Delete,
-    RoomShiftClass, RoomShiftClass_Delete,
+    RoomShift,
+    RoomShift_Delete,
+    RoomShiftClass,
+    RoomShiftClass_Delete,
     Student,
     Student_Delete,
-    Subject, Subject_Delete,
+    Subject,
+    Subject_Delete,
     Teacher,
     Teacher_Delete
 } from "../../utils/Specify";
@@ -39,6 +45,7 @@ import {
     CurriculumTableDataNext,
     DeleteCurriculum
 } from "./CurriculumMIddleware";
+import {AdminTableDataInit,AdminRegister,AdminTableDataNext,DeleteAdmin} from "./AdminListMiddleWare";
 
 /**
  *
@@ -235,7 +242,7 @@ export function* watchCurriculumTableNextData() {
 }
 
 export function* watchCurriculumSearchChange() {
-    yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Curriculum), CurriculumTableDataNext)
+    yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Curriculum), CurriculumTableDataInit)
 }
 
 export function* watchAdminRegisterCurriculum() {
@@ -245,4 +252,36 @@ export function* watchAdminRegisterCurriculum() {
 export function* watchAdminDeleteCurriculum() {
     yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Curriculum_Delete), DeleteCurriculum)
 }
+
+
+/**
+ *
+ *
+ *          This middleware is for admin
+ *
+ *
+ **/
+
+export function* watchAdminInitTableData() {
+    yield takeLeading(adminTable.ADMIN_TABLE_INIT(Admin), AdminTableDataInit)
+}
+
+
+export function* watchTableNextData() {
+    yield takeLeading(adminTable.ADMIN_TABLE_NEXT_PAGE(Admin), AdminTableDataNext)
+}
+
+export function* watchSearchChange() {
+    yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Admin), AdminTableDataInit)
+}
+
+export function* watchAdminRegister() {
+    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Admin_Create), AdminRegister)
+}
+
+export function* watchAdminDelete() {
+    yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Admin_Delete), DeleteAdmin)
+}
+
+
 

@@ -41,6 +41,8 @@ import {
 } from './store/reducers/Student'
 
 
+
+// Admin
 import {
     AdminDashBoard,
     AdminRoom,
@@ -64,7 +66,10 @@ import {
     AdminCurriculum,
     CreateCurriculum,
     DeleteCurriculum,
-    InsertCurriculumSubject
+    InsertCurriculumSubject,
+    AdminList,
+    CreateAdmin,
+    DeleteAdmin
 } from './store/reducers/Admin'
 
 import Classroom from "./store/reducers/ClassroomState";
@@ -156,7 +161,12 @@ import {
     watchCurriculumSearchChange,
     watchCurriculumTableNextData,
     watchAdminRegisterCurriculum,
-    watchAdminDeleteCurriculum
+    watchAdminDeleteCurriculum,
+    watchAdminInitTableData,
+    watchAdminDelete,
+    watchSearchChange,
+    watchTableNextData,
+    watchAdminRegister
 } from './store/middleware/admin'
 
 import {
@@ -238,6 +248,9 @@ const reducers = combineReducers({
     CreateCurriculum,
     DeleteCurriculum,
     InsertCurriculumSubject,
+    AdminList,
+    CreateAdmin,
+    DeleteAdmin,
 
     // Profile of Entity
     StudentProfile,
@@ -318,6 +331,12 @@ sagaMiddleware.run(watchCurriculumSearchChange)
 sagaMiddleware.run(watchCurriculumTableNextData)
 sagaMiddleware.run(watchAdminRegisterCurriculum)
 sagaMiddleware.run(watchAdminDeleteCurriculum)
+
+sagaMiddleware.run(watchAdminInitTableData)
+sagaMiddleware.run(watchAdminDelete)
+sagaMiddleware.run(watchSearchChange)
+sagaMiddleware.run(watchTableNextData)
+sagaMiddleware.run(watchAdminRegister)
 
 
 // profile

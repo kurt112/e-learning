@@ -21,6 +21,10 @@ export const
     AdminCurriculum = (state) => state.AdminCurriculum,
     AdminCreateCurriculum = (state) => state.CreateCurriculum,
     AdminDeleteCurriculum = (state) => state.DeleteCurriculum,
+    Admin = (state) => state.AdminList,
+    AdminCreate = (state) => state.CreateAdmin,
+    AdminDelete = (state) => state.DeleteAdmin,
+
 
     // admin dialogs
     DeleteSubjectDialog = (state) => state.DeleteDialogSubject,

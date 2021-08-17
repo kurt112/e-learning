@@ -16,6 +16,8 @@ const SubjectList = lazy(() => import('../ui/__user_ui/admin/Admin').then(module
 const RoomClass = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({default: module.RoomClassList})))
 const RoomShift = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({default: module.RoomShift})))
 const StrandAndCourse = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({default: module.StrandAndCourse})))
+const AdminList = lazy(() => import('../ui/__user_ui/admin/Admin').then(module => ({default: module.AdminList})))
+
 
 const AdminRoute = ({translation}) => {
     const location = useLocation();
@@ -37,6 +39,12 @@ const AdminRoute = ({translation}) => {
                    render={() => <RoomShift translation={translation}/>}/>
             <Route path={translation.language["route.admin.curriculum"]} exact
                    render={() => <StrandAndCourse translation={translation}/>}/>
+
+            <Route path={translation.language["route.admin.list"]}
+                   exact
+                   render={() => <AdminList translation={translation}/>}
+
+            />
             <ProfileRoute translation={translation}/>
             {
                 location.pathname === '/'? <Redirect to={translation.language["route.admin.dashboard"]}/>:null

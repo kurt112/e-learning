@@ -88,8 +88,12 @@ export const
 
     updateAccount = 'update-account',
     /**
-    * for Attendance Endpoint
-    */
+     * for Attendance Endpoint
+     */
     attendance = 'attendance/',
-    studentAttendance = attendance+'student',
-    teacherAttendance = attendance+'teacher'
+    studentAttendance = attendance + 'student',
+    teacherAttendance = attendance + 'teacher',
+    /**
+     * for admin
+     */
+    admin = 'admin'

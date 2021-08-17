@@ -26,7 +26,9 @@ export {
     AdminRoomClassTable,
     AdminRoomShiftTable,
     AdminCurriculumTable,
+    AdminTable,
 
+    AdminInsertTable,
     AdminInsertCurriculum,
     AdminInsertRoomClass,
     AdminInsertSubject,

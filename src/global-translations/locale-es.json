@@ -101,6 +101,9 @@
   "label.global.logs": "Logs",
   "label.global.day": "Day",
   "label.global.time":"Time",
+  "label.global.delete.admin": "Delete Admin",
+  "label.global.create.admin": "Create Admin",
+  "label.global.input.email": "Enter Email Address",
   "label.global.enter.email": "Enter Your Email",
   "label.global.current.class": "Current Class",
   "label.global.archive.class": "Archive Class",
@@ -243,6 +246,9 @@
   "label.teacher.quiz.dialog.create.resource": "Quiz Resource",
   "label.teacher.quiz.dialog.create.resource.search": "Search By Quiz Resource",
 
+
+  "label.admin.table.title": "Admin List",
+
   "validation.login.error": "No Account Found",
 
   "validation.invalid.id": "Invalid Id",
@@ -264,6 +270,7 @@
   "label.sidebar.assignments": "Assignments",
   "label.sidebar.todos": "Todos",
   "label.sidebar.lecture": "Lectures",
+  "label.sidebar.admin": "Admins",
 
   "route.admin.dashboard": "/admin/dashboard",
   "route.admin.room.list": "/admin/room-list",
@@ -271,6 +278,7 @@
   "route.admin.classes.list": "/admin/classes-list",
   "route.admin.student.list": "/admin/student-list",
   "route.admin.teacher.list": "/admin/teacher-list",
+  "route.admin.list": "/admin/list",
   "route.admin.subject.list": "/admin/subject-list",
   "route.admin.curriculum": "/admin/curriculum",
   "route.student.classes": "/student/classes",
@@ -390,6 +398,10 @@
   "message.teacher.dialog.lecture.create.fail": "Create Lecture Fail",
   "message.teacher.dialog.quiz.delete.success": "Delete Quiz Success",
   "message.teacher.dialog.quiz.delete.fail": "Delete Quiz Fail",
+  "message.admin.dialog.delete.fail": "Delete Admin Fail",
+  "message.admin.dialog.delete.success": "Delete Admin Success",
+  "message.admin.dialog.create.fail": "Create Admin Fail",
+  "message.admin.dialog.create.success": "Create Admin Success",
 
   "message.teacher.dialog.quiz.create.success": "Create Quiz Success",
   "message.teacher.dialog.quiz.create.fail": "Create Quiz Fail"

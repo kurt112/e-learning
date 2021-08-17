@@ -107,3 +107,17 @@ export {
 export {
     default as InsertCurriculumSubject
 } from './AdminCurriculum/AdminCurriculumInsertSubjectDialogState'
+
+// for admin list
+
+export {
+    default as AdminList
+}from './AdminList/AdminListState'
+
+export {
+    default as CreateAdmin
+} from './AdminList/AdminCreateDialog'
+
+export  {
+    default as DeleteAdmin
+} from './AdminList/AdminDeleteDialog'

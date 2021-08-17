@@ -34,3 +34,7 @@ export {
 export {
     default as StrandAndCourse
 }from './curriculum'
+
+export {
+    default as AdminList
+}from './admin-list'

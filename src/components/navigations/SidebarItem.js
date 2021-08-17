@@ -26,6 +26,7 @@ import AcUnitIcon from '@material-ui/icons/AcUnit';
 
 // icons student
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import {Divider, ListSubheader} from "@material-ui/core";
 
 export function TeacherItems({translation}) {
     return (
@@ -111,6 +112,7 @@ export function StudentItems({translation}) {
 export function AdminItems({translation}) {
     return (
         <div>
+            <ListSubheader inset style={{cursor:'default'}}>Utility</ListSubheader>
             <ListItem component={NavLink} to={translation.language["route.admin.dashboard"]} button>
                 <ListItemIcon>
                     <DashboardIcon/>
@@ -122,6 +124,12 @@ export function AdminItems({translation}) {
                     <MeetingRoomIcon/>
                 </ListItemIcon>
                 <ListItemText primary={translation.language["label.sidebar.rooms"]}/>
+            </ListItem>
+            <ListItem component={NavLink} to={translation.language["route.admin.curriculum"]} button>
+                <ListItemIcon>
+                    <AcUnitIcon/>
+                </ListItemIcon>
+                <ListItemText primary={translation.language["label.sidebar.curriculum"]}/>
             </ListItem>
             <ListItem component={NavLink} to={translation.language["route.admin.room.shift"]} button>
                 <ListItemIcon>
@@ -135,6 +143,16 @@ export function AdminItems({translation}) {
                 </ListItemIcon>
                 <ListItemText primary={translation.language["label.sidebar.classes"]}/>
             </ListItem>
+            <ListItem component={NavLink} to={translation.language["route.admin.subject.list"]} button>
+                <ListItemIcon>
+                    <ImportContactsIcon/>
+                </ListItemIcon>
+                <ListItemText primary={translation.language["label.sidebar.subjects"]}/>
+            </ListItem>
+
+
+            <Divider/>
+            <ListSubheader inset style={{cursor:'default'}}>Accounts</ListSubheader>
             <ListItem component={NavLink} to={translation.language["route.admin.student.list"]} button>
                 <ListItemIcon>
                     <PeopleIcon/>
@@ -147,18 +165,14 @@ export function AdminItems({translation}) {
                 </ListItemIcon>
                 <ListItemText primary={translation.language["label.sidebar.teachers"]}/>
             </ListItem>
-            <ListItem component={NavLink} to={translation.language["route.admin.subject.list"]} button>
+            <ListItem component={NavLink} to={translation.language["route.admin.list"]} button>
                 <ListItemIcon>
-                    <ImportContactsIcon/>
+                    <PeopleIcon/>
                 </ListItemIcon>
-                <ListItemText primary={translation.language["label.sidebar.subjects"]}/>
+                <ListItemText primary={translation.language["label.sidebar.admin"]}/>
             </ListItem>
-            <ListItem component={NavLink} to={translation.language["route.admin.curriculum"]} button>
-                <ListItemIcon>
-                    <AcUnitIcon/>
-                </ListItemIcon>
-                <ListItemText primary={translation.language["label.sidebar.curriculum"]}/>
-            </ListItem>
+            <Divider/>
+            <ListSubheader inset style={{cursor:'default'}}>Profile</ListSubheader>
         </div>
     )
 }
