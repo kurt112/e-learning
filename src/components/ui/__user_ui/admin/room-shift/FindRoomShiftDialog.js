@@ -22,13 +22,14 @@ const FindRoomShiftDialog = ({
 
     const [id, setId] = useState('')
     const [roomShift, setRoomShift] = useState(null)
+
     const getRoomShift = () => {
         graphQlRequestAsync(getRoomShiftBasic(id)).then(roomShift => {
             if (roomShift.data.data.roomShift !== null) {
                 setId('')
                 setData(roomShift.data.data.roomShift)
                 setRoomShift(roomShift.data.data.roomShift)
-            }else alert("Room Shift Not Found")
+            } else alert("Room Shift Not Found")
         })
     }
 
@@ -42,7 +43,7 @@ const FindRoomShiftDialog = ({
     }
 
     const clickEnter = (event) => {
-        if (event.key === "Enter" ) getRoomShift()
+        if (event.key === "Enter") getRoomShift()
     }
 
 
@@ -53,45 +54,46 @@ const FindRoomShiftDialog = ({
         maxWidth="lg"
         fullWidth
     >
-            <DialogTitle
-                id="add-student">{translation.language["label.room.dialog.find.room.shift.title"]}</DialogTitle>
-            <Divider/>
-            <br/>
-            <DialogContent>
-                <Grid container spacing={1}>
-                    <Grid item md={12} xs={12}>
-                        <TextField autoFocus
-                                   value={id}
-                                   margin={'dense'}
-                                   onKeyDown={(e) => clickEnter(e)}
-                                   variant={'outlined'} fullWidth
-                                   onChange={event => setId(event.target.value)}
-                                   placeholder={translation.language["label.room.shift.input.id"]}/>
-                    </Grid>
+        <DialogTitle
+            id="add-student">{translation.language["label.room.dialog.find.room.shift.title"]}</DialogTitle>
+        <Divider/>
+        <br/>
+        <DialogContent>
+            <Grid container spacing={1}>
+                <Grid item md={12} xs={12}>
+                    <TextField autoFocus
+                               value={id}
+                               margin={'dense'}
+                               onKeyDown={(e) => clickEnter(e)}
+                               variant={'outlined'} fullWidth
+                               onChange={event => setId(event.target.value)}
+                               placeholder={translation.language["label.room.shift.input.id"]}/>
                 </Grid>
-            </DialogContent>
+            </Grid>
+        </DialogContent>
 
-            <DialogActions>
-                <Button variant={'contained'} disableElevation onClick={getRoomShift}
-                        color='primary'>
-                    {translation.language["label.global.find"]}
-                </Button>
-                <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
-                    {translation.language["label.button.back"]}
-                </Button>
-            </DialogActions>
+        <DialogActions>
+            <Button variant={'contained'} disableElevation onClick={getRoomShift}
+                    color='primary'>
+                {translation.language["label.global.find"]}
+            </Button>
+            <Button variant={'contained'} disableElevation onClick={closeDialog} color='secondary'>
+                {translation.language["label.button.back"]}
+            </Button>
+        </DialogActions>
     </Dialog> : update === true ?
         <UpdateRoomShift
             closeDialog={closeUpdate}
             dialog={update}
             translation={translation}
         /> :
-        <RoomShiftAddStudentTransferDialog translation={translation}
-                                           closeDialog={closeAddStudent}
-                                           open={addStudent}
-                                           studentRoomShift={roomShift.students}
-                                           shiftID={roomShift.id}
-                                           shiftName={`${roomShift.grade} - ${roomShift.section}`}
+        <RoomShiftAddStudentTransferDialog
+            translation={translation}
+            closeDialog={closeAddStudent}
+            open={addStudent}
+            studentRoomShift={roomShift.students}
+            shiftID={roomShift.id}
+            shiftName={`${roomShift.grade} - ${roomShift.section}`}
         />
 }
 

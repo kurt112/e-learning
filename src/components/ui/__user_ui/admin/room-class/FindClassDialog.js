@@ -3,6 +3,7 @@ import {graphQlRequestAsync} from "../../../../../store/middleware/utils/HttpReq
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Grid, TextField} from "@material-ui/core";
 import {getRoomShiftClassBasic} from "../../../../../store/middleware/utils/GraphQlQuery/ProfileQuery/RoomShiftClassProfile";
 import UpdateClassDialog from "./UpdateClassDialog";
+import RoomClassStudentTransferDialog from "./RoomClassStudentTransferDialog";
 
 /**
  * @author : Kurt Lupin Orioque
@@ -15,12 +16,13 @@ const FindClassDialog = ({
                              dialog,
                              closeDialog,
                              setData,
-                             reInitState
+                             reInitState,
+                             update,
+                             addStudent
                          }) => {
 
     const [id, setId] = useState('')
-    const [update, setUpdate] = useState(false)
-
+    const [Class, setClass] = useState(null)
 
     const getClass = () => {
         graphQlRequestAsync(getRoomShiftClassBasic(id)).then(roomClass => {
@@ -28,13 +30,14 @@ const FindClassDialog = ({
             if (roomClass.data.data.roomShiftClass !== null) {
                 setId('')
                 setData(roomClass.data.data.roomShiftClass)
-                setUpdate(true)
+                setClass(roomClass.data.data.roomShiftClass)
             } else alert("Class Not Found")
         })
     }
 
     const closeUpdate = () => {
-        setUpdate(false)
+        setClass(null)
+        reInitState()
     }
 
     const closeFindDialog = () => {
@@ -42,12 +45,16 @@ const FindClassDialog = ({
         closeDialog()
     }
 
+    const closeAddStudent = () => {
+        setClass(null)
+    }
+
     const clickEnter = (event) => {
-        if (event.key === "Enter" ) getClass()
+        if (event.key === "Enter") getClass()
     }
 
 
-    return update === false ? <Dialog
+    return Class === null ? <Dialog
         open={dialog}
         onClose={closeFindDialog}
         aria-labelledby="find-subject"
@@ -55,7 +62,7 @@ const FindClassDialog = ({
         fullWidth
     >
         <DialogTitle
-            id="find-subject">{translation.language["label.room.class.dialog.update.title"]}</DialogTitle>
+            id="find-subject">{translation.language["label.room.dialog.find.room.class.title"]}</DialogTitle>
         <Divider/>
         <br/>
         <DialogContent>
@@ -81,6 +88,15 @@ const FindClassDialog = ({
                 {translation.language["label.button.back"]}
             </Button>
         </DialogActions>
-    </Dialog> : <UpdateClassDialog translation={translation} closeDialog={closeUpdate} dialog={update}/>
+    </Dialog> : update === true ?
+        <UpdateClassDialog translation={translation} closeDialog={closeUpdate} dialog={update}/> :
+        <RoomClassStudentTransferDialog
+            subjectName={Class.subject.subjectName}
+            closeDialog={closeAddStudent}
+            open={addStudent}
+            translation={translation}
+            studentClass={Class.students}
+            classID={Class.id}
+        />
 }
 export default FindClassDialog

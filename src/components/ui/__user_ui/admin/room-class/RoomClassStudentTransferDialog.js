@@ -1,8 +1,17 @@
 /**
  * @author : Kurt Lupin Orioque
  * @mailto : kurtorioque112@gmail.com
- * @created : 11/07/2021, Sunday
+ * @created : 18/08/2021, Wednesday
  **/
+
+import style from "../../../_style/TransferDialogStyle";
+import {useEffect, useState} from "react";
+import {graphQlRequestAsync, PostData} from "../../../../../store/middleware/utils/HttpRequest";
+import {
+    AddStudentInRoomClass
+} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
 import {
     Button,
     Checkbox,
@@ -14,19 +23,9 @@ import {
     ListItemText,
     TextField
 } from "@material-ui/core";
-
-import List from '@material-ui/core/List';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import ListItem from '@material-ui/core/ListItem';
-import {useEffect, useState} from "react";
-import {
-    getStudentsForRoomShift
-} from "../../../../../store/middleware/utils/GraphQlQuery/AdminQuery/AdminRoomShiftQuery";
-import {graphQlRequestAsync, PostData} from "../../../../../store/middleware/utils/HttpRequest";
-import style from "../../../_style/TransferDialogStyle";
-import {AddStudentInRoomShift} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
-
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import {getStudentsForRoomShift} from "../../../../../store/middleware/utils/GraphQlQuery/AdminQuery/AdminRoomShiftQuery";
 
 // Checking if the current check list has a member of the entity
 function not(a, b) {
@@ -39,23 +38,19 @@ function intersection(a, b) {
     return a.filter((value) => b.indexOf(value) !== -1);
 }
 
-/**
- * @param {{student_id:string}} id of the student
- *
- */
-const RoomShiftAddStudentTransfer = ({
-                                         open,
-                                         closeDialog,
-                                         shiftID,
-                                         translation,
-                                         studentRoomShift,
-                                         shiftName
-}) => {
+const RoomClassStudentTransferDialog = ({
+                                            open,
+                                            closeDialog,
+                                            classID,
+                                            translation,
+                                            studentClass,
+                                            subjectName,
+                                        }) => {
 
     const classes = style();
     const [checked, setChecked] = useState([])
     const [availStudent, setAvailStudent] = useState([])
-    const [roomShiftStudents, setRoomShiftStudents] = useState(studentRoomShift)
+    const [roomShiftStudents, setRoomShiftStudents] = useState(studentClass)
     const [rightText, setRightText] = useState('')
     const [leftText, setLeftText] = useState('')
     const [studentHashMap] = useState({})
@@ -67,9 +62,9 @@ const RoomShiftAddStudentTransfer = ({
 
         const data = {
             students: roomShiftStudents.map(e => e.student_id),
-            shiftID
+            classID
         }
-        PostData(AddStudentInRoomShift, data).then(ignored => {
+        PostData(AddStudentInRoomClass, data).then(ignored => {
             console.log(ignored)
         }).catch(ignored => {
             console.log(ignored)
@@ -278,7 +273,7 @@ const RoomShiftAddStudentTransfer = ({
                         </Grid>
                         <Grid md={5}
                               item sm={12} xs={12}
-                        >{customList(shiftName + ' ' + translation.language['label.global.student'], roomShiftStudents, rightText, setRightText)}</Grid>
+                        >{customList(subjectName + ' ' + translation.language['label.global.student'], roomShiftStudents, rightText, setRightText)}</Grid>
                     </Grid>
 
                 </DialogContent>
@@ -298,4 +293,4 @@ const RoomShiftAddStudentTransfer = ({
     )
 }
 
-export default RoomShiftAddStudentTransfer
+export default RoomClassStudentTransferDialog

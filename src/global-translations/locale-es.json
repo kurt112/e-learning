@@ -169,7 +169,7 @@
 
   "label.room.dialog.find.room.title": "Find Room",
   "label.room.dialog.find.room.shift.title": "Find Room Shift",
-
+  "label.room.dialog.find.room.class.title": "Find Class",
   "label.room.shift.table.title":"Room Shift List",
   "label.room.shift.table.column.shift": "Shift",
   "label.room.shift.dialog.delete.title": "Delete Room Shift",

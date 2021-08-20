@@ -43,6 +43,7 @@ export const
     AdminRoomClassRegister = "admin/classes/register",
     AdminRoomClass = "admin/classes/roomClass",
     DeleteRoomClass = 'admin/classes/delete/class',
+    AddStudentInRoomClass = 'admin/classes/add/student',
 
 
     /**
@@ -87,13 +88,23 @@ export const
      */
 
     updateAccount = 'update-account',
+
     /**
      * for Attendance Endpoint
      */
     attendance = 'attendance/',
     studentAttendance = attendance + 'student',
     teacherAttendance = attendance + 'teacher',
+
     /**
      * for admin
      */
-    admin = 'admin'
+
+    admin = 'admin',
+
+    /**
+     * for student
+     */
+    student = 'student/',
+    passAssignment = student+'upload/assignment',
+    unSubmitAssignment=student+'unsubmit/assignment'

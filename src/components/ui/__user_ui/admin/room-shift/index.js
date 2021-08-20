@@ -21,6 +21,7 @@ import UpdateIcon from "@material-ui/icons/Update";
 import DeleteIcon from "@material-ui/icons/Delete";
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import {reInitState} from "../../../../../store/action/__ActionGlobal/DialogAction";
+
 const RegisterRoomShiftDialog = lazy(() => import(`./RoomShiftRegisterDialog`));
 const DeleteRooShiftDialog = lazy(() => import(`./DeleteRoomShiftDialog`))
 const FindRoomShiftDialog = lazy(() => import(`./FindRoomShiftDialog`))
@@ -43,7 +44,7 @@ const RoomShiftList = ({
     const classes = style()
 
     // dialog State
-    const [update,setUpdate] = useState(false)
+    const [update, setUpdate] = useState(false)
     const [addStudent, setAddStudent] = useState(false)
 
     const updateClick = () => {
@@ -76,15 +77,17 @@ const RoomShiftList = ({
                                      closeDialog={closeDialog}
                                      reInitState={reInitState}
             />
-            <DeleteRooShiftDialog translation={translation} dialog={roomShift.deleteDialog}
-                                  closeDialog={closeDeleteDialog}/>
-            <FindRoomShiftDialog translation={translation}
-                                 dialog={roomShift.findDialog}
-                                 update={update}
-                                 addStudent={addStudent}
-                                 closeDialog={closeDialogClick}
-                                 setData={setData}
-                                 reInitState={reInitState}
+            <DeleteRooShiftDialog
+                translation={translation} dialog={roomShift.deleteDialog}
+                closeDialog={closeDeleteDialog}/>
+            <FindRoomShiftDialog
+                translation={translation}
+                dialog={roomShift.findDialog}
+                update={update}
+                addStudent={addStudent}
+                closeDialog={closeDialogClick}
+                setData={setData}
+                reInitState={reInitState}
             />
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
@@ -164,7 +167,7 @@ const mapDispatchToProps = (dispatch) => {
         openFindDialog: () => dispatch(actions.openDialog(RoomShift_Find)),
         closeFindDialog: () => dispatch(actions.closeDialog(RoomShift_Find)),
 
-        setData: (data) => dispatch(actions.setData(data,RoomShift)),
+        setData: (data) => dispatch(actions.setData(data, RoomShift)),
         reInitState: () => dispatch(reInitState(RoomShift))
 
     }

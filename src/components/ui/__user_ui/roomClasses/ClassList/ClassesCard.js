@@ -34,7 +34,7 @@ const ClassesCard = ({style, classes,translation}) => {
                                 <p>
                                     {
                                         e.teacher === undefined ? 'You' :
-                                            e.teacher === null? <p>TBA</p>:
+                                            e.teacher === null?'TBA':
                                             `${e.teacher.user.firstName} 
                                              ${e.teacher.user.lastName}`
                                     }

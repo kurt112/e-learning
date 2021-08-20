@@ -5,7 +5,7 @@
  **/
 import {CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
-import {Fragment, lazy, useEffect} from "react"
+import {Fragment, lazy, useEffect, useState} from "react"
 import {AdminRoomClassTable as columns} from '../../../utils/tableColumn'
 import style, {TableOptions as options} from '../../../_style/TableStyle'
 
@@ -14,7 +14,7 @@ import * as actions from "../../../../../store/action/__ActionGlobal/TableAction
 import {
     RoomShiftClass,
     RoomShiftClass_Delete,
-    RoomShiftClass_Find, Subject
+    RoomShiftClass_Find,
 } from "../../../../../store/utils/Specify";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
@@ -22,6 +22,7 @@ import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
 import {reInitState} from "../../../../../store/action/__ActionGlobal/DialogAction";
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
 
 
 const RegisterRoom = lazy(() => import(`./RegisterRoomClassDialog`));
@@ -50,6 +51,28 @@ const Index = ({
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const [update, setUpdate] = useState(false)
+    const [addStudent, setAddStudent] = useState(false)
+
+
+    const updateClick = () => {
+        setUpdate(true)
+        openFindDialog()
+    }
+
+    const addStudentClick = () => {
+
+        setAddStudent(true)
+        openFindDialog()
+    }
+
+    const closeDialogClick = () => {
+        setUpdate(false)
+        setAddStudent(false)
+        closeFindDialog()
+    }
+
     return (
         <Fragment>
 
@@ -63,11 +86,15 @@ const Index = ({
                 dialog={state.deleteDialog}
                 closeDialog={closeDeleteDialog}
             />
-            <FindClassDialog reInitState={reInitState}
-                             setData={setData}
-                             translation={translation}
-                             dialog={state.findDialog}
-                             closeDialog={closeFindDialog}/>
+            <FindClassDialog
+                reInitState={reInitState}
+                setData={setData}
+                translation={translation}
+                dialog={state.findDialog}
+                closeDialog={closeDialogClick}
+                update={update}
+                addStudent={addStudent}
+            />
 
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
@@ -83,8 +110,13 @@ const Index = ({
                             </IconButton>
                         </Tooltip>
                         <Tooltip title={translation.language["tooltip.class.update"]}>
-                            <IconButton aria-label="update-room" onClick={openFindDialog}>
+                            <IconButton aria-label="update-room" onClick={updateClick}>
                                 <UpdateIcon fontSize={'large'} color={'primary'}/>
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title={translation.language['tooltip.room.shift.add.student']}>
+                            <IconButton aria-label="update-room" onClick={addStudentClick}>
+                                <GroupAddIcon fontSize={'large'} color={'primary'}/>
                             </IconButton>
                         </Tooltip>
                     </Toolbar>

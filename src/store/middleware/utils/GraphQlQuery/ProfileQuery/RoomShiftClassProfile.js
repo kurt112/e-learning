@@ -144,6 +144,15 @@ export const
                                 id,
                                 subjectCode,
                                 subjectName
+                           },
+                           students{
+                                student_id,
+                                user{
+                                    email,
+                                    firstName,
+                                    lastName,
+                                    picture
+                                }
                            }                   
                     }
             }

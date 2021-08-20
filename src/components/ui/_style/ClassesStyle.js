@@ -40,7 +40,9 @@ const classesStyle = makeStyles(() => ({
             textShadow: '0px 0px 9px #000000',
             padding:0,
             margin: 0,
-
+            whiteSpace:'noWrap',
+            overflow:'hidden',
+            textOverflow: 'ellipsis'
         }
     },
 
@@ -49,8 +51,10 @@ const classesStyle = makeStyles(() => ({
             fontSize: 15,
             padding:0,
             margin: 0,
-            fontWeight: "bold"
-
+            fontWeight: "bold",
+            whiteSpace:'noWrap',
+            overflow:'hidden',
+            textOverflow: 'ellipsis'
         }
     },
 
@@ -68,7 +72,9 @@ const classesStyle = makeStyles(() => ({
     },
 
     classTeacher: {
-
+        whiteSpace:'noWrap',
+        overflow:'hidden',
+        textOverflow: 'ellipsis'
     },
 
     classSubject:{

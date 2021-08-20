@@ -4,13 +4,45 @@
  * @created : 11/07/2021, Sunday
  **/
 export const
-    getStudentDataByEmail = (email) => {
+    getStudentAssignment = (email) => {
         return {
             query: `
                     query{
-                       getStudentByUserEmail(email:"${email}") {
-                            roomShiftClasses{ 
-                                id,
+                       getStudentAssignment(email:"${email}") {
+                            id,
+                            grade,
+                            location,
+                            submittedAt,
+                            status,
+                            response,
+                            teacherAssignment{
+                                    createdAt,
+                                    deadLine,
+                                    lowGrade,
+                                    code,
+                                    description,
+                                    resource{
+                                        name,
+                                        location,
+                                        teacher{
+                                            user{
+                                                firstName,
+                                                lastName
+                                            }
+                                        }
+                                    }
+                            }          
+                        }
+                    }
+            `
+        }
+    },
+    getStudentClasses = (email,status) => {
+        return {
+            query: `
+                    query{
+                       getStudentClass(email:"${email}", status: ${status}) {
+                               id,
                                 day,
                                 startTime,
                                 endTime,
@@ -35,87 +67,8 @@ export const
                                     lastName,
                                     email,
                                   }
-                                },
-                                 teacherLectures{
-                                   resource{
-                                        code,
-                                        name,
-                                        teacher{
-                                            user{
-                                                firstName,
-                                                lastName
-                                            }
-                                        }
-                                   },
-                                   code,
-                                   createdAt,
-                                   description,
-                                   sem,
-                                   quarter
-                                },
-                                teacherExams{
-                                    resource{
-                                       name,
-                                       code,
-                                       teacher{
-                                        user{
-                                            firstName,
-                                            lastName
-                                        }
-                                    }
-                                    },
-                                    code,
-                                    createdAt,
-                                    deadLine,
-                                    description,
-                                    highGrade,
-                                    lowGrade,
-                                    sem,
-                                    quarter
-                                },
-                                teacherQuizzes{
-                                    resource{
-                                        name,
-                                        code,
-                                        teacher{
-                                        user{
-                                            firstName,
-                                            lastName
-                                        }
-                                    }
-                                    },
-                                    code,
-                                    createdAt,
-                                    deadLine,
-                                    description,
-                                    highGrade,
-                                    lowGrade,
-                                    sem,
-                                    quarter
-                                },
-                                teacherAssignments{
-                                    resource{
-                                        name,
-                                        code,
-                                        teacher{
-                                        user{
-                                            firstName,
-                                            lastName
-                                        }
-                                    }
-                                    },
-                                    code,
-                                    createdAt,
-                                    deadLine,
-                                    description,
-                                    highGrade,
-                                    lowGrade,
-                                    sem,
-                                    quarter
                                 }
-                            }          
-                       }
-                    }
-        `
+                      }          
+                    }`
         }
     }

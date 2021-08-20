@@ -5,16 +5,40 @@
  **/
 import {Redirect, Route} from "react-router";
 import {Fragment, lazy, useEffect, useState} from "react";
-import {getStudentDataByEmail} from "../../store/middleware/utils/GraphQlQuery/StudentQuery/StudentDataQuery";
+import {
+    getStudentAssignment,
+    getStudentClasses
+} from "../../store/middleware/utils/GraphQlQuery/StudentQuery/StudentDataQuery";
 import {graphQlRequestAsync} from "../../store/middleware/utils/HttpRequest";
 
-import { useLocation } from 'react-router-dom'
+import {useLocation} from 'react-router-dom'
 
 import ClassesList from "../ui/__user_ui/roomClasses/ClassList/ClassesList";
 import ProfileRoute from "./ProfileRoute";
+import {passAssignment, unSubmitAssignment} from "../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 
 const StudentLecture = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({default: module.StudentLecture})))
 const StudentTodo = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({default: module.StudentTodo})))
+
+const todoData = (id,todoCreated, todoDeadline, location, description, highGrade, lowGrade, isLecture, teacherName, type, name, status,url,unSubmitUrl,response) => {
+    return {
+        id,
+        todoCreated,
+        todoDeadline,
+        location,
+        description,
+        highGrade,
+        lowGrade,
+        isLecture,
+        teacherName,
+        type,
+        name,
+        status,
+        url,
+        unSubmitUrl,
+        response
+    }
+}
 
 const StudentRoute = ({email, translation}) => {
 
@@ -22,97 +46,120 @@ const StudentRoute = ({email, translation}) => {
 
     const [student, setStudent] = useState(null);
 
-    const [currentClass, setCurrentClass] = useState()
-    const [doneClass, setDoneClass] = useState()
+    const [currentClass, setCurrentClass] = useState([])
+    const [doneClass, setDoneClass] = useState([])
 
     // for classwork filter
-    const [all, setAll] = useState([])
     const [exam, setExam] = useState([])
-    const [assignment, setAssignment] = useState([])
     const [quiz, setQuiz] = useState([])
     const [lecture, setLecture] = useState([])
     const [filterSubject, setFilterSubject] = useState([])
 
+    // assignment status
+    const [assignment, setAssignment] = useState([])
+    const [finishAssignment, setFinishAssignment] = useState([])
+
+    // all status
+    const [all, setAll] = useState([])
+    const [finishAll, setFinishAll] = useState([])
+
 
     useEffect(() => {
-
-        async function fetchData() {
-            return await graphQlRequestAsync(getStudentDataByEmail(email))
-        }
-
-        fetchData().then(r => {
-            setStudent(r.data.data.getStudentByUserEmail)
-        })
-
-
+        initData().then(ignored => {})
     }, [email])
 
-    useEffect(() => {
-        if (student !== null) {
-            const tempAssignment = [], tempExam = [], tempQuiz = [], tempAll = [], tempLecture = [],
-                tempFilterSubject = []
+    const initData = async () => {
+        const tempFinishAll = [] , tempAll = []
 
-            const tempDoneClass = student.roomShiftClasses.filter(e => e.status === 0)
-            const tempCurrentClass = student.roomShiftClasses.filter(e => e.status === 1)
+        await graphQlRequestAsync(getStudentAssignment(email)).then(assignment => {
 
-            setCurrentClass(tempCurrentClass)
-            setDoneClass(tempDoneClass)
+            const assignments = assignment.data.data.getStudentAssignment
 
-            tempCurrentClass.map(classes => {
+            const tempAssignment = [], tempFinishAssignment = []
+            assignments.map(e => {
+                const {teacherAssignment} = e
+                const {resource} = teacherAssignment
+                const {teacher} = resource
+                const {user} = teacher
+                const location = e.location === null? resource.location:e.location
 
-                classes.teacherAssignments.map(assignment => {
-                    tempAssignment.push(assignment)
-                    return tempAll.push(assignment)
-                })
+                const data = todoData(e.id,teacherAssignment.createdAt, teacherAssignment.deadLine, location , teacherAssignment.description,
+                    teacherAssignment.high, teacherAssignment.lowGrade, false, `${user.firstName} ${user.lastName}`,
+                    'Assignment', resource.name, e.status,passAssignment,unSubmitAssignment, e.response)
 
-                classes.teacherQuizzes.map(quiz => {
-                    tempQuiz.push(quiz)
-                    return tempAll.push(quiz)
-                })
 
-                classes.teacherLectures.map(lecture => {
-                    tempLecture.push({...lecture, subjectCode:classes.subject.subjectCode})
-                })
+                if(e.status ===1){
+                    tempFinishAll.push(data)
+                    return tempFinishAssignment.push(data)
+                }
 
-                tempFilterSubject.push({code: classes.subject.subjectCode, name: classes.subject.subjectName})
-
-                return classes.teacherExams.map(exam => {
-                    tempExam.push(exam)
-                    return tempAll.push(exam)
-                })
+                tempAll.push(data)
+                return tempAssignment.push(data)
 
             })
 
 
-            setFilterSubject(tempFilterSubject)
-            setLecture(tempLecture)
             setAssignment(tempAssignment)
-            setExam(tempExam)
-            setQuiz(tempQuiz)
-            console.log(filterSubject)
-            return setAll(tempAll)
+            setFinishAssignment(tempFinishAssignment)
+        })
+
+
+        // archive
+        await graphQlRequestAsync(getStudentClasses(email, 0)).then(classes => {
+            const tempDoneClass = []
+
+            classes.data.data.getStudentClass.map(Class => {
+                tempDoneClass.push(Class)
+            })
+
+            setDoneClass(tempDoneClass)
+        })
+
+        // current
+        await graphQlRequestAsync(getStudentClasses(email, 1)).then(classes => {
+            const tempCurrentClass = []
+            classes.data.data.getStudentClass.map(Class => {
+                tempCurrentClass.push(Class)
+            })
+            setCurrentClass(tempCurrentClass)
+        })
+
+        setAll(tempAll)
+        setFinishAll(tempFinishAll)
+    }
+
+
+
+    return <Fragment>
+        <Route path={translation.language["route.student.classes"]} exact
+               render={() => <ClassesList translation={translation} currentClass={currentClass}
+                                          archiveClass={doneClass}/>}/>
+        <Route path={translation.language["route.student.todos"]} exact
+               render={() =>
+                   <StudentTodo
+                       initData={initData}
+                       finishAll={finishAll}
+                       all={all}
+                       exams={exam}
+                       assignments={assignment}
+                       finishAssignments={finishAssignment}
+                       quiz={quiz}
+                       translation={translation}
+                   />
+               }
+        />
+        <Route
+            path={translation.language["route.student.lectures"]} exact
+            render={() => <StudentLecture filter={filterSubject} translation={translation} lecture={lecture}/>}
+
+        />
+
+        <ProfileRoute translation={translation}/>
+        {
+            location.pathname === '/' ? <Redirect to={translation.language["route.student.classes"]}/> : null
         }
-    }, [student])
+    </Fragment>
 
-    return student === null ? null :
-        <Fragment>
-            <Route path={translation.language["route.student.classes"]} exact
-                   render={() => <ClassesList translation={translation} currentClass={currentClass}
-                                              archiveClass={doneClass}/>}/>
-            <Route path={translation.language["route.student.todos"]} exact
-                   render={() => <StudentTodo all={all} exams={exam} assignments={assignment} quiz={quiz}
-                                              translation={translation}/>}/>
-            <Route
-                path={translation.language["route.student.lectures"]} exact
-                render={() => <StudentLecture filter={filterSubject} translation={translation} lecture={lecture}/>}
-
-            />
-
-            <ProfileRoute translation={translation}/>
-            {
-                location.pathname === '/'?<Redirect to={translation.language["route.student.classes"]}/>: null
-            }
-        </Fragment>
 }
 
 export default StudentRoute
