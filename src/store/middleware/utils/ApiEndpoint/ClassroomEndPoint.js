@@ -107,4 +107,9 @@ export const
      */
     student = 'student/',
     passAssignment = student+'upload/assignment',
-    unSubmitAssignment=student+'unsubmit/assignment'
+    unSubmitAssignment=student+'unsubmit/assignment',
+    passExam = student+'upload/exam',
+    unSubmitExam=student+'unsubmit/exam',
+    passQuiz = student+'upload/quiz',
+    unSubmitQuiz=student+'unsubmit/quiz'
+

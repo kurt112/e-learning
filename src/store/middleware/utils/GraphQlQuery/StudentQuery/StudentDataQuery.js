@@ -18,8 +18,77 @@ export const
                             teacherAssignment{
                                     createdAt,
                                     deadLine,
+                                    highGrade,
                                     lowGrade,
                                     code,
+                                    description,
+                                    resource{
+                                        name,
+                                        location,
+                                        teacher{
+                                            user{
+                                                firstName,
+                                                lastName
+                                            }
+                                        }
+                                    }
+                            }          
+                        }
+                    }
+            `
+        }
+    },
+    getStudentExam= (email) => {
+        return {
+            query: `
+                    query{
+                       getStudentExam(email:"${email}") {
+                            id,
+                            grade,
+                            location,
+                            submittedAt,
+                            status,
+                            response,
+                            exam{
+                                    createdAt,
+                                    deadLine,
+                                    lowGrade,
+                                    code,
+                                    highGrade,
+                                    description,
+                                    resource{
+                                        name,
+                                        location,
+                                        teacher{
+                                            user{
+                                                firstName,
+                                                lastName
+                                            }
+                                        }
+                                    }
+                            }          
+                        }
+                    }
+            `
+        }
+    },
+    getStudentQuiz = (email) => {
+        return {
+            query: `
+                    query{
+                       getStudentQuiz(email:"${email}") {
+                            id,
+                            grade,
+                            location,
+                            submittedAt,
+                            status,
+                            response,
+                            quiz{
+                                    createdAt,
+                                    deadLine,
+                                    lowGrade,
+                                    code,
+                                    highGrade,
                                     description,
                                     resource{
                                         name,

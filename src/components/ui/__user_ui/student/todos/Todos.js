@@ -23,12 +23,14 @@ import TaskCard from "../../profiles/classes-profile/TaskCard";
 const Todo = ({
                   translation,
                   exams,
+                  finishExam,
                   all,
                   assignments,
-                  quiz,
                   finishAssignments,
+                  quiz,
+                  finishQuiz,
                   finishAll,
-                  initData
+                  initData,
               }) => {
     const style = ClassesStyle()
     const taskCardStyle = ProfileStyle()
@@ -64,11 +66,17 @@ const Todo = ({
         if (filterIndex === 0) {
             if (todos === true) setFilter(all)
             else setFilter(finishAll)
-        } else if (filterIndex === 1) setFilter(exams)
+        } else if (filterIndex === 1) {
+            if(todos === true)setFilter(exams)
+            else setFilter(finishExam)
+        }
         else if (filterIndex === 2) {
             if (todos === true) setFilter(assignments)
             else setFilter(finishAssignments)
-        } else if (filterIndex === 3) setFilter(quiz)
+        } else if (filterIndex === 3) {
+            if(todos === true) setFilter(quiz)
+            else setFilter(finishQuiz)
+        }
     }
 
     const refreshData = async () => {

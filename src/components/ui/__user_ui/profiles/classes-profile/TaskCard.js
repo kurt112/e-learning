@@ -138,8 +138,8 @@ const TaskCard = ({
                                     <b>{translation.language["label.global.high.grade"]}:</b>{highGrade}</p>
                                 <p style={{marginBottom: 0, marginRight: 10}}>
                                     <b>{translation.language["label.global.low.grade"]}: </b>{lowGrade}</p>
-                                <p style={{marginBottom: 0, marginRight: 10}}>
-                                    <b>{translation.language["label.global.your.grade"]} </b></p>
+                                {unSubmitUrl === undefined || todo ? null : <p style={{marginBottom: 0, marginRight: 10}}>
+                                    <b>{translation.language["label.global.your.grade"]} </b></p>}
                             </Grid>
                     }
                 </Grid>
@@ -190,7 +190,7 @@ const TaskCard = ({
                             </Grid>
                         </Grid> :
 
-                        <Grid item>
+                        unSubmitUrl === undefined ? null : <Grid item>
                             <Grid container alignItems="center" style={{marginTop: 10}}>
                                 <Button
                                     disableElevation
