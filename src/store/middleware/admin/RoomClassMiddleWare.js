@@ -71,11 +71,10 @@ export function * DeleteRoomClass(){
 
 export function* RoomClassTableDataNext(action) {
     const classState = yield select(Selector.AdminClass)
-    yield TableNextData(action, classState, AdminRoomClassBodyDataQuery(classState.search,classState.page),AdminRoomClassBodyDataSettingsQuery(),RoomShiftClass)
+    yield TableNextData(action, classState, AdminRoomClassBodyDataQuery(classState.search,classState.page,classState.status),AdminRoomClassBodyDataSettingsQuery(),RoomShiftClass)
 }
 
 export function* RoomClassTableDataInit() {
     const classState = yield select(Selector.AdminClass)
-
-    yield TableDataInit(AdminRoomClassBodyDataQuery(classState.search,classState.page),AdminRoomClassBodyDataSettingsQuery(),RoomShiftClass)
+    yield TableDataInit(AdminRoomClassBodyDataQuery(classState.search,classState.page,classState.status),AdminRoomClassBodyDataSettingsQuery(),RoomShiftClass)
 }

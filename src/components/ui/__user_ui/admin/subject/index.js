@@ -3,7 +3,18 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
+import {
+    Box,
+    CircularProgress,
+    FormControl,
+    Grid,
+    InputLabel,
+    MenuItem,
+    Paper,
+    Select,
+    Toolbar,
+    Tooltip
+} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
 import {Fragment, lazy, useEffect} from "react"
 import {AdminSubjectTable as columns} from '../../../utils/tableColumn'
@@ -19,12 +30,17 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
 import FindSubjectDialog from "./FindSubjectDialog";
 import {reInitState} from "../../../../../store/action/__ActionGlobal/DialogAction";
+import {baseUrl} from "../../../../../store/middleware/axios";
+import {
+    OffSubject,
+    OnSubject
+} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 
 const RegisterSubject = lazy(() => import(`./RegisterSubjectDialog`))
 const DeleteSubjectDialog = lazy(() => import(`./DeleteSubjectDialog`))
 
 const Index = ({
-                   subject,
+                   state,
                    pageChange,
                    searchChange,
                    openDialog,
@@ -36,27 +52,41 @@ const Index = ({
                    closeFindDialog,
                    openFindDialog,
                    setData,
-                   reInitState
+                   reInitState,
+                   statusChange
                }) => {
 
     const classes = style()
 
     useEffect(() => {
 
-        if (subject.data.length === 0) initData();
+        if (state.data.length === 0) initData();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    const setStatus = async (status,id) => {
+        const params = new URLSearchParams()
+        params.append('id', id)
+        //
+
+        if(status === true) await baseUrl.post(OffSubject, params).then(ignored =>{})
+        else await baseUrl.post(OnSubject, params).then(ignored => {})
+
+        alert("Status Change Success")
+
+        await initData()
+    }
+
     return (
         <Fragment>
-            <RegisterSubject translation={translation} dialog={subject.dialog} closeDialog={closeDialog}/>
-            <DeleteSubjectDialog translation={translation} dialog={subject.deleteDialog}
+            <RegisterSubject translation={translation} dialog={state.dialog} closeDialog={closeDialog}/>
+            <DeleteSubjectDialog translation={translation} dialog={state.deleteDialog}
                                  closeDialog={closeDeleteDialog}/>
             <FindSubjectDialog reInitState={reInitState}
                                setData={setData}
                                translation={translation}
-                               dialog={subject.findDialog}
+                               dialog={state.findDialog}
                                closeDialog={closeFindDialog}
             />
             <Grid component="main" className={classes.root}>
@@ -81,6 +111,20 @@ const Index = ({
                                 </IconButton>
                             </Tooltip>
                         </Box>
+
+                        <FormControl>
+                            <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={state.status}
+                                onChange={(e) => statusChange(e.target.value)}
+                            >
+                                {
+                                    state.statusData.map((e, i) => <MenuItem key={i} value={i}>{e}</MenuItem>)
+                                }
+                            </Select>
+                        </FormControl>
                     </Toolbar>
                 </Grid>
                 <Grid item md={12} component={Paper} className={classes.tableContainerWrapper}>
@@ -89,23 +133,23 @@ const Index = ({
                             title={
                                 <Typography variant="h6">
                                     {translation.language["label.subject.table.title"]}
-                                    {subject.loading && <CircularProgress size={24} style={{
+                                    {state.loading && <CircularProgress size={24} style={{
                                         marginLeft: 15,
                                         position: 'relative',
                                         top: 4
                                     }}/>}
                                 </Typography>
                             }
-                            data={subject.data}
-                            columns={columns(translation)}
+                            data={state.data}
+                            columns={columns(translation,setStatus)}
                             options={options(
                                 pageChange,
                                 searchChange,
-                                subject.search,
-                                subject.totalPages,
-                                subject.totalItems,
-                                subject.page,
-                                subject.loading)}
+                                state.search,
+                                state.totalPages,
+                                state.totalItems,
+                                state.page,
+                                state.loading)}
                         />
                     </div>
                 </Grid>
@@ -117,7 +161,7 @@ const Index = ({
 
 const mapStateToProps = (state) => {
     return {
-        subject: state.AdminSubject
+        state: state.AdminSubject
     }
 }
 
@@ -126,6 +170,7 @@ const mapDispatchToProps = (dispatch) => {
         initData: () => dispatch(actions.InitDataTable(Subject)),
         searchChange: (data) => dispatch(actions.SearchChange(data, Subject)),
         pageChange: (page) => dispatch(actions.DataNextPage(page, Subject)),
+        statusChange: (data) => dispatch(actions.statusChange(data,Subject)),
 
         // for opening and closing dialog
         openDialog: () => dispatch(actions.openDialog(Subject)),

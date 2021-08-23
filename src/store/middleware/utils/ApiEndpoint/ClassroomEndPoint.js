@@ -15,6 +15,8 @@ export const
         // Curriculum admin endpoint
     CreateCurriculum = 'admin/curriculum-register',
     DeleteCurriculum = 'admin/delete/curriculum',
+    OnCurriculum = 'admin/on/curriculum',
+    OffCurriculum = 'admin/off/curriculum',
 
     //Teacher Admin endpoint
     AdminTeacherRegister = 'teacherID-register',
@@ -27,10 +29,14 @@ export const
     // Room Admin endpoint
     AdminRoomRegister = "admin/room-register",
     DeleteRoom = 'admin/delete/room',
+    OnRoom = 'admin/on/room',
+    OffRoom = 'admin/off/room',
 
     // Subject Admin endpoint
     AdminSubjectRegister = "admin/subjectID-register",
     DeleteSubject = 'admin/delete/subject',
+    OnSubject = 'admin/on/subject',
+    OffSubject = 'admin/off/subject',
 
 
     // Room Shift Admin endpoint
@@ -38,12 +44,16 @@ export const
     AdminRoomShift = "admin/roomShift",
     DeleteRoomShift = 'admin/delete/roomShift',
     AddStudentInRoomShift = 'admin/room-shift/add/student',
+    OnRoomShift = 'admin/on/roomShift',
+    OffRoomShift = 'admin/off/roomShift',
 
     // RoomClass Admin Endpoint
     AdminRoomClassRegister = "admin/classes/register",
     AdminRoomClass = "admin/classes/roomClass",
     DeleteRoomClass = 'admin/classes/delete/class',
     AddStudentInRoomClass = 'admin/classes/add/student',
+    OnClass = 'admin/classes/on',
+    OffClass = 'admin/classes/off',
 
 
     /**
@@ -64,6 +74,8 @@ export const
     TeacherExamDelete = 'teacher/exam/delete',
     TeacherQuizCreate = 'teacher/quiz/create',
     TeacherQuizDelete = 'teacher/quiz/delete',
+    onTeacher = 'on/teacher',
+    offTeacher = 'off/teacher',
 
     /**
      * for Auto Complete API
@@ -101,6 +113,8 @@ export const
      */
 
     admin = 'admin',
+    adminOn = '/on/user',
+    adminOff = '/off/user',
 
     /**
      * for student
@@ -111,5 +125,7 @@ export const
     passExam = student+'upload/exam',
     unSubmitExam=student+'unsubmit/exam',
     passQuiz = student+'upload/quiz',
-    unSubmitQuiz=student+'unsubmit/quiz'
+    unSubmitQuiz=student+'unsubmit/quiz',
+    onStudent = 'on/student',
+    offStudent = 'off/student'
 

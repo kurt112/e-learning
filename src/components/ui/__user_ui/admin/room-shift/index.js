@@ -3,7 +3,18 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
+import {
+    Box,
+    CircularProgress,
+    FormControl,
+    Grid,
+    InputLabel,
+    MenuItem,
+    Paper,
+    Select,
+    Toolbar,
+    Tooltip
+} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
 import {Fragment, lazy, useEffect, useState} from "react"
 import {AdminRoomShiftTable as columns} from '../../../utils/tableColumn'
@@ -21,13 +32,18 @@ import UpdateIcon from "@material-ui/icons/Update";
 import DeleteIcon from "@material-ui/icons/Delete";
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import {reInitState} from "../../../../../store/action/__ActionGlobal/DialogAction";
+import {baseUrl} from "../../../../../store/middleware/axios";
+import {
+    OffRoomShift,
+    OnRoomShift
+} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 
 const RegisterRoomShiftDialog = lazy(() => import(`./RoomShiftRegisterDialog`));
 const DeleteRooShiftDialog = lazy(() => import(`./DeleteRoomShiftDialog`))
 const FindRoomShiftDialog = lazy(() => import(`./FindRoomShiftDialog`))
 
 const RoomShiftList = ({
-                           roomShift,
+                           state,
                            initData,
                            searchChange,
                            pageChange,
@@ -39,7 +55,8 @@ const RoomShiftList = ({
                            openFindDialog,
                            closeFindDialog,
                            setData,
-                           reInitState
+                           reInitState,
+                           statusChange
                        }) => {
     const classes = style()
 
@@ -65,24 +82,38 @@ const RoomShiftList = ({
     }
 
     useEffect(() => {
-        if (roomShift.data.length === 0) initData()
+        if (state.data.length === 0) initData()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const setStatus = async (status,id) => {
+        const params = new URLSearchParams()
+        params.append('id', id)
+        //
+
+        if(status === true) await baseUrl.post(OffRoomShift, params).then(ignored =>{})
+        else await baseUrl.post(OnRoomShift, params).then(ignored => {})
+
+        alert("Status Change Success")
+
+        await initData()
+    }
+
     return (
         <Fragment>
 
             <RegisterRoomShiftDialog translation={translation}
-                                     dialog={roomShift.dialog}
+                                     dialog={state.dialog}
                                      closeDialog={closeDialog}
                                      reInitState={reInitState}
             />
             <DeleteRooShiftDialog
-                translation={translation} dialog={roomShift.deleteDialog}
+                translation={translation} dialog={state.deleteDialog}
                 closeDialog={closeDeleteDialog}/>
             <FindRoomShiftDialog
                 translation={translation}
-                dialog={roomShift.findDialog}
+                dialog={state.findDialog}
                 update={update}
                 addStudent={addStudent}
                 closeDialog={closeDialogClick}
@@ -118,6 +149,19 @@ const RoomShiftList = ({
                             </Tooltip>
 
                         </Box>
+                        <FormControl>
+                            <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={state.status}
+                                onChange={(e) => statusChange(e.target.value)}
+                            >
+                                {
+                                    state.statusData.map((e, i) => <MenuItem key={i} value={i}>{e}</MenuItem>)
+                                }
+                            </Select>
+                        </FormControl>
                     </Toolbar>
                 </Grid>
 
@@ -126,20 +170,20 @@ const RoomShiftList = ({
                         title={
                             <Typography variant="h6">
                                 {translation.language["label.room.shift.table.title"]}
-                                {roomShift.loading &&
+                                {state.loading &&
                                 <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}}/>}
                             </Typography>
                         }
-                        data={roomShift.data}
-                        columns={columns(translation)}
+                        data={state.data}
+                        columns={columns(translation,setStatus)}
                         options={options(
                             pageChange,
                             searchChange,
-                            roomShift.search,
-                            roomShift.totalPages,
-                            roomShift.totalItems,
-                            roomShift.page,
-                            roomShift.loading)}
+                            state.search,
+                            state.totalPages,
+                            state.totalItems,
+                            state.page,
+                            state.loading)}
                     />
                 </Grid>
             </Grid>
@@ -149,7 +193,7 @@ const RoomShiftList = ({
 
 const mapStateToProps = (state) => {
     return {
-        roomShift: state.AdminRoomShift
+        state: state.AdminRoomShift
     }
 }
 
@@ -158,6 +202,7 @@ const mapDispatchToProps = (dispatch) => {
         initData: () => dispatch(actions.InitDataTable(RoomShift)),
         searchChange: (data) => dispatch(actions.SearchChange(data, RoomShift)),
         pageChange: (page) => dispatch(actions.DataNextPage(page, RoomShift)),
+        statusChange: (data) => dispatch(actions.statusChange(data,RoomShift)),
 
         // for opening dialog
         openDialog: () => dispatch(actions.openDialog(RoomShift)),

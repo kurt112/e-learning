@@ -49,15 +49,18 @@ export const
             type: actions.DIALOG_CLOSE(to)
         }
     },
-
+    statusChange = (data,to) => {
+        return {
+            type: actions.ADMIN_CHANGE_STATUS(to),
+            data
+        }
+    },
     openDialog = (to) => {
         return {
             type: actions.DIALOG_OPEN(to)
         }
     },
-    setData = (data,to) => {
-        console.log(to)
-        console.log(data)
+    setData = (data, to) => {
         return {
             type: dialogAction.SET_DATA(to),
             data

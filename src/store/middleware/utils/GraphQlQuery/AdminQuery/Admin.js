@@ -4,14 +4,16 @@
  * @created : 17/08/2021, Tuesday
  **/
 export const
-    AdminListBodyDataQuery = (search, page) => {
+    AdminListBodyDataQuery = (search, page,status) => {
         return {
             query: `
-                    query{getUsersWithRole(search:"${search}", page:${page},role:"Admin"){
+                    query{getUsersWithRole(search:"${search}", page:${page},role:"Admin",status:${status}){
+                       id,
                        lastName,
                        email,
                        firstName,
                        birthdate,
+                       accountNotLocked
                     }
        }`
         }

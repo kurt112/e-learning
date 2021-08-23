@@ -69,7 +69,7 @@ import {
     InsertCurriculumSubject,
     AdminList,
     CreateAdmin,
-    DeleteAdmin
+    DeleteAdmin,
 } from './store/reducers/Admin'
 
 import Classroom from "./store/reducers/ClassroomState";
@@ -166,7 +166,15 @@ import {
     watchAdminDelete,
     watchSearchChange,
     watchTableNextData,
-    watchAdminRegister
+    watchAdminRegister,
+    watchAdminCurriculumStatusChange,
+    watchAdminRoomClassStatusChange,
+    watchAdminRoomShiftStatusChange,
+    watchAdminStatusChange,
+    watchAdminRoomStatusChange,
+    watchAdminSubjectStatusChange,
+    watchStudentStatusChange,
+    watchTeacherStatusChange
 } from './store/middleware/admin'
 
 import {
@@ -385,6 +393,14 @@ sagaMiddleware.run(watchTeacherQuizExams)
 sagaMiddleware.run(watchTeacherQuizInit)
 sagaMiddleware.run(watchTeacherQuizSearchChange)
 sagaMiddleware.run(watchTeacherQuizTableNext)
+sagaMiddleware.run(watchAdminCurriculumStatusChange)
+sagaMiddleware.run(watchAdminRoomClassStatusChange)
+sagaMiddleware.run(watchAdminRoomShiftStatusChange)
+sagaMiddleware.run(watchAdminStatusChange)
+sagaMiddleware.run(watchAdminRoomStatusChange)
+sagaMiddleware.run(watchAdminSubjectStatusChange)
+sagaMiddleware.run(watchStudentStatusChange)
+sagaMiddleware.run(watchTeacherStatusChange)
 
 
 ReactDOM.render(

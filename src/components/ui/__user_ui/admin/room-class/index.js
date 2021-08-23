@@ -3,7 +3,18 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
+import {
+    Box,
+    CircularProgress,
+    FormControl,
+    Grid,
+    InputLabel,
+    MenuItem,
+    Paper,
+    Select,
+    Toolbar,
+    Tooltip
+} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
 import {Fragment, lazy, useEffect, useState} from "react"
 import {AdminRoomClassTable as columns} from '../../../utils/tableColumn'
@@ -23,6 +34,13 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
 import {reInitState} from "../../../../../store/action/__ActionGlobal/DialogAction";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
+import {baseUrl} from "../../../../../store/middleware/axios";
+import {
+    OffClass,
+    OffRoomShift,
+    OnClass,
+    OnRoomShift
+} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 
 
 const RegisterRoom = lazy(() => import(`./RegisterRoomClassDialog`));
@@ -42,7 +60,8 @@ const Index = ({
                    openFindDialog,
                    closeFindDialog,
                    setData,
-                   reInitState
+                   reInitState,
+                   statusChange
                }) => {
 
     const classes = style()
@@ -73,6 +92,18 @@ const Index = ({
         closeFindDialog()
     }
 
+    const setStatus = async (status,id) => {
+        const params = new URLSearchParams()
+        params.append('id', id)
+
+        if(status === true) await baseUrl.post(OffClass, params).then(ignored =>{})
+        else await baseUrl.post(OnClass, params).then(ignored => {})
+
+        alert("Status Change Success")
+
+        await initData()
+    }
+
     return (
         <Fragment>
 
@@ -99,27 +130,43 @@ const Index = ({
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
-                        <Tooltip title={translation.language["tooltip.class.add"]}>
-                            <IconButton aria-label="add-room-shift" onClick={openDialog}>
-                                <LibraryAddIcon fontSize={'large'} color={'primary'}/>
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip title={translation.language["tooltip.class.delete"]}>
-                            <IconButton aria-label="delete-room" onClick={openDeleteDialog}>
-                                <DeleteIcon fontSize={'large'} color={'secondary'}/>
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip title={translation.language["tooltip.class.update"]}>
-                            <IconButton aria-label="update-room" onClick={updateClick}>
-                                <UpdateIcon fontSize={'large'} color={'primary'}/>
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip title={translation.language['tooltip.room.shift.add.student']}>
-                            <IconButton aria-label="update-room" onClick={addStudentClick}>
-                                <GroupAddIcon fontSize={'large'} color={'primary'}/>
-                            </IconButton>
-                        </Tooltip>
+                        <Box className={classes.tableNavbarBox}>
+                            <Tooltip title={translation.language["tooltip.class.add"]}>
+                                <IconButton aria-label="add-room-shift" onClick={openDialog}>
+                                    <LibraryAddIcon fontSize={'large'} color={'primary'}/>
+                                </IconButton>
+                            </Tooltip>
+                            <Tooltip title={translation.language["tooltip.class.delete"]}>
+                                <IconButton aria-label="delete-room" onClick={openDeleteDialog}>
+                                    <DeleteIcon fontSize={'large'} color={'secondary'}/>
+                                </IconButton>
+                            </Tooltip>
+                            <Tooltip title={translation.language["tooltip.class.update"]}>
+                                <IconButton aria-label="update-room" onClick={updateClick}>
+                                    <UpdateIcon fontSize={'large'} color={'primary'}/>
+                                </IconButton>
+                            </Tooltip>
+                            <Tooltip title={translation.language['tooltip.room.shift.add.student']}>
+                                <IconButton aria-label="update-room" onClick={addStudentClick}>
+                                    <GroupAddIcon fontSize={'large'} color={'primary'}/>
+                                </IconButton>
+                            </Tooltip>
+                        </Box>
+                        <FormControl>
+                            <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={state.status}
+                                onChange={(e) => statusChange(e.target.value)}
+                            >
+                                {
+                                    state.statusData.map((e, i) => <MenuItem key={i} value={i}>{e}</MenuItem>)
+                                }
+                            </Select>
+                        </FormControl>
                     </Toolbar>
+
                 </Grid>
 
                 <Grid item md={12} component={Paper} className={classes.tableContainerWrapper}>
@@ -132,7 +179,7 @@ const Index = ({
                             </Typography>
                         }
                         data={state.data}
-                        columns={columns(translation)}
+                        columns={columns(translation,setStatus)}
                         options={options(
                             pageChange,
                             searchChange,
@@ -159,6 +206,7 @@ const mapDispatchToProps = (dispatch) => {
         initData: () => dispatch(actions.InitDataTable(RoomShiftClass)),
         searchChange: (data) => dispatch(actions.SearchChange(data, RoomShiftClass)),
         pageChange: (page) => dispatch(actions.DataNextPage(page, RoomShiftClass)),
+        statusChange: (data) => dispatch(actions.statusChange(data, RoomShiftClass)),
 
         // for opening and closing dialog
         openDialog: () => dispatch(actions.openDialog(RoomShiftClass)),

@@ -15,7 +15,7 @@ const newState = new state()
 const transforms = (items) => items.map((item) => {
     const birthdate = item.user.birthdate === null ? 'No Info' : convertDateTime(item.user.birthdate)
 
-    return insert(item.id, item.user.firstName, item.user.lastName, item.user.email, birthdate)
+    return insert(item.id, item.user.firstName, item.user.lastName, item.user.email, birthdate,item.status)
 })
 const currentState = {
     ...newState.init_state,
@@ -30,6 +30,7 @@ const reducer = (state=currentState, action)=>{
         case actions.ADMIN_TABLE_FAIL(Teacher): return newState.failData(state)
         case actions.ADMIN_TABLE_NEXT_PAGE(Teacher): return newState.nextData(state,action)
         case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(Teacher): return newState.searchChange(state,action)
+        case actions.ADMIN_CHANGE_STATUS(Teacher):return newState.changeStatus(state,action)
 
         // for opening and closing dialog
         case actions.DIALOG_OPEN(Teacher): return newState.openDialog(state)

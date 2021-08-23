@@ -4,14 +4,15 @@
  * @created : 11/07/2021, Sunday
  **/
 export const
-    AdminRoomBodyDataQuery = (search, page) => {
+    AdminRoomBodyDataQuery = (search, page,status) => {
         return {
             query: `
-                    query{rooms(search:"${search}", page:${page}){
+                    query{rooms(search:"${search}", page:${page}, status:${status}){
                             id,
                             roomName,
                             timeEnd,
                             timeStart,
+                            status
             }
         }
         `

@@ -48,11 +48,10 @@ export function * DeleteCurriculum(){
 
 export function* CurriculumTableDataNext(action) {
     const classState = yield select(Selector.AdminCurriculum)
-    yield TableNextData(action, classState, AdminCurriculumBodyDataQuery(classState.search,classState.page),AdminCurriculumBodyDataSettingsQuery(),Curriculum)
+    yield TableNextData(action, classState, AdminCurriculumBodyDataQuery(classState.search,classState.page,classState.status),AdminCurriculumBodyDataSettingsQuery(),Curriculum)
 }
 
 export function* CurriculumTableDataInit() {
     const classState = yield select(Selector.AdminCurriculum)
-
-    yield TableDataInit(AdminCurriculumBodyDataQuery(classState.search,classState.page),AdminCurriculumBodyDataSettingsQuery(),Curriculum)
+    yield TableDataInit(AdminCurriculumBodyDataQuery(classState.search,classState.page,classState.status),AdminCurriculumBodyDataSettingsQuery(),Curriculum)
 }

@@ -19,7 +19,7 @@ const transforms = (items) => items.map((item) =>{
     const birthdate = item.user.birthdate === null? 'No Info':convertDateTime(item.user.birthdate)
 
     return insert(item.student_id, item.user.firstName,item.user.lastName,item.user.email,birthdate,
-        grade, section, adviser)
+        grade, section, adviser,item.status)
 })
 
 const newState = new state()
@@ -40,6 +40,7 @@ const reducer = (state = currentState, action)=>{
         case actions.ADMIN_TABLE_FAIL(Student): return newState.failData(state)
         case actions.ADMIN_TABLE_NEXT_PAGE(Student): return newState.nextData(state,action)
         case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(Student): return newState.searchChange(state,action)
+        case actions.ADMIN_CHANGE_STATUS(Student):return newState.changeStatus(state,action)
 
         // For opening and closing dialog
         case actions.DIALOG_OPEN(Student_Delete): return updateObject(state, {deleteDialog: true})

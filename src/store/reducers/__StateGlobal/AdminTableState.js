@@ -17,6 +17,13 @@ class State {
             dialog: false,
             error: '',
             loading: true,
+            status: 1,
+
+            // status
+            // 0 = In-active
+            // 1 = Active
+            // 2 = All
+            statusData: ['In-Active', 'Active', 'All']
         }
         this.initData = (state) => {
             state = updateObject(state, {loading: true})
@@ -72,6 +79,15 @@ class State {
         this.searchChange = (state, action) => {
             return updateObject(state, {
                 search: action.text === null ? '' : action.text,
+                page: 0,
+                highPage: -1,
+                loading: true
+            })
+        }
+
+        this.changeStatus = (state, action) => {
+            return updateObject(state, {
+                status: action.data,
                 page: 0,
                 highPage: -1,
                 loading: true

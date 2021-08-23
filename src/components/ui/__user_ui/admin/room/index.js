@@ -3,7 +3,18 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
+import {
+    Box,
+    CircularProgress,
+    FormControl,
+    Grid,
+    InputLabel,
+    MenuItem,
+    Paper,
+    Select,
+    Toolbar,
+    Tooltip
+} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
 import {Fragment, lazy, useEffect} from "react"
 import {AdminRoomTable as columns} from '../../../utils/tableColumn'
@@ -17,6 +28,8 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import IconButton from "@material-ui/core/IconButton"
 import DeleteIcon from '@material-ui/icons/Delete'
 import UpdateIcon from '@material-ui/icons/Update'
+import {baseUrl} from "../../../../../store/middleware/axios";
+import {OffRoom, OnRoom} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 
 const RegisterRoom = lazy(() => import(`./RegisterRoomDialog`))
 const DeleteRoomDialog = lazy(() => import(`./DeleteRoomDialog`))
@@ -35,7 +48,8 @@ const Index = ({
                    closeUpdateDialog,
                    translation,
                    setData,
-                   reInitState
+                   reInitState,
+                   statusChange
                }) => {
 
     const classes = style()
@@ -43,6 +57,20 @@ const Index = ({
         if (room.data.length === 0) initData()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const setStatus = async (status,id) => {
+
+        const params = new URLSearchParams()
+        params.append('id', id)
+
+        if(status === true) await baseUrl.post(OffRoom, params).then(ignored =>{})
+        else await baseUrl.post(OnRoom, params).then(ignored => {})
+
+        alert("Status Change Success")
+
+        await initData()
+    }
+
     return (
         <Fragment>
 
@@ -87,6 +115,21 @@ const Index = ({
                             </Tooltip>
 
                         </Box>
+
+                        <FormControl >
+                            <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={room.status}
+                                onChange={(e) => statusChange(e.target.value)}
+                            >
+                                {
+                                    room.statusData.map((e,i) => <MenuItem key={i} value={i}>{e}</MenuItem>)
+                                }
+                            </Select>
+                        </FormControl>
+
                     </Toolbar>
                 </Grid>
 
@@ -100,7 +143,7 @@ const Index = ({
                             </Typography>
                         }
                         data={room.data}
-                        columns={columns(translation)}
+                        columns={columns(translation,setStatus)}
                         options={options(
                             pageChange,
                             searchChange,
@@ -128,6 +171,7 @@ const mapDispatchToProps = (dispatch) => {
         initData: () => dispatch(actions.InitDataTable(Room)),
         searchChange: (data) => dispatch(actions.SearchChange(data, Room)),
         pageChange: (page) => dispatch(actions.DataNextPage(page, Room)),
+        statusChange: (data) => dispatch(actions.statusChange(data,Room)),
 
         // action for opening and closing dialogs
         openDialog: () => dispatch(actions.openDialog(Room)),
@@ -140,7 +184,9 @@ const mapDispatchToProps = (dispatch) => {
         closeUpdateDialog: () => dispatch(actions.closeDialog(Room_Update)),
 
         setData: (data) => dispatch(actions.setData(data, Room)),
-        reInitState: () => dispatch(reInitState(Room))
+        reInitState: () => dispatch(reInitState(Room)),
+
+
 
     }
 }

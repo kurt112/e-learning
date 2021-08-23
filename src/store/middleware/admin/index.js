@@ -76,6 +76,10 @@ export function* watchTeacherSearchChange() {
     yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Teacher), TeacherTableDataInit)
 }
 
+export function * watchTeacherStatusChange() {
+    yield takeLeading(adminTable.ADMIN_CHANGE_STATUS(Teacher), TeacherTableDataInit)
+}
+
 /**
  *
  *
@@ -105,6 +109,11 @@ export function* watchStudentSearchChange() {
     yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Student), StudentTableDataInit)
 }
 
+export function * watchStudentStatusChange() {
+    yield takeLeading(adminTable.ADMIN_CHANGE_STATUS(Student), StudentTableDataInit)
+}
+
+
 
 /**
  *
@@ -131,6 +140,11 @@ export function* watchAdminSubjectTableNext(){
 export function* watchAdminSubjectSearchChange() {
     yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Subject), SubjectTableDataInit)
 }
+export function* watchAdminSubjectStatusChange() {
+    yield takeLeading(adminTable.ADMIN_CHANGE_STATUS(Subject), SubjectTableDataInit)
+}
+
+
 
 /**
  *
@@ -159,6 +173,11 @@ export function* watchAdminRoomSearchChange() {
     yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Room), RoomTableDataInit)
 }
 
+export function* watchAdminRoomStatusChange() {
+    yield takeLeading(adminTable.ADMIN_CHANGE_STATUS(Room),RoomTableDataInit)
+}
+
+
 /**
  *
  *
@@ -184,6 +203,10 @@ export function* watchAdminRoomShiftTableNext(){
 
 export function* watchAdminRoomShiftSearchChange() {
     yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(RoomShift), RoomShiftTableDataInit)
+}
+
+export function* watchAdminRoomShiftStatusChange() {
+    yield takeLeading(adminTable.ADMIN_CHANGE_STATUS(RoomShift),RoomShiftTableDataInit)
 }
 
 /**
@@ -215,6 +238,11 @@ export function* watchAdminRoomClassTableNext(){
 export function* watchAdminRoomClassSearchChange() {
     yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(RoomShiftClass), RoomClassTableDataInit)
 }
+
+export function* watchAdminRoomClassStatusChange() {
+    yield takeLeading(adminTable.ADMIN_CHANGE_STATUS(RoomShiftClass),RoomClassTableDataInit)
+}
+
 
 /**
  *
@@ -252,6 +280,9 @@ export function* watchAdminRegisterCurriculum() {
 export function* watchAdminDeleteCurriculum() {
     yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Curriculum_Delete), DeleteCurriculum)
 }
+export function* watchAdminCurriculumStatusChange() {
+    yield takeLeading(adminTable.ADMIN_CHANGE_STATUS(Curriculum),CurriculumTableDataInit)
+}
 
 
 /**
@@ -282,6 +313,11 @@ export function* watchAdminRegister() {
 export function* watchAdminDelete() {
     yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Admin_Delete), DeleteAdmin)
 }
+
+export function* watchAdminStatusChange() {
+    yield takeLeading(adminTable.ADMIN_CHANGE_STATUS(Admin),AdminTableDataInit)
+}
+
 
 
 

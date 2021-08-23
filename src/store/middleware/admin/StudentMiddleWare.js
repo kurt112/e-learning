@@ -42,12 +42,12 @@ export function* StudentRegister() {
 
 export function* StudentTableDataNext(action) {
     const student = yield select(Selector.AdminStudent)
-    yield TableNextData(action, student, AdminStudentBodyDataQuery(student.search,student.page),AdminStudentBodyDataSettingsQuery(), Student)
+    yield TableNextData(action, student, AdminStudentBodyDataQuery(student.search,student.page,student.status),AdminStudentBodyDataSettingsQuery(), Student)
 
 }
 
 export function* StudentTableDataInit() {
     const student = yield select(Selector.AdminStudent)
-    yield TableDataInit(AdminStudentBodyDataQuery(student.search,student.page),AdminStudentBodyDataSettingsQuery(),Student)
+    yield TableDataInit(AdminStudentBodyDataQuery(student.search,student.page,student.status),AdminStudentBodyDataSettingsQuery(),Student)
 }
 

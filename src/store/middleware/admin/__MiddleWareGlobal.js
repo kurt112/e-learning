@@ -69,12 +69,10 @@ export function* TableNextData(action,state,bodyDataQuery, bodySettingsQuery,to)
 }
 
 export function* TableDataInit(bodyDataQuery, bodySettingsQuery,to, ) {
-    console.log(bodyDataQuery)
     try {
         const bodyDataResponse = yield graphQLRequest(bodyDataQuery)
         const bodySettingsResponse = yield graphQLRequest(bodySettingsQuery)
         const object = bodyDataResponse.data.data
-        console.log(bodyDataResponse)
         const key = Object.keys(object)
         yield put(tableActions.SettingInitDataTable(bodySettingsResponse.data.data,to))
         yield put(tableActions.SuccessDataTable(object[key], true, to))

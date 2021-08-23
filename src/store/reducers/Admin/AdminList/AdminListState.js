@@ -22,7 +22,7 @@ const currentState = {
 
 const transforms = (items) => items.map((item) => {
     const birthdate = item.birthdate === null ? 'No Info' : convertDateTime(item.birthdate)
-    return insert(item.firstName, item.lastName, item.email, birthdate)
+    return insert(item.firstName, item.lastName, item.email, birthdate,item.accountNotLocked,item.id)
 })
 
 const reducer = (state = currentState, action) => {
@@ -34,7 +34,7 @@ const reducer = (state = currentState, action) => {
         case actions.ADMIN_TABLE_FAIL(Admin): return newState.failData(state)
         case actions.ADMIN_TABLE_NEXT_PAGE(Admin): return newState.nextData(state,action)
         case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(Admin): return newState.searchChange(state,action)
-
+        case actions.ADMIN_CHANGE_STATUS(Admin):return newState.changeStatus(state,action)
 
         // For opening and closing dialog
         case actions.DIALOG_OPEN(Admin_Create): return updateObject(state, {createDialog: true})

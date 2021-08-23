@@ -17,7 +17,7 @@ import {updateObject} from "../../../utils/UpdateObject";
 const newState = new state()
 
 const transforms = (items) => items.map((item) =>
-    insert(item.code, item.name, item.description, item.code))
+    insert(item.code, item.name, item.description, item.code,item.status))
 
 const currentState = {
     ...newState.init_state,
@@ -39,6 +39,8 @@ const reducer = (state = currentState, action) => {
             return newState.nextData(state, action)
         case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(Curriculum):
             return newState.searchChange(state, action)
+        case actions.ADMIN_CHANGE_STATUS(Curriculum):
+            return newState.changeStatus(state,action)
 
         // for opening and closing dialog
         case actions.DIALOG_OPEN(Curriculum_Create):

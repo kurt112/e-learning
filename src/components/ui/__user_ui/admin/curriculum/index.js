@@ -3,7 +3,18 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
+import {
+    Box,
+    CircularProgress,
+    FormControl,
+    Grid,
+    InputLabel,
+    MenuItem,
+    Paper,
+    Select,
+    Toolbar,
+    Tooltip
+} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
 import {Fragment, lazy, useEffect, useState} from "react"
 import {AdminCurriculumTable as columns} from '../../../utils/tableColumn'
@@ -24,6 +35,11 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateIcon from "@material-ui/icons/Update";
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import {reInitState} from "../../../../../store/action/__ActionGlobal/DialogAction";
+import {baseUrl} from "../../../../../store/middleware/axios";
+import {
+    OffCurriculum,
+    OnCurriculum
+} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 
 const CreateCurriculumDialog = lazy(() => import(`./CreateCurriculumDialog`))
 const DeleteCurriculumDialog = lazy(() => import(`./DeleteCurriculumDialog`))
@@ -42,7 +58,8 @@ const Index = ({
                    closeFindCurriculum,
                    translation,
                    setData,
-                   reInitState
+                   reInitState,
+                   statusChange
                }) => {
 
     const classes = style()
@@ -75,11 +92,31 @@ const Index = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    const setStatus = async (status,id) => {
+
+        const params = new URLSearchParams()
+        params.append('id', id)
+
+        if(status === true) await baseUrl.post(OffCurriculum, params).then(ignored =>{})
+        else await baseUrl.post(OnCurriculum, params).then(ignored => {})
+
+        alert("Status Change Success")
+
+        await initData()
+    }
+
     return (
         <Fragment>
-            <CreateCurriculumDialog translation={translation} dialog={state.dialog} closeDialog={closeDialog}/>
-            <DeleteCurriculumDialog translation={translation} dialog={state.deleteDialog}
-                                    closeDialog={closeDeleteDialog}/>
+            <CreateCurriculumDialog
+                translation={translation}
+                dialog={state.dialog}
+                closeDialog={closeDialog}
+            />
+            <DeleteCurriculumDialog
+                translation={translation}
+                dialog={state.deleteDialog}
+                closeDialog={closeDeleteDialog}
+            />
             <FindCurriculum
                 update={update}
                 insertSubject={insertSubject}
@@ -120,6 +157,19 @@ const Index = ({
                                 </IconButton>
                             </Tooltip>
                         </Box>
+                        <FormControl >
+                            <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={state.status}
+                                onChange={(e) => statusChange(e.target.value)}
+                            >
+                                {
+                                    state.statusData.map((e,i) => <MenuItem key={i} value={i}>{e}</MenuItem>)
+                                }
+                            </Select>
+                        </FormControl>
                     </Toolbar>
                 </Grid>
                 <Grid item md={12} component={Paper} className={classes.tableContainerWrapper}>
@@ -136,7 +186,7 @@ const Index = ({
                                 </Typography>
                             }
                             data={state.data}
-                            columns={columns(translation)}
+                            columns={columns(translation,setStatus)}
                             options={options(
                                 pageChange,
                                 searchChange,
@@ -166,6 +216,7 @@ const mapDispatchToProps = (dispatch) => {
         initData: () => dispatch(actions.InitDataTable(Curriculum)),
         searchChange: (data) => dispatch(actions.SearchChange(data, Curriculum)),
         pageChange: (page) => dispatch(actions.DataNextPage(page, Curriculum)),
+        statusChange: (data) => dispatch(actions.statusChange(data,Curriculum)),
 
         // action for opening and closing dialogs
         openDialog: () => dispatch(actions.openDialog(Curriculum_Create)),

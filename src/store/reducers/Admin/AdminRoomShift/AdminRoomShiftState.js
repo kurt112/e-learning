@@ -19,7 +19,7 @@ const transforms = (items) => items.map((item) =>{
     const teacher = item.teacher === null? 'TBA': `${item.teacher.user.firstName} ${item.teacher.user.lastName}`
     const curriculum = item.curriculum === null? 'TBA': item.curriculum.name
 
-    return insert(item.id,item.room.roomName, item.roomShiftName, item.grade, item.section,curriculum,teacher, format24Hour(item.timeStart),format24Hour(item.timeEnd),item.id)
+    return insert(item.id,item.room.roomName, item.roomShiftName, item.grade, item.section,curriculum,teacher, format24Hour(item.timeStart),format24Hour(item.timeEnd),item.id,item.status)
 })
 
 const initState = {
@@ -37,7 +37,7 @@ const reducer = (state = initState, action) =>{
         case actions.ADMIN_TABLE_FAIL(RoomShift): return newState.failData(state)
         case actions.ADMIN_TABLE_NEXT_PAGE(RoomShift): return newState.nextData(state,action)
         case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(RoomShift): return newState.searchChange(state,action)
-
+        case actions.ADMIN_CHANGE_STATUS(RoomShift):return newState.changeStatus(state,action)
         // Adding Student in Room Shift List
         case actions.DIALOG_OPEN(RoomShift_Find): return updateObject(state, {findDialog: true})
         case actions.DIALOG_CLOSE(RoomShift_Find): return updateObject(state, {findDialog: false})

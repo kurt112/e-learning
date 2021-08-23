@@ -69,10 +69,10 @@ export function * DeleteAdmin(){
 
 export function* AdminTableDataNext(action) {
     const classState = yield select(Selector.Admin)
-    yield TableNextData(action, classState, AdminListBodyDataQuery(classState.search,classState.page),AdminBodyDataSettingsQuery(),Admin)
+    yield TableNextData(action, classState, AdminListBodyDataQuery(classState.search,classState.page,classState.status),AdminBodyDataSettingsQuery(),Admin)
 }
 
 export function* AdminTableDataInit() {
     const classState = yield select(Selector.Admin)
-    yield TableDataInit(AdminListBodyDataQuery(classState.search,classState.page),AdminBodyDataSettingsQuery(),Admin)
+    yield TableDataInit(AdminListBodyDataQuery(classState.search,classState.page,classState.status),AdminBodyDataSettingsQuery(),Admin)
 }

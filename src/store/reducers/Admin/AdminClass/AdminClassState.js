@@ -22,7 +22,7 @@ const transforms = (items) => items.map((item) =>{
     const timeEnd = item.endTime === null? 'TBA': format24Hour(item.endTime)
 
     return insert(item.id,item.roomShift.room.roomName, item.roomShift.grade, item.roomShift.section, item.subject.subjectName,
-        teacher, day, timeStart, timeEnd, item.id,item.id)
+        teacher, day, timeStart, timeEnd, item.id,item.id,item.status)
 })
 
 
@@ -40,7 +40,7 @@ const reducer = (state = currentState, action) =>{
         case actions.ADMIN_TABLE_FAIL(RoomShiftClass): return newState.failData(state)
         case actions.ADMIN_TABLE_NEXT_PAGE(RoomShiftClass): return newState.nextData(state,action)
         case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(RoomShiftClass): return newState.searchChange(state,action)
-
+        case actions.ADMIN_CHANGE_STATUS(RoomShiftClass):return newState.changeStatus(state,action)
         // for opening and closing dialog
         case actions.DIALOG_OPEN(RoomShiftClass): return newState.openDialog(state)
         case actions.DIALOG_CLOSE(RoomShiftClass): return newState.closeDialog(state)

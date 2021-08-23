@@ -29,11 +29,8 @@ const reducer = (state = newState, action) => {
         case dialogAction.ADMIN_TABLE_INIT(Teacher_Quiz):
             return init.initData(state)
 
-        case dialogAction.ADMIN_TABLE_SUCCESS(Teacher_Quiz):{
-            console.log("i am here")
-            console.log(action)
+        case dialogAction.ADMIN_TABLE_SUCCESS(Teacher_Quiz):
             return init.successData(state, action,transforms)
-        }
         case dialogAction.ADMIN_TABLE_FAIL(Teacher_Quiz):
             return init.failData(state)
         case dialogAction.ADMIN_TABLE_NEXT_PAGE(Teacher_Quiz):

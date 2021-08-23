@@ -5,7 +5,18 @@
  **/
 import style, {TableOptions as options} from "../../../_style/TableStyle";
 import {Fragment, useEffect} from "react";
-import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core";
+import {
+    Box,
+    CircularProgress,
+    FormControl,
+    Grid,
+    InputLabel,
+    MenuItem,
+    Paper,
+    Select,
+    Toolbar,
+    Tooltip
+} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -13,10 +24,18 @@ import MUIDataTable from "mui-datatables";
 import Typography from "@material-ui/core/Typography";
 import {AdminTable as columns} from "../../../utils/tableColumn";
 import * as actions from "../../../../../store/action/__ActionGlobal/TableAction";
-import {Admin, Admin_Create, Admin_Delete, Room, Room_Delete, Room_Update} from "../../../../../store/utils/Specify";
+import {
+    Admin,
+    Admin_Create,
+    Admin_Delete
+} from "../../../../../store/utils/Specify";
 import {connect} from 'react-redux'
 import CreateAdminDialog from "./CreateAdminDialog";
 import DeleteAdminDialog from "./DeleteAdminDialog";
+import {baseUrl} from "../../../../../store/middleware/axios";
+import {
+    adminOff, adminOn
+} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 
 const Index = ({
                    state,
@@ -28,6 +47,7 @@ const Index = ({
                    openDeleteDialog,
                    closeDeleteDialog,
                    translation,
+                   statusChange
                }) => {
 
     const classes = style()
@@ -36,6 +56,20 @@ const Index = ({
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const setStatus = async (status,id) => {
+
+        const params = new URLSearchParams()
+        params.append('id', id)
+
+        if(status === true) await baseUrl.post(adminOff, params).then(ignored =>{})
+        else await baseUrl.post(adminOn, params).then(ignored => {})
+
+        alert("Status Change Success")
+
+        await initData()
+    }
+
     return (
         <Fragment>
             <CreateAdminDialog
@@ -48,23 +82,6 @@ const Index = ({
                 dialog={state.deleteDialog}
                 closeDialog={closeDeleteDialog}
             />
-            {/*<RegisterRoom*/}
-            {/*    translation={translation}*/}
-            {/*    dialog={room.dialog}*/}
-            {/*    closeDialog={closeDialog}*/}
-            {/*/>*/}
-            {/*<DeleteRoomDialog*/}
-            {/*    translation={translation}*/}
-            {/*    dialog={room.deleteDialog}*/}
-            {/*    closeDialog={closeDeleteDialog}*/}
-            {/*/>*/}
-            {/*<FindRoomDialog*/}
-            {/*    reInitState={reInitState}*/}
-            {/*    setData={setData}*/}
-            {/*    translation={translation}*/}
-            {/*    dialog={room.updateDialog}*/}
-            {/*    closeDialog={closeUpdateDialog}*/}
-            {/*/>*/}
 
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
@@ -82,6 +99,19 @@ const Index = ({
                                 </IconButton>
                             </Tooltip>
                         </Box>
+                        <FormControl >
+                            <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={state.status}
+                                onChange={(e) => statusChange(e.target.value)}
+                            >
+                                {
+                                    state.statusData.map((e,i) => <MenuItem key={i} value={i}>{e}</MenuItem>)
+                                }
+                            </Select>
+                        </FormControl>
                     </Toolbar>
                 </Grid>
 
@@ -95,7 +125,7 @@ const Index = ({
                             </Typography>
                         }
                         data={state.data}
-                        columns={columns(translation)}
+                        columns={columns(translation,setStatus)}
                         options={options(
                             pageChange,
                             searchChange,
@@ -123,6 +153,7 @@ const mapDispatchToProps = (dispatch) => {
         initData: () => dispatch(actions.InitDataTable(Admin)),
         searchChange: (data) => dispatch(actions.SearchChange(data, Admin)),
         pageChange: (page) => dispatch(actions.DataNextPage(page, Admin)),
+        statusChange: (data) => dispatch(actions.statusChange(data,Admin)),
 
         // action for opening and closing dialogs
         openCreateDialog: () => dispatch(actions.openDialog(Admin_Create)),

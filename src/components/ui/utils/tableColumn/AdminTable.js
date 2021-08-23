@@ -3,20 +3,36 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {Button} from "@material-ui/core";
+import {Button, Switch, withStyles} from "@material-ui/core";
 import {Link} from "react-router-dom";
+import {green} from "@material-ui/core/colors";
+
 /*
 *
 *
 *
-*                 \This table is for the student table in admin area
+*                 This table is for the student table in admin area
 *
 *
 *
 *
 */
 
-export const AdminStudentTable = (translation) => [
+const GreenSwitch = withStyles({
+    switchBase: {
+        color: green[300],
+        '&$checked': {
+            color: green[500],
+        },
+        '&$checked + $track': {
+            backgroundColor: green[500],
+        },
+    },
+    checked: {},
+    track: {},
+})(Switch);
+
+export const AdminStudentTable = (translation,setStatus) => [
     {
         name: "LRN",
         label: translation.language["label.student.table.column.lrn"],
@@ -72,10 +88,26 @@ export const AdminStudentTable = (translation) => [
             }
         }
     },
+    {
+        name: "status",
+        label: translation.language["label.global.status"],
+        options: {
+            filter: false,
+            sort: false,
+            customBodyRender: (value) => {
+                const status = value.status === 1
+                return <GreenSwitch checked={status} onClick={() =>setStatus(status,value.id)}/>
+
+            },
+            filterOptions: {
+                fullWidth: false
+            }
+        }
+    }
 ];
 
-export function AdminInsertStudentTable(id, firstName, lastName, email, birthdate, grade, section, adviser) {
-    return {LRN: id, firstName, lastName, email, birthdate, grade, section, adviser, profile: email}
+export function AdminInsertStudentTable(id, firstName, lastName, email, birthdate, grade, section, adviser,status) {
+    return {LRN: id, firstName, lastName, email, birthdate, grade, section, adviser, profile: email,status:{status,id}}
 }
 
 
@@ -91,7 +123,7 @@ export function AdminInsertStudentTable(id, firstName, lastName, email, birthdat
 */
 
 
-export const AdminTeacherTable=(translation) => [
+export const AdminTeacherTable=(translation,setStatus) => [
     {
         name: 'id',
         label: translation.language["label.global.id"]
@@ -131,13 +163,29 @@ export const AdminTeacherTable=(translation) => [
             }
         }
     },
+    {
+        name: "status",
+        label: translation.language["label.global.status"],
+        options: {
+            filter: false,
+            sort: false,
+            customBodyRender: (value) => {
+                const status = value.status === 1
+                return <GreenSwitch checked={status} onClick={() =>setStatus(status,value.email)}/>
+
+            },
+            filterOptions: {
+                fullWidth: false
+            }
+        }
+    }
 ]
 
-export function AdminInsertTeacherTable(id, firstName, lastName, email, birthdate) {
-    return {id, firstName, lastName, email, birthdate, profile: email}
+export function AdminInsertTeacherTable(id, firstName, lastName, email, birthdate,status) {
+    return {id, firstName, lastName, email, birthdate, profile: email,status: {status,email}}
 }
 
-export const AdminTable=(translation) => [
+export const AdminTable=(translation,setStatus) => [
     {
         name: "firstName",
         label:translation.language["label.global.first.name"]
@@ -173,10 +221,25 @@ export const AdminTable=(translation) => [
             }
         }
     },
+    {
+        name: "status",
+        label: translation.language["label.global.status"],
+        options: {
+            filter: false,
+            sort: false,
+            customBodyRender: (value) => {
+                const {status} = value
+                return <GreenSwitch checked={status} onClick={() =>setStatus(status,value.id)}/>
+            },
+            filterOptions: {
+                fullWidth: false
+            }
+        }
+    }
 ]
 
-export function AdminInsertTable(firstName, lastName, email, birthdate) {
-    return {firstName, lastName, email, birthdate, profile: email}
+export function AdminInsertTable(firstName, lastName, email, birthdate,status,id) {
+    return {firstName, lastName, email, birthdate, profile: email, status: {id,status}}
 }
 
 /*
@@ -191,7 +254,7 @@ export function AdminInsertTable(firstName, lastName, email, birthdate) {
 */
 
 
-export const AdminRoomTable = (translation) => [
+export const AdminRoomTable = (translation,setStatus) => [
     {
         name: 'id',
         label: translation.language["label.global.id"]
@@ -227,10 +290,26 @@ export const AdminRoomTable = (translation) => [
             }
         }
     },
+    {
+        name: "status",
+        label: translation.language["label.global.status"],
+        options: {
+            filter: false,
+            sort: false,
+            customBodyRender: (value) => {
+                const status = value.status === 1
+                return <GreenSwitch checked={status} onClick={() =>setStatus(status,value.id)}/>
+
+            },
+            filterOptions: {
+                fullWidth: false
+            }
+        }
+    }
 ]
 
-export function AdminInsertRoom(id, roomName, timeStart, timeEnd, profile) {
-    return {id, roomName, timeStart, timeEnd, profile}
+export function AdminInsertRoom(id, roomName, timeStart, timeEnd, profile,status) {
+    return {id, roomName, timeStart, timeEnd, profile, status:{status,id}}
 }
 
 /*
@@ -245,7 +324,7 @@ export function AdminInsertRoom(id, roomName, timeStart, timeEnd, profile) {
 */
 
 
-export const AdminSubjectTable = (translation) => [
+export const AdminSubjectTable = (translation,setStatus) => [
     {
         name: 'subjectCode',
         label: translation.language["label.global.subject.code"]
@@ -282,13 +361,30 @@ export const AdminSubjectTable = (translation) => [
             }
         }
     },
+    {
+        name: "status",
+        label: translation.language["label.global.status"],
+        options: {
+            filter: false,
+            sort: false,
+            customBodyRender: (value) => {
+                const status = value.status === 1
+                return <GreenSwitch checked={status} onClick={() =>setStatus(status,value.subjectCode)}/>
+
+            },
+            filterOptions: {
+                fullWidth: false
+            }
+        }
+    }
+
 
 ]
 
 
 
-export function AdminInsertSubject(subjectCode, subjectName, major, active, profile) {
-    return {subjectCode, subjectName, major, active, profile}
+export function AdminInsertSubject(subjectCode, subjectName, major, active, profile,status) {
+    return {subjectCode, subjectName, major, active, profile, status:{subjectCode,status}}
 }
 
 
@@ -303,7 +399,7 @@ export function AdminInsertSubject(subjectCode, subjectName, major, active, prof
 *
 */
 
-export const AdminRoomClassTable = (translation) => [
+export const AdminRoomClassTable = (translation,setStatus) => [
     {
         name: 'id',
         label: translation.language["label.global.id"]
@@ -380,10 +476,27 @@ export const AdminRoomClassTable = (translation) => [
             }
         }
     },
+    {
+        name: "status",
+        label: translation.language["label.global.status"],
+        options: {
+            filter: false,
+            sort: false,
+            customBodyRender: (value) => {
+                const status = value.status === 1
+                return <GreenSwitch checked={status} onClick={() =>setStatus(status,value.id)}/>
+
+            },
+            filterOptions: {
+                fullWidth: false
+            }
+        }
+    }
+
 ]
 
-export function AdminInsertRoomClass(id, roomName, grade, section, subject, assignedTeacher, day, timeStart, timeEnd, classroom, profile) {
-    return {id, roomName, grade, section, subject, assignedTeacher, day, timeStart, timeEnd, classroom, profile}
+export function AdminInsertRoomClass(id, roomName, grade, section, subject, assignedTeacher, day, timeStart, timeEnd, classroom, profile,status) {
+    return {id, roomName, grade, section, subject, assignedTeacher, day, timeStart, timeEnd, classroom, profile, status:{id,status}}
 }
 
 /*
@@ -396,7 +509,7 @@ export function AdminInsertRoomClass(id, roomName, grade, section, subject, assi
 *
 *
 */
-export const AdminRoomShiftTable = (translation) => [
+export const AdminRoomShiftTable = (translation,setStatus) => [
     {
         name: 'id',
         label: translation.language["label.global.id"]
@@ -453,10 +566,26 @@ export const AdminRoomShiftTable = (translation) => [
             }
         }
     },
+    {
+        name: "status",
+        label: translation.language["label.global.status"],
+        options: {
+            filter: false,
+            sort: false,
+            customBodyRender: (value) => {
+                const status = value.status === 1
+                return <GreenSwitch checked={status} onClick={() =>setStatus(status,value.id)}/>
+
+            },
+            filterOptions: {
+                fullWidth: false
+            }
+        }
+    }
 ]
 
-export function AdminInsertRoomShift(id, roomName, roomShiftName, grade, section, curriculum, adviser,timeStart, timeEnd, profile) {
-    return {id, roomName, roomShiftName, grade, section,curriculum,adviser, timeStart, timeEnd, profile}
+export function AdminInsertRoomShift(id, roomName, roomShiftName, grade, section, curriculum, adviser,timeStart, timeEnd, profile,status) {
+    return {id, roomName, roomShiftName, grade, section,curriculum,adviser, timeStart, timeEnd, profile, status: {id,status}}
 }
 
 /*
@@ -470,7 +599,7 @@ export function AdminInsertRoomShift(id, roomName, roomShiftName, grade, section
 *
 */
 
-export const AdminCurriculumTable = (translation) => [
+export const AdminCurriculumTable = (translation,setStatus) => [
 
     {
         name: 'code',
@@ -505,8 +634,25 @@ export const AdminCurriculumTable = (translation) => [
             }
         }
     },
+    {
+        name: "status",
+        label: translation.language["label.global.status"],
+        options: {
+            filter: false,
+            sort: false,
+            customBodyRender: (value) => {
+                console.log(value)
+                const status = value.status === 1
+                return <GreenSwitch checked={status} onClick={() =>setStatus(status,value.code)}/>
+
+            },
+            filterOptions: {
+                fullWidth: false
+            }
+        }
+    }
 ]
 
-export function AdminInsertCurriculum(code, name, description, profile) {
-    return {code, name, description, profile}
+export function AdminInsertCurriculum(code, name, description, profile,status) {
+    return {code, name, description, profile, status:{code,status}}
 }

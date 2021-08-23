@@ -4,11 +4,12 @@
  * @created : 11/07/2021, Sunday
  **/
 export const
-    AdminTeacherBodyDataQuery = (search, page) => {
+    AdminTeacherBodyDataQuery = (search, page,status) => {
         return {
             query: `
-                    query{teachers(search:"${search}", page:${page}){
+                    query{teachers(search:"${search}", page:${page}, status:${status}){
                         id,
+                        status,
                         user{
                                lastName,
                                email,

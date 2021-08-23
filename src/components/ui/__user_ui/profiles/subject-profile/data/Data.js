@@ -9,7 +9,6 @@ import ProfileStyle from '../../ProfileStyle'
 import {format24Hour} from "../../../../utils/dateFormat/TimeConverter";
 export default function Data({translation,profile}) {
     const style = ProfileStyle()
-    console.log(profile)
     return (
         <Fragment>
             <h1 className={style.profileName}>{translation.language["label.global.room.info"]}</h1>

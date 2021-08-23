@@ -3,7 +3,18 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
+import {
+    Box,
+    CircularProgress,
+    FormControl,
+    Grid,
+    InputLabel,
+    MenuItem,
+    Paper,
+    Select,
+    Toolbar,
+    Tooltip
+} from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
 import {Fragment, lazy, useEffect} from "react"
 import {AdminTeacherTable as columns} from '../../../utils/tableColumn'
@@ -15,25 +26,55 @@ import {Teacher, Teacher_Delete} from '../../../../../store/utils/Specify'
 import IconButton from "@material-ui/core/IconButton";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import DeleteIcon from "@material-ui/icons/Delete";
+import {baseUrl} from "../../../../../store/middleware/axios";
+import {
+    offTeacher,
+    onTeacher
+} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
+
 const TeacherDialogRegister = lazy(() => import(`./RegisterTeacherDialog`))
 const TeacherDeleteDialog = lazy(() => import(`./DeleteTeacherDialog`))
 
 const Index = ({
-                   teacher, pageChange, searchChange, openDialog, closeDialog, initData, openDeleteDialog,
-                   closeDeleteDialog, translation
+                   state,
+                   pageChange,
+                   searchChange,
+                   openDialog,
+                   closeDialog,
+                   initData,
+                   openDeleteDialog,
+                   closeDeleteDialog,
+                   translation,
+                   statusChange
                }) => {
     const classes = style()
 
     useEffect(() => {
 
-        if (teacher.data.length === 0) initData()
+        if (state.data.length === 0) initData()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const setStatus = async (status,id) => {
+        // alert(id)
+
+        const params = new URLSearchParams()
+        params.append('id', id)
+
+        if(status === true) await baseUrl.post(offTeacher, params).then(ignored =>{})
+        else await baseUrl.post(onTeacher, params).then(ignored => {})
+
+        alert("Status Change Success")
+
+        await initData()
+    }
+
     return (
         <Fragment>
-            <TeacherDialogRegister translation={translation} dialog={teacher.dialog} closeDialog={closeDialog}/>
-            <TeacherDeleteDialog translation={translation} dialog={teacher.deleteDialog} closeDialog={closeDeleteDialog}/>
+            <TeacherDialogRegister translation={translation} dialog={state.dialog} closeDialog={closeDialog}/>
+            <TeacherDeleteDialog translation={translation} dialog={state.deleteDialog}
+                                 closeDialog={closeDeleteDialog}/>
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>
@@ -49,6 +90,19 @@ const Index = ({
                                 </IconButton>
                             </Tooltip>
                         </Box>
+                        <FormControl>
+                            <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={state.status}
+                                onChange={(e) => statusChange(e.target.value)}
+                            >
+                                {
+                                    state.statusData.map((e, i) => <MenuItem key={i} value={i}>{e}</MenuItem>)
+                                }
+                            </Select>
+                        </FormControl>
                     </Toolbar>
                 </Grid>
                 <Grid item md={12} sm={12} xs={false} component={Paper} className={classes.tableContainerWrapper}>
@@ -56,20 +110,20 @@ const Index = ({
                         title={
                             <Typography variant="h6">
                                 {translation.language["label.teacher.table.title"]}
-                                {teacher.loading &&
+                                {state.loading &&
                                 <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}}/>}
                             </Typography>
                         }
-                        data={teacher.data}
-                        columns={columns(translation)}
+                        data={state.data}
+                        columns={columns(translation,setStatus)}
                         options={options(
                             pageChange,
                             searchChange,
-                            teacher.search,
-                            teacher.totalPages,
-                            teacher.totalItems,
-                            teacher.page,
-                            teacher.loading)}
+                            state.search,
+                            state.totalPages,
+                            state.totalItems,
+                            state.page,
+                            state.loading)}
                     />
                 </Grid>
             </Grid>
@@ -80,7 +134,7 @@ const Index = ({
 
 const mapStateToProps = (state) => {
     return {
-        teacher: state.AdminTeacher
+        state: state.AdminTeacher
     }
 }
 
@@ -89,6 +143,7 @@ const mapDispatchToProps = (dispatch) => {
         initData: () => dispatch(actions.InitDataTable(Teacher)),
         searchChange: (data) => dispatch(actions.SearchChange(data, Teacher)),
         pageChange: (page) => dispatch(actions.DataNextPage(page, Teacher)),
+        statusChange: (data) => dispatch(actions.statusChange(data, Teacher)),
 
         // for opening and closing dialog
         openDialog: () => dispatch(actions.openDialog(Teacher)),

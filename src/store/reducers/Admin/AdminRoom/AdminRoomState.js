@@ -19,7 +19,7 @@ const currentState = {
 }
 
 const transforms = (items) => items.map((item) =>{
-    return insert(item.id, item.roomName, format24Hour(item.timeStart), format24Hour(item.timeEnd), item.id)
+    return insert(item.id, item.roomName, format24Hour(item.timeStart), format24Hour(item.timeEnd), item.id,item.status)
 })
 
 
@@ -40,7 +40,8 @@ const reducer = (state = currentState, action) => {
             return newState.nextData(state, action)
         case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(Room):
             return newState.searchChange(state, action)
-
+        case actions.ADMIN_CHANGE_STATUS(Room):
+            return newState.changeStatus(state,action)
 
         // for room create dialog actions
         case actions.DIALOG_OPEN(Room):

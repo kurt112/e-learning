@@ -87,10 +87,10 @@ export function* RoomShiftRegister() {
 
 export function* RoomShiftTableDataNext(action) {
     const roomShift = yield select(Selector.AdminRoomShift)
-    yield TableNextData(action, roomShift, AdminRoomShiftBodyDataQuery(roomShift.search, roomShift.page), AdminRoomShiftBodyDataSettingsQuery(), RoomShift)
+    yield TableNextData(action, roomShift, AdminRoomShiftBodyDataQuery(roomShift.search, roomShift.page,roomShift.status), AdminRoomShiftBodyDataSettingsQuery(), RoomShift)
 }
 
 export function* RoomShiftTableDataInit() {
     const roomShift = yield select(Selector.AdminRoomShift)
-    yield TableDataInit(AdminRoomShiftBodyDataQuery(roomShift.search, roomShift.page), AdminRoomShiftBodyDataSettingsQuery(), RoomShift)
+    yield TableDataInit(AdminRoomShiftBodyDataQuery(roomShift.search, roomShift.page,roomShift.status), AdminRoomShiftBodyDataSettingsQuery(), RoomShift)
 }

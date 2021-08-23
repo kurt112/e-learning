@@ -4,14 +4,15 @@
  * @created : 11/07/2021, Sunday
  **/
 export const
-    AdminRoomClassBodyDataQuery = (search, page) => {
+    AdminRoomClassBodyDataQuery = (search, page, status) => {
         return {
             query: `
-                    query{roomShiftClasses(search:"${search}", page:${page}){
+                    query{roomShiftClasses(search:"${search}", page:${page}, status:${status}){
                            id,
                            day,
                            startTime,
                            endTime,
+                           status,
                            roomShift{
                               roomShiftName,
                               grade,
