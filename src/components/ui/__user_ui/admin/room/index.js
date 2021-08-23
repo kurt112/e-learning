@@ -68,7 +68,7 @@ const Index = ({
 
         alert("Status Change Success")
 
-        await initData()
+        await searchChange(room.search)
     }
 
     return (

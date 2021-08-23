@@ -84,7 +84,6 @@ class State {
                 loading: true
             })
         }
-
         this.changeStatus = (state, action) => {
             return updateObject(state, {
                 status: action.data,

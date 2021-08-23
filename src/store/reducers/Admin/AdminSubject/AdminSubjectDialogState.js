@@ -21,7 +21,7 @@ const init_state = {
     subjectCode: '',
     subjectName: '',
     subjectMajor: 'Minor',
-    status: 'Active',
+    status: 1,
 
 
     // error

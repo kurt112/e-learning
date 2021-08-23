@@ -102,7 +102,7 @@ const Index = ({
 
         alert("Status Change Success")
 
-        await initData()
+        await searchChange(state.search)
     }
 
     return (

@@ -49,7 +49,7 @@ export const
             type: actions.DIALOG_CLOSE(to)
         }
     },
-    statusChange = (data,to) => {
+    statusChange = (data, to) => {
         return {
             type: actions.ADMIN_CHANGE_STATUS(to),
             data
