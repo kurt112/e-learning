@@ -66,7 +66,7 @@ const Index = ({
 
     const classes = style()
     useEffect(() => {
-        if (state.data.length === 0) initData()
+        initData()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -99,9 +99,11 @@ const Index = ({
         if(status === true) await baseUrl.post(OffClass, params).then(ignored =>{})
         else await baseUrl.post(OnClass, params).then(ignored => {})
 
+        initData()
+
         alert("Status Change Success")
 
-        await searchChange(state.search)
+
     }
 
     return (

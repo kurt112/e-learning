@@ -54,7 +54,7 @@ const Index = ({
 
     const classes = style()
     useEffect(() => {
-        if (room.data.length === 0) initData()
+         initData()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

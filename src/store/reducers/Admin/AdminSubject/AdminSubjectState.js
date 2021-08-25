@@ -12,7 +12,7 @@ import {updateObject} from "../../../utils/UpdateObject";
 const newState = new state()
 
 const transforms = (items) => items.map((item) =>{
-    return insert(item.subjectCode, item.subjectName, item.subjectMajor, item.status, item.subjectCode,item.status)
+    return insert(item.subjectCode, item.subjectName, item.subjectMajor, item.subjectCode,item.status)
 })
 
 const currentState = {

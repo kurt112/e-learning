@@ -110,9 +110,7 @@ const  RoomShiftClassProfile= ({roomShiftClass, match, initData,translation})=>{
                                     <Button color="primary" onClick={classExams}>{translation.language["label.global.exam"]}</Button>
                                     <Button color="primary" onClick={classQuizzes}>{translation.language["label.global.quiz"]}</Button>
                                     <Button color="primary" onClick={RoomClassPeople}>{translation.language["label.global.people"]}</Button>
-                                    <Button color="primary" onClick={RoomClassPeople}>{translation.language["label.global.join.class"]}</Button>
                                 </Grid>
-
                             </Grid>
                         </Grid>
 

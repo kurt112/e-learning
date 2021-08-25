@@ -41,6 +41,7 @@ const reducer = (state = currentState, action) =>{
         case actions.ADMIN_TABLE_NEXT_PAGE(RoomShiftClass): return newState.nextData(state,action)
         case actions.ADMIN_TABLE_SEARCH_DATA_CHANGE(RoomShiftClass): return newState.searchChange(state,action)
         case actions.ADMIN_CHANGE_STATUS(RoomShiftClass):return newState.changeStatus(state,action)
+
         // for opening and closing dialog
         case actions.DIALOG_OPEN(RoomShiftClass): return newState.openDialog(state)
         case actions.DIALOG_CLOSE(RoomShiftClass): return newState.closeDialog(state)

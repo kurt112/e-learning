@@ -60,18 +60,20 @@ const Index = ({
 
     useEffect(() => {
 
-        if (state.data.length === 0) initData();
+        initData();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const setStatus = async (status,id) => {
+    const setStatus = async (status, id) => {
         const params = new URLSearchParams()
         params.append('id', id)
         //
 
-        if(status === true) await baseUrl.post(OffSubject, params).then(ignored =>{})
-        else await baseUrl.post(OnSubject, params).then(ignored => {})
+        if (status === true) await baseUrl.post(OffSubject, params).then(ignored => {
+        })
+        else await baseUrl.post(OnSubject, params).then(ignored => {
+        })
 
         alert("Status Change Success")
 
@@ -141,7 +143,7 @@ const Index = ({
                                 </Typography>
                             }
                             data={state.data}
-                            columns={columns(translation,setStatus)}
+                            columns={columns(translation, setStatus)}
                             options={options(
                                 pageChange,
                                 searchChange,
@@ -170,7 +172,7 @@ const mapDispatchToProps = (dispatch) => {
         initData: () => dispatch(actions.InitDataTable(Subject)),
         searchChange: (data) => dispatch(actions.SearchChange(data, Subject)),
         pageChange: (page) => dispatch(actions.DataNextPage(page, Subject)),
-        statusChange: (data) => dispatch(actions.statusChange(data,Subject)),
+        statusChange: (data) => dispatch(actions.statusChange(data, Subject)),
 
         // for opening and closing dialog
         openDialog: () => dispatch(actions.openDialog(Subject)),
@@ -182,7 +184,7 @@ const mapDispatchToProps = (dispatch) => {
         openFindDialog: () => dispatch(actions.openDialog(Subject_Find)),
         closeFindDialog: () => dispatch(actions.closeDialog(Subject_Find)),
 
-        setData: (data) => dispatch(actions.setData(data,Subject)),
+        setData: (data) => dispatch(actions.setData(data, Subject)),
         reInitState: () => dispatch(reInitState(Subject))
 
     }

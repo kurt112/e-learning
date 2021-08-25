@@ -94,6 +94,7 @@ export const AdminStudentTable = (translation,setStatus) => [
         options: {
             filter: false,
             sort: false,
+            display: false,
             customBodyRender: (value) => {
                 const status = value.status === 1
                 return <GreenSwitch checked={status} onClick={() =>setStatus(status,value.id)}/>
@@ -169,6 +170,7 @@ export const AdminTeacherTable=(translation,setStatus) => [
         options: {
             filter: false,
             sort: false,
+            display: false,
             customBodyRender: (value) => {
                 const status = value.status === 1
                 return <GreenSwitch checked={status} onClick={() =>setStatus(status,value.email)}/>
@@ -227,6 +229,7 @@ export const AdminTable=(translation,setStatus) => [
         options: {
             filter: false,
             sort: false,
+            display: false,
             customBodyRender: (value) => {
                 const {status} = value
                 return <GreenSwitch checked={status} onClick={() =>setStatus(status,value.id)}/>
@@ -296,6 +299,7 @@ export const AdminRoomTable = (translation,setStatus) => [
         options: {
             filter: false,
             sort: false,
+            display: false,
             customBodyRender: (value) => {
                 const status = value.status === 1
                 return <GreenSwitch checked={status} onClick={() =>setStatus(status,value.id)}/>
@@ -339,10 +343,6 @@ export const AdminSubjectTable = (translation,setStatus) => [
         label: translation.language["label.global.category"]
     },
     {
-        name: 'active',
-        label: translation.language["label.global.active"]
-    },
-    {
         name: "profile",
         label: translation.language["label.global.profile"],
         options: {
@@ -367,6 +367,7 @@ export const AdminSubjectTable = (translation,setStatus) => [
         options: {
             filter: false,
             sort: false,
+            display: false,
             customBodyRender: (value) => {
                 const status = value.status === 1
                 return <GreenSwitch checked={status} onClick={() =>setStatus(status,value.subjectCode)}/>
@@ -383,8 +384,8 @@ export const AdminSubjectTable = (translation,setStatus) => [
 
 
 
-export function AdminInsertSubject(subjectCode, subjectName, major, active, profile,status) {
-    return {subjectCode, subjectName, major, active, profile, status:{subjectCode,status}}
+export function AdminInsertSubject(subjectCode, subjectName, major, profile,status) {
+    return {subjectCode, subjectName, major, profile, status:{subjectCode,status}}
 }
 
 
@@ -482,6 +483,7 @@ export const AdminRoomClassTable = (translation,setStatus) => [
         options: {
             filter: false,
             sort: false,
+            display: false,
             customBodyRender: (value) => {
                 const status = value.status === 1
                 return <GreenSwitch checked={status} onClick={() =>setStatus(status,value.id)}/>
@@ -572,6 +574,7 @@ export const AdminRoomShiftTable = (translation,setStatus) => [
         options: {
             filter: false,
             sort: false,
+            display: false,
             customBodyRender: (value) => {
                 const status = value.status === 1
                 return <GreenSwitch checked={status} onClick={() =>setStatus(status,value.id)}/>
@@ -640,6 +643,7 @@ export const AdminCurriculumTable = (translation,setStatus) => [
         options: {
             filter: false,
             sort: false,
+            display: false,
             customBodyRender: (value) => {
                 console.log(value)
                 const status = value.status === 1

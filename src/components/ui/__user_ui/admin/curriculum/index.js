@@ -87,18 +87,20 @@ const Index = ({
 
     useEffect(() => {
 
-        if (state.data.length === 0) initData();
+        initData();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const setStatus = async (status,id) => {
+    const setStatus = async (status, id) => {
 
         const params = new URLSearchParams()
         params.append('id', id)
 
-        if(status === true) await baseUrl.post(OffCurriculum, params).then(ignored =>{})
-        else await baseUrl.post(OnCurriculum, params).then(ignored => {})
+        if (status === true) await baseUrl.post(OffCurriculum, params).then(ignored => {
+        })
+        else await baseUrl.post(OnCurriculum, params).then(ignored => {
+        })
 
         alert("Status Change Success")
 
@@ -157,7 +159,7 @@ const Index = ({
                                 </IconButton>
                             </Tooltip>
                         </Box>
-                        <FormControl >
+                        <FormControl>
                             <InputLabel id="demo-simple-select-label">Status</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
@@ -166,7 +168,7 @@ const Index = ({
                                 onChange={(e) => statusChange(e.target.value)}
                             >
                                 {
-                                    state.statusData.map((e,i) => <MenuItem key={i} value={i}>{e}</MenuItem>)
+                                    state.statusData.map((e, i) => <MenuItem key={i} value={i}>{e}</MenuItem>)
                                 }
                             </Select>
                         </FormControl>
@@ -186,7 +188,7 @@ const Index = ({
                                 </Typography>
                             }
                             data={state.data}
-                            columns={columns(translation,setStatus)}
+                            columns={columns(translation, setStatus)}
                             options={options(
                                 pageChange,
                                 searchChange,
@@ -216,7 +218,7 @@ const mapDispatchToProps = (dispatch) => {
         initData: () => dispatch(actions.InitDataTable(Curriculum)),
         searchChange: (data) => dispatch(actions.SearchChange(data, Curriculum)),
         pageChange: (page) => dispatch(actions.DataNextPage(page, Curriculum)),
-        statusChange: (data) => dispatch(actions.statusChange(data,Curriculum)),
+        statusChange: (data) => dispatch(actions.statusChange(data, Curriculum)),
 
         // action for opening and closing dialogs
         openDialog: () => dispatch(actions.openDialog(Curriculum_Create)),
@@ -228,7 +230,7 @@ const mapDispatchToProps = (dispatch) => {
         openFindCurriculum: () => dispatch(actions.openDialog(Curriculum_Find)),
         closeFindCurriculum: () => dispatch(actions.closeDialog(Curriculum_Find)),
 
-        setData: (data) => dispatch(actions.setData(data,Curriculum_Create)),
+        setData: (data) => dispatch(actions.setData(data, Curriculum_Create)),
         reInitState: () => dispatch(reInitState(Curriculum_Create))
     }
 }

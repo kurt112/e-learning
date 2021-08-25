@@ -8,12 +8,14 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle, FormControl, Grid, InputLabel, Select,
+    DialogTitle, FormControl, Grid, InputAdornment, InputLabel, Select,
     TextField
 } from "@material-ui/core";
 import * as actions from '../../../store/action/__ActionGlobal/UserRegisterAction'
 import {connect} from "react-redux";
 import {Student} from "../../../store/utils/Specify";
+import {Visibility, VisibilityOff} from "@material-ui/icons";
+import {useState} from "react";
 
 const StudentRegisterForm = ({
                                  student,
@@ -31,6 +33,18 @@ const StudentRegisterForm = ({
                                  translation,
                                  closeDialog
                              }) => {
+    const [showPassword, setShowPassword] = useState(false)
+    const [showRePassword, setShowRePassword] = useState(false)
+
+
+    const handleClickShowRePassword = () => {
+        setShowRePassword(!showRePassword)
+    }
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword)
+    }
+
+
     return <Dialog
         open={open}
         onClose={closeDialog}
@@ -111,12 +125,13 @@ const StudentRegisterForm = ({
                             value={student.birthdate}
                             onChange={(event) => changeBirthdate(event.target.value)}
 
-                            InputLabelProps={{ shrink: true }}
+                            InputLabelProps={{shrink: true}}
                         />
                     </Grid>
                     <Grid item md={6} xs={12}>
                         <FormControl variant="outlined" margin='dense' fullWidth>
-                            <InputLabel htmlFor={translation.language['label.global.gender']}>{translation.language['label.global.gender']}</InputLabel>
+                            <InputLabel
+                                htmlFor={translation.language['label.global.gender']}>{translation.language['label.global.gender']}</InputLabel>
                             <Select
                                 native
                                 label={translation.language['label.global.gender']}
@@ -127,8 +142,10 @@ const StudentRegisterForm = ({
                                 value={student.gender}
                                 onChange={(event) => changeGender(event.target.value)}
                             >
-                                <option value={translation.language['label.global.male']}>{translation.language['label.global.male']}</option>
-                                <option value={translation.language['label.global.female']}>{translation.language['label.global.female']}</option>
+                                <option
+                                    value={translation.language['label.global.male']}>{translation.language['label.global.male']}</option>
+                                <option
+                                    value={translation.language['label.global.female']}>{translation.language['label.global.female']}</option>
 
                             </Select>
                         </FormControl>
@@ -156,11 +173,24 @@ const StudentRegisterForm = ({
                             helperText={student.passwordErrorMessage}
                             margin="dense"
                             label={translation.language['label.login.input.password']}
-                            type="password"
+                            type={showPassword===false? "password":"text"}
                             fullWidth
                             variant="outlined"
                             value={student.password}
                             onChange={(event) => changePassword(event.target.value)}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="end">
+                                        {
+                                            showPassword === false ?
+                                                <VisibilityOff onClick={handleClickShowPassword}
+                                                               style={{cursor: 'pointer'}}/> :
+                                                <Visibility onClick={handleClickShowPassword}
+                                                            style={{cursor: 'pointer'}}/>
+                                        }
+                                    </InputAdornment>
+                                )
+                            }}
                         />
                     </Grid>
 
@@ -170,11 +200,24 @@ const StudentRegisterForm = ({
                             helperText={student.reTypePasswordErrorMessage}
                             margin="dense"
                             label={translation.language['label.global.retypePassword']}
-                            type="password"
+                            type={showRePassword===false? "password":"text"}
                             fullWidth
                             variant="outlined"
                             value={student.reTypePassword}
                             onChange={(event) => changeReTypePassword(event.target.value)}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="end">
+                                        {
+                                            showRePassword === false ?
+                                                <VisibilityOff onClick={handleClickShowRePassword}
+                                                               style={{cursor: 'pointer'}}/> :
+                                                <Visibility onClick={handleClickShowRePassword}
+                                                            style={{cursor: 'pointer'}}/>
+                                        }
+                                    </InputAdornment>
+                                )
+                            }}
                         />
                     </Grid>
 

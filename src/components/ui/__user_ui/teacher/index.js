@@ -30,3 +30,7 @@ export {
 export {
     default as TeacherQuizzes
 } from './teacher-quizzes/TeacherQuizzes'
+
+export {
+    default as TeacherGrade
+} from './teacher-grade'

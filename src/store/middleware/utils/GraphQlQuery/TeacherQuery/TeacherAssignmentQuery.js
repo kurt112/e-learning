@@ -43,4 +43,49 @@ export const
         }
         `
         }
+    },
+    getTeacherAssignmentToGrade = (email) => {
+        return {
+            query: `
+                    query{getTeacherAssignmentToGrade(email:"${email}"){
+                           id,
+                           status,
+                           response,
+                           submittedAt,
+                           location,
+                           grade,
+                           student{
+                               user{
+                                  firstName,
+                                  lastName
+                               }
+                           },
+                           teacherAssignment{
+                           description,
+                           highGrade,
+                           lowGrade,
+                           roomShiftClass{
+                               subject{
+                                   subjectName
+                               }
+                               teacher{
+                                    user{
+                                        firstName,
+                                        lastName
+                                    }
+                               }
+                               roomShift{
+                                    grade,
+                                    section
+                               }
+                           },
+                           resource{
+                               name,
+                               type
+                           }
+                       }
+                    }
+            }`
+        }
     }
+

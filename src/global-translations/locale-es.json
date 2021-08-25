@@ -24,7 +24,8 @@
   "label.global.retypePassword": "Re-type Password",
   "label.global.register": "Register",
   "label.global.your.profile": "Your Profile",
-
+  "label.global.submitted.on": "Submitted On",
+  "label.global.submitted.by": "Submitted By",
   "label.global.info": "Info",
   "label.global.first": "First",
   "label.global.second": "Second",
@@ -64,7 +65,6 @@
   "label.global.minor": "Minor",
   "label.global.active": "Active",
   "label.global.major": "Major",
-
   "label.global.category": "Category",
 
   "label.global.assignment": "Assignment",
@@ -123,6 +123,8 @@
   "label.global.tba": "TBA",
   "label.global.lecture.archive": "Archive Lecture",
   "label.global.lecture.current": "Current Lecture",
+  "label.to.grade": "To Grade",
+  "label.graded": "Graded",
   "label.global.curriculum": "Curriculum",
   "label.button.save": "Save",
   "label.button.back": "Back",
@@ -271,6 +273,7 @@
   "label.sidebar.todos": "Todos",
   "label.sidebar.lecture": "Lectures",
   "label.sidebar.admin": "Admins",
+    "label.sidebar.to.grade": "To Grade",
 
   "route.admin.dashboard": "/admin/dashboard",
   "route.admin.room.list": "/admin/room-list",
@@ -291,6 +294,7 @@
   "route.teacher.assignments": "/teacher/assignments",
   "route.teacher.quizzes": "/teacher/quizzes",
   "route.teacher.exams": "/teacher/exams",
+  "route.teacher.to.grade": "/teacher/grade",
   "route.teacher.resources": "/teacher/resources",
   "route.profile.room": "/room/profile/",
   "route.profile.subject": "/subject/profile/",

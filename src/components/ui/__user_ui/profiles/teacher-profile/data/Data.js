@@ -3,7 +3,7 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {Container, FormControl, Grid, InputLabel, Select, TextField} from "@material-ui/core";
+import {Container, FormControl, Grid, InputAdornment, InputLabel, Select, TextField} from "@material-ui/core";
 import {Fragment, useEffect, useState} from "react";
 import ProfileStyle from '../../ProfileStyle'
 import {convertDateTime} from "../../../../utils/dateFormat/DateTimeFormatToDateWord";
@@ -14,6 +14,7 @@ import {updateAccount} from "../../../../../../store/middleware/utils/ApiEndpoin
 import {compareBCrypt, PasswordEncrypt} from "../../../../../../store/middleware/utils/EncryptPassword";
 import {checkPasswordStrength, checkStringEmail, checkStringEmpty} from "../../../../utils/validation";
 import {convertToYYMMDD} from "../../../../utils/dateFormat/DateFormatYYMMDD";
+import {Visibility, VisibilityOff} from "@material-ui/icons";
 
 const Data = ({
                   teacher,
@@ -30,12 +31,29 @@ const Data = ({
     const [birthdate, setBirthDate] = useState('')
     const [email, setEmail] = useState('')
     const [gender, setGender] = useState('');
-    const [middleName,setMiddleName] = useState('')
+    const [middleName, setMiddleName] = useState('')
 
     // setting new password
     const [currentPassword, setCurrentPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
     const [reTypeNewPassword, setReTypePassword] = useState('')
+
+    // for seeing the password
+    const [showCurrentPassword, setShowCurrentPassword] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
+    const [showRePassword, setShowRePassword] = useState(false)
+
+
+    const handleClickCurrentPassword = () => {
+        setShowCurrentPassword(!showCurrentPassword)
+    }
+
+    const handleClickShowRePassword = () => {
+        setShowRePassword(!showRePassword)
+    }
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword)
+    }
 
     useEffect(() => {
         reset()
@@ -51,8 +69,6 @@ const Data = ({
     }, [update])
 
     const style = ProfileStyle()
-
-
 
 
     // const error
@@ -152,8 +168,6 @@ const Data = ({
         } else if (currentPhoto === '' && currentPhoto !== '') {
             currentPhoto = await uploadToS3(photo)
         }
-
-
 
 
         const params = new URLSearchParams();
@@ -429,9 +443,25 @@ const Data = ({
                                         variant="outlined"
                                         margin={'dense'}
                                         label={translation.language["label.global.current.password"]}
-                                        value={currentPassword}
                                         onChange={(e) => changePassword(e.target.value)}
-                                        type={'password'}
+                                        type={showCurrentPassword === false ? "password" : "text"}
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="end">
+                                                    {
+                                                        showCurrentPassword === false ?
+                                                            <VisibilityOff
+                                                                onClick={handleClickCurrentPassword}
+                                                                style={{cursor: 'pointer'}}
+                                                            /> :
+                                                            <Visibility
+                                                                onClick={handleClickCurrentPassword}
+                                                                style={{cursor: 'pointer'}}
+                                                            />
+                                                    }
+                                                </InputAdornment>
+                                            )
+                                        }}
                                     />
                                 </Grid>
                             </Grid>
@@ -455,7 +485,24 @@ const Data = ({
                                         label={translation.language["label.global.new.password"]}
                                         value={newPassword}
                                         onChange={(e) => changeNewPassword(e.target.value)}
-                                        type={'password'}
+                                        type={showPassword === false ? "password" : "text"}
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="end">
+                                                    {
+                                                        showPassword === false ?
+                                                            <VisibilityOff
+                                                                onClick={handleClickShowPassword}
+                                                                style={{cursor: 'pointer'}}
+                                                            /> :
+                                                            <Visibility
+                                                                onClick={handleClickShowPassword}
+                                                                style={{cursor: 'pointer'}}
+                                                            />
+                                                    }
+                                                </InputAdornment>
+                                            )
+                                        }}
                                     />
                                 </Grid>
                             </Grid>
@@ -479,7 +526,24 @@ const Data = ({
                                         label={translation.language["label.global.retype.password"]}
                                         value={reTypeNewPassword}
                                         onChange={(e) => changeRetypePassword(e.target.value)}
-                                        type={'password'}
+                                        type={showRePassword === false ? "password" : "text"}
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="end">
+                                                    {
+                                                        showRePassword === false ?
+                                                            <VisibilityOff
+                                                                onClick={handleClickShowRePassword}
+                                                                style={{cursor: 'pointer'}}
+                                                            /> :
+                                                            <Visibility
+                                                                onClick={handleClickShowRePassword}
+                                                                style={{cursor: 'pointer'}}
+                                                            />
+                                                    }
+                                                </InputAdornment>
+                                            )
+                                        }}
                                     />
                                 </Grid>
                             </Grid>

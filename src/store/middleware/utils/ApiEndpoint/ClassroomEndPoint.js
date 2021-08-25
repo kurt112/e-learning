@@ -127,5 +127,8 @@ export const
     passQuiz = student+'upload/quiz',
     unSubmitQuiz=student+'unsubmit/quiz',
     onStudent = 'on/student',
-    offStudent = 'off/student'
+    offStudent = 'off/student',
+    gradeExam = student+'grade/exam',
+    gradeQuiz = student+'grade/quiz',
+    gradeAssignment = student+'grade/assignment'
 

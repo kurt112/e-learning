@@ -7,14 +7,19 @@
 import {takeLeading} from "redux-saga/effects";
 import * as adminTable from "../../ActionType/__ActionTypeGlobal/TableActionType";
 import {
+    Teacher,
     Teacher_Assignment,
     Teacher_Assignment_Create,
     Teacher_Assignment_Delete,
     Teacher_Exams,
     Teacher_Exams_Create,
     Teacher_Exams_Delete,
-    Teacher_Lecture, Teacher_Lecture_Create,
-    Teacher_Lecture_Delete, Teacher_Quiz, Teacher_Quiz_Create, Teacher_Quiz_Delete,
+    Teacher_Lecture,
+    Teacher_Lecture_Create,
+    Teacher_Lecture_Delete,
+    Teacher_Quiz,
+    Teacher_Quiz_Create,
+    Teacher_Quiz_Delete,
     Teacher_Resource,
     Teacher_Resource_Delete,
     Teacher_Resource_Upload
@@ -49,6 +54,8 @@ import {
     TeacherQuizzesTableDataInit,
     TeacherQuizzesTableNext
 } from "./TeacherQuizMIddleware";
+import {TeacherTableDataInit} from "../admin/TeacherMiddleWare";
+
 
 export function* watchTeacherAssignmentInit(){
     yield takeLeading(adminTable.ADMIN_TABLE_INIT(Teacher_Assignment), TeacherAssignmentTableDataInit)
@@ -62,6 +69,10 @@ export function* watchTeacherAssignmentTableNext(){
     yield takeLeading(adminTable.ADMIN_TABLE_NEXT_PAGE(Teacher_Assignment), TeacherAssignmentTableNext)
 }
 
+export function * watchTeacherAssignmentStatusChange() {
+    yield takeLeading(adminTable.ADMIN_CHANGE_STATUS(Teacher_Assignment), TeacherAssignmentTableDataInit)
+}
+
 export function * watchTeacherAssignmentDelete() {
     yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Assignment_Delete), TeacherAssignmentDelete)
 }
@@ -69,6 +80,8 @@ export function * watchTeacherAssignmentDelete() {
 export function * watchTeacherAssignmentCreate() {
     yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Assignment_Create),TeacherAssignmentCreate)
 }
+
+
 
 
 // for resource teacher
@@ -82,6 +95,10 @@ export function* watchTeacherResourcesSearchChange() {
 
 export function* watchTeacherResourcesTableNext(){
     yield takeLeading(adminTable.ADMIN_TABLE_NEXT_PAGE(Teacher_Resource), TeacherResourceDataNext)
+}
+
+export function * watchTeacherResourcesStatusChange() {
+    yield takeLeading(adminTable.ADMIN_CHANGE_STATUS(Teacher_Resource), TeacherResourceTableDataInit)
 }
 
 export function * watchTeacherUploadResource() {
@@ -106,6 +123,10 @@ export function* watchTeacherLectureTableNext(){
     yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Teacher_Lecture), TeacherLectureDataNext)
 }
 
+export function * watchTeacherLectureStatusChange() {
+    yield takeLeading(adminTable.ADMIN_CHANGE_STATUS(Teacher_Lecture), TeacherLectureTableDataInit)
+}
+
 export function * watchTeacherCreateLecture() {
     yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Lecture_Create), TeacherLectureCreate)
 }
@@ -128,6 +149,11 @@ export function* watchTeacherExamsTableNext(){
     yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Teacher_Exams), TeacherExamsTableNext)
 }
 
+export function * watchTeacherExamStatusChange() {
+    yield takeLeading(adminTable.ADMIN_CHANGE_STATUS(Teacher_Exams), TeacherExamsTableDataInit)
+}
+
+
 export function * watchTeacherCreateExams() {
     yield takeLeading(adminDialog.ADMIN_DIALOG_REGISTER(Teacher_Exams_Create), TeacherExamsCreate)
 }
@@ -148,6 +174,10 @@ export function* watchTeacherQuizSearchChange(){
 
 export function* watchTeacherQuizTableNext(){
     yield takeLeading(adminTable.ADMIN_TABLE_SEARCH_DATA_CHANGE(Teacher_Quiz), TeacherQuizzesTableNext)
+}
+
+export function * watchTeacherQuizStatusChange() {
+    yield takeLeading(adminTable.ADMIN_CHANGE_STATUS(Teacher_Quiz), TeacherQuizzesTableDataInit)
 }
 
 export function * watchTeacherQuizExams() {

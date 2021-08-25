@@ -8,12 +8,14 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle, FormControl, Grid, InputLabel, Select,
+    DialogTitle, FormControl, Grid, InputAdornment, InputLabel, Select,
     TextField
 } from "@material-ui/core";
 import * as actions from '../../../store/action/__ActionGlobal/UserRegisterAction'
 import {connect} from "react-redux";
 import {Teacher} from "../../../store/utils/Specify";
+import {useState} from "react";
+import {Visibility, VisibilityOff} from "@material-ui/icons";
 
 const TeacherRegisterForm = ({
                                  teacher,
@@ -31,6 +33,17 @@ const TeacherRegisterForm = ({
                                  register,
                                  translation
                              }) => {
+
+    const [showPassword, setShowPassword] = useState(false)
+    const [showRePassword, setShowRePassword] = useState(false)
+
+
+    const handleClickShowRePassword = () => {
+        setShowRePassword(!showRePassword)
+    }
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword)
+    }
 
     return <Dialog
         open={open}
@@ -152,11 +165,24 @@ const TeacherRegisterForm = ({
                             helperText={teacher.passwordErrorMessage}
                             margin="dense"
                             label={translation.language['label.login.input.password']}
-                            type="password"
+                            type={showPassword===false? "password":"text"}
                             fullWidth
                             variant="outlined"
                             value={teacher.password}
                             onChange={(event) => changePassword(event.target.value)}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="end">
+                                        {
+                                            showPassword === false ?
+                                                <VisibilityOff onClick={handleClickShowPassword}
+                                                               style={{cursor: 'pointer'}}/> :
+                                                <Visibility onClick={handleClickShowPassword}
+                                                            style={{cursor: 'pointer'}}/>
+                                        }
+                                    </InputAdornment>
+                                )
+                            }}
                         />
                     </Grid>
 
@@ -166,11 +192,24 @@ const TeacherRegisterForm = ({
                             helperText={teacher.reTypePasswordErrorMessage}
                             margin="dense"
                             label={translation.language['label.global.retypePassword']}
-                            type="password"
+                            type={showRePassword===false? "password":"text"}
                             fullWidth
                             variant="outlined"
                             value={teacher.reTypePassword}
                             onChange={(event) => changeReTypePassword(event.target.value)}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="end">
+                                        {
+                                            showRePassword === false ?
+                                                <VisibilityOff onClick={handleClickShowRePassword}
+                                                               style={{cursor: 'pointer'}}/> :
+                                                <Visibility onClick={handleClickShowRePassword}
+                                                            style={{cursor: 'pointer'}}/>
+                                        }
+                                    </InputAdornment>
+                                )
+                            }}
                         />
                     </Grid>
 

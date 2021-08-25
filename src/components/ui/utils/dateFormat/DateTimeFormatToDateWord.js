@@ -9,6 +9,6 @@ export const months = ["January", "February", "March", "April", "May", "June",
 export const    convertDateTime = (date) => {
     const dateParts = date.split("-");
     const monthsWord = months[dateParts[1]-1]
-    return monthsWord + " " + dateParts[2].substr(0,2) + " " + dateParts[0]
+    return monthsWord + " " + dateParts[2].substr(0,2) + ", " + dateParts[0]
 }
 

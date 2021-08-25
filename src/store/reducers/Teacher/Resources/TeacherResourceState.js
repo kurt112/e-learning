@@ -13,6 +13,7 @@ import {
     Teacher_Resource_Upload
 } from "../../../utils/Specify";
 import state from "../../__StateGlobal/AdminTableState";
+import * as actions from "../../../ActionType/__ActionTypeGlobal/TableActionType";
 const newState = new state()
 
 const initState = {
@@ -40,6 +41,7 @@ const reducer = (state = initState, action) => {
         case dialogAction.ADMIN_TABLE_FAIL(Teacher_Resource): return newState.failData(state)
         case dialogAction.ADMIN_TABLE_NEXT_PAGE(Teacher_Resource): return newState.nextData(state,action)
         case dialogAction.ADMIN_TABLE_SEARCH_DATA_CHANGE(Teacher_Resource): return newState.searchChange(state,action)
+        case actions.ADMIN_CHANGE_STATUS(Teacher_Resource):return newState.changeStatus(state,action)
 
         // upload dialog actions
         case dialogAction.DIALOG_OPEN(Teacher_Resource_Upload):

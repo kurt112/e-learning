@@ -17,14 +17,14 @@ import {Teacher_Assignment_Delete} from "../../../../../store/utils/Specify";
 import Response from "../../../utils/Response";
 
 const DeleteAssignmentDialog = ({
-                                           dialog,
-                                           state,
-                                           closeDialog,
-                                           dialogId,
-                                           registerDialogMessageClose,
-                                           dialogRegister,
-    translation
-                                       }) => {
+                                    dialog,
+                                    state,
+                                    closeDialog,
+                                    dialogId,
+                                    registerDialogMessageClose,
+                                    dialogRegister,
+                                    translation
+                                }) => {
 
     const RegisterEnter = (event) => {
         if (event.key === "Enter" && state.id.length > 0) dialogRegister()
@@ -37,7 +37,8 @@ const DeleteAssignmentDialog = ({
         fullWidth
         maxWidth={"md"}
     >
-        <DialogTitle id="delete-resource">{translation.language["label.teacher.assignment.dialog.delete.assignment.title"]}</DialogTitle>
+        <DialogTitle
+            id="delete-resource">{translation.language["label.teacher.assignment.dialog.delete.assignment.title"]}</DialogTitle>
         <Divider/>
         <DialogContent>
 

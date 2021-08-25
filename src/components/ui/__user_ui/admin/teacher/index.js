@@ -51,19 +51,21 @@ const Index = ({
 
     useEffect(() => {
 
-        if (state.data.length === 0) initData()
+        initData()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const setStatus = async (status,id) => {
+    const setStatus = async (status, id) => {
         // alert(id)
 
         const params = new URLSearchParams()
         params.append('id', id)
 
-        if(status === true) await baseUrl.post(offTeacher, params).then(ignored =>{})
-        else await baseUrl.post(onTeacher, params).then(ignored => {})
+        if (status === true) await baseUrl.post(offTeacher, params).then(ignored => {
+        })
+        else await baseUrl.post(onTeacher, params).then(ignored => {
+        })
 
         alert("Status Change Success")
 
@@ -115,7 +117,7 @@ const Index = ({
                             </Typography>
                         }
                         data={state.data}
-                        columns={columns(translation,setStatus)}
+                        columns={columns(translation, setStatus)}
                         options={options(
                             pageChange,
                             searchChange,

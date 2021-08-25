@@ -3,7 +3,18 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {Box, CircularProgress, Grid, Paper, Toolbar, Tooltip} from "@material-ui/core"
+import {
+    Box,
+    CircularProgress,
+    FormControl,
+    Grid,
+    InputLabel,
+    MenuItem,
+    Paper,
+    Select,
+    Toolbar,
+    Tooltip
+} from "@material-ui/core"
 import MUIDataTable from "mui-datatables"
 import {TeacherResources as columns} from "../../../utils/tableColumn"
 import style, {TableOptions as options} from "../../../_style/TableStyle"
@@ -18,6 +29,7 @@ import {connect} from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import * as actions from "../../../../../store/action/__ActionGlobal/TableAction";
 import {
+    Admin,
 
     Teacher_Resource,
     Teacher_Resource_Delete,
@@ -38,7 +50,8 @@ const TeacherResources = ({
                               pageChange,
                               DeleteOpenDialog,
                               DeleteCloseDialog,
-                              translation
+                              translation,
+                              statusChange
                           }) => {
 
     const classes = style()
@@ -74,6 +87,19 @@ const TeacherResources = ({
                                 </IconButton>
                             </Tooltip>
                         </Box>
+                        <FormControl >
+                            <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={state.status}
+                                onChange={(e) => statusChange(e.target.value)}
+                            >
+                                {
+                                    state.statusDataTeacher.map((e,i) => <MenuItem key={i} value={i}>{e}</MenuItem>)
+                                }
+                            </Select>
+                        </FormControl>
                     </Toolbar>
                 </Grid>
 
@@ -122,6 +148,8 @@ const mapDispatchToProps = (dispatch) => {
         initData: () => dispatch(actions.InitDataTable(Teacher_Resource)),
         searchChange: (data) => dispatch(actions.SearchChange(data, Teacher_Resource)),
         pageChange: (page) => dispatch(actions.DataNextPage(page, Teacher_Resource)),
+        statusChange: (data) => dispatch(actions.statusChange(data,Teacher_Resource)),
+
     }
 }
 

@@ -27,7 +27,7 @@ import AcUnitIcon from '@material-ui/icons/AcUnit';
 // icons student
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import {Divider, ListSubheader} from "@material-ui/core";
-
+import GradeIcon from '@material-ui/icons/Grade';
 export function TeacherItems({translation}) {
     return (
         <div>
@@ -78,6 +78,12 @@ export function TeacherItems({translation}) {
                     <CloudUploadIcon/>
                 </ListItemIcon>
                 <ListItemText primary={translation.language["label.sidebar.resources"]}/>
+            </ListItem>
+            <ListItem component={NavLink} to={translation.language["route.teacher.to.grade"]} button>
+                <ListItemIcon>
+                    <GradeIcon/>
+                </ListItemIcon>
+                <ListItemText primary={translation.language["label.sidebar.to.grade"]}/>
             </ListItem>
         </div>
     )

@@ -23,7 +23,8 @@ class State {
             // 0 = In-active
             // 1 = Active
             // 2 = All
-            statusData: ['In-Active', 'Active', 'All']
+            statusData: ['In-Active', 'Active', 'All'],
+            statusDataTeacher: ['Not Shared', 'Shared', 'All']
         }
         this.initData = (state) => {
             state = updateObject(state, {loading: true})
@@ -58,13 +59,20 @@ class State {
             })
         }
         this.nextData = (state, action) => {
-            if (state.page > state.highPage) {
+
+            if (state.page >= state.highPage) {
                 state = updateObject(state, {
                     loading: true,
                     highPage: state.page
                 })
             }
+
             state = updateObject(state, {page: action.page})
+            if (state.page < state.highPage){
+                state = updateObject(state, {
+                    loading: false
+                })
+            }
             return state
         }
 

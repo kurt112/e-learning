@@ -24,6 +24,7 @@ const TeacherResources = lazy(() => import('../ui/__user_ui/teacher').then(modul
 const TeacherAssignments = lazy(() => import('../ui/__user_ui/teacher').then(module => ({default: module.TeacherAssignments})))
 const TeacherExams = lazy(() => import('../ui/__user_ui/teacher').then(module => ({default: module.TeacherExams})))
 const TeacherQuizzes = lazy(() => import('../ui/__user_ui/teacher').then(module => ({default: module.TeacherQuizzes})))
+const TeacherGrade = lazy(() => import('../ui/__user_ui/teacher').then(module => ({default: module.TeacherGrade})))
 
 const TeacherRoute = ({email, translation}) => {
 
@@ -94,13 +95,20 @@ const TeacherRoute = ({email, translation}) => {
                                           currentClass={currentClass}
                                           archiveClass={doneClass}/>}/>
             <Route path={translation.language["route.teacher.resources"]} exact
-                   render={() => <TeacherResources translation={translation}/>}/>
+                   render={() => <TeacherResources translation={translation}/>}
+            />
             <Route path={translation.language["route.teacher.assignments"]} exact
-                   render={() => <TeacherAssignments translation={translation}/>}/>
+                   render={() => <TeacherAssignments translation={translation}/>}
+            />
             <Route path={translation.language["route.teacher.exams"]} exact
-                   render={() => <TeacherExams translation={translation}/>}/>
+                   render={() => <TeacherExams translation={translation}/>}
+            />
             <Route path={translation.language["route.teacher.quizzes"]} exact
-                   render={() => <TeacherQuizzes translation={translation}/>}/>
+                   render={() => <TeacherQuizzes translation={translation}/>}
+            />
+            <Route path={translation.language["route.teacher.to.grade"]}
+                   render={() => <TeacherGrade translation={translation} email={email}/>}
+            />
 
             <ProfileRoute translation={translation}/>
 

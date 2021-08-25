@@ -91,5 +91,5 @@ export function* TeacherResourceTableDataInit() {
 
     const teacherResource = yield select(Selector.TeacherResource)
     const user = yield  select(Selector.CurrentUser)
-    yield TableDataInit(getTeacherResource(teacherResource.search, user.user.email, teacherResource.page), AdminTeacherBodyDataSettingsQuery(), Teacher_Resource)
+    yield TableDataInit(getTeacherResource(teacherResource.search, user.user.email, teacherResource.page,teacherResource.status), AdminTeacherBodyDataSettingsQuery(), Teacher_Resource)
 }

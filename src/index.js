@@ -41,7 +41,6 @@ import {
 } from './store/reducers/Student'
 
 
-
 // Admin
 import {
     AdminDashBoard,
@@ -123,7 +122,11 @@ import {
     watchTeacherQuizExams,
     watchTeacherQuizInit,
     watchTeacherQuizSearchChange,
-    watchTeacherQuizTableNext
+    watchTeacherQuizTableNext,
+    watchTeacherExamStatusChange,
+    watchTeacherQuizStatusChange,
+    watchTeacherResourcesStatusChange,
+    watchTeacherAssignmentStatusChange
 } from './store/middleware/teacher'
 
 import {
@@ -401,6 +404,10 @@ sagaMiddleware.run(watchAdminRoomStatusChange)
 sagaMiddleware.run(watchAdminSubjectStatusChange)
 sagaMiddleware.run(watchStudentStatusChange)
 sagaMiddleware.run(watchTeacherStatusChange)
+sagaMiddleware.run(watchTeacherExamStatusChange)
+sagaMiddleware.run(watchTeacherQuizStatusChange)
+sagaMiddleware.run(watchTeacherResourcesStatusChange)
+sagaMiddleware.run(watchTeacherAssignmentStatusChange)
 
 
 ReactDOM.render(

@@ -13,15 +13,16 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Typography from '@material-ui/core/Typography';
-import {FormControl, Hidden, InputLabel, LinearProgress, MenuItem, Select} from '@material-ui/core';
+import {FormControl, Hidden, InputAdornment, InputLabel, LinearProgress, MenuItem, Select} from '@material-ui/core';
 import Copyright from '../copyright/Copyright';
 import {connect} from 'react-redux'
 import * as action from '../../../store/action/login/LoginAction'
 import {StudentRegisterForm, TeacherRegisterForm, UserIDForm} from "../registerForm";
 import style from './LoginStyle'
 import {changeLanguage} from '../../../store/action/__ActionGlobal/ProfileAction'
-import {baseUrl, baseUrlNoAuth} from "../../../store/middleware/axios";
 import ForgotPassword from "./ForgotPassword";
+import {useState} from "react";
+import {AccountCircle, Visibility, VisibilityOff} from "@material-ui/icons";
 
 const Login = ({
                    loginState,
@@ -41,6 +42,7 @@ const Login = ({
 
                }) => {
     const classes = style();
+    const [showPassword, setShowPassword] = useState(false)
 
 
     const ClickEnter = (event) => {
@@ -52,7 +54,12 @@ const Login = ({
         await registerInit()
     }
 
+    const handleClickShowPassword =  () => {
+        setShowPassword(!showPassword)
+    }
+
     return (
+
         <Grid container component="main" className={classes.root}>
 
 
@@ -131,6 +138,13 @@ const Login = ({
                             onChange={(event) => changeEmail(event.target.value)}
                             autoFocus
                             onKeyPress={(event) => ClickEnter(event.key)}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="end">
+                                        <AccountCircle />
+                                    </InputAdornment>
+                                ),
+                            }}
                         />
                         <TextField
                             fullWidth
@@ -139,10 +153,21 @@ const Login = ({
                             value={loginState.password}
                             name="password"
                             label={translation.language["label.login.input.password"]}
-                            type="password"
+                            type={showPassword===false? "password":"text"}
                             onChange={(event) => changePassword(event.target.value)}
                             autoComplete="current-password"
                             onKeyPress={(event) => ClickEnter(event.key)}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="end">
+                                        {
+                                            showPassword === false?
+                                                <VisibilityOff onClick={handleClickShowPassword} style={{cursor:'pointer'}} />:
+                                                <Visibility onClick={handleClickShowPassword} style={{cursor:'pointer'}}/>
+                                        }
+                                    </InputAdornment>
+                                ),
+                            }}
                         />
                         <Box className={classes.util}>
                             <FormControlLabel

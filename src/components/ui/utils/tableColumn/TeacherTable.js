@@ -109,7 +109,7 @@ export function TeacherInsertSubject(subjectName, subjectCode, major) {
  *
  **/
 
-export const TeacherStudentTable =(translation) => [
+export const TeacherStudentTable = (translation) => [
 
     {
         name: "firstName",
@@ -338,7 +338,7 @@ export const TeacherResources = (translation) => [
             filter: false,
             sort: false,
             customBodyRender: (value) => {
-                return <a href={S3BucketEndPoint+value}
+                return <a href={S3BucketEndPoint + value}
                           target="_blank"
                           style={{textDecoration: 'none', marginRight: '10px'}}
                           rel="noopener noreferrer">
@@ -355,6 +355,7 @@ export const TeacherResources = (translation) => [
 ]
 
 export function TeacherInsertResources(documentCode, documentName, description, dateUploaded, type, status, location) {
+    status = status === 1 ? 'Shared' : 'No Shared';
     return {documentCode, documentName, description, dateUploaded, type, status, download: location}
 }
 
@@ -411,7 +412,7 @@ export const TeacherAssignments = (translation) => [
             filter: false,
             sort: false,
             customBodyRender: (value) => {
-                return <a href={S3BucketEndPoint+value}
+                return <a href={S3BucketEndPoint + value}
                           target="_blank"
                           style={{textDecoration: 'none', marginRight: '10px'}}
                           rel="noopener noreferrer">
@@ -488,7 +489,7 @@ export const TeacherExams = (translation) => [
             filter: false,
             sort: false,
             customBodyRender: (value) => {
-                return <a href={S3BucketEndPoint+value}
+                return <a href={S3BucketEndPoint + value}
                           target="_blank"
                           style={{textDecoration: 'none', marginRight: '10px'}}
                           rel="noopener noreferrer">
@@ -566,7 +567,7 @@ export const TeacherQuiz = (translation) => [
             filter: false,
             sort: false,
             customBodyRender: (value) => {
-                return <a href={S3BucketEndPoint+value} target="_blank"
+                return <a href={S3BucketEndPoint + value} target="_blank"
                           style={{textDecoration: 'none', marginRight: '10px'}}
                           rel="noopener noreferrer">
                     <Button variant="outlined" color="primary">

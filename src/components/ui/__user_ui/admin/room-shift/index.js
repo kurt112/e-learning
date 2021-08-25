@@ -82,7 +82,7 @@ const RoomShiftList = ({
     }
 
     useEffect(() => {
-        if (state.data.length === 0) initData()
+        initData()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
