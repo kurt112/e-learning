@@ -44,6 +44,7 @@ const TaskCard = ({
                       index,
                       setLoading
                   }) => {
+
     const submitFile = async (file, url) => {
         setLoading(true)
         const fileName = await uploadToS3(file)

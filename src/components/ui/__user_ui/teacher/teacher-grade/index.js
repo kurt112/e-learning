@@ -5,43 +5,64 @@
  **/
 
 import {Fragment, useEffect, useState} from "react";
-import {Box, Container, Divider, FormControl, Grid, InputLabel, Select} from "@material-ui/core";
+import {Box, CircularProgress, Container, Divider, FormControl, Grid, InputLabel, Select} from "@material-ui/core";
 import clsx from "clsx";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import ClassesStyle from "../../../_style/ClassesStyle";
 import TeacherGradeCard from './TeacherGradeCard'
 import {graphQlRequestAsync} from "../../../../../store/middleware/utils/HttpRequest";
-import {getTeacherAssignmentToGrade} from "../../../../../store/middleware/utils/GraphQlQuery/TeacherQuery/TeacherAssignmentQuery";
-import {gradeAssignment} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
+import {
+    getTeacherAssignmentToGrade,
+    getTeacherExamToGrade, getTeacherQuizToGrade
+} from "../../../../../store/middleware/utils/GraphQlQuery/TeacherQuery/TeacherAssignmentQuery";
+import {
+    gradeAssignment,
+    gradeExam,
+    gradeQuiz
+} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 
 
-
-const data = (id,url,type,description,highGrade,lowGrade,submittedOn,status,subject,grade,section,name,location) => {
-    return {id,url,type,description,highGrade,lowGrade,submittedOn,status,subject,grade,section,name,location}
+const data = (id, url, type, description, highGrade, lowGrade, submittedOn, status, subject, grade, section, name, location) => {
+    return {
+        id,
+        url,
+        type,
+        description,
+        highGrade,
+        lowGrade,
+        submittedOn,
+        status,
+        subject,
+        grade,
+        section,
+        name,
+        location
+    }
 }
 
 
 const TeacherGrade = ({
-                        translation,
-                        email
+                          translation,
+                          email
                       }) => {
 
     const style = ClassesStyle()
     const [filterIndex, setFilterIndex] = useState(0)
+    const [loading, setLoading] = useState(false)
 
     // for getting the grade
-    const [assignmentToGrade,setAssignmentToGrade] = useState([])
+    const [assignmentToGrade, setAssignmentToGrade] = useState([])
     const [examToGrade, setExamToGrade] = useState([])
-    const [quizToGrade,setQuizToGrade]  = useState([])
+    const [quizToGrade, setQuizToGrade] = useState([])
 
 
     //  for graded
-    const [assignmentGraded,setAssignmentGraded] = useState([])
-    // const [examToGrade, setExamToGrade] = useState([])
-    // const [quizToGrade,setQuizToGrade]  = useState([])
+    const [assignmentGraded, setAssignmentGraded] = useState([])
+    const [examGraded, setExamGraded] = useState([])
+    const [quizGraded,setQuizGraded]  = useState([])
 
-    const [all,setAll] = useState([])
-    const [allGraded,setAllGraded] = useState([])
+    const [all, setAll] = useState([])
+    const [allGraded, setAllGraded] = useState([])
     const [filter, setFilter] = useState([])
     const filterType = [
         translation.language["label.global.all"],
@@ -55,38 +76,44 @@ const TeacherGrade = ({
 
     const filterData = () => {
         if (filterIndex === 0) {
-            if(toGrade)setFilter(all)
+            if (toGrade) setFilter(all)
             else setFilter(allGraded)
         } else if (filterIndex === 1) {
             setFilter(examToGrade)
-        }
-        else if (filterIndex === 2) {
-            if(toGrade) setFilter(assignmentToGrade)
+        } else if (filterIndex === 2) {
+            if (toGrade) setFilter(assignmentToGrade)
             else setFilter(assignmentGraded)
         } else if (filterIndex === 3) {
-            setFilter(quizToGrade)
+            if(toGrade) setFilter(quizToGrade)
+            else setFilter(quizGraded)
         }
     }
 
     const initData = async () => {
-        await graphQlRequestAsync(getTeacherAssignmentToGrade(email)).then(response => {
-            const tempAssignment = [], tempAll=[], tempAssignmentGraded = [], tempAllGraded=[]
 
-            const {getTeacherAssignmentToGrade}  = response.data.data
+        let tempAll = [], tempAllGraded = []
+
+        setLoading(true)
+
+        await graphQlRequestAsync(getTeacherAssignmentToGrade(email)).then(response => {
+
+            const tempAssignment = [], tempAssignmentGraded = []
+
+            const {getTeacherAssignmentToGrade} = response.data.data
             // id,url,type,description,highGrade,lowGrade,submittedOn,status
             getTeacherAssignmentToGrade.map(assignment => {
 
-                const {teacherAssignment,student} = assignment
+                const {teacherAssignment, student} = assignment
                 const {roomShiftClass} = teacherAssignment
-                const {roomShift,subject} =roomShiftClass
+                const {roomShift, subject} = roomShiftClass
                 const {user} = student
                 const name = user.firstName + ' ' + user.lastName
 
-                const input = data(assignment.id,gradeAssignment,translation.language["label.global.assignment"],teacherAssignment.description,
-                    teacherAssignment.highGrade, teacherAssignment.lowGrade,assignment.submittedAt,assignment.response,subject.subjectName,
-                    roomShift.grade,roomShift.section,name,assignment.location)
+                const input = data(assignment.id, gradeAssignment, translation.language["label.global.assignment"], teacherAssignment.description,
+                    teacherAssignment.highGrade, teacherAssignment.lowGrade, assignment.submittedAt, assignment.response, subject.subjectName,
+                    roomShift.grade, roomShift.section, name, assignment.location)
 
-                if(assignment.grade ===0){
+                if (assignment.grade === 0) {
                     tempAll.push(input)
                     return tempAssignment.push(input)
                 }
@@ -97,16 +124,84 @@ const TeacherGrade = ({
 
 
             setAssignmentToGrade(tempAssignment)
-            setAll(tempAll)
             setAssignmentGraded(tempAssignmentGraded)
-            setAllGraded(tempAllGraded)
+        })
+
+        await graphQlRequestAsync(getTeacherExamToGrade(email)).then(response => {
+            const tempExam = [], tempExamGraded = []
+
+            const {getTeacherExamToGrade} = response.data.data
+
+            getTeacherExamToGrade.map(exams => {
+
+                const {exam, student} = exams
+
+                const {roomShiftClass} = exam
+                const {roomShift, subject} = roomShiftClass
+                const {user} = student
+                const name = user.firstName + ' ' + user.lastName
+
+
+                const input = data(exams.id, gradeExam, translation.language["label.global.exam"], exam.description,
+                    exam.highGrade, exam.lowGrade, exams.submittedAt, exams.response, subject.subjectName,
+                    roomShift.grade, roomShift.section, name, exams.location)
+
+                if (exams.grade === 0) {
+                    tempAll.push(input)
+                    return tempExam.push(input)
+                }
+
+                tempExamGraded.push(input)
+                return tempAllGraded.push(input)
+            })
+
+
+            setExamToGrade(tempExam)
+            setExamGraded(tempExamGraded)
         })
 
 
+        await graphQlRequestAsync(getTeacherQuizToGrade(email)).then(response => {
+            const tempQuiz = [], tempQuizGraded = []
 
+            console.log(response)
+            const {getTeacherQuizToGrade} = response.data.data
+
+            getTeacherQuizToGrade.map(quizzes => {
+
+                const {quiz, student} = quizzes
+
+                const {roomShiftClass} = quiz
+                const {roomShift, subject} = roomShiftClass
+                const {user} = student
+                const name = user.firstName + ' ' + user.lastName
+
+
+                const input = data(quizzes.id, gradeQuiz, translation.language["label.global.quiz"], quiz.description,
+                    quiz.highGrade, quiz.lowGrade, quizzes.submittedAt, quizzes.response, subject.subjectName,
+                    roomShift.grade, roomShift.section, name, quizzes.location)
+
+                if (quizzes.grade === 0) {
+                    tempAll.push(input)
+                    return tempQuiz.push(input)
+                }
+
+                tempQuizGraded.push(input)
+                return tempAllGraded.push(input)
+            })
+
+
+            setQuizToGrade(tempQuiz)
+            setQuizGraded(tempQuizGraded)
+        })
+
+
+        setAll(tempAll)
+        setAllGraded(tempAllGraded)
         await filterData()
+        setLoading(false)
     }
-    
+
 
     const filterChange = (data) => {
         data = parseInt(data)
@@ -119,18 +214,18 @@ const TeacherGrade = ({
     }
 
     const toGradeClick = () => {
-        setToGrade(true )
+        setToGrade(true)
     }
 
 
-
     useEffect(() => {
-        initData().then(ignored => {})
+        initData().then(ignored => {
+        })
     }, [])
 
-    useEffect(() =>{
+    useEffect(() => {
         filterData()
-    }, [filterValue,filterIndex,toGrade,filterData])
+    }, [filterValue, filterIndex, toGrade, filterData])
 
 
     return (
@@ -176,15 +271,17 @@ const TeacherGrade = ({
 
             </Grid>
 
-            <Container>
+            <Container style={{textAlign:'center'}}>
                 {
-                    filter.map((e,i) =>
-                        <TeacherGradeCard  toGrade={toGrade} key={i} translation={translation} data={e} initData={initData}/>
-                    )
+                    loading ? <CircularProgress size={90}/> :
+                        filter.map((e, i) =>
+                            <TeacherGradeCard toGrade={toGrade} key={i} translation={translation} data={e}
+                                              initData={initData}/>
+                        )
                 }
             </Container>
         </Fragment>
     )
 }
 
-export  default TeacherGrade
+export default TeacherGrade

@@ -56,7 +56,7 @@ const TeacherGradeCard = ({translation,data,initData,toGrade}) => {
                         {translation.language['label.global.submitted.by']}: {data.name}
                     </h4>
 
-                    <p className={style.marginZero}>
+                    <div className={style.marginZero}>
                         <b>{translation.language["label.global.status"]}: </b>
                         {data.status === 'Late' ?
                             <Chip
@@ -71,7 +71,7 @@ const TeacherGradeCard = ({translation,data,initData,toGrade}) => {
                                 style={{borderColor: 'green', color: 'green'}}
                                 icon={<CheckIcon style={{color: 'green'}}/>}/>
                         }
-                    </p>
+                    </div>
 
                 </Grid>
                 <Grid item md={12} container
