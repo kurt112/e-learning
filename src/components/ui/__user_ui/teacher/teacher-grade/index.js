@@ -1,3 +1,9 @@
+/**
+ * @author : Kurt Lupin Orioque
+ * @mailto : kurtorioque112@gmail.com
+ * @created : 24/08/2021, Tuesday
+ **/
+
 import {Fragment, useEffect, useState} from "react";
 import {Box, Container, Divider, FormControl, Grid, InputLabel, Select} from "@material-ui/core";
 import clsx from "clsx";
@@ -8,11 +14,7 @@ import {graphQlRequestAsync} from "../../../../../store/middleware/utils/HttpReq
 import {getTeacherAssignmentToGrade} from "../../../../../store/middleware/utils/GraphQlQuery/TeacherQuery/TeacherAssignmentQuery";
 import {gradeAssignment} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 
-/**
- * @author : Kurt Lupin Orioque
- * @mailto : kurtorioque112@gmail.com
- * @created : 24/08/2021, Tuesday
- **/
+
 
 const data = (id,url,type,description,highGrade,lowGrade,submittedOn,status,subject,grade,section,name,location) => {
     return {id,url,type,description,highGrade,lowGrade,submittedOn,status,subject,grade,section,name,location}
@@ -99,6 +101,8 @@ const TeacherGrade = ({
             setAssignmentGraded(tempAssignmentGraded)
             setAllGraded(tempAllGraded)
         })
+
+
 
         await filterData()
     }

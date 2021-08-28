@@ -15,6 +15,7 @@ export const
                             submittedAt,
                             status,
                             response,
+                            grade,
                             teacherAssignment{
                                     createdAt,
                                     deadLine,
@@ -49,6 +50,7 @@ export const
                             submittedAt,
                             status,
                             response,
+                            grade,
                             exam{
                                     createdAt,
                                     deadLine,
@@ -83,6 +85,7 @@ export const
                             submittedAt,
                             status,
                             response,
+                            grade,
                             quiz{
                                     createdAt,
                                     deadLine,

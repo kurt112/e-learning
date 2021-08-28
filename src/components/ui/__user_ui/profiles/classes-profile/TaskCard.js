@@ -39,177 +39,199 @@ const TaskCard = ({
                       url,
                       unSubmitUrl,
                       initData,
-                      response
+                      response,
+                      grade,
+                      index,
+                      setLoading
                   }) => {
-
-
-    const upload = async (event) => {
-        const file = event.target.files[0]
-
+    const submitFile = async (file, url) => {
+        setLoading(true)
         const fileName = await uploadToS3(file)
         const params = new URLSearchParams()
         params.append('fileName', fileName)
         params.append('id', id)
-        await baseUrl.post(url, params).then(e => {
+        console.log(params)
+        await baseUrl.post(url, params).then(ignored => {
+            initData()
             alert("Uploaded Successful")
+        }).catch(ignored => {
+            alert("Uploaded Not Success")
         })
-        initData()
+
     }
 
     const unSubmit = async () => {
+        setLoading(true)
         await deleteToS3(resourceCode)
         const params = new URLSearchParams()
         params.append('id', id)
-        await baseUrl.post(unSubmitUrl, params).then(ignored => {
-            alert("Un-submit Success")
+        await baseUrl.post(unSubmitUrl, params).then(response => {
+            console.log(response)
+            const data = response.data.item
+            deleteToS3(data).then(ignored => {
+            }).catch(error => {
+                console.log(error)
+            })
         })
         initData()
-
+        setLoading(false)
     }
 
 
-    return <Grid component={Paper} container style={{padding: 10, marginBottom: 10}}>
-        <Grid item container>
-            <Grid item md={12} container
-                  direction="row" justify="space-between">
-                <h2 className={style.marginZero}>
-                    {resourceName}
-                </h2>
-                <h2 className={style.marginZero}>{type}</h2>
-                <p className={style.marginZero}>
-                    <b>{translation.language["label.global.date.upload"]}: </b>
-                    {convertDateTime(createdAt)}
-                </p>
-            </Grid>
-            <Grid item md={12} container
-                  direction="row" justify="space-between">
-                <h4 className={style.marginZero}>
-                    {teacherName}
-                </h4>
+    return <Fragment>
+        <Grid component={Paper} container style={{padding: 10, marginBottom: 10}}>
+            <Grid item container>
+                <Grid item md={12} container
+                      direction="row" justify="space-between">
+                    <h2 className={style.marginZero}>
+                        {resourceName}
+                    </h2>
+                    <h2 className={style.marginZero}>{type}</h2>
+                    <p className={style.marginZero}>
+                        <b>{translation.language["label.global.date.upload"]}: </b>
+                        {convertDateTime(createdAt)}
+                    </p>
+                </Grid>
+                <Grid item md={12} container
+                      direction="row" justify="space-between">
+                    <h4 className={style.marginZero}>
+                        {teacherName}
+                    </h4>
 
-                <p className={style.marginZero}>
-                    {
-                        lecture === true ? null :
-                            <Fragment>
-                                <b>{translation.language["label.global.date.deadline"]}: </b>
-                                {convertDateTime(deadLine)}
-                            </Fragment>
-                    }
-                </p>
+                    <p className={style.marginZero}>
+                        {
+                            lecture === true ? null :
+                                <Fragment>
+                                    <b>{translation.language["label.global.date.deadline"]}: </b>
+                                    {checkStringEmpty(deadLine) ? 'No Deadline' : convertDateTime(deadLine)}
 
-            </Grid>
-            {
-                checkStringEmpty(response) && lecture !== true ? null :
-                    <Grid item md={12} container
-                          direction="row" justify="space-between">
-                        {response === 'Late' ?
-                            <Chip
-                                label={response}
-                                variant="outlined"
-                                size={'small'}
-                                color={'secondary'}
-                                icon={<ErrorIcon/>}/> :
-                            <Chip
-                                label={response}
-                                variant="outlined" size={'small'}
-                                style={{borderColor: 'green', color: 'green'}}
-                                icon={<CheckIcon style={{color: 'green'}}/>}/>
+                                </Fragment>
                         }
+                    </p>
 
-                    </Grid>
-            }
-
-            <Grid item md={12} container>
-                <p>
-                    {description}
-                </p>
-            </Grid>
-
-            <Divider style={{width: '100%'}}/>
-
-            <Grid container
-                  direction="row" justify="space-between">
-
-                <Grid item>
-                    {
-                        lecture === true ? null :
-                            <Grid item md={12} container>
-                                <p style={{marginBottom: 0, marginRight: 10}}>
-                                    <b>{translation.language["label.global.high.grade"]}:</b>{highGrade}</p>
-                                <p style={{marginBottom: 0, marginRight: 10}}>
-                                    <b>{translation.language["label.global.low.grade"]}: </b>{lowGrade}</p>
-                                {unSubmitUrl === undefined || todo ? null : <p style={{marginBottom: 0, marginRight: 10}}>
-                                    <b>{translation.language["label.global.your.grade"]} </b></p>}
-                            </Grid>
-                    }
                 </Grid>
-
-                <Grid item>
-                    <Grid container alignItems="center" style={{marginTop: 10}}>
-                        <Button
-                            disableElevation
-                            variant="contained"
-                            style={{backgroundColor: '#228B22', color: 'white'}}
-                            startIcon={<GetAppIcon/>}
-                            component={'a'}
-                            target="_blank"
-                            href={S3BucketEndPoint + resourceCode}
-                        >
-                            {translation.language["label.global.download"]}
-                        </Button>
-
-                    </Grid>
-                </Grid>
-
                 {
-                    todo ?
-                        <Grid item>
-                            <Grid container alignItems="center" style={{marginTop: 10}}>
-                                <div>
-                                    <input
-                                        style={{display: 'none'}}
-                                        id="contained-button-file"
-                                        multiple
-                                        type="file"
-                                        onChange={(event) => upload(event)}
-                                    />
-                                    <label htmlFor="contained-button-file">
-                                        <Button
-                                            disableElevation
-                                            variant="contained"
-                                            color="primary"
-                                            startIcon={<CloudUploadIcon/>}
-                                            component={'span'}
-                                        >
-                                            Upload
-                                        </Button>
-                                    </label>
+                    checkStringEmpty(response) && lecture !== true ? null :
+                        <Grid item md={12} container
+                              direction="row" justify="space-between">
+                            {response === 'Late' ?
+                                <Chip
+                                    label={response}
+                                    variant="outlined"
+                                    size={'small'}
+                                    color={'secondary'}
+                                    icon={<ErrorIcon/>}/> :
+                                <Chip
+                                    label={response}
+                                    variant="outlined" size={'small'}
+                                    style={{borderColor: 'green', color: 'green'}}
+                                    icon={<CheckIcon style={{color: 'green'}}/>}/>
+                            }
 
-                                </div>
+                        </Grid>
+                }
 
-                            </Grid>
-                        </Grid> :
+                <Grid item md={12} container>
+                    <p>
+                        {description}
+                    </p>
+                </Grid>
 
-                        unSubmitUrl === undefined ? null : <Grid item>
-                            <Grid container alignItems="center" style={{marginTop: 10}}>
+                <Divider style={{width: '100%'}}/>
+
+                <Grid container
+                      direction="row" justify="space-between">
+
+                    <Grid item>
+                        {
+                            lecture === true ? null :
+                                <Grid item md={12} container>
+                                    <p style={{marginBottom: 0, marginRight: 10}}>
+                                        <b>{translation.language["label.global.high.grade"]}: </b>{highGrade}</p>
+                                    <p style={{marginBottom: 0, marginRight: 10}}>
+                                        <b>{translation.language["label.global.low.grade"]}: </b>{lowGrade}</p>
+                                    {
+                                        unSubmitUrl === undefined || todo ? null :
+                                            <p style={{marginBottom: 0, marginRight: 10}}>
+                                                <b>{translation.language["label.global.your.grade"]}: </b>
+                                                {grade === 0 ? 'Not Graded' : grade}
+                                            </p>
+                                    }
+                                </Grid>
+                        }
+                    </Grid>
+
+                    <Grid item>
+                        <Grid container alignItems="center" style={{marginTop: 10}}>
+                            {
                                 <Button
+                                    fullWidth
                                     disableElevation
                                     variant="contained"
-                                    color="secondary"
-                                    startIcon={<HighlightOffIcon/>}
-                                    component={'span'}
-                                    onClick={unSubmit}
+                                    style={{backgroundColor: '#228B22', color: 'white'}}
+                                    startIcon={<GetAppIcon/>}
+                                    component={'a'}
+                                    target="_blank"
+                                    href={S3BucketEndPoint + resourceCode}
                                 >
-                                    UnSubmit
+                                    {translation.language["label.global.download"]}
                                 </Button>
-
-                            </Grid>
+                            }
                         </Grid>
+                    </Grid>
 
-                }
+                    {
+                        todo ?
+                            <Grid item>
+
+
+                                <Grid container alignItems="center" style={{marginTop: 10}}>
+                                    <div>
+                                        <input
+                                            style={{display: 'none'}}
+                                            id={index}
+                                            multiple
+                                            type="file"
+                                            onChange={(e) => submitFile(e.target.files[0], url)}
+                                        />
+                                        <label htmlFor={index}>
+                                            <Button
+                                                fullWidth
+                                                disableElevation
+                                                variant="contained"
+                                                color="primary"
+                                                startIcon={<CloudUploadIcon/>}
+                                                component={'span'}
+                                            >
+                                                Upload
+                                            </Button>
+                                        </label>
+
+                                    </div>
+                                </Grid>
+                            </Grid> :
+
+                            unSubmitUrl === undefined ? null : <Grid item>
+                                <Grid container alignItems="center" style={{marginTop: 10}}>
+                                    <Button
+                                        disableElevation
+                                        variant="contained"
+                                        color="secondary"
+                                        startIcon={<HighlightOffIcon/>}
+                                        component={'span'}
+                                        onClick={unSubmit}
+                                    >
+                                        UnSubmit
+                                    </Button>
+
+                                </Grid>
+                            </Grid>
+
+                    }
+                </Grid>
             </Grid>
         </Grid>
-    </Grid>
+    </Fragment>
 }
 
 

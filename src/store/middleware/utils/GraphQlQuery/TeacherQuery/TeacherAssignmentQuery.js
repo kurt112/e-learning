@@ -44,6 +44,94 @@ export const
         `
         }
     },
+    getTeacherExamToGrade = (email) => {
+        return {
+            query: `
+                    query{getTeacherExamToGrade(email:"${email}"){
+                           id,
+                           status,
+                           response,
+                           submittedAt,
+                           location,
+                           grade,
+                           student{
+                               user{
+                                  firstName,
+                                  lastName
+                               }
+                           },
+                           exam{
+                           description,
+                           highGrade,
+                           lowGrade,
+                           roomShiftClass{
+                               subject{
+                                   subjectName
+                               }
+                               teacher{
+                                    user{
+                                        firstName,
+                                        lastName
+                                    }
+                               }
+                               roomShift{
+                                    grade,
+                                    section
+                               }
+                           },
+                           resource{
+                               name,
+                               type
+                           }
+                       }
+                    }
+            }`
+        }
+    },
+    getTeacherQuizToGrade = (email) => {
+        return {
+            query: `
+                    query{getTeacherQuizToGrade(email:"${email}"){
+                           id,
+                           status,
+                           response,
+                           submittedAt,
+                           location,
+                           grade,
+                           student{
+                               user{
+                                  firstName,
+                                  lastName
+                               }
+                           },
+                           quiz{
+                           description,
+                           highGrade,
+                           lowGrade,
+                           roomShiftClass{
+                               subject{
+                                   subjectName
+                               }
+                               teacher{
+                                    user{
+                                        firstName,
+                                        lastName
+                                    }
+                               }
+                               roomShift{
+                                    grade,
+                                    section
+                               }
+                           },
+                           resource{
+                               name,
+                               type
+                           }
+                       }
+                    }
+            }`
+        }
+    },
     getTeacherAssignmentToGrade = (email) => {
         return {
             query: `

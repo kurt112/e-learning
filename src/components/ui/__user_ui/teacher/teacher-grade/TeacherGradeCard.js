@@ -2,7 +2,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import {convertDateTime} from "../../../utils/dateFormat/DateTimeFormatToDateWord";
 import {Fragment, useState} from "react";
-import {Button} from "@material-ui/core";
+import {Button, Chip} from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import {S3BucketEndPoint} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 import GradeIcon from '@material-ui/icons/Grade';
@@ -11,6 +11,8 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import InputGradeDialog from "../InputGradeDialog";
 import DeleteIcon from '@material-ui/icons/Delete';
 import {baseUrl} from "../../../../../store/middleware/axios";
+import ErrorIcon from "@material-ui/icons/Error";
+import CheckIcon from "@material-ui/icons/Check";
 /**
  * @author : Kurt Lupin Orioque
  * @mailto : kurtorioque112@gmail.com
@@ -56,7 +58,19 @@ const TeacherGradeCard = ({translation,data,initData,toGrade}) => {
 
                     <p className={style.marginZero}>
                         <b>{translation.language["label.global.status"]}: </b>
-                        {data.status}
+                        {data.status === 'Late' ?
+                            <Chip
+                                label={data.status}
+                                variant="outlined"
+                                size={'small'}
+                                color={'secondary'}
+                                icon={<ErrorIcon/>}/> :
+                            <Chip
+                                label={data.status}
+                                variant="outlined" size={'small'}
+                                style={{borderColor: 'green', color: 'green'}}
+                                icon={<CheckIcon style={{color: 'green'}}/>}/>
+                        }
                     </p>
 
                 </Grid>

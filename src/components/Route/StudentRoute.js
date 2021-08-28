@@ -25,7 +25,7 @@ import {
 const StudentLecture = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({default: module.StudentLecture})))
 const StudentTodo = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({default: module.StudentTodo})))
 
-const todoData = (id,todoCreated, todoDeadline, location, description, highGrade, lowGrade, isLecture, teacherName, type, name, status,url,unSubmitUrl,response) => {
+const todoData = (id,todoCreated, todoDeadline, location, description, highGrade, lowGrade, isLecture, teacherName, type, name, status,url,unSubmitUrl,response,grade,file) => {
     return {
         id,
         todoCreated,
@@ -41,7 +41,9 @@ const todoData = (id,todoCreated, todoDeadline, location, description, highGrade
         status,
         url,
         unSubmitUrl,
-        response
+        response,
+        grade,
+        file
     }
 }
 
@@ -80,7 +82,7 @@ const StudentRoute = ({email, translation}) => {
         const tempFinishAll = [] , tempAll = []
 
         await graphQlRequestAsync(getStudentAssignment(email)).then(assignment => {
-
+            console.log(assignment)
             const assignments = assignment.data.data.getStudentAssignment
 
             const tempAssignment = [], tempFinishAssignment = []
@@ -93,8 +95,7 @@ const StudentRoute = ({email, translation}) => {
 
                 const data = todoData(e.id,teacherAssignment.createdAt, teacherAssignment.deadLine, location , teacherAssignment.description,
                     teacherAssignment.highGrade, teacherAssignment.lowGrade, false, `${user.firstName} ${user.lastName}`,
-                    'Assignment', resource.name, e.status,passAssignment,unSubmitAssignment, e.response)
-
+                    'Assignment', resource.name, e.status,passAssignment,unSubmitAssignment, e.response,e.grade,null)
 
                 if(e.status ===1){
                     tempFinishAll.push(data)
@@ -105,7 +106,6 @@ const StudentRoute = ({email, translation}) => {
                 return tempAssignment.push(data)
 
             })
-
 
             setAssignment(tempAssignment)
             setFinishAssignment(tempFinishAssignment)
@@ -123,7 +123,7 @@ const StudentRoute = ({email, translation}) => {
 
                 const data = todoData(e.id,teacherExam.createdAt, teacherExam.deadLine, location , teacherExam.description,
                     teacherExam.highGrade, teacherExam.lowGrade, false, `${user.firstName} ${user.lastName}`,
-                    'Exam', resource.name, e.status,passExam,unSubmitExam, e.response)
+                    'Exam', resource.name, e.status,passExam,unSubmitExam, e.response,e.grade,null)
 
 
                 if(e.status ===1){
@@ -154,7 +154,7 @@ const StudentRoute = ({email, translation}) => {
 
                 const data = todoData(e.id,teacherQuiz.createdAt, teacherQuiz.deadLine, location , teacherQuiz.description,
                     teacherQuiz.highGrade, teacherQuiz.lowGrade, false, `${user.firstName} ${user.lastName}`,
-                    'Quiz', resource.name, e.status,passQuiz,unSubmitQuiz, e.response)
+                    'Quiz', resource.name, e.status,passQuiz,unSubmitQuiz, e.response,e.grade,null)
 
 
                 if(e.status ===1){

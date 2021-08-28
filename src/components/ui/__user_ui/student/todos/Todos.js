@@ -5,7 +5,7 @@
  **/
 import {useState, Fragment, useEffect} from "react";
 import {
-    Box,
+    Box, CircularProgress,
     Container,
     Divider,
     FormControl,
@@ -30,13 +30,14 @@ const Todo = ({
                   quiz,
                   finishQuiz,
                   finishAll,
-                  initData,
+                  initData
               }) => {
     const style = ClassesStyle()
     const taskCardStyle = ProfileStyle()
     const [todos, setTodo] = useState(true)
     const [filterIndex, setFilterIndex] = useState(0)
     const [filter, setFilter] = useState(all)
+    const [loading, setLoading] = useState(false)
 
     const filterType = [
         translation.language["label.global.all"],
@@ -67,27 +68,28 @@ const Todo = ({
             if (todos === true) setFilter(all)
             else setFilter(finishAll)
         } else if (filterIndex === 1) {
-            if(todos === true)setFilter(exams)
+            if (todos === true) setFilter(exams)
             else setFilter(finishExam)
-        }
-        else if (filterIndex === 2) {
+        } else if (filterIndex === 2) {
             if (todos === true) setFilter(assignments)
             else setFilter(finishAssignments)
         } else if (filterIndex === 3) {
-            if(todos === true) setFilter(quiz)
+            if (todos === true) setFilter(quiz)
             else setFilter(finishQuiz)
         }
     }
 
     const refreshData = async () => {
+        setLoading(true)
         await initData()
-        filterData()
+        await filterData()
+
+        setLoading(false)
     }
 
     useEffect(() => {
         filterData()
     }, [todos, filterIndex, filterData])
-
 
     return (
         <Fragment>
@@ -132,31 +134,39 @@ const Todo = ({
 
             </Grid>
 
-            <Container>
+            <Container style={{textAlign:'center'}} >
+
                 {
-                    filter.map((e, i) =>
-                        <TaskCard
-                            initData={refreshData}
-                            id={e.id}
-                            todo={todos}
-                            key={i}
-                            style={taskCardStyle}
-                            translation={translation}
-                            resourceCode={e.location}
-                            createdAt={e.todoCreated}
-                            deadLine={e.todoDeadline}
-                            lowGrade={e.lowGrade}
-                            highGrade={e.highGrade}
-                            description={e.description}
-                            lecture={e.isLecture}
-                            resourceName={e.name}
-                            teacherName={e.teacherName}
-                            type={e.type}
-                            url={e.url}
-                            unSubmitUrl={e.unSubmitUrl}
-                            response={e.response}
-                        />
-                    )
+                    loading ?   <CircularProgress size={90}/>  :
+                        filter.map((e, i) => {
+
+                                return <TaskCard
+
+                                    filter={filter}
+                                    initData={refreshData}
+                                    id={e.id}
+                                    todo={todos}
+                                    key={i}
+                                    index={i}
+                                    style={taskCardStyle}
+                                    translation={translation}
+                                    resourceCode={e.location}
+                                    createdAt={e.todoCreated}
+                                    deadLine={e.todoDeadline}
+                                    lowGrade={e.lowGrade}
+                                    highGrade={e.highGrade}
+                                    description={e.description}
+                                    lecture={e.isLecture}
+                                    resourceName={e.name}
+                                    type={e.type}
+                                    url={e.url}
+                                    unSubmitUrl={e.unSubmitUrl}
+                                    response={e.response}
+                                    grade={e.grade}
+                                    setLoading={setLoading}
+                                />
+                            }
+                        )
                 }
             </Container>
         </Fragment>
