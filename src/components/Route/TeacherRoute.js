@@ -3,15 +3,15 @@
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
  **/
-import {lazy, Fragment, useState, useEffect} from "react";
 import {Redirect, Route} from "react-router";
+import {lazy, Fragment, useState, useEffect} from "react";
 import {graphQlRequestAsync} from "../../store/middleware/utils/HttpRequest";
 import {
     getTeacherClasses,
     getTeacherDataByEmail
 } from "../../store/middleware/utils/GraphQlQuery/TeacherQuery/TeacherDataQuery";
 import {TeacherInsertStudent as insertStudent, TeacherInsertSubject as insertSubject} from '../ui/utils/tableColumn'
-import { useLocation } from 'react-router-dom'
+import {useLocation} from 'react-router-dom'
 import ClassesList from "../ui/__user_ui/roomClasses/ClassList/ClassesList";
 import ProfileRoute from "./ProfileRoute";
 
@@ -28,72 +28,83 @@ const TeacherGrade = lazy(() => import('../ui/__user_ui/teacher').then(module =>
 
 const TeacherRoute = ({email, translation}) => {
 
-    const [teacher, setTeacher] = useState(null)
+    const location = useLocation();
+
     const [students, setStudents] = useState([])
     const [subjects, setSubjects] = useState([])
     const [currentClass, setCurrentClass] = useState()
     const [doneClass, setDoneClass] = useState()
-    const location = useLocation();
+    const [loading, setLoading] = useState(false)
+
 
     useEffect(() => {
-        fetchData().then(r => {
-            console.log(r)
-            setTeacher(r.data.data.getTeacherByUserEmail)
+        initData().then(ignored => {
         })
-    }, [])
+    }, [email])
 
-    async function fetchData() {
-        return await graphQlRequestAsync(getTeacherDataByEmail(email))
+
+    const initData = async () => {
+        const tempStudent = [], tempSubject = []
+
+        setLoading(true)
+        const data = await graphQlRequestAsync(getTeacherDataByEmail(email))
+            .then(response => response.data.data.getTeacherByUserEmail.id)
+
+
+        await graphQlRequestAsync(getTeacherClasses(data, 1)).then(e => {
+            const classes = e.data.data.getTeacherClasses
+            // eslint-disable-next-line array-callback-return
+
+            classes.map((class_) => {
+                const students = class_.students
+                const roomShift = class_.roomShift
+                const subject = class_.subject
+
+                students.map(student => {
+                    const {user} = student
+                    tempStudent.push(insertStudent(user.firstName, user.lastName, roomShift.grade,
+                        roomShift.section, subject.subjectName, roomShift.teacher !== null ? `${roomShift.teacher.user.firstName} ${roomShift.teacher.user.lastName}` : translation.language["label.global.tba"], user.email))
+                })
+
+                tempSubject.push(insertSubject(subject.subjectName, subject.subjectCode, subject.subjectMajor))
+
+            })
+
+            setSubjects(tempSubject)
+            setStudents(tempStudent)
+            setCurrentClass(classes)
+        })
+
+        setLoading(false)
+
+        graphQlRequestAsync(getTeacherClasses(data, 0)).then(e => {
+            const classes = e.data.data.getTeacherClasses
+            setDoneClass(classes)
+        })
+
     }
 
-    useEffect(() => {
-
-        if (teacher) {
-            const tempStudent = []
-            const tempSubject = []
-
-            graphQlRequestAsync(getTeacherClasses(teacher.id, 1)).then(e => {
-                const classes = e.data.data.getTeacherClasses
-                setCurrentClass(classes)
-
-                // eslint-disable-next-line array-callback-return
-
-                for (const class_ of classes) {
-                    const students = class_.students
-                    const roomShift = class_.roomShift
-                    const subject = class_.subject
-                    for (const student of students) {
-                        const user = student.user
-                        tempStudent.push(insertStudent(user.firstName, user.lastName, roomShift.grade,
-                            roomShift.section, subject.subjectName, roomShift.teacher !== null ? `${roomShift.teacher.user.firstName} ${roomShift.teacher.user.lastName}` : translation.language["label.global.tba"], user.email))
-                    }
-                    tempSubject.push(insertSubject(subject.subjectName, subject.subjectCode, subject.subjectMajor))
-                }
-                setSubjects(tempSubject)
-                setStudents(tempStudent)
-            })
-
-
-            graphQlRequestAsync(getTeacherClasses(teacher.id, 0)).then(e => {
-                const classes = e.data.data.getTeacherClasses
-                setDoneClass(classes)
-            })
-
-        }
-    }, [teacher])
 
     return (
         <Fragment>
+            <Route path={translation.language["route.teacher.classes"]} exact
+                   render={
+                       () =>
+                           <ClassesList
+                               translation={translation}
+                               currentClass={currentClass}
+                               archiveClass={doneClass}
+                               loading={loading}
+                           />
+                   }
+            />
             <Route path={translation.language["route.teacher.subjects"]} exact
                    render={() => <TeacherSubjects translation={translation} subjects={subjects}/>}/>
             <Route path={translation.language["route.teacher.students"]} exact
                    render={() => <TeacherStudent translation={translation} students={students}/>}/>
             <Route path={translation.language["route.teacher.lectures"]} exact
                    render={() => <TeacherLectures translation={translation}/>}/>
-            <Route path={translation.language["route.teacher.classes"]} exact
-                   render={() => <ClassesList translation={translation}
-                                          currentClass={currentClass}
-                                          archiveClass={doneClass}/>}/>
+
             <Route path={translation.language["route.teacher.resources"]} exact
                    render={() => <TeacherResources translation={translation}/>}
             />
@@ -113,7 +124,7 @@ const TeacherRoute = ({email, translation}) => {
             <ProfileRoute translation={translation}/>
 
             {
-                location.pathname === '/'? <Redirect to={translation.language["route.teacher.classes"]}/>:null
+                location.pathname === '/' ? <Redirect to={translation.language["route.teacher.classes"]}/> : null
             }
 
         </Fragment>

@@ -25,7 +25,7 @@ import {
 const StudentLecture = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({default: module.StudentLecture})))
 const StudentTodo = lazy(() => import('../ui/__user_ui/student/Student').then(module => ({default: module.StudentTodo})))
 
-const todoData = (id,todoCreated, todoDeadline, location, description, highGrade, lowGrade, isLecture, teacherName, type, name, status,url,unSubmitUrl,response,grade,file) => {
+const todoData = (id, todoCreated, todoDeadline, location, description, highGrade, lowGrade, isLecture, teacherName, type, name, status, url, unSubmitUrl, response, grade, file) => {
     return {
         id,
         todoCreated,
@@ -53,6 +53,7 @@ const StudentRoute = ({email, translation}) => {
 
     const [currentClass, setCurrentClass] = useState([])
     const [doneClass, setDoneClass] = useState([])
+    const [loading, setLoading] = useState(false)
 
     // for classwork filter
     const [lecture, setLecture] = useState([])
@@ -68,21 +69,48 @@ const StudentRoute = ({email, translation}) => {
 
     // exam status
     const [exam, setExam] = useState([])
-    const [finishExam,setFinishExam] = useState([])
+    const [finishExam, setFinishExam] = useState([])
 
     // quiz status
     const [quiz, setQuiz] = useState([])
-    const [finishQuiz,setFinishQuiz] = useState([])
+    const [finishQuiz, setFinishQuiz] = useState([])
 
     useEffect(() => {
-        initData().then(ignored => {})
+        initData().then(ignored => {
+        })
     }, [email])
 
     const initData = async () => {
-        const tempFinishAll = [] , tempAll = []
+        const tempFinishAll = [], tempAll = []
+
+        setLoading(true)
+        // current
+        await graphQlRequestAsync(getStudentClasses(email, 1)).then(classes => {
+            const tempCurrentClass = []
+            classes.data.data.getStudentClass.map(Class => {
+                tempCurrentClass.push(Class)
+            })
+            setCurrentClass(tempCurrentClass)
+        })
+
+
+        // archive
+        await graphQlRequestAsync(getStudentClasses(email, 0)).then(classes => {
+            const tempDoneClass = []
+
+            classes.data.data.getStudentClass.map(Class => {
+                tempDoneClass.push(Class)
+            })
+
+            setDoneClass(tempDoneClass)
+        })
+
+
+
+        setLoading(false)
+
 
         await graphQlRequestAsync(getStudentAssignment(email)).then(assignment => {
-            console.log(assignment)
             const assignments = assignment.data.data.getStudentAssignment
 
             const tempAssignment = [], tempFinishAssignment = []
@@ -91,13 +119,13 @@ const StudentRoute = ({email, translation}) => {
                 const {resource} = teacherAssignment
                 const {teacher} = resource
                 const {user} = teacher
-                const location = e.location === null? resource.location:e.location
+                const location = e.location === null ? resource.location : e.location
 
-                const data = todoData(e.id,teacherAssignment.createdAt, teacherAssignment.deadLine, location , teacherAssignment.description,
+                const data = todoData(e.id, teacherAssignment.createdAt, teacherAssignment.deadLine, location, teacherAssignment.description,
                     teacherAssignment.highGrade, teacherAssignment.lowGrade, false, `${user.firstName} ${user.lastName}`,
-                    'Assignment', resource.name, e.status,passAssignment,unSubmitAssignment, e.response,e.grade,null)
+                    'Assignment', resource.name, e.status, passAssignment, unSubmitAssignment, e.response, e.grade, null)
 
-                if(e.status ===1){
+                if (e.status === 1) {
                     tempFinishAll.push(data)
                     return tempFinishAssignment.push(data)
                 }
@@ -119,14 +147,14 @@ const StudentRoute = ({email, translation}) => {
                 const {resource} = teacherExam
                 const {teacher} = resource
                 const {user} = teacher
-                const location = e.location === null? resource.location:e.location
+                const location = e.location === null ? resource.location : e.location
 
-                const data = todoData(e.id,teacherExam.createdAt, teacherExam.deadLine, location , teacherExam.description,
+                const data = todoData(e.id, teacherExam.createdAt, teacherExam.deadLine, location, teacherExam.description,
                     teacherExam.highGrade, teacherExam.lowGrade, false, `${user.firstName} ${user.lastName}`,
-                    'Exam', resource.name, e.status,passExam,unSubmitExam, e.response,e.grade,null)
+                    'Exam', resource.name, e.status, passExam, unSubmitExam, e.response, e.grade, null)
 
 
-                if(e.status ===1){
+                if (e.status === 1) {
                     tempFinishAll.push(data)
                     return tempFinishExam.push(data)
                 }
@@ -150,14 +178,14 @@ const StudentRoute = ({email, translation}) => {
                 const {resource} = teacherQuiz
                 const {teacher} = resource
                 const {user} = teacher
-                const location = e.location === null? resource.location:e.location
+                const location = e.location === null ? resource.location : e.location
 
-                const data = todoData(e.id,teacherQuiz.createdAt, teacherQuiz.deadLine, location , teacherQuiz.description,
+                const data = todoData(e.id, teacherQuiz.createdAt, teacherQuiz.deadLine, location, teacherQuiz.description,
                     teacherQuiz.highGrade, teacherQuiz.lowGrade, false, `${user.firstName} ${user.lastName}`,
-                    'Quiz', resource.name, e.status,passQuiz,unSubmitQuiz, e.response,e.grade,null)
+                    'Quiz', resource.name, e.status, passQuiz, unSubmitQuiz, e.response, e.grade, null)
 
 
-                if(e.status ===1){
+                if (e.status === 1) {
                     tempFinishAll.push(data)
                     return tempFinishQuiz.push(data)
                 }
@@ -171,36 +199,23 @@ const StudentRoute = ({email, translation}) => {
         })
 
 
-        // archive
-        await graphQlRequestAsync(getStudentClasses(email, 0)).then(classes => {
-            const tempDoneClass = []
-
-            classes.data.data.getStudentClass.map(Class => {
-                tempDoneClass.push(Class)
-            })
-
-            setDoneClass(tempDoneClass)
-        })
-
-        // current
-        await graphQlRequestAsync(getStudentClasses(email, 1)).then(classes => {
-            const tempCurrentClass = []
-            classes.data.data.getStudentClass.map(Class => {
-                tempCurrentClass.push(Class)
-            })
-            setCurrentClass(tempCurrentClass)
-        })
-
         setAll(tempAll)
         setFinishAll(tempFinishAll)
     }
 
 
-
     return <Fragment>
         <Route path={translation.language["route.student.classes"]} exact
-               render={() => <ClassesList translation={translation} currentClass={currentClass}
-                                          archiveClass={doneClass}/>}/>
+               render={
+                   () =>
+                       <ClassesList
+                           translation={translation}
+                           currentClass={currentClass}
+                           archiveClass={doneClass}
+                           loading={loading}
+                       />
+               }
+        />
         <Route path={translation.language["route.student.todos"]} exact
                render={() =>
                    <StudentTodo
