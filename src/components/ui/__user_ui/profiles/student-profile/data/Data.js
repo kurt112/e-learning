@@ -15,6 +15,7 @@ import {updateAccount} from "../../../../../../store/middleware/utils/ApiEndpoin
 import {compareBCrypt, PasswordEncrypt} from "../../../../../../store/middleware/utils/EncryptPassword";
 import {checkPasswordStrength, checkStringEmail, checkStringEmpty} from "../../../../utils/validation";
 import {Visibility, VisibilityOff} from "@material-ui/icons";
+import {getLessThanTenYears} from "../../../../utils/dateFormat/DateTimeMinLow";
 
 export default function Data({
                                  student,
@@ -442,6 +443,9 @@ export default function Data({
                                                label={translation.language["label.global.birth.date"]}
                                                value={convertToYYMMDD(birthdate)}
                                                onChange={(e) => setBirthDate(e.target.value)}
+                                               inputProps={{
+                                                   max: getLessThanTenYears()
+                                               }}
                                     />
                                     :
                                     <p>{convertDateTime(student.user.birthdate)}</p>

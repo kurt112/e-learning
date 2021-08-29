@@ -16,6 +16,7 @@ import {connect} from "react-redux";
 import {Student} from "../../../store/utils/Specify";
 import {Visibility, VisibilityOff} from "@material-ui/icons";
 import {useState} from "react";
+import {getLessThanTenYears} from "../utils/dateFormat/DateTimeMinLow";
 
 const StudentRegisterForm = ({
                                  student,
@@ -43,7 +44,6 @@ const StudentRegisterForm = ({
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword)
     }
-
 
     return <Dialog
         open={open}
@@ -124,8 +124,13 @@ const StudentRegisterForm = ({
                             variant="outlined"
                             value={student.birthdate}
                             onChange={(event) => changeBirthdate(event.target.value)}
-
-                            InputLabelProps={{shrink: true}}
+                            getLessThanTenYears
+                            InputLabelProps={{
+                                shrink: true
+                            }}
+                            inputProps={{
+                                max: getLessThanTenYears()
+                            }}
                         />
                     </Grid>
                     <Grid item md={6} xs={12}>

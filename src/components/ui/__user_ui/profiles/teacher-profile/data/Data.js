@@ -15,6 +15,7 @@ import {compareBCrypt, PasswordEncrypt} from "../../../../../../store/middleware
 import {checkPasswordStrength, checkStringEmail, checkStringEmpty} from "../../../../utils/validation";
 import {convertToYYMMDD} from "../../../../utils/dateFormat/DateFormatYYMMDD";
 import {Visibility, VisibilityOff} from "@material-ui/icons";
+import {getLessThanTenYears} from "../../../../utils/dateFormat/DateTimeMinLow";
 
 const Data = ({
                   teacher,
@@ -405,6 +406,9 @@ const Data = ({
                                                label={translation.language["label.global.birth.date"]}
                                                value={convertToYYMMDD(birthdate)}
                                                onChange={(e) => setBirthDate(e.target.value)}
+                                               inputProps={{
+                                                   max: getLessThanTenYears()
+                                               }}
                                     />
                                     :
                                     <p>{convertDateTime(teacher.user.birthdate)}</p>

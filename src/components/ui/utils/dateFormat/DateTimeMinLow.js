@@ -12,5 +12,12 @@ export const geDateTodayDateTime = () => {
     return maxDate.substring(0, maxDate.length-4);
 }
 
+export const getLessThanTenYears =() => {
+    const oneYearFromNow = new Date();
+    oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() - 10);
+
+    return oneYearFromNow.toISOString().split("T")[0]
+}
+
 // export const getMinDateTodayh = () => {
 // }

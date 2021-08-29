@@ -16,6 +16,7 @@ import {connect} from "react-redux";
 import {Teacher} from "../../../store/utils/Specify";
 import {useState} from "react";
 import {Visibility, VisibilityOff} from "@material-ui/icons";
+import {getLessThanTenYears} from "../utils/dateFormat/DateTimeMinLow";
 
 const TeacherRegisterForm = ({
                                  teacher,
@@ -122,6 +123,9 @@ const TeacherRegisterForm = ({
                             variant="outlined"
                             value={teacher.birthdate}
                             onChange={(event) => changeBirthdate(event.target.value)}
+                            inputProps={{
+                                max: getLessThanTenYears()
+                            }}
                         />
                     </Grid>
                     <Grid item md={6} xs={12}>

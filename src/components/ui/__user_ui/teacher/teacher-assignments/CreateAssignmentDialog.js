@@ -25,7 +25,6 @@ import {Teacher_Assignment_Create} from "../../../../../store/utils/Specify"
 import GetTeacherClassAutoComplete from "../../../utils/autoComplete/ui/GetTeacherClassAutoComplete";
 import GetTeacherAssignmentResourceAutoComplete
     from "../../../utils/autoComplete/ui/GetTeacherAssignmentResourceAutoComplete";
-import moment from "moment";
 import {geDateTodayDateTime} from "../../../utils/dateFormat/DateTimeMinLow";
 
 
