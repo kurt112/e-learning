@@ -32,6 +32,9 @@ const RoomProfile = ({room, match, initData,translation}) => {
 
         if (room.profile !== null) {
             const  tempClasses = []
+
+            console.log(room.profile)
+
             setComponent(<Data translation={translation} room={profile}/>)
 
             profile.roomShifts.map((roomShift) => roomShift.roomShiftClasses.map((c) => tempClasses.push(c)))

@@ -13,6 +13,7 @@ import {
     SET_ERROR_ROOM_SHIFT_EMPTY,
     SET_ERROR_SUBJECT_EMPTY
 } from "../../../ActionType/__ActionTypeGlobal/ValidationActionType";
+import {checkStringEmpty} from "../../../../components/ui/utils/validation";
 
 const newState = new state();
 
@@ -46,7 +47,7 @@ const setState = (state, action) => {
         done: false,
         timeEnd: action.endTime,
         timeStart: action.startTime,
-        day: action.day,
+        day: checkStringEmpty(action.day)? 'MWF':action.day,
         teacher: action.teacher,
         subject: action.subject,
         shift: action.roomShift
