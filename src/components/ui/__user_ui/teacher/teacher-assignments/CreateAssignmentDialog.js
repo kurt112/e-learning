@@ -25,6 +25,9 @@ import {Teacher_Assignment_Create} from "../../../../../store/utils/Specify"
 import GetTeacherClassAutoComplete from "../../../utils/autoComplete/ui/GetTeacherClassAutoComplete";
 import GetTeacherAssignmentResourceAutoComplete
     from "../../../utils/autoComplete/ui/GetTeacherAssignmentResourceAutoComplete";
+import moment from "moment";
+import {geDateTodayDateTime} from "../../../utils/dateFormat/DateTimeMinLow";
+
 
 const CreateAssignmentDialog = ({
 
@@ -56,7 +59,6 @@ const CreateAssignmentDialog = ({
     const OutputClass = (event, value) => {
         changeClassCode(value === null ? '' : value[2].toString())
     }
-
 
     return <Dialog
         open={dialog}
@@ -92,12 +94,18 @@ const CreateAssignmentDialog = ({
                         <TextField
                             margin="dense"
                             label={translation.language["label.global.date.deadline"]}
-                            InputLabelProps={{ shrink: true }}
+                            InputLabelProps={{shrink: true}}
                             type="datetime-local"
                             fullWidth
                             variant="outlined"
                             value={state.deadLine}
                             onChange={(e) => changeDeadLine(e.target.value)}
+                            inputProps={
+                                {
+                                    min:geDateTodayDateTime()
+                                }
+                            }
+
                         />
                     </Grid>
                     <Grid item md={3} xs={12}>
@@ -108,8 +116,8 @@ const CreateAssignmentDialog = ({
                                 native
                                 label={translation.language["label.global.semester"]}
                                 inputProps={{
-                                    name: 'type',
-                                    id: 'type',
+                                    name: translation.language["label.global.semester"],
+                                    id: translation.language["label.global.semester"],
                                 }}
                                 value={state.sem}
                                 onChange={(e) => changeSem(e.target.value)}
@@ -128,8 +136,8 @@ const CreateAssignmentDialog = ({
                                 native
                                 label={translation.language["label.global.quarter"]}
                                 inputProps={{
-                                    name: 'type',
-                                    id: 'type',
+                                    name: translation.language["label.global.quarter"],
+                                    id: translation.language["label.global.quarter"],
                                 }}
                                 value={state.quarter}
                                 onChange={(e) => changeQuarter(e.target.value)}
@@ -148,6 +156,11 @@ const CreateAssignmentDialog = ({
                             type="number"
                             fullWidth
                             variant="outlined"
+                            inputProps={{
+                                min:0,
+                                max: 100
+                            }
+                            }
                             value={state.lowGrade}
                             onChange={(e) => changeLowGrade(e.target.value)}
                         />
@@ -161,6 +174,7 @@ const CreateAssignmentDialog = ({
                             variant="outlined"
                             value={state.highGrade}
                             onChange={(e) => changeHighGrade(e.target.value)}
+                            inputMode={"numeric"}
                         />
                     </Grid>
                     <Grid item md={12} xs={12}>

@@ -1,4 +1,4 @@
-/**
+    /**
  * @author : Kurt Lupin Orioque
  * @mailto : kurtorioque112@gmail.com
  * @created : 11/07/2021, Sunday
@@ -20,6 +20,7 @@ import Response from "../../../utils/Response"
 import {Teacher_Exams_Create} from "../../../../../store/utils/Specify"
 import GetTeacherExamResourceAutoComplete from "../../../utils/autoComplete/ui/GetTeacherExamResourceAutoComplete";
 import GetTeacherClassAutoComplete from "../../../utils/autoComplete/ui/GetTeacherClassAutoComplete";
+    import {geDateTodayDateTime} from "../../../utils/dateFormat/DateTimeMinLow";
 
 const CreateExamsDialog = ({
                                dialog,
@@ -93,6 +94,11 @@ const CreateExamsDialog = ({
                             variant="outlined"
                             value={state.deadLine}
                             onChange={(e) => changeDeadLine(e.target.value)}
+                            inputProps={
+                                {
+                                    min:geDateTodayDateTime()
+                                }
+                            }
                         />
                     </Grid>
 

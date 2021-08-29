@@ -24,6 +24,7 @@ import Response from "../../../utils/Response"
 import {Teacher_Quiz_Create} from "../../../../../store/utils/Specify"
 import GetTeacherQuizResourceAutoComplete from "../../../utils/autoComplete/ui/GetTeacherQuizResourceAutoComplete";
 import GetTeacherClassAutoComplete from "../../../utils/autoComplete/ui/GetTeacherClassAutoComplete";
+import {geDateTodayDateTime} from "../../../utils/dateFormat/DateTimeMinLow";
 
 const CreateQuizDialog = ({
                               dialog,
@@ -98,6 +99,11 @@ const CreateQuizDialog = ({
                             variant="outlined"
                             value={state.deadLine}
                             onChange={(e) => changeDeadLine(e.target.value)}
+                            inputProps={
+                                {
+                                    min:geDateTodayDateTime()
+                                }
+                            }
                         />
                     </Grid>
 
