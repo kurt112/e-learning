@@ -229,4 +229,24 @@ export const StudentActivityTable = [
 
 export function StudentInsertActivity(id, activityTitle, subjectName, date, status, link) {
     return {id, activityTitle, subjectName, date, status, link}
-} 
+}
+
+export const StudentGrade = [
+    {
+        name: 'teacher',
+        label: 'Teacher'
+    },
+    {
+        name: 'subject',
+        label: 'Subject'
+    },
+    {
+        name:"grade",
+        label:"Grade"
+    }
+]
+
+export function StudentInsertGrade(teacher,subject,grade) {
+    return {teacher,subject,grade}
+}
+

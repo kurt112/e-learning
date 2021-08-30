@@ -43,11 +43,13 @@ export {
     StudentActivityTable,
     StudentTeacherTable,
     StudentSubjectTable,
+    StudentGrade,
 
     StudentInsertRoom,
     StudentInsertTeacher,
     StudentInsertSubject,
-    StudentInsertActivity
+    StudentInsertActivity,
+    StudentInsertGrade
 } from './StudentTable'
 
 export {

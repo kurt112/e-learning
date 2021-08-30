@@ -15,6 +15,7 @@ import * as action from '../../../../../store/action/__ActionGlobal/ProfileActio
 import {Student} from "../../../../../store/utils/Specify";
 import {S3BucketEndPoint} from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import Grade from "../../student/grade/Grade";
 
 const StudentProfile = ({
                             studentState,
@@ -33,6 +34,7 @@ const StudentProfile = ({
 
     const [dataComponent, setDataComponent] = useState(false)
     const [logsComponent, setLogsComponent] = useState(false)
+    const [gradeComponent, setGradeComponent] =useState(false)
 
 
     // for changing the photo
@@ -57,12 +59,25 @@ const StudentProfile = ({
     const data = () => {
         setDataComponent(true)
         setLogsComponent(false)
+        setGradeComponent(false)
     }
 
     const logs = () => {
         setDataComponent(false)
         setLogsComponent(true)
+        setGradeComponent(false)
     }
+
+    const grade= () => {
+        setDataComponent(false)
+        setLogsComponent(false)
+        setGradeComponent(true)
+    }
+
+
+
+
+
 
     const editClick = () => {
         const isUpdate = !update
@@ -82,6 +97,8 @@ const StudentProfile = ({
         if (id === user.user.email) setCanUpdate(true)
         initData(id)
     }
+
+    console.log(studentState)
 
 
     return (
@@ -141,7 +158,12 @@ const StudentProfile = ({
                                     update === true ? null :
                                         <Fragment>
                                             <Button color="primary"
-                                                    onClick={logs}>{translation.language["label.global.class.logs"]}</Button>
+                                                    onClick={logs}>{translation.language["label.global.class.logs"]}
+                                            </Button>
+
+                                            <Button color="primary" onClick={grade}>
+                                                Grades
+                                            </Button>
 
                                         </Fragment>
                                 }
@@ -165,7 +187,8 @@ const StudentProfile = ({
                                         cancel={() => setUpdate(false)}
                                         getProfileData={getProfileData}
                                     /> :
-                                        logsComponent ? <Logs translation={translation} attendances={studentState.profile.classAttendances}/> : null
+                                        logsComponent ? <Logs translation={translation} attendances={studentState.profile.classAttendances}/> :
+                                            gradeComponent? <Grade translation={translation} grades={studentState.profile.studentGrades}/>:null
                             }
                         </Grid>
                     </Grid>

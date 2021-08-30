@@ -8,6 +8,20 @@ export const
         return {
             query: `
                     query{getStudentByUserEmail(email:"${email}"){
+                    studentGrades{
+                        grade,
+                    roomShiftClass{
+                        teacher{
+                            user{
+                            firstName,
+                            lastName
+                        }
+                    },
+                    subject{
+                        subjectName
+                    }
+                    }
+                     },
                      classAttendances{
                         student_class{
                             roomShift{
