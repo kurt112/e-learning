@@ -35,6 +35,9 @@ const TeacherGradeCard = ({translation,data,initData,toGrade}) => {
         alert("Grade Remove Success")
 
     }
+
+    console.log(data)
+
     return <Fragment>
         <InputGradeDialog highGrade={data.highGrade} lowGrade={data.lowGrade} id={data.id} initData={initData} url={data.url} dialog={grade} handleClose={() => setGrade(false)}/>
         <Grid component={Paper} container style={{padding: 10, marginBottom: 10}}>
@@ -102,7 +105,7 @@ const TeacherGradeCard = ({translation,data,initData,toGrade}) => {
                             {
                                 toGrade === false?
                                     <p style={{marginBottom: 0, marginRight: 10}}>
-                                        <b>Grade: </b>{data.grade}</p>:null
+                                        <b>Grade: </b>{data.myGrade}</p>:null
                             }
                         </Grid>
                         {/*{*/}

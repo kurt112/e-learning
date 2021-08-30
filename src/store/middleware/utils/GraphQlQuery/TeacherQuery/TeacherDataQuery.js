@@ -46,12 +46,18 @@ export const
                                 }
                             }
                             students{
-                            student_id,
+                                student_id,
                                 user{
                                     email,
                                     firstName,
                                     lastName,
                                     suffix
+                                },
+                                studentGrades{
+                                    roomShiftClass{
+                                    id
+                                },
+                                    grade
                                 }
                             }
                        }

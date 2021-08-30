@@ -22,7 +22,7 @@ import {
 } from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 
 
-const data = (id, url, type, description, highGrade, lowGrade, submittedOn, status, subject, grade, section, name, location) => {
+const data = (id, url, type, description, highGrade, lowGrade, submittedOn, status, subject, grade, section, name, location,myGrade) => {
     return {
         id,
         url,
@@ -36,7 +36,8 @@ const data = (id, url, type, description, highGrade, lowGrade, submittedOn, stat
         grade,
         section,
         name,
-        location
+        location,
+        myGrade
     }
 }
 
@@ -111,7 +112,7 @@ const TeacherGrade = ({
 
                 const input = data(assignment.id, gradeAssignment, translation.language["label.global.assignment"], teacherAssignment.description,
                     teacherAssignment.highGrade, teacherAssignment.lowGrade, assignment.submittedAt, assignment.response, subject.subjectName,
-                    roomShift.grade, roomShift.section, name, assignment.location)
+                    roomShift.grade, roomShift.section, name, assignment.location, assignment.grade)
 
                 if (assignment.grade === 0) {
                     tempAll.push(input)
@@ -144,7 +145,7 @@ const TeacherGrade = ({
 
                 const input = data(exams.id, gradeExam, translation.language["label.global.exam"], exam.description,
                     exam.highGrade, exam.lowGrade, exams.submittedAt, exams.response, subject.subjectName,
-                    roomShift.grade, roomShift.section, name, exams.location)
+                    roomShift.grade, roomShift.section, name, exams.location,exams.grade)
 
                 if (exams.grade === 0) {
                     tempAll.push(input)
@@ -179,7 +180,7 @@ const TeacherGrade = ({
 
                 const input = data(quizzes.id, gradeQuiz, translation.language["label.global.quiz"], quiz.description,
                     quiz.highGrade, quiz.lowGrade, quizzes.submittedAt, quizzes.response, subject.subjectName,
-                    roomShift.grade, roomShift.section, name, quizzes.location)
+                    roomShift.grade, roomShift.section, name, quizzes.location,quizzes.grade)
 
                 if (quizzes.grade === 0) {
                     tempAll.push(input)
@@ -275,7 +276,9 @@ const TeacherGrade = ({
                 {
                     loading ? <CircularProgress size={90}/> :
                         filter.map((e, i) =>
-                            <TeacherGradeCard toGrade={toGrade} key={i} translation={translation} data={e}
+                            <TeacherGradeCard toGrade={toGrade}
+                                              key={i}
+                                              translation={translation} data={e}
                                               initData={initData}/>
                         )
                 }

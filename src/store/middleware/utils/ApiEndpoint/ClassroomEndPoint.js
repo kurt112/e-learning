@@ -74,6 +74,7 @@ export const
     TeacherExamDelete = 'teacher/exam/delete',
     TeacherQuizCreate = 'teacher/quiz/create',
     TeacherQuizDelete = 'teacher/quiz/delete',
+    TeacherGradeStudent ='teacher/grade/student',
     onTeacher = 'on/teacher',
     offTeacher = 'off/teacher',
 

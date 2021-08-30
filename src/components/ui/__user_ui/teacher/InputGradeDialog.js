@@ -61,7 +61,7 @@ const InputGradeDialog = ({dialog,initData,highGrade, lowGrade,handleClose, id, 
                 label="Enter Grade"
                 value={grade}
                 onChange={(e) => setGrade(e.target.value)}
-                type="email"
+                type={"Number"}
                 fullWidth
             />
         </DialogContent>

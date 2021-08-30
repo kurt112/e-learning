@@ -14,6 +14,7 @@ import {TeacherInsertStudent as insertStudent, TeacherInsertSubject as insertSub
 import {useLocation} from 'react-router-dom'
 import ClassesList from "../ui/__user_ui/roomClasses/ClassList/ClassesList";
 import ProfileRoute from "./ProfileRoute";
+import {getStudentGradeInClass} from "../../store/middleware/utils/GraphQlQuery/StudentQuery/StudentDataQuery";
 
 
 // import {get} from "../../store/middleware/utils/GraphQlQuery/TeacherQuery";
@@ -56,14 +57,27 @@ const TeacherRoute = ({email, translation}) => {
             // eslint-disable-next-line array-callback-return
 
             classes.map((class_) => {
+                console.log(class_)
                 const students = class_.students
                 const roomShift = class_.roomShift
                 const subject = class_.subject
 
                 students.map(student => {
                     const {user} = student
+
+
+                    const {grade} = student.studentGrades.find(grade => {
+
+                        if(grade.roomShiftClass.id === class_.id){
+                            return grade.grade
+                        }
+
+                    })
+
+
                     tempStudent.push(insertStudent(user.firstName, user.lastName, roomShift.grade,
-                        roomShift.section, subject.subjectName, roomShift.teacher !== null ? `${roomShift.teacher.user.firstName} ${roomShift.teacher.user.lastName}` : translation.language["label.global.tba"], user.email))
+                        roomShift.section, subject.subjectName, roomShift.teacher !== null ? `${roomShift.teacher.user.firstName} ${roomShift.teacher.user.lastName}` : translation.language["label.global.tba"],
+                        grade === undefined? 0: grade, user.email))
                 })
 
                 tempSubject.push(insertSubject(subject.subjectName, subject.subjectCode, subject.subjectMajor))
@@ -99,9 +113,9 @@ const TeacherRoute = ({email, translation}) => {
                    }
             />
             <Route path={translation.language["route.teacher.subjects"]} exact
-                   render={() => <TeacherSubjects translation={translation} subjects={subjects}/>}/>
+                   render={() => <TeacherSubjects translation={translation} subjects={subjects} />}/>
             <Route path={translation.language["route.teacher.students"]} exact
-                   render={() => <TeacherStudent translation={translation} students={students}/>}/>
+                   render={() => <TeacherStudent translation={translation} students={students} email={email}/>}/>
             <Route path={translation.language["route.teacher.lectures"]} exact
                    render={() => <TeacherLectures translation={translation}/>}/>
 

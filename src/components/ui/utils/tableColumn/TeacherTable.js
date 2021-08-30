@@ -137,6 +137,10 @@ export const TeacherStudentTable = (translation) => [
         label: translation.language["label.global.adviser"]
     },
     {
+        name: "evaluation",
+        label:'Evaluation'
+    },
+    {
         name: "profile",
         label: translation.language["label.global.profile"],
         options: {
@@ -157,9 +161,9 @@ export const TeacherStudentTable = (translation) => [
     },
 ];
 
-export function TeacherInsertStudent(firstName, lastName, grade, section, subject, adviser, profile) {
+export function TeacherInsertStudent(firstName, lastName, grade, section, subject, adviser,evaluation, profile) {
 
-    return {firstName, lastName, grade, section, subject, adviser, profile}
+    return {firstName, lastName, grade, section, subject, adviser, evaluation, profile}
 }
 
 /**

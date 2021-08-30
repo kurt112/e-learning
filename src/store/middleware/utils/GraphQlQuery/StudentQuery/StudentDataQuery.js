@@ -143,4 +143,14 @@ export const
                       }          
                     }`
         }
+    },
+    getStudentGradeInClass =(classId, studentId) => {
+        return {
+            query: `
+                    query{
+                       getStudentGradeInClass(classId:"${classId}", studentId: "${studentId}") {
+                            grade         
+                      }          
+                    }`
+            }
     }
