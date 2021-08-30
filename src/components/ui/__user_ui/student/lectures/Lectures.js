@@ -12,18 +12,26 @@ import ProfileStyle from "../../profiles/ProfileStyle"
 import TaskCard from "../../profiles/classes-profile/TaskCard";
 
 
-const Lecture = ({translation, lecture, filter}) => {
+const Lecture = ({translation, lecture,lectureArchive,filterArchive, filter}) => {
+
     const style = ClassesStyle()
     const taskCardStyle = ProfileStyle()
     const [archive, setArchive] = useState(false)
-    const [filterValue, setFilterValue] = useState('')
+    const [filterValue, setFilterValue] = useState(filter[0].code)
+
+    const [data,setData] = useState([])
+    const [dataFilter,setDataFilter]  = useState([])
 
     const lectureClick = () => {
         setArchive(false)
+        setData(lecture)
+        setDataFilter(filter)
     }
 
     const archiveLectureClick = () => {
         setArchive(true)
+        setData(lectureArchive)
+        setDataFilter(filterArchive)
     }
 
     const filterChange = (data) => {
@@ -31,8 +39,16 @@ const Lecture = ({translation, lecture, filter}) => {
     }
 
     useEffect(() => {
-        if (filter.length !== 0) setFilterValue(filter[0].code)
+      //  if (dataFilter.length !== 0) setFilterValue()
+    }, [dataFilter, filterValue,archive])
+
+    useEffect(() => {
+        setData(lecture)
     }, [])
+
+    console.log(filterValue)
+    console.log(lecture)
+
 
     return (
         <Fragment>
@@ -44,12 +60,12 @@ const Lecture = ({translation, lecture, filter}) => {
                         <br/>
                         <AccessTimeIcon/>
                     </Box>
-                    <Box onClick={archiveLectureClick}
-                         className={clsx(style.boxNavButton, archive === true ? style.active : null)}>
-                        <span>{translation.language["label.global.lecture.archive"]}</span>
-                        <br/>
-                        <AccessTimeIcon/>
-                    </Box>
+                    {/*<Box onClick={archiveLectureClick}*/}
+                    {/*     className={clsx(style.boxNavButton, archive === true ? style.active : null)}>*/}
+                    {/*    <span>{translation.language["label.global.lecture.archive"]}</span>*/}
+                    {/*    <br/>*/}
+                    {/*    <AccessTimeIcon/>*/}
+                    {/*</Box>*/}
                 </Box>
 
                 <FormControl>
@@ -83,12 +99,14 @@ const Lecture = ({translation, lecture, filter}) => {
                             <TaskCard key={i}
                                       style={taskCardStyle}
                                       translation={translation}
-                                      resourceCode={e.resource.code}
+                                      resourceCode={e.resource.location}
                                       createdAt={e.createdAt}
                                       description={e.description}
                                       lecture={true}
                                       resourceName={e.resource.name}
                                       teacherName={`${e.resource.teacher.user.firstName} ${e.resource.teacher.user.lastName}`}
+                                      type={e.resource.type}
+
                             />
                         )
                 }

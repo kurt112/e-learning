@@ -114,6 +114,10 @@ export const
             query: `
                     query{
                        getStudentClass(email:"${email}", status: ${status}) {
+                                subject{
+                                    subjectCode,
+                                    subjectName
+                                },
                                id,
                                 day,
                                 startTime,
@@ -140,7 +144,24 @@ export const
                                     email,
                                   }
                                 }
-                      }          
+                                teacherLectures{
+                                    createdAt,
+                                     
+                                    description
+                                        resource{
+                                            name,
+                                            code,
+                                            type,
+                                            description,
+                                            teacher{
+                                                user{
+                                                    firstName,
+                                                    lastName
+                                                }
+                                            }
+                                        }
+                                    }
+                                }          
                     }`
         }
     },

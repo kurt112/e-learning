@@ -58,6 +58,9 @@ const StudentRoute = ({email, translation}) => {
     // for classwork filter
     const [lecture, setLecture] = useState([])
     const [filterSubject, setFilterSubject] = useState([])
+    const [lectureArchive, setLectureArchive] = useState([])
+    const [filterSubjectArchive, setFilterSubjectArchive] = useState([])
+
 
     // assignment status
     const [assignment, setAssignment] = useState([])
@@ -80,18 +83,35 @@ const StudentRoute = ({email, translation}) => {
         })
     }, [email])
 
+
+    useEffect(() => {
+
+    }, [filterSubjectArchive,filterSubject,lecture,filterSubjectArchive])
+
     const initData = async () => {
-        const tempFinishAll = [], tempAll = []
+        const tempFinishAll = [], tempAll = [], tempLecture =[],tempLectureArchive=[],tempFilterSubject=[],tempFilterSubjectArchive=[]
 
         setLoading(true)
         // current
         await graphQlRequestAsync(getStudentClasses(email, 1)).then(classes => {
             const tempCurrentClass = []
             classes.data.data.getStudentClass.map(Class => {
+
+                Class.teacherLectures.map(lecture => {
+                    tempLecture.push({...lecture, subjectCode:Class.subject.subjectCode})
+                })
+
+                tempFilterSubject.push({code: Class.subject.subjectCode, name: Class.subject.subjectName})
+
                 tempCurrentClass.push(Class)
             })
+
+
+            setFilterSubject(tempFilterSubject)
             setCurrentClass(tempCurrentClass)
         })
+
+        setLecture(tempLecture)
 
 
         // archive
@@ -99,11 +119,19 @@ const StudentRoute = ({email, translation}) => {
             const tempDoneClass = []
 
             classes.data.data.getStudentClass.map(Class => {
+                Class.teacherLectures.map(lecture => {
+                    tempLectureArchive.push({...lecture, subjectCode:Class.subject.subjectCode})
+                })
+                tempFilterSubjectArchive.push({code: Class.subject.subjectCode, name: Class.subject.subjectName})
                 tempDoneClass.push(Class)
             })
 
+            setFilterSubjectArchive(tempFilterSubjectArchive)
             setDoneClass(tempDoneClass)
         })
+
+
+        setLectureArchive(tempLectureArchive)
 
 
 
@@ -234,7 +262,13 @@ const StudentRoute = ({email, translation}) => {
         />
         <Route
             path={translation.language["route.student.lectures"]} exact
-            render={() => <StudentLecture filter={filterSubject} translation={translation} lecture={lecture}/>}
+            render={() => <StudentLecture
+                translation={translation}
+                lecture={lecture}
+                filter={filterSubject}
+                lectureArchive={lectureArchive}
+                filterArchive={filterSubjectArchive}
+            />}
 
         />
 

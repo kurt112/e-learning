@@ -111,7 +111,7 @@ const TaskCard = ({
                     </p>
 
                 </Grid>
-                {
+                {lecture ? null :
                     checkStringEmpty(response) && lecture !== true ? null :
                         <Grid item md={12} container
                               direction="row" justify="space-between">
