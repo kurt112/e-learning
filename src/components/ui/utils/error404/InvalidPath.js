@@ -7,7 +7,6 @@ import './style.css'
 import {Fragment} from "react";
 import pic from './404.svg'
 const InvalidPath = () => {
-    alert("i am here")
     return <Fragment>
         <img src={pic} alt="bg"/>
             <div className="wrapper">

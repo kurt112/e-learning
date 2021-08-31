@@ -202,6 +202,7 @@ const StudentRoute = ({email, translation}) => {
             const tempQuiz = [], tempFinishQuiz = []
 
             quizzes.map(e => {
+                console.log(e)
                 const teacherQuiz = e.quiz
                 const {resource} = teacherQuiz
                 const {teacher} = resource

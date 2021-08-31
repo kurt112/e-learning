@@ -53,7 +53,6 @@ export function* TeacherQuizzesDelete() {
 
 export function* TeacherQuizzesCreate() {
     const classState = yield select(Selector.TeacherQuizCreateDialog)
-    alert("i am here")
     const code = yield uniqueNamesGenerator({
             dictionaries: [adjectives, colors, animals],
             separator: '-',
