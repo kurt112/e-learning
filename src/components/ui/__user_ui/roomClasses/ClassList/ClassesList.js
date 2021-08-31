@@ -12,11 +12,9 @@ import ClassesStyle from "../../../_style/ClassesStyle";
 
 const ClassesList = ({currentClass, archiveClass, translation, loading}) => {
 
-    console.log(currentClass)
     const currentStyle = ClassesStyle()
     const [currentClassActive, setCurrentClassActive] = useState(true)
 
-    console.log(loading)
 
     const currentClassClick = () => {
         setCurrentClassActive(true)

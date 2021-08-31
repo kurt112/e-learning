@@ -68,6 +68,8 @@ const TeacherRoute = ({email, translation}) => {
 
                     const {grade} = student.studentGrades.find(grade => {
 
+                        console.log(grade)
+                        console.log(grade.grade)
                         if(grade.roomShiftClass.id === class_.id){
                             return grade.grade
                         }
