@@ -66,22 +66,19 @@ const TeacherRoute = ({email, translation}) => {
                     const {user} = student
 
 
-                    const {grade} = student.studentGrades.find(grade => {
+                    const grade = student.studentGrades.find(grade => {
 
-                        console.log(grade)
-                        console.log(grade.grade)
                         if(grade.roomShiftClass.id === class_.id){
-                            return grade === undefined? 0:grade.grade
+                            return grade.grade
                         }
 
                     })
 
 
 
-
                     tempStudent.push(insertStudent(user.firstName, user.lastName, roomShift.grade,
                         roomShift.section, subject.subjectName, roomShift.teacher !== null ? `${roomShift.teacher.user.firstName} ${roomShift.teacher.user.lastName}` : translation.language["label.global.tba"],
-                        grade === undefined? 0: grade, user.email))
+                        grade === undefined? 0: grade.grade, user.email))
                 })
 
                 tempSubject.push(insertSubject(subject.subjectName, subject.subjectCode, subject.subjectMajor))
