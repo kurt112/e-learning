@@ -107,7 +107,9 @@ const Classroom = (props) => {
     return valid === false ? null :
         <div className={classes.root}>
             <main className={classes.content}>
-
+                {
+                    role === Teacher?<video/>:null
+                }
                 <Toolbar setDrawer={setDrawer} path={path}/>
 
             </main>
