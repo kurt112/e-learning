@@ -71,10 +71,12 @@ const TeacherRoute = ({email, translation}) => {
                         console.log(grade)
                         console.log(grade.grade)
                         if(grade.roomShiftClass.id === class_.id){
-                            return grade.grade
+                            return grade === undefined? 0:grade.grade
                         }
 
                     })
+
+
 
 
                     tempStudent.push(insertStudent(user.firstName, user.lastName, roomShift.grade,
