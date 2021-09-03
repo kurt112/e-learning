@@ -30,6 +30,7 @@ const StudentRegisterForm = ({
                                  changeEmail,
                                  changePassword,
                                  changeReTypePassword,
+                                 changeId,
                                  register,
                                  translation,
                                  closeDialog
@@ -59,13 +60,26 @@ const StudentRegisterForm = ({
             <DialogContent>
 
                 <Grid container spacing={1}>
+                    <Grid item md={12} xs={12}>
+                        <TextField
+                            error={student.idError}
+                            helperText={student.idErrorMessage}
+                            margin="dense"
+                            label={translation.language['label.global.lrn']}
+                            autoFocus={true}
+                            type="number"
+                            fullWidth
+                            variant="outlined"
+                            value={student.id}
+                            onChange={(event) =>changeId(event.target.value)}
+                        />
+                    </Grid>
                     <Grid item md={4} xs={12}>
                         <TextField
                             error={student.firstNameError}
                             helperText={student.firstNameErrorMessage}
                             margin="dense"
                             label={translation.language['label.global.first.name']}
-                            autoFocus={true}
                             type="text"
                             fullWidth
                             variant="outlined"
@@ -263,6 +277,7 @@ const mapDispatchToProps = (dispatch) => {
         changeEmail: (data) => dispatch(actions.changeEmail(data, Student)),
         changePassword: (data) => dispatch(actions.changePassword(data, Student)),
         changeReTypePassword: (data) => dispatch(actions.changeReTypePassword(data, Student)),
+        changeId: (data) => dispatch(actions.changeId(data,Student)),
 
         register: () => dispatch(actions.initRegister(Student))
     }

@@ -66,6 +66,7 @@
   "label.global.active": "Active",
   "label.global.major": "Major",
   "label.global.category": "Category",
+  "label.global.lrn": "LRN",
 
   "label.global.assignment": "Assignment",
   "label.global.exam": "Exam",
@@ -344,7 +345,7 @@
   "tooltip.teacher.quiz.delete": "Delete Quiz",
 
   "message.curriculum.dialog.create.success": "Create Curriculum Success",
-  "message.curriculum.dialog.create.fail": "Create Curriculum Failed",
+  "message.curriculum.dialog.create.fail": "Curriculum Already Exist",
   "message.curriculum.dialog.delete.success": "Delete Curriculum Success",
   "message.curriculum.dialog.delete.fail": "Delete Curriculum Failed",
   "message.curriculum.dialog.update.success": "Update Curriculum Success",

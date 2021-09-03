@@ -14,13 +14,12 @@ import {validate} from "./registrationValidation";
 
 export function* StudentRegisterData() {
     const state = yield select(Selector.StudentRegister)
-    const {id} = yield select(Selector.Login)
     const error = yield validate(state, Student);
 
     //validation
     if(error) return;
 
-    const params = yield param(state, id)
+    const params = yield param(state)
     try {
         yield baseUrlNoAuth.post('/student-fillUp', params)
         alert("Success Register")

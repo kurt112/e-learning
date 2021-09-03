@@ -16,4 +16,5 @@ export const
     CHANGE_ROLE= to => to+'_CHANGE_ROLE',
     INIT_REGISTER = to => to+'_REGISTER_USER',
     FAIL_REGISTER = to => to+'_FAIL_REGISTER',
-    SUCCESS_REGISTER = to => to+'_SUCCESS_REGISTER'
+    SUCCESS_REGISTER = to => to+'_SUCCESS_REGISTER',
+    CHANGE_ID = to => to + '_CHANGE_ID'

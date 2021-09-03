@@ -31,6 +31,7 @@ const TeacherRegisterForm = ({
                                  changeEmail,
                                  changePassword,
                                  changeReTypePassword,
+                                 changeId,
                                  register,
                                  translation
                              }) => {
@@ -58,6 +59,20 @@ const TeacherRegisterForm = ({
             <DialogTitle id="add-student">Register Teacher Form</DialogTitle>
             <DialogContent>
                 <Grid container spacing={1}>
+                    <Grid item md={12} xs={12}>
+                        <TextField
+                            error={teacher.idError}
+                            helperText={teacher.idErrorMessage}
+                            margin="dense"
+                            label={translation.language['label.global.id']}
+                            autoFocus={true}
+                            type="number"
+                            fullWidth
+                            variant="outlined"
+                            value={teacher.id}
+                            onChange={(event) =>changeId(event.target.value)}
+                        />
+                    </Grid>
                     <Grid item md={4} xs={12}>
                         <TextField
                             error={teacher.firstNameError}
@@ -254,6 +269,7 @@ const mapDispatchToProps = (dispatch) => {
         changeEmail: (data) => dispatch(actions.changeEmail(data, Teacher)),
         changePassword: (data) => dispatch(actions.changePassword(data, Teacher)),
         changeReTypePassword: (data) => dispatch(actions.changeReTypePassword(data, Teacher)),
+        changeId: (data) => dispatch(actions.changeId(data,Teacher)),
 
         register: () => dispatch(actions.initRegister(Teacher))
     }

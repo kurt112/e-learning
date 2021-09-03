@@ -62,6 +62,12 @@ export const
             data
         }
     },
+    changeId = (data, to) => {
+        return {
+            type: action.CHANGE_ID(to),
+            data
+        }
+    },
     changeRole = (data, to) => {
         return {
             type: action.CHANGE_ROLE(to),

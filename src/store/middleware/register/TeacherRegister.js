@@ -14,14 +14,12 @@ import {successRegister} from "../../action/__ActionGlobal/UserRegisterAction";
 export function* TeacherRegisterData() {
 
     const teacher = yield select(Selector.TeacherRegister)
-    const {id}   = yield select(Selector.Login)
-
     const error = yield validate(teacher,Teacher)
 
     if(error) return;
 
 
-    const params = yield param(teacher,id)
+    const params = yield param(teacher)
 
     try {
         yield baseUrlNoAuth.post('/teacher-fillUp', params)

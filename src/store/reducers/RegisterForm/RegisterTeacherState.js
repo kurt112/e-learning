@@ -5,13 +5,13 @@
  **/
 import state from '../__StateGlobal/UserForm'
 import * as userAction from '../../ActionType/__ActionTypeGlobal/UserRegisterActionType'
-import {Teacher} from "../../utils/Specify";
+import {Student, Teacher} from "../../utils/Specify";
 import {
     SET_ERROR_BIRTHDATE_EMPTY,
     SET_ERROR_EMAIL_ALREADY_EXIST,
     SET_ERROR_EMAIL_EMPTY,
     SET_ERROR_EMAIL_INVALID,
-    SET_ERROR_FIRST_NAME_EMPTY,
+    SET_ERROR_FIRST_NAME_EMPTY, SET_ERROR_ID_EMPTY,
     SET_ERROR_LAST_NAME_EMPTY,
     SET_ERROR_PASSWORD_EMPTY,
     SET_ERROR_PASSWORD_NOT_MATCH,
@@ -36,6 +36,7 @@ const reducer =(state = initState, action) => {
         case userAction.CHANGE_BIRTHDATE(Teacher): return userState.changeBirthDate(state,action.data)
         case userAction.CHANGE_GENDER(Teacher): return userState.changeGender(state,action.data)
         case userAction.CHANGE_ROLE(Teacher): return userState.changeRole(state, action.data)
+        case userAction.CHANGE_ID(Teacher): return userState.changeId(state,action.data)
 
         // for registering the user
         case userAction.INIT_REGISTER(Teacher): return state;
@@ -52,6 +53,7 @@ const reducer =(state = initState, action) => {
         case SET_ERROR_BIRTHDATE_EMPTY(Teacher): return userState.birthDateErrorHandler(state)
         case SET_ERROR_PASSWORD_STRENGTH(Teacher): return userState.passwordStrengthErrorHandler(state)
         case SET_ERROR_EMAIL_ALREADY_EXIST(Teacher): return userState.emailAlreadyExist(state)
+        case SET_ERROR_ID_EMPTY(Teacher): return userState.IdAlreadyExist(state)
 
         default: return state;
     }

@@ -31,6 +31,7 @@ import {
     offTeacher,
     onTeacher
 } from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
+import {TeacherRegisterForm} from "../../../registerForm";
 
 const TeacherDialogRegister = lazy(() => import(`./RegisterTeacherDialog`))
 const TeacherDeleteDialog = lazy(() => import(`./DeleteTeacherDialog`))
@@ -74,9 +75,14 @@ const Index = ({
 
     return (
         <Fragment>
-            <TeacherDialogRegister translation={translation} dialog={state.dialog} closeDialog={closeDialog}/>
+            {/*<TeacherDialogRegister translation={translation} dialog={state.dialog} closeDialog={closeDialog}/>*/}
+            <TeacherRegisterForm translation={translation}
+                                 closeDialog={closeDialog}
+                                 open={state.dialog}
+            />
             <TeacherDeleteDialog translation={translation} dialog={state.deleteDialog}
                                  closeDialog={closeDeleteDialog}/>
+
             <Grid component="main" className={classes.root}>
                 <Grid item component={Paper} md={12} sm={12} xs={12} className={classes.tableNavbar}>
                     <Toolbar>

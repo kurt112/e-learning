@@ -8,6 +8,7 @@ import {updateObject} from "../../utils/UpdateObject";
 class State {
     constructor() {
         this.init_state = {
+            id: '',
             email: '',
             firstName: '',
             lastName: '',
@@ -20,6 +21,7 @@ class State {
             userRole: '',
 
             // error
+            idError: false,
             emailError: false,
             firstNameError: false,
             lastNameError: false,
@@ -28,6 +30,7 @@ class State {
             birthdateError: false,
 
             // error message
+            idErrorMessage: '',
             emailErrorMessage: '',
             firstNameErrorMessage: '',
             lastNameErrorMessage: '',
@@ -35,6 +38,12 @@ class State {
             reTypePasswordErrorMessage: '',
             birthdateErrorMessage: '',
         }
+
+        this.changeId = (state,data) => updateObject(state, {
+            id:data,
+            idError: false,
+            idErrorMessage: ''
+        })
 
         this.changeEmail = (state, data) => updateObject(state, {
             email: data,
@@ -130,6 +139,11 @@ class State {
         this.passwordStrengthErrorHandler = (state) => updateObject(state, {
             passwordError: true,
             passwordErrorMessage: "Password Should Contain 8 Characters, One Upper Case, One Lower Case, One Digit",
+        })
+
+        this.IdAlreadyExist = (state) => updateObject(state, {
+            idError: true,
+            idErrorMessage: 'Id Already Exist'
         })
 
         this.resetForm = (state) => updateObject(state, {
