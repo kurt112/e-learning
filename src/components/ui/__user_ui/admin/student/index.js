@@ -4,7 +4,7 @@
  * @created : 11/07/2021, Sunday
  **/
 import {
-    Box,
+    Box, Button,
     CircularProgress,
     FormControl,
     Grid,
@@ -16,7 +16,7 @@ import {
     Tooltip
 } from "@material-ui/core"
 import MUIDataTable from 'mui-datatables'
-import {Fragment, lazy, useEffect} from "react"
+import {Fragment, lazy, useEffect, useState} from "react"
 import {AdminStudentTable as columns} from '../../../utils/tableColumn'
 import style, {TableOptions as options} from '../../../_style/TableStyle'
 import {connect} from 'react-redux'
@@ -29,10 +29,10 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import {baseUrl} from "../../../../../store/middleware/axios";
 import {
     offStudent,
-    onStudent
+    onStudent, UploadManyStudent
 } from "../../../../../store/middleware/utils/ApiEndpoint/ClassroomEndPoint";
 import {StudentRegisterForm} from "../../../registerForm";
-
+import BeenhereIcon from '@material-ui/icons/Beenhere';
 const StudentRegisterDialog = lazy(() => import(`./RegisterStudentDialog`));
 const StudentDeleteDialog = lazy(() => import(`./DeleteStudentDialog`))
 
@@ -48,7 +48,9 @@ const Index = ({
                    translation,
                    statusChange
                }) => {
+
     const classes = style()
+
 
     useEffect(() => {
         initData()
@@ -65,6 +67,22 @@ const Index = ({
         alert("Status Change Success")
 
         await searchChange(state.search)
+    }
+
+
+    const uploadCsv = (event) => {
+        const formData = new FormData();
+        formData.append('file',event.target.files[0])
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        baseUrl.post(UploadManyStudent,formData,config).then(r => {
+            console.log(r)
+        }).catch(error =>{
+            console.log(error)
+        })
     }
 
 
@@ -91,6 +109,23 @@ const Index = ({
                                 <IconButton aria-label="delete-student" onClick={openDeleteDialog}>
                                     <DeleteIcon fontSize={'large'} color={'secondary'}/>
                                 </IconButton>
+                            </Tooltip>
+
+                            <Tooltip title={"Upload Student"}>
+                                <Button
+                                    variant="contained"
+                                    component="label"
+                                    disableElevation
+                                    color={"primary"}
+                                >
+                                    Upload CSV
+                                    <input
+                                        type="file"
+                                        onChange={(event) => uploadCsv(event)}
+                                        hidden
+                                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                    />
+                                </Button>
                             </Tooltip>
                         </Box>
 

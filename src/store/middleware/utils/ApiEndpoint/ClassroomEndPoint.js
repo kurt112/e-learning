@@ -25,6 +25,7 @@ export const
     //Student Admin endpoint
     AdminStudentRegister = "student-register",
     DeleteStudent = 'delete/student',
+    UploadManyStudent = 'upload/csv',
 
     // Room Admin endpoint
     AdminRoomRegister = "admin/room-register",
